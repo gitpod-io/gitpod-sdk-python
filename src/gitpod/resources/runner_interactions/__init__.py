@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .environment import (
-    EnvironmentResource,
-    AsyncEnvironmentResource,
-    EnvironmentResourceWithRawResponse,
-    AsyncEnvironmentResourceWithRawResponse,
-    EnvironmentResourceWithStreamingResponse,
-    AsyncEnvironmentResourceWithStreamingResponse,
-)
 from .environments import (
     EnvironmentsResource,
     AsyncEnvironmentsResource,
@@ -26,12 +18,6 @@ from .runner_interactions import (
 )
 
 __all__ = [
-    "EnvironmentResource",
-    "AsyncEnvironmentResource",
-    "EnvironmentResourceWithRawResponse",
-    "AsyncEnvironmentResourceWithRawResponse",
-    "EnvironmentResourceWithStreamingResponse",
-    "AsyncEnvironmentResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",

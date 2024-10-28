@@ -251,6 +251,70 @@ class TestTaskExecutions:
 
         assert cast(Any, response.is_closed) is True
 
+    @parametrize
+    def test_method_update_task_execution_status(self, client: Gitpod) -> None:
+        task_execution = client.environment_automations.task_executions.update_task_execution_status(
+            body={},
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    def test_method_update_task_execution_status_with_all_params(self, client: Gitpod) -> None:
+        task_execution = client.environment_automations.task_executions.update_task_execution_status(
+            body={
+                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "failureMessage": "failureMessage",
+                "logUrl": "logUrl",
+                "steps": [
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                ],
+            },
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_task_execution_status(self, client: Gitpod) -> None:
+        response = client.environment_automations.task_executions.with_raw_response.update_task_execution_status(
+            body={},
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        task_execution = response.parse()
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_task_execution_status(self, client: Gitpod) -> None:
+        with client.environment_automations.task_executions.with_streaming_response.update_task_execution_status(
+            body={},
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            task_execution = response.parse()
+            assert_matches_type(object, task_execution, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncTaskExecutions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -474,6 +538,72 @@ class TestAsyncTaskExecutions:
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGitpod) -> None:
         async with async_client.environment_automations.task_executions.with_streaming_response.stop(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            task_execution = await response.parse()
+            assert_matches_type(object, task_execution, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_task_execution_status(self, async_client: AsyncGitpod) -> None:
+        task_execution = await async_client.environment_automations.task_executions.update_task_execution_status(
+            body={},
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    async def test_method_update_task_execution_status_with_all_params(self, async_client: AsyncGitpod) -> None:
+        task_execution = await async_client.environment_automations.task_executions.update_task_execution_status(
+            body={
+                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "failureMessage": "failureMessage",
+                "logUrl": "logUrl",
+                "steps": [
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                    {
+                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                        "failure_message": "failureMessage",
+                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
+                    },
+                ],
+            },
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_task_execution_status(self, async_client: AsyncGitpod) -> None:
+        response = (
+            await async_client.environment_automations.task_executions.with_raw_response.update_task_execution_status(
+                body={},
+                connect_protocol_version=1,
+            )
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        task_execution = await response.parse()
+        assert_matches_type(object, task_execution, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_task_execution_status(self, async_client: AsyncGitpod) -> None:
+        async with async_client.environment_automations.task_executions.with_streaming_response.update_task_execution_status(
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

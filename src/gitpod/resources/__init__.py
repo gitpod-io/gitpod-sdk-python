@@ -56,14 +56,6 @@ from .automations_files import (
     AutomationsFilesResourceWithStreamingResponse,
     AsyncAutomationsFilesResourceWithStreamingResponse,
 )
-from .runner_interaction import (
-    RunnerInteractionResource,
-    AsyncRunnerInteractionResource,
-    RunnerInteractionResourceWithRawResponse,
-    AsyncRunnerInteractionResourceWithRawResponse,
-    RunnerInteractionResourceWithStreamingResponse,
-    AsyncRunnerInteractionResourceWithStreamingResponse,
-)
 from .environment_classes import (
     EnvironmentClassesResource,
     AsyncEnvironmentClassesResource,
@@ -87,14 +79,6 @@ from .runner_configurations import (
     AsyncRunnerConfigurationsResourceWithRawResponse,
     RunnerConfigurationsResourceWithStreamingResponse,
     AsyncRunnerConfigurationsResourceWithStreamingResponse,
-)
-from .environment_automation import (
-    EnvironmentAutomationResource,
-    AsyncEnvironmentAutomationResource,
-    EnvironmentAutomationResourceWithRawResponse,
-    AsyncEnvironmentAutomationResourceWithRawResponse,
-    EnvironmentAutomationResourceWithStreamingResponse,
-    AsyncEnvironmentAutomationResourceWithStreamingResponse,
 )
 from .personal_access_tokens import (
     PersonalAccessTokensResource,
@@ -138,12 +122,6 @@ __all__ = [
     "AsyncEnvironmentAutomationsResourceWithRawResponse",
     "EnvironmentAutomationsResourceWithStreamingResponse",
     "AsyncEnvironmentAutomationsResourceWithStreamingResponse",
-    "EnvironmentAutomationResource",
-    "AsyncEnvironmentAutomationResource",
-    "EnvironmentAutomationResourceWithRawResponse",
-    "AsyncEnvironmentAutomationResourceWithRawResponse",
-    "EnvironmentAutomationResourceWithStreamingResponse",
-    "AsyncEnvironmentAutomationResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",
@@ -180,12 +158,6 @@ __all__ = [
     "AsyncRunnerInteractionsResourceWithRawResponse",
     "RunnerInteractionsResourceWithStreamingResponse",
     "AsyncRunnerInteractionsResourceWithStreamingResponse",
-    "RunnerInteractionResource",
-    "AsyncRunnerInteractionResource",
-    "RunnerInteractionResourceWithRawResponse",
-    "AsyncRunnerInteractionResourceWithRawResponse",
-    "RunnerInteractionResourceWithStreamingResponse",
-    "AsyncRunnerInteractionResourceWithStreamingResponse",
     "RunnersResource",
     "AsyncRunnersResource",
     "RunnersResourceWithRawResponse",
