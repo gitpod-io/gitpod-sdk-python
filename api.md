@@ -83,6 +83,7 @@ from gitpod.types.environment_automations import (
     TaskExecutionCreateListResponse,
     TaskExecutionCreateRetrieveResponse,
     TaskExecutionStopResponse,
+    TaskExecutionUpdateTaskExecutionStatusResponse,
 )
 ```
 
@@ -93,18 +94,7 @@ Methods:
 - <code title="post /gitpod.v1.EnvironmentAutomationService/ListTaskExecutions">client.environment_automations.task_executions.<a href="./src/gitpod/resources/environment_automations/task_executions.py">create_list</a>(\*\*<a href="src/gitpod/types/environment_automations/task_execution_create_list_params.py">params</a>) -> <a href="./src/gitpod/types/environment_automations/task_execution_create_list_response.py">TaskExecutionCreateListResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/GetTaskExecution">client.environment_automations.task_executions.<a href="./src/gitpod/resources/environment_automations/task_executions.py">create_retrieve</a>(\*\*<a href="src/gitpod/types/environment_automations/task_execution_create_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/environment_automations/task_execution_create_retrieve_response.py">TaskExecutionCreateRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StopTaskExecution">client.environment_automations.task_executions.<a href="./src/gitpod/resources/environment_automations/task_executions.py">stop</a>(\*\*<a href="src/gitpod/types/environment_automations/task_execution_stop_params.py">params</a>) -> <a href="./src/gitpod/types/environment_automations/task_execution_stop_response.py">object</a></code>
-
-# EnvironmentAutomation
-
-Types:
-
-```python
-from gitpod.types import EnvironmentAutomationUpdateTaskExecutionStatusResponse
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus">client.environment_automation.<a href="./src/gitpod/resources/environment_automation.py">update_task_execution_status</a>(\*\*<a href="src/gitpod/types/environment_automation_update_task_execution_status_params.py">params</a>) -> <a href="./src/gitpod/types/environment_automation_update_task_execution_status_response.py">object</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus">client.environment_automations.task_executions.<a href="./src/gitpod/resources/environment_automations/task_executions.py">update_task_execution_status</a>(\*\*<a href="src/gitpod/types/environment_automations/task_execution_update_task_execution_status_params.py">params</a>) -> <a href="./src/gitpod/types/environment_automations/task_execution_update_task_execution_status_response.py">object</a></code>
 
 # Environments
 
@@ -292,69 +282,47 @@ Types:
 
 ```python
 from gitpod.types import (
+    RunnerInteractionGetHostAuthenticationTokenValueResponse,
+    RunnerInteractionGetLatestVersionResponse,
+    RunnerInteractionListRunnerEnvironmentClassesResponse,
+    RunnerInteractionListRunnerScmIntegrationsResponse,
     RunnerInteractionMarkActiveResponse,
+    RunnerInteractionSendResponseResponse,
     RunnerInteractionSignupResponse,
+    RunnerInteractionUpdateRunnerConfigurationSchemaResponse,
     RunnerInteractionUpdateStatusResponse,
 )
 ```
 
 Methods:
 
+- <code title="post /gitpod.v1.RunnerInteractionService/GetHostAuthenticationTokenValue">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">get_host_authentication_token_value</a>(\*\*<a href="src/gitpod/types/runner_interaction_get_host_authentication_token_value_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_get_host_authentication_token_value_response.py">RunnerInteractionGetHostAuthenticationTokenValueResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/GetLatestVersion">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">get_latest_version</a>(\*\*<a href="src/gitpod/types/runner_interaction_get_latest_version_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_get_latest_version_response.py">RunnerInteractionGetLatestVersionResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerEnvironmentClasses">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">list_runner_environment_classes</a>(\*\*<a href="src/gitpod/types/runner_interaction_list_runner_environment_classes_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_list_runner_environment_classes_response.py">RunnerInteractionListRunnerEnvironmentClassesResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerSCMIntegrations">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">list_runner_scm_integrations</a>(\*\*<a href="src/gitpod/types/runner_interaction_list_runner_scm_integrations_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_list_runner_scm_integrations_response.py">RunnerInteractionListRunnerScmIntegrationsResponse</a></code>
 - <code title="post /gitpod.v1.RunnerInteractionService/MarkRunnerActive">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">mark_active</a>(\*\*<a href="src/gitpod/types/runner_interaction_mark_active_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_mark_active_response.py">object</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/SendResponse">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">send_response</a>(\*\*<a href="src/gitpod/types/runner_interaction_send_response_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_send_response_response.py">object</a></code>
 - <code title="post /gitpod.v1.RunnerInteractionService/Signup">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">signup</a>(\*\*<a href="src/gitpod/types/runner_interaction_signup_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_signup_response.py">RunnerInteractionSignupResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/UpdateRunnerConfigurationSchema">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">update_runner_configuration_schema</a>(\*\*<a href="src/gitpod/types/runner_interaction_update_runner_configuration_schema_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_update_runner_configuration_schema_response.py">object</a></code>
 - <code title="post /gitpod.v1.RunnerInteractionService/UpdateRunnerStatus">client.runner_interactions.<a href="./src/gitpod/resources/runner_interactions/runner_interactions.py">update_status</a>(\*\*<a href="src/gitpod/types/runner_interaction_update_status_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_update_status_response.py">object</a></code>
-
-## Environment
-
-Types:
-
-```python
-from gitpod.types.runner_interactions import (
-    EnvironmentRetrieveResponse,
-    EnvironmentUpdateStatusResponse,
-)
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.RunnerInteractionService/GetRunnerEnvironment">client.runner_interactions.environment.<a href="./src/gitpod/resources/runner_interactions/environment.py">retrieve</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_retrieve_response.py">EnvironmentRetrieveResponse</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/UpdateRunnerEnvironmentStatus">client.runner_interactions.environment.<a href="./src/gitpod/resources/runner_interactions/environment.py">update_status</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_update_status_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_update_status_response.py">object</a></code>
 
 ## Environments
 
 Types:
 
 ```python
-from gitpod.types.runner_interactions import EnvironmentListResponse
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerEnvironments">client.runner_interactions.environments.<a href="./src/gitpod/resources/runner_interactions/environments.py">list</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_list_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_list_response.py">EnvironmentListResponse</a></code>
-
-# RunnerInteraction
-
-Types:
-
-```python
-from gitpod.types import (
-    RunnerInteractionGetHostAuthenticationTokenValueResponse,
-    RunnerInteractionGetLatestVersionResponse,
-    RunnerInteractionListRunnerEnvironmentClassesResponse,
-    RunnerInteractionListRunnerScmIntegrationsResponse,
-    RunnerInteractionSendResponseResponse,
-    RunnerInteractionUpdateRunnerConfigurationSchemaResponse,
+from gitpod.types.runner_interactions import (
+    EnvironmentRetrieveResponse,
+    EnvironmentListResponse,
+    EnvironmentUpdateStatusResponse,
 )
 ```
 
 Methods:
 
-- <code title="post /gitpod.v1.RunnerInteractionService/GetHostAuthenticationTokenValue">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">get_host_authentication_token_value</a>(\*\*<a href="src/gitpod/types/runner_interaction_get_host_authentication_token_value_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_get_host_authentication_token_value_response.py">RunnerInteractionGetHostAuthenticationTokenValueResponse</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/GetLatestVersion">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">get_latest_version</a>(\*\*<a href="src/gitpod/types/runner_interaction_get_latest_version_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_get_latest_version_response.py">RunnerInteractionGetLatestVersionResponse</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerEnvironmentClasses">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">list_runner_environment_classes</a>(\*\*<a href="src/gitpod/types/runner_interaction_list_runner_environment_classes_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_list_runner_environment_classes_response.py">RunnerInteractionListRunnerEnvironmentClassesResponse</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerSCMIntegrations">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">list_runner_scm_integrations</a>(\*\*<a href="src/gitpod/types/runner_interaction_list_runner_scm_integrations_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_list_runner_scm_integrations_response.py">RunnerInteractionListRunnerScmIntegrationsResponse</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/SendResponse">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">send_response</a>(\*\*<a href="src/gitpod/types/runner_interaction_send_response_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_send_response_response.py">object</a></code>
-- <code title="post /gitpod.v1.RunnerInteractionService/UpdateRunnerConfigurationSchema">client.runner_interaction.<a href="./src/gitpod/resources/runner_interaction.py">update_runner_configuration_schema</a>(\*\*<a href="src/gitpod/types/runner_interaction_update_runner_configuration_schema_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interaction_update_runner_configuration_schema_response.py">object</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/GetRunnerEnvironment">client.runner_interactions.environments.<a href="./src/gitpod/resources/runner_interactions/environments.py">retrieve</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_retrieve_response.py">EnvironmentRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/ListRunnerEnvironments">client.runner_interactions.environments.<a href="./src/gitpod/resources/runner_interactions/environments.py">list</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_list_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_list_response.py">EnvironmentListResponse</a></code>
+- <code title="post /gitpod.v1.RunnerInteractionService/UpdateRunnerEnvironmentStatus">client.runner_interactions.environments.<a href="./src/gitpod/resources/runner_interactions/environments.py">update_status</a>(\*\*<a href="src/gitpod/types/runner_interactions/environment_update_status_params.py">params</a>) -> <a href="./src/gitpod/types/runner_interactions/environment_update_status_response.py">object</a></code>
 
 # Runners
 

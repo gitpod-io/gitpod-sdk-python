@@ -23,3 +23,6 @@ from .task_execution_create_retrieve_params import (
 from .task_execution_create_retrieve_response import (
     TaskExecutionCreateRetrieveResponse as TaskExecutionCreateRetrieveResponse,
 )
+from .task_execution_update_task_execution_status_params import (
+    TaskExecutionUpdateTaskExecutionStatusParams as TaskExecutionUpdateTaskExecutionStatusParams,
+)

@@ -98,9 +98,6 @@ from .runner_interaction_list_runner_scm_integrations_response import (
 from .runner_interaction_list_runner_environment_classes_params import (
     RunnerInteractionListRunnerEnvironmentClassesParams as RunnerInteractionListRunnerEnvironmentClassesParams,
 )
-from .environment_automation_update_task_execution_status_params import (
-    EnvironmentAutomationUpdateTaskExecutionStatusParams as EnvironmentAutomationUpdateTaskExecutionStatusParams,
-)
 from .runner_interaction_list_runner_environment_classes_response import (
     RunnerInteractionListRunnerEnvironmentClassesResponse as RunnerInteractionListRunnerEnvironmentClassesResponse,
 )

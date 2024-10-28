@@ -28,6 +28,7 @@ from ...types.environment_automations import (
     task_execution_retrieve_params,
     task_execution_create_list_params,
     task_execution_create_retrieve_params,
+    task_execution_update_task_execution_status_params,
 )
 from ...types.environment_automations.task_execution_list_response import TaskExecutionListResponse
 from ...types.environment_automations.task_execution_retrieve_response import TaskExecutionRetrieveResponse
@@ -335,6 +336,57 @@ class TaskExecutionsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def update_task_execution_status(
+        self,
+        *,
+        body: task_execution_update_task_execution_status_params.Body,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """UpdateTaskExecutionStatus updates the status of a task execution.
+
+        Only the
+        environment executing a task execution is expected to call this function.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
+            body=maybe_transform(
+                body, task_execution_update_task_execution_status_params.TaskExecutionUpdateTaskExecutionStatusParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class AsyncTaskExecutionsResource(AsyncAPIResource):
     @cached_property
@@ -636,6 +688,57 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def update_task_execution_status(
+        self,
+        *,
+        body: task_execution_update_task_execution_status_params.Body,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """UpdateTaskExecutionStatus updates the status of a task execution.
+
+        Only the
+        environment executing a task execution is expected to call this function.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
+            body=await async_maybe_transform(
+                body, task_execution_update_task_execution_status_params.TaskExecutionUpdateTaskExecutionStatusParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class TaskExecutionsResourceWithRawResponse:
     def __init__(self, task_executions: TaskExecutionsResource) -> None:
@@ -655,6 +758,9 @@ class TaskExecutionsResourceWithRawResponse:
         )
         self.stop = to_raw_response_wrapper(
             task_executions.stop,
+        )
+        self.update_task_execution_status = to_raw_response_wrapper(
+            task_executions.update_task_execution_status,
         )
 
 
@@ -677,6 +783,9 @@ class AsyncTaskExecutionsResourceWithRawResponse:
         self.stop = async_to_raw_response_wrapper(
             task_executions.stop,
         )
+        self.update_task_execution_status = async_to_raw_response_wrapper(
+            task_executions.update_task_execution_status,
+        )
 
 
 class TaskExecutionsResourceWithStreamingResponse:
@@ -698,6 +807,9 @@ class TaskExecutionsResourceWithStreamingResponse:
         self.stop = to_streamed_response_wrapper(
             task_executions.stop,
         )
+        self.update_task_execution_status = to_streamed_response_wrapper(
+            task_executions.update_task_execution_status,
+        )
 
 
 class AsyncTaskExecutionsResourceWithStreamingResponse:
@@ -718,4 +830,7 @@ class AsyncTaskExecutionsResourceWithStreamingResponse:
         )
         self.stop = async_to_streamed_response_wrapper(
             task_executions.stop,
+        )
+        self.update_task_execution_status = async_to_streamed_response_wrapper(
+            task_executions.update_task_execution_status,
         )

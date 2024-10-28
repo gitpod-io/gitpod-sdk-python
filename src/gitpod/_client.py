@@ -50,14 +50,12 @@ class Gitpod(SyncAPIClient):
     automations_files: resources.AutomationsFilesResource
     tasks: resources.TasksResource
     environment_automations: resources.EnvironmentAutomationsResource
-    environment_automation: resources.EnvironmentAutomationResource
     environments: resources.EnvironmentsResource
     environment_classes: resources.EnvironmentClassesResource
     organizations: resources.OrganizationsResource
     projects: resources.ProjectsResource
     runner_configurations: resources.RunnerConfigurationsResource
     runner_interactions: resources.RunnerInteractionsResource
-    runner_interaction: resources.RunnerInteractionResource
     runners: resources.RunnersResource
     personal_access_tokens: resources.PersonalAccessTokensResource
     with_raw_response: GitpodWithRawResponse
@@ -108,14 +106,12 @@ class Gitpod(SyncAPIClient):
         self.automations_files = resources.AutomationsFilesResource(self)
         self.tasks = resources.TasksResource(self)
         self.environment_automations = resources.EnvironmentAutomationsResource(self)
-        self.environment_automation = resources.EnvironmentAutomationResource(self)
         self.environments = resources.EnvironmentsResource(self)
         self.environment_classes = resources.EnvironmentClassesResource(self)
         self.organizations = resources.OrganizationsResource(self)
         self.projects = resources.ProjectsResource(self)
         self.runner_configurations = resources.RunnerConfigurationsResource(self)
         self.runner_interactions = resources.RunnerInteractionsResource(self)
-        self.runner_interaction = resources.RunnerInteractionResource(self)
         self.runners = resources.RunnersResource(self)
         self.personal_access_tokens = resources.PersonalAccessTokensResource(self)
         self.with_raw_response = GitpodWithRawResponse(self)
@@ -223,14 +219,12 @@ class AsyncGitpod(AsyncAPIClient):
     automations_files: resources.AsyncAutomationsFilesResource
     tasks: resources.AsyncTasksResource
     environment_automations: resources.AsyncEnvironmentAutomationsResource
-    environment_automation: resources.AsyncEnvironmentAutomationResource
     environments: resources.AsyncEnvironmentsResource
     environment_classes: resources.AsyncEnvironmentClassesResource
     organizations: resources.AsyncOrganizationsResource
     projects: resources.AsyncProjectsResource
     runner_configurations: resources.AsyncRunnerConfigurationsResource
     runner_interactions: resources.AsyncRunnerInteractionsResource
-    runner_interaction: resources.AsyncRunnerInteractionResource
     runners: resources.AsyncRunnersResource
     personal_access_tokens: resources.AsyncPersonalAccessTokensResource
     with_raw_response: AsyncGitpodWithRawResponse
@@ -281,14 +275,12 @@ class AsyncGitpod(AsyncAPIClient):
         self.automations_files = resources.AsyncAutomationsFilesResource(self)
         self.tasks = resources.AsyncTasksResource(self)
         self.environment_automations = resources.AsyncEnvironmentAutomationsResource(self)
-        self.environment_automation = resources.AsyncEnvironmentAutomationResource(self)
         self.environments = resources.AsyncEnvironmentsResource(self)
         self.environment_classes = resources.AsyncEnvironmentClassesResource(self)
         self.organizations = resources.AsyncOrganizationsResource(self)
         self.projects = resources.AsyncProjectsResource(self)
         self.runner_configurations = resources.AsyncRunnerConfigurationsResource(self)
         self.runner_interactions = resources.AsyncRunnerInteractionsResource(self)
-        self.runner_interaction = resources.AsyncRunnerInteractionResource(self)
         self.runners = resources.AsyncRunnersResource(self)
         self.personal_access_tokens = resources.AsyncPersonalAccessTokensResource(self)
         self.with_raw_response = AsyncGitpodWithRawResponse(self)
@@ -399,16 +391,12 @@ class GitpodWithRawResponse:
         self.environment_automations = resources.EnvironmentAutomationsResourceWithRawResponse(
             client.environment_automations
         )
-        self.environment_automation = resources.EnvironmentAutomationResourceWithRawResponse(
-            client.environment_automation
-        )
         self.environments = resources.EnvironmentsResourceWithRawResponse(client.environments)
         self.environment_classes = resources.EnvironmentClassesResourceWithRawResponse(client.environment_classes)
         self.organizations = resources.OrganizationsResourceWithRawResponse(client.organizations)
         self.projects = resources.ProjectsResourceWithRawResponse(client.projects)
         self.runner_configurations = resources.RunnerConfigurationsResourceWithRawResponse(client.runner_configurations)
         self.runner_interactions = resources.RunnerInteractionsResourceWithRawResponse(client.runner_interactions)
-        self.runner_interaction = resources.RunnerInteractionResourceWithRawResponse(client.runner_interaction)
         self.runners = resources.RunnersResourceWithRawResponse(client.runners)
         self.personal_access_tokens = resources.PersonalAccessTokensResourceWithRawResponse(
             client.personal_access_tokens
@@ -423,9 +411,6 @@ class AsyncGitpodWithRawResponse:
         self.environment_automations = resources.AsyncEnvironmentAutomationsResourceWithRawResponse(
             client.environment_automations
         )
-        self.environment_automation = resources.AsyncEnvironmentAutomationResourceWithRawResponse(
-            client.environment_automation
-        )
         self.environments = resources.AsyncEnvironmentsResourceWithRawResponse(client.environments)
         self.environment_classes = resources.AsyncEnvironmentClassesResourceWithRawResponse(client.environment_classes)
         self.organizations = resources.AsyncOrganizationsResourceWithRawResponse(client.organizations)
@@ -434,7 +419,6 @@ class AsyncGitpodWithRawResponse:
             client.runner_configurations
         )
         self.runner_interactions = resources.AsyncRunnerInteractionsResourceWithRawResponse(client.runner_interactions)
-        self.runner_interaction = resources.AsyncRunnerInteractionResourceWithRawResponse(client.runner_interaction)
         self.runners = resources.AsyncRunnersResourceWithRawResponse(client.runners)
         self.personal_access_tokens = resources.AsyncPersonalAccessTokensResourceWithRawResponse(
             client.personal_access_tokens
@@ -449,9 +433,6 @@ class GitpodWithStreamedResponse:
         self.environment_automations = resources.EnvironmentAutomationsResourceWithStreamingResponse(
             client.environment_automations
         )
-        self.environment_automation = resources.EnvironmentAutomationResourceWithStreamingResponse(
-            client.environment_automation
-        )
         self.environments = resources.EnvironmentsResourceWithStreamingResponse(client.environments)
         self.environment_classes = resources.EnvironmentClassesResourceWithStreamingResponse(client.environment_classes)
         self.organizations = resources.OrganizationsResourceWithStreamingResponse(client.organizations)
@@ -460,7 +441,6 @@ class GitpodWithStreamedResponse:
             client.runner_configurations
         )
         self.runner_interactions = resources.RunnerInteractionsResourceWithStreamingResponse(client.runner_interactions)
-        self.runner_interaction = resources.RunnerInteractionResourceWithStreamingResponse(client.runner_interaction)
         self.runners = resources.RunnersResourceWithStreamingResponse(client.runners)
         self.personal_access_tokens = resources.PersonalAccessTokensResourceWithStreamingResponse(
             client.personal_access_tokens
@@ -475,9 +455,6 @@ class AsyncGitpodWithStreamedResponse:
         self.environment_automations = resources.AsyncEnvironmentAutomationsResourceWithStreamingResponse(
             client.environment_automations
         )
-        self.environment_automation = resources.AsyncEnvironmentAutomationResourceWithStreamingResponse(
-            client.environment_automation
-        )
         self.environments = resources.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
         self.environment_classes = resources.AsyncEnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
@@ -489,9 +466,6 @@ class AsyncGitpodWithStreamedResponse:
         )
         self.runner_interactions = resources.AsyncRunnerInteractionsResourceWithStreamingResponse(
             client.runner_interactions
-        )
-        self.runner_interaction = resources.AsyncRunnerInteractionResourceWithStreamingResponse(
-            client.runner_interaction
         )
         self.runners = resources.AsyncRunnersResourceWithStreamingResponse(client.runners)
         self.personal_access_tokens = resources.AsyncPersonalAccessTokensResourceWithStreamingResponse(
