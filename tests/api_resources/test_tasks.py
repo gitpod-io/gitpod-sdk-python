@@ -33,11 +33,7 @@ class TestTasks:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         task = client.tasks.create(
             connect_protocol_version=1,
-            depends_on=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -48,7 +44,7 @@ class TestTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{}, {}, {}],
+                "triggered_by": [{}],
             },
             spec={"command": "command"},
             connect_timeout_ms=0,
@@ -178,11 +174,7 @@ class TestAsyncTasks:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.tasks.create(
             connect_protocol_version=1,
-            depends_on=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -193,7 +185,7 @@ class TestAsyncTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{}, {}, {}],
+                "triggered_by": [{}],
             },
             spec={"command": "command"},
             connect_timeout_ms=0,

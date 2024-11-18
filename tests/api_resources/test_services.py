@@ -160,17 +160,9 @@ class TestServices:
         service = client.services.list_create(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "references": ["x", "x", "x"],
-                "service_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "references": ["x"],
+                "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
@@ -428,17 +420,9 @@ class TestAsyncServices:
         service = await async_client.services.list_create(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "references": ["x", "x", "x"],
-                "service_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "references": ["x"],
+                "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",

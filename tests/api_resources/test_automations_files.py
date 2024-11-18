@@ -38,16 +38,16 @@ class TestAutomationsFiles:
                         },
                         "description": "description",
                         "name": "x",
-                        "triggered_by": ["string", "string", "string"],
+                        "triggered_by": ["string"],
                     }
                 },
                 "tasks": {
                     "foo": {
                         "command": "x",
-                        "depends_on": ["string", "string", "string"],
+                        "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
-                        "triggered_by": ["string", "string", "string"],
+                        "triggered_by": ["string"],
                     }
                 },
             },
@@ -105,16 +105,16 @@ class TestAsyncAutomationsFiles:
                         },
                         "description": "description",
                         "name": "x",
-                        "triggered_by": ["string", "string", "string"],
+                        "triggered_by": ["string"],
                     }
                 },
                 "tasks": {
                     "foo": {
                         "command": "x",
-                        "depends_on": ["string", "string", "string"],
+                        "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
-                        "triggered_by": ["string", "string", "string"],
+                        "triggered_by": ["string"],
                     }
                 },
             },

@@ -42,7 +42,7 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{}, {}, {}]},
+                    "initializer": {"specs": [{}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -59,33 +59,15 @@ class TestEnvironments:
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
                         "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
+                    }
                 ],
-                "secrets": [{}, {}, {}],
+                "secrets": [{}],
                 "spec_version": "string",
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
+                    }
                 ],
                 "timeout": {"disconnected": "disconnected"},
             },
@@ -169,26 +151,10 @@ class TestEnvironments:
         environment = client.environments.list(
             connect_protocol_version=1,
             filter={
-                "creator_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "project_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "runner_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "status_phases": [
-                    "ENVIRONMENT_PHASE_UNSPECIFIED",
-                    "ENVIRONMENT_PHASE_CREATING",
-                    "ENVIRONMENT_PHASE_STARTING",
-                ],
+                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -244,7 +210,7 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{}, {}, {}]},
+                    "initializer": {"specs": [{}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -261,33 +227,15 @@ class TestEnvironments:
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
                         "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
+                    }
                 ],
-                "secrets": [{}, {}, {}],
+                "secrets": [{}],
                 "spec_version": "string",
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
+                    }
                 ],
                 "timeout": {"disconnected": "disconnected"},
             },
@@ -383,7 +331,7 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{}, {}, {}]},
+                    "initializer": {"specs": [{}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -400,33 +348,15 @@ class TestAsyncEnvironments:
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
                         "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
+                    }
                 ],
-                "secrets": [{}, {}, {}],
+                "secrets": [{}],
                 "spec_version": "string",
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
+                    }
                 ],
                 "timeout": {"disconnected": "disconnected"},
             },
@@ -510,26 +440,10 @@ class TestAsyncEnvironments:
         environment = await async_client.environments.list(
             connect_protocol_version=1,
             filter={
-                "creator_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "project_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "runner_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "status_phases": [
-                    "ENVIRONMENT_PHASE_UNSPECIFIED",
-                    "ENVIRONMENT_PHASE_CREATING",
-                    "ENVIRONMENT_PHASE_STARTING",
-                ],
+                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
@@ -585,7 +499,7 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{}, {}, {}]},
+                    "initializer": {"specs": [{}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -602,33 +516,15 @@ class TestAsyncEnvironments:
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
                         "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
-                    {
-                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
-                        "name": "x",
-                        "port": 1,
-                    },
+                    }
                 ],
-                "secrets": [{}, {}, {}],
+                "secrets": [{}],
                 "spec_version": "string",
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
-                    {
-                        "id": "id",
-                        "value": "value",
-                    },
+                    }
                 ],
                 "timeout": {"disconnected": "disconnected"},
             },

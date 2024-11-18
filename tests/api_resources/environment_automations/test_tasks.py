@@ -33,11 +33,7 @@ class TestTasks:
         task = client.environment_automations.tasks.update(
             connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            depends_on=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             metadata={},
             spec={},
             connect_timeout_ms=0,
@@ -164,17 +160,9 @@ class TestTasks:
         task = client.environment_automations.tasks.create_list(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "references": ["x", "x", "x"],
-                "task_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "references": ["x"],
+                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
@@ -264,11 +252,7 @@ class TestAsyncTasks:
         task = await async_client.environment_automations.tasks.update(
             connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            depends_on=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             metadata={},
             spec={},
             connect_timeout_ms=0,
@@ -395,17 +379,9 @@ class TestAsyncTasks:
         task = await async_client.environment_automations.tasks.create_list(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "references": ["x", "x", "x"],
-                "task_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "references": ["x"],
+                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",

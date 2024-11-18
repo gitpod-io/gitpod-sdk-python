@@ -72,11 +72,7 @@ class TestEnvironments:
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         environment = client.runner_interactions.environments.list(
             connect_protocol_version=1,
-            environment_ids=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            environment_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -140,21 +136,13 @@ class TestEnvironments:
                             {
                                 "change_type": "CHANGE_TYPE_UNSPECIFIED",
                                 "path": "path",
-                            },
-                            {
-                                "change_type": "CHANGE_TYPE_UNSPECIFIED",
-                                "path": "path",
-                            },
-                            {
-                                "change_type": "CHANGE_TYPE_UNSPECIFIED",
-                                "path": "path",
-                            },
+                            }
                         ],
                         "clone_url": "cloneUrl",
                         "latest_commit": "latestCommit",
                         "total_changed_files": 0,
                         "total_unpushed_commits": 0,
-                        "unpushed_commits": ["string", "string", "string"],
+                        "unpushed_commits": ["string"],
                     },
                     "phase": "CONTENT_PHASE_UNSPECIFIED",
                     "session": "session",
@@ -180,19 +168,11 @@ class TestEnvironments:
                         {
                             "port": 1,
                             "url": "url",
-                        },
-                        {
-                            "port": 1,
-                            "url": "url",
-                        },
-                        {
-                            "port": 1,
-                            "url": "url",
-                        },
+                        }
                     ],
                     "ssh": {"url": "url"},
                 },
-                "failure_message": ["string", "string", "string"],
+                "failure_message": ["string"],
                 "machine": {
                     "failure_message": "failureMessage",
                     "phase": "PHASE_UNSPECIFIED",
@@ -216,36 +196,16 @@ class TestEnvironments:
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                         "secret_name": "secretName",
                         "warning_message": "warningMessage",
-                    },
-                    {
-                        "failure_message": "failureMessage",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                        "secret_name": "secretName",
-                        "warning_message": "warningMessage",
-                    },
-                    {
-                        "failure_message": "failureMessage",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                        "secret_name": "secretName",
-                        "warning_message": "warningMessage",
-                    },
+                    }
                 ],
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "id",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "id",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
+                    }
                 ],
                 "status_version": "string",
-                "warning_message": ["string", "string", "string"],
+                "warning_message": ["string"],
             },
             connect_timeout_ms=0,
         )
@@ -331,11 +291,7 @@ class TestAsyncEnvironments:
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.runner_interactions.environments.list(
             connect_protocol_version=1,
-            environment_ids=[
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            ],
+            environment_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -399,21 +355,13 @@ class TestAsyncEnvironments:
                             {
                                 "change_type": "CHANGE_TYPE_UNSPECIFIED",
                                 "path": "path",
-                            },
-                            {
-                                "change_type": "CHANGE_TYPE_UNSPECIFIED",
-                                "path": "path",
-                            },
-                            {
-                                "change_type": "CHANGE_TYPE_UNSPECIFIED",
-                                "path": "path",
-                            },
+                            }
                         ],
                         "clone_url": "cloneUrl",
                         "latest_commit": "latestCommit",
                         "total_changed_files": 0,
                         "total_unpushed_commits": 0,
-                        "unpushed_commits": ["string", "string", "string"],
+                        "unpushed_commits": ["string"],
                     },
                     "phase": "CONTENT_PHASE_UNSPECIFIED",
                     "session": "session",
@@ -439,19 +387,11 @@ class TestAsyncEnvironments:
                         {
                             "port": 1,
                             "url": "url",
-                        },
-                        {
-                            "port": 1,
-                            "url": "url",
-                        },
-                        {
-                            "port": 1,
-                            "url": "url",
-                        },
+                        }
                     ],
                     "ssh": {"url": "url"},
                 },
-                "failure_message": ["string", "string", "string"],
+                "failure_message": ["string"],
                 "machine": {
                     "failure_message": "failureMessage",
                     "phase": "PHASE_UNSPECIFIED",
@@ -475,36 +415,16 @@ class TestAsyncEnvironments:
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                         "secret_name": "secretName",
                         "warning_message": "warningMessage",
-                    },
-                    {
-                        "failure_message": "failureMessage",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                        "secret_name": "secretName",
-                        "warning_message": "warningMessage",
-                    },
-                    {
-                        "failure_message": "failureMessage",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                        "secret_name": "secretName",
-                        "warning_message": "warningMessage",
-                    },
+                    }
                 ],
                 "ssh_public_keys": [
                     {
                         "id": "id",
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "id",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "id",
-                        "phase": "CONTENT_PHASE_UNSPECIFIED",
-                    },
+                    }
                 ],
                 "status_version": "string",
-                "warning_message": ["string", "string", "string"],
+                "warning_message": ["string"],
             },
             connect_timeout_ms=0,
         )

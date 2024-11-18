@@ -30,13 +30,7 @@ class TestPersonalAccessTokens:
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         personal_access_token = client.personal_access_tokens.list(
             connect_protocol_version=1,
-            filter={
-                "user_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -124,13 +118,7 @@ class TestAsyncPersonalAccessTokens:
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         personal_access_token = await async_client.personal_access_tokens.list(
             connect_protocol_version=1,
-            filter={
-                "user_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,

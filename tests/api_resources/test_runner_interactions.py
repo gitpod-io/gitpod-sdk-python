@@ -128,13 +128,7 @@ class TestRunnerInteractions:
     def test_method_list_runner_environment_classes_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.list_runner_environment_classes(
             connect_protocol_version=1,
-            filter={
-                "environment_class_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -185,13 +179,7 @@ class TestRunnerInteractions:
     def test_method_list_runner_scm_integrations_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.list_runner_scm_integrations(
             connect_protocol_version=1,
-            filter={
-                "scm_integration_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"scm_integration_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -543,63 +531,13 @@ class TestRunnerInteractions:
                         {
                             "key": "key",
                             "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
+                        }
                     ],
                     "description": "xxx",
                     "display_name": "xxx",
                     "enabled": True,
                     "runner_id": "runnerId",
-                },
-                {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
-                {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
+                }
             ],
             public_key="U3RhaW5sZXNzIHJvY2tz",
             connect_timeout_ms=0,
@@ -642,11 +580,11 @@ class TestRunnerInteractions:
         runner_interaction = client.runner_interactions.update_runner_configuration_schema(
             connect_protocol_version=1,
             config_schema={
-                "environment_classes": [{}, {}, {}],
-                "runner_config": [{}, {}, {}],
+                "environment_classes": [{}],
+                "runner_config": [{}],
                 "scm": [
                     {
-                        "default_hosts": ["string", "string", "string"],
+                        "default_hosts": ["string"],
                         "name": "name",
                         "oauth": {"callback_url": "callbackUrl"},
                         "pat": {
@@ -654,27 +592,7 @@ class TestRunnerInteractions:
                             "docs_link": "docsLink",
                         },
                         "scm_id": "scmId",
-                    },
-                    {
-                        "default_hosts": ["string", "string", "string"],
-                        "name": "name",
-                        "oauth": {"callback_url": "callbackUrl"},
-                        "pat": {
-                            "description": "description",
-                            "docs_link": "docsLink",
-                        },
-                        "scm_id": "scmId",
-                    },
-                    {
-                        "default_hosts": ["string", "string", "string"],
-                        "name": "name",
-                        "oauth": {"callback_url": "callbackUrl"},
-                        "pat": {
-                            "description": "description",
-                            "docs_link": "docsLink",
-                        },
-                        "scm_id": "scmId",
-                    },
+                    }
                 ],
                 "version": "version",
             },
@@ -719,7 +637,7 @@ class TestRunnerInteractions:
     def test_method_update_status_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.update_status(
             body={
-                "additionalInfo": [{}, {}, {}],
+                "additionalInfo": [{}],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",
@@ -867,13 +785,7 @@ class TestAsyncRunnerInteractions:
     async def test_method_list_runner_environment_classes_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.list_runner_environment_classes(
             connect_protocol_version=1,
-            filter={
-                "environment_class_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -924,13 +836,7 @@ class TestAsyncRunnerInteractions:
     async def test_method_list_runner_scm_integrations_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.list_runner_scm_integrations(
             connect_protocol_version=1,
-            filter={
-                "scm_integration_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ]
-            },
+            filter={"scm_integration_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 0,
@@ -1282,63 +1188,13 @@ class TestAsyncRunnerInteractions:
                         {
                             "key": "key",
                             "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
+                        }
                     ],
                     "description": "xxx",
                     "display_name": "xxx",
                     "enabled": True,
                     "runner_id": "runnerId",
-                },
-                {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
-                {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                        {
-                            "key": "key",
-                            "value": "value",
-                        },
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
+                }
             ],
             public_key="U3RhaW5sZXNzIHJvY2tz",
             connect_timeout_ms=0,
@@ -1381,11 +1237,11 @@ class TestAsyncRunnerInteractions:
         runner_interaction = await async_client.runner_interactions.update_runner_configuration_schema(
             connect_protocol_version=1,
             config_schema={
-                "environment_classes": [{}, {}, {}],
-                "runner_config": [{}, {}, {}],
+                "environment_classes": [{}],
+                "runner_config": [{}],
                 "scm": [
                     {
-                        "default_hosts": ["string", "string", "string"],
+                        "default_hosts": ["string"],
                         "name": "name",
                         "oauth": {"callback_url": "callbackUrl"},
                         "pat": {
@@ -1393,27 +1249,7 @@ class TestAsyncRunnerInteractions:
                             "docs_link": "docsLink",
                         },
                         "scm_id": "scmId",
-                    },
-                    {
-                        "default_hosts": ["string", "string", "string"],
-                        "name": "name",
-                        "oauth": {"callback_url": "callbackUrl"},
-                        "pat": {
-                            "description": "description",
-                            "docs_link": "docsLink",
-                        },
-                        "scm_id": "scmId",
-                    },
-                    {
-                        "default_hosts": ["string", "string", "string"],
-                        "name": "name",
-                        "oauth": {"callback_url": "callbackUrl"},
-                        "pat": {
-                            "description": "description",
-                            "docs_link": "docsLink",
-                        },
-                        "scm_id": "scmId",
-                    },
+                    }
                 ],
                 "version": "version",
             },
@@ -1458,7 +1294,7 @@ class TestAsyncRunnerInteractions:
     async def test_method_update_status_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.update_status(
             body={
-                "additionalInfo": [{}, {}, {}],
+                "additionalInfo": [{}],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",
