@@ -122,22 +122,10 @@ class TestTaskExecutions:
         task_execution = client.environment_automations.task_executions.create_list(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "phases": [
-                    "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    "TASK_EXECUTION_PHASE_PENDING",
-                    "TASK_EXECUTION_PHASE_RUNNING",
-                ],
-                "task_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "task_references": ["string", "string", "string"],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED"],
+                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "task_references": ["string"],
             },
             pagination={
                 "token": "token",
@@ -271,17 +259,7 @@ class TestTaskExecutions:
                         "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "failure_message": "failureMessage",
                         "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "failure_message": "failureMessage",
-                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "failure_message": "failureMessage",
-                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
+                    }
                 ],
             },
             connect_protocol_version=1,
@@ -419,22 +397,10 @@ class TestAsyncTaskExecutions:
         task_execution = await async_client.environment_automations.task_executions.create_list(
             connect_protocol_version=1,
             filter={
-                "environment_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "phases": [
-                    "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    "TASK_EXECUTION_PHASE_PENDING",
-                    "TASK_EXECUTION_PHASE_RUNNING",
-                ],
-                "task_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "task_references": ["string", "string", "string"],
+                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED"],
+                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "task_references": ["string"],
             },
             pagination={
                 "token": "token",
@@ -568,17 +534,7 @@ class TestAsyncTaskExecutions:
                         "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "failure_message": "failureMessage",
                         "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "failure_message": "failureMessage",
-                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
-                    {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "failure_message": "failureMessage",
-                        "phase": "TASK_EXECUTION_PHASE_UNSPECIFIED",
-                    },
+                    }
                 ],
             },
             connect_protocol_version=1,

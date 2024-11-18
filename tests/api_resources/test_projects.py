@@ -34,7 +34,7 @@ class TestProjects:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
             environment_class={},
-            initializer={"specs": [{}, {}, {}]},
+            initializer={"specs": [{}]},
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -173,7 +173,7 @@ class TestAsyncProjects:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
             environment_class={},
-            initializer={"specs": [{}, {}, {}]},
+            initializer={"specs": [{}]},
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",

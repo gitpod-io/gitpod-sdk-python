@@ -130,12 +130,8 @@ class TestRunners:
         runner = client.runners.list(
             connect_protocol_version=1,
             filter={
-                "creator_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "kinds": ["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE"],
+                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "kinds": ["RUNNER_KIND_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
@@ -528,12 +524,8 @@ class TestAsyncRunners:
         runner = await async_client.runners.list(
             connect_protocol_version=1,
             filter={
-                "creator_ids": [
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                ],
-                "kinds": ["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE"],
+                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "kinds": ["RUNNER_KIND_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
