@@ -69,7 +69,7 @@ class TestEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "disconnected"},
+                "timeout": {"disconnected": "+9125115.360s"},
             },
             connect_timeout_ms=0,
         )
@@ -237,7 +237,7 @@ class TestEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "disconnected"},
+                "timeout": {"disconnected": "+9125115.360s"},
             },
             connect_timeout_ms=0,
         )
@@ -358,7 +358,7 @@ class TestAsyncEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "disconnected"},
+                "timeout": {"disconnected": "+9125115.360s"},
             },
             connect_timeout_ms=0,
         )
@@ -526,7 +526,7 @@ class TestAsyncEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "disconnected"},
+                "timeout": {"disconnected": "+9125115.360s"},
             },
             connect_timeout_ms=0,
         )
