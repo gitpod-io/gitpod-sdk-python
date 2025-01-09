@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["TaskRetrieveResponse", "Task", "TaskMetadata", "TaskMetadataCreator", "TaskSpec"]
+__all__ = ["TaskRetrieveResponse", "Task", "TaskMetadata", "TaskMetadataCreator", "TaskMetadataTriggeredBy", "TaskSpec"]
 
 
 class TaskMetadataCreator(BaseModel):
@@ -26,6 +26,10 @@ class TaskMetadataCreator(BaseModel):
         ]
     ] = None
     """Principal is the principal of the subject"""
+
+
+class TaskMetadataTriggeredBy:
+    pass
 
 
 class TaskMetadata(BaseModel):
@@ -144,7 +148,7 @@ class TaskMetadata(BaseModel):
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[Union[object, object, object, object]]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[TaskMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the task."""
 
 

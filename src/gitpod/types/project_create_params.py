@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["ProjectCreateParams", "Initializer"]
+__all__ = ["ProjectCreateParams", "Initializer", "InitializerSpec"]
 
 
 class ProjectCreateParams(TypedDict, total=False):
@@ -37,5 +37,9 @@ class ProjectCreateParams(TypedDict, total=False):
     """Define the timeout, in ms"""
 
 
+class InitializerSpec:
+    pass
+
+
 class Initializer(TypedDict, total=False):
-    specs: Iterable[Union[object, object, object]]
+    specs: Iterable[InitializerSpec]

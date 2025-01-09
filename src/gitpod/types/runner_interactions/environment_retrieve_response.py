@@ -17,9 +17,11 @@ __all__ = [
     "EnvironmentSpecAutomationsFile",
     "EnvironmentSpecContent",
     "EnvironmentSpecContentInitializer",
+    "EnvironmentSpecContentInitializerSpec",
     "EnvironmentSpecDevcontainer",
     "EnvironmentSpecMachine",
     "EnvironmentSpecPort",
+    "EnvironmentSpecSecret",
     "EnvironmentSpecSSHPublicKey",
     "EnvironmentSpecTimeout",
 ]
@@ -176,8 +178,12 @@ class EnvironmentSpecAutomationsFile(BaseModel):
     session: Optional[str] = None
 
 
+class EnvironmentSpecContentInitializerSpec:
+    pass
+
+
 class EnvironmentSpecContentInitializer(BaseModel):
-    specs: Optional[List[Union[object, object, object]]] = None
+    specs: Optional[List[EnvironmentSpecContentInitializerSpec]] = None
 
 
 class EnvironmentSpecContent(BaseModel):
@@ -221,6 +227,10 @@ class EnvironmentSpecPort(BaseModel):
 
     port: Optional[int] = None
     """port number"""
+
+
+class EnvironmentSpecSecret:
+    pass
 
 
 class EnvironmentSpecSSHPublicKey(BaseModel):
@@ -330,7 +340,7 @@ class EnvironmentSpec(BaseModel):
     ports: Optional[List[EnvironmentSpecPort]] = None
     """ports is the set of ports which ought to be exposed to the internet"""
 
-    secrets: Optional[List[Union[object, object, object, object]]] = None
+    secrets: Optional[List[EnvironmentSpecSecret]] = None
     """secrets are confidential data that is mounted into the environment"""
 
     spec_version: Union[str, float, None] = FieldInfo(alias="specVersion", default=None)
