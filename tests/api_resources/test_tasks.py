@@ -44,7 +44,13 @@ class TestTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "postDevcontainerStart": True,
+                        "postEnvironmentStart": True,
+                    }
+                ],
             },
             spec={"command": "command"},
             connect_timeout_ms=0,
@@ -185,7 +191,13 @@ class TestAsyncTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "postDevcontainerStart": True,
+                        "postEnvironmentStart": True,
+                    }
+                ],
             },
             spec={"command": "command"},
             connect_timeout_ms=0,

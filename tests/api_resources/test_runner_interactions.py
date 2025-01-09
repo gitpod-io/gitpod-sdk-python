@@ -256,7 +256,7 @@ class TestRunnerInteractions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_send_response_overload_1(self, client: Gitpod) -> None:
+    def test_method_send_response(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.send_response(
             body={},
             connect_protocol_version=1,
@@ -264,16 +264,53 @@ class TestRunnerInteractions:
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    def test_method_send_response_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_send_response_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.send_response(
-            body={},
+            body={
+                "callCheckAuthenticationForHost": {
+                    "resp": {
+                        "authenticated": True,
+                        "authentication_url": "authenticationUrl",
+                        "pat_supported": True,
+                    }
+                },
+                "callParseContext": {
+                    "resp": {
+                        "git": {
+                            "branch": "branch",
+                            "clone_url": "cloneUrl",
+                            "commit": "commit",
+                            "host": "host",
+                            "owner": "owner",
+                            "repo": "repo",
+                            "upstream_remote_url": "upstreamRemoteUrl",
+                        },
+                        "original_context_url": "originalContextUrl",
+                    }
+                },
+                "callPing": {},
+                "callValidateConfig": {},
+                "error": {
+                    "code": "ERROR_CODE_UNSPECIFIED",
+                    "details": [
+                        {
+                            "debug": {"foo": "bar"},
+                            "type": "type",
+                            "value": b"raw file contents",
+                        }
+                    ],
+                    "message": "message",
+                },
+                "requestId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    def test_raw_response_send_response_overload_1(self, client: Gitpod) -> None:
+    def test_raw_response_send_response(self, client: Gitpod) -> None:
         response = client.runner_interactions.with_raw_response.send_response(
             body={},
             connect_protocol_version=1,
@@ -285,222 +322,7 @@ class TestRunnerInteractions:
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    def test_streaming_response_send_response_overload_1(self, client: Gitpod) -> None:
-        with client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_send_response_overload_2(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_method_send_response_with_all_params_overload_2(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_raw_response_send_response_overload_2(self, client: Gitpod) -> None:
-        response = client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_streaming_response_send_response_overload_2(self, client: Gitpod) -> None:
-        with client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_send_response_overload_3(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_method_send_response_with_all_params_overload_3(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_raw_response_send_response_overload_3(self, client: Gitpod) -> None:
-        response = client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_streaming_response_send_response_overload_3(self, client: Gitpod) -> None:
-        with client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_send_response_overload_4(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_method_send_response_with_all_params_overload_4(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_raw_response_send_response_overload_4(self, client: Gitpod) -> None:
-        response = client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_streaming_response_send_response_overload_4(self, client: Gitpod) -> None:
-        with client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_send_response_overload_5(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_method_send_response_with_all_params_overload_5(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_raw_response_send_response_overload_5(self, client: Gitpod) -> None:
-        response = client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_streaming_response_send_response_overload_5(self, client: Gitpod) -> None:
-        with client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_send_response_overload_6(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_method_send_response_with_all_params_overload_6(self, client: Gitpod) -> None:
-        runner_interaction = client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_raw_response_send_response_overload_6(self, client: Gitpod) -> None:
-        response = client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    def test_streaming_response_send_response_overload_6(self, client: Gitpod) -> None:
+    def test_streaming_response_send_response(self, client: Gitpod) -> None:
         with client.runner_interactions.with_streaming_response.send_response(
             body={},
             connect_protocol_version=1,
@@ -580,8 +402,54 @@ class TestRunnerInteractions:
         runner_interaction = client.runner_interactions.update_runner_configuration_schema(
             connect_protocol_version=1,
             config_schema={
-                "environment_classes": [{}],
-                "runner_config": [{}],
+                "environment_classes": [
+                    {
+                        "id": "id",
+                        "bool": {"default": True},
+                        "description": "description",
+                        "display": {"default": "default"},
+                        "enum": {
+                            "default": "default",
+                            "values": ["string"],
+                        },
+                        "int": {
+                            "default": 0,
+                            "max": 0,
+                            "min": 0,
+                        },
+                        "name": "name",
+                        "required": True,
+                        "secret": True,
+                        "string": {
+                            "default": "default",
+                            "pattern": "pattern",
+                        },
+                    }
+                ],
+                "runner_config": [
+                    {
+                        "id": "id",
+                        "bool": {"default": True},
+                        "description": "description",
+                        "display": {"default": "default"},
+                        "enum": {
+                            "default": "default",
+                            "values": ["string"],
+                        },
+                        "int": {
+                            "default": 0,
+                            "max": 0,
+                            "min": 0,
+                        },
+                        "name": "name",
+                        "required": True,
+                        "secret": True,
+                        "string": {
+                            "default": "default",
+                            "pattern": "pattern",
+                        },
+                    }
+                ],
                 "scm": [
                     {
                         "default_hosts": ["string"],
@@ -637,7 +505,12 @@ class TestRunnerInteractions:
     def test_method_update_status_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.update_status(
             body={
-                "additionalInfo": [{}],
+                "additionalInfo": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                    }
+                ],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",
@@ -913,7 +786,7 @@ class TestAsyncRunnerInteractions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_send_response_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_send_response(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.send_response(
             body={},
             connect_protocol_version=1,
@@ -921,16 +794,53 @@ class TestAsyncRunnerInteractions:
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    async def test_method_send_response_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_send_response_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
+            body={
+                "callCheckAuthenticationForHost": {
+                    "resp": {
+                        "authenticated": True,
+                        "authentication_url": "authenticationUrl",
+                        "pat_supported": True,
+                    }
+                },
+                "callParseContext": {
+                    "resp": {
+                        "git": {
+                            "branch": "branch",
+                            "clone_url": "cloneUrl",
+                            "commit": "commit",
+                            "host": "host",
+                            "owner": "owner",
+                            "repo": "repo",
+                            "upstream_remote_url": "upstreamRemoteUrl",
+                        },
+                        "original_context_url": "originalContextUrl",
+                    }
+                },
+                "callPing": {},
+                "callValidateConfig": {},
+                "error": {
+                    "code": "ERROR_CODE_UNSPECIFIED",
+                    "details": [
+                        {
+                            "debug": {"foo": "bar"},
+                            "type": "type",
+                            "value": b"raw file contents",
+                        }
+                    ],
+                    "message": "message",
+                },
+                "requestId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    async def test_raw_response_send_response_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_send_response(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_interactions.with_raw_response.send_response(
             body={},
             connect_protocol_version=1,
@@ -942,222 +852,7 @@ class TestAsyncRunnerInteractions:
         assert_matches_type(object, runner_interaction, path=["response"])
 
     @parametrize
-    async def test_streaming_response_send_response_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = await response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_send_response_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_method_send_response_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_raw_response_send_response_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = await response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_send_response_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = await response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_send_response_overload_3(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_method_send_response_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_raw_response_send_response_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = await response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_send_response_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = await response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_send_response_overload_4(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_method_send_response_with_all_params_overload_4(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_raw_response_send_response_overload_4(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = await response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_send_response_overload_4(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = await response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_send_response_overload_5(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_method_send_response_with_all_params_overload_5(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_raw_response_send_response_overload_5(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = await response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_send_response_overload_5(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_interactions.with_streaming_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_interaction = await response.parse()
-            assert_matches_type(object, runner_interaction, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_send_response_overload_6(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_method_send_response_with_all_params_overload_6(self, async_client: AsyncGitpod) -> None:
-        runner_interaction = await async_client.runner_interactions.send_response(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_raw_response_send_response_overload_6(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_interactions.with_raw_response.send_response(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_interaction = await response.parse()
-        assert_matches_type(object, runner_interaction, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_send_response_overload_6(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_send_response(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_interactions.with_streaming_response.send_response(
             body={},
             connect_protocol_version=1,
@@ -1237,8 +932,54 @@ class TestAsyncRunnerInteractions:
         runner_interaction = await async_client.runner_interactions.update_runner_configuration_schema(
             connect_protocol_version=1,
             config_schema={
-                "environment_classes": [{}],
-                "runner_config": [{}],
+                "environment_classes": [
+                    {
+                        "id": "id",
+                        "bool": {"default": True},
+                        "description": "description",
+                        "display": {"default": "default"},
+                        "enum": {
+                            "default": "default",
+                            "values": ["string"],
+                        },
+                        "int": {
+                            "default": 0,
+                            "max": 0,
+                            "min": 0,
+                        },
+                        "name": "name",
+                        "required": True,
+                        "secret": True,
+                        "string": {
+                            "default": "default",
+                            "pattern": "pattern",
+                        },
+                    }
+                ],
+                "runner_config": [
+                    {
+                        "id": "id",
+                        "bool": {"default": True},
+                        "description": "description",
+                        "display": {"default": "default"},
+                        "enum": {
+                            "default": "default",
+                            "values": ["string"],
+                        },
+                        "int": {
+                            "default": 0,
+                            "max": 0,
+                            "min": 0,
+                        },
+                        "name": "name",
+                        "required": True,
+                        "secret": True,
+                        "string": {
+                            "default": "default",
+                            "pattern": "pattern",
+                        },
+                    }
+                ],
                 "scm": [
                     {
                         "default_hosts": ["string"],
@@ -1294,7 +1035,12 @@ class TestAsyncRunnerInteractions:
     async def test_method_update_status_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.update_status(
             body={
-                "additionalInfo": [{}],
+                "additionalInfo": [
+                    {
+                        "key": "key",
+                        "value": "value",
+                    }
+                ],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",

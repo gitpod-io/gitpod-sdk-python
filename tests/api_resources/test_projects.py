@@ -34,7 +34,20 @@ class TestProjects:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
             environment_class={},
-            initializer={"specs": [{}]},
+            initializer={
+                "specs": [
+                    {
+                        "contextUrl": {"url": "https://example.com"},
+                        "git": {
+                            "checkout_location": "checkoutLocation",
+                            "clone_target": "cloneTarget",
+                            "remote_uri": "remoteUri",
+                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                            "upstream_remote_uri": "upstreamRemoteUri",
+                        },
+                    }
+                ]
+            },
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -173,7 +186,20 @@ class TestAsyncProjects:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
             environment_class={},
-            initializer={"specs": [{}]},
+            initializer={
+                "specs": [
+                    {
+                        "contextUrl": {"url": "https://example.com"},
+                        "git": {
+                            "checkout_location": "checkoutLocation",
+                            "clone_target": "cloneTarget",
+                            "remote_uri": "remoteUri",
+                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                            "upstream_remote_uri": "upstreamRemoteUri",
+                        },
+                    }
+                ]
+            },
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",

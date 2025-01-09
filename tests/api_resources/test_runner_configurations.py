@@ -18,7 +18,7 @@ class TestRunnerConfigurations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_validate_overload_1(self, client: Gitpod) -> None:
+    def test_method_validate(self, client: Gitpod) -> None:
         runner_configuration = client.runner_configurations.validate(
             body={},
             connect_protocol_version=1,
@@ -26,16 +26,32 @@ class TestRunnerConfigurations:
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    def test_method_validate_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_validate_with_all_params(self, client: Gitpod) -> None:
         runner_configuration = client.runner_configurations.validate(
-            body={},
+            body={
+                "environmentClass": {
+                    "id": "id",
+                    "configuration": [
+                        {
+                            "key": "key",
+                            "value": "value",
+                        }
+                    ],
+                    "description": "xxx",
+                    "display_name": "xxx",
+                    "enabled": True,
+                    "runner_id": "runnerId",
+                },
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "scmIntegration": {},
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    def test_raw_response_validate_overload_1(self, client: Gitpod) -> None:
+    def test_raw_response_validate(self, client: Gitpod) -> None:
         response = client.runner_configurations.with_raw_response.validate(
             body={},
             connect_protocol_version=1,
@@ -47,93 +63,7 @@ class TestRunnerConfigurations:
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    def test_streaming_response_validate_overload_1(self, client: Gitpod) -> None:
-        with client.runner_configurations.with_streaming_response.validate(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_configuration = response.parse()
-            assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_validate_overload_2(self, client: Gitpod) -> None:
-        runner_configuration = client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_method_validate_with_all_params_overload_2(self, client: Gitpod) -> None:
-        runner_configuration = client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_raw_response_validate_overload_2(self, client: Gitpod) -> None:
-        response = client.runner_configurations.with_raw_response.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_configuration = response.parse()
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_streaming_response_validate_overload_2(self, client: Gitpod) -> None:
-        with client.runner_configurations.with_streaming_response.validate(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_configuration = response.parse()
-            assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_validate_overload_3(self, client: Gitpod) -> None:
-        runner_configuration = client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_method_validate_with_all_params_overload_3(self, client: Gitpod) -> None:
-        runner_configuration = client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_raw_response_validate_overload_3(self, client: Gitpod) -> None:
-        response = client.runner_configurations.with_raw_response.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_configuration = response.parse()
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    def test_streaming_response_validate_overload_3(self, client: Gitpod) -> None:
+    def test_streaming_response_validate(self, client: Gitpod) -> None:
         with client.runner_configurations.with_streaming_response.validate(
             body={},
             connect_protocol_version=1,
@@ -151,7 +81,7 @@ class TestAsyncRunnerConfigurations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_validate_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_validate(self, async_client: AsyncGitpod) -> None:
         runner_configuration = await async_client.runner_configurations.validate(
             body={},
             connect_protocol_version=1,
@@ -159,16 +89,32 @@ class TestAsyncRunnerConfigurations:
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    async def test_method_validate_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_validate_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_configuration = await async_client.runner_configurations.validate(
-            body={},
+            body={
+                "environmentClass": {
+                    "id": "id",
+                    "configuration": [
+                        {
+                            "key": "key",
+                            "value": "value",
+                        }
+                    ],
+                    "description": "xxx",
+                    "display_name": "xxx",
+                    "enabled": True,
+                    "runner_id": "runnerId",
+                },
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "scmIntegration": {},
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    async def test_raw_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_validate(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.with_raw_response.validate(
             body={},
             connect_protocol_version=1,
@@ -180,93 +126,7 @@ class TestAsyncRunnerConfigurations:
         assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
 
     @parametrize
-    async def test_streaming_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_configurations.with_streaming_response.validate(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_configuration = await response.parse()
-            assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner_configuration = await async_client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_method_validate_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner_configuration = await async_client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_raw_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_configurations.with_raw_response.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_configuration = await response.parse()
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_configurations.with_streaming_response.validate(
-            body={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner_configuration = await response.parse()
-            assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_validate_overload_3(self, async_client: AsyncGitpod) -> None:
-        runner_configuration = await async_client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_method_validate_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
-        runner_configuration = await async_client.runner_configurations.validate(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_raw_response_validate_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_configurations.with_raw_response.validate(
-            body={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner_configuration = await response.parse()
-        assert_matches_type(RunnerConfigurationValidateResponse, runner_configuration, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_validate_overload_3(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_validate(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.with_streaming_response.validate(
             body={},
             connect_protocol_version=1,

@@ -5,10 +5,9 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ..types import service_update_params
 from .._utils import PropertyInfo
 
-__all__ = ["ServiceUpdateParams"]
+__all__ = ["ServiceUpdateParams", "Metadata", "Status"]
 
 
 class ServiceUpdateParams(TypedDict, total=False):
@@ -17,7 +16,7 @@ class ServiceUpdateParams(TypedDict, total=False):
 
     id: str
 
-    metadata: service_update_params.Metadata
+    metadata: Metadata
 
     spec: Union[object, object]
     """Changing the spec of a service is a complex operation.
@@ -26,7 +25,7 @@ class ServiceUpdateParams(TypedDict, total=False):
     If the service is running, it must be stopped first.
     """
 
-    status: service_update_params.Status
+    status: Status
     """Service status updates are only expected from the executing environment.
 
     As a client of this API you are not expected to provide this field. Updating
@@ -35,3 +34,11 @@ class ServiceUpdateParams(TypedDict, total=False):
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
+
+
+class Metadata:
+    pass
+
+
+class Status:
+    pass

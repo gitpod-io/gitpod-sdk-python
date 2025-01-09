@@ -14,6 +14,7 @@ __all__ = [
     "Service",
     "ServiceMetadata",
     "ServiceMetadataCreator",
+    "ServiceMetadataTriggeredBy",
     "ServiceSpec",
     "ServiceSpecCommands",
     "ServiceStatus",
@@ -43,6 +44,10 @@ class ServiceMetadataCreator(BaseModel):
         ]
     ] = None
     """Principal is the principal of the subject"""
+
+
+class ServiceMetadataTriggeredBy:
+    pass
 
 
 class ServiceMetadata(BaseModel):
@@ -161,7 +166,7 @@ class ServiceMetadata(BaseModel):
     identify the service in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[Union[object, object, object, object]]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[ServiceMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the service."""
 
 

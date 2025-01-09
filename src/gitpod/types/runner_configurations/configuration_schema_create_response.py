@@ -1,12 +1,28 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["ConfigurationSchemaCreateResponse", "Schema", "SchemaScm", "SchemaScmOAuth", "SchemaScmPat"]
+__all__ = [
+    "ConfigurationSchemaCreateResponse",
+    "Schema",
+    "SchemaEnvironmentClass",
+    "SchemaRunnerConfig",
+    "SchemaScm",
+    "SchemaScmOAuth",
+    "SchemaScmPat",
+]
+
+
+class SchemaEnvironmentClass:
+    pass
+
+
+class SchemaRunnerConfig:
+    pass
 
 
 class SchemaScmOAuth(BaseModel):
@@ -41,13 +57,9 @@ class SchemaScm(BaseModel):
 
 
 class Schema(BaseModel):
-    environment_classes: Optional[List[Union[object, object, object, object, object, object]]] = FieldInfo(
-        alias="environmentClasses", default=None
-    )
+    environment_classes: Optional[List[SchemaEnvironmentClass]] = FieldInfo(alias="environmentClasses", default=None)
 
-    runner_config: Optional[List[Union[object, object, object, object, object, object]]] = FieldInfo(
-        alias="runnerConfig", default=None
-    )
+    runner_config: Optional[List[SchemaRunnerConfig]] = FieldInfo(alias="runnerConfig", default=None)
 
     scm: Optional[List[SchemaScm]] = None
 

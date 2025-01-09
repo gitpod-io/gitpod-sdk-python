@@ -12,6 +12,7 @@ __all__ = [
     "ProjectRetrieveResponse",
     "Project",
     "ProjectInitializer",
+    "ProjectInitializerSpec",
     "ProjectMetadata",
     "ProjectMetadataCreator",
     "ProjectUsedBy",
@@ -19,8 +20,12 @@ __all__ = [
 ]
 
 
+class ProjectInitializerSpec:
+    pass
+
+
 class ProjectInitializer(BaseModel):
-    specs: Optional[List[Union[object, object, object]]] = None
+    specs: Optional[List[ProjectInitializerSpec]] = None
 
 
 class ProjectMetadataCreator(BaseModel):

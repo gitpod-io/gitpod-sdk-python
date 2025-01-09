@@ -6,9 +6,8 @@ from typing import List, Union
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
-from ...types.environment_automations import task_update_params
 
-__all__ = ["TaskUpdateParams"]
+__all__ = ["TaskUpdateParams", "Metadata"]
 
 
 class TaskUpdateParams(TypedDict, total=False):
@@ -20,9 +19,13 @@ class TaskUpdateParams(TypedDict, total=False):
     depends_on: Annotated[List[str], PropertyInfo(alias="dependsOn")]
     """dependencies specifies the IDs of the automations this task depends on."""
 
-    metadata: task_update_params.Metadata
+    metadata: Metadata
 
     spec: Union[object, object]
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
+
+
+class Metadata:
+    pass

@@ -15,6 +15,7 @@ __all__ = [
     "TaskExecutionMetadataCreator",
     "TaskExecutionSpec",
     "TaskExecutionSpecPlan",
+    "TaskExecutionSpecPlanStep",
     "TaskExecutionStatus",
     "TaskExecutionStatusStep",
 ]
@@ -327,8 +328,12 @@ class TaskExecutionMetadata(BaseModel):
     """task_id is the ID of the main task being executed."""
 
 
+class TaskExecutionSpecPlanStep:
+    pass
+
+
 class TaskExecutionSpecPlan(BaseModel):
-    steps: Optional[List[Union[object, object, object]]] = None
+    steps: Optional[List[TaskExecutionSpecPlanStep]] = None
 
 
 class TaskExecutionSpec(BaseModel):

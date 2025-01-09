@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["TaskCreateParams", "Metadata", "MetadataCreator", "Spec"]
+__all__ = ["TaskCreateParams", "Metadata", "MetadataCreator", "MetadataTriggeredBy", "Spec"]
 
 
 class TaskCreateParams(TypedDict, total=False):
@@ -40,6 +40,10 @@ class MetadataCreator(TypedDict, total=False):
         "PRINCIPAL_SERVICE_ACCOUNT",
     ]
     """Principal is the principal of the subject"""
+
+
+class MetadataTriggeredBy:
+    pass
 
 
 class Metadata(TypedDict, total=False):
@@ -158,7 +162,7 @@ class Metadata(TypedDict, total=False):
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Annotated[Iterable[Union[object, object, object, object]], PropertyInfo(alias="triggeredBy")]
+    triggered_by: Annotated[Iterable[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]
     """triggered_by is a list of trigger that start the task."""
 
 

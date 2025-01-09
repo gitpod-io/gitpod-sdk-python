@@ -13,9 +13,11 @@ __all__ = [
     "SpecAutomationsFile",
     "SpecContent",
     "SpecContentInitializer",
+    "SpecContentInitializerSpec",
     "SpecDevcontainer",
     "SpecMachine",
     "SpecPort",
+    "SpecSecret",
     "SpecSSHPublicKey",
     "SpecTimeout",
 ]
@@ -45,8 +47,12 @@ class SpecAutomationsFile(TypedDict, total=False):
     session: str
 
 
+class SpecContentInitializerSpec:
+    pass
+
+
 class SpecContentInitializer(TypedDict, total=False):
-    specs: Iterable[Union[object, object, object]]
+    specs: Iterable[SpecContentInitializerSpec]
 
 
 class SpecContent(TypedDict, total=False):
@@ -94,6 +100,10 @@ class SpecPort(TypedDict, total=False):
 
     port: int
     """port number"""
+
+
+class SpecSecret:
+    pass
 
 
 class SpecSSHPublicKey(TypedDict, total=False):
@@ -202,7 +212,7 @@ class Spec(TypedDict, total=False):
     ports: Iterable[SpecPort]
     """ports is the set of ports which ought to be exposed to the internet"""
 
-    secrets: Iterable[Union[object, object, object, object]]
+    secrets: Iterable[SpecSecret]
     """secrets are confidential data that is mounted into the environment"""
 
     spec_version: Annotated[Union[str, float], PropertyInfo(alias="specVersion")]

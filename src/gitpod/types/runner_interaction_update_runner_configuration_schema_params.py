@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
+from typing import List, Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -10,6 +10,8 @@ from .._utils import PropertyInfo
 __all__ = [
     "RunnerInteractionUpdateRunnerConfigurationSchemaParams",
     "ConfigSchema",
+    "ConfigSchemaEnvironmentClass",
+    "ConfigSchemaRunnerConfig",
     "ConfigSchemaScm",
     "ConfigSchemaScmOAuth",
     "ConfigSchemaScmPat",
@@ -28,6 +30,14 @@ class RunnerInteractionUpdateRunnerConfigurationSchemaParams(TypedDict, total=Fa
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
+
+
+class ConfigSchemaEnvironmentClass:
+    pass
+
+
+class ConfigSchemaRunnerConfig:
+    pass
 
 
 class ConfigSchemaScmOAuth(TypedDict, total=False):
@@ -62,13 +72,9 @@ class ConfigSchemaScm(TypedDict, total=False):
 
 
 class ConfigSchema(TypedDict, total=False):
-    environment_classes: Annotated[
-        Iterable[Union[object, object, object, object, object, object]], PropertyInfo(alias="environmentClasses")
-    ]
+    environment_classes: Annotated[Iterable[ConfigSchemaEnvironmentClass], PropertyInfo(alias="environmentClasses")]
 
-    runner_config: Annotated[
-        Iterable[Union[object, object, object, object, object, object]], PropertyInfo(alias="runnerConfig")
-    ]
+    runner_config: Annotated[Iterable[ConfigSchemaRunnerConfig], PropertyInfo(alias="runnerConfig")]
 
     scm: Iterable[ConfigSchemaScm]
 
