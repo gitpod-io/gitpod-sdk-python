@@ -14,7 +14,6 @@ from gitpod.types import (
     TaskRetrieveResponse,
     TaskRetrieveCreateResponse,
 )
-from gitpod._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -36,7 +35,7 @@ class TestTasks:
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={
-                "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "created_at": "2019-12-27T18:11:19.117Z",
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
@@ -47,8 +46,8 @@ class TestTasks:
                 "triggered_by": [
                     {
                         "manual": True,
-                        "postDevcontainerStart": True,
-                        "postEnvironmentStart": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
                     }
                 ],
             },
@@ -183,7 +182,7 @@ class TestAsyncTasks:
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={
-                "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "created_at": "2019-12-27T18:11:19.117Z",
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
@@ -194,8 +193,8 @@ class TestAsyncTasks:
                 "triggered_by": [
                     {
                         "manual": True,
-                        "postDevcontainerStart": True,
-                        "postEnvironmentStart": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
                     }
                 ],
             },

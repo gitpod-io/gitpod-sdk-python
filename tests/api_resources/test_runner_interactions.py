@@ -267,29 +267,6 @@ class TestRunnerInteractions:
     def test_method_send_response_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.send_response(
             body={
-                "callCheckAuthenticationForHost": {
-                    "resp": {
-                        "authenticated": True,
-                        "authentication_url": "authenticationUrl",
-                        "pat_supported": True,
-                    }
-                },
-                "callParseContext": {
-                    "resp": {
-                        "git": {
-                            "branch": "branch",
-                            "clone_url": "cloneUrl",
-                            "commit": "commit",
-                            "host": "host",
-                            "owner": "owner",
-                            "repo": "repo",
-                            "upstream_remote_url": "upstreamRemoteUrl",
-                        },
-                        "original_context_url": "originalContextUrl",
-                    }
-                },
-                "callPing": {},
-                "callValidateConfig": {},
                 "error": {
                     "code": "ERROR_CODE_UNSPECIFIED",
                     "details": [
@@ -300,9 +277,7 @@ class TestRunnerInteractions:
                         }
                     ],
                     "message": "message",
-                },
-                "requestId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
@@ -505,17 +480,7 @@ class TestRunnerInteractions:
     def test_method_update_status_with_all_params(self, client: Gitpod) -> None:
         runner_interaction = client.runner_interactions.update_status(
             body={
-                "additionalInfo": [
-                    {
-                        "key": "key",
-                        "value": "value",
-                    }
-                ],
-                "degredationMessage": "degredationMessage",
-                "logUrl": "https://example.com",
                 "region": "region",
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "systemDetails": "systemDetails",
                 "version": "version",
             },
             connect_protocol_version=1,
@@ -797,29 +762,6 @@ class TestAsyncRunnerInteractions:
     async def test_method_send_response_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.send_response(
             body={
-                "callCheckAuthenticationForHost": {
-                    "resp": {
-                        "authenticated": True,
-                        "authentication_url": "authenticationUrl",
-                        "pat_supported": True,
-                    }
-                },
-                "callParseContext": {
-                    "resp": {
-                        "git": {
-                            "branch": "branch",
-                            "clone_url": "cloneUrl",
-                            "commit": "commit",
-                            "host": "host",
-                            "owner": "owner",
-                            "repo": "repo",
-                            "upstream_remote_url": "upstreamRemoteUrl",
-                        },
-                        "original_context_url": "originalContextUrl",
-                    }
-                },
-                "callPing": {},
-                "callValidateConfig": {},
                 "error": {
                     "code": "ERROR_CODE_UNSPECIFIED",
                     "details": [
@@ -830,9 +772,7 @@ class TestAsyncRunnerInteractions:
                         }
                     ],
                     "message": "message",
-                },
-                "requestId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                }
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
@@ -1035,17 +975,7 @@ class TestAsyncRunnerInteractions:
     async def test_method_update_status_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_interaction = await async_client.runner_interactions.update_status(
             body={
-                "additionalInfo": [
-                    {
-                        "key": "key",
-                        "value": "value",
-                    }
-                ],
-                "degredationMessage": "degredationMessage",
-                "logUrl": "https://example.com",
                 "region": "region",
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "systemDetails": "systemDetails",
                 "version": "version",
             },
             connect_protocol_version=1,

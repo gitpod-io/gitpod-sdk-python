@@ -32,9 +32,7 @@ class TestEnvironmentClasses:
         environment_class = client.runner_configurations.environment_classes.update(
             body={
                 "description": "xxx",
-                "displayName": "xxx",
                 "enabled": True,
-                "environmentClassId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
@@ -128,9 +126,7 @@ class TestAsyncEnvironmentClasses:
         environment_class = await async_client.runner_configurations.environment_classes.update(
             body={
                 "description": "xxx",
-                "displayName": "xxx",
                 "enabled": True,
-                "environmentClassId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
