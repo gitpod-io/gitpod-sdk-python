@@ -28,23 +28,7 @@ class TestRunnerConfigurations:
     @parametrize
     def test_method_validate_with_all_params(self, client: Gitpod) -> None:
         runner_configuration = client.runner_configurations.validate(
-            body={
-                "environmentClass": {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        }
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "scmIntegration": {},
-            },
+            body={},
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
@@ -91,23 +75,7 @@ class TestAsyncRunnerConfigurations:
     @parametrize
     async def test_method_validate_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner_configuration = await async_client.runner_configurations.validate(
-            body={
-                "environmentClass": {
-                    "id": "id",
-                    "configuration": [
-                        {
-                            "key": "key",
-                            "value": "value",
-                        }
-                    ],
-                    "description": "xxx",
-                    "display_name": "xxx",
-                    "enabled": True,
-                    "runner_id": "runnerId",
-                },
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "scmIntegration": {},
-            },
+            body={},
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
