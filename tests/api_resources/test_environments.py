@@ -45,13 +45,14 @@ class TestEnvironments:
                     "initializer": {
                         "specs": [
                             {
+                                "contextUrl": {"url": "https://example.com"},
                                 "git": {
                                     "checkout_location": "checkoutLocation",
                                     "clone_target": "cloneTarget",
                                     "remote_uri": "remoteUri",
                                     "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                                     "upstream_remote_uri": "upstreamRemoteUri",
-                                }
+                                },
                             }
                         ]
                     },
@@ -75,8 +76,12 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "environmentVariable": "environmentVariable",
+                        "filePath": "filePath",
+                        "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
                         "source": "source",
+                        "sourceRef": "sourceRef",
                     }
                 ],
                 "spec_version": "string",
@@ -230,13 +235,14 @@ class TestEnvironments:
                     "initializer": {
                         "specs": [
                             {
+                                "contextUrl": {"url": "https://example.com"},
                                 "git": {
                                     "checkout_location": "checkoutLocation",
                                     "clone_target": "cloneTarget",
                                     "remote_uri": "remoteUri",
                                     "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                                     "upstream_remote_uri": "upstreamRemoteUri",
-                                }
+                                },
                             }
                         ]
                     },
@@ -260,8 +266,12 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "environmentVariable": "environmentVariable",
+                        "filePath": "filePath",
+                        "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
                         "source": "source",
+                        "sourceRef": "sourceRef",
                     }
                 ],
                 "spec_version": "string",
@@ -368,13 +378,14 @@ class TestAsyncEnvironments:
                     "initializer": {
                         "specs": [
                             {
+                                "contextUrl": {"url": "https://example.com"},
                                 "git": {
                                     "checkout_location": "checkoutLocation",
                                     "clone_target": "cloneTarget",
                                     "remote_uri": "remoteUri",
                                     "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                                     "upstream_remote_uri": "upstreamRemoteUri",
-                                }
+                                },
                             }
                         ]
                     },
@@ -398,8 +409,12 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "environmentVariable": "environmentVariable",
+                        "filePath": "filePath",
+                        "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
                         "source": "source",
+                        "sourceRef": "sourceRef",
                     }
                 ],
                 "spec_version": "string",
@@ -553,13 +568,14 @@ class TestAsyncEnvironments:
                     "initializer": {
                         "specs": [
                             {
+                                "contextUrl": {"url": "https://example.com"},
                                 "git": {
                                     "checkout_location": "checkoutLocation",
                                     "clone_target": "cloneTarget",
                                     "remote_uri": "remoteUri",
                                     "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                                     "upstream_remote_uri": "upstreamRemoteUri",
-                                }
+                                },
                             }
                         ]
                     },
@@ -583,8 +599,12 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "environmentVariable": "environmentVariable",
+                        "filePath": "filePath",
+                        "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
                         "source": "source",
+                        "sourceRef": "sourceRef",
                     }
                 ],
                 "spec_version": "string",

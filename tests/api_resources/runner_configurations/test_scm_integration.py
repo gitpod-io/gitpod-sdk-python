@@ -30,7 +30,11 @@ class TestScmIntegration:
         scm_integration = client.runner_configurations.scm_integration.create(
             body={
                 "host": "host",
+                "oauthClientId": "oauthClientId",
+                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
                 "pat": True,
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "scmId": "scmId",
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
@@ -80,7 +84,11 @@ class TestAsyncScmIntegration:
         scm_integration = await async_client.runner_configurations.scm_integration.create(
             body={
                 "host": "host",
+                "oauthClientId": "oauthClientId",
+                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
                 "pat": True,
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "scmId": "scmId",
             },
             connect_protocol_version=1,
             connect_timeout_ms=0,
