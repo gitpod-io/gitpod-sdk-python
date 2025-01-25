@@ -252,6 +252,8 @@ class TestTaskExecutions:
         task_execution = client.environment_automations.task_executions.update_task_execution_status(
             body={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "failureMessage": "failureMessage",
+                "logUrl": "logUrl",
                 "steps": [
                     {
                         "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -525,6 +527,8 @@ class TestAsyncTaskExecutions:
         task_execution = await async_client.environment_automations.task_executions.update_task_execution_status(
             body={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "failureMessage": "failureMessage",
+                "logUrl": "logUrl",
                 "steps": [
                     {
                         "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

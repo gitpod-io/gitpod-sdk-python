@@ -381,6 +381,7 @@ class TestRunners:
         runner = client.runners.update_runner(
             body={
                 "name": "xxx",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "spec": {},
             },
             connect_protocol_version=1,
@@ -774,6 +775,7 @@ class TestAsyncRunners:
         runner = await async_client.runners.update_runner(
             body={
                 "name": "xxx",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "spec": {},
             },
             connect_protocol_version=1,
