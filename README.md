@@ -37,6 +37,11 @@ runner = client.runners.create(
 print(runner.access_token)
 ```
 
+While you can provide a `bearer_token` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `GITPOD_API_KEY="My Bearer Token"` to your `.env` file
+so that your Bearer Token is not stored in source control.
+
 ## Async usage
 
 Simply import `AsyncGitpod` instead of `Gitpod` and use `await` with each API call:
