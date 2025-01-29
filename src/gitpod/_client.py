@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import editors, projects, automations_files, environment_classes, personal_access_tokens
+from .resources import editors, identity, projects, automations_files, environment_classes, personal_access_tokens
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -44,6 +44,7 @@ class Gitpod(SyncAPIClient):
     automations_files: automations_files.AutomationsFilesResource
     editors: editors.EditorsResource
     environments: environments.EnvironmentsResource
+    identity: identity.IdentityResource
     environment_classes: environment_classes.EnvironmentClassesResource
     organizations: organizations.OrganizationsResource
     projects: projects.ProjectsResource
@@ -110,6 +111,7 @@ class Gitpod(SyncAPIClient):
         self.automations_files = automations_files.AutomationsFilesResource(self)
         self.editors = editors.EditorsResource(self)
         self.environments = environments.EnvironmentsResource(self)
+        self.identity = identity.IdentityResource(self)
         self.environment_classes = environment_classes.EnvironmentClassesResource(self)
         self.organizations = organizations.OrganizationsResource(self)
         self.projects = projects.ProjectsResource(self)
@@ -222,6 +224,7 @@ class AsyncGitpod(AsyncAPIClient):
     automations_files: automations_files.AsyncAutomationsFilesResource
     editors: editors.AsyncEditorsResource
     environments: environments.AsyncEnvironmentsResource
+    identity: identity.AsyncIdentityResource
     environment_classes: environment_classes.AsyncEnvironmentClassesResource
     organizations: organizations.AsyncOrganizationsResource
     projects: projects.AsyncProjectsResource
@@ -288,6 +291,7 @@ class AsyncGitpod(AsyncAPIClient):
         self.automations_files = automations_files.AsyncAutomationsFilesResource(self)
         self.editors = editors.AsyncEditorsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
+        self.identity = identity.AsyncIdentityResource(self)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.projects = projects.AsyncProjectsResource(self)
@@ -401,6 +405,7 @@ class GitpodWithRawResponse:
         self.automations_files = automations_files.AutomationsFilesResourceWithRawResponse(client.automations_files)
         self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
+        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithRawResponse(
             client.environment_classes
         )
@@ -422,6 +427,7 @@ class AsyncGitpodWithRawResponse:
         )
         self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
+        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithRawResponse(
             client.environment_classes
         )
@@ -443,6 +449,7 @@ class GitpodWithStreamedResponse:
         )
         self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
+        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
         )
@@ -464,6 +471,7 @@ class AsyncGitpodWithStreamedResponse:
         )
         self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
+        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
         )
