@@ -63,7 +63,9 @@ class SummaryResource(SyncAPIResource):
     ) -> SummaryRetrieveResponse:
         """
         GetOrganizationInviteSummary retrieves a summary of the organization based on an
-        Invite ID. Used to discover which organization an invite is for.
+        Invite ID.
+
+        Used to discover which organization an invite is for.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -132,7 +134,9 @@ class AsyncSummaryResource(AsyncAPIResource):
     ) -> SummaryRetrieveResponse:
         """
         GetOrganizationInviteSummary retrieves a summary of the organization based on an
-        Invite ID. Used to discover which organization an invite is for.
+        Invite ID.
+
+        Used to discover which organization an invite is for.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

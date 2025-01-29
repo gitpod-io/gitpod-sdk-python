@@ -85,7 +85,7 @@ class TestEnvironments:
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": 0,
+                "spec_version": "specVersion",
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -277,7 +277,7 @@ class TestEnvironments:
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": 0,
+                "spec_version": "specVersion",
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -421,7 +421,7 @@ class TestAsyncEnvironments:
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": 0,
+                "spec_version": "specVersion",
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -613,7 +613,7 @@ class TestAsyncEnvironments:
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": 0,
+                "spec_version": "specVersion",
                 "ssh_public_keys": [
                     {
                         "id": "id",

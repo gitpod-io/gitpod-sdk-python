@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -61,14 +61,14 @@ class EnvironmentMetadataCreator(BaseModel):
 
 class EnvironmentMetadata(BaseModel):
     annotations: Optional[Dict[str, str]] = None
-    """
-    annotations are key/value pairs that gets attached to the environment.
+    """annotations are key/value pairs that gets attached to the environment.
+
     +internal - not yet implemented
     """
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -162,8 +162,8 @@ class EnvironmentMetadata(BaseModel):
     """creator is the identity of the creator of the environment"""
 
     last_started_at: Optional[datetime] = FieldInfo(alias="lastStartedAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -260,8 +260,8 @@ class EnvironmentMetadata(BaseModel):
     """organization_id is the ID of the organization that contains the environment"""
 
     original_context_url: Optional[str] = FieldInfo(alias="originalContextUrl", default=None)
-    """
-    original_context_url is the normalized URL from which the environment was
+    """original_context_url is the normalized URL from which the environment was
+
     created
     """
 
@@ -279,8 +279,9 @@ class EnvironmentSpecAutomationsFile(BaseModel):
     automations_file_path: Optional[str] = FieldInfo(alias="automationsFilePath", default=None)
     """
     automations_file_path is the path to the automations file that is applied in the
-    environment, relative to the repo root. path must not be absolute (start with a
-    /):
+    environment,
+
+    relative to the repo root. path must not be absolute (start with a /):
 
     ```
     this.matches('^$|^[^/].*')
@@ -459,7 +460,7 @@ class EnvironmentSpec(BaseModel):
     secrets: Optional[List[EnvironmentSpecSecret]] = None
     """secrets are confidential data that is mounted into the environment"""
 
-    spec_version: Union[int, str, None] = FieldInfo(alias="specVersion", default=None)
+    spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
     """version of the spec.
 
     The value of this field has no semantic meaning (e.g. don't interpret it as as a
@@ -476,15 +477,15 @@ class EnvironmentSpec(BaseModel):
 
 class EnvironmentStatusActivitySignal(BaseModel):
     source: Optional[str] = None
-    """
-    source of the activity signal, such as "VS Code", "SSH", or "Automations". It
-    should be a human-readable string that describes the source of the activity
+    """source of the activity signal, such as "VS Code", "SSH", or "Automations".
+
+    It should be a human-readable string that describes the source of the activity
     signal.
     """
 
     timestamp: Optional[datetime] = None
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -591,8 +592,8 @@ class EnvironmentStatusAutomationsFile(BaseModel):
     """
 
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
-    """
-    failure_message contains the reason the automations file failed to be applied.
+    """failure_message contains the reason the automations file failed to be applied.
+
     This is only set if the phase is FAILED.
     """
 
@@ -641,8 +642,8 @@ class EnvironmentStatusContentGit(BaseModel):
     changed_files: Optional[List[EnvironmentStatusContentGitChangedFile]] = FieldInfo(
         alias="changedFiles", default=None
     )
-    """
-    changed_files is an array of changed files in the environment, possibly
+    """changed_files is an array of changed files in the environment, possibly
+
     truncated
     """
 
@@ -661,8 +662,8 @@ class EnvironmentStatusContentGit(BaseModel):
     """the total number of unpushed changes"""
 
     unpushed_commits: Optional[List[str]] = FieldInfo(alias="unpushedCommits", default=None)
-    """
-    unpushed_commits is an array of unpushed changes in the environment, possibly
+    """unpushed_commits is an array of unpushed changes in the environment, possibly
+
     truncated
     """
 
@@ -816,9 +817,9 @@ class EnvironmentStatusMachine(BaseModel):
     """session is the session that is currently active in the machine."""
 
     timeout: Optional[str] = None
-    """timeout contains the reason the environment has timed out.
+    """timeout contains the reason the environment has timed out. If this field is
 
-    If this field is empty, the environment has not timed out.
+    empty, the environment has not timed out.
     """
 
     versions: Optional[EnvironmentStatusMachineVersions] = None
@@ -834,7 +835,7 @@ class EnvironmentStatusMachine(BaseModel):
 class EnvironmentStatusRunnerAck(BaseModel):
     message: Optional[str] = None
 
-    spec_version: Union[int, str, None] = FieldInfo(alias="specVersion", default=None)
+    spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
 
     status_code: Optional[
         Literal[
@@ -904,16 +905,18 @@ class EnvironmentStatus(BaseModel):
     """devcontainer contains the status of the devcontainer."""
 
     environment_urls: Optional[EnvironmentStatusEnvironmentURLs] = FieldInfo(alias="environmentUrls", default=None)
-    """
-    environment_url contains the URL at which the environment can be accessed. This
-    field is only set if the environment is running.
+    """environment_url contains the URL at which the environment can be accessed.
+
+    This field is only set if the environment is running.
     """
 
     failure_message: Optional[List[str]] = FieldInfo(alias="failureMessage", default=None)
     """failure_message summarises why the environment failed to operate.
 
-    If this is non-empty the environment has failed to operate and will likely
-    transition to a stopped state.
+    If this is non-empty
+
+    the environment has failed to operate and will likely transition to a stopped
+    state.
     """
 
     machine: Optional[EnvironmentStatusMachine] = None
@@ -932,14 +935,14 @@ class EnvironmentStatus(BaseModel):
             "ENVIRONMENT_PHASE_DELETED",
         ]
     ] = None
-    """
-    the phase of an environment is a simple, high-level summary of where the
+    """the phase of an environment is a simple, high-level summary of where the
+
     environment is in its lifecycle
     """
 
     runner_ack: Optional[EnvironmentStatusRunnerAck] = FieldInfo(alias="runnerAck", default=None)
-    """
-    RunnerACK is the acknowledgement from the runner that is has received the
+    """RunnerACK is the acknowledgement from the runner that is has received the
+
     environment spec.
     """
 
@@ -949,7 +952,7 @@ class EnvironmentStatus(BaseModel):
     ssh_public_keys: Optional[List[EnvironmentStatusSSHPublicKey]] = FieldInfo(alias="sshPublicKeys", default=None)
     """ssh_public_keys contains the status of the environment ssh public keys"""
 
-    status_version: Union[int, str, None] = FieldInfo(alias="statusVersion", default=None)
+    status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
     """version of the status update.
 
     Environment instances themselves are unversioned, but their status has different
@@ -967,21 +970,20 @@ class EnvironmentStatus(BaseModel):
 
 class Environment(BaseModel):
     id: Optional[str] = None
-    """ID is a unique identifier of this environment.
+    """ID is a unique identifier of this environment. No other environment with the
 
-    No other environment with the same name must be managed by this environment
-    manager
+    same name must be managed by this environment manager
     """
 
     metadata: Optional[EnvironmentMetadata] = None
-    """
-    EnvironmentMetadata is data associated with an environment that's required for
+    """EnvironmentMetadata is data associated with an environment that's required for
+
     other parts of the system to function
     """
 
     spec: Optional[EnvironmentSpec] = None
-    """
-    EnvironmentSpec specifies the configuration of an environment for an environment
+    """EnvironmentSpec specifies the configuration of an environment for an environment
+
     start
     """
 

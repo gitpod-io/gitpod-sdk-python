@@ -21,9 +21,9 @@ __all__ = [
 
 class Pagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
+    """Token passed for retreiving the next set of results. Empty if there are no
 
-    Empty if there are no more results
+    more results
     """
 
 
@@ -50,8 +50,8 @@ class TaskMetadataTriggeredBy:
 
 class TaskMetadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -154,14 +154,18 @@ class TaskMetadata(BaseModel):
     """name is a user-facing name for the task.
 
     Unlike the reference, this field is not unique, and not referenced by the
-    system. This is a short descriptive name for the task.
+    system.
+
+    This is a short descriptive name for the task.
     """
 
     reference: Optional[str] = None
     """
     reference is a user-facing identifier for the task which must be unique on the
-    environment. It is used to express dependencies between tasks, and to identify
-    the task in user interactions (e.g. the CLI).
+    environment.
+
+    It is used to express dependencies between tasks, and to identify the task in
+    user interactions (e.g. the CLI).
     """
 
     triggered_by: Optional[List[TaskMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)

@@ -29,10 +29,12 @@ from ....types.environments.automations import (
     task_create_params,
     task_delete_params,
     task_update_params,
+    task_retrieve_params,
 )
 from ....types.environments.automations.task_list_response import TaskListResponse
 from ....types.environments.automations.task_start_response import TaskStartResponse
 from ....types.environments.automations.task_create_response import TaskCreateResponse
+from ....types.environments.automations.task_retrieve_response import TaskRetrieveResponse
 
 __all__ = ["TasksResource", "AsyncTasksResource"]
 
@@ -113,6 +115,53 @@ class TasksResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TaskCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TaskRetrieveResponse:
+        """
+        GetTask
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.EnvironmentAutomationService/GetTask",
+            body=maybe_transform({"id": id}, task_retrieve_params.TaskRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TaskRetrieveResponse,
         )
 
     def update(
@@ -408,6 +457,53 @@ class AsyncTasksResource(AsyncAPIResource):
             cast_to=TaskCreateResponse,
         )
 
+    async def retrieve(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> TaskRetrieveResponse:
+        """
+        GetTask
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.EnvironmentAutomationService/GetTask",
+            body=await async_maybe_transform({"id": id}, task_retrieve_params.TaskRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=TaskRetrieveResponse,
+        )
+
     async def update(
         self,
         *,
@@ -630,6 +726,9 @@ class TasksResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             tasks.create,
         )
+        self.retrieve = to_raw_response_wrapper(
+            tasks.retrieve,
+        )
         self.update = to_raw_response_wrapper(
             tasks.update,
         )
@@ -650,6 +749,9 @@ class AsyncTasksResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             tasks.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            tasks.retrieve,
         )
         self.update = async_to_raw_response_wrapper(
             tasks.update,
@@ -672,6 +774,9 @@ class TasksResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             tasks.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            tasks.retrieve,
+        )
         self.update = to_streamed_response_wrapper(
             tasks.update,
         )
@@ -692,6 +797,9 @@ class AsyncTasksResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             tasks.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            tasks.retrieve,
         )
         self.update = async_to_streamed_response_wrapper(
             tasks.update,

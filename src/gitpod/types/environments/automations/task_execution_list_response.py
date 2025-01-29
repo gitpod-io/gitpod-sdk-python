@@ -6,20 +6,31 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from .._models import BaseModel
+from ...._models import BaseModel
 
 __all__ = [
-    "RunnerCreateResponse",
-    "Runner",
-    "RunnerCreator",
-    "RunnerSpec",
-    "RunnerSpecConfiguration",
-    "RunnerStatus",
-    "RunnerStatusAdditionalInfo",
+    "TaskExecutionListResponse",
+    "Pagination",
+    "TaskExecution",
+    "TaskExecutionMetadata",
+    "TaskExecutionMetadataCreator",
+    "TaskExecutionSpec",
+    "TaskExecutionSpecPlan",
+    "TaskExecutionSpecPlanStep",
+    "TaskExecutionStatus",
+    "TaskExecutionStatusStep",
 ]
 
 
-class RunnerCreator(BaseModel):
+class Pagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+    """Token passed for retreiving the next set of results. Empty if there are no
+
+    more results
+    """
+
+
+class TaskExecutionMetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -36,86 +47,8 @@ class RunnerCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class RunnerSpecConfiguration(BaseModel):
-    auto_update: Optional[bool] = FieldInfo(alias="autoUpdate", default=None)
-    """auto_update indicates whether the runner should automatically update itself."""
-
-    region: Optional[str] = None
-    """
-    Region to deploy the runner in, if applicable. This is mainly used for remote
-    runners, and is only a hint. The runner may be deployed in a different region.
-    See the runner's status for the actual region.
-    """
-
-    release_channel: Optional[
-        Literal["RUNNER_RELEASE_CHANNEL_UNSPECIFIED", "RUNNER_RELEASE_CHANNEL_STABLE", "RUNNER_RELEASE_CHANNEL_LATEST"]
-    ] = FieldInfo(alias="releaseChannel", default=None)
-    """The release channel the runner is on"""
-
-
-class RunnerSpec(BaseModel):
-    configuration: Optional[RunnerSpecConfiguration] = None
-    """The runner's configuration"""
-
-    desired_phase: Optional[
-        Literal[
-            "RUNNER_PHASE_UNSPECIFIED",
-            "RUNNER_PHASE_CREATED",
-            "RUNNER_PHASE_INACTIVE",
-            "RUNNER_PHASE_ACTIVE",
-            "RUNNER_PHASE_DELETING",
-            "RUNNER_PHASE_DELETED",
-            "RUNNER_PHASE_DEGRADED",
-        ]
-    ] = FieldInfo(alias="desiredPhase", default=None)
-    """RunnerPhase represents the phase a runner is in"""
-
-
-class RunnerStatusAdditionalInfo(BaseModel):
-    key: Optional[str] = None
-
-    value: Optional[str] = None
-
-
-class RunnerStatus(BaseModel):
-    additional_info: Optional[List[RunnerStatusAdditionalInfo]] = FieldInfo(alias="additionalInfo", default=None)
-    """additional_info contains additional information about the runner, e.g.
-
-    a CloudFormation stack URL.
-    """
-
-    capabilities: Optional[
-        List[Literal["RUNNER_CAPABILITY_UNSPECIFIED", "RUNNER_CAPABILITY_FETCH_LOCAL_SCM_INTEGRATIONS"]]
-    ] = None
-    """capabilities is a list of capabilities the runner supports."""
-
-    log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
-
-    message: Optional[str] = None
-    """
-    The runner's reported message which is shown to users. This message adds more
-    context to the runner's phase.
-    """
-
-    phase: Optional[
-        Literal[
-            "RUNNER_PHASE_UNSPECIFIED",
-            "RUNNER_PHASE_CREATED",
-            "RUNNER_PHASE_INACTIVE",
-            "RUNNER_PHASE_ACTIVE",
-            "RUNNER_PHASE_DELETING",
-            "RUNNER_PHASE_DELETED",
-            "RUNNER_PHASE_DEGRADED",
-        ]
-    ] = None
-    """RunnerPhase represents the phase a runner is in"""
-
-    region: Optional[str] = None
-    """region is the region the runner is running in, if applicable."""
-
-    system_details: Optional[str] = FieldInfo(alias="systemDetails", default=None)
-
-    updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
+class TaskExecutionMetadata(BaseModel):
+    completed_at: Optional[datetime] = FieldInfo(alias="completedAt", default=None)
     """A Timestamp represents a point in time independent of any time zone or local
 
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -207,10 +140,6 @@ class RunnerStatus(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    version: Optional[str] = None
-
-
-class Runner(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """A Timestamp represents a point in time independent of any time zone or local
 
@@ -303,26 +232,13 @@ class Runner(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[RunnerCreator] = None
-    """creator is the identity of the creator of the environment"""
+    creator: Optional[TaskExecutionMetadataCreator] = None
+    """creator describes the principal who created/started the task run."""
 
-    kind: Optional[
-        Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"]
-    ] = None
-    """RunnerKind represents the kind of a runner"""
+    environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
+    """environment_id is the ID of the environment in which the task run is executed."""
 
-    name: Optional[str] = None
-    """The runner's name which is shown to users"""
-
-    runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
-
-    spec: Optional[RunnerSpec] = None
-    """The runner's specification"""
-
-    status: Optional[RunnerStatus] = None
-    """RunnerStatus represents the status of a runner"""
-
-    updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
+    started_at: Optional[datetime] = FieldInfo(alias="startedAt", default=None)
     """A Timestamp represents a point in time independent of any time zone or local
 
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -414,8 +330,129 @@ class Runner(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
+    started_by: Optional[str] = FieldInfo(alias="startedBy", default=None)
+    """started_by describes the trigger that started the task execution."""
 
-class RunnerCreateResponse(BaseModel):
-    access_token: Optional[str] = FieldInfo(alias="accessToken", default=None)
+    task_id: Optional[str] = FieldInfo(alias="taskId", default=None)
+    """task_id is the ID of the main task being executed."""
 
-    runner: Optional[Runner] = None
+
+class TaskExecutionSpecPlanStep:
+    pass
+
+
+class TaskExecutionSpecPlan(BaseModel):
+    steps: Optional[List[TaskExecutionSpecPlanStep]] = None
+
+
+class TaskExecutionSpec(BaseModel):
+    desired_phase: Optional[
+        Literal[
+            "TASK_EXECUTION_PHASE_UNSPECIFIED",
+            "TASK_EXECUTION_PHASE_PENDING",
+            "TASK_EXECUTION_PHASE_RUNNING",
+            "TASK_EXECUTION_PHASE_SUCCEEDED",
+            "TASK_EXECUTION_PHASE_FAILED",
+            "TASK_EXECUTION_PHASE_STOPPED",
+        ]
+    ] = FieldInfo(alias="desiredPhase", default=None)
+    """desired_phase is the phase the task execution should be in.
+
+    Used to stop a running task execution early.
+    """
+
+    plan: Optional[List[TaskExecutionSpecPlan]] = None
+    """plan is a list of groups of steps.
+
+    The steps in a group are executed concurrently, while the groups are executed
+    sequentially.
+
+    The order of the groups is the order in which they are executed.
+    """
+
+
+class TaskExecutionStatusStep(BaseModel):
+    id: Optional[str] = None
+    """ID is the ID of the execution step"""
+
+    failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
+    """failure_message summarises why the step failed to operate. If this is non-empty
+
+    the step has failed to operate and will likely transition to a failed state.
+    """
+
+    phase: Optional[
+        Literal[
+            "TASK_EXECUTION_PHASE_UNSPECIFIED",
+            "TASK_EXECUTION_PHASE_PENDING",
+            "TASK_EXECUTION_PHASE_RUNNING",
+            "TASK_EXECUTION_PHASE_SUCCEEDED",
+            "TASK_EXECUTION_PHASE_FAILED",
+            "TASK_EXECUTION_PHASE_STOPPED",
+        ]
+    ] = None
+    """phase is the current phase of the execution step"""
+
+
+class TaskExecutionStatus(BaseModel):
+    failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
+    """failure_message summarises why the task execution failed to operate.
+
+    If this is non-empty
+
+    the task execution has failed to operate and will likely transition to a failed
+    state.
+    """
+
+    log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
+    """log_url is the URL to the logs of the task's steps.
+
+    If this is empty, the task either has no logs
+
+    or has not yet started.
+    """
+
+    phase: Optional[
+        Literal[
+            "TASK_EXECUTION_PHASE_UNSPECIFIED",
+            "TASK_EXECUTION_PHASE_PENDING",
+            "TASK_EXECUTION_PHASE_RUNNING",
+            "TASK_EXECUTION_PHASE_SUCCEEDED",
+            "TASK_EXECUTION_PHASE_FAILED",
+            "TASK_EXECUTION_PHASE_STOPPED",
+        ]
+    ] = None
+    """the phase of a task execution represents the aggregated phase of all steps."""
+
+    status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
+    """version of the status update.
+
+    Task executions themselves are unversioned, but their status has different
+    versions. The value of this field has no semantic meaning (e.g. don't interpret
+    it as as a timestamp), but it can be used to impose a partial order. If
+    a.status_version < b.status_version then a was the status before b.
+    """
+
+    steps: Optional[List[TaskExecutionStatusStep]] = None
+    """steps provides the status for each individual step of the task execution.
+
+    If a step is missing it
+
+    has not yet started.
+    """
+
+
+class TaskExecution(BaseModel):
+    id: Optional[str] = None
+
+    metadata: Optional[TaskExecutionMetadata] = None
+
+    spec: Optional[TaskExecutionSpec] = None
+
+    status: Optional[TaskExecutionStatus] = None
+
+
+class TaskExecutionListResponse(BaseModel):
+    pagination: Optional[Pagination] = None
+
+    task_executions: Optional[List[TaskExecution]] = FieldInfo(alias="taskExecutions", default=None)

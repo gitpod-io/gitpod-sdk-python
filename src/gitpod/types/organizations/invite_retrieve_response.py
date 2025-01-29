@@ -11,9 +11,9 @@ __all__ = ["InviteRetrieveResponse", "Invite"]
 
 class Invite(BaseModel):
     invite_id: Optional[str] = FieldInfo(alias="inviteId", default=None)
-    """
-    invite_id is the unique identifier of the invite to join the organization. Use
-    JoinOrganization with this ID to join the organization.
+    """invite_id is the unique identifier of the invite to join the organization.
+
+    Use JoinOrganization with this ID to join the organization.
     """
 
 

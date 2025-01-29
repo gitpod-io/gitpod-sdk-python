@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -30,8 +30,8 @@ class EnvironmentCreateFromProjectParams(TypedDict, total=False):
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
 
     spec: Spec
-    """
-    EnvironmentSpec specifies the configuration of an environment for an environment
+    """EnvironmentSpec specifies the configuration of an environment for an environment
+
     start
     """
 
@@ -43,8 +43,9 @@ class SpecAutomationsFile(TypedDict, total=False):
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
-    environment, relative to the repo root. path must not be absolute (start with a
-    /):
+    environment,
+
+    relative to the repo root. path must not be absolute (start with a /):
 
     ```
     this.matches('^$|^[^/].*')
@@ -226,7 +227,7 @@ class Spec(TypedDict, total=False):
     secrets: Iterable[SpecSecret]
     """secrets are confidential data that is mounted into the environment"""
 
-    spec_version: Annotated[Union[int, str], PropertyInfo(alias="specVersion")]
+    spec_version: Annotated[str, PropertyInfo(alias="specVersion")]
     """version of the spec.
 
     The value of this field has no semantic meaning (e.g. don't interpret it as as a

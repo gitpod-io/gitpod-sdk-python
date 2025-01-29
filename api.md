@@ -1,29 +1,3 @@
-# AutomationsFiles
-
-Types:
-
-```python
-from gitpod.types import AutomationsFileUpsertResponse
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.EnvironmentAutomationService/UpsertAutomationsFile">client.automations_files.<a href="./src/gitpod/resources/automations_files.py">upsert</a>(\*\*<a href="src/gitpod/types/automations_file_upsert_params.py">params</a>) -> <a href="./src/gitpod/types/automations_file_upsert_response.py">AutomationsFileUpsertResponse</a></code>
-
-# Editors
-
-Types:
-
-```python
-from gitpod.types import EditorRetrieveResponse, EditorListResponse, EditorResolveEditorURLResponse
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.EditorService/GetEditor">client.editors.<a href="./src/gitpod/resources/editors.py">retrieve</a>(\*\*<a href="src/gitpod/types/editor_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/editor_retrieve_response.py">EditorRetrieveResponse</a></code>
-- <code title="post /gitpod.v1.EditorService/ListEditors">client.editors.<a href="./src/gitpod/resources/editors.py">list</a>(\*\*<a href="src/gitpod/types/editor_list_params.py">params</a>) -> <a href="./src/gitpod/types/editor_list_response.py">EditorListResponse</a></code>
-- <code title="post /gitpod.v1.EditorService/ResolveEditorURL">client.editors.<a href="./src/gitpod/resources/editors.py">resolve_editor_url</a>(\*\*<a href="src/gitpod/types/editor_resolve_editor_url_params.py">params</a>) -> <a href="./src/gitpod/types/editor_resolve_editor_url_response.py">EditorResolveEditorURLResponse</a></code>
-
 # Environments
 
 Types:
@@ -48,6 +22,16 @@ Methods:
 
 ## Automations
 
+Types:
+
+```python
+from gitpod.types.environments import AutomationUpsertResponse
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.EnvironmentAutomationService/UpsertAutomationsFile">client.environments.automations.<a href="./src/gitpod/resources/environments/automations/automations.py">upsert</a>(\*\*<a href="src/gitpod/types/environments/automation_upsert_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automation_upsert_response.py">AutomationUpsertResponse</a></code>
+
 ### Tasks
 
 Types:
@@ -55,6 +39,7 @@ Types:
 ```python
 from gitpod.types.environments.automations import (
     TaskCreateResponse,
+    TaskRetrieveResponse,
     TaskUpdateResponse,
     TaskListResponse,
     TaskDeleteResponse,
@@ -65,10 +50,31 @@ from gitpod.types.environments.automations import (
 Methods:
 
 - <code title="post /gitpod.v1.EnvironmentAutomationService/CreateTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">create</a>(\*\*<a href="src/gitpod/types/environments/automations/task_create_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_create_response.py">TaskCreateResponse</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/GetTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">retrieve</a>(\*\*<a href="src/gitpod/types/environments/automations/task_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_retrieve_response.py">TaskRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/UpdateTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">update</a>(\*\*<a href="src/gitpod/types/environments/automations/task_update_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_update_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/ListTasks">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/task_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_list_response.py">TaskListResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/DeleteTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">delete</a>(\*\*<a href="src/gitpod/types/environments/automations/task_delete_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StartTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks.py">start</a>(\*\*<a href="src/gitpod/types/environments/automations/task_start_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_start_response.py">TaskStartResponse</a></code>
+
+### TaskExecutions
+
+Types:
+
+```python
+from gitpod.types.environments.automations import (
+    TaskExecutionRetrieveResponse,
+    TaskExecutionListResponse,
+    TaskExecutionStopResponse,
+    TaskExecutionUpdateTaskExecutionStatusResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.EnvironmentAutomationService/GetTaskExecution">client.environments.automations.task_executions.<a href="./src/gitpod/resources/environments/automations/task_executions.py">retrieve</a>(\*\*<a href="src/gitpod/types/environments/automations/task_execution_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_execution_retrieve_response.py">TaskExecutionRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/ListTaskExecutions">client.environments.automations.task_executions.<a href="./src/gitpod/resources/environments/automations/task_executions.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/task_execution_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_execution_list_response.py">TaskExecutionListResponse</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/StopTaskExecution">client.environments.automations.task_executions.<a href="./src/gitpod/resources/environments/automations/task_executions.py">stop</a>(\*\*<a href="src/gitpod/types/environments/automations/task_execution_stop_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_execution_stop_response.py">object</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus">client.environments.automations.task_executions.<a href="./src/gitpod/resources/environments/automations/task_executions.py">update_task_execution_status</a>(\*\*<a href="src/gitpod/types/environments/automations/task_execution_update_task_execution_status_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_execution_update_task_execution_status_response.py">object</a></code>
 
 ### Services
 
@@ -91,24 +97,6 @@ Methods:
 - <code title="post /gitpod.v1.EnvironmentAutomationService/DeleteService">client.environments.automations.services.<a href="./src/gitpod/resources/environments/automations/services.py">delete</a>(\*\*<a href="src/gitpod/types/environments/automations/service_delete_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/service_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StartService">client.environments.automations.services.<a href="./src/gitpod/resources/environments/automations/services.py">start</a>(\*\*<a href="src/gitpod/types/environments/automations/service_start_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/service_start_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StopService">client.environments.automations.services.<a href="./src/gitpod/resources/environments/automations/services.py">stop</a>(\*\*<a href="src/gitpod/types/environments/automations/service_stop_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/service_stop_response.py">object</a></code>
-
-# Identity
-
-Types:
-
-```python
-from gitpod.types import (
-    IdentityExchangeTokenResponse,
-    IdentityGetAuthenticatedIdentityResponse,
-    IdentityGetIDTokenResponse,
-)
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.IdentityService/ExchangeToken">client.identity.<a href="./src/gitpod/resources/identity.py">exchange_token</a>(\*\*<a href="src/gitpod/types/identity_exchange_token_params.py">params</a>) -> <a href="./src/gitpod/types/identity_exchange_token_response.py">IdentityExchangeTokenResponse</a></code>
-- <code title="post /gitpod.v1.IdentityService/GetAuthenticatedIdentity">client.identity.<a href="./src/gitpod/resources/identity.py">get_authenticated_identity</a>(\*\*<a href="src/gitpod/types/identity_get_authenticated_identity_params.py">params</a>) -> <a href="./src/gitpod/types/identity_get_authenticated_identity_response.py">IdentityGetAuthenticatedIdentityResponse</a></code>
-- <code title="post /gitpod.v1.IdentityService/GetIDToken">client.identity.<a href="./src/gitpod/resources/identity.py">get_id_token</a>(\*\*<a href="src/gitpod/types/identity_get_id_token_params.py">params</a>) -> <a href="./src/gitpod/types/identity_get_id_token_response.py">IdentityGetIDTokenResponse</a></code>
 
 # EnvironmentClasses
 
@@ -177,12 +165,17 @@ Methods:
 Types:
 
 ```python
-from gitpod.types import ProjectCreateResponse, ProjectCreateFromEnvironmentResponse
+from gitpod.types import (
+    ProjectCreateResponse,
+    ProjectRetrieveResponse,
+    ProjectCreateFromEnvironmentResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /gitpod.v1.ProjectService/CreateProject">client.projects.<a href="./src/gitpod/resources/projects.py">create</a>(\*\*<a href="src/gitpod/types/project_create_params.py">params</a>) -> <a href="./src/gitpod/types/project_create_response.py">ProjectCreateResponse</a></code>
+- <code title="post /gitpod.v1.ProjectService/GetProject">client.projects.<a href="./src/gitpod/resources/projects.py">retrieve</a>(\*\*<a href="src/gitpod/types/project_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/project_retrieve_response.py">ProjectRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.ProjectService/CreateProjectFromEnvironment">client.projects.<a href="./src/gitpod/resources/projects.py">create_from_environment</a>(\*\*<a href="src/gitpod/types/project_create_from_environment_params.py">params</a>) -> <a href="./src/gitpod/types/project_create_from_environment_response.py">ProjectCreateFromEnvironmentResponse</a></code>
 
 # RunnerConfigurations
@@ -204,6 +197,7 @@ Types:
 ```python
 from gitpod.types.runner_configurations import (
     HostAuthenticationTokenCreateResponse,
+    HostAuthenticationTokenRetrieveResponse,
     HostAuthenticationTokenUpdateResponse,
     HostAuthenticationTokenListResponse,
     HostAuthenticationTokenDeleteResponse,
@@ -213,6 +207,7 @@ from gitpod.types.runner_configurations import (
 Methods:
 
 - <code title="post /gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken">client.runner_configurations.host_authentication_tokens.<a href="./src/gitpod/resources/runner_configurations/host_authentication_tokens.py">create</a>(\*\*<a href="src/gitpod/types/runner_configurations/host_authentication_token_create_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/host_authentication_token_create_response.py">HostAuthenticationTokenCreateResponse</a></code>
+- <code title="post /gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken">client.runner_configurations.host_authentication_tokens.<a href="./src/gitpod/resources/runner_configurations/host_authentication_tokens.py">retrieve</a>(\*\*<a href="src/gitpod/types/runner_configurations/host_authentication_token_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/host_authentication_token_retrieve_response.py">HostAuthenticationTokenRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.RunnerConfigurationService/UpdateHostAuthenticationToken">client.runner_configurations.host_authentication_tokens.<a href="./src/gitpod/resources/runner_configurations/host_authentication_tokens.py">update</a>(\*\*<a href="src/gitpod/types/runner_configurations/host_authentication_token_update_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/host_authentication_token_update_response.py">object</a></code>
 - <code title="post /gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens">client.runner_configurations.host_authentication_tokens.<a href="./src/gitpod/resources/runner_configurations/host_authentication_tokens.py">list</a>(\*\*<a href="src/gitpod/types/runner_configurations/host_authentication_token_list_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/host_authentication_token_list_response.py">HostAuthenticationTokenListResponse</a></code>
 - <code title="post /gitpod.v1.RunnerConfigurationService/DeleteHostAuthenticationToken">client.runner_configurations.host_authentication_tokens.<a href="./src/gitpod/resources/runner_configurations/host_authentication_tokens.py">delete</a>(\*\*<a href="src/gitpod/types/runner_configurations/host_authentication_token_delete_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/host_authentication_token_delete_response.py">object</a></code>
@@ -222,12 +217,16 @@ Methods:
 Types:
 
 ```python
-from gitpod.types.runner_configurations import ConfigurationSchemaCreateResponse
+from gitpod.types.runner_configurations import (
+    ConfigurationSchemaCreateResponse,
+    ConfigurationSchemaRetrieveResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /gitpod.v1.RunnerConfigurationService/GetRunnerConfigurationSchema">client.runner_configurations.configuration_schema.<a href="./src/gitpod/resources/runner_configurations/configuration_schema.py">create</a>(\*\*<a href="src/gitpod/types/runner_configurations/configuration_schema_create_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/configuration_schema_create_response.py">ConfigurationSchemaCreateResponse</a></code>
+- <code title="post /gitpod.v1.RunnerConfigurationService/GetRunnerConfigurationSchema">client.runner_configurations.configuration_schema.<a href="./src/gitpod/resources/runner_configurations/configuration_schema.py">retrieve</a>(\*\*<a href="src/gitpod/types/runner_configurations/configuration_schema_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runner_configurations/configuration_schema_retrieve_response.py">ConfigurationSchemaRetrieveResponse</a></code>
 
 ## ScmIntegration
 
@@ -264,6 +263,7 @@ Types:
 ```python
 from gitpod.types import (
     RunnerCreateResponse,
+    RunnerRetrieveResponse,
     RunnerListResponse,
     RunnerCheckAuthenticationForHostResponse,
     RunnerCreateRunnerTokenResponse,
@@ -277,6 +277,7 @@ from gitpod.types import (
 Methods:
 
 - <code title="post /gitpod.v1.RunnerService/CreateRunner">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create</a>(\*\*<a href="src/gitpod/types/runner_create_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_response.py">RunnerCreateResponse</a></code>
+- <code title="post /gitpod.v1.RunnerService/GetRunner">client.runners.<a href="./src/gitpod/resources/runners/runners.py">retrieve</a>(\*\*<a href="src/gitpod/types/runner_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runner_retrieve_response.py">RunnerRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/ListRunners">client.runners.<a href="./src/gitpod/resources/runners/runners.py">list</a>(\*\*<a href="src/gitpod/types/runner_list_params.py">params</a>) -> <a href="./src/gitpod/types/runner_list_response.py">RunnerListResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CheckAuthenticationForHost">client.runners.<a href="./src/gitpod/resources/runners/runners.py">check_authentication_for_host</a>(\*\*<a href="src/gitpod/types/runner_check_authentication_for_host_params.py">params</a>) -> <a href="./src/gitpod/types/runner_check_authentication_for_host_response.py">RunnerCheckAuthenticationForHostResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CreateRunnerToken">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create_runner_token</a>(\*\*<a href="src/gitpod/types/runner_create_runner_token_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_runner_token_response.py">RunnerCreateRunnerTokenResponse</a></code>

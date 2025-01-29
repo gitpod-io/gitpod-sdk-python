@@ -24,9 +24,9 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import editors, identity, projects, automations_files, environment_classes, personal_access_tokens
+from .resources import projects, environment_classes, personal_access_tokens
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import GitpodError, APIStatusError
+from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -41,10 +41,7 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Gitpod", "
 
 
 class Gitpod(SyncAPIClient):
-    automations_files: automations_files.AutomationsFilesResource
-    editors: editors.EditorsResource
     environments: environments.EnvironmentsResource
-    identity: identity.IdentityResource
     environment_classes: environment_classes.EnvironmentClassesResource
     organizations: organizations.OrganizationsResource
     projects: projects.ProjectsResource
@@ -55,12 +52,10 @@ class Gitpod(SyncAPIClient):
     with_streaming_response: GitpodWithStreamedResponse
 
     # client options
-    auth_token: str
 
     def __init__(
         self,
         *,
-        auth_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -80,18 +75,7 @@ class Gitpod(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous gitpod client instance.
-
-        This automatically infers the `auth_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
-        """
-        if auth_token is None:
-            auth_token = os.environ.get("GITPOD_API_KEY")
-        if auth_token is None:
-            raise GitpodError(
-                "The auth_token client option must be set either by passing auth_token to the client or by setting the GITPOD_API_KEY environment variable"
-            )
-        self.auth_token = auth_token
-
+        """Construct a new synchronous gitpod client instance."""
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
@@ -108,10 +92,7 @@ class Gitpod(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.automations_files = automations_files.AutomationsFilesResource(self)
-        self.editors = editors.EditorsResource(self)
         self.environments = environments.EnvironmentsResource(self)
-        self.identity = identity.IdentityResource(self)
         self.environment_classes = environment_classes.EnvironmentClassesResource(self)
         self.organizations = organizations.OrganizationsResource(self)
         self.projects = projects.ProjectsResource(self)
@@ -138,7 +119,6 @@ class Gitpod(SyncAPIClient):
     def copy(
         self,
         *,
-        auth_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -172,7 +152,6 @@ class Gitpod(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            auth_token=auth_token or self.auth_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -221,10 +200,7 @@ class Gitpod(SyncAPIClient):
 
 
 class AsyncGitpod(AsyncAPIClient):
-    automations_files: automations_files.AsyncAutomationsFilesResource
-    editors: editors.AsyncEditorsResource
     environments: environments.AsyncEnvironmentsResource
-    identity: identity.AsyncIdentityResource
     environment_classes: environment_classes.AsyncEnvironmentClassesResource
     organizations: organizations.AsyncOrganizationsResource
     projects: projects.AsyncProjectsResource
@@ -235,12 +211,10 @@ class AsyncGitpod(AsyncAPIClient):
     with_streaming_response: AsyncGitpodWithStreamedResponse
 
     # client options
-    auth_token: str
 
     def __init__(
         self,
         *,
-        auth_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -260,18 +234,7 @@ class AsyncGitpod(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async gitpod client instance.
-
-        This automatically infers the `auth_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
-        """
-        if auth_token is None:
-            auth_token = os.environ.get("GITPOD_API_KEY")
-        if auth_token is None:
-            raise GitpodError(
-                "The auth_token client option must be set either by passing auth_token to the client or by setting the GITPOD_API_KEY environment variable"
-            )
-        self.auth_token = auth_token
-
+        """Construct a new async gitpod client instance."""
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
@@ -288,10 +251,7 @@ class AsyncGitpod(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.automations_files = automations_files.AsyncAutomationsFilesResource(self)
-        self.editors = editors.AsyncEditorsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
-        self.identity = identity.AsyncIdentityResource(self)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.projects = projects.AsyncProjectsResource(self)
@@ -318,7 +278,6 @@ class AsyncGitpod(AsyncAPIClient):
     def copy(
         self,
         *,
-        auth_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -352,7 +311,6 @@ class AsyncGitpod(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            auth_token=auth_token or self.auth_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -402,10 +360,7 @@ class AsyncGitpod(AsyncAPIClient):
 
 class GitpodWithRawResponse:
     def __init__(self, client: Gitpod) -> None:
-        self.automations_files = automations_files.AutomationsFilesResourceWithRawResponse(client.automations_files)
-        self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
-        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithRawResponse(
             client.environment_classes
         )
@@ -422,12 +377,7 @@ class GitpodWithRawResponse:
 
 class AsyncGitpodWithRawResponse:
     def __init__(self, client: AsyncGitpod) -> None:
-        self.automations_files = automations_files.AsyncAutomationsFilesResourceWithRawResponse(
-            client.automations_files
-        )
-        self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
-        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithRawResponse(
             client.environment_classes
         )
@@ -444,12 +394,7 @@ class AsyncGitpodWithRawResponse:
 
 class GitpodWithStreamedResponse:
     def __init__(self, client: Gitpod) -> None:
-        self.automations_files = automations_files.AutomationsFilesResourceWithStreamingResponse(
-            client.automations_files
-        )
-        self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
-        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
         )
@@ -466,12 +411,7 @@ class GitpodWithStreamedResponse:
 
 class AsyncGitpodWithStreamedResponse:
     def __init__(self, client: AsyncGitpod) -> None:
-        self.automations_files = automations_files.AsyncAutomationsFilesResourceWithStreamingResponse(
-            client.automations_files
-        )
-        self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
-        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
         )

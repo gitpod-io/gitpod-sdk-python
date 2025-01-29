@@ -29,9 +29,7 @@ The full API of this library can be found in [api.md](api.md).
 ```python
 from gitpod import Gitpod
 
-client = Gitpod(
-    auth_token="My Auth Token",
-)
+client = Gitpod()
 
 runner = client.runners.create(
     connect_protocol_version=1,
@@ -47,9 +45,7 @@ Simply import `AsyncGitpod` instead of `Gitpod` and use `await` with each API ca
 import asyncio
 from gitpod import AsyncGitpod
 
-client = AsyncGitpod(
-    auth_token="My Auth Token",
-)
+client = AsyncGitpod()
 
 
 async def main() -> None:
@@ -86,9 +82,7 @@ All errors inherit from `gitpod.APIError`.
 import gitpod
 from gitpod import Gitpod
 
-client = Gitpod(
-    auth_token="My Auth Token",
-)
+client = Gitpod()
 
 try:
     client.runners.create(
@@ -133,7 +127,6 @@ from gitpod import Gitpod
 client = Gitpod(
     # default is 2
     max_retries=0,
-    auth_token="My Auth Token",
 )
 
 # Or, configure per-request:
@@ -154,13 +147,11 @@ from gitpod import Gitpod
 client = Gitpod(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    auth_token="My Auth Token",
 )
 
 # More granular control:
 client = Gitpod(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    auth_token="My Auth Token",
 )
 
 # Override per-request:
@@ -206,9 +197,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from gitpod import Gitpod
 
-client = Gitpod(
-    auth_token="My Auth Token",
-)
+client = Gitpod()
 response = client.runners.with_raw_response.create(
     connect_protocol_version=1,
 )
@@ -293,7 +282,6 @@ client = Gitpod(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    auth_token="My Auth Token",
 )
 ```
 
@@ -310,9 +298,7 @@ By default the library closes underlying HTTP connections whenever the client is
 ```py
 from gitpod import Gitpod
 
-with Gitpod(
-    auth_token="My Auth Token",
-) as client:
+with Gitpod() as client:
   # make requests here
   ...
 

@@ -6,15 +6,14 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EditorRetrieveParams"]
+__all__ = ["RunnerRetrieveParams"]
 
 
-class EditorRetrieveParams(TypedDict, total=False):
+class RunnerRetrieveParams(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    id: str
-    """id is the ID of the editor to get"""
+    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""

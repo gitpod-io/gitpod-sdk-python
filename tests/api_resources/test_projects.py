@@ -11,6 +11,7 @@ from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
     ProjectCreateResponse,
+    ProjectRetrieveResponse,
     ProjectCreateFromEnvironmentResponse,
 )
 
@@ -80,6 +81,46 @@ class TestProjects:
 
             project = response.parse()
             assert_matches_type(ProjectCreateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_retrieve(self, client: Gitpod) -> None:
+        project = client.projects.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
+        project = client.projects.retrieve(
+            connect_protocol_version=1,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Gitpod) -> None:
+        response = client.projects.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Gitpod) -> None:
+        with client.projects.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -188,6 +229,46 @@ class TestAsyncProjects:
 
             project = await response.parse()
             assert_matches_type(ProjectCreateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.retrieve(
+            connect_protocol_version=1,
+            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.projects.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        async with async_client.projects.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -40,8 +40,8 @@ class TaskExecutionMetadataCreator(BaseModel):
 
 class TaskExecutionMetadata(BaseModel):
     completed_at: Optional[datetime] = FieldInfo(alias="completedAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -132,8 +132,8 @@ class TaskExecutionMetadata(BaseModel):
     """
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -230,8 +230,8 @@ class TaskExecutionMetadata(BaseModel):
     """environment_id is the ID of the environment in which the task run is executed."""
 
     started_at: Optional[datetime] = FieldInfo(alias="startedAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -356,7 +356,9 @@ class TaskExecutionSpec(BaseModel):
     """plan is a list of groups of steps.
 
     The steps in a group are executed concurrently, while the groups are executed
-    sequentially. The order of the groups is the order in which they are executed.
+    sequentially.
+
+    The order of the groups is the order in which they are executed.
     """
 
 
@@ -365,10 +367,9 @@ class TaskExecutionStatusStep(BaseModel):
     """ID is the ID of the execution step"""
 
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
-    """failure_message summarises why the step failed to operate.
+    """failure_message summarises why the step failed to operate. If this is non-empty
 
-    If this is non-empty the step has failed to operate and will likely transition
-    to a failed state.
+    the step has failed to operate and will likely transition to a failed state.
     """
 
     phase: Optional[
@@ -388,14 +389,18 @@ class TaskExecutionStatus(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message summarises why the task execution failed to operate.
 
-    If this is non-empty the task execution has failed to operate and will likely
-    transition to a failed state.
+    If this is non-empty
+
+    the task execution has failed to operate and will likely transition to a failed
+    state.
     """
 
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
     """log_url is the URL to the logs of the task's steps.
 
-    If this is empty, the task either has no logs or has not yet started.
+    If this is empty, the task either has no logs
+
+    or has not yet started.
     """
 
     phase: Optional[
@@ -410,7 +415,7 @@ class TaskExecutionStatus(BaseModel):
     ] = None
     """the phase of a task execution represents the aggregated phase of all steps."""
 
-    status_version: Union[int, str, None] = FieldInfo(alias="statusVersion", default=None)
+    status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
     """version of the status update.
 
     Task executions themselves are unversioned, but their status has different
@@ -422,7 +427,9 @@ class TaskExecutionStatus(BaseModel):
     steps: Optional[List[TaskExecutionStatusStep]] = None
     """steps provides the status for each individual step of the task execution.
 
-    If a step is missing it has not yet started.
+    If a step is missing it
+
+    has not yet started.
     """
 
 

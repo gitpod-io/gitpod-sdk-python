@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .editors import (
-    EditorsResource,
-    AsyncEditorsResource,
-    EditorsResourceWithRawResponse,
-    AsyncEditorsResourceWithRawResponse,
-    EditorsResourceWithStreamingResponse,
-    AsyncEditorsResourceWithStreamingResponse,
-)
 from .runners import (
     RunnersResource,
     AsyncRunnersResource,
@@ -15,14 +7,6 @@ from .runners import (
     AsyncRunnersResourceWithRawResponse,
     RunnersResourceWithStreamingResponse,
     AsyncRunnersResourceWithStreamingResponse,
-)
-from .identity import (
-    IdentityResource,
-    AsyncIdentityResource,
-    IdentityResourceWithRawResponse,
-    AsyncIdentityResourceWithRawResponse,
-    IdentityResourceWithStreamingResponse,
-    AsyncIdentityResourceWithStreamingResponse,
 )
 from .projects import (
     ProjectsResource,
@@ -47,14 +31,6 @@ from .organizations import (
     AsyncOrganizationsResourceWithRawResponse,
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
-)
-from .automations_files import (
-    AutomationsFilesResource,
-    AsyncAutomationsFilesResource,
-    AutomationsFilesResourceWithRawResponse,
-    AsyncAutomationsFilesResourceWithRawResponse,
-    AutomationsFilesResourceWithStreamingResponse,
-    AsyncAutomationsFilesResourceWithStreamingResponse,
 )
 from .environment_classes import (
     EnvironmentClassesResource,
@@ -82,30 +58,12 @@ from .personal_access_tokens import (
 )
 
 __all__ = [
-    "AutomationsFilesResource",
-    "AsyncAutomationsFilesResource",
-    "AutomationsFilesResourceWithRawResponse",
-    "AsyncAutomationsFilesResourceWithRawResponse",
-    "AutomationsFilesResourceWithStreamingResponse",
-    "AsyncAutomationsFilesResourceWithStreamingResponse",
-    "EditorsResource",
-    "AsyncEditorsResource",
-    "EditorsResourceWithRawResponse",
-    "AsyncEditorsResourceWithRawResponse",
-    "EditorsResourceWithStreamingResponse",
-    "AsyncEditorsResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",
     "AsyncEnvironmentsResourceWithRawResponse",
     "EnvironmentsResourceWithStreamingResponse",
     "AsyncEnvironmentsResourceWithStreamingResponse",
-    "IdentityResource",
-    "AsyncIdentityResource",
-    "IdentityResourceWithRawResponse",
-    "AsyncIdentityResourceWithRawResponse",
-    "IdentityResourceWithStreamingResponse",
-    "AsyncIdentityResourceWithStreamingResponse",
     "EnvironmentClassesResource",
     "AsyncEnvironmentClassesResource",
     "EnvironmentClassesResourceWithRawResponse",
