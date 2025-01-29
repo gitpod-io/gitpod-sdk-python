@@ -1,3 +1,21 @@
+# Identity
+
+Types:
+
+```python
+from gitpod.types import (
+    IdentityExchangeTokenResponse,
+    IdentityGetAuthenticatedIdentityResponse,
+    IdentityGetIDTokenResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.IdentityService/ExchangeToken">client.identity.<a href="./src/gitpod/resources/identity.py">exchange_token</a>(\*\*<a href="src/gitpod/types/identity_exchange_token_params.py">params</a>) -> <a href="./src/gitpod/types/identity_exchange_token_response.py">IdentityExchangeTokenResponse</a></code>
+- <code title="post /gitpod.v1.IdentityService/GetAuthenticatedIdentity">client.identity.<a href="./src/gitpod/resources/identity.py">get_authenticated_identity</a>(\*\*<a href="src/gitpod/types/identity_get_authenticated_identity_params.py">params</a>) -> <a href="./src/gitpod/types/identity_get_authenticated_identity_response.py">IdentityGetAuthenticatedIdentityResponse</a></code>
+- <code title="post /gitpod.v1.IdentityService/GetIDToken">client.identity.<a href="./src/gitpod/resources/identity.py">get_id_token</a>(\*\*<a href="src/gitpod/types/identity_get_id_token_params.py">params</a>) -> <a href="./src/gitpod/types/identity_get_id_token_response.py">IdentityGetIDTokenResponse</a></code>
+
 # Environments
 
 Types:

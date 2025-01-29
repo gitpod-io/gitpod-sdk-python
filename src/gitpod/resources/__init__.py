@@ -8,6 +8,14 @@ from .runners import (
     RunnersResourceWithStreamingResponse,
     AsyncRunnersResourceWithStreamingResponse,
 )
+from .identity import (
+    IdentityResource,
+    AsyncIdentityResource,
+    IdentityResourceWithRawResponse,
+    AsyncIdentityResourceWithRawResponse,
+    IdentityResourceWithStreamingResponse,
+    AsyncIdentityResourceWithStreamingResponse,
+)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -58,6 +66,12 @@ from .personal_access_tokens import (
 )
 
 __all__ = [
+    "IdentityResource",
+    "AsyncIdentityResource",
+    "IdentityResourceWithRawResponse",
+    "AsyncIdentityResourceWithRawResponse",
+    "IdentityResourceWithStreamingResponse",
+    "AsyncIdentityResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",
