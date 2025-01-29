@@ -94,7 +94,7 @@ class Gitpod(SyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://app.gitpod.io/app"
 
         super().__init__(
             version=__version__,
@@ -272,7 +272,7 @@ class AsyncGitpod(AsyncAPIClient):
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://app.gitpod.io/app"
 
         super().__init__(
             version=__version__,
