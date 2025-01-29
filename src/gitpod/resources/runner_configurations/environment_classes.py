@@ -112,6 +112,7 @@ class EnvironmentClassesResource(SyncAPIResource):
     ) -> EnvironmentClassListResponse:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
+
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
 
         Args:
@@ -237,6 +238,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     ) -> EnvironmentClassListResponse:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
+
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
 
         Args:

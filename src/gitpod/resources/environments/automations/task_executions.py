@@ -6,49 +6,53 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import editor_list_params, editor_retrieve_params, editor_resolve_editor_url_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._utils import (
     is_given,
     maybe_transform,
     strip_not_given,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ...._compat import cached_property
+from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.editor_list_response import EditorListResponse
-from ..types.editor_retrieve_response import EditorRetrieveResponse
-from ..types.editor_resolve_editor_url_response import EditorResolveEditorURLResponse
+from ...._base_client import make_request_options
+from ....types.environments.automations import (
+    task_execution_list_params,
+    task_execution_stop_params,
+    task_execution_retrieve_params,
+    task_execution_update_task_execution_status_params,
+)
+from ....types.environments.automations.task_execution_list_response import TaskExecutionListResponse
+from ....types.environments.automations.task_execution_retrieve_response import TaskExecutionRetrieveResponse
 
-__all__ = ["EditorsResource", "AsyncEditorsResource"]
+__all__ = ["TaskExecutionsResource", "AsyncTaskExecutionsResource"]
 
 
-class EditorsResource(SyncAPIResource):
+class TaskExecutionsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> EditorsResourceWithRawResponse:
+    def with_raw_response(self) -> TaskExecutionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#accessing-raw-response-data-eg-headers
         """
-        return EditorsResourceWithRawResponse(self)
+        return TaskExecutionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> EditorsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> TaskExecutionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#with_streaming_response
         """
-        return EditorsResourceWithStreamingResponse(self)
+        return TaskExecutionsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
@@ -62,14 +66,12 @@ class EditorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorRetrieveResponse:
+    ) -> TaskExecutionRetrieveResponse:
         """
-        GetEditor returns the editor with the given ID
+        GetTaskExecution
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
-
-          id: id is the ID of the editor to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -91,19 +93,20 @@ class EditorsResource(SyncAPIResource):
             **(extra_headers or {}),
         }
         return self._post(
-            "/gitpod.v1.EditorService/GetEditor",
-            body=maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
+            "/gitpod.v1.EnvironmentAutomationService/GetTaskExecution",
+            body=maybe_transform({"id": id}, task_execution_retrieve_params.TaskExecutionRetrieveParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorRetrieveResponse,
+            cast_to=TaskExecutionRetrieveResponse,
         )
 
     def list(
         self,
         *,
         connect_protocol_version: Literal[1],
-        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
+        filter: task_execution_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: task_execution_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -111,14 +114,16 @@ class EditorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorListResponse:
+    ) -> TaskExecutionListResponse:
         """
-        ListEditors lists all editors available to the caller
+        ListTaskExecutions
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          pagination: pagination contains the pagination options for listing environments
+          filter: filter contains the filter options for listing task runs
+
+          pagination: pagination contains the pagination options for listing task runs
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -140,21 +145,25 @@ class EditorsResource(SyncAPIResource):
             **(extra_headers or {}),
         }
         return self._post(
-            "/gitpod.v1.EditorService/ListEditors",
-            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                task_execution_list_params.TaskExecutionListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorListResponse,
+            cast_to=TaskExecutionListResponse,
         )
 
-    def resolve_editor_url(
+    def stop(
         self,
         *,
         connect_protocol_version: Literal[1],
-        editor_id: str | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -162,18 +171,12 @@ class EditorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorResolveEditorURLResponse:
+    ) -> object:
         """
-        ResolveEditorURL resolves the editor's URL for an environment
+        StopTaskExecution
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
-
-          editor_id: editorId is the ID of the editor to resolve the URL for
-
-          environment_id: environmentId is the ID of the environment to resolve the URL for
-
-          organization_id: organizationId is the ID of the organization to resolve the URL for
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -195,41 +198,85 @@ class EditorsResource(SyncAPIResource):
             **(extra_headers or {}),
         }
         return self._post(
-            "/gitpod.v1.EditorService/ResolveEditorURL",
-            body=maybe_transform(
+            "/gitpod.v1.EnvironmentAutomationService/StopTaskExecution",
+            body=maybe_transform({"id": id}, task_execution_stop_params.TaskExecutionStopParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    def update_task_execution_status(
+        self,
+        *,
+        body: task_execution_update_task_execution_status_params.Body,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """UpdateTaskExecutionStatus updates the status of a task execution.
+
+        Only the
+        environment executing a task execution is expected to call this function.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
                 {
-                    "editor_id": editor_id,
-                    "environment_id": environment_id,
-                    "organization_id": organization_id,
-                },
-                editor_resolve_editor_url_params.EditorResolveEditorURLParams,
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
+            body=maybe_transform(
+                body, task_execution_update_task_execution_status_params.TaskExecutionUpdateTaskExecutionStatusParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorResolveEditorURLResponse,
+            cast_to=object,
         )
 
 
-class AsyncEditorsResource(AsyncAPIResource):
+class AsyncTaskExecutionsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncEditorsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncTaskExecutionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncEditorsResourceWithRawResponse(self)
+        return AsyncTaskExecutionsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncEditorsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncTaskExecutionsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#with_streaming_response
         """
-        return AsyncEditorsResourceWithStreamingResponse(self)
+        return AsyncTaskExecutionsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
@@ -243,14 +290,12 @@ class AsyncEditorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorRetrieveResponse:
+    ) -> TaskExecutionRetrieveResponse:
         """
-        GetEditor returns the editor with the given ID
+        GetTaskExecution
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
-
-          id: id is the ID of the editor to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -272,19 +317,20 @@ class AsyncEditorsResource(AsyncAPIResource):
             **(extra_headers or {}),
         }
         return await self._post(
-            "/gitpod.v1.EditorService/GetEditor",
-            body=await async_maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
+            "/gitpod.v1.EnvironmentAutomationService/GetTaskExecution",
+            body=await async_maybe_transform({"id": id}, task_execution_retrieve_params.TaskExecutionRetrieveParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorRetrieveResponse,
+            cast_to=TaskExecutionRetrieveResponse,
         )
 
     async def list(
         self,
         *,
         connect_protocol_version: Literal[1],
-        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
+        filter: task_execution_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: task_execution_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -292,14 +338,16 @@ class AsyncEditorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorListResponse:
+    ) -> TaskExecutionListResponse:
         """
-        ListEditors lists all editors available to the caller
+        ListTaskExecutions
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          pagination: pagination contains the pagination options for listing environments
+          filter: filter contains the filter options for listing task runs
+
+          pagination: pagination contains the pagination options for listing task runs
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -321,21 +369,25 @@ class AsyncEditorsResource(AsyncAPIResource):
             **(extra_headers or {}),
         }
         return await self._post(
-            "/gitpod.v1.EditorService/ListEditors",
-            body=await async_maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
+            body=await async_maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                task_execution_list_params.TaskExecutionListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorListResponse,
+            cast_to=TaskExecutionListResponse,
         )
 
-    async def resolve_editor_url(
+    async def stop(
         self,
         *,
         connect_protocol_version: Literal[1],
-        editor_id: str | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -343,18 +395,12 @@ class AsyncEditorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorResolveEditorURLResponse:
+    ) -> object:
         """
-        ResolveEditorURL resolves the editor's URL for an environment
+        StopTaskExecution
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
-
-          editor_id: editorId is the ID of the editor to resolve the URL for
-
-          environment_id: environmentId is the ID of the environment to resolve the URL for
-
-          organization_id: organizationId is the ID of the organization to resolve the URL for
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -376,77 +422,133 @@ class AsyncEditorsResource(AsyncAPIResource):
             **(extra_headers or {}),
         }
         return await self._post(
-            "/gitpod.v1.EditorService/ResolveEditorURL",
-            body=await async_maybe_transform(
+            "/gitpod.v1.EnvironmentAutomationService/StopTaskExecution",
+            body=await async_maybe_transform({"id": id}, task_execution_stop_params.TaskExecutionStopParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    async def update_task_execution_status(
+        self,
+        *,
+        body: task_execution_update_task_execution_status_params.Body,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """UpdateTaskExecutionStatus updates the status of a task execution.
+
+        Only the
+        environment executing a task execution is expected to call this function.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
                 {
-                    "editor_id": editor_id,
-                    "environment_id": environment_id,
-                    "organization_id": organization_id,
-                },
-                editor_resolve_editor_url_params.EditorResolveEditorURLParams,
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
+            body=await async_maybe_transform(
+                body, task_execution_update_task_execution_status_params.TaskExecutionUpdateTaskExecutionStatusParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EditorResolveEditorURLResponse,
+            cast_to=object,
         )
 
 
-class EditorsResourceWithRawResponse:
-    def __init__(self, editors: EditorsResource) -> None:
-        self._editors = editors
+class TaskExecutionsResourceWithRawResponse:
+    def __init__(self, task_executions: TaskExecutionsResource) -> None:
+        self._task_executions = task_executions
 
         self.retrieve = to_raw_response_wrapper(
-            editors.retrieve,
+            task_executions.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            editors.list,
+            task_executions.list,
         )
-        self.resolve_editor_url = to_raw_response_wrapper(
-            editors.resolve_editor_url,
+        self.stop = to_raw_response_wrapper(
+            task_executions.stop,
+        )
+        self.update_task_execution_status = to_raw_response_wrapper(
+            task_executions.update_task_execution_status,
         )
 
 
-class AsyncEditorsResourceWithRawResponse:
-    def __init__(self, editors: AsyncEditorsResource) -> None:
-        self._editors = editors
+class AsyncTaskExecutionsResourceWithRawResponse:
+    def __init__(self, task_executions: AsyncTaskExecutionsResource) -> None:
+        self._task_executions = task_executions
 
         self.retrieve = async_to_raw_response_wrapper(
-            editors.retrieve,
+            task_executions.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            editors.list,
+            task_executions.list,
         )
-        self.resolve_editor_url = async_to_raw_response_wrapper(
-            editors.resolve_editor_url,
+        self.stop = async_to_raw_response_wrapper(
+            task_executions.stop,
+        )
+        self.update_task_execution_status = async_to_raw_response_wrapper(
+            task_executions.update_task_execution_status,
         )
 
 
-class EditorsResourceWithStreamingResponse:
-    def __init__(self, editors: EditorsResource) -> None:
-        self._editors = editors
+class TaskExecutionsResourceWithStreamingResponse:
+    def __init__(self, task_executions: TaskExecutionsResource) -> None:
+        self._task_executions = task_executions
 
         self.retrieve = to_streamed_response_wrapper(
-            editors.retrieve,
+            task_executions.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            editors.list,
+            task_executions.list,
         )
-        self.resolve_editor_url = to_streamed_response_wrapper(
-            editors.resolve_editor_url,
+        self.stop = to_streamed_response_wrapper(
+            task_executions.stop,
+        )
+        self.update_task_execution_status = to_streamed_response_wrapper(
+            task_executions.update_task_execution_status,
         )
 
 
-class AsyncEditorsResourceWithStreamingResponse:
-    def __init__(self, editors: AsyncEditorsResource) -> None:
-        self._editors = editors
+class AsyncTaskExecutionsResourceWithStreamingResponse:
+    def __init__(self, task_executions: AsyncTaskExecutionsResource) -> None:
+        self._task_executions = task_executions
 
         self.retrieve = async_to_streamed_response_wrapper(
-            editors.retrieve,
+            task_executions.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            editors.list,
+            task_executions.list,
         )
-        self.resolve_editor_url = async_to_streamed_response_wrapper(
-            editors.resolve_editor_url,
+        self.stop = async_to_streamed_response_wrapper(
+            task_executions.stop,
+        )
+        self.update_task_execution_status = async_to_streamed_response_wrapper(
+            task_executions.update_task_execution_status,
         )

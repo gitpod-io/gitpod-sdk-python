@@ -27,8 +27,8 @@ class Filter:
 
 class Pagination(TypedDict, total=False):
     token: str
-    """
-    Token for the next set of results that was returned as next_token of a
+    """Token for the next set of results that was returned as next_token of a
+
     PaginationResponse
     """
 

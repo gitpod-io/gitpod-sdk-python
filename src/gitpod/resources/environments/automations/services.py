@@ -76,13 +76,16 @@ class ServicesResource(SyncAPIResource):
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          spec: Changing the spec of a service is a complex operation. The spec of a service can
-              only be updated if the service is in a stopped state. If the service is running,
-              it must be stopped first.
+          spec: Changing the spec of a service is a complex operation. The spec of a service
+
+              can only be updated if the service is in a stopped state. If the service is
+              running, it must be stopped first.
 
           status: Service status updates are only expected from the executing environment. As a
-              client of this API you are not expected to provide this field. Updating this
-              field requires the `environmentservice:update_status` permission.
+              client
+
+              of this API you are not expected to provide this field. Updating this field
+              requires the `environmentservice:update_status` permission.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -195,7 +198,9 @@ class ServicesResource(SyncAPIResource):
         """DeleteService deletes a service.
 
         This call does not block until the service is
-        deleted. If the service is not stopped it will be stopped before deletion.
+        deleted.
+
+        If the service is not stopped it will be stopped before deletion.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -250,8 +255,9 @@ class ServicesResource(SyncAPIResource):
         """StartService starts a service.
 
         This call does not block until the service is
-        started. This call will not error if the service is already running or has been
         started.
+
+        This call will not error if the service is already running or has been started.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -300,8 +306,9 @@ class ServicesResource(SyncAPIResource):
         """StopService stops a service.
 
         This call does not block until the service is
-        stopped. This call will not error if the service is already stopped or has been
         stopped.
+
+        This call will not error if the service is already stopped or has been stopped.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -377,13 +384,16 @@ class AsyncServicesResource(AsyncAPIResource):
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          spec: Changing the spec of a service is a complex operation. The spec of a service can
-              only be updated if the service is in a stopped state. If the service is running,
-              it must be stopped first.
+          spec: Changing the spec of a service is a complex operation. The spec of a service
+
+              can only be updated if the service is in a stopped state. If the service is
+              running, it must be stopped first.
 
           status: Service status updates are only expected from the executing environment. As a
-              client of this API you are not expected to provide this field. Updating this
-              field requires the `environmentservice:update_status` permission.
+              client
+
+              of this API you are not expected to provide this field. Updating this field
+              requires the `environmentservice:update_status` permission.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -496,7 +506,9 @@ class AsyncServicesResource(AsyncAPIResource):
         """DeleteService deletes a service.
 
         This call does not block until the service is
-        deleted. If the service is not stopped it will be stopped before deletion.
+        deleted.
+
+        If the service is not stopped it will be stopped before deletion.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -551,8 +563,9 @@ class AsyncServicesResource(AsyncAPIResource):
         """StartService starts a service.
 
         This call does not block until the service is
-        started. This call will not error if the service is already running or has been
         started.
+
+        This call will not error if the service is already running or has been started.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -601,8 +614,9 @@ class AsyncServicesResource(AsyncAPIResource):
         """StopService stops a service.
 
         This call does not block until the service is
-        stopped. This call will not error if the service is already stopped or has been
         stopped.
+
+        This call will not error if the service is already stopped or has been stopped.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

@@ -112,7 +112,9 @@ class RunnerConfigurationsResource(SyncAPIResource):
         """ValidateRunnerConfiguration validates a runner configuration (e.g.
 
         environment
-        class, SCM integration) with the runner.
+        class, SCM integration)
+
+        with the runner.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -198,7 +200,9 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         """ValidateRunnerConfiguration validates a runner configuration (e.g.
 
         environment
-        class, SCM integration) with the runner.
+        class, SCM integration)
+
+        with the runner.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

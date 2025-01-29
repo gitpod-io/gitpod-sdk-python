@@ -18,17 +18,19 @@ class ServiceUpdateParams(TypedDict, total=False):
     metadata: Metadata
 
     spec: Spec
-    """Changing the spec of a service is a complex operation.
+    """Changing the spec of a service is a complex operation. The spec of a service
 
-    The spec of a service can only be updated if the service is in a stopped state.
-    If the service is running, it must be stopped first.
+    can only be updated if the service is in a stopped state. If the service is
+    running, it must be stopped first.
     """
 
     status: Status
     """Service status updates are only expected from the executing environment.
 
-    As a client of this API you are not expected to provide this field. Updating
-    this field requires the `environmentservice:update_status` permission.
+    As a client
+
+    of this API you are not expected to provide this field. Updating this field
+    requires the `environmentservice:update_status` permission.
     """
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]

@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from gitpod.types import (
     RunnerListResponse,
     RunnerCreateResponse,
+    RunnerRetrieveResponse,
     RunnerGetRunnerResponse,
     RunnerParseContextURLResponse,
     RunnerCreateRunnerTokenResponse,
@@ -70,6 +71,46 @@ class TestRunners:
 
             runner = response.parse()
             assert_matches_type(RunnerCreateResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_retrieve(self, client: Gitpod) -> None:
+        runner = client.runners.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.retrieve(
+            connect_protocol_version=1,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -420,6 +461,46 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerCreateResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.retrieve(
+            connect_protocol_version=1,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

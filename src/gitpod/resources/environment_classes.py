@@ -65,8 +65,9 @@ class EnvironmentClassesResource(SyncAPIResource):
     ) -> EnvironmentClassListResponse:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
-        details a user is able to use based on the query buf:lint:ignore
-        RPC_REQUEST_RESPONSE_UNIQUE
+        details a user is able to use based on the
+
+        query buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -144,8 +145,9 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     ) -> EnvironmentClassListResponse:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
-        details a user is able to use based on the query buf:lint:ignore
-        RPC_REQUEST_RESPONSE_UNIQUE
+        details a user is able to use based on the
+
+        query buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

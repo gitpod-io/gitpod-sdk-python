@@ -1,39 +1,20 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["TaskCreateResponse", "Task", "TaskMetadata", "TaskMetadataCreator", "TaskMetadataTriggeredBy", "TaskSpec"]
+__all__ = ["HostAuthenticationTokenRetrieveResponse", "Token"]
 
 
-class TaskMetadataCreator(BaseModel):
+class Token(BaseModel):
     id: Optional[str] = None
-    """id is the UUID of the subject"""
 
-    principal: Optional[
-        Literal[
-            "PRINCIPAL_UNSPECIFIED",
-            "PRINCIPAL_ACCOUNT",
-            "PRINCIPAL_USER",
-            "PRINCIPAL_RUNNER",
-            "PRINCIPAL_ENVIRONMENT",
-            "PRINCIPAL_SERVICE_ACCOUNT",
-        ]
-    ] = None
-    """Principal is the principal of the subject"""
-
-
-class TaskMetadataTriggeredBy:
-    pass
-
-
-class TaskMetadata(BaseModel):
-    created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
+    expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
     """A Timestamp represents a point in time independent of any time zone or local
 
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -125,57 +106,20 @@ class TaskMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[TaskMetadataCreator] = None
-    """creator describes the principal who created the task."""
+    host: Optional[str] = None
 
-    description: Optional[str] = None
-    """description is a user-facing description for the task.
+    runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
 
-    It can be used to provide context and documentation for the task.
-    """
+    source: Optional[
+        Literal[
+            "HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
+            "HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
+            "HOST_AUTHENTICATION_TOKEN_SOURCE_PAT",
+        ]
+    ] = None
 
-    name: Optional[str] = None
-    """name is a user-facing name for the task.
-
-    Unlike the reference, this field is not unique, and not referenced by the
-    system.
-
-    This is a short descriptive name for the task.
-    """
-
-    reference: Optional[str] = None
-    """
-    reference is a user-facing identifier for the task which must be unique on the
-    environment.
-
-    It is used to express dependencies between tasks, and to identify the task in
-    user interactions (e.g. the CLI).
-    """
-
-    triggered_by: Optional[List[TaskMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
-    """triggered_by is a list of trigger that start the task."""
+    user_id: Optional[str] = FieldInfo(alias="userId", default=None)
 
 
-class TaskSpec(BaseModel):
-    command: Optional[str] = None
-    """command contains the command the task should execute"""
-
-    runs_on: Union[object, object, None] = FieldInfo(alias="runsOn", default=None)
-    """runs_on specifies the environment the task should run on."""
-
-
-class Task(BaseModel):
-    id: Optional[str] = None
-
-    depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
-    """dependencies specifies the IDs of the automations this task depends on."""
-
-    environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
-
-    metadata: Optional[TaskMetadata] = None
-
-    spec: Optional[TaskSpec] = None
-
-
-class TaskCreateResponse(BaseModel):
-    task: Optional[Task] = None
+class HostAuthenticationTokenRetrieveResponse(BaseModel):
+    token: Optional[Token] = None

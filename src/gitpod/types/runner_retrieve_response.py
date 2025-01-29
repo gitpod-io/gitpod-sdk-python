@@ -9,7 +9,7 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 
 __all__ = [
-    "RunnerCreateResponse",
+    "RunnerRetrieveResponse",
     "Runner",
     "RunnerCreator",
     "RunnerSpec",
@@ -415,7 +415,5 @@ class Runner(BaseModel):
     """
 
 
-class RunnerCreateResponse(BaseModel):
-    access_token: Optional[str] = FieldInfo(alias="accessToken", default=None)
-
+class RunnerRetrieveResponse(BaseModel):
     runner: Optional[Runner] = None

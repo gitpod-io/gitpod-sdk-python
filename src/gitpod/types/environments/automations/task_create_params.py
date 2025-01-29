@@ -48,8 +48,8 @@ class MetadataTriggeredBy:
 
 class Metadata(TypedDict, total=False):
     created_at: Annotated[Union[str, datetime], PropertyInfo(alias="createdAt", format="iso8601")]
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -152,14 +152,18 @@ class Metadata(TypedDict, total=False):
     """name is a user-facing name for the task.
 
     Unlike the reference, this field is not unique, and not referenced by the
-    system. This is a short descriptive name for the task.
+    system.
+
+    This is a short descriptive name for the task.
     """
 
     reference: str
     """
     reference is a user-facing identifier for the task which must be unique on the
-    environment. It is used to express dependencies between tasks, and to identify
-    the task in user interactions (e.g. the CLI).
+    environment.
+
+    It is used to express dependencies between tasks, and to identify the task in
+    user interactions (e.g. the CLI).
     """
 
     triggered_by: Annotated[Iterable[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]

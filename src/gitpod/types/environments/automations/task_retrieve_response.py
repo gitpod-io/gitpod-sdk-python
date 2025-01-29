@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["TaskCreateResponse", "Task", "TaskMetadata", "TaskMetadataCreator", "TaskMetadataTriggeredBy", "TaskSpec"]
+__all__ = ["TaskRetrieveResponse", "Task", "TaskMetadata", "TaskMetadataCreator", "TaskMetadataTriggeredBy", "TaskSpec"]
 
 
 class TaskMetadataCreator(BaseModel):
@@ -177,5 +177,5 @@ class Task(BaseModel):
     spec: Optional[TaskSpec] = None
 
 
-class TaskCreateResponse(BaseModel):
+class TaskRetrieveResponse(BaseModel):
     task: Optional[Task] = None

@@ -13,6 +13,7 @@ from gitpod._utils import parse_datetime
 from gitpod.types.runner_configurations import (
     HostAuthenticationTokenListResponse,
     HostAuthenticationTokenCreateResponse,
+    HostAuthenticationTokenRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -58,6 +59,46 @@ class TestHostAuthenticationTokens:
 
             host_authentication_token = response.parse()
             assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_retrieve(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.retrieve(
+            connect_protocol_version=1,
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_raw_response_retrieve(self, client: Gitpod) -> None:
+        response = client.runner_configurations.host_authentication_tokens.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = response.parse()
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Gitpod) -> None:
+        with client.runner_configurations.host_authentication_tokens.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = response.parse()
+            assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -234,6 +275,46 @@ class TestAsyncHostAuthenticationTokens:
 
             host_authentication_token = await response.parse()
             assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.retrieve(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.retrieve(
+            connect_protocol_version=1,
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runner_configurations.host_authentication_tokens.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = await response.parse()
+        assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runner_configurations.host_authentication_tokens.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = await response.parse()
+            assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

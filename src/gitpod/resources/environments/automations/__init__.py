@@ -24,6 +24,14 @@ from .automations import (
     AutomationsResourceWithStreamingResponse,
     AsyncAutomationsResourceWithStreamingResponse,
 )
+from .task_executions import (
+    TaskExecutionsResource,
+    AsyncTaskExecutionsResource,
+    TaskExecutionsResourceWithRawResponse,
+    AsyncTaskExecutionsResourceWithRawResponse,
+    TaskExecutionsResourceWithStreamingResponse,
+    AsyncTaskExecutionsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "TasksResource",
@@ -32,6 +40,12 @@ __all__ = [
     "AsyncTasksResourceWithRawResponse",
     "TasksResourceWithStreamingResponse",
     "AsyncTasksResourceWithStreamingResponse",
+    "TaskExecutionsResource",
+    "AsyncTaskExecutionsResource",
+    "TaskExecutionsResourceWithRawResponse",
+    "AsyncTaskExecutionsResourceWithRawResponse",
+    "TaskExecutionsResourceWithStreamingResponse",
+    "AsyncTaskExecutionsResourceWithStreamingResponse",
     "ServicesResource",
     "AsyncServicesResource",
     "ServicesResourceWithRawResponse",

@@ -89,6 +89,7 @@ class EnvironmentsResource(SyncAPIResource):
           connect_protocol_version: Define the version of the Connect protocol
 
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
+
               start
 
           connect_timeout_ms: Define the timeout, in ms
@@ -255,6 +256,7 @@ class EnvironmentsResource(SyncAPIResource):
           connect_protocol_version: Define the version of the Connect protocol
 
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
+
               start
 
           connect_timeout_ms: Define the timeout, in ms
@@ -306,8 +308,9 @@ class EnvironmentsResource(SyncAPIResource):
     ) -> object:
         """StartEnvironment starts an environment.
 
-        This function is idempotent, i.e. if the
-        environment is already running no error is returned.
+        This function is idempotent, i.e. if
+
+        the environment is already running no error is returned.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -387,6 +390,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           connect_protocol_version: Define the version of the Connect protocol
 
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
+
               start
 
           connect_timeout_ms: Define the timeout, in ms
@@ -553,6 +557,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           connect_protocol_version: Define the version of the Connect protocol
 
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
+
               start
 
           connect_timeout_ms: Define the timeout, in ms
@@ -604,8 +609,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     ) -> object:
         """StartEnvironment starts an environment.
 
-        This function is idempotent, i.e. if the
-        environment is already running no error is returned.
+        This function is idempotent, i.e. if
+
+        the environment is already running no error is returned.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

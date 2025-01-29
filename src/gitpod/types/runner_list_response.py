@@ -22,9 +22,9 @@ __all__ = [
 
 class Pagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
+    """Token passed for retreiving the next set of results. Empty if there are no
 
-    Empty if there are no more results
+    more results
     """
 
 
@@ -125,8 +125,8 @@ class RunnerStatus(BaseModel):
     system_details: Optional[str] = FieldInfo(alias="systemDetails", default=None)
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -221,8 +221,8 @@ class RunnerStatus(BaseModel):
 
 class Runner(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -332,8 +332,8 @@ class Runner(BaseModel):
     """RunnerStatus represents the status of a runner"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """
-    A Timestamp represents a point in time independent of any time zone or local
+    """A Timestamp represents a point in time independent of any time zone or local
+
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar

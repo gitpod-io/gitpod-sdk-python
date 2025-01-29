@@ -9,6 +9,7 @@ import httpx
 from ...types import (
     runner_list_params,
     runner_create_params,
+    runner_retrieve_params,
     runner_get_runner_params,
     runner_delete_runner_params,
     runner_update_runner_params,
@@ -42,6 +43,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.runner_list_response import RunnerListResponse
 from ...types.runner_create_response import RunnerCreateResponse
+from ...types.runner_retrieve_response import RunnerRetrieveResponse
 from ...types.runner_get_runner_response import RunnerGetRunnerResponse
 from ...types.runner_parse_context_url_response import RunnerParseContextURLResponse
 from ...types.runner_create_runner_token_response import RunnerCreateRunnerTokenResponse
@@ -95,6 +97,7 @@ class RunnersResource(SyncAPIResource):
         """CreateRunner creates a new runner with the server.
 
         Registrations are very
+
         short-lived and must be renewed every 30 seconds. Runners can be registered for
         an entire organisation or a single user.
 
@@ -138,6 +141,53 @@ class RunnersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunnerCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RunnerRetrieveResponse:
+        """
+        GetRunner returns a single runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.RunnerService/GetRunner",
+            body=maybe_transform({"runner_id": runner_id}, runner_retrieve_params.RunnerRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerRetrieveResponse,
         )
 
     def list(
@@ -212,9 +262,10 @@ class RunnersResource(SyncAPIResource):
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         CheckAuthenticationForHost asks a runner if the user is authenticated against a
-        particular host, e.g. an SCM system. If not, this function will return a URL
-        that the user should visit to authenticate, or indicate that Personal Access
-        Tokens are supported.
+        particular host, e.g. an SCM system.
+
+        If not, this function will return a URL that the user should visit to
+        authenticate, or indicate that Personal Access Tokens are supported.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -266,10 +317,10 @@ class RunnersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerCreateRunnerTokenResponse:
-        """CreateRunnerToken returns a token that can be used to authenticate as the
-        runner.
+        """
+        CreateRunnerToken returns a token that can be used to authenticate as the
 
-        Use this call to renew an outdated token - this does not expire any
+        runner. Use this call to renew an outdated token - this does not expire any
         previouly issued tokens.
 
         Args:
@@ -569,6 +620,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         """CreateRunner creates a new runner with the server.
 
         Registrations are very
+
         short-lived and must be renewed every 30 seconds. Runners can be registered for
         an entire organisation or a single user.
 
@@ -612,6 +664,53 @@ class AsyncRunnersResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunnerCreateResponse,
+        )
+
+    async def retrieve(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> RunnerRetrieveResponse:
+        """
+        GetRunner returns a single runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.RunnerService/GetRunner",
+            body=await async_maybe_transform({"runner_id": runner_id}, runner_retrieve_params.RunnerRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerRetrieveResponse,
         )
 
     async def list(
@@ -686,9 +785,10 @@ class AsyncRunnersResource(AsyncAPIResource):
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         CheckAuthenticationForHost asks a runner if the user is authenticated against a
-        particular host, e.g. an SCM system. If not, this function will return a URL
-        that the user should visit to authenticate, or indicate that Personal Access
-        Tokens are supported.
+        particular host, e.g. an SCM system.
+
+        If not, this function will return a URL that the user should visit to
+        authenticate, or indicate that Personal Access Tokens are supported.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -740,10 +840,10 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerCreateRunnerTokenResponse:
-        """CreateRunnerToken returns a token that can be used to authenticate as the
-        runner.
+        """
+        CreateRunnerToken returns a token that can be used to authenticate as the
 
-        Use this call to renew an outdated token - this does not expire any
+        runner. Use this call to renew an outdated token - this does not expire any
         previouly issued tokens.
 
         Args:
@@ -1005,6 +1105,9 @@ class RunnersResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             runners.create,
         )
+        self.retrieve = to_raw_response_wrapper(
+            runners.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             runners.list,
         )
@@ -1038,6 +1141,9 @@ class AsyncRunnersResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             runners.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            runners.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
             runners.list,
@@ -1073,6 +1179,9 @@ class RunnersResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             runners.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            runners.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             runners.list,
         )
@@ -1106,6 +1215,9 @@ class AsyncRunnersResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             runners.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            runners.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
             runners.list,
