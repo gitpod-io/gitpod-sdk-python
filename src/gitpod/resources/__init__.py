@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .tasks import (
-    TasksResource,
-    AsyncTasksResource,
-    TasksResourceWithRawResponse,
-    AsyncTasksResourceWithRawResponse,
-    TasksResourceWithStreamingResponse,
-    AsyncTasksResourceWithStreamingResponse,
-)
 from .editors import (
     EditorsResource,
     AsyncEditorsResource,
@@ -31,14 +23,6 @@ from .projects import (
     AsyncProjectsResourceWithRawResponse,
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
-)
-from .services import (
-    ServicesResource,
-    AsyncServicesResource,
-    ServicesResourceWithRawResponse,
-    AsyncServicesResourceWithRawResponse,
-    ServicesResourceWithStreamingResponse,
-    AsyncServicesResourceWithStreamingResponse,
 )
 from .environments import (
     EnvironmentsResource,
@@ -72,14 +56,6 @@ from .environment_classes import (
     EnvironmentClassesResourceWithStreamingResponse,
     AsyncEnvironmentClassesResourceWithStreamingResponse,
 )
-from .runner_interactions import (
-    RunnerInteractionsResource,
-    AsyncRunnerInteractionsResource,
-    RunnerInteractionsResourceWithRawResponse,
-    AsyncRunnerInteractionsResourceWithRawResponse,
-    RunnerInteractionsResourceWithStreamingResponse,
-    AsyncRunnerInteractionsResourceWithStreamingResponse,
-)
 from .runner_configurations import (
     RunnerConfigurationsResource,
     AsyncRunnerConfigurationsResource,
@@ -96,46 +72,20 @@ from .personal_access_tokens import (
     PersonalAccessTokensResourceWithStreamingResponse,
     AsyncPersonalAccessTokensResourceWithStreamingResponse,
 )
-from .environment_automations import (
-    EnvironmentAutomationsResource,
-    AsyncEnvironmentAutomationsResource,
-    EnvironmentAutomationsResourceWithRawResponse,
-    AsyncEnvironmentAutomationsResourceWithRawResponse,
-    EnvironmentAutomationsResourceWithStreamingResponse,
-    AsyncEnvironmentAutomationsResourceWithStreamingResponse,
-)
 
 __all__ = [
-    "ServicesResource",
-    "AsyncServicesResource",
-    "ServicesResourceWithRawResponse",
-    "AsyncServicesResourceWithRawResponse",
-    "ServicesResourceWithStreamingResponse",
-    "AsyncServicesResourceWithStreamingResponse",
     "AutomationsFilesResource",
     "AsyncAutomationsFilesResource",
     "AutomationsFilesResourceWithRawResponse",
     "AsyncAutomationsFilesResourceWithRawResponse",
     "AutomationsFilesResourceWithStreamingResponse",
     "AsyncAutomationsFilesResourceWithStreamingResponse",
-    "TasksResource",
-    "AsyncTasksResource",
-    "TasksResourceWithRawResponse",
-    "AsyncTasksResourceWithRawResponse",
-    "TasksResourceWithStreamingResponse",
-    "AsyncTasksResourceWithStreamingResponse",
     "EditorsResource",
     "AsyncEditorsResource",
     "EditorsResourceWithRawResponse",
     "AsyncEditorsResourceWithRawResponse",
     "EditorsResourceWithStreamingResponse",
     "AsyncEditorsResourceWithStreamingResponse",
-    "EnvironmentAutomationsResource",
-    "AsyncEnvironmentAutomationsResource",
-    "EnvironmentAutomationsResourceWithRawResponse",
-    "AsyncEnvironmentAutomationsResourceWithRawResponse",
-    "EnvironmentAutomationsResourceWithStreamingResponse",
-    "AsyncEnvironmentAutomationsResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",
@@ -166,12 +116,6 @@ __all__ = [
     "AsyncRunnerConfigurationsResourceWithRawResponse",
     "RunnerConfigurationsResourceWithStreamingResponse",
     "AsyncRunnerConfigurationsResourceWithStreamingResponse",
-    "RunnerInteractionsResource",
-    "AsyncRunnerInteractionsResource",
-    "RunnerInteractionsResourceWithRawResponse",
-    "AsyncRunnerInteractionsResourceWithRawResponse",
-    "RunnerInteractionsResourceWithStreamingResponse",
-    "AsyncRunnerInteractionsResourceWithStreamingResponse",
     "RunnersResource",
     "AsyncRunnersResource",
     "RunnersResourceWithRawResponse",
