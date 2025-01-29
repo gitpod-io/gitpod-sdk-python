@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import projects, environment_classes, personal_access_tokens
+from .resources import identity, projects, environment_classes, personal_access_tokens
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -41,6 +41,7 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Gitpod", "
 
 
 class Gitpod(SyncAPIClient):
+    identity: identity.IdentityResource
     environments: environments.EnvironmentsResource
     environment_classes: environment_classes.EnvironmentClassesResource
     organizations: organizations.OrganizationsResource
@@ -105,6 +106,7 @@ class Gitpod(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.identity = identity.IdentityResource(self)
         self.environments = environments.EnvironmentsResource(self)
         self.environment_classes = environment_classes.EnvironmentClassesResource(self)
         self.organizations = organizations.OrganizationsResource(self)
@@ -221,6 +223,7 @@ class Gitpod(SyncAPIClient):
 
 
 class AsyncGitpod(AsyncAPIClient):
+    identity: identity.AsyncIdentityResource
     environments: environments.AsyncEnvironmentsResource
     environment_classes: environment_classes.AsyncEnvironmentClassesResource
     organizations: organizations.AsyncOrganizationsResource
@@ -285,6 +288,7 @@ class AsyncGitpod(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.identity = identity.AsyncIdentityResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
@@ -402,6 +406,7 @@ class AsyncGitpod(AsyncAPIClient):
 
 class GitpodWithRawResponse:
     def __init__(self, client: Gitpod) -> None:
+        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithRawResponse(
             client.environment_classes
@@ -419,6 +424,7 @@ class GitpodWithRawResponse:
 
 class AsyncGitpodWithRawResponse:
     def __init__(self, client: AsyncGitpod) -> None:
+        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithRawResponse(
             client.environment_classes
@@ -436,6 +442,7 @@ class AsyncGitpodWithRawResponse:
 
 class GitpodWithStreamedResponse:
     def __init__(self, client: Gitpod) -> None:
+        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
         self.environment_classes = environment_classes.EnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
@@ -453,6 +460,7 @@ class GitpodWithStreamedResponse:
 
 class AsyncGitpodWithStreamedResponse:
     def __init__(self, client: AsyncGitpod) -> None:
+        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithStreamingResponse(
             client.environment_classes
