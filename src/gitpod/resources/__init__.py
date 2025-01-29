@@ -16,6 +16,14 @@ from .runners import (
     RunnersResourceWithStreamingResponse,
     AsyncRunnersResourceWithStreamingResponse,
 )
+from .identity import (
+    IdentityResource,
+    AsyncIdentityResource,
+    IdentityResourceWithRawResponse,
+    AsyncIdentityResourceWithRawResponse,
+    IdentityResourceWithStreamingResponse,
+    AsyncIdentityResourceWithStreamingResponse,
+)
 from .projects import (
     ProjectsResource,
     AsyncProjectsResource,
@@ -92,6 +100,12 @@ __all__ = [
     "AsyncEnvironmentsResourceWithRawResponse",
     "EnvironmentsResourceWithStreamingResponse",
     "AsyncEnvironmentsResourceWithStreamingResponse",
+    "IdentityResource",
+    "AsyncIdentityResource",
+    "IdentityResourceWithRawResponse",
+    "AsyncIdentityResourceWithRawResponse",
+    "IdentityResourceWithStreamingResponse",
+    "AsyncIdentityResourceWithStreamingResponse",
     "EnvironmentClassesResource",
     "AsyncEnvironmentClassesResource",
     "EnvironmentClassesResourceWithRawResponse",
