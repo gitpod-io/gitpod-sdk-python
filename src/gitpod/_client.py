@@ -26,7 +26,7 @@ from ._utils import (
 from ._version import __version__
 from .resources import projects, environment_classes, personal_access_tokens
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError
+from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -52,10 +52,12 @@ class Gitpod(SyncAPIClient):
     with_streaming_response: GitpodWithStreamedResponse
 
     # client options
+    bearer_token: str
 
     def __init__(
         self,
         *,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -75,7 +77,18 @@ class Gitpod(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous gitpod client instance."""
+        """Construct a new synchronous gitpod client instance.
+
+        This automatically infers the `bearer_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
+        """
+        if bearer_token is None:
+            bearer_token = os.environ.get("GITPOD_API_KEY")
+        if bearer_token is None:
+            raise GitpodError(
+                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the GITPOD_API_KEY environment variable"
+            )
+        self.bearer_token = bearer_token
+
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
@@ -109,6 +122,12 @@ class Gitpod(SyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -119,6 +138,7 @@ class Gitpod(SyncAPIClient):
     def copy(
         self,
         *,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -152,6 +172,7 @@ class Gitpod(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
+            bearer_token=bearer_token or self.bearer_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -211,10 +232,12 @@ class AsyncGitpod(AsyncAPIClient):
     with_streaming_response: AsyncGitpodWithStreamedResponse
 
     # client options
+    bearer_token: str
 
     def __init__(
         self,
         *,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -234,7 +257,18 @@ class AsyncGitpod(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async gitpod client instance."""
+        """Construct a new async gitpod client instance.
+
+        This automatically infers the `bearer_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
+        """
+        if bearer_token is None:
+            bearer_token = os.environ.get("GITPOD_API_KEY")
+        if bearer_token is None:
+            raise GitpodError(
+                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the GITPOD_API_KEY environment variable"
+            )
+        self.bearer_token = bearer_token
+
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
         if base_url is None:
@@ -268,6 +302,12 @@ class AsyncGitpod(AsyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        bearer_token = self.bearer_token
+        return {"Authorization": f"Bearer {bearer_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -278,6 +318,7 @@ class AsyncGitpod(AsyncAPIClient):
     def copy(
         self,
         *,
+        bearer_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -311,6 +352,7 @@ class AsyncGitpod(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
+            bearer_token=bearer_token or self.bearer_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
