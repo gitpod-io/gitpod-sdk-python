@@ -272,6 +272,7 @@ class TestRunnerInteractions:
                         "authenticated": True,
                         "authentication_url": "authenticationUrl",
                         "pat_supported": True,
+                        "scm_id": "scmId",
                     }
                 },
                 "callParseContext": {
@@ -511,6 +512,7 @@ class TestRunnerInteractions:
                         "value": "value",
                     }
                 ],
+                "capabilities": ["RUNNER_CAPABILITY_UNSPECIFIED"],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",
@@ -802,6 +804,7 @@ class TestAsyncRunnerInteractions:
                         "authenticated": True,
                         "authentication_url": "authenticationUrl",
                         "pat_supported": True,
+                        "scm_id": "scmId",
                     }
                 },
                 "callParseContext": {
@@ -1041,6 +1044,7 @@ class TestAsyncRunnerInteractions:
                         "value": "value",
                     }
                 ],
+                "capabilities": ["RUNNER_CAPABILITY_UNSPECIFIED"],
                 "degredationMessage": "degredationMessage",
                 "logUrl": "https://example.com",
                 "region": "region",

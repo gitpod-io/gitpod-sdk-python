@@ -18,6 +18,9 @@ class Member(BaseModel):
 
     full_name: Optional[str] = FieldInfo(alias="fullName", default=None)
 
+    login_provider: Optional[str] = FieldInfo(alias="loginProvider", default=None)
+    """login_provider is the login provider the user uses to sign in"""
+
     member_since: Optional[datetime] = FieldInfo(alias="memberSince", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local

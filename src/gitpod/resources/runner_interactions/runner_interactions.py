@@ -289,8 +289,11 @@ class RunnerInteractionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerInteractionListRunnerScmIntegrationsResponse:
-        """
-        ListRunnerSCMIntegrations
+        """ListRunnerSCMIntegrations returns the SCM integrations configured for the
+        runner.
+
+        For local runners, this returns the SCM integrations configured on the
+        organization's local-configuration runner.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
@@ -826,8 +829,11 @@ class AsyncRunnerInteractionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerInteractionListRunnerScmIntegrationsResponse:
-        """
-        ListRunnerSCMIntegrations
+        """ListRunnerSCMIntegrations returns the SCM integrations configured for the
+        runner.
+
+        For local runners, this returns the SCM integrations configured on the
+        organization's local-configuration runner.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol

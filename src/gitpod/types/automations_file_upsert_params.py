@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Dict, List, Union
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -71,6 +71,8 @@ class AutomationsFileServices(TypedDict, total=False):
 
     name: str
 
+    runs_on: Annotated[Union[object, object], PropertyInfo(alias="runsOn")]
+
     triggered_by: Annotated[List[str], PropertyInfo(alias="triggeredBy")]
 
 
@@ -82,6 +84,8 @@ class AutomationsFileTasks(TypedDict, total=False):
     description: str
 
     name: str
+
+    runs_on: Annotated[Union[object, object], PropertyInfo(alias="runsOn")]
 
     triggered_by: Annotated[List[str], PropertyInfo(alias="triggeredBy")]
 

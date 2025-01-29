@@ -38,6 +38,7 @@ class TestAutomationsFiles:
                         },
                         "description": "description",
                         "name": "x",
+                        "runs_on": {},
                         "triggered_by": ["string"],
                     }
                 },
@@ -47,6 +48,7 @@ class TestAutomationsFiles:
                         "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
+                        "runs_on": {},
                         "triggered_by": ["string"],
                     }
                 },
@@ -105,6 +107,7 @@ class TestAsyncAutomationsFiles:
                         },
                         "description": "description",
                         "name": "x",
+                        "runs_on": {},
                         "triggered_by": ["string"],
                     }
                 },
@@ -114,6 +117,7 @@ class TestAsyncAutomationsFiles:
                         "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
+                        "runs_on": {},
                         "triggered_by": ["string"],
                     }
                 },

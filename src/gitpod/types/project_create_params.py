@@ -22,13 +22,21 @@ class ProjectCreateParams(TypedDict, total=False):
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file relative to the repo
-    root
+    root path must not be absolute (start with a /):
+
+    ```
+    this.matches('^$|^[^/].*')
+    ```
     """
 
     devcontainer_file_path: Annotated[str, PropertyInfo(alias="devcontainerFilePath")]
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
-    root
+    root path must not be absolute (start with a /):
+
+    ```
+    this.matches('^$|^[^/].*')
+    ```
     """
 
     name: str

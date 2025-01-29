@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import List, Union, Iterable
+from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -10,6 +11,7 @@ from ..._utils import PropertyInfo
 __all__ = [
     "EnvironmentUpdateStatusParams",
     "Status",
+    "StatusActivitySignal",
     "StatusAutomationsFile",
     "StatusContent",
     "StatusContentGit",
@@ -41,6 +43,107 @@ class EnvironmentUpdateStatusParams(TypedDict, total=False):
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
+
+
+class StatusActivitySignal(TypedDict, total=False):
+    source: str
+    """
+    source of the activity signal, such as "VS Code", "SSH", or "Automations". It
+    should be a human-readable string that describes the source of the activity
+    signal.
+    """
+
+    timestamp: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    A Timestamp represents a point in time independent of any time zone or local
+    calendar, encoded as a count of seconds and fractions of seconds at nanosecond
+    resolution. The count is relative to an epoch at UTC midnight on January 1,
+    1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
+    backwards to year one.
+
+    All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap
+    second table is needed for interpretation, using a
+    [24-hour linear smear](https://developers.google.com/time/smear).
+
+    The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+    restricting to that range, we ensure that we can convert to and from
+    [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+
+    # Examples
+
+    Example 1: Compute Timestamp from POSIX `time()`.
+
+         Timestamp timestamp;
+         timestamp.set_seconds(time(NULL));
+         timestamp.set_nanos(0);
+
+    Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+         struct timeval tv;
+         gettimeofday(&tv, NULL);
+
+         Timestamp timestamp;
+         timestamp.set_seconds(tv.tv_sec);
+         timestamp.set_nanos(tv.tv_usec * 1000);
+
+    Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+         FILETIME ft;
+         GetSystemTimeAsFileTime(&ft);
+         UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+         // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+         // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+         Timestamp timestamp;
+         timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
+         timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+    Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+         long millis = System.currentTimeMillis();
+
+         Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+             .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+    Example 5: Compute Timestamp from Java `Instant.now()`.
+
+         Instant now = Instant.now();
+
+         Timestamp timestamp =
+             Timestamp.newBuilder().setSeconds(now.getEpochSecond())
+                 .setNanos(now.getNano()).build();
+
+    Example 6: Compute Timestamp from current time in Python.
+
+         timestamp = Timestamp()
+         timestamp.GetCurrentTime()
+
+    # JSON Mapping
+
+    In JSON format, the Timestamp type is encoded as a string in the
+    [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the format is
+    "{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z" where {year} is always
+    expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are
+    zero-padded to two digits each. The fractional seconds, which can go up to 9
+    digits (i.e. up to 1 nanosecond resolution), are optional. The "Z" suffix
+    indicates the timezone ("UTC"); the timezone is required. A proto3 JSON
+    serializer should always use UTC (as indicated by "Z") when printing the
+    Timestamp type and a proto3 JSON parser should be able to accept both UTC and
+    other timezones (as indicated by an offset).
+
+    For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on
+    January 15, 2017.
+
+    In JavaScript, one can convert a Date object to this format using the standard
+    [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+    method. In Python, a standard `datetime.datetime` object can be converted to
+    this format using
+    [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the
+    time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the
+    Joda Time's
+    [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
+    to obtain a formatter capable of generating timestamps in this format.
+    """
 
 
 class StatusAutomationsFile(TypedDict, total=False):
@@ -295,7 +398,7 @@ class StatusMachine(TypedDict, total=False):
 class StatusRunnerAck(TypedDict, total=False):
     message: str
 
-    spec_version: Annotated[Union[str, float], PropertyInfo(alias="specVersion")]
+    spec_version: Annotated[Union[int, str], PropertyInfo(alias="specVersion")]
 
     status_code: Annotated[
         Literal[
@@ -323,6 +426,9 @@ class StatusSecret(TypedDict, total=False):
 
     secret_name: Annotated[str, PropertyInfo(alias="secretName")]
 
+    session: str
+    """session is the session that is currently active in the environment."""
+
     warning_message: Annotated[str, PropertyInfo(alias="warningMessage")]
     """warning_message contains warnings, e.g.
 
@@ -346,6 +452,9 @@ class StatusSSHPublicKey(TypedDict, total=False):
 
 
 class Status(TypedDict, total=False):
+    activity_signal: Annotated[StatusActivitySignal, PropertyInfo(alias="activitySignal")]
+    """EnvironmentActivitySignal used to signal activity for an environment."""
+
     automations_file: Annotated[StatusAutomationsFile, PropertyInfo(alias="automationsFile")]
     """automations_file contains the status of the automations file."""
 
@@ -399,13 +508,13 @@ class Status(TypedDict, total=False):
     ssh_public_keys: Annotated[Iterable[StatusSSHPublicKey], PropertyInfo(alias="sshPublicKeys")]
     """ssh_public_keys contains the status of the environment ssh public keys"""
 
-    status_version: Annotated[Union[str, float], PropertyInfo(alias="statusVersion")]
+    status_version: Annotated[Union[int, str], PropertyInfo(alias="statusVersion")]
     """version of the status update.
 
-    Environment instances themselves are unversioned, but their statuus has
-    different versions. The value of this field has no semantic meaning (e.g. don't
-    interpret it as as a timestemp), but it can be used to impose a partial order.
-    If a.status_version < b.status_version then a was the status before b.
+    Environment instances themselves are unversioned, but their status has different
+    versions. The value of this field has no semantic meaning (e.g. don't interpret
+    it as as a timestamp), but it can be used to impose a partial order. If
+    a.status_version < b.status_version then a was the status before b.
     """
 
     warning_message: Annotated[List[str], PropertyInfo(alias="warningMessage")]

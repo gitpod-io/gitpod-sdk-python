@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -162,6 +162,9 @@ class TaskMetadata(BaseModel):
 class TaskSpec(BaseModel):
     command: Optional[str] = None
     """command contains the command the task should execute"""
+
+    runs_on: Union[object, object, None] = FieldInfo(alias="runsOn", default=None)
+    """runs_on specifies the environment the task should run on."""
 
 
 class Task(BaseModel):

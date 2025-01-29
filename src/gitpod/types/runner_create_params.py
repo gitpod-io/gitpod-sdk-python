@@ -13,7 +13,9 @@ class RunnerCreateParams(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    kind: Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE"]
+    kind: Literal[
+        "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
+    ]
     """RunnerKind represents the kind of a runner"""
 
     name: str

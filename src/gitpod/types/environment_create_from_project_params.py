@@ -43,7 +43,12 @@ class SpecAutomationsFile(TypedDict, total=False):
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
-    environment, relative to the repo root.
+    environment, relative to the repo root. path must not be absolute (start with a
+    /):
+
+    ```
+    this.matches('^$|^[^/].*')
+    ```
     """
 
     session: str
@@ -74,7 +79,11 @@ class SpecDevcontainer(TypedDict, total=False):
     devcontainer_file_path: Annotated[str, PropertyInfo(alias="devcontainerFilePath")]
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
-    root
+    root path must not be absolute (start with a /):
+
+    ```
+    this.matches('^$|^[^/].*')
+    ```
     """
 
     session: str
@@ -217,7 +226,7 @@ class Spec(TypedDict, total=False):
     secrets: Iterable[SpecSecret]
     """secrets are confidential data that is mounted into the environment"""
 
-    spec_version: Annotated[Union[str, float], PropertyInfo(alias="specVersion")]
+    spec_version: Annotated[Union[int, str], PropertyInfo(alias="specVersion")]
     """version of the spec.
 
     The value of this field has no semantic meaning (e.g. don't interpret it as as a

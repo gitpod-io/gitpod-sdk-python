@@ -80,11 +80,12 @@ class TestEnvironments:
                         "filePath": "filePath",
                         "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
+                        "session": "session",
                         "source": "source",
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": "string",
+                "spec_version": 0,
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -176,6 +177,7 @@ class TestEnvironments:
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -270,11 +272,12 @@ class TestEnvironments:
                         "filePath": "filePath",
                         "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
+                        "session": "session",
                         "source": "source",
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": "string",
+                "spec_version": 0,
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -413,11 +416,12 @@ class TestAsyncEnvironments:
                         "filePath": "filePath",
                         "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
+                        "session": "session",
                         "source": "source",
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": "string",
+                "spec_version": 0,
                 "ssh_public_keys": [
                     {
                         "id": "id",
@@ -509,6 +513,7 @@ class TestAsyncEnvironments:
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -603,11 +608,12 @@ class TestAsyncEnvironments:
                         "filePath": "filePath",
                         "gitCredentialHost": "gitCredentialHost",
                         "name": "name",
+                        "session": "session",
                         "source": "source",
                         "sourceRef": "sourceRef",
                     }
                 ],
-                "spec_version": "string",
+                "spec_version": 0,
                 "ssh_public_keys": [
                     {
                         "id": "id",
