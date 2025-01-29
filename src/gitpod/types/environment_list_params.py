@@ -44,6 +44,19 @@ class Filter(TypedDict, total=False):
     runner_ids filters the response to only Environments running on these Runner IDs
     """
 
+    runner_kinds: Annotated[
+        List[
+            Literal[
+                "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
+            ]
+        ],
+        PropertyInfo(alias="runnerKinds"),
+    ]
+    """
+    runner_kinds filters the response to only Environments running on these Runner
+    Kinds
+    """
+
     status_phases: Annotated[
         List[
             Literal[

@@ -9,12 +9,8 @@ from .environment_class_update_params import EnvironmentClassUpdateParams as Env
 from .scm_integration_create_response import ScmIntegrationCreateResponse as ScmIntegrationCreateResponse
 from .configuration_schema_create_params import ConfigurationSchemaCreateParams as ConfigurationSchemaCreateParams
 from .configuration_schema_create_response import ConfigurationSchemaCreateResponse as ConfigurationSchemaCreateResponse
-from .configuration_schema_retrieve_params import ConfigurationSchemaRetrieveParams as ConfigurationSchemaRetrieveParams
 from .host_authentication_token_list_params import (
     HostAuthenticationTokenListParams as HostAuthenticationTokenListParams,
-)
-from .configuration_schema_retrieve_response import (
-    ConfigurationSchemaRetrieveResponse as ConfigurationSchemaRetrieveResponse,
 )
 from .host_authentication_token_create_params import (
     HostAuthenticationTokenCreateParams as HostAuthenticationTokenCreateParams,
@@ -30,10 +26,4 @@ from .host_authentication_token_update_params import (
 )
 from .host_authentication_token_create_response import (
     HostAuthenticationTokenCreateResponse as HostAuthenticationTokenCreateResponse,
-)
-from .host_authentication_token_retrieve_params import (
-    HostAuthenticationTokenRetrieveParams as HostAuthenticationTokenRetrieveParams,
-)
-from .host_authentication_token_retrieve_response import (
-    HostAuthenticationTokenRetrieveResponse as HostAuthenticationTokenRetrieveResponse,
 )

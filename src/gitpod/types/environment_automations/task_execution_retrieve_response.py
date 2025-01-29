@@ -365,10 +365,10 @@ class TaskExecutionStatusStep(BaseModel):
     """ID is the ID of the execution step"""
 
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
-    """failure_message summarises why the environment failed to operate.
+    """failure_message summarises why the step failed to operate.
 
-    If this is non-empty the environment has failed to operate and will likely
-    transition to a stopped state.
+    If this is non-empty the step has failed to operate and will likely transition
+    to a failed state.
     """
 
     phase: Optional[
@@ -381,18 +381,15 @@ class TaskExecutionStatusStep(BaseModel):
             "TASK_EXECUTION_PHASE_STOPPED",
         ]
     ] = None
-    """
-    the phase of a environment is a simple, high-level summary of where the
-    environment is in its lifecycle
-    """
+    """phase is the current phase of the execution step"""
 
 
 class TaskExecutionStatus(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
-    """failure_message summarises why the environment failed to operate.
+    """failure_message summarises why the task execution failed to operate.
 
-    If this is non-empty the environment has failed to operate and will likely
-    transition to a stopped state.
+    If this is non-empty the task execution has failed to operate and will likely
+    transition to a failed state.
     """
 
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
@@ -411,18 +408,15 @@ class TaskExecutionStatus(BaseModel):
             "TASK_EXECUTION_PHASE_STOPPED",
         ]
     ] = None
-    """
-    the phase of a environment is a simple, high-level summary of where the
-    environment is in its lifecycle
-    """
+    """the phase of a task execution represents the aggregated phase of all steps."""
 
-    status_version: Union[str, float, None] = FieldInfo(alias="statusVersion", default=None)
+    status_version: Union[int, str, None] = FieldInfo(alias="statusVersion", default=None)
     """version of the status update.
 
-    Environment instances themselves are unversioned, but their statuus has
-    different versions. The value of this field has no semantic meaning (e.g. don't
-    interpret it as as a timestemp), but it can be used to impose a partial order.
-    If a.status_version < b.status_version then a was the status before b.
+    Task executions themselves are unversioned, but their status has different
+    versions. The value of this field has no semantic meaning (e.g. don't interpret
+    it as as a timestamp), but it can be used to impose a partial order. If
+    a.status_version < b.status_version then a was the status before b.
     """
 
     steps: Optional[List[TaskExecutionStatusStep]] = None

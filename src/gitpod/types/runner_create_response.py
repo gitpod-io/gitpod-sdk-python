@@ -84,6 +84,11 @@ class RunnerStatus(BaseModel):
     a CloudFormation stack URL.
     """
 
+    capabilities: Optional[
+        List[Literal["RUNNER_CAPABILITY_UNSPECIFIED", "RUNNER_CAPABILITY_FETCH_LOCAL_SCM_INTEGRATIONS"]]
+    ] = None
+    """capabilities is a list of capabilities the runner supports."""
+
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
 
     message: Optional[str] = None
@@ -301,7 +306,9 @@ class Runner(BaseModel):
     creator: Optional[RunnerCreator] = None
     """creator is the identity of the creator of the environment"""
 
-    kind: Optional[Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE"]] = None
+    kind: Optional[
+        Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"]
+    ] = None
     """RunnerKind represents the kind of a runner"""
 
     name: Optional[str] = None

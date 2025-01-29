@@ -8,6 +8,14 @@ from .tasks import (
     TasksResourceWithStreamingResponse,
     AsyncTasksResourceWithStreamingResponse,
 )
+from .editors import (
+    EditorsResource,
+    AsyncEditorsResource,
+    EditorsResourceWithRawResponse,
+    AsyncEditorsResourceWithRawResponse,
+    EditorsResourceWithStreamingResponse,
+    AsyncEditorsResourceWithStreamingResponse,
+)
 from .runners import (
     RunnersResource,
     AsyncRunnersResource,
@@ -116,6 +124,12 @@ __all__ = [
     "AsyncTasksResourceWithRawResponse",
     "TasksResourceWithStreamingResponse",
     "AsyncTasksResourceWithStreamingResponse",
+    "EditorsResource",
+    "AsyncEditorsResource",
+    "EditorsResourceWithRawResponse",
+    "AsyncEditorsResourceWithRawResponse",
+    "EditorsResourceWithStreamingResponse",
+    "AsyncEditorsResourceWithStreamingResponse",
     "EnvironmentAutomationsResource",
     "AsyncEnvironmentAutomationsResource",
     "EnvironmentAutomationsResourceWithRawResponse",

@@ -26,6 +26,7 @@ from ._utils import (
 from ._version import __version__
 from .resources import (
     tasks,
+    editors,
     projects,
     services,
     environments,
@@ -53,6 +54,7 @@ class Gitpod(SyncAPIClient):
     services: services.ServicesResource
     automations_files: automations_files.AutomationsFilesResource
     tasks: tasks.TasksResource
+    editors: editors.EditorsResource
     environment_automations: environment_automations.EnvironmentAutomationsResource
     environments: environments.EnvironmentsResource
     environment_classes: environment_classes.EnvironmentClassesResource
@@ -109,6 +111,7 @@ class Gitpod(SyncAPIClient):
         self.services = services.ServicesResource(self)
         self.automations_files = automations_files.AutomationsFilesResource(self)
         self.tasks = tasks.TasksResource(self)
+        self.editors = editors.EditorsResource(self)
         self.environment_automations = environment_automations.EnvironmentAutomationsResource(self)
         self.environments = environments.EnvironmentsResource(self)
         self.environment_classes = environment_classes.EnvironmentClassesResource(self)
@@ -222,6 +225,7 @@ class AsyncGitpod(AsyncAPIClient):
     services: services.AsyncServicesResource
     automations_files: automations_files.AsyncAutomationsFilesResource
     tasks: tasks.AsyncTasksResource
+    editors: editors.AsyncEditorsResource
     environment_automations: environment_automations.AsyncEnvironmentAutomationsResource
     environments: environments.AsyncEnvironmentsResource
     environment_classes: environment_classes.AsyncEnvironmentClassesResource
@@ -278,6 +282,7 @@ class AsyncGitpod(AsyncAPIClient):
         self.services = services.AsyncServicesResource(self)
         self.automations_files = automations_files.AsyncAutomationsFilesResource(self)
         self.tasks = tasks.AsyncTasksResource(self)
+        self.editors = editors.AsyncEditorsResource(self)
         self.environment_automations = environment_automations.AsyncEnvironmentAutomationsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
         self.environment_classes = environment_classes.AsyncEnvironmentClassesResource(self)
@@ -392,6 +397,7 @@ class GitpodWithRawResponse:
         self.services = services.ServicesResourceWithRawResponse(client.services)
         self.automations_files = automations_files.AutomationsFilesResourceWithRawResponse(client.automations_files)
         self.tasks = tasks.TasksResourceWithRawResponse(client.tasks)
+        self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environment_automations = environment_automations.EnvironmentAutomationsResourceWithRawResponse(
             client.environment_automations
         )
@@ -420,6 +426,7 @@ class AsyncGitpodWithRawResponse:
             client.automations_files
         )
         self.tasks = tasks.AsyncTasksResourceWithRawResponse(client.tasks)
+        self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environment_automations = environment_automations.AsyncEnvironmentAutomationsResourceWithRawResponse(
             client.environment_automations
         )
@@ -448,6 +455,7 @@ class GitpodWithStreamedResponse:
             client.automations_files
         )
         self.tasks = tasks.TasksResourceWithStreamingResponse(client.tasks)
+        self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environment_automations = environment_automations.EnvironmentAutomationsResourceWithStreamingResponse(
             client.environment_automations
         )
@@ -476,6 +484,7 @@ class AsyncGitpodWithStreamedResponse:
             client.automations_files
         )
         self.tasks = tasks.AsyncTasksResourceWithStreamingResponse(client.tasks)
+        self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environment_automations = environment_automations.AsyncEnvironmentAutomationsResourceWithStreamingResponse(
             client.environment_automations
         )

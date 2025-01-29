@@ -27,7 +27,9 @@ class Filter(TypedDict, total=False):
     creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
     """creator_ids filters the response to only runner created by specified users"""
 
-    kinds: List[Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE"]]
+    kinds: List[
+        Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"]
+    ]
     """kinds filters the response to only runners of the specified kinds"""
 
 

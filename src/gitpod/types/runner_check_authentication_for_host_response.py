@@ -15,3 +15,5 @@ class RunnerCheckAuthenticationForHostResponse(BaseModel):
     authentication_url: Optional[str] = FieldInfo(alias="authenticationUrl", default=None)
 
     pat_supported: Optional[bool] = FieldInfo(alias="patSupported", default=None)
+
+    scm_id: Optional[str] = FieldInfo(alias="scmId", default=None)

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["TaskUpdateParams", "Metadata"]
+__all__ = ["TaskUpdateParams", "Metadata", "Spec"]
 
 
 class TaskUpdateParams(TypedDict, total=False):
@@ -21,11 +21,15 @@ class TaskUpdateParams(TypedDict, total=False):
 
     metadata: Metadata
 
-    spec: Union[object, object]
+    spec: Spec
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
 
 
 class Metadata:
+    pass
+
+
+class Spec:
     pass

@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Union
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["ServiceUpdateParams", "Metadata", "Status"]
+__all__ = ["ServiceUpdateParams", "Metadata", "Spec", "Status"]
 
 
 class ServiceUpdateParams(TypedDict, total=False):
@@ -18,7 +17,7 @@ class ServiceUpdateParams(TypedDict, total=False):
 
     metadata: Metadata
 
-    spec: Union[object, object]
+    spec: Spec
     """Changing the spec of a service is a complex operation.
 
     The spec of a service can only be updated if the service is in a stopped state.
@@ -37,6 +36,10 @@ class ServiceUpdateParams(TypedDict, total=False):
 
 
 class Metadata:
+    pass
+
+
+class Spec:
     pass
 
 

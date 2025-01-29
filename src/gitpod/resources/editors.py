@@ -6,12 +6,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import (
-    service_stop_params,
-    service_start_params,
-    service_delete_params,
-    service_update_params,
-)
+from ..types import editor_list_params, editor_retrieve_params, editor_resolve_editor_url_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     is_given,
@@ -28,38 +23,38 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.editor_list_response import EditorListResponse
+from ..types.editor_retrieve_response import EditorRetrieveResponse
+from ..types.editor_resolve_editor_url_response import EditorResolveEditorURLResponse
 
-__all__ = ["ServicesResource", "AsyncServicesResource"]
+__all__ = ["EditorsResource", "AsyncEditorsResource"]
 
 
-class ServicesResource(SyncAPIResource):
+class EditorsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ServicesResourceWithRawResponse:
+    def with_raw_response(self) -> EditorsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#accessing-raw-response-data-eg-headers
         """
-        return ServicesResourceWithRawResponse(self)
+        return EditorsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ServicesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> EditorsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#with_streaming_response
         """
-        return ServicesResourceWithStreamingResponse(self)
+        return EditorsResourceWithStreamingResponse(self)
 
-    def update(
+    def retrieve(
         self,
         *,
         connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        metadata: service_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: service_update_params.Spec | NotGiven = NOT_GIVEN,
-        status: service_update_params.Status | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -67,20 +62,14 @@ class ServicesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EditorRetrieveResponse:
         """
-        UpdateService
+        GetEditor returns the editor with the given ID
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          spec: Changing the spec of a service is a complex operation. The spec of a service can
-              only be updated if the service is in a stopped state. If the service is running,
-              it must be stopped first.
-
-          status: Service status updates are only expected from the executing environment. As a
-              client of this API you are not expected to provide this field. Updating this
-              field requires the `environmentservice:update_status` permission.
+          id: id is the ID of the editor to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -102,207 +91,151 @@ class ServicesResource(SyncAPIResource):
             **(extra_headers or {}),
         }
         return self._post(
-            "/gitpod.v1.EnvironmentAutomationService/UpdateService",
+            "/gitpod.v1.EditorService/GetEditor",
+            body=maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EditorRetrieveResponse,
+        )
+
+    def list(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EditorListResponse:
+        """
+        ListEditors lists all editors available to the caller
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          pagination: pagination contains the pagination options for listing environments
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.EditorService/ListEditors",
+            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EditorListResponse,
+        )
+
+    def resolve_editor_url(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        editor_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EditorResolveEditorURLResponse:
+        """
+        ResolveEditorURL resolves the editor's URL for an environment
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          editor_id: editorId is the ID of the editor to resolve the URL for
+
+          environment_id: environmentId is the ID of the environment to resolve the URL for
+
+          organization_id: organizationId is the ID of the organization to resolve the URL for
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.EditorService/ResolveEditorURL",
             body=maybe_transform(
                 {
-                    "id": id,
-                    "metadata": metadata,
-                    "spec": spec,
-                    "status": status,
+                    "editor_id": editor_id,
+                    "environment_id": environment_id,
+                    "organization_id": organization_id,
                 },
-                service_update_params.ServiceUpdateParams,
+                editor_resolve_editor_url_params.EditorResolveEditorURLParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
-        )
-
-    def delete(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        force: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """DeleteService deletes a service.
-
-        This call does not block until the service is
-        deleted. If the service is not stopped it will be stopped before deletion.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._post(
-            "/gitpod.v1.EnvironmentAutomationService/DeleteService",
-            body=maybe_transform(
-                {
-                    "id": id,
-                    "force": force,
-                },
-                service_delete_params.ServiceDeleteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    def start(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """StartService starts a service.
-
-        This call does not block until the service is
-        started. This call will not error if the service is already running or has been
-        started.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._post(
-            "/gitpod.v1.EnvironmentAutomationService/StartService",
-            body=maybe_transform({"id": id}, service_start_params.ServiceStartParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    def stop(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """StopService stops a service.
-
-        This call does not block until the service is
-        stopped. This call will not error if the service is already stopped or has been
-        stopped.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._post(
-            "/gitpod.v1.EnvironmentAutomationService/StopService",
-            body=maybe_transform({"id": id}, service_stop_params.ServiceStopParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
+            cast_to=EditorResolveEditorURLResponse,
         )
 
 
-class AsyncServicesResource(AsyncAPIResource):
+class AsyncEditorsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncServicesResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncEditorsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncServicesResourceWithRawResponse(self)
+        return AsyncEditorsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncServicesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncEditorsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/stainless-sdks/gitpod-python#with_streaming_response
         """
-        return AsyncServicesResourceWithStreamingResponse(self)
+        return AsyncEditorsResourceWithStreamingResponse(self)
 
-    async def update(
+    async def retrieve(
         self,
         *,
         connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        metadata: service_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: service_update_params.Spec | NotGiven = NOT_GIVEN,
-        status: service_update_params.Status | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -310,20 +243,14 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EditorRetrieveResponse:
         """
-        UpdateService
+        GetEditor returns the editor with the given ID
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          spec: Changing the spec of a service is a complex operation. The spec of a service can
-              only be updated if the service is in a stopped state. If the service is running,
-              it must be stopped first.
-
-          status: Service status updates are only expected from the executing environment. As a
-              client of this API you are not expected to provide this field. Updating this
-              field requires the `environmentservice:update_status` permission.
+          id: id is the ID of the editor to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -345,246 +272,181 @@ class AsyncServicesResource(AsyncAPIResource):
             **(extra_headers or {}),
         }
         return await self._post(
-            "/gitpod.v1.EnvironmentAutomationService/UpdateService",
+            "/gitpod.v1.EditorService/GetEditor",
+            body=await async_maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EditorRetrieveResponse,
+        )
+
+    async def list(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EditorListResponse:
+        """
+        ListEditors lists all editors available to the caller
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          pagination: pagination contains the pagination options for listing environments
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.EditorService/ListEditors",
+            body=await async_maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EditorListResponse,
+        )
+
+    async def resolve_editor_url(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        editor_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EditorResolveEditorURLResponse:
+        """
+        ResolveEditorURL resolves the editor's URL for an environment
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          editor_id: editorId is the ID of the editor to resolve the URL for
+
+          environment_id: environmentId is the ID of the environment to resolve the URL for
+
+          organization_id: organizationId is the ID of the organization to resolve the URL for
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.EditorService/ResolveEditorURL",
             body=await async_maybe_transform(
                 {
-                    "id": id,
-                    "metadata": metadata,
-                    "spec": spec,
-                    "status": status,
+                    "editor_id": editor_id,
+                    "environment_id": environment_id,
+                    "organization_id": organization_id,
                 },
-                service_update_params.ServiceUpdateParams,
+                editor_resolve_editor_url_params.EditorResolveEditorURLParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
-        )
-
-    async def delete(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        force: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """DeleteService deletes a service.
-
-        This call does not block until the service is
-        deleted. If the service is not stopped it will be stopped before deletion.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._post(
-            "/gitpod.v1.EnvironmentAutomationService/DeleteService",
-            body=await async_maybe_transform(
-                {
-                    "id": id,
-                    "force": force,
-                },
-                service_delete_params.ServiceDeleteParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    async def start(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """StartService starts a service.
-
-        This call does not block until the service is
-        started. This call will not error if the service is already running or has been
-        started.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._post(
-            "/gitpod.v1.EnvironmentAutomationService/StartService",
-            body=await async_maybe_transform({"id": id}, service_start_params.ServiceStartParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    async def stop(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """StopService stops a service.
-
-        This call does not block until the service is
-        stopped. This call will not error if the service is already stopped or has been
-        stopped.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._post(
-            "/gitpod.v1.EnvironmentAutomationService/StopService",
-            body=await async_maybe_transform({"id": id}, service_stop_params.ServiceStopParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
+            cast_to=EditorResolveEditorURLResponse,
         )
 
 
-class ServicesResourceWithRawResponse:
-    def __init__(self, services: ServicesResource) -> None:
-        self._services = services
+class EditorsResourceWithRawResponse:
+    def __init__(self, editors: EditorsResource) -> None:
+        self._editors = editors
 
-        self.update = to_raw_response_wrapper(
-            services.update,
+        self.retrieve = to_raw_response_wrapper(
+            editors.retrieve,
         )
-        self.delete = to_raw_response_wrapper(
-            services.delete,
+        self.list = to_raw_response_wrapper(
+            editors.list,
         )
-        self.start = to_raw_response_wrapper(
-            services.start,
-        )
-        self.stop = to_raw_response_wrapper(
-            services.stop,
+        self.resolve_editor_url = to_raw_response_wrapper(
+            editors.resolve_editor_url,
         )
 
 
-class AsyncServicesResourceWithRawResponse:
-    def __init__(self, services: AsyncServicesResource) -> None:
-        self._services = services
+class AsyncEditorsResourceWithRawResponse:
+    def __init__(self, editors: AsyncEditorsResource) -> None:
+        self._editors = editors
 
-        self.update = async_to_raw_response_wrapper(
-            services.update,
+        self.retrieve = async_to_raw_response_wrapper(
+            editors.retrieve,
         )
-        self.delete = async_to_raw_response_wrapper(
-            services.delete,
+        self.list = async_to_raw_response_wrapper(
+            editors.list,
         )
-        self.start = async_to_raw_response_wrapper(
-            services.start,
-        )
-        self.stop = async_to_raw_response_wrapper(
-            services.stop,
+        self.resolve_editor_url = async_to_raw_response_wrapper(
+            editors.resolve_editor_url,
         )
 
 
-class ServicesResourceWithStreamingResponse:
-    def __init__(self, services: ServicesResource) -> None:
-        self._services = services
+class EditorsResourceWithStreamingResponse:
+    def __init__(self, editors: EditorsResource) -> None:
+        self._editors = editors
 
-        self.update = to_streamed_response_wrapper(
-            services.update,
+        self.retrieve = to_streamed_response_wrapper(
+            editors.retrieve,
         )
-        self.delete = to_streamed_response_wrapper(
-            services.delete,
+        self.list = to_streamed_response_wrapper(
+            editors.list,
         )
-        self.start = to_streamed_response_wrapper(
-            services.start,
-        )
-        self.stop = to_streamed_response_wrapper(
-            services.stop,
+        self.resolve_editor_url = to_streamed_response_wrapper(
+            editors.resolve_editor_url,
         )
 
 
-class AsyncServicesResourceWithStreamingResponse:
-    def __init__(self, services: AsyncServicesResource) -> None:
-        self._services = services
+class AsyncEditorsResourceWithStreamingResponse:
+    def __init__(self, editors: AsyncEditorsResource) -> None:
+        self._editors = editors
 
-        self.update = async_to_streamed_response_wrapper(
-            services.update,
+        self.retrieve = async_to_streamed_response_wrapper(
+            editors.retrieve,
         )
-        self.delete = async_to_streamed_response_wrapper(
-            services.delete,
+        self.list = async_to_streamed_response_wrapper(
+            editors.list,
         )
-        self.start = async_to_streamed_response_wrapper(
-            services.start,
-        )
-        self.stop = async_to_streamed_response_wrapper(
-            services.stop,
+        self.resolve_editor_url = async_to_streamed_response_wrapper(
+            editors.resolve_editor_url,
         )

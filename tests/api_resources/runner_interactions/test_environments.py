@@ -9,6 +9,7 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
+from gitpod._utils import parse_datetime
 from gitpod.types.runner_interactions import (
     EnvironmentListResponse,
     EnvironmentRetrieveResponse,
@@ -120,6 +121,10 @@ class TestEnvironments:
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status={
+                "activity_signal": {
+                    "source": "xxx",
+                    "timestamp": parse_datetime("2019-12-27T18:11:19.117Z"),
+                },
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "automations_file_presence": "PRESENCE_UNSPECIFIED",
@@ -187,7 +192,7 @@ class TestEnvironments:
                 "phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "runner_ack": {
                     "message": "message",
-                    "spec_version": "string",
+                    "spec_version": 0,
                     "status_code": "STATUS_CODE_UNSPECIFIED",
                 },
                 "secrets": [
@@ -195,6 +200,7 @@ class TestEnvironments:
                         "failure_message": "failureMessage",
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                         "secret_name": "secretName",
+                        "session": "session",
                         "warning_message": "warningMessage",
                     }
                 ],
@@ -204,7 +210,7 @@ class TestEnvironments:
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                     }
                 ],
-                "status_version": "string",
+                "status_version": 0,
                 "warning_message": ["string"],
             },
             connect_timeout_ms=0,
@@ -339,6 +345,10 @@ class TestAsyncEnvironments:
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             status={
+                "activity_signal": {
+                    "source": "xxx",
+                    "timestamp": parse_datetime("2019-12-27T18:11:19.117Z"),
+                },
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "automations_file_presence": "PRESENCE_UNSPECIFIED",
@@ -406,7 +416,7 @@ class TestAsyncEnvironments:
                 "phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "runner_ack": {
                     "message": "message",
-                    "spec_version": "string",
+                    "spec_version": 0,
                     "status_code": "STATUS_CODE_UNSPECIFIED",
                 },
                 "secrets": [
@@ -414,6 +424,7 @@ class TestAsyncEnvironments:
                         "failure_message": "failureMessage",
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                         "secret_name": "secretName",
+                        "session": "session",
                         "warning_message": "warningMessage",
                     }
                 ],
@@ -423,7 +434,7 @@ class TestAsyncEnvironments:
                         "phase": "CONTENT_PHASE_UNSPECIFIED",
                     }
                 ],
-                "status_version": "string",
+                "status_version": 0,
                 "warning_message": ["string"],
             },
             connect_timeout_ms=0,

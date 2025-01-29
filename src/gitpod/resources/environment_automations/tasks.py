@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List
 from typing_extensions import Literal
 
 import httpx
@@ -23,16 +23,9 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.environment_automations import (
-    task_list_params,
-    task_start_params,
-    task_delete_params,
-    task_update_params,
-    task_create_list_params,
-)
+from ...types.environment_automations import task_list_params, task_start_params, task_delete_params, task_update_params
 from ...types.environment_automations.task_list_response import TaskListResponse
 from ...types.environment_automations.task_start_response import TaskStartResponse
-from ...types.environment_automations.task_create_list_response import TaskCreateListResponse
 
 __all__ = ["TasksResource", "AsyncTasksResource"]
 
@@ -64,7 +57,7 @@ class TasksResource(SyncAPIResource):
         id: str | NotGiven = NOT_GIVEN,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: Union[object, object] | NotGiven = NOT_GIVEN,
+        spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -121,11 +114,8 @@ class TasksResource(SyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        base64: str | NotGiven = NOT_GIVEN,
-        compression: str | NotGiven = NOT_GIVEN,
-        connect: str | NotGiven = NOT_GIVEN,
-        encoding: str | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        filter: task_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: task_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -139,6 +129,10 @@ class TasksResource(SyncAPIResource):
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
+
+          filter: filter contains the filter options for listing tasks
+
+          pagination: pagination contains the pagination options for listing tasks
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -159,23 +153,17 @@ class TasksResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._get(
+        return self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                task_list_params.TaskListParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "encoding": encoding,
-                        "message": message,
-                    },
-                    task_list_params.TaskListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TaskListResponse,
         )
@@ -225,64 +213,6 @@ class TasksResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
-        )
-
-    def create_list(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        filter: task_create_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: task_create_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TaskCreateListResponse:
-        """
-        ListTasks
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          filter: filter contains the filter options for listing tasks
-
-          pagination: pagination contains the pagination options for listing tasks
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._post(
-            "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            body=maybe_transform(
-                {
-                    "filter": filter,
-                    "pagination": pagination,
-                },
-                task_create_list_params.TaskCreateListParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=TaskCreateListResponse,
         )
 
     def start(
@@ -362,7 +292,7 @@ class AsyncTasksResource(AsyncAPIResource):
         id: str | NotGiven = NOT_GIVEN,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: Union[object, object] | NotGiven = NOT_GIVEN,
+        spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -419,11 +349,8 @@ class AsyncTasksResource(AsyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        base64: str | NotGiven = NOT_GIVEN,
-        compression: str | NotGiven = NOT_GIVEN,
-        connect: str | NotGiven = NOT_GIVEN,
-        encoding: str | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        filter: task_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: task_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -437,6 +364,10 @@ class AsyncTasksResource(AsyncAPIResource):
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
+
+          filter: filter contains the filter options for listing tasks
+
+          pagination: pagination contains the pagination options for listing tasks
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -457,23 +388,17 @@ class AsyncTasksResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._get(
+        return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
+            body=await async_maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                task_list_params.TaskListParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "encoding": encoding,
-                        "message": message,
-                    },
-                    task_list_params.TaskListParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=TaskListResponse,
         )
@@ -523,64 +448,6 @@ class AsyncTasksResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
-        )
-
-    async def create_list(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        filter: task_create_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: task_create_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TaskCreateListResponse:
-        """
-        ListTasks
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          filter: filter contains the filter options for listing tasks
-
-          pagination: pagination contains the pagination options for listing tasks
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._post(
-            "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            body=await async_maybe_transform(
-                {
-                    "filter": filter,
-                    "pagination": pagination,
-                },
-                task_create_list_params.TaskCreateListParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=TaskCreateListResponse,
         )
 
     async def start(
@@ -646,9 +513,6 @@ class TasksResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             tasks.delete,
         )
-        self.create_list = to_raw_response_wrapper(
-            tasks.create_list,
-        )
         self.start = to_raw_response_wrapper(
             tasks.start,
         )
@@ -666,9 +530,6 @@ class AsyncTasksResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             tasks.delete,
-        )
-        self.create_list = async_to_raw_response_wrapper(
-            tasks.create_list,
         )
         self.start = async_to_raw_response_wrapper(
             tasks.start,
@@ -688,9 +549,6 @@ class TasksResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             tasks.delete,
         )
-        self.create_list = to_streamed_response_wrapper(
-            tasks.create_list,
-        )
         self.start = to_streamed_response_wrapper(
             tasks.start,
         )
@@ -708,9 +566,6 @@ class AsyncTasksResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             tasks.delete,
-        )
-        self.create_list = async_to_streamed_response_wrapper(
-            tasks.create_list,
         )
         self.start = async_to_streamed_response_wrapper(
             tasks.start,
