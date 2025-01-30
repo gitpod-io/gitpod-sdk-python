@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import identity, projects, environment_classes, personal_access_tokens
+from .resources import events, groups, editors, secrets, accounts, identity
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -32,23 +32,27 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.users import users
 from .resources.runners import runners
+from .resources.projects import projects
 from .resources.environments import environments
 from .resources.organizations import organizations
-from .resources.runner_configurations import runner_configurations
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Gitpod", "AsyncGitpod", "Client", "AsyncClient"]
 
 
 class Gitpod(SyncAPIClient):
-    identity: identity.IdentityResource
+    accounts: accounts.AccountsResource
+    editors: editors.EditorsResource
     environments: environments.EnvironmentsResource
-    environment_classes: environment_classes.EnvironmentClassesResource
+    events: events.EventsResource
+    groups: groups.GroupsResource
+    identity: identity.IdentityResource
     organizations: organizations.OrganizationsResource
     projects: projects.ProjectsResource
-    runner_configurations: runner_configurations.RunnerConfigurationsResource
     runners: runners.RunnersResource
-    personal_access_tokens: personal_access_tokens.PersonalAccessTokensResource
+    secrets: secrets.SecretsResource
+    users: users.UsersResource
     with_raw_response: GitpodWithRawResponse
     with_streaming_response: GitpodWithStreamedResponse
 
@@ -106,14 +110,17 @@ class Gitpod(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.identity = identity.IdentityResource(self)
+        self.accounts = accounts.AccountsResource(self)
+        self.editors = editors.EditorsResource(self)
         self.environments = environments.EnvironmentsResource(self)
-        self.environment_classes = environment_classes.EnvironmentClassesResource(self)
+        self.events = events.EventsResource(self)
+        self.groups = groups.GroupsResource(self)
+        self.identity = identity.IdentityResource(self)
         self.organizations = organizations.OrganizationsResource(self)
         self.projects = projects.ProjectsResource(self)
-        self.runner_configurations = runner_configurations.RunnerConfigurationsResource(self)
         self.runners = runners.RunnersResource(self)
-        self.personal_access_tokens = personal_access_tokens.PersonalAccessTokensResource(self)
+        self.secrets = secrets.SecretsResource(self)
+        self.users = users.UsersResource(self)
         self.with_raw_response = GitpodWithRawResponse(self)
         self.with_streaming_response = GitpodWithStreamedResponse(self)
 
@@ -223,14 +230,17 @@ class Gitpod(SyncAPIClient):
 
 
 class AsyncGitpod(AsyncAPIClient):
-    identity: identity.AsyncIdentityResource
+    accounts: accounts.AsyncAccountsResource
+    editors: editors.AsyncEditorsResource
     environments: environments.AsyncEnvironmentsResource
-    environment_classes: environment_classes.AsyncEnvironmentClassesResource
+    events: events.AsyncEventsResource
+    groups: groups.AsyncGroupsResource
+    identity: identity.AsyncIdentityResource
     organizations: organizations.AsyncOrganizationsResource
     projects: projects.AsyncProjectsResource
-    runner_configurations: runner_configurations.AsyncRunnerConfigurationsResource
     runners: runners.AsyncRunnersResource
-    personal_access_tokens: personal_access_tokens.AsyncPersonalAccessTokensResource
+    secrets: secrets.AsyncSecretsResource
+    users: users.AsyncUsersResource
     with_raw_response: AsyncGitpodWithRawResponse
     with_streaming_response: AsyncGitpodWithStreamedResponse
 
@@ -288,14 +298,17 @@ class AsyncGitpod(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.identity = identity.AsyncIdentityResource(self)
+        self.accounts = accounts.AsyncAccountsResource(self)
+        self.editors = editors.AsyncEditorsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
-        self.environment_classes = environment_classes.AsyncEnvironmentClassesResource(self)
+        self.events = events.AsyncEventsResource(self)
+        self.groups = groups.AsyncGroupsResource(self)
+        self.identity = identity.AsyncIdentityResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
         self.projects = projects.AsyncProjectsResource(self)
-        self.runner_configurations = runner_configurations.AsyncRunnerConfigurationsResource(self)
         self.runners = runners.AsyncRunnersResource(self)
-        self.personal_access_tokens = personal_access_tokens.AsyncPersonalAccessTokensResource(self)
+        self.secrets = secrets.AsyncSecretsResource(self)
+        self.users = users.AsyncUsersResource(self)
         self.with_raw_response = AsyncGitpodWithRawResponse(self)
         self.with_streaming_response = AsyncGitpodWithStreamedResponse(self)
 
@@ -406,74 +419,62 @@ class AsyncGitpod(AsyncAPIClient):
 
 class GitpodWithRawResponse:
     def __init__(self, client: Gitpod) -> None:
-        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
+        self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
+        self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
-        self.environment_classes = environment_classes.EnvironmentClassesResourceWithRawResponse(
-            client.environment_classes
-        )
+        self.events = events.EventsResourceWithRawResponse(client.events)
+        self.groups = groups.GroupsResourceWithRawResponse(client.groups)
+        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
-        self.runner_configurations = runner_configurations.RunnerConfigurationsResourceWithRawResponse(
-            client.runner_configurations
-        )
         self.runners = runners.RunnersResourceWithRawResponse(client.runners)
-        self.personal_access_tokens = personal_access_tokens.PersonalAccessTokensResourceWithRawResponse(
-            client.personal_access_tokens
-        )
+        self.secrets = secrets.SecretsResourceWithRawResponse(client.secrets)
+        self.users = users.UsersResourceWithRawResponse(client.users)
 
 
 class AsyncGitpodWithRawResponse:
     def __init__(self, client: AsyncGitpod) -> None:
-        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
+        self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
+        self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
-        self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithRawResponse(
-            client.environment_classes
-        )
+        self.events = events.AsyncEventsResourceWithRawResponse(client.events)
+        self.groups = groups.AsyncGroupsResourceWithRawResponse(client.groups)
+        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.runner_configurations = runner_configurations.AsyncRunnerConfigurationsResourceWithRawResponse(
-            client.runner_configurations
-        )
         self.runners = runners.AsyncRunnersResourceWithRawResponse(client.runners)
-        self.personal_access_tokens = personal_access_tokens.AsyncPersonalAccessTokensResourceWithRawResponse(
-            client.personal_access_tokens
-        )
+        self.secrets = secrets.AsyncSecretsResourceWithRawResponse(client.secrets)
+        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
 
 
 class GitpodWithStreamedResponse:
     def __init__(self, client: Gitpod) -> None:
-        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
+        self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
+        self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
-        self.environment_classes = environment_classes.EnvironmentClassesResourceWithStreamingResponse(
-            client.environment_classes
-        )
+        self.events = events.EventsResourceWithStreamingResponse(client.events)
+        self.groups = groups.GroupsResourceWithStreamingResponse(client.groups)
+        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
-        self.runner_configurations = runner_configurations.RunnerConfigurationsResourceWithStreamingResponse(
-            client.runner_configurations
-        )
         self.runners = runners.RunnersResourceWithStreamingResponse(client.runners)
-        self.personal_access_tokens = personal_access_tokens.PersonalAccessTokensResourceWithStreamingResponse(
-            client.personal_access_tokens
-        )
+        self.secrets = secrets.SecretsResourceWithStreamingResponse(client.secrets)
+        self.users = users.UsersResourceWithStreamingResponse(client.users)
 
 
 class AsyncGitpodWithStreamedResponse:
     def __init__(self, client: AsyncGitpod) -> None:
-        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
+        self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
+        self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
-        self.environment_classes = environment_classes.AsyncEnvironmentClassesResourceWithStreamingResponse(
-            client.environment_classes
-        )
+        self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
+        self.groups = groups.AsyncGroupsResourceWithStreamingResponse(client.groups)
+        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.runner_configurations = runner_configurations.AsyncRunnerConfigurationsResourceWithStreamingResponse(
-            client.runner_configurations
-        )
         self.runners = runners.AsyncRunnersResourceWithStreamingResponse(client.runners)
-        self.personal_access_tokens = personal_access_tokens.AsyncPersonalAccessTokensResourceWithStreamingResponse(
-            client.personal_access_tokens
-        )
+        self.secrets = secrets.AsyncSecretsResourceWithStreamingResponse(client.secrets)
+        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
 
 
 Client = Gitpod

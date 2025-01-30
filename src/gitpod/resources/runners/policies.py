@@ -22,8 +22,10 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.runners import policy_list_params
+from ...types.runners import policy_list_params, policy_create_params, policy_delete_params, policy_update_params
 from ...types.runners.policy_list_response import PolicyListResponse
+from ...types.runners.policy_create_response import PolicyCreateResponse
+from ...types.runners.policy_update_response import PolicyUpdateResponse
 
 __all__ = ["PoliciesResource", "AsyncPoliciesResource"]
 
@@ -48,11 +50,12 @@ class PoliciesResource(SyncAPIResource):
         """
         return PoliciesResourceWithStreamingResponse(self)
 
-    def list(
+    def create(
         self,
         *,
         connect_protocol_version: Literal[1],
-        pagination: policy_list_params.Pagination | NotGiven = NOT_GIVEN,
+        group_id: str | NotGiven = NOT_GIVEN,
+        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -61,14 +64,14 @@ class PoliciesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PolicyListResponse:
+    ) -> PolicyCreateResponse:
         """
-        ListRunnerPolicies lists runner policies.
+        CreateRunnerPolicy creates a new runner policy.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          pagination: pagination contains the pagination options for listing project policies
+          group_id: group_id specifies the group_id identifier
 
           runner_id: runner_id specifies the project identifier
 
@@ -92,18 +95,209 @@ class PoliciesResource(SyncAPIResource):
             **(extra_headers or {}),
         }
         return self._post(
-            "/gitpod.v1.RunnerService/ListRunnerPolicies",
+            "/gitpod.v1.RunnerService/CreateRunnerPolicy",
             body=maybe_transform(
                 {
-                    "pagination": pagination,
+                    "group_id": group_id,
+                    "role": role,
                     "runner_id": runner_id,
                 },
-                policy_list_params.PolicyListParams,
+                policy_create_params.PolicyCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
+            cast_to=PolicyCreateResponse,
+        )
+
+    def update(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        group_id: str | NotGiven = NOT_GIVEN,
+        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PolicyUpdateResponse:
+        """
+        UpdateRunnerPolicy an existing runner policy.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          group_id: group_id specifies the group_id identifier
+
+          runner_id: runner_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.RunnerService/UpdateRunnerPolicy",
+            body=maybe_transform(
+                {
+                    "group_id": group_id,
+                    "role": role,
+                    "runner_id": runner_id,
+                },
+                policy_update_params.PolicyUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PolicyUpdateResponse,
+        )
+
+    def list(
+        self,
+        *,
+        encoding: Literal["proto", "json"],
+        connect_protocol_version: Literal[1],
+        base64: bool | NotGiven = NOT_GIVEN,
+        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
+        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
+        message: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PolicyListResponse:
+        """
+        ListRunnerPolicies lists runner policies.
+
+        Args:
+          encoding: Define which encoding or 'Message-Codec' to use
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          base64: Specifies if the message query param is base64 encoded, which may be required
+              for binary data
+
+          compression: Which compression algorithm to use for this request
+
+          connect: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._get(
+            "/gitpod.v1.RunnerService/ListRunnerPolicies",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "encoding": encoding,
+                        "base64": base64,
+                        "compression": compression,
+                        "connect": connect,
+                        "message": message,
+                    },
+                    policy_list_params.PolicyListParams,
+                ),
+            ),
             cast_to=PolicyListResponse,
+        )
+
+    def delete(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        group_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        DeleteRunnerPolicy deletes a runner policy.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          group_id: group_id specifies the group_id identifier
+
+          runner_id: runner_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.RunnerService/DeleteRunnerPolicy",
+            body=maybe_transform(
+                {
+                    "group_id": group_id,
+                    "runner_id": runner_id,
+                },
+                policy_delete_params.PolicyDeleteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
         )
 
 
@@ -127,11 +321,12 @@ class AsyncPoliciesResource(AsyncAPIResource):
         """
         return AsyncPoliciesResourceWithStreamingResponse(self)
 
-    async def list(
+    async def create(
         self,
         *,
         connect_protocol_version: Literal[1],
-        pagination: policy_list_params.Pagination | NotGiven = NOT_GIVEN,
+        group_id: str | NotGiven = NOT_GIVEN,
+        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -140,14 +335,14 @@ class AsyncPoliciesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> PolicyListResponse:
+    ) -> PolicyCreateResponse:
         """
-        ListRunnerPolicies lists runner policies.
+        CreateRunnerPolicy creates a new runner policy.
 
         Args:
           connect_protocol_version: Define the version of the Connect protocol
 
-          pagination: pagination contains the pagination options for listing project policies
+          group_id: group_id specifies the group_id identifier
 
           runner_id: runner_id specifies the project identifier
 
@@ -171,18 +366,209 @@ class AsyncPoliciesResource(AsyncAPIResource):
             **(extra_headers or {}),
         }
         return await self._post(
-            "/gitpod.v1.RunnerService/ListRunnerPolicies",
+            "/gitpod.v1.RunnerService/CreateRunnerPolicy",
             body=await async_maybe_transform(
                 {
-                    "pagination": pagination,
+                    "group_id": group_id,
+                    "role": role,
                     "runner_id": runner_id,
                 },
-                policy_list_params.PolicyListParams,
+                policy_create_params.PolicyCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
+            cast_to=PolicyCreateResponse,
+        )
+
+    async def update(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        group_id: str | NotGiven = NOT_GIVEN,
+        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PolicyUpdateResponse:
+        """
+        UpdateRunnerPolicy an existing runner policy.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          group_id: group_id specifies the group_id identifier
+
+          runner_id: runner_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.RunnerService/UpdateRunnerPolicy",
+            body=await async_maybe_transform(
+                {
+                    "group_id": group_id,
+                    "role": role,
+                    "runner_id": runner_id,
+                },
+                policy_update_params.PolicyUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PolicyUpdateResponse,
+        )
+
+    async def list(
+        self,
+        *,
+        encoding: Literal["proto", "json"],
+        connect_protocol_version: Literal[1],
+        base64: bool | NotGiven = NOT_GIVEN,
+        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
+        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
+        message: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> PolicyListResponse:
+        """
+        ListRunnerPolicies lists runner policies.
+
+        Args:
+          encoding: Define which encoding or 'Message-Codec' to use
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          base64: Specifies if the message query param is base64 encoded, which may be required
+              for binary data
+
+          compression: Which compression algorithm to use for this request
+
+          connect: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._get(
+            "/gitpod.v1.RunnerService/ListRunnerPolicies",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "encoding": encoding,
+                        "base64": base64,
+                        "compression": compression,
+                        "connect": connect,
+                        "message": message,
+                    },
+                    policy_list_params.PolicyListParams,
+                ),
+            ),
             cast_to=PolicyListResponse,
+        )
+
+    async def delete(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        group_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        DeleteRunnerPolicy deletes a runner policy.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          group_id: group_id specifies the group_id identifier
+
+          runner_id: runner_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.RunnerService/DeleteRunnerPolicy",
+            body=await async_maybe_transform(
+                {
+                    "group_id": group_id,
+                    "runner_id": runner_id,
+                },
+                policy_delete_params.PolicyDeleteParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
         )
 
 
@@ -190,8 +576,17 @@ class PoliciesResourceWithRawResponse:
     def __init__(self, policies: PoliciesResource) -> None:
         self._policies = policies
 
+        self.create = to_raw_response_wrapper(
+            policies.create,
+        )
+        self.update = to_raw_response_wrapper(
+            policies.update,
+        )
         self.list = to_raw_response_wrapper(
             policies.list,
+        )
+        self.delete = to_raw_response_wrapper(
+            policies.delete,
         )
 
 
@@ -199,8 +594,17 @@ class AsyncPoliciesResourceWithRawResponse:
     def __init__(self, policies: AsyncPoliciesResource) -> None:
         self._policies = policies
 
+        self.create = async_to_raw_response_wrapper(
+            policies.create,
+        )
+        self.update = async_to_raw_response_wrapper(
+            policies.update,
+        )
         self.list = async_to_raw_response_wrapper(
             policies.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            policies.delete,
         )
 
 
@@ -208,8 +612,17 @@ class PoliciesResourceWithStreamingResponse:
     def __init__(self, policies: PoliciesResource) -> None:
         self._policies = policies
 
+        self.create = to_streamed_response_wrapper(
+            policies.create,
+        )
+        self.update = to_streamed_response_wrapper(
+            policies.update,
+        )
         self.list = to_streamed_response_wrapper(
             policies.list,
+        )
+        self.delete = to_streamed_response_wrapper(
+            policies.delete,
         )
 
 
@@ -217,6 +630,15 @@ class AsyncPoliciesResourceWithStreamingResponse:
     def __init__(self, policies: AsyncPoliciesResource) -> None:
         self._policies = policies
 
+        self.create = async_to_streamed_response_wrapper(
+            policies.create,
+        )
+        self.update = async_to_streamed_response_wrapper(
+            policies.update,
+        )
         self.list = async_to_streamed_response_wrapper(
             policies.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            policies.delete,
         )

@@ -12,8 +12,8 @@ __all__ = [
     "ProjectCreateFromEnvironmentResponse",
     "Project",
     "ProjectEnvironmentClass",
-    "ProjectEnvironmentClassEnvironmentClassID",
-    "ProjectEnvironmentClassLocalRunner",
+    "ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass",
+    "ProjectEnvironmentClassUseALocalRunnerForTheUser",
     "ProjectInitializer",
     "ProjectInitializerSpec",
     "ProjectInitializerSpecContextURL",
@@ -27,7 +27,9 @@ __all__ = [
 ]
 
 
-class ProjectEnvironmentClassEnvironmentClassID(BaseModel):
+class ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(
+    BaseModel
+):
     environment_class_id: str = FieldInfo(alias="environmentClassId")
     """Use a fixed environment class on a given Runner.
 
@@ -35,13 +37,14 @@ class ProjectEnvironmentClassEnvironmentClassID(BaseModel):
     """
 
 
-class ProjectEnvironmentClassLocalRunner(BaseModel):
+class ProjectEnvironmentClassUseALocalRunnerForTheUser(BaseModel):
     local_runner: bool = FieldInfo(alias="localRunner")
     """Use a local runner for the user"""
 
 
 ProjectEnvironmentClass: TypeAlias = Union[
-    ProjectEnvironmentClassEnvironmentClassID, ProjectEnvironmentClassLocalRunner
+    ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass,
+    ProjectEnvironmentClassUseALocalRunnerForTheUser,
 ]
 
 

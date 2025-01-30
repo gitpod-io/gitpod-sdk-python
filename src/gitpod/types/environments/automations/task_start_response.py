@@ -16,12 +16,12 @@ __all__ = [
     "TaskExecutionSpec",
     "TaskExecutionSpecPlan",
     "TaskExecutionSpecPlanStep",
-    "TaskExecutionSpecPlanStepServiceID",
-    "TaskExecutionSpecPlanStepTask",
-    "TaskExecutionSpecPlanStepTaskTask",
-    "TaskExecutionSpecPlanStepTaskTaskSpec",
-    "TaskExecutionSpecPlanStepTaskTaskSpecRunsOn",
-    "TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker",
+    "TaskExecutionSpecPlanStepUnionMember0",
+    "TaskExecutionSpecPlanStepUnionMember1",
+    "TaskExecutionSpecPlanStepUnionMember1Task",
+    "TaskExecutionSpecPlanStepUnionMember1TaskSpec",
+    "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn",
+    "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker",
     "TaskExecutionStatus",
     "TaskExecutionStatusStep",
 ]
@@ -334,7 +334,7 @@ class TaskExecutionMetadata(BaseModel):
     """task_id is the ID of the main task being executed."""
 
 
-class TaskExecutionSpecPlanStepServiceID(BaseModel):
+class TaskExecutionSpecPlanStepUnionMember0(BaseModel):
     service_id: str = FieldInfo(alias="serviceId")
 
     id: Optional[str] = None
@@ -345,32 +345,32 @@ class TaskExecutionSpecPlanStepServiceID(BaseModel):
     label: Optional[str] = None
 
 
-class TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker(BaseModel):
+class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class TaskExecutionSpecPlanStepTaskTaskSpecRunsOn(BaseModel):
-    docker: TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker
+class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn(BaseModel):
+    docker: TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker
 
 
-class TaskExecutionSpecPlanStepTaskTaskSpec(BaseModel):
+class TaskExecutionSpecPlanStepUnionMember1TaskSpec(BaseModel):
     command: Optional[str] = None
     """command contains the command the task should execute"""
 
-    runs_on: Optional[TaskExecutionSpecPlanStepTaskTaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the task should run on."""
 
 
-class TaskExecutionSpecPlanStepTaskTask(BaseModel):
+class TaskExecutionSpecPlanStepUnionMember1Task(BaseModel):
     id: Optional[str] = None
 
-    spec: Optional[TaskExecutionSpecPlanStepTaskTaskSpec] = None
+    spec: Optional[TaskExecutionSpecPlanStepUnionMember1TaskSpec] = None
 
 
-class TaskExecutionSpecPlanStepTask(BaseModel):
-    task: TaskExecutionSpecPlanStepTaskTask
+class TaskExecutionSpecPlanStepUnionMember1(BaseModel):
+    task: TaskExecutionSpecPlanStepUnionMember1Task
 
     id: Optional[str] = None
     """ID is the ID of the execution step"""
@@ -380,7 +380,9 @@ class TaskExecutionSpecPlanStepTask(BaseModel):
     label: Optional[str] = None
 
 
-TaskExecutionSpecPlanStep: TypeAlias = Union[TaskExecutionSpecPlanStepServiceID, TaskExecutionSpecPlanStepTask]
+TaskExecutionSpecPlanStep: TypeAlias = Union[
+    TaskExecutionSpecPlanStepUnionMember0, TaskExecutionSpecPlanStepUnionMember1
+]
 
 
 class TaskExecutionSpecPlan(BaseModel):

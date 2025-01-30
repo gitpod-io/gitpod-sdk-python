@@ -2,48 +2,33 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["TaskListParams", "Filter", "Pagination"]
+__all__ = ["TaskListParams"]
 
 
 class TaskListParams(TypedDict, total=False):
+    encoding: Required[Literal["proto", "json"]]
+    """Define which encoding or 'Message-Codec' to use"""
+
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    filter: Filter
-    """filter contains the filter options for listing tasks"""
+    base64: bool
+    """
+    Specifies if the message query param is base64 encoded, which may be required
+    for binary data
+    """
 
-    pagination: Pagination
-    """pagination contains the pagination options for listing tasks"""
+    compression: Literal["identity", "gzip", "br"]
+    """Which compression algorithm to use for this request"""
+
+    connect: Literal["v1"]
+    """Define the version of the Connect protocol"""
+
+    message: str
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
-
-
-class Filter(TypedDict, total=False):
-    environment_ids: Annotated[List[str], PropertyInfo(alias="environmentIds")]
-    """environment_ids filters the response to only tasks of these environments"""
-
-    references: List[str]
-    """references filters the response to only services with these references"""
-
-    task_ids: Annotated[List[str], PropertyInfo(alias="taskIds")]
-    """task_ids filters the response to only tasks with these IDs"""
-
-
-class Pagination(TypedDict, total=False):
-    token: str
-    """Token for the next set of results that was returned as next_token of a
-
-    PaginationResponse
-    """
-
-    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
-    """Page size is the maximum number of results to retrieve per page. Defaults to 25.
-
-    Maximum 100.
-    """
