@@ -22,19 +22,25 @@ class TestConfigurationSchema:
 
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
-        configuration_schema = client.runner_configurations.configuration_schema.create()
+        configuration_schema = client.runner_configurations.configuration_schema.create(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ConfigurationSchemaCreateResponse, configuration_schema, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         configuration_schema = client.runner_configurations.configuration_schema.create(
+            connect_protocol_version=1,
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(ConfigurationSchemaCreateResponse, configuration_schema, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
-        response = client.runner_configurations.configuration_schema.with_raw_response.create()
+        response = client.runner_configurations.configuration_schema.with_raw_response.create(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -43,7 +49,9 @@ class TestConfigurationSchema:
 
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
-        with client.runner_configurations.configuration_schema.with_streaming_response.create() as response:
+        with client.runner_configurations.configuration_schema.with_streaming_response.create(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -54,19 +62,25 @@ class TestConfigurationSchema:
 
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
-        configuration_schema = client.runner_configurations.configuration_schema.retrieve()
+        configuration_schema = client.runner_configurations.configuration_schema.retrieve(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ConfigurationSchemaRetrieveResponse, configuration_schema, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         configuration_schema = client.runner_configurations.configuration_schema.retrieve(
+            connect_protocol_version=1,
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(ConfigurationSchemaRetrieveResponse, configuration_schema, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
-        response = client.runner_configurations.configuration_schema.with_raw_response.retrieve()
+        response = client.runner_configurations.configuration_schema.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -75,7 +89,9 @@ class TestConfigurationSchema:
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
-        with client.runner_configurations.configuration_schema.with_streaming_response.retrieve() as response:
+        with client.runner_configurations.configuration_schema.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -90,19 +106,25 @@ class TestAsyncConfigurationSchema:
 
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
-        configuration_schema = await async_client.runner_configurations.configuration_schema.create()
+        configuration_schema = await async_client.runner_configurations.configuration_schema.create(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ConfigurationSchemaCreateResponse, configuration_schema, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         configuration_schema = await async_client.runner_configurations.configuration_schema.create(
+            connect_protocol_version=1,
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(ConfigurationSchemaCreateResponse, configuration_schema, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_configurations.configuration_schema.with_raw_response.create()
+        response = await async_client.runner_configurations.configuration_schema.with_raw_response.create(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -111,7 +133,9 @@ class TestAsyncConfigurationSchema:
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_configurations.configuration_schema.with_streaming_response.create() as response:
+        async with async_client.runner_configurations.configuration_schema.with_streaming_response.create(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -122,19 +146,25 @@ class TestAsyncConfigurationSchema:
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
-        configuration_schema = await async_client.runner_configurations.configuration_schema.retrieve()
+        configuration_schema = await async_client.runner_configurations.configuration_schema.retrieve(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ConfigurationSchemaRetrieveResponse, configuration_schema, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         configuration_schema = await async_client.runner_configurations.configuration_schema.retrieve(
+            connect_protocol_version=1,
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(ConfigurationSchemaRetrieveResponse, configuration_schema, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_configurations.configuration_schema.with_raw_response.retrieve()
+        response = await async_client.runner_configurations.configuration_schema.with_raw_response.retrieve(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,7 +173,9 @@ class TestAsyncConfigurationSchema:
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_configurations.configuration_schema.with_streaming_response.retrieve() as response:
+        async with async_client.runner_configurations.configuration_schema.with_streaming_response.retrieve(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

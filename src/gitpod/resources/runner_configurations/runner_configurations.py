@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 from typing import Any, cast
-from typing_extensions import overload
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ...types import runner_configuration_validate_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
+    is_given,
     required_args,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -101,7 +103,9 @@ class RunnerConfigurationsResource(SyncAPIResource):
         self,
         *,
         environment_class: runner_configuration_validate_params.EnvironmentClassEnvironmentClass,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -117,6 +121,10 @@ class RunnerConfigurationsResource(SyncAPIResource):
         with the runner.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -132,7 +140,9 @@ class RunnerConfigurationsResource(SyncAPIResource):
         self,
         *,
         scm_integration: runner_configuration_validate_params.ScmIntegrationScmIntegration,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -148,6 +158,10 @@ class RunnerConfigurationsResource(SyncAPIResource):
         with the runner.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -158,12 +172,14 @@ class RunnerConfigurationsResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["environment_class"], ["scm_integration"])
+    @required_args(["environment_class", "connect_protocol_version"], ["scm_integration", "connect_protocol_version"])
     def validate(
         self,
         *,
         environment_class: runner_configuration_validate_params.EnvironmentClassEnvironmentClass | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         scm_integration: runner_configuration_validate_params.ScmIntegrationScmIntegration | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -172,6 +188,15 @@ class RunnerConfigurationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerConfigurationValidateResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return cast(
             RunnerConfigurationValidateResponse,
             self._post(
@@ -235,7 +260,9 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         self,
         *,
         environment_class: runner_configuration_validate_params.EnvironmentClassEnvironmentClass,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -251,6 +278,10 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         with the runner.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -266,7 +297,9 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         self,
         *,
         scm_integration: runner_configuration_validate_params.ScmIntegrationScmIntegration,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,6 +315,10 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         with the runner.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -292,12 +329,14 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["environment_class"], ["scm_integration"])
+    @required_args(["environment_class", "connect_protocol_version"], ["scm_integration", "connect_protocol_version"])
     async def validate(
         self,
         *,
         environment_class: runner_configuration_validate_params.EnvironmentClassEnvironmentClass | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         scm_integration: runner_configuration_validate_params.ScmIntegrationScmIntegration | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -306,6 +345,15 @@ class AsyncRunnerConfigurationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerConfigurationValidateResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return cast(
             RunnerConfigurationValidateResponse,
             await self._post(

@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
-from typing_extensions import overload
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
+    is_given,
     required_args,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -52,6 +54,8 @@ class ScmIntegrationResource(SyncAPIResource):
         self,
         *,
         oauth_client_id: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -66,6 +70,10 @@ class ScmIntegrationResource(SyncAPIResource):
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured.
 
               If configured, oauth_plaintext_client_secret must also be set.
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -82,6 +90,8 @@ class ScmIntegrationResource(SyncAPIResource):
         self,
         *,
         oauth_plaintext_client_secret: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -97,6 +107,10 @@ class ScmIntegrationResource(SyncAPIResource):
 
               This will first be encrypted with the runner's public key before being stored.
 
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -107,11 +121,15 @@ class ScmIntegrationResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["oauth_client_id"], ["oauth_plaintext_client_secret"])
+    @required_args(
+        ["oauth_client_id", "connect_protocol_version"], ["oauth_plaintext_client_secret", "connect_protocol_version"]
+    )
     def create(
         self,
         *,
         oauth_client_id: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -120,6 +138,15 @@ class ScmIntegrationResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationCreateResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/CreateSCMIntegration",
             body=maybe_transform(
@@ -161,6 +188,8 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
         self,
         *,
         oauth_client_id: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -175,6 +204,10 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured.
 
               If configured, oauth_plaintext_client_secret must also be set.
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -191,6 +224,8 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
         self,
         *,
         oauth_plaintext_client_secret: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -206,6 +241,10 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
 
               This will first be encrypted with the runner's public key before being stored.
 
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -216,11 +255,15 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["oauth_client_id"], ["oauth_plaintext_client_secret"])
+    @required_args(
+        ["oauth_client_id", "connect_protocol_version"], ["oauth_plaintext_client_secret", "connect_protocol_version"]
+    )
     async def create(
         self,
         *,
         oauth_client_id: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -229,6 +272,15 @@ class AsyncScmIntegrationResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationCreateResponse:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/CreateSCMIntegration",
             body=await async_maybe_transform(

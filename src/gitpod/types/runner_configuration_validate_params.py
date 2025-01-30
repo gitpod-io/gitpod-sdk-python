@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union, Iterable
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._types import Base64FileInput
 from .._utils import PropertyInfo
@@ -25,7 +25,13 @@ __all__ = [
 class EnvironmentClass(TypedDict, total=False):
     environment_class: Required[Annotated[EnvironmentClassEnvironmentClass, PropertyInfo(alias="environmentClass")]]
 
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class EnvironmentClassEnvironmentClassConfiguration(TypedDict, total=False):
@@ -63,7 +69,13 @@ class EnvironmentClassEnvironmentClass(TypedDict, total=False):
 class ScmIntegration(TypedDict, total=False):
     scm_integration: Required[Annotated[ScmIntegrationScmIntegration, PropertyInfo(alias="scmIntegration")]]
 
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class ScmIntegrationScmIntegrationOAuthClientID(TypedDict, total=False):

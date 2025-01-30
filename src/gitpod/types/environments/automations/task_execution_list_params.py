@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -11,11 +11,17 @@ __all__ = ["TaskExecutionListParams", "Filter", "Pagination"]
 
 
 class TaskExecutionListParams(TypedDict, total=False):
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     filter: Filter
     """filter contains the filter options for listing task runs"""
 
     pagination: Pagination
     """pagination contains the pagination options for listing task runs"""
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class Filter(TypedDict, total=False):

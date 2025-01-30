@@ -23,6 +23,9 @@ __all__ = [
 
 
 class TaskCreateParams(TypedDict, total=False):
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     depends_on: Annotated[List[str], PropertyInfo(alias="dependsOn")]
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
@@ -30,6 +33,9 @@ class TaskCreateParams(TypedDict, total=False):
     metadata: Metadata
 
     spec: Spec
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class MetadataCreator(TypedDict, total=False):

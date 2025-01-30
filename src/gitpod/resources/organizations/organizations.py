@@ -13,7 +13,9 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
+    is_given,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -65,7 +67,9 @@ class OrganizationsResource(SyncAPIResource):
     def leave(
         self,
         *,
+        connect_protocol_version: Literal[1],
         user_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,6 +81,10 @@ class OrganizationsResource(SyncAPIResource):
         LeaveOrganization lets the passed user leave an Organization.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -85,6 +93,15 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.OrganizationService/LeaveOrganization",
             body=maybe_transform({"user_id": user_id}, organization_leave_params.OrganizationLeaveParams),
@@ -97,8 +114,10 @@ class OrganizationsResource(SyncAPIResource):
     def list_members(
         self,
         *,
+        connect_protocol_version: Literal[1],
         organization_id: str | NotGiven = NOT_GIVEN,
         pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -110,9 +129,13 @@ class OrganizationsResource(SyncAPIResource):
         ListMembers lists all members of the specified organization.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           organization_id: organization_id is the ID of the organization to list members for
 
           pagination: pagination contains the pagination options for listing members
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -122,6 +145,15 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.OrganizationService/ListMembers",
             body=maybe_transform(
@@ -140,10 +172,12 @@ class OrganizationsResource(SyncAPIResource):
     def set_role(
         self,
         *,
+        connect_protocol_version: Literal[1],
         organization_id: str | NotGiven = NOT_GIVEN,
         role: Literal["ORGANIZATION_ROLE_UNSPECIFIED", "ORGANIZATION_ROLE_ADMIN", "ORGANIZATION_ROLE_MEMBER"]
         | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,6 +189,10 @@ class OrganizationsResource(SyncAPIResource):
         SetRole
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -163,6 +201,15 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.OrganizationService/SetRole",
             body=maybe_transform(
@@ -207,7 +254,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def leave(
         self,
         *,
+        connect_protocol_version: Literal[1],
         user_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -219,6 +268,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         LeaveOrganization lets the passed user leave an Organization.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -227,6 +280,15 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.OrganizationService/LeaveOrganization",
             body=await async_maybe_transform({"user_id": user_id}, organization_leave_params.OrganizationLeaveParams),
@@ -239,8 +301,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def list_members(
         self,
         *,
+        connect_protocol_version: Literal[1],
         organization_id: str | NotGiven = NOT_GIVEN,
         pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -252,9 +316,13 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         ListMembers lists all members of the specified organization.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           organization_id: organization_id is the ID of the organization to list members for
 
           pagination: pagination contains the pagination options for listing members
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -264,6 +332,15 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.OrganizationService/ListMembers",
             body=await async_maybe_transform(
@@ -282,10 +359,12 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def set_role(
         self,
         *,
+        connect_protocol_version: Literal[1],
         organization_id: str | NotGiven = NOT_GIVEN,
         role: Literal["ORGANIZATION_ROLE_UNSPECIFIED", "ORGANIZATION_ROLE_ADMIN", "ORGANIZATION_ROLE_MEMBER"]
         | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -297,6 +376,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         SetRole
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -305,6 +388,15 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.OrganizationService/SetRole",
             body=await async_maybe_transform(

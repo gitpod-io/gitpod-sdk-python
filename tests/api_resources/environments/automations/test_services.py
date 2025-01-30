@@ -21,22 +21,28 @@ class TestServices:
 
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
-        service = client.environments.automations.services.update()
+        service = client.environments.automations.services.update(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.update(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={"description": "description"},
             spec={"commands": {"ready": "ready"}},
             status={"failure_message": "failureMessage"},
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
-        response = client.environments.automations.services.with_raw_response.update()
+        response = client.environments.automations.services.with_raw_response.update(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -45,7 +51,9 @@ class TestServices:
 
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
-        with client.environments.automations.services.with_streaming_response.update() as response:
+        with client.environments.automations.services.with_streaming_response.update(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -56,12 +64,15 @@ class TestServices:
 
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        service = client.environments.automations.services.list()
+        service = client.environments.automations.services.list(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ServiceListResponse, service, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.list(
+            connect_protocol_version=1,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "references": ["x"],
@@ -71,12 +82,15 @@ class TestServices:
                 "token": "token",
                 "page_size": 100,
             },
+            connect_timeout_ms=0,
         )
         assert_matches_type(ServiceListResponse, service, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.environments.automations.services.with_raw_response.list()
+        response = client.environments.automations.services.with_raw_response.list(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -85,7 +99,9 @@ class TestServices:
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.environments.automations.services.with_streaming_response.list() as response:
+        with client.environments.automations.services.with_streaming_response.list(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -96,20 +112,26 @@ class TestServices:
 
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
-        service = client.environments.automations.services.delete()
+        service = client.environments.automations.services.delete(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.delete(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             force=True,
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
-        response = client.environments.automations.services.with_raw_response.delete()
+        response = client.environments.automations.services.with_raw_response.delete(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -118,7 +140,9 @@ class TestServices:
 
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
-        with client.environments.automations.services.with_streaming_response.delete() as response:
+        with client.environments.automations.services.with_streaming_response.delete(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -129,19 +153,25 @@ class TestServices:
 
     @parametrize
     def test_method_start(self, client: Gitpod) -> None:
-        service = client.environments.automations.services.start()
+        service = client.environments.automations.services.start(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_method_start_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.start(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_raw_response_start(self, client: Gitpod) -> None:
-        response = client.environments.automations.services.with_raw_response.start()
+        response = client.environments.automations.services.with_raw_response.start(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -150,7 +180,9 @@ class TestServices:
 
     @parametrize
     def test_streaming_response_start(self, client: Gitpod) -> None:
-        with client.environments.automations.services.with_streaming_response.start() as response:
+        with client.environments.automations.services.with_streaming_response.start(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -161,19 +193,25 @@ class TestServices:
 
     @parametrize
     def test_method_stop(self, client: Gitpod) -> None:
-        service = client.environments.automations.services.stop()
+        service = client.environments.automations.services.stop(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_method_stop_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.stop(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     def test_raw_response_stop(self, client: Gitpod) -> None:
-        response = client.environments.automations.services.with_raw_response.stop()
+        response = client.environments.automations.services.with_raw_response.stop(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -182,7 +220,9 @@ class TestServices:
 
     @parametrize
     def test_streaming_response_stop(self, client: Gitpod) -> None:
-        with client.environments.automations.services.with_streaming_response.stop() as response:
+        with client.environments.automations.services.with_streaming_response.stop(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -197,22 +237,28 @@ class TestAsyncServices:
 
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
-        service = await async_client.environments.automations.services.update()
+        service = await async_client.environments.automations.services.update(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.update(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={"description": "description"},
             spec={"commands": {"ready": "ready"}},
             status={"failure_message": "failureMessage"},
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.services.with_raw_response.update()
+        response = await async_client.environments.automations.services.with_raw_response.update(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -221,7 +267,9 @@ class TestAsyncServices:
 
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.services.with_streaming_response.update() as response:
+        async with async_client.environments.automations.services.with_streaming_response.update(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -232,12 +280,15 @@ class TestAsyncServices:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        service = await async_client.environments.automations.services.list()
+        service = await async_client.environments.automations.services.list(
+            connect_protocol_version=1,
+        )
         assert_matches_type(ServiceListResponse, service, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.list(
+            connect_protocol_version=1,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "references": ["x"],
@@ -247,12 +298,15 @@ class TestAsyncServices:
                 "token": "token",
                 "page_size": 100,
             },
+            connect_timeout_ms=0,
         )
         assert_matches_type(ServiceListResponse, service, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.services.with_raw_response.list()
+        response = await async_client.environments.automations.services.with_raw_response.list(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -261,7 +315,9 @@ class TestAsyncServices:
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.services.with_streaming_response.list() as response:
+        async with async_client.environments.automations.services.with_streaming_response.list(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -272,20 +328,26 @@ class TestAsyncServices:
 
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
-        service = await async_client.environments.automations.services.delete()
+        service = await async_client.environments.automations.services.delete(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.delete(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             force=True,
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.services.with_raw_response.delete()
+        response = await async_client.environments.automations.services.with_raw_response.delete(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,7 +356,9 @@ class TestAsyncServices:
 
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.services.with_streaming_response.delete() as response:
+        async with async_client.environments.automations.services.with_streaming_response.delete(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -305,19 +369,25 @@ class TestAsyncServices:
 
     @parametrize
     async def test_method_start(self, async_client: AsyncGitpod) -> None:
-        service = await async_client.environments.automations.services.start()
+        service = await async_client.environments.automations.services.start(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.start(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_raw_response_start(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.services.with_raw_response.start()
+        response = await async_client.environments.automations.services.with_raw_response.start(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -326,7 +396,9 @@ class TestAsyncServices:
 
     @parametrize
     async def test_streaming_response_start(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.services.with_streaming_response.start() as response:
+        async with async_client.environments.automations.services.with_streaming_response.start(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -337,19 +409,25 @@ class TestAsyncServices:
 
     @parametrize
     async def test_method_stop(self, async_client: AsyncGitpod) -> None:
-        service = await async_client.environments.automations.services.stop()
+        service = await async_client.environments.automations.services.stop(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_method_stop_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.stop(
+            connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
 
     @parametrize
     async def test_raw_response_stop(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.services.with_raw_response.stop()
+        response = await async_client.environments.automations.services.with_raw_response.stop(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -358,7 +436,9 @@ class TestAsyncServices:
 
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.services.with_streaming_response.stop() as response:
+        async with async_client.environments.automations.services.with_streaming_response.stop(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
