@@ -32,6 +32,8 @@ from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 bearer_token = "My Bearer Token"
+connect_protocol_version = True
+connect_timeout_header = 0
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -53,7 +55,13 @@ def _get_open_connections(client: Gitpod | AsyncGitpod) -> int:
 
 
 class TestGitpod:
-    client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = Gitpod(
+        base_url=base_url,
+        bearer_token=bearer_token,
+        connect_protocol_version=connect_protocol_version,
+        connect_timeout_header=connect_timeout_header,
+        _strict_response_validation=True,
+    )
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -83,6 +91,14 @@ class TestGitpod:
         assert copied.bearer_token == "another My Bearer Token"
         assert self.client.bearer_token == "My Bearer Token"
 
+        copied = self.client.copy(connect_protocol_version=True)
+        assert copied.connect_protocol_version == True
+        assert self.client.connect_protocol_version == True
+
+        copied = self.client.copy(connect_timeout_header=0)
+        assert copied.connect_timeout_header == 0
+        assert self.client.connect_timeout_header == 0
+
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -103,6 +119,8 @@ class TestGitpod:
         client = Gitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -138,7 +156,12 @@ class TestGitpod:
 
     def test_copy_default_query(self) -> None:
         client = Gitpod(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+            default_query={"foo": "bar"},
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -263,7 +286,12 @@ class TestGitpod:
 
     def test_client_timeout_option(self) -> None:
         client = Gitpod(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+            timeout=httpx.Timeout(0),
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -274,7 +302,12 @@ class TestGitpod:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Gitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -284,7 +317,12 @@ class TestGitpod:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Gitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -294,7 +332,12 @@ class TestGitpod:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Gitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -307,6 +350,8 @@ class TestGitpod:
                 Gitpod(
                     base_url=base_url,
                     bearer_token=bearer_token,
+                    connect_protocol_version=connect_protocol_version,
+                    connect_timeout_header=connect_timeout_header,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -315,6 +360,8 @@ class TestGitpod:
         client = Gitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -325,6 +372,8 @@ class TestGitpod:
         client2 = Gitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -339,6 +388,8 @@ class TestGitpod:
         client = Gitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -541,7 +592,11 @@ class TestGitpod:
 
     def test_base_url_setter(self) -> None:
         client = Gitpod(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
+            base_url="https://example.com/from_init",
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -551,7 +606,12 @@ class TestGitpod:
 
     def test_base_url_env(self) -> None:
         with update_env(GITPOD_BASE_URL="http://localhost:5000/from/env"):
-            client = Gitpod(bearer_token=bearer_token, _strict_response_validation=True)
+            client = Gitpod(
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+            )
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -560,11 +620,15 @@ class TestGitpod:
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -587,11 +651,15 @@ class TestGitpod:
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -614,11 +682,15 @@ class TestGitpod:
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             Gitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -636,7 +708,13 @@ class TestGitpod:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Gitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
         assert not client.is_closed()
 
         copied = client.copy()
@@ -647,7 +725,13 @@ class TestGitpod:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Gitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -671,6 +755,8 @@ class TestGitpod:
             Gitpod(
                 base_url=base_url,
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -682,12 +768,24 @@ class TestGitpod:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        strict_client = Gitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = Gitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=False,
+        )
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -715,7 +813,13 @@ class TestGitpod:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = Gitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -780,7 +884,7 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(connect_protocol_version=1)
+        response = client.runners.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -804,9 +908,7 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -829,15 +931,19 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
 class TestAsyncGitpod:
-    client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+    client = AsyncGitpod(
+        base_url=base_url,
+        bearer_token=bearer_token,
+        connect_protocol_version=connect_protocol_version,
+        connect_timeout_header=connect_timeout_header,
+        _strict_response_validation=True,
+    )
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -869,6 +975,14 @@ class TestAsyncGitpod:
         assert copied.bearer_token == "another My Bearer Token"
         assert self.client.bearer_token == "My Bearer Token"
 
+        copied = self.client.copy(connect_protocol_version=True)
+        assert copied.connect_protocol_version == True
+        assert self.client.connect_protocol_version == True
+
+        copied = self.client.copy(connect_timeout_header=0)
+        assert copied.connect_timeout_header == 0
+        assert self.client.connect_timeout_header == 0
+
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -889,6 +1003,8 @@ class TestAsyncGitpod:
         client = AsyncGitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -924,7 +1040,12 @@ class TestAsyncGitpod:
 
     def test_copy_default_query(self) -> None:
         client = AsyncGitpod(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+            default_query={"foo": "bar"},
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1049,7 +1170,12 @@ class TestAsyncGitpod:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncGitpod(
-            base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+            timeout=httpx.Timeout(0),
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1060,7 +1186,12 @@ class TestAsyncGitpod:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncGitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1070,7 +1201,12 @@ class TestAsyncGitpod:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncGitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1080,7 +1216,12 @@ class TestAsyncGitpod:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncGitpod(
-                base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1093,6 +1234,8 @@ class TestAsyncGitpod:
                 AsyncGitpod(
                     base_url=base_url,
                     bearer_token=bearer_token,
+                    connect_protocol_version=connect_protocol_version,
+                    connect_timeout_header=connect_timeout_header,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -1101,6 +1244,8 @@ class TestAsyncGitpod:
         client = AsyncGitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -1111,6 +1256,8 @@ class TestAsyncGitpod:
         client2 = AsyncGitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1125,6 +1272,8 @@ class TestAsyncGitpod:
         client = AsyncGitpod(
             base_url=base_url,
             bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -1327,7 +1476,11 @@ class TestAsyncGitpod:
 
     def test_base_url_setter(self) -> None:
         client = AsyncGitpod(
-            base_url="https://example.com/from_init", bearer_token=bearer_token, _strict_response_validation=True
+            base_url="https://example.com/from_init",
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1337,7 +1490,12 @@ class TestAsyncGitpod:
 
     def test_base_url_env(self) -> None:
         with update_env(GITPOD_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncGitpod(bearer_token=bearer_token, _strict_response_validation=True)
+            client = AsyncGitpod(
+                bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
+                _strict_response_validation=True,
+            )
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -1346,11 +1504,15 @@ class TestAsyncGitpod:
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1373,11 +1535,15 @@ class TestAsyncGitpod:
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1400,11 +1566,15 @@ class TestAsyncGitpod:
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
             ),
             AsyncGitpod(
                 base_url="http://localhost:5000/custom/path/",
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1422,7 +1592,13 @@ class TestAsyncGitpod:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncGitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1434,7 +1610,13 @@ class TestAsyncGitpod:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncGitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1459,6 +1641,8 @@ class TestAsyncGitpod:
             AsyncGitpod(
                 base_url=base_url,
                 bearer_token=bearer_token,
+                connect_protocol_version=connect_protocol_version,
+                connect_timeout_header=connect_timeout_header,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -1471,12 +1655,24 @@ class TestAsyncGitpod:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        strict_client = AsyncGitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=False)
+        client = AsyncGitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=False,
+        )
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1505,7 +1701,13 @@ class TestAsyncGitpod:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        client = AsyncGitpod(
+            base_url=base_url,
+            bearer_token=bearer_token,
+            connect_protocol_version=connect_protocol_version,
+            connect_timeout_header=connect_timeout_header,
+            _strict_response_validation=True,
+        )
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1571,7 +1773,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(connect_protocol_version=1)
+        response = await client.runners.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1596,9 +1798,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1622,9 +1822,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

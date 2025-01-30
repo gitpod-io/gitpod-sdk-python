@@ -2,16 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing_extensions import overload
 
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    is_given,
     required_args,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ...._compat import cached_property
@@ -58,9 +56,7 @@ class TaskExecutionsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,10 +68,6 @@ class TaskExecutionsResource(SyncAPIResource):
         GetTaskExecution
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -84,15 +76,6 @@ class TaskExecutionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/GetTaskExecution",
             body=maybe_transform({"id": id}, task_execution_retrieve_params.TaskExecutionRetrieveParams),
@@ -105,10 +88,8 @@ class TaskExecutionsResource(SyncAPIResource):
     def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: task_execution_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: task_execution_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -120,13 +101,9 @@ class TaskExecutionsResource(SyncAPIResource):
         ListTaskExecutions
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           filter: filter contains the filter options for listing task runs
 
           pagination: pagination contains the pagination options for listing task runs
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -136,15 +113,6 @@ class TaskExecutionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
             body=maybe_transform(
@@ -163,9 +131,7 @@ class TaskExecutionsResource(SyncAPIResource):
     def stop(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -177,10 +143,6 @@ class TaskExecutionsResource(SyncAPIResource):
         StopTaskExecution
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -189,15 +151,6 @@ class TaskExecutionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/StopTaskExecution",
             body=maybe_transform({"id": id}, task_execution_stop_params.TaskExecutionStopParams),
@@ -212,8 +165,6 @@ class TaskExecutionsResource(SyncAPIResource):
         self,
         *,
         failure_message: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -233,10 +184,6 @@ class TaskExecutionsResource(SyncAPIResource):
               If an individual step has failed, callers are NOT expected to set this message;
               only if the task execution as a whole has failed/cannot be started.
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -252,8 +199,6 @@ class TaskExecutionsResource(SyncAPIResource):
         self,
         *,
         log_url: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -270,10 +215,6 @@ class TaskExecutionsResource(SyncAPIResource):
           log_url: log_url is the URL to the logs of the task's steps. If this is empty, the task
               either has no logs or has not yet started.
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -284,13 +225,11 @@ class TaskExecutionsResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["failure_message", "connect_protocol_version"], ["log_url", "connect_protocol_version"])
+    @required_args(["failure_message"], ["log_url"])
     def update_task_execution_status(
         self,
         *,
         failure_message: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         log_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -299,15 +238,6 @@ class TaskExecutionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
             body=maybe_transform(
@@ -347,9 +277,7 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -361,10 +289,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         GetTaskExecution
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -373,15 +297,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/GetTaskExecution",
             body=await async_maybe_transform({"id": id}, task_execution_retrieve_params.TaskExecutionRetrieveParams),
@@ -394,10 +309,8 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: task_execution_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: task_execution_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,13 +322,9 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         ListTaskExecutions
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           filter: filter contains the filter options for listing task runs
 
           pagination: pagination contains the pagination options for listing task runs
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -425,15 +334,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
             body=await async_maybe_transform(
@@ -452,9 +352,7 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
     async def stop(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -466,10 +364,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         StopTaskExecution
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -478,15 +372,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/StopTaskExecution",
             body=await async_maybe_transform({"id": id}, task_execution_stop_params.TaskExecutionStopParams),
@@ -501,8 +386,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         self,
         *,
         failure_message: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -522,10 +405,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
               If an individual step has failed, callers are NOT expected to set this message;
               only if the task execution as a whole has failed/cannot be started.
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -541,8 +420,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         self,
         *,
         log_url: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -559,10 +436,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
           log_url: log_url is the URL to the logs of the task's steps. If this is empty, the task
               either has no logs or has not yet started.
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -573,13 +446,11 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["failure_message", "connect_protocol_version"], ["log_url", "connect_protocol_version"])
+    @required_args(["failure_message"], ["log_url"])
     async def update_task_execution_status(
         self,
         *,
         failure_message: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         log_url: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -588,15 +459,6 @@ class AsyncTaskExecutionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpdateTaskExecutionStatus",
             body=await async_maybe_transform(

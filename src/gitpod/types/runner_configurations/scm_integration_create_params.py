@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -17,12 +17,6 @@ class OAuthClientID(TypedDict, total=False):
     If configured, oauth_plaintext_client_secret must also be set.
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class OAuthPlaintextClientSecret(TypedDict, total=False):
     oauth_plaintext_client_secret: Required[Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]]
@@ -30,12 +24,6 @@ class OAuthPlaintextClientSecret(TypedDict, total=False):
 
     This will first be encrypted with the runner's public key before being stored.
     """
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 ScmIntegrationCreateParams: TypeAlias = Union[OAuthClientID, OAuthPlaintextClientSecret]

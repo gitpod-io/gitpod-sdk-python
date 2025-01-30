@@ -23,16 +23,6 @@ class TestEnvironmentClasses:
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         environment_class = client.runner_configurations.environment_classes.update(
             description="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
-        environment_class = client.runner_configurations.environment_classes.update(
-            description="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -40,7 +30,6 @@ class TestEnvironmentClasses:
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runner_configurations.environment_classes.with_raw_response.update(
             description="xxx",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -52,7 +41,6 @@ class TestEnvironmentClasses:
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runner_configurations.environment_classes.with_streaming_response.update(
             description="xxx",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -66,16 +54,6 @@ class TestEnvironmentClasses:
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         environment_class = client.runner_configurations.environment_classes.update(
             display_name="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
-        environment_class = client.runner_configurations.environment_classes.update(
-            display_name="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -83,7 +61,6 @@ class TestEnvironmentClasses:
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.runner_configurations.environment_classes.with_raw_response.update(
             display_name="xxx",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -95,7 +72,6 @@ class TestEnvironmentClasses:
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.runner_configurations.environment_classes.with_streaming_response.update(
             display_name="xxx",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -109,16 +85,6 @@ class TestEnvironmentClasses:
     def test_method_update_overload_3(self, client: Gitpod) -> None:
         environment_class = client.runner_configurations.environment_classes.update(
             enabled=True,
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_3(self, client: Gitpod) -> None:
-        environment_class = client.runner_configurations.environment_classes.update(
-            enabled=True,
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -126,7 +92,6 @@ class TestEnvironmentClasses:
     def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
         response = client.runner_configurations.environment_classes.with_raw_response.update(
             enabled=True,
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -138,7 +103,6 @@ class TestEnvironmentClasses:
     def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
         with client.runner_configurations.environment_classes.with_streaming_response.update(
             enabled=True,
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -150,29 +114,23 @@ class TestEnvironmentClasses:
 
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        environment_class = client.runner_configurations.environment_classes.list(
-            connect_protocol_version=1,
-        )
+        environment_class = client.runner_configurations.environment_classes.list()
         assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         environment_class = client.runner_configurations.environment_classes.list(
-            connect_protocol_version=1,
             filter={"enabled": True},
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
-            connect_timeout_ms=0,
         )
         assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.runner_configurations.environment_classes.with_raw_response.list(
-            connect_protocol_version=1,
-        )
+        response = client.runner_configurations.environment_classes.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -181,9 +139,7 @@ class TestEnvironmentClasses:
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.runner_configurations.environment_classes.with_streaming_response.list(
-            connect_protocol_version=1,
-        ) as response:
+        with client.runner_configurations.environment_classes.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -200,16 +156,6 @@ class TestAsyncEnvironmentClasses:
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runner_configurations.environment_classes.update(
             description="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
-        environment_class = await async_client.runner_configurations.environment_classes.update(
-            description="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -217,7 +163,6 @@ class TestAsyncEnvironmentClasses:
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.environment_classes.with_raw_response.update(
             description="xxx",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -229,7 +174,6 @@ class TestAsyncEnvironmentClasses:
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.environment_classes.with_streaming_response.update(
             description="xxx",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -243,16 +187,6 @@ class TestAsyncEnvironmentClasses:
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runner_configurations.environment_classes.update(
             display_name="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        environment_class = await async_client.runner_configurations.environment_classes.update(
-            display_name="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -260,7 +194,6 @@ class TestAsyncEnvironmentClasses:
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.environment_classes.with_raw_response.update(
             display_name="xxx",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -272,7 +205,6 @@ class TestAsyncEnvironmentClasses:
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.environment_classes.with_streaming_response.update(
             display_name="xxx",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -286,16 +218,6 @@ class TestAsyncEnvironmentClasses:
     async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runner_configurations.environment_classes.update(
             enabled=True,
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, environment_class, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
-        environment_class = await async_client.runner_configurations.environment_classes.update(
-            enabled=True,
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -303,7 +225,6 @@ class TestAsyncEnvironmentClasses:
     async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.environment_classes.with_raw_response.update(
             enabled=True,
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -315,7 +236,6 @@ class TestAsyncEnvironmentClasses:
     async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.environment_classes.with_streaming_response.update(
             enabled=True,
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -327,29 +247,23 @@ class TestAsyncEnvironmentClasses:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        environment_class = await async_client.runner_configurations.environment_classes.list(
-            connect_protocol_version=1,
-        )
+        environment_class = await async_client.runner_configurations.environment_classes.list()
         assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runner_configurations.environment_classes.list(
-            connect_protocol_version=1,
             filter={"enabled": True},
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
-            connect_timeout_ms=0,
         )
         assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runner_configurations.environment_classes.with_raw_response.list(
-            connect_protocol_version=1,
-        )
+        response = await async_client.runner_configurations.environment_classes.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -358,9 +272,7 @@ class TestAsyncEnvironmentClasses:
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runner_configurations.environment_classes.with_streaming_response.list(
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.runner_configurations.environment_classes.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

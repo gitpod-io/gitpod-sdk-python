@@ -2,15 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ...._compat import cached_property
@@ -57,12 +53,10 @@ class ServicesResource(SyncAPIResource):
     def update(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
         metadata: service_update_params.Metadata | NotGiven = NOT_GIVEN,
         spec: service_update_params.Spec | NotGiven = NOT_GIVEN,
         status: service_update_params.Status | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -74,8 +68,6 @@ class ServicesResource(SyncAPIResource):
         UpdateService
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: Changing the spec of a service is a complex operation. The spec of a service
 
               can only be updated if the service is in a stopped state. If the service is
@@ -87,8 +79,6 @@ class ServicesResource(SyncAPIResource):
               of this API you are not expected to provide this field. Updating this field
               requires the `environmentservice:update_status` permission.
 
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -97,15 +87,6 @@ class ServicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpdateService",
             body=maybe_transform(
@@ -126,10 +107,8 @@ class ServicesResource(SyncAPIResource):
     def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: service_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: service_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -141,13 +120,9 @@ class ServicesResource(SyncAPIResource):
         ListServices
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           filter: filter contains the filter options for listing services
 
           pagination: pagination contains the pagination options for listing services
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -157,15 +132,6 @@ class ServicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
             body=maybe_transform(
@@ -184,10 +150,8 @@ class ServicesResource(SyncAPIResource):
     def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
         force: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -203,10 +167,6 @@ class ServicesResource(SyncAPIResource):
         If the service is not stopped it will be stopped before deletion.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -215,15 +175,6 @@ class ServicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/DeleteService",
             body=maybe_transform(
@@ -242,9 +193,7 @@ class ServicesResource(SyncAPIResource):
     def start(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -260,10 +209,6 @@ class ServicesResource(SyncAPIResource):
         This call will not error if the service is already running or has been started.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -272,15 +217,6 @@ class ServicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/StartService",
             body=maybe_transform({"id": id}, service_start_params.ServiceStartParams),
@@ -293,9 +229,7 @@ class ServicesResource(SyncAPIResource):
     def stop(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -311,10 +245,6 @@ class ServicesResource(SyncAPIResource):
         This call will not error if the service is already stopped or has been stopped.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -323,15 +253,6 @@ class ServicesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/StopService",
             body=maybe_transform({"id": id}, service_stop_params.ServiceStopParams),
@@ -365,12 +286,10 @@ class AsyncServicesResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
         metadata: service_update_params.Metadata | NotGiven = NOT_GIVEN,
         spec: service_update_params.Spec | NotGiven = NOT_GIVEN,
         status: service_update_params.Status | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -382,8 +301,6 @@ class AsyncServicesResource(AsyncAPIResource):
         UpdateService
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: Changing the spec of a service is a complex operation. The spec of a service
 
               can only be updated if the service is in a stopped state. If the service is
@@ -395,8 +312,6 @@ class AsyncServicesResource(AsyncAPIResource):
               of this API you are not expected to provide this field. Updating this field
               requires the `environmentservice:update_status` permission.
 
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -405,15 +320,6 @@ class AsyncServicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpdateService",
             body=await async_maybe_transform(
@@ -434,10 +340,8 @@ class AsyncServicesResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: service_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: service_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -449,13 +353,9 @@ class AsyncServicesResource(AsyncAPIResource):
         ListServices
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           filter: filter contains the filter options for listing services
 
           pagination: pagination contains the pagination options for listing services
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -465,15 +365,6 @@ class AsyncServicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
             body=await async_maybe_transform(
@@ -492,10 +383,8 @@ class AsyncServicesResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
         force: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -511,10 +400,6 @@ class AsyncServicesResource(AsyncAPIResource):
         If the service is not stopped it will be stopped before deletion.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -523,15 +408,6 @@ class AsyncServicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/DeleteService",
             body=await async_maybe_transform(
@@ -550,9 +426,7 @@ class AsyncServicesResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -568,10 +442,6 @@ class AsyncServicesResource(AsyncAPIResource):
         This call will not error if the service is already running or has been started.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -580,15 +450,6 @@ class AsyncServicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/StartService",
             body=await async_maybe_transform({"id": id}, service_start_params.ServiceStartParams),
@@ -601,9 +462,7 @@ class AsyncServicesResource(AsyncAPIResource):
     async def stop(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -619,10 +478,6 @@ class AsyncServicesResource(AsyncAPIResource):
         This call will not error if the service is already stopped or has been stopped.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -631,15 +486,6 @@ class AsyncServicesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/StopService",
             body=await async_maybe_transform({"id": id}, service_stop_params.ServiceStopParams),

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -11,17 +11,11 @@ __all__ = ["ServiceListParams", "Filter", "Pagination"]
 
 
 class ServiceListParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     filter: Filter
     """filter contains the filter options for listing services"""
 
     pagination: Pagination
     """pagination contains the pagination options for listing services"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Filter(TypedDict, total=False):
