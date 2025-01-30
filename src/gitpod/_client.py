@@ -54,14 +54,14 @@ class Gitpod(SyncAPIClient):
 
     # client options
     bearer_token: str
-    connect_protocol_version: bool
+    connect_protocol_version: float
     connect_timeout_header: float
 
     def __init__(
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: bool | None = 1,
+        connect_protocol_version: float | None = 1,
         connect_timeout_header: float,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
@@ -153,7 +153,7 @@ class Gitpod(SyncAPIClient):
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: bool | None = None,
+        connect_protocol_version: float | None = None,
         connect_timeout_header: float | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
@@ -252,14 +252,14 @@ class AsyncGitpod(AsyncAPIClient):
 
     # client options
     bearer_token: str
-    connect_protocol_version: bool
+    connect_protocol_version: float
     connect_timeout_header: float
 
     def __init__(
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: bool | None = 1,
+        connect_protocol_version: float | None = 1,
         connect_timeout_header: float,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
@@ -351,7 +351,7 @@ class AsyncGitpod(AsyncAPIClient):
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: bool | None = None,
+        connect_protocol_version: float | None = None,
         connect_timeout_header: float | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
