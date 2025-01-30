@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ...types import (
@@ -15,9 +13,7 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -72,9 +68,7 @@ class EnvironmentsResource(SyncAPIResource):
     def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         spec: environment_create_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,13 +80,9 @@ class EnvironmentsResource(SyncAPIResource):
         CreateEnvironment creates a new environment and starts it.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
 
               start
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -102,15 +92,6 @@ class EnvironmentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironment",
             body=maybe_transform({"spec": spec}, environment_create_params.EnvironmentCreateParams),
@@ -123,9 +104,7 @@ class EnvironmentsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,11 +119,7 @@ class EnvironmentsResource(SyncAPIResource):
         +return NOT_FOUND Environment does not exist
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           environment_id: environment_id specifies the environment to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -154,15 +129,6 @@ class EnvironmentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentService/GetEnvironment",
             body=maybe_transform(
@@ -177,11 +143,9 @@ class EnvironmentsResource(SyncAPIResource):
     def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
         pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,13 +157,9 @@ class EnvironmentsResource(SyncAPIResource):
         ListEnvironments returns a list of environments that match the query.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           organization_id: organization_id is the ID of the organization that contains the environments
 
           pagination: pagination contains the pagination options for listing environments
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -209,15 +169,6 @@ class EnvironmentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
             body=maybe_transform(
@@ -237,10 +188,8 @@ class EnvironmentsResource(SyncAPIResource):
     def create_from_project(
         self,
         *,
-        connect_protocol_version: Literal[1],
         project_id: str | NotGiven = NOT_GIVEN,
         spec: environment_create_from_project_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -253,13 +202,9 @@ class EnvironmentsResource(SyncAPIResource):
         and starts it.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
 
               start
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -269,15 +214,6 @@ class EnvironmentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironmentFromProject",
             body=maybe_transform(
@@ -296,9 +232,7 @@ class EnvironmentsResource(SyncAPIResource):
     def start(
         self,
         *,
-        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -313,11 +247,7 @@ class EnvironmentsResource(SyncAPIResource):
         the environment is already running no error is returned.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           environment_id: environment_id specifies which environment should be started.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -327,15 +257,6 @@ class EnvironmentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentService/StartEnvironment",
             body=maybe_transform({"environment_id": environment_id}, environment_start_params.EnvironmentStartParams),
@@ -373,9 +294,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         spec: environment_create_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -387,13 +306,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         CreateEnvironment creates a new environment and starts it.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
 
               start
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -403,15 +318,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironment",
             body=await async_maybe_transform({"spec": spec}, environment_create_params.EnvironmentCreateParams),
@@ -424,9 +330,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -441,11 +345,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         +return NOT_FOUND Environment does not exist
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           environment_id: environment_id specifies the environment to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -455,15 +355,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentService/GetEnvironment",
             body=await async_maybe_transform(
@@ -478,11 +369,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        connect_protocol_version: Literal[1],
         filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
         pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -494,13 +383,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         ListEnvironments returns a list of environments that match the query.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           organization_id: organization_id is the ID of the organization that contains the environments
 
           pagination: pagination contains the pagination options for listing environments
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -510,15 +395,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
             body=await async_maybe_transform(
@@ -538,10 +414,8 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create_from_project(
         self,
         *,
-        connect_protocol_version: Literal[1],
         project_id: str | NotGiven = NOT_GIVEN,
         spec: environment_create_from_project_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -554,13 +428,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         and starts it.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
 
               start
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -570,15 +440,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironmentFromProject",
             body=await async_maybe_transform(
@@ -597,9 +458,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -614,11 +473,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         the environment is already running no error is returned.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           environment_id: environment_id specifies which environment should be started.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -628,15 +483,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentService/StartEnvironment",
             body=await async_maybe_transform(

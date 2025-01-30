@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, List
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -21,9 +21,6 @@ __all__ = [
 
 
 class AutomationUpsertParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     automations_file: Annotated[AutomationsFile, PropertyInfo(alias="automationsFile")]
     """
     WARN: Do not remove any field here, as it will break reading automation yaml
@@ -35,9 +32,6 @@ class AutomationUpsertParams(TypedDict, total=False):
     """
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class AutomationsFileServicesCommands(TypedDict, total=False):

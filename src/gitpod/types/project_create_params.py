@@ -27,9 +27,6 @@ class ProjectCreateParams(TypedDict, total=False):
     initializer: Required[Initializer]
     """EnvironmentInitializer specifies how an environment is to be initialized"""
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file relative to the repo
@@ -51,9 +48,6 @@ class ProjectCreateParams(TypedDict, total=False):
     """
 
     name: str
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class EnvironmentClassEnvironmentClassID(TypedDict, total=False):

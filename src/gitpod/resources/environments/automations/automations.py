@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from .tasks import (
@@ -24,9 +22,7 @@ from .services import (
 )
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ...._compat import cached_property
@@ -87,10 +83,8 @@ class AutomationsResource(SyncAPIResource):
     def upsert(
         self,
         *,
-        connect_protocol_version: Literal[1],
         automations_file: automation_upsert_params.AutomationsFile | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -102,16 +96,12 @@ class AutomationsResource(SyncAPIResource):
         UpsertAutomationsFile upserts the automations file for the given environment.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           automations_file: WARN: Do not remove any field here, as it will break reading automation yaml
               files. We error if there are any
 
               unknown fields in the yaml (to ensure the yaml is correct), but would break if
               we removed any fields. This includes marking a field as "reserved" in the proto
               file, this will also break reading the yaml.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -121,15 +111,6 @@ class AutomationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpsertAutomationsFile",
             body=maybe_transform(
@@ -181,10 +162,8 @@ class AsyncAutomationsResource(AsyncAPIResource):
     async def upsert(
         self,
         *,
-        connect_protocol_version: Literal[1],
         automations_file: automation_upsert_params.AutomationsFile | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -196,16 +175,12 @@ class AsyncAutomationsResource(AsyncAPIResource):
         UpsertAutomationsFile upserts the automations file for the given environment.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           automations_file: WARN: Do not remove any field here, as it will break reading automation yaml
               files. We error if there are any
 
               unknown fields in the yaml (to ensure the yaml is correct), but would break if
               we removed any fields. This includes marking a field as "reserved" in the proto
               file, this will also break reading the yaml.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -215,15 +190,6 @@ class AsyncAutomationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EnvironmentAutomationService/UpsertAutomationsFile",
             body=await async_maybe_transform(

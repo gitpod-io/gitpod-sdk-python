@@ -29,11 +29,12 @@ The full API of this library can be found in [api.md](api.md).
 ```python
 from gitpod import Gitpod
 
-client = Gitpod()
-
-runner = client.runners.create(
-    connect_protocol_version=1,
+client = Gitpod(
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
+
+runner = client.runners.create()
 print(runner.access_token)
 ```
 
@@ -50,13 +51,14 @@ Simply import `AsyncGitpod` instead of `Gitpod` and use `await` with each API ca
 import asyncio
 from gitpod import AsyncGitpod
 
-client = AsyncGitpod()
+client = AsyncGitpod(
+    connect_protocol_version=True,
+    connect_timeout_header=0,
+)
 
 
 async def main() -> None:
-    runner = await client.runners.create(
-        connect_protocol_version=1,
-    )
+    runner = await client.runners.create()
     print(runner.access_token)
 
 
@@ -87,12 +89,13 @@ All errors inherit from `gitpod.APIError`.
 import gitpod
 from gitpod import Gitpod
 
-client = Gitpod()
+client = Gitpod(
+    connect_protocol_version=True,
+    connect_timeout_header=0,
+)
 
 try:
-    client.runners.create(
-        connect_protocol_version=1,
-    )
+    client.runners.create()
 except gitpod.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -132,12 +135,12 @@ from gitpod import Gitpod
 client = Gitpod(
     # default is 2
     max_retries=0,
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).runners.create(
-    connect_protocol_version=1,
-)
+client.with_options(max_retries=5).runners.create()
 ```
 
 ### Timeouts
@@ -152,17 +155,19 @@ from gitpod import Gitpod
 client = Gitpod(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
 
 # More granular control:
 client = Gitpod(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).runners.create(
-    connect_protocol_version=1,
-)
+client.with_options(timeout=5.0).runners.create()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -202,10 +207,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from gitpod import Gitpod
 
-client = Gitpod()
-response = client.runners.with_raw_response.create(
-    connect_protocol_version=1,
+client = Gitpod(
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
+response = client.runners.with_raw_response.create()
 print(response.headers.get('X-My-Header'))
 
 runner = response.parse()  # get the object that `runners.create()` would have returned
@@ -223,9 +229,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.runners.with_streaming_response.create(
-    connect_protocol_version=1,
-) as response:
+with client.runners.with_streaming_response.create() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -287,6 +291,8 @@ client = Gitpod(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
+    connect_protocol_version=True,
+    connect_timeout_header=0,
 )
 ```
 
@@ -303,7 +309,10 @@ By default the library closes underlying HTTP connections whenever the client is
 ```py
 from gitpod import Gitpod
 
-with Gitpod() as client:
+with Gitpod(
+    connect_protocol_version=True,
+    connect_timeout_header=0,
+) as client:
   # make requests here
   ...
 
