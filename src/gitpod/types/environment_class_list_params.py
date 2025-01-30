@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -14,7 +13,7 @@ class EnvironmentClassListParams(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    filter: Union[object, object]
+    filter: object
 
     pagination: Pagination
     """pagination contains the pagination options for listing environment classes"""

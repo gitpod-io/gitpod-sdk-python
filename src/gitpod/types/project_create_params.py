@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -11,7 +11,7 @@ __all__ = ["ProjectCreateParams", "Initializer", "InitializerSpec"]
 
 
 class ProjectCreateParams(TypedDict, total=False):
-    environment_class: Required[Annotated[Union[object, object, object], PropertyInfo(alias="environmentClass")]]
+    environment_class: Required[Annotated[object, PropertyInfo(alias="environmentClass")]]
 
     initializer: Required[Initializer]
     """EnvironmentInitializer specifies how an environment is to be initialized"""

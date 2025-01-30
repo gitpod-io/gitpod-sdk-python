@@ -186,7 +186,7 @@ class TestTasks:
             },
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )
@@ -463,7 +463,7 @@ class TestAsyncTasks:
             },
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )

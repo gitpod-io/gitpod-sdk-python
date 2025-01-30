@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
 from typing_extensions import Literal
 
 import httpx
@@ -100,7 +99,7 @@ class EnvironmentClassesResource(SyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        filter: Union[object, object] | NotGiven = NOT_GIVEN,
+        filter: object | NotGiven = NOT_GIVEN,
         pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -226,7 +225,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        filter: Union[object, object] | NotGiven = NOT_GIVEN,
+        filter: object | NotGiven = NOT_GIVEN,
         pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

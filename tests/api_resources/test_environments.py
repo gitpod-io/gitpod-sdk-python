@@ -183,7 +183,7 @@ class TestEnvironments:
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )
@@ -519,7 +519,7 @@ class TestAsyncEnvironments:
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )

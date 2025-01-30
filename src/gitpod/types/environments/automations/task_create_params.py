@@ -174,5 +174,5 @@ class Spec(TypedDict, total=False):
     command: str
     """command contains the command the task should execute"""
 
-    runs_on: Annotated[Union[object, object], PropertyInfo(alias="runsOn")]
+    runs_on: Annotated[object, PropertyInfo(alias="runsOn")]
     """runs_on specifies the environment the task should run on."""

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Union
 from typing_extensions import Literal
 
 import httpx
@@ -58,7 +57,7 @@ class ProjectsResource(SyncAPIResource):
     def create(
         self,
         *,
-        environment_class: Union[object, object, object],
+        environment_class: object,
         initializer: project_create_params.Initializer,
         connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,
@@ -260,7 +259,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        environment_class: Union[object, object, object],
+        environment_class: object,
         initializer: project_create_params.Initializer,
         connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,
