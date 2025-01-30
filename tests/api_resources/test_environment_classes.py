@@ -31,7 +31,7 @@ class TestEnvironmentClasses:
             filter={},
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )
@@ -79,7 +79,7 @@ class TestAsyncEnvironmentClasses:
             filter={},
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             connect_timeout_ms=0,
         )

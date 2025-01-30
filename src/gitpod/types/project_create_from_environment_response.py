@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -269,7 +269,7 @@ class ProjectUsedBy(BaseModel):
 
 
 class Project(BaseModel):
-    environment_class: Union[object, object, object] = FieldInfo(alias="environmentClass")
+    environment_class: object = FieldInfo(alias="environmentClass")
 
     id: Optional[str] = None
     """id is the unique identifier for the project"""

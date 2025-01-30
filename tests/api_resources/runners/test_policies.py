@@ -30,7 +30,7 @@ class TestPolicies:
             connect_protocol_version=1,
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
@@ -78,7 +78,7 @@ class TestAsyncPolicies:
             connect_protocol_version=1,
             pagination={
                 "token": "token",
-                "page_size": 0,
+                "page_size": 100,
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
