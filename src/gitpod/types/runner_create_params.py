@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,6 +10,9 @@ __all__ = ["RunnerCreateParams", "Spec", "SpecConfiguration"]
 
 
 class RunnerCreateParams(TypedDict, total=False):
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     kind: Literal[
         "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
     ]
@@ -19,6 +22,9 @@ class RunnerCreateParams(TypedDict, total=False):
     """The runner name for humans"""
 
     spec: Spec
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class SpecConfiguration(TypedDict, total=False):

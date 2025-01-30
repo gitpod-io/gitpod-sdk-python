@@ -36,6 +36,9 @@ __all__ = [
 
 
 class ServiceUpdateParams(TypedDict, total=False):
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     id: str
 
     metadata: Metadata
@@ -55,6 +58,9 @@ class ServiceUpdateParams(TypedDict, total=False):
     of this API you are not expected to provide this field. Updating this field
     requires the `environmentservice:update_status` permission.
     """
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class MetadataDescription(TypedDict, total=False):

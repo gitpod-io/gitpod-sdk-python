@@ -29,8 +29,6 @@ def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 bearer_token = "My Bearer Token"
-connect_protocol_version = 0
-connect_timeout_header = 0
 
 
 @pytest.fixture(scope="session")
@@ -39,13 +37,7 @@ def client(request: FixtureRequest) -> Iterator[Gitpod]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Gitpod(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        connect_protocol_version=connect_protocol_version,
-        connect_timeout_header=connect_timeout_header,
-        _strict_response_validation=strict,
-    ) as client:
+    with Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client:
         yield client
 
 
@@ -55,11 +47,5 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncGitpod]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncGitpod(
-        base_url=base_url,
-        bearer_token=bearer_token,
-        connect_protocol_version=connect_protocol_version,
-        connect_timeout_header=connect_timeout_header,
-        _strict_response_validation=strict,
-    ) as client:
+    async with AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=strict) as client:
         yield client

@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import personal_access_token_list_params, personal_access_token_delete_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
+    is_given,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -47,8 +51,10 @@ class PersonalAccessTokensResource(SyncAPIResource):
     def list(
         self,
         *,
+        connect_protocol_version: Literal[1],
         filter: personal_access_token_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: personal_access_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -60,6 +66,10 @@ class PersonalAccessTokensResource(SyncAPIResource):
         ListPersonalAccessTokens
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -68,6 +78,15 @@ class PersonalAccessTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
             body=maybe_transform(
@@ -86,7 +105,9 @@ class PersonalAccessTokensResource(SyncAPIResource):
     def delete(
         self,
         *,
+        connect_protocol_version: Literal[1],
         personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,6 +119,10 @@ class PersonalAccessTokensResource(SyncAPIResource):
         DeletePersonalAccessToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -106,6 +131,15 @@ class PersonalAccessTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.UserService/DeletePersonalAccessToken",
             body=maybe_transform(
@@ -142,8 +176,10 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        connect_protocol_version: Literal[1],
         filter: personal_access_token_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: personal_access_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,6 +191,10 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
         ListPersonalAccessTokens
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -163,6 +203,15 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
             body=await async_maybe_transform(
@@ -181,7 +230,9 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
     async def delete(
         self,
         *,
+        connect_protocol_version: Literal[1],
         personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -193,6 +244,10 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
         DeletePersonalAccessToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -201,6 +256,15 @@ class AsyncPersonalAccessTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.UserService/DeletePersonalAccessToken",
             body=await async_maybe_transform(

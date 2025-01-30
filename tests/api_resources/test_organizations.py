@@ -21,19 +21,25 @@ class TestOrganizations:
 
     @parametrize
     def test_method_leave(self, client: Gitpod) -> None:
-        organization = client.organizations.leave()
+        organization = client.organizations.leave(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     def test_method_leave_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.leave(
+            connect_protocol_version=1,
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     def test_raw_response_leave(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.leave()
+        response = client.organizations.with_raw_response.leave(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -42,7 +48,9 @@ class TestOrganizations:
 
     @parametrize
     def test_streaming_response_leave(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.leave() as response:
+        with client.organizations.with_streaming_response.leave(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -53,23 +61,29 @@ class TestOrganizations:
 
     @parametrize
     def test_method_list_members(self, client: Gitpod) -> None:
-        organization = client.organizations.list_members()
+        organization = client.organizations.list_members(
+            connect_protocol_version=1,
+        )
         assert_matches_type(OrganizationListMembersResponse, organization, path=["response"])
 
     @parametrize
     def test_method_list_members_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.list_members(
+            connect_protocol_version=1,
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
+            connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationListMembersResponse, organization, path=["response"])
 
     @parametrize
     def test_raw_response_list_members(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.list_members()
+        response = client.organizations.with_raw_response.list_members(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,7 +92,9 @@ class TestOrganizations:
 
     @parametrize
     def test_streaming_response_list_members(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.list_members() as response:
+        with client.organizations.with_streaming_response.list_members(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -89,21 +105,27 @@ class TestOrganizations:
 
     @parametrize
     def test_method_set_role(self, client: Gitpod) -> None:
-        organization = client.organizations.set_role()
+        organization = client.organizations.set_role(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     def test_method_set_role_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.set_role(
+            connect_protocol_version=1,
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             role="ORGANIZATION_ROLE_UNSPECIFIED",
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     def test_raw_response_set_role(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.set_role()
+        response = client.organizations.with_raw_response.set_role(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -112,7 +134,9 @@ class TestOrganizations:
 
     @parametrize
     def test_streaming_response_set_role(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.set_role() as response:
+        with client.organizations.with_streaming_response.set_role(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -127,19 +151,25 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_method_leave(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.leave()
+        organization = await async_client.organizations.leave(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     async def test_method_leave_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.leave(
+            connect_protocol_version=1,
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     async def test_raw_response_leave(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.leave()
+        response = await async_client.organizations.with_raw_response.leave(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -148,7 +178,9 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_streaming_response_leave(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.leave() as response:
+        async with async_client.organizations.with_streaming_response.leave(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -159,23 +191,29 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_method_list_members(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.list_members()
+        organization = await async_client.organizations.list_members(
+            connect_protocol_version=1,
+        )
         assert_matches_type(OrganizationListMembersResponse, organization, path=["response"])
 
     @parametrize
     async def test_method_list_members_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members(
+            connect_protocol_version=1,
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
+            connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationListMembersResponse, organization, path=["response"])
 
     @parametrize
     async def test_raw_response_list_members(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.list_members()
+        response = await async_client.organizations.with_raw_response.list_members(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -184,7 +222,9 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_streaming_response_list_members(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.list_members() as response:
+        async with async_client.organizations.with_streaming_response.list_members(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -195,21 +235,27 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_method_set_role(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.set_role()
+        organization = await async_client.organizations.set_role(
+            connect_protocol_version=1,
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     async def test_method_set_role_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.set_role(
+            connect_protocol_version=1,
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             role="ORGANIZATION_ROLE_UNSPECIFIED",
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(object, organization, path=["response"])
 
     @parametrize
     async def test_raw_response_set_role(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.set_role()
+        response = await async_client.organizations.with_raw_response.set_role(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -218,7 +264,9 @@ class TestAsyncOrganizations:
 
     @parametrize
     async def test_streaming_response_set_role(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.set_role() as response:
+        async with async_client.organizations.with_streaming_response.set_role(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

@@ -54,15 +54,11 @@ class Gitpod(SyncAPIClient):
 
     # client options
     bearer_token: str
-    connect_protocol_version: float
-    connect_timeout_header: float
 
     def __init__(
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: float | None = 1,
-        connect_timeout_header: float,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -93,12 +89,6 @@ class Gitpod(SyncAPIClient):
                 "The bearer_token client option must be set either by passing bearer_token to the client or by setting the GITPOD_API_KEY environment variable"
             )
         self.bearer_token = bearer_token
-
-        if connect_protocol_version is None:
-            connect_protocol_version = 1
-        self.connect_protocol_version = connect_protocol_version
-
-        self.connect_timeout_header = connect_timeout_header
 
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
@@ -144,8 +134,6 @@ class Gitpod(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
-            "Connect-Protocol-Version": str(self.connect_protocol_version),
-            "Connect-Timeout-Ms": str(self.connect_timeout_header),
             **self._custom_headers,
         }
 
@@ -153,8 +141,6 @@ class Gitpod(SyncAPIClient):
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: float | None = None,
-        connect_timeout_header: float | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -189,8 +175,6 @@ class Gitpod(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             bearer_token=bearer_token or self.bearer_token,
-            connect_protocol_version=connect_protocol_version or self.connect_protocol_version,
-            connect_timeout_header=connect_timeout_header or self.connect_timeout_header,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -252,15 +236,11 @@ class AsyncGitpod(AsyncAPIClient):
 
     # client options
     bearer_token: str
-    connect_protocol_version: float
-    connect_timeout_header: float
 
     def __init__(
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: float | None = 1,
-        connect_timeout_header: float,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -291,12 +271,6 @@ class AsyncGitpod(AsyncAPIClient):
                 "The bearer_token client option must be set either by passing bearer_token to the client or by setting the GITPOD_API_KEY environment variable"
             )
         self.bearer_token = bearer_token
-
-        if connect_protocol_version is None:
-            connect_protocol_version = 1
-        self.connect_protocol_version = connect_protocol_version
-
-        self.connect_timeout_header = connect_timeout_header
 
         if base_url is None:
             base_url = os.environ.get("GITPOD_BASE_URL")
@@ -342,8 +316,6 @@ class AsyncGitpod(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
-            "Connect-Protocol-Version": str(self.connect_protocol_version),
-            "Connect-Timeout-Ms": str(self.connect_timeout_header),
             **self._custom_headers,
         }
 
@@ -351,8 +323,6 @@ class AsyncGitpod(AsyncAPIClient):
         self,
         *,
         bearer_token: str | None = None,
-        connect_protocol_version: float | None = None,
-        connect_timeout_header: float | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -387,8 +357,6 @@ class AsyncGitpod(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             bearer_token=bearer_token or self.bearer_token,
-            connect_protocol_version=connect_protocol_version or self.connect_protocol_version,
-            connect_timeout_header=connect_timeout_header or self.connect_timeout_header,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,

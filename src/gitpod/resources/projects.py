@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..types import (
@@ -11,7 +13,9 @@ from ..types import (
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
+    is_given,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -55,9 +59,11 @@ class ProjectsResource(SyncAPIResource):
         *,
         environment_class: project_create_params.EnvironmentClass,
         initializer: project_create_params.Initializer,
+        connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -70,6 +76,8 @@ class ProjectsResource(SyncAPIResource):
 
         Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
+
+          connect_protocol_version: Define the version of the Connect protocol
 
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
               root path must not be absolute (start with a /):
@@ -85,6 +93,8 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -93,6 +103,15 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.ProjectService/CreateProject",
             body=maybe_transform(
@@ -114,7 +133,9 @@ class ProjectsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
+        connect_protocol_version: Literal[1],
         project_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -126,7 +147,11 @@ class ProjectsResource(SyncAPIResource):
         GetProject retrieves a single Project.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           project_id: project_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -136,6 +161,15 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.ProjectService/GetProject",
             body=maybe_transform({"project_id": project_id}, project_retrieve_params.ProjectRetrieveParams),
@@ -148,8 +182,10 @@ class ProjectsResource(SyncAPIResource):
     def create_from_environment(
         self,
         *,
+        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -161,7 +197,11 @@ class ProjectsResource(SyncAPIResource):
         CreateProject creates a new Project using an environment as template.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           environment_id: environment_id specifies the environment identifier
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -171,6 +211,15 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.ProjectService/CreateProjectFromEnvironment",
             body=maybe_transform(
@@ -212,9 +261,11 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         environment_class: project_create_params.EnvironmentClass,
         initializer: project_create_params.Initializer,
+        connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -227,6 +278,8 @@ class AsyncProjectsResource(AsyncAPIResource):
 
         Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
+
+          connect_protocol_version: Define the version of the Connect protocol
 
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
               root path must not be absolute (start with a /):
@@ -242,6 +295,8 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -250,6 +305,15 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.ProjectService/CreateProject",
             body=await async_maybe_transform(
@@ -271,7 +335,9 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
+        connect_protocol_version: Literal[1],
         project_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -283,7 +349,11 @@ class AsyncProjectsResource(AsyncAPIResource):
         GetProject retrieves a single Project.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           project_id: project_id specifies the project identifier
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -293,6 +363,15 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.ProjectService/GetProject",
             body=await async_maybe_transform({"project_id": project_id}, project_retrieve_params.ProjectRetrieveParams),
@@ -305,8 +384,10 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create_from_environment(
         self,
         *,
+        connect_protocol_version: Literal[1],
         environment_id: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -318,7 +399,11 @@ class AsyncProjectsResource(AsyncAPIResource):
         CreateProject creates a new Project using an environment as template.
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
           environment_id: environment_id specifies the environment identifier
+
+          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -328,6 +413,15 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.ProjectService/CreateProjectFromEnvironment",
             body=await async_maybe_transform(

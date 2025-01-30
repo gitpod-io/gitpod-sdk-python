@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -20,6 +20,12 @@ class FailureMessage(TypedDict, total=False):
     only if the task execution as a whole has failed/cannot be started.
     """
 
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
+
 
 class LogURL(TypedDict, total=False):
     log_url: Required[Annotated[str, PropertyInfo(alias="logUrl")]]
@@ -27,6 +33,12 @@ class LogURL(TypedDict, total=False):
 
     If this is empty, the task either has no logs or has not yet started.
     """
+
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 TaskExecutionUpdateTaskExecutionStatusParams: TypeAlias = Union[FailureMessage, LogURL]

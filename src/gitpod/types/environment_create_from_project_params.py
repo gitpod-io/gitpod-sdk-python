@@ -31,6 +31,9 @@ __all__ = [
 
 
 class EnvironmentCreateFromProjectParams(TypedDict, total=False):
+    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
+    """Define the version of the Connect protocol"""
+
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
 
     spec: Spec
@@ -38,6 +41,9 @@ class EnvironmentCreateFromProjectParams(TypedDict, total=False):
 
     start
     """
+
+    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
+    """Define the timeout, in ms"""
 
 
 class SpecAutomationsFile(TypedDict, total=False):

@@ -21,6 +21,16 @@ class TestScmIntegration:
     def test_method_create_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runner_configurations.scm_integration.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_1(self, client: Gitpod) -> None:
+        scm_integration = client.runner_configurations.scm_integration.create(
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -28,6 +38,7 @@ class TestScmIntegration:
     def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
         response = client.runner_configurations.scm_integration.with_raw_response.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -39,6 +50,7 @@ class TestScmIntegration:
     def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
         with client.runner_configurations.scm_integration.with_streaming_response.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -52,6 +64,16 @@ class TestScmIntegration:
     def test_method_create_overload_2(self, client: Gitpod) -> None:
         scm_integration = client.runner_configurations.scm_integration.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Gitpod) -> None:
+        scm_integration = client.runner_configurations.scm_integration.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -59,6 +81,7 @@ class TestScmIntegration:
     def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
         response = client.runner_configurations.scm_integration.with_raw_response.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -70,6 +93,7 @@ class TestScmIntegration:
     def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
         with client.runner_configurations.scm_integration.with_streaming_response.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -87,6 +111,16 @@ class TestAsyncScmIntegration:
     async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runner_configurations.scm_integration.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runner_configurations.scm_integration.create(
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -94,6 +128,7 @@ class TestAsyncScmIntegration:
     async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.scm_integration.with_raw_response.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -105,6 +140,7 @@ class TestAsyncScmIntegration:
     async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.scm_integration.with_streaming_response.create(
             oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -118,6 +154,16 @@ class TestAsyncScmIntegration:
     async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runner_configurations.scm_integration.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runner_configurations.scm_integration.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -125,6 +171,7 @@ class TestAsyncScmIntegration:
     async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.scm_integration.with_raw_response.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -136,6 +183,7 @@ class TestAsyncScmIntegration:
     async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.scm_integration.with_streaming_response.create(
             oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

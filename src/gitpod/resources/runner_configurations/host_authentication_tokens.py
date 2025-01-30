@@ -4,14 +4,16 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import datetime
-from typing_extensions import overload
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
+    is_given,
     required_args,
     maybe_transform,
+    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -64,7 +66,9 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def create(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -76,6 +80,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         GetHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -84,6 +92,15 @@ class HostAuthenticationTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken",
             body=maybe_transform(
@@ -98,7 +115,9 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def retrieve(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -110,6 +129,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         GetHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -118,6 +141,15 @@ class HostAuthenticationTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken",
             body=maybe_transform(
@@ -134,6 +166,8 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         self,
         *,
         expires_at: Union[str, datetime],
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -235,6 +269,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
               [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
               to obtain a formatter capable of generating timestamps in this format.
 
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -250,6 +288,8 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         self,
         *,
         refresh_token: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -261,6 +301,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         UpdateHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -276,6 +320,8 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         self,
         *,
         token: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -287,6 +333,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         UpdateHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -297,11 +347,17 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["expires_at"], ["refresh_token"], ["token"])
+    @required_args(
+        ["expires_at", "connect_protocol_version"],
+        ["refresh_token", "connect_protocol_version"],
+        ["token", "connect_protocol_version"],
+    )
     def update(
         self,
         *,
         expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         refresh_token: str | NotGiven = NOT_GIVEN,
         token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -311,6 +367,15 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateHostAuthenticationToken",
             body=maybe_transform(
@@ -330,8 +395,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def list(
         self,
         *,
+        connect_protocol_version: Literal[1],
         filter: host_authentication_token_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: host_authentication_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -343,6 +410,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         ListHostAuthenticationTokens
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -351,6 +422,15 @@ class HostAuthenticationTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
             body=maybe_transform(
@@ -369,7 +449,9 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def delete(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -381,6 +463,10 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         DeleteHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -389,6 +475,15 @@ class HostAuthenticationTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/DeleteHostAuthenticationToken",
             body=maybe_transform(
@@ -424,7 +519,9 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -436,6 +533,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         GetHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -444,6 +545,15 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken",
             body=await async_maybe_transform(
@@ -458,7 +568,9 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,6 +582,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         GetHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -478,6 +594,15 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/GetHostAuthenticationToken",
             body=await async_maybe_transform(
@@ -494,6 +619,8 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         self,
         *,
         expires_at: Union[str, datetime],
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -595,6 +722,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
               [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
               to obtain a formatter capable of generating timestamps in this format.
 
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -610,6 +741,8 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         self,
         *,
         refresh_token: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -621,6 +754,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         UpdateHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -636,6 +773,8 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         self,
         *,
         token: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -647,6 +786,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         UpdateHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -657,11 +800,17 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["expires_at"], ["refresh_token"], ["token"])
+    @required_args(
+        ["expires_at", "connect_protocol_version"],
+        ["refresh_token", "connect_protocol_version"],
+        ["token", "connect_protocol_version"],
+    )
     async def update(
         self,
         *,
         expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         refresh_token: str | NotGiven = NOT_GIVEN,
         token: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -671,6 +820,15 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateHostAuthenticationToken",
             body=await async_maybe_transform(
@@ -690,8 +848,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        connect_protocol_version: Literal[1],
         filter: host_authentication_token_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: host_authentication_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -703,6 +863,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         ListHostAuthenticationTokens
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -711,6 +875,15 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
             body=await async_maybe_transform(
@@ -729,7 +902,9 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def delete(
         self,
         *,
+        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -741,6 +916,10 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         DeleteHostAuthenticationToken
 
         Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -749,6 +928,15 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/DeleteHostAuthenticationToken",
             body=await async_maybe_transform(

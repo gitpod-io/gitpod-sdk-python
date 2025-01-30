@@ -19,12 +19,15 @@ class TestAutomations:
 
     @parametrize
     def test_method_upsert(self, client: Gitpod) -> None:
-        automation = client.environments.automations.upsert()
+        automation = client.environments.automations.upsert(
+            connect_protocol_version=1,
+        )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 
     @parametrize
     def test_method_upsert_with_all_params(self, client: Gitpod) -> None:
         automation = client.environments.automations.upsert(
+            connect_protocol_version=1,
             automations_file={
                 "services": {
                     "foo": {
@@ -61,12 +64,15 @@ class TestAutomations:
                 },
             },
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 
     @parametrize
     def test_raw_response_upsert(self, client: Gitpod) -> None:
-        response = client.environments.automations.with_raw_response.upsert()
+        response = client.environments.automations.with_raw_response.upsert(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -75,7 +81,9 @@ class TestAutomations:
 
     @parametrize
     def test_streaming_response_upsert(self, client: Gitpod) -> None:
-        with client.environments.automations.with_streaming_response.upsert() as response:
+        with client.environments.automations.with_streaming_response.upsert(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -90,12 +98,15 @@ class TestAsyncAutomations:
 
     @parametrize
     async def test_method_upsert(self, async_client: AsyncGitpod) -> None:
-        automation = await async_client.environments.automations.upsert()
+        automation = await async_client.environments.automations.upsert(
+            connect_protocol_version=1,
+        )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 
     @parametrize
     async def test_method_upsert_with_all_params(self, async_client: AsyncGitpod) -> None:
         automation = await async_client.environments.automations.upsert(
+            connect_protocol_version=1,
             automations_file={
                 "services": {
                     "foo": {
@@ -132,12 +143,15 @@ class TestAsyncAutomations:
                 },
             },
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
         )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 
     @parametrize
     async def test_raw_response_upsert(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.automations.with_raw_response.upsert()
+        response = await async_client.environments.automations.with_raw_response.upsert(
+            connect_protocol_version=1,
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -146,7 +160,9 @@ class TestAsyncAutomations:
 
     @parametrize
     async def test_streaming_response_upsert(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.automations.with_streaming_response.upsert() as response:
+        async with async_client.environments.automations.with_streaming_response.upsert(
+            connect_protocol_version=1,
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
