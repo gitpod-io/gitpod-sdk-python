@@ -10,10 +10,25 @@ __all__ = ["IdentityGetAuthenticatedIdentityParams"]
 
 
 class IdentityGetAuthenticatedIdentityParams(TypedDict, total=False):
-    body: Required[object]
+    encoding: Required[Literal["proto", "json"]]
+    """Define which encoding or 'Message-Codec' to use"""
 
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
+
+    base64: bool
+    """
+    Specifies if the message query param is base64 encoded, which may be required
+    for binary data
+    """
+
+    compression: Literal["identity", "gzip", "br"]
+    """Which compression algorithm to use for this request"""
+
+    connect: Literal["v1"]
+    """Define the version of the Connect protocol"""
+
+    message: str
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""

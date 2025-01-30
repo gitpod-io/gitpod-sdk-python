@@ -14,15 +14,11 @@ from .task_start_response import TaskStartResponse as TaskStartResponse
 from .service_start_params import ServiceStartParams as ServiceStartParams
 from .task_create_response import TaskCreateResponse as TaskCreateResponse
 from .task_retrieve_params import TaskRetrieveParams as TaskRetrieveParams
+from .service_create_params import ServiceCreateParams as ServiceCreateParams
 from .service_delete_params import ServiceDeleteParams as ServiceDeleteParams
 from .service_list_response import ServiceListResponse as ServiceListResponse
 from .service_update_params import ServiceUpdateParams as ServiceUpdateParams
 from .task_retrieve_response import TaskRetrieveResponse as TaskRetrieveResponse
-from .task_execution_list_params import TaskExecutionListParams as TaskExecutionListParams
-from .task_execution_stop_params import TaskExecutionStopParams as TaskExecutionStopParams
-from .task_execution_list_response import TaskExecutionListResponse as TaskExecutionListResponse
-from .task_execution_retrieve_params import TaskExecutionRetrieveParams as TaskExecutionRetrieveParams
-from .task_execution_retrieve_response import TaskExecutionRetrieveResponse as TaskExecutionRetrieveResponse
-from .task_execution_update_task_execution_status_params import (
-    TaskExecutionUpdateTaskExecutionStatusParams as TaskExecutionUpdateTaskExecutionStatusParams,
-)
+from .service_create_response import ServiceCreateResponse as ServiceCreateResponse
+from .service_retrieve_params import ServiceRetrieveParams as ServiceRetrieveParams
+from .service_retrieve_response import ServiceRetrieveResponse as ServiceRetrieveResponse

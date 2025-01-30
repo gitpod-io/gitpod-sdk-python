@@ -26,9 +26,9 @@ __all__ = [
     "EnvironmentSpecMachine",
     "EnvironmentSpecPort",
     "EnvironmentSpecSecret",
-    "EnvironmentSpecSecretEnvironmentVariable",
-    "EnvironmentSpecSecretFilePath",
-    "EnvironmentSpecSecretGitCredentialHost",
+    "EnvironmentSpecSecretUnionMember0",
+    "EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
+    "EnvironmentSpecSecretUnionMember2",
     "EnvironmentSpecSSHPublicKey",
     "EnvironmentSpecTimeout",
     "EnvironmentStatus",
@@ -395,7 +395,7 @@ class EnvironmentSpecPort(BaseModel):
     """port number"""
 
 
-class EnvironmentSpecSecretEnvironmentVariable(BaseModel):
+class EnvironmentSpecSecretUnionMember0(BaseModel):
     environment_variable: str = FieldInfo(alias="environmentVariable")
 
     name: Optional[str] = None
@@ -414,7 +414,7 @@ class EnvironmentSpecSecretEnvironmentVariable(BaseModel):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class EnvironmentSpecSecretFilePath(BaseModel):
+class EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(BaseModel):
     file_path: str = FieldInfo(alias="filePath")
     """file_path is the path inside the devcontainer where the secret is mounted"""
 
@@ -434,7 +434,7 @@ class EnvironmentSpecSecretFilePath(BaseModel):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class EnvironmentSpecSecretGitCredentialHost(BaseModel):
+class EnvironmentSpecSecretUnionMember2(BaseModel):
     git_credential_host: str = FieldInfo(alias="gitCredentialHost")
 
     name: Optional[str] = None
@@ -454,7 +454,9 @@ class EnvironmentSpecSecretGitCredentialHost(BaseModel):
 
 
 EnvironmentSpecSecret: TypeAlias = Union[
-    EnvironmentSpecSecretEnvironmentVariable, EnvironmentSpecSecretFilePath, EnvironmentSpecSecretGitCredentialHost
+    EnvironmentSpecSecretUnionMember0,
+    EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
+    EnvironmentSpecSecretUnionMember2,
 ]
 
 

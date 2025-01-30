@@ -87,6 +87,7 @@ class TestTasks:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
@@ -94,8 +95,12 @@ class TestTasks:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
@@ -103,6 +108,7 @@ class TestTasks:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.environments.automations.tasks.with_raw_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -114,6 +120,7 @@ class TestTasks:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.environments.automations.tasks.with_streaming_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -170,6 +177,7 @@ class TestTasks:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
@@ -177,16 +185,12 @@ class TestTasks:
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.list(
+            encoding="proto",
             connect_protocol_version=1,
-            filter={
-                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
-                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            },
-            pagination={
-                "token": "token",
-                "page_size": 100,
-            },
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
@@ -194,6 +198,7 @@ class TestTasks:
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.environments.automations.tasks.with_raw_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -205,6 +210,7 @@ class TestTasks:
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.environments.automations.tasks.with_streaming_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -363,6 +369,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
@@ -370,8 +377,12 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
@@ -379,6 +390,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.environments.automations.tasks.with_raw_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -390,6 +402,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.environments.automations.tasks.with_streaming_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -446,6 +459,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
@@ -453,16 +467,12 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.list(
+            encoding="proto",
             connect_protocol_version=1,
-            filter={
-                "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
-                "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            },
-            pagination={
-                "token": "token",
-                "page_size": 100,
-            },
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(TaskListResponse, task, path=["response"])
@@ -470,6 +480,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.environments.automations.tasks.with_raw_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -481,6 +492,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.environments.automations.tasks.with_streaming_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

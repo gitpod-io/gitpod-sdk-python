@@ -6,14 +6,6 @@ from typing_extensions import Literal
 
 import httpx
 
-from .tasks import (
-    TasksResource,
-    AsyncTasksResource,
-    TasksResourceWithRawResponse,
-    AsyncTasksResourceWithRawResponse,
-    TasksResourceWithStreamingResponse,
-    AsyncTasksResourceWithStreamingResponse,
-)
 from .services import (
     ServicesResource,
     AsyncServicesResource,
@@ -30,6 +22,14 @@ from ...._utils import (
     async_maybe_transform,
 )
 from ...._compat import cached_property
+from .tasks.tasks import (
+    TasksResource,
+    AsyncTasksResource,
+    TasksResourceWithRawResponse,
+    AsyncTasksResourceWithRawResponse,
+    TasksResourceWithStreamingResponse,
+    AsyncTasksResourceWithStreamingResponse,
+)
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from ...._response import (
     to_raw_response_wrapper,
@@ -38,14 +38,6 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from .task_executions import (
-    TaskExecutionsResource,
-    AsyncTaskExecutionsResource,
-    TaskExecutionsResourceWithRawResponse,
-    AsyncTaskExecutionsResourceWithRawResponse,
-    TaskExecutionsResourceWithStreamingResponse,
-    AsyncTaskExecutionsResourceWithStreamingResponse,
-)
 from ....types.environments import automation_upsert_params
 from ....types.environments.automation_upsert_response import AutomationUpsertResponse
 
@@ -54,16 +46,12 @@ __all__ = ["AutomationsResource", "AsyncAutomationsResource"]
 
 class AutomationsResource(SyncAPIResource):
     @cached_property
-    def tasks(self) -> TasksResource:
-        return TasksResource(self._client)
-
-    @cached_property
-    def task_executions(self) -> TaskExecutionsResource:
-        return TaskExecutionsResource(self._client)
-
-    @cached_property
     def services(self) -> ServicesResource:
         return ServicesResource(self._client)
+
+    @cached_property
+    def tasks(self) -> TasksResource:
+        return TasksResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AutomationsResourceWithRawResponse:
@@ -148,16 +136,12 @@ class AutomationsResource(SyncAPIResource):
 
 class AsyncAutomationsResource(AsyncAPIResource):
     @cached_property
-    def tasks(self) -> AsyncTasksResource:
-        return AsyncTasksResource(self._client)
-
-    @cached_property
-    def task_executions(self) -> AsyncTaskExecutionsResource:
-        return AsyncTaskExecutionsResource(self._client)
-
-    @cached_property
     def services(self) -> AsyncServicesResource:
         return AsyncServicesResource(self._client)
+
+    @cached_property
+    def tasks(self) -> AsyncTasksResource:
+        return AsyncTasksResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncAutomationsResourceWithRawResponse:
@@ -249,16 +233,12 @@ class AutomationsResourceWithRawResponse:
         )
 
     @cached_property
-    def tasks(self) -> TasksResourceWithRawResponse:
-        return TasksResourceWithRawResponse(self._automations.tasks)
-
-    @cached_property
-    def task_executions(self) -> TaskExecutionsResourceWithRawResponse:
-        return TaskExecutionsResourceWithRawResponse(self._automations.task_executions)
-
-    @cached_property
     def services(self) -> ServicesResourceWithRawResponse:
         return ServicesResourceWithRawResponse(self._automations.services)
+
+    @cached_property
+    def tasks(self) -> TasksResourceWithRawResponse:
+        return TasksResourceWithRawResponse(self._automations.tasks)
 
 
 class AsyncAutomationsResourceWithRawResponse:
@@ -270,16 +250,12 @@ class AsyncAutomationsResourceWithRawResponse:
         )
 
     @cached_property
-    def tasks(self) -> AsyncTasksResourceWithRawResponse:
-        return AsyncTasksResourceWithRawResponse(self._automations.tasks)
-
-    @cached_property
-    def task_executions(self) -> AsyncTaskExecutionsResourceWithRawResponse:
-        return AsyncTaskExecutionsResourceWithRawResponse(self._automations.task_executions)
-
-    @cached_property
     def services(self) -> AsyncServicesResourceWithRawResponse:
         return AsyncServicesResourceWithRawResponse(self._automations.services)
+
+    @cached_property
+    def tasks(self) -> AsyncTasksResourceWithRawResponse:
+        return AsyncTasksResourceWithRawResponse(self._automations.tasks)
 
 
 class AutomationsResourceWithStreamingResponse:
@@ -291,16 +267,12 @@ class AutomationsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def tasks(self) -> TasksResourceWithStreamingResponse:
-        return TasksResourceWithStreamingResponse(self._automations.tasks)
-
-    @cached_property
-    def task_executions(self) -> TaskExecutionsResourceWithStreamingResponse:
-        return TaskExecutionsResourceWithStreamingResponse(self._automations.task_executions)
-
-    @cached_property
     def services(self) -> ServicesResourceWithStreamingResponse:
         return ServicesResourceWithStreamingResponse(self._automations.services)
+
+    @cached_property
+    def tasks(self) -> TasksResourceWithStreamingResponse:
+        return TasksResourceWithStreamingResponse(self._automations.tasks)
 
 
 class AsyncAutomationsResourceWithStreamingResponse:
@@ -312,13 +284,9 @@ class AsyncAutomationsResourceWithStreamingResponse:
         )
 
     @cached_property
-    def tasks(self) -> AsyncTasksResourceWithStreamingResponse:
-        return AsyncTasksResourceWithStreamingResponse(self._automations.tasks)
-
-    @cached_property
-    def task_executions(self) -> AsyncTaskExecutionsResourceWithStreamingResponse:
-        return AsyncTaskExecutionsResourceWithStreamingResponse(self._automations.task_executions)
-
-    @cached_property
     def services(self) -> AsyncServicesResourceWithStreamingResponse:
         return AsyncServicesResourceWithStreamingResponse(self._automations.services)
+
+    @cached_property
+    def tasks(self) -> AsyncTasksResourceWithStreamingResponse:
+        return AsyncTasksResourceWithStreamingResponse(self._automations.tasks)

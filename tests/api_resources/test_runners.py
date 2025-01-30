@@ -13,7 +13,6 @@ from gitpod.types import (
     RunnerListResponse,
     RunnerCreateResponse,
     RunnerRetrieveResponse,
-    RunnerGetRunnerResponse,
     RunnerParseContextURLResponse,
     RunnerCreateRunnerTokenResponse,
     RunnerCheckAuthenticationForHostResponse,
@@ -77,6 +76,7 @@ class TestRunners:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         runner = client.runners.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
@@ -84,8 +84,12 @@ class TestRunners:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
@@ -93,6 +97,7 @@ class TestRunners:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -104,6 +109,7 @@ class TestRunners:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -115,8 +121,95 @@ class TestRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_update_overload_1(self, client: Gitpod) -> None:
+        runner = client.runners.update(
+            name="xxx",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
+        runner = client.runners.update(
+            name="xxx",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.update(
+            name="xxx",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.update(
+            name="xxx",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(object, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_2(self, client: Gitpod) -> None:
+        runner = client.runners.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
+        runner = client.runners.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(object, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         runner = client.runners.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(RunnerListResponse, runner, path=["response"])
@@ -124,15 +217,12 @@ class TestRunners:
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.list(
+            encoding="proto",
             connect_protocol_version=1,
-            filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "kinds": ["RUNNER_KIND_UNSPECIFIED"],
-            },
-            pagination={
-                "token": "token",
-                "page_size": 100,
-            },
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerListResponse, runner, path=["response"])
@@ -140,6 +230,7 @@ class TestRunners:
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -151,6 +242,7 @@ class TestRunners:
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -158,6 +250,47 @@ class TestRunners:
 
             runner = response.parse()
             assert_matches_type(RunnerListResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_delete(self, client: Gitpod) -> None:
+        runner = client.runners.delete(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_method_delete_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.delete(
+            connect_protocol_version=1,
+            force=True,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.delete(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    def test_streaming_response_delete(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.delete(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(object, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,87 +376,6 @@ class TestRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_delete_runner(self, client: Gitpod) -> None:
-        runner = client.runners.delete_runner(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_method_delete_runner_with_all_params(self, client: Gitpod) -> None:
-        runner = client.runners.delete_runner(
-            connect_protocol_version=1,
-            force=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_raw_response_delete_runner(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.delete_runner(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_streaming_response_delete_runner(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.delete_runner(
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_get_runner(self, client: Gitpod) -> None:
-        runner = client.runners.get_runner(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    def test_method_get_runner_with_all_params(self, client: Gitpod) -> None:
-        runner = client.runners.get_runner(
-            connect_protocol_version=1,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    def test_raw_response_get_runner(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.get_runner(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    def test_streaming_response_get_runner(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.get_runner(
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
     def test_method_parse_context_url(self, client: Gitpod) -> None:
         runner = client.runners.parse_context_url(
             connect_protocol_version=1,
@@ -361,92 +413,6 @@ class TestRunners:
 
             runner = response.parse()
             assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_runner_overload_1(self, client: Gitpod) -> None:
-        runner = client.runners.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_method_update_runner_with_all_params_overload_1(self, client: Gitpod) -> None:
-        runner = client.runners.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_runner_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_runner_overload_1(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_runner_overload_2(self, client: Gitpod) -> None:
-        runner = client.runners.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_method_update_runner_with_all_params_overload_2(self, client: Gitpod) -> None:
-        runner = client.runners.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_runner_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_runner_overload_2(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(object, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -506,6 +472,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
@@ -513,8 +480,12 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
@@ -522,6 +493,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -533,6 +505,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.retrieve(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -544,8 +517,95 @@ class TestAsyncRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.update(
+            name="xxx",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.update(
+            name="xxx",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.update(
+            name="xxx",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.update(
+            name="xxx",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(object, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.update(
+            spec={"configuration": {"auto_update": True}},
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(object, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(RunnerListResponse, runner, path=["response"])
@@ -553,15 +613,12 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list(
+            encoding="proto",
             connect_protocol_version=1,
-            filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "kinds": ["RUNNER_KIND_UNSPECIFIED"],
-            },
-            pagination={
-                "token": "token",
-                "page_size": 100,
-            },
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(RunnerListResponse, runner, path=["response"])
@@ -569,6 +626,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -580,6 +638,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.list(
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -587,6 +646,47 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerListResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_delete(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.delete(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.delete(
+            connect_protocol_version=1,
+            force=True,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.delete(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(object, runner, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.delete(
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(object, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -672,87 +772,6 @@ class TestAsyncRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_delete_runner(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.delete_runner(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_method_delete_runner_with_all_params(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.delete_runner(
-            connect_protocol_version=1,
-            force=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_raw_response_delete_runner(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.delete_runner(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_delete_runner(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.delete_runner(
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_get_runner(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.get_runner(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    async def test_method_get_runner_with_all_params(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.get_runner(
-            connect_protocol_version=1,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    async def test_raw_response_get_runner(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.get_runner(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_get_runner(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.get_runner(
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(RunnerGetRunnerResponse, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
     async def test_method_parse_context_url(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.parse_context_url(
             connect_protocol_version=1,
@@ -790,91 +809,5 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_runner_overload_1(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_method_update_runner_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_runner_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_runner_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.update_runner(
-            name="xxx",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_runner_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_method_update_runner_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_runner_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_runner_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.update_runner(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(object, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True

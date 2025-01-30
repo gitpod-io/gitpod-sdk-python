@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .classes import (
+    ClassesResource,
+    AsyncClassesResource,
+    ClassesResourceWithRawResponse,
+    AsyncClassesResourceWithRawResponse,
+    ClassesResourceWithStreamingResponse,
+    AsyncClassesResourceWithStreamingResponse,
+)
 from .automations import (
     AutomationsResource,
     AsyncAutomationsResource,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncAutomationsResourceWithRawResponse",
     "AutomationsResourceWithStreamingResponse",
     "AsyncAutomationsResourceWithStreamingResponse",
+    "ClassesResource",
+    "AsyncClassesResource",
+    "ClassesResourceWithRawResponse",
+    "AsyncClassesResourceWithRawResponse",
+    "ClassesResourceWithStreamingResponse",
+    "AsyncClassesResourceWithStreamingResponse",
     "EnvironmentsResource",
     "AsyncEnvironmentsResource",
     "EnvironmentsResourceWithRawResponse",

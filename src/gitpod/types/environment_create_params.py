@@ -22,9 +22,9 @@ __all__ = [
     "SpecMachine",
     "SpecPort",
     "SpecSecret",
-    "SpecSecretEnvironmentVariable",
-    "SpecSecretFilePath",
-    "SpecSecretGitCredentialHost",
+    "SpecSecretUnionMember0",
+    "SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
+    "SpecSecretUnionMember2",
     "SpecSSHPublicKey",
     "SpecTimeout",
 ]
@@ -160,7 +160,7 @@ class SpecPort(TypedDict, total=False):
     """port number"""
 
 
-class SpecSecretEnvironmentVariable(TypedDict, total=False):
+class SpecSecretUnionMember0(TypedDict, total=False):
     environment_variable: Required[Annotated[str, PropertyInfo(alias="environmentVariable")]]
 
     name: str
@@ -179,7 +179,7 @@ class SpecSecretEnvironmentVariable(TypedDict, total=False):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class SpecSecretFilePath(TypedDict, total=False):
+class SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(TypedDict, total=False):
     file_path: Required[Annotated[str, PropertyInfo(alias="filePath")]]
     """file_path is the path inside the devcontainer where the secret is mounted"""
 
@@ -199,7 +199,7 @@ class SpecSecretFilePath(TypedDict, total=False):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class SpecSecretGitCredentialHost(TypedDict, total=False):
+class SpecSecretUnionMember2(TypedDict, total=False):
     git_credential_host: Required[Annotated[str, PropertyInfo(alias="gitCredentialHost")]]
 
     name: str
@@ -218,7 +218,11 @@ class SpecSecretGitCredentialHost(TypedDict, total=False):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-SpecSecret: TypeAlias = Union[SpecSecretEnvironmentVariable, SpecSecretFilePath, SpecSecretGitCredentialHost]
+SpecSecret: TypeAlias = Union[
+    SpecSecretUnionMember0,
+    SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
+    SpecSecretUnionMember2,
+]
 
 
 class SpecSSHPublicKey(TypedDict, total=False):

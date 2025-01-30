@@ -16,8 +16,22 @@ from .policies import (
     PoliciesResourceWithStreamingResponse,
     AsyncPoliciesResourceWithStreamingResponse,
 )
+from .configurations import (
+    ConfigurationsResource,
+    AsyncConfigurationsResource,
+    ConfigurationsResourceWithRawResponse,
+    AsyncConfigurationsResourceWithRawResponse,
+    ConfigurationsResourceWithStreamingResponse,
+    AsyncConfigurationsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "ConfigurationsResource",
+    "AsyncConfigurationsResource",
+    "ConfigurationsResourceWithRawResponse",
+    "AsyncConfigurationsResourceWithRawResponse",
+    "ConfigurationsResourceWithStreamingResponse",
+    "AsyncConfigurationsResourceWithStreamingResponse",
     "PoliciesResource",
     "AsyncPoliciesResource",
     "PoliciesResourceWithRawResponse",

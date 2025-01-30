@@ -64,7 +64,7 @@ class TestIdentity:
     @parametrize
     def test_method_get_authenticated_identity(self, client: Gitpod) -> None:
         identity = client.identity.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
@@ -72,8 +72,12 @@ class TestIdentity:
     @parametrize
     def test_method_get_authenticated_identity_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
@@ -81,7 +85,7 @@ class TestIdentity:
     @parametrize
     def test_raw_response_get_authenticated_identity(self, client: Gitpod) -> None:
         response = client.identity.with_raw_response.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -93,7 +97,7 @@ class TestIdentity:
     @parametrize
     def test_streaming_response_get_authenticated_identity(self, client: Gitpod) -> None:
         with client.identity.with_streaming_response.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -191,7 +195,7 @@ class TestAsyncIdentity:
     @parametrize
     async def test_method_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
@@ -199,8 +203,12 @@ class TestAsyncIdentity:
     @parametrize
     async def test_method_get_authenticated_identity_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
+            base64=True,
+            compression="identity",
+            connect="v1",
+            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
@@ -208,7 +216,7 @@ class TestAsyncIdentity:
     @parametrize
     async def test_raw_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         response = await async_client.identity.with_raw_response.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -220,7 +228,7 @@ class TestAsyncIdentity:
     @parametrize
     async def test_streaming_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         async with async_client.identity.with_streaming_response.get_authenticated_identity(
-            body={},
+            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

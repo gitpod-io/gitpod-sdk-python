@@ -109,8 +109,12 @@ class IdentityResource(SyncAPIResource):
     def get_authenticated_identity(
         self,
         *,
-        body: object,
+        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
+        base64: bool | NotGiven = NOT_GIVEN,
+        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
+        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
+        message: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -123,7 +127,16 @@ class IdentityResource(SyncAPIResource):
         GetAuthenticatedIdentity allows to retrieve the current identity.
 
         Args:
+          encoding: Define which encoding or 'Message-Codec' to use
+
           connect_protocol_version: Define the version of the Connect protocol
+
+          base64: Specifies if the message query param is base64 encoded, which may be required
+              for binary data
+
+          compression: Which compression algorithm to use for this request
+
+          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -144,13 +157,23 @@ class IdentityResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._post(
+        return self._get(
             "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-            body=maybe_transform(
-                body, identity_get_authenticated_identity_params.IdentityGetAuthenticatedIdentityParams
-            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "encoding": encoding,
+                        "base64": base64,
+                        "compression": compression,
+                        "connect": connect,
+                        "message": message,
+                    },
+                    identity_get_authenticated_identity_params.IdentityGetAuthenticatedIdentityParams,
+                ),
             ),
             cast_to=IdentityGetAuthenticatedIdentityResponse,
         )
@@ -278,8 +301,12 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def get_authenticated_identity(
         self,
         *,
-        body: object,
+        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
+        base64: bool | NotGiven = NOT_GIVEN,
+        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
+        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
+        message: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -292,7 +319,16 @@ class AsyncIdentityResource(AsyncAPIResource):
         GetAuthenticatedIdentity allows to retrieve the current identity.
 
         Args:
+          encoding: Define which encoding or 'Message-Codec' to use
+
           connect_protocol_version: Define the version of the Connect protocol
+
+          base64: Specifies if the message query param is base64 encoded, which may be required
+              for binary data
+
+          compression: Which compression algorithm to use for this request
+
+          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -313,13 +349,23 @@ class AsyncIdentityResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._post(
+        return await self._get(
             "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-            body=await async_maybe_transform(
-                body, identity_get_authenticated_identity_params.IdentityGetAuthenticatedIdentityParams
-            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "encoding": encoding,
+                        "base64": base64,
+                        "compression": compression,
+                        "connect": connect,
+                        "message": message,
+                    },
+                    identity_get_authenticated_identity_params.IdentityGetAuthenticatedIdentityParams,
+                ),
             ),
             cast_to=IdentityGetAuthenticatedIdentityResponse,
         )

@@ -10,8 +10,8 @@ from .._utils import PropertyInfo
 __all__ = [
     "ProjectCreateParams",
     "EnvironmentClass",
-    "EnvironmentClassEnvironmentClassID",
-    "EnvironmentClassLocalRunner",
+    "EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass",
+    "EnvironmentClassUseALocalRunnerForTheUser",
     "Initializer",
     "InitializerSpec",
     "InitializerSpecContextURL",
@@ -56,7 +56,9 @@ class ProjectCreateParams(TypedDict, total=False):
     """Define the timeout, in ms"""
 
 
-class EnvironmentClassEnvironmentClassID(TypedDict, total=False):
+class EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(
+    TypedDict, total=False
+):
     environment_class_id: Required[Annotated[str, PropertyInfo(alias="environmentClassId")]]
     """Use a fixed environment class on a given Runner.
 
@@ -64,12 +66,15 @@ class EnvironmentClassEnvironmentClassID(TypedDict, total=False):
     """
 
 
-class EnvironmentClassLocalRunner(TypedDict, total=False):
+class EnvironmentClassUseALocalRunnerForTheUser(TypedDict, total=False):
     local_runner: Required[Annotated[bool, PropertyInfo(alias="localRunner")]]
     """Use a local runner for the user"""
 
 
-EnvironmentClass: TypeAlias = Union[EnvironmentClassEnvironmentClassID, EnvironmentClassLocalRunner]
+EnvironmentClass: TypeAlias = Union[
+    EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass,
+    EnvironmentClassUseALocalRunnerForTheUser,
+]
 
 
 class InitializerSpecContextURLContextURL(TypedDict, total=False):
