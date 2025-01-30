@@ -28,7 +28,7 @@ class TestEnvironmentClasses:
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         environment_class = client.environment_classes.list(
             connect_protocol_version=1,
-            filter={},
+            filter={"enabled": True},
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -76,7 +76,7 @@ class TestAsyncEnvironmentClasses:
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.environment_classes.list(
             connect_protocol_version=1,
-            filter={},
+            filter={"enabled": True},
             pagination={
                 "token": "token",
                 "page_size": 100,

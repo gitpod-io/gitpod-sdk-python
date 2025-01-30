@@ -24,7 +24,7 @@ class TestProjects:
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         project = client.projects.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         )
@@ -33,21 +33,8 @@ class TestProjects:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
-            environment_class={},
-            initializer={
-                "specs": [
-                    {
-                        "contextUrl": {"url": "https://example.com"},
-                        "git": {
-                            "checkout_location": "checkoutLocation",
-                            "clone_target": "cloneTarget",
-                            "remote_uri": "remoteUri",
-                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                            "upstream_remote_uri": "upstreamRemoteUri",
-                        },
-                    }
-                ]
-            },
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -59,7 +46,7 @@ class TestProjects:
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         )
@@ -72,7 +59,7 @@ class TestProjects:
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         ) as response:
@@ -172,7 +159,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         )
@@ -181,21 +168,8 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
-            environment_class={},
-            initializer={
-                "specs": [
-                    {
-                        "contextUrl": {"url": "https://example.com"},
-                        "git": {
-                            "checkout_location": "checkoutLocation",
-                            "clone_target": "cloneTarget",
-                            "remote_uri": "remoteUri",
-                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                            "upstream_remote_uri": "upstreamRemoteUri",
-                        },
-                    }
-                ]
-            },
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -207,7 +181,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         )
@@ -220,7 +194,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.create(
-            environment_class={},
+            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             initializer={},
             connect_protocol_version=1,
         ) as response:

@@ -4,11 +4,22 @@ from __future__ import annotations
 
 from typing import List, Union, Iterable
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["TaskCreateParams", "Metadata", "MetadataCreator", "MetadataTriggeredBy", "Spec"]
+__all__ = [
+    "TaskCreateParams",
+    "Metadata",
+    "MetadataCreator",
+    "MetadataTriggeredBy",
+    "MetadataTriggeredByManual",
+    "MetadataTriggeredByPostDevcontainerStart",
+    "MetadataTriggeredByPostEnvironmentStart",
+    "Spec",
+    "SpecRunsOn",
+    "SpecRunsOnDocker",
+]
 
 
 class TaskCreateParams(TypedDict, total=False):
@@ -42,8 +53,21 @@ class MetadataCreator(TypedDict, total=False):
     """Principal is the principal of the subject"""
 
 
-class MetadataTriggeredBy:
-    pass
+class MetadataTriggeredByManual(TypedDict, total=False):
+    manual: Required[bool]
+
+
+class MetadataTriggeredByPostDevcontainerStart(TypedDict, total=False):
+    post_devcontainer_start: Required[Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]]
+
+
+class MetadataTriggeredByPostEnvironmentStart(TypedDict, total=False):
+    post_environment_start: Required[Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]]
+
+
+MetadataTriggeredBy: TypeAlias = Union[
+    MetadataTriggeredByManual, MetadataTriggeredByPostDevcontainerStart, MetadataTriggeredByPostEnvironmentStart
+]
 
 
 class Metadata(TypedDict, total=False):
@@ -170,9 +194,19 @@ class Metadata(TypedDict, total=False):
     """triggered_by is a list of trigger that start the task."""
 
 
+class SpecRunsOnDocker(TypedDict, total=False):
+    environment: List[str]
+
+    image: str
+
+
+class SpecRunsOn(TypedDict, total=False):
+    docker: Required[SpecRunsOnDocker]
+
+
 class Spec(TypedDict, total=False):
     command: str
     """command contains the command the task should execute"""
 
-    runs_on: Annotated[object, PropertyInfo(alias="runsOn")]
+    runs_on: Annotated[SpecRunsOn, PropertyInfo(alias="runsOn")]
     """runs_on specifies the environment the task should run on."""

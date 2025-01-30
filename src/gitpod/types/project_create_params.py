@@ -2,16 +2,27 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["ProjectCreateParams", "Initializer", "InitializerSpec"]
+__all__ = [
+    "ProjectCreateParams",
+    "EnvironmentClass",
+    "EnvironmentClassEnvironmentClassID",
+    "EnvironmentClassLocalRunner",
+    "Initializer",
+    "InitializerSpec",
+    "InitializerSpecContextURL",
+    "InitializerSpecContextURLContextURL",
+    "InitializerSpecGit",
+    "InitializerSpecGitGit",
+]
 
 
 class ProjectCreateParams(TypedDict, total=False):
-    environment_class: Required[Annotated[object, PropertyInfo(alias="environmentClass")]]
+    environment_class: Required[Annotated[EnvironmentClass, PropertyInfo(alias="environmentClass")]]
 
     initializer: Required[Initializer]
     """EnvironmentInitializer specifies how an environment is to be initialized"""
@@ -45,8 +56,65 @@ class ProjectCreateParams(TypedDict, total=False):
     """Define the timeout, in ms"""
 
 
-class InitializerSpec:
-    pass
+class EnvironmentClassEnvironmentClassID(TypedDict, total=False):
+    environment_class_id: Required[Annotated[str, PropertyInfo(alias="environmentClassId")]]
+    """Use a fixed environment class on a given Runner.
+
+    This cannot be a local runner's environment class.
+    """
+
+
+class EnvironmentClassLocalRunner(TypedDict, total=False):
+    local_runner: Required[Annotated[bool, PropertyInfo(alias="localRunner")]]
+    """Use a local runner for the user"""
+
+
+EnvironmentClass: TypeAlias = Union[EnvironmentClassEnvironmentClassID, EnvironmentClassLocalRunner]
+
+
+class InitializerSpecContextURLContextURL(TypedDict, total=False):
+    url: str
+    """url is the URL from which the environment is created"""
+
+
+class InitializerSpecContextURL(TypedDict, total=False):
+    context_url: Required[Annotated[InitializerSpecContextURLContextURL, PropertyInfo(alias="contextUrl")]]
+
+
+class InitializerSpecGitGit(TypedDict, total=False):
+    checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Annotated[str, PropertyInfo(alias="remoteUri")]
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Annotated[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ],
+        PropertyInfo(alias="targetMode"),
+    ]
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class InitializerSpecGit(TypedDict, total=False):
+    git: Required[InitializerSpecGitGit]
+
+
+InitializerSpec: TypeAlias = Union[InitializerSpecContextURL, InitializerSpecGit]
 
 
 class Initializer(TypedDict, total=False):

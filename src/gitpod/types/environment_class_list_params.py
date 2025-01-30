@@ -6,20 +6,28 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EnvironmentClassListParams", "Pagination"]
+__all__ = ["EnvironmentClassListParams", "Filter", "Pagination"]
 
 
 class EnvironmentClassListParams(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    filter: object
+    filter: Filter
 
     pagination: Pagination
     """pagination contains the pagination options for listing environment classes"""
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
+
+
+class Filter(TypedDict, total=False):
+    enabled: Required[bool]
+    """enabled filters the response to only enabled or disabled environment classes.
+
+    If not set, all environment classes are returned.
+    """
 
 
 class Pagination(TypedDict, total=False):

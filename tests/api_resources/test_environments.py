@@ -42,20 +42,7 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {
-                        "specs": [
-                            {
-                                "contextUrl": {"url": "https://example.com"},
-                                "git": {
-                                    "checkout_location": "checkoutLocation",
-                                    "clone_target": "cloneTarget",
-                                    "remote_uri": "remoteUri",
-                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                                    "upstream_remote_uri": "upstreamRemoteUri",
-                                },
-                            }
-                        ]
-                    },
+                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -76,13 +63,11 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
-                        "environmentVariable": "environmentVariable",
-                        "filePath": "filePath",
-                        "gitCredentialHost": "gitCredentialHost",
+                        "environment_variable": "environmentVariable",
                         "name": "name",
                         "session": "session",
                         "source": "source",
-                        "sourceRef": "sourceRef",
+                        "source_ref": "sourceRef",
                     }
                 ],
                 "spec_version": "specVersion",
@@ -234,20 +219,7 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {
-                        "specs": [
-                            {
-                                "contextUrl": {"url": "https://example.com"},
-                                "git": {
-                                    "checkout_location": "checkoutLocation",
-                                    "clone_target": "cloneTarget",
-                                    "remote_uri": "remoteUri",
-                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                                    "upstream_remote_uri": "upstreamRemoteUri",
-                                },
-                            }
-                        ]
-                    },
+                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -268,13 +240,11 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
-                        "environmentVariable": "environmentVariable",
-                        "filePath": "filePath",
-                        "gitCredentialHost": "gitCredentialHost",
+                        "environment_variable": "environmentVariable",
                         "name": "name",
                         "session": "session",
                         "source": "source",
-                        "sourceRef": "sourceRef",
+                        "source_ref": "sourceRef",
                     }
                 ],
                 "spec_version": "specVersion",
@@ -378,20 +348,7 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {
-                        "specs": [
-                            {
-                                "contextUrl": {"url": "https://example.com"},
-                                "git": {
-                                    "checkout_location": "checkoutLocation",
-                                    "clone_target": "cloneTarget",
-                                    "remote_uri": "remoteUri",
-                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                                    "upstream_remote_uri": "upstreamRemoteUri",
-                                },
-                            }
-                        ]
-                    },
+                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -412,13 +369,11 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
-                        "environmentVariable": "environmentVariable",
-                        "filePath": "filePath",
-                        "gitCredentialHost": "gitCredentialHost",
+                        "environment_variable": "environmentVariable",
                         "name": "name",
                         "session": "session",
                         "source": "source",
-                        "sourceRef": "sourceRef",
+                        "source_ref": "sourceRef",
                     }
                 ],
                 "spec_version": "specVersion",
@@ -570,20 +525,7 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {
-                        "specs": [
-                            {
-                                "contextUrl": {"url": "https://example.com"},
-                                "git": {
-                                    "checkout_location": "checkoutLocation",
-                                    "clone_target": "cloneTarget",
-                                    "remote_uri": "remoteUri",
-                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
-                                    "upstream_remote_uri": "upstreamRemoteUri",
-                                },
-                            }
-                        ]
-                    },
+                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -604,13 +546,11 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
-                        "environmentVariable": "environmentVariable",
-                        "filePath": "filePath",
-                        "gitCredentialHost": "gitCredentialHost",
+                        "environment_variable": "environmentVariable",
                         "name": "name",
                         "session": "session",
                         "source": "source",
-                        "sourceRef": "sourceRef",
+                        "source_ref": "sourceRef",
                     }
                 ],
                 "spec_version": "specVersion",

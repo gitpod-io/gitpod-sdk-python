@@ -8,14 +8,6 @@ from .invite import (
     InviteResourceWithStreamingResponse,
     AsyncInviteResourceWithStreamingResponse,
 )
-from .members import (
-    MembersResource,
-    AsyncMembersResource,
-    MembersResourceWithRawResponse,
-    AsyncMembersResourceWithRawResponse,
-    MembersResourceWithStreamingResponse,
-    AsyncMembersResourceWithStreamingResponse,
-)
 from .organizations import (
     OrganizationsResource,
     AsyncOrganizationsResource,
@@ -26,12 +18,6 @@ from .organizations import (
 )
 
 __all__ = [
-    "MembersResource",
-    "AsyncMembersResource",
-    "MembersResourceWithRawResponse",
-    "AsyncMembersResourceWithRawResponse",
-    "MembersResourceWithStreamingResponse",
-    "AsyncMembersResourceWithStreamingResponse",
     "InviteResource",
     "AsyncInviteResource",
     "InviteResourceWithRawResponse",

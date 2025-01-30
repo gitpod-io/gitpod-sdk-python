@@ -12,7 +12,11 @@ __all__ = [
     "AutomationsFile",
     "AutomationsFileServices",
     "AutomationsFileServicesCommands",
+    "AutomationsFileServicesRunsOn",
+    "AutomationsFileServicesRunsOnDocker",
     "AutomationsFileTasks",
+    "AutomationsFileTasksRunsOn",
+    "AutomationsFileTasksRunsOnDocker",
 ]
 
 
@@ -69,6 +73,16 @@ class AutomationsFileServicesCommands(TypedDict, total=False):
     """
 
 
+class AutomationsFileServicesRunsOnDocker(TypedDict, total=False):
+    environment: List[str]
+
+    image: str
+
+
+class AutomationsFileServicesRunsOn(TypedDict, total=False):
+    docker: Required[AutomationsFileServicesRunsOnDocker]
+
+
 class AutomationsFileServices(TypedDict, total=False):
     commands: AutomationsFileServicesCommands
 
@@ -76,9 +90,19 @@ class AutomationsFileServices(TypedDict, total=False):
 
     name: str
 
-    runs_on: Annotated[object, PropertyInfo(alias="runsOn")]
+    runs_on: Annotated[AutomationsFileServicesRunsOn, PropertyInfo(alias="runsOn")]
 
     triggered_by: Annotated[List[str], PropertyInfo(alias="triggeredBy")]
+
+
+class AutomationsFileTasksRunsOnDocker(TypedDict, total=False):
+    environment: List[str]
+
+    image: str
+
+
+class AutomationsFileTasksRunsOn(TypedDict, total=False):
+    docker: Required[AutomationsFileTasksRunsOnDocker]
 
 
 class AutomationsFileTasks(TypedDict, total=False):
@@ -90,7 +114,7 @@ class AutomationsFileTasks(TypedDict, total=False):
 
     name: str
 
-    runs_on: Annotated[object, PropertyInfo(alias="runsOn")]
+    runs_on: Annotated[AutomationsFileTasksRunsOn, PropertyInfo(alias="runsOn")]
 
     triggered_by: Annotated[List[str], PropertyInfo(alias="triggeredBy")]
 

@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Union
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["HostAuthenticationTokenListParams", "Filter", "Pagination"]
+__all__ = ["HostAuthenticationTokenListParams", "Filter", "FilterRunnerID", "FilterUserID", "Pagination"]
 
 
 class HostAuthenticationTokenListParams(TypedDict, total=False):
@@ -21,8 +22,15 @@ class HostAuthenticationTokenListParams(TypedDict, total=False):
     """Define the timeout, in ms"""
 
 
-class Filter:
-    pass
+class FilterRunnerID(TypedDict, total=False):
+    runner_id: Required[Annotated[str, PropertyInfo(alias="runnerId")]]
+
+
+class FilterUserID(TypedDict, total=False):
+    user_id: Required[Annotated[str, PropertyInfo(alias="userId")]]
+
+
+Filter: TypeAlias = Union[FilterRunnerID, FilterUserID]
 
 
 class Pagination(TypedDict, total=False):

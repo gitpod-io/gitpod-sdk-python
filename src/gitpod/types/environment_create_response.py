@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -18,10 +18,17 @@ __all__ = [
     "EnvironmentSpecContent",
     "EnvironmentSpecContentInitializer",
     "EnvironmentSpecContentInitializerSpec",
+    "EnvironmentSpecContentInitializerSpecContextURL",
+    "EnvironmentSpecContentInitializerSpecContextURLContextURL",
+    "EnvironmentSpecContentInitializerSpecGit",
+    "EnvironmentSpecContentInitializerSpecGitGit",
     "EnvironmentSpecDevcontainer",
     "EnvironmentSpecMachine",
     "EnvironmentSpecPort",
     "EnvironmentSpecSecret",
+    "EnvironmentSpecSecretEnvironmentVariable",
+    "EnvironmentSpecSecretFilePath",
+    "EnvironmentSpecSecretGitCredentialHost",
     "EnvironmentSpecSSHPublicKey",
     "EnvironmentSpecTimeout",
     "EnvironmentStatus",
@@ -291,8 +298,50 @@ class EnvironmentSpecAutomationsFile(BaseModel):
     session: Optional[str] = None
 
 
-class EnvironmentSpecContentInitializerSpec:
-    pass
+class EnvironmentSpecContentInitializerSpecContextURLContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class EnvironmentSpecContentInitializerSpecContextURL(BaseModel):
+    context_url: EnvironmentSpecContentInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
+
+
+class EnvironmentSpecContentInitializerSpecGitGit(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class EnvironmentSpecContentInitializerSpecGit(BaseModel):
+    git: EnvironmentSpecContentInitializerSpecGitGit
+
+
+EnvironmentSpecContentInitializerSpec: TypeAlias = Union[
+    EnvironmentSpecContentInitializerSpecContextURL, EnvironmentSpecContentInitializerSpecGit
+]
 
 
 class EnvironmentSpecContentInitializer(BaseModel):
@@ -346,8 +395,67 @@ class EnvironmentSpecPort(BaseModel):
     """port number"""
 
 
-class EnvironmentSpecSecret:
-    pass
+class EnvironmentSpecSecretEnvironmentVariable(BaseModel):
+    environment_variable: str = FieldInfo(alias="environmentVariable")
+
+    name: Optional[str] = None
+    """name is the human readable description of the secret"""
+
+    session: Optional[str] = None
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: Optional[str] = None
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Optional[str] = FieldInfo(alias="sourceRef", default=None)
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class EnvironmentSpecSecretFilePath(BaseModel):
+    file_path: str = FieldInfo(alias="filePath")
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    name: Optional[str] = None
+    """name is the human readable description of the secret"""
+
+    session: Optional[str] = None
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: Optional[str] = None
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Optional[str] = FieldInfo(alias="sourceRef", default=None)
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class EnvironmentSpecSecretGitCredentialHost(BaseModel):
+    git_credential_host: str = FieldInfo(alias="gitCredentialHost")
+
+    name: Optional[str] = None
+    """name is the human readable description of the secret"""
+
+    session: Optional[str] = None
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: Optional[str] = None
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Optional[str] = FieldInfo(alias="sourceRef", default=None)
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+EnvironmentSpecSecret: TypeAlias = Union[
+    EnvironmentSpecSecretEnvironmentVariable, EnvironmentSpecSecretFilePath, EnvironmentSpecSecretGitCredentialHost
+]
 
 
 class EnvironmentSpecSSHPublicKey(BaseModel):

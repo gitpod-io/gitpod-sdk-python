@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     is_given,
+    required_args,
     maybe_transform,
     strip_not_given,
     async_maybe_transform,
@@ -48,10 +49,11 @@ class EnvironmentClassesResource(SyncAPIResource):
         """
         return EnvironmentClassesResourceWithStreamingResponse(self)
 
+    @overload
     def update(
         self,
         *,
-        body: environment_class_update_params.Body,
+        description: str,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -77,6 +79,92 @@ class EnvironmentClassesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        display_name: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        UpdateEnvironmentClass updates an existing environment class on a runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        enabled: bool,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        UpdateEnvironmentClass updates an existing environment class on a runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["description", "connect_protocol_version"],
+        ["display_name", "connect_protocol_version"],
+        ["enabled", "connect_protocol_version"],
+    )
+    def update(
+        self,
+        *,
+        description: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        display_name: str | NotGiven = NOT_GIVEN,
+        enabled: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
         extra_headers = {
             **strip_not_given(
                 {
@@ -88,7 +176,14 @@ class EnvironmentClassesResource(SyncAPIResource):
         }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateEnvironmentClass",
-            body=maybe_transform(body, environment_class_update_params.EnvironmentClassUpdateParams),
+            body=maybe_transform(
+                {
+                    "description": description,
+                    "display_name": display_name,
+                    "enabled": enabled,
+                },
+                environment_class_update_params.EnvironmentClassUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -99,7 +194,7 @@ class EnvironmentClassesResource(SyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        filter: object | NotGiven = NOT_GIVEN,
+        filter: environment_class_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -174,10 +269,11 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         """
         return AsyncEnvironmentClassesResourceWithStreamingResponse(self)
 
+    @overload
     async def update(
         self,
         *,
-        body: environment_class_update_params.Body,
+        description: str,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -203,6 +299,92 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        display_name: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        UpdateEnvironmentClass updates an existing environment class on a runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        enabled: bool,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        UpdateEnvironmentClass updates an existing environment class on a runner.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["description", "connect_protocol_version"],
+        ["display_name", "connect_protocol_version"],
+        ["enabled", "connect_protocol_version"],
+    )
+    async def update(
+        self,
+        *,
+        description: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        display_name: str | NotGiven = NOT_GIVEN,
+        enabled: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
         extra_headers = {
             **strip_not_given(
                 {
@@ -214,7 +396,14 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateEnvironmentClass",
-            body=await async_maybe_transform(body, environment_class_update_params.EnvironmentClassUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "description": description,
+                    "display_name": display_name,
+                    "enabled": enabled,
+                },
+                environment_class_update_params.EnvironmentClassUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -225,7 +414,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         self,
         *,
         connect_protocol_version: Literal[1],
-        filter: object | NotGiven = NOT_GIVEN,
+        filter: environment_class_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

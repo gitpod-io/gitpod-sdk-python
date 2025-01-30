@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -15,8 +15,13 @@ __all__ = [
     "ServiceMetadata",
     "ServiceMetadataCreator",
     "ServiceMetadataTriggeredBy",
+    "ServiceMetadataTriggeredByManual",
+    "ServiceMetadataTriggeredByPostDevcontainerStart",
+    "ServiceMetadataTriggeredByPostEnvironmentStart",
     "ServiceSpec",
     "ServiceSpecCommands",
+    "ServiceSpecRunsOn",
+    "ServiceSpecRunsOnDocker",
     "ServiceStatus",
 ]
 
@@ -46,8 +51,23 @@ class ServiceMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class ServiceMetadataTriggeredBy:
-    pass
+class ServiceMetadataTriggeredByManual(BaseModel):
+    manual: bool
+
+
+class ServiceMetadataTriggeredByPostDevcontainerStart(BaseModel):
+    post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
+
+
+class ServiceMetadataTriggeredByPostEnvironmentStart(BaseModel):
+    post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
+
+
+ServiceMetadataTriggeredBy: TypeAlias = Union[
+    ServiceMetadataTriggeredByManual,
+    ServiceMetadataTriggeredByPostDevcontainerStart,
+    ServiceMetadataTriggeredByPostEnvironmentStart,
+]
 
 
 class ServiceMetadata(BaseModel):
@@ -207,6 +227,16 @@ class ServiceSpecCommands(BaseModel):
     """
 
 
+class ServiceSpecRunsOnDocker(BaseModel):
+    environment: Optional[List[str]] = None
+
+    image: Optional[str] = None
+
+
+class ServiceSpecRunsOn(BaseModel):
+    docker: ServiceSpecRunsOnDocker
+
+
 class ServiceSpec(BaseModel):
     commands: Optional[ServiceSpecCommands] = None
     """
@@ -230,7 +260,7 @@ class ServiceSpec(BaseModel):
     Used to start or stop the service.
     """
 
-    runs_on: Optional[object] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[ServiceSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the service should run on."""
 
     session: Optional[str] = None

@@ -6,14 +6,10 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...types import organization_leave_params, organization_set_role_params
-from .members import (
-    MembersResource,
-    AsyncMembersResource,
-    MembersResourceWithRawResponse,
-    AsyncMembersResourceWithRawResponse,
-    MembersResourceWithStreamingResponse,
-    AsyncMembersResourceWithStreamingResponse,
+from ...types import (
+    organization_leave_params,
+    organization_set_role_params,
+    organization_list_members_params,
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
@@ -39,15 +35,12 @@ from .invite.invite import (
     AsyncInviteResourceWithStreamingResponse,
 )
 from ..._base_client import make_request_options
+from ...types.organization_list_members_response import OrganizationListMembersResponse
 
 __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
 
 class OrganizationsResource(SyncAPIResource):
-    @cached_property
-    def members(self) -> MembersResource:
-        return MembersResource(self._client)
-
     @cached_property
     def invite(self) -> InviteResource:
         return InviteResource(self._client)
@@ -118,6 +111,64 @@ class OrganizationsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def list_members(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrganizationListMembersResponse:
+        """
+        ListMembers lists all members of the specified organization.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          organization_id: organization_id is the ID of the organization to list members for
+
+          pagination: pagination contains the pagination options for listing members
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return self._post(
+            "/gitpod.v1.OrganizationService/ListMembers",
+            body=maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "pagination": pagination,
+                },
+                organization_list_members_params.OrganizationListMembersParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListMembersResponse,
+        )
+
     def set_role(
         self,
         *,
@@ -177,10 +228,6 @@ class OrganizationsResource(SyncAPIResource):
 
 
 class AsyncOrganizationsResource(AsyncAPIResource):
-    @cached_property
-    def members(self) -> AsyncMembersResource:
-        return AsyncMembersResource(self._client)
-
     @cached_property
     def invite(self) -> AsyncInviteResource:
         return AsyncInviteResource(self._client)
@@ -251,6 +298,64 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def list_members(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrganizationListMembersResponse:
+        """
+        ListMembers lists all members of the specified organization.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          organization_id: organization_id is the ID of the organization to list members for
+
+          pagination: pagination contains the pagination options for listing members
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        extra_headers = {
+            **strip_not_given(
+                {
+                    "Connect-Protocol-Version": str(connect_protocol_version),
+                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
+                }
+            ),
+            **(extra_headers or {}),
+        }
+        return await self._post(
+            "/gitpod.v1.OrganizationService/ListMembers",
+            body=await async_maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "pagination": pagination,
+                },
+                organization_list_members_params.OrganizationListMembersParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrganizationListMembersResponse,
+        )
+
     async def set_role(
         self,
         *,
@@ -316,13 +421,12 @@ class OrganizationsResourceWithRawResponse:
         self.leave = to_raw_response_wrapper(
             organizations.leave,
         )
+        self.list_members = to_raw_response_wrapper(
+            organizations.list_members,
+        )
         self.set_role = to_raw_response_wrapper(
             organizations.set_role,
         )
-
-    @cached_property
-    def members(self) -> MembersResourceWithRawResponse:
-        return MembersResourceWithRawResponse(self._organizations.members)
 
     @cached_property
     def invite(self) -> InviteResourceWithRawResponse:
@@ -336,13 +440,12 @@ class AsyncOrganizationsResourceWithRawResponse:
         self.leave = async_to_raw_response_wrapper(
             organizations.leave,
         )
+        self.list_members = async_to_raw_response_wrapper(
+            organizations.list_members,
+        )
         self.set_role = async_to_raw_response_wrapper(
             organizations.set_role,
         )
-
-    @cached_property
-    def members(self) -> AsyncMembersResourceWithRawResponse:
-        return AsyncMembersResourceWithRawResponse(self._organizations.members)
 
     @cached_property
     def invite(self) -> AsyncInviteResourceWithRawResponse:
@@ -356,13 +459,12 @@ class OrganizationsResourceWithStreamingResponse:
         self.leave = to_streamed_response_wrapper(
             organizations.leave,
         )
+        self.list_members = to_streamed_response_wrapper(
+            organizations.list_members,
+        )
         self.set_role = to_streamed_response_wrapper(
             organizations.set_role,
         )
-
-    @cached_property
-    def members(self) -> MembersResourceWithStreamingResponse:
-        return MembersResourceWithStreamingResponse(self._organizations.members)
 
     @cached_property
     def invite(self) -> InviteResourceWithStreamingResponse:
@@ -376,13 +478,12 @@ class AsyncOrganizationsResourceWithStreamingResponse:
         self.leave = async_to_streamed_response_wrapper(
             organizations.leave,
         )
+        self.list_members = async_to_streamed_response_wrapper(
+            organizations.list_members,
+        )
         self.set_role = async_to_streamed_response_wrapper(
             organizations.set_role,
         )
-
-    @cached_property
-    def members(self) -> AsyncMembersResourceWithStreamingResponse:
-        return AsyncMembersResourceWithStreamingResponse(self._organizations.members)
 
     @cached_property
     def invite(self) -> AsyncInviteResourceWithStreamingResponse:

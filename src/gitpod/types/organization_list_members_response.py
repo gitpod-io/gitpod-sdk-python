@@ -6,9 +6,9 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["MemberListResponse", "Member", "Pagination"]
+__all__ = ["OrganizationListMembersResponse", "Member", "Pagination"]
 
 
 class Member(BaseModel):
@@ -132,7 +132,7 @@ class Pagination(BaseModel):
     """
 
 
-class MemberListResponse(BaseModel):
+class OrganizationListMembersResponse(BaseModel):
     members: Optional[List[Member]] = None
     """members are the members of the organization"""
 
