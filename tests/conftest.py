@@ -29,7 +29,7 @@ def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 bearer_token = "My Bearer Token"
-connect_protocol_version = True
+connect_protocol_version = 0
 connect_timeout_header = 0
 
 

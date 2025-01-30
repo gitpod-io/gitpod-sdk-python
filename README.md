@@ -30,7 +30,7 @@ The full API of this library can be found in [api.md](api.md).
 from gitpod import Gitpod
 
 client = Gitpod(
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
@@ -52,7 +52,7 @@ import asyncio
 from gitpod import AsyncGitpod
 
 client = AsyncGitpod(
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
@@ -90,7 +90,7 @@ import gitpod
 from gitpod import Gitpod
 
 client = Gitpod(
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
@@ -135,7 +135,7 @@ from gitpod import Gitpod
 client = Gitpod(
     # default is 2
     max_retries=0,
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
@@ -155,14 +155,14 @@ from gitpod import Gitpod
 client = Gitpod(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
 # More granular control:
 client = Gitpod(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 
@@ -208,7 +208,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gitpod import Gitpod
 
 client = Gitpod(
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 response = client.runners.with_raw_response.create()
@@ -291,7 +291,7 @@ client = Gitpod(
         proxy="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 )
 ```
@@ -310,7 +310,7 @@ By default the library closes underlying HTTP connections whenever the client is
 from gitpod import Gitpod
 
 with Gitpod(
-    connect_protocol_version=True,
+    connect_protocol_version=0,
     connect_timeout_header=0,
 ) as client:
   # make requests here

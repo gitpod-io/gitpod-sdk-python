@@ -32,7 +32,7 @@ from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 bearer_token = "My Bearer Token"
-connect_protocol_version = True
+connect_protocol_version = 0
 connect_timeout_header = 0
 
 
@@ -91,9 +91,9 @@ class TestGitpod:
         assert copied.bearer_token == "another My Bearer Token"
         assert self.client.bearer_token == "My Bearer Token"
 
-        copied = self.client.copy(connect_protocol_version=True)
-        assert copied.connect_protocol_version == True
-        assert self.client.connect_protocol_version == True
+        copied = self.client.copy(connect_protocol_version=0)
+        assert copied.connect_protocol_version == 0
+        assert self.client.connect_protocol_version == 0
 
         copied = self.client.copy(connect_timeout_header=0)
         assert copied.connect_timeout_header == 0
@@ -975,9 +975,9 @@ class TestAsyncGitpod:
         assert copied.bearer_token == "another My Bearer Token"
         assert self.client.bearer_token == "My Bearer Token"
 
-        copied = self.client.copy(connect_protocol_version=True)
-        assert copied.connect_protocol_version == True
-        assert self.client.connect_protocol_version == True
+        copied = self.client.copy(connect_protocol_version=0)
+        assert copied.connect_protocol_version == 0
+        assert self.client.connect_protocol_version == 0
 
         copied = self.client.copy(connect_timeout_header=0)
         assert copied.connect_timeout_header == 0
