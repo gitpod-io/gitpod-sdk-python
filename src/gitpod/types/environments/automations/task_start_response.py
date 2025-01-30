@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -16,6 +16,12 @@ __all__ = [
     "TaskExecutionSpec",
     "TaskExecutionSpecPlan",
     "TaskExecutionSpecPlanStep",
+    "TaskExecutionSpecPlanStepServiceID",
+    "TaskExecutionSpecPlanStepTask",
+    "TaskExecutionSpecPlanStepTaskTask",
+    "TaskExecutionSpecPlanStepTaskTaskSpec",
+    "TaskExecutionSpecPlanStepTaskTaskSpecRunsOn",
+    "TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker",
     "TaskExecutionStatus",
     "TaskExecutionStatusStep",
 ]
@@ -328,8 +334,53 @@ class TaskExecutionMetadata(BaseModel):
     """task_id is the ID of the main task being executed."""
 
 
-class TaskExecutionSpecPlanStep:
-    pass
+class TaskExecutionSpecPlanStepServiceID(BaseModel):
+    service_id: str = FieldInfo(alias="serviceId")
+
+    id: Optional[str] = None
+    """ID is the ID of the execution step"""
+
+    depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
+
+    label: Optional[str] = None
+
+
+class TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker(BaseModel):
+    environment: Optional[List[str]] = None
+
+    image: Optional[str] = None
+
+
+class TaskExecutionSpecPlanStepTaskTaskSpecRunsOn(BaseModel):
+    docker: TaskExecutionSpecPlanStepTaskTaskSpecRunsOnDocker
+
+
+class TaskExecutionSpecPlanStepTaskTaskSpec(BaseModel):
+    command: Optional[str] = None
+    """command contains the command the task should execute"""
+
+    runs_on: Optional[TaskExecutionSpecPlanStepTaskTaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    """runs_on specifies the environment the task should run on."""
+
+
+class TaskExecutionSpecPlanStepTaskTask(BaseModel):
+    id: Optional[str] = None
+
+    spec: Optional[TaskExecutionSpecPlanStepTaskTaskSpec] = None
+
+
+class TaskExecutionSpecPlanStepTask(BaseModel):
+    task: TaskExecutionSpecPlanStepTaskTask
+
+    id: Optional[str] = None
+    """ID is the ID of the execution step"""
+
+    depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
+
+    label: Optional[str] = None
+
+
+TaskExecutionSpecPlanStep: TypeAlias = Union[TaskExecutionSpecPlanStepServiceID, TaskExecutionSpecPlanStepTask]
 
 
 class TaskExecutionSpecPlan(BaseModel):

@@ -133,25 +133,18 @@ Methods:
 Types:
 
 ```python
-from gitpod.types import OrganizationLeaveResponse, OrganizationSetRoleResponse
+from gitpod.types import (
+    OrganizationLeaveResponse,
+    OrganizationListMembersResponse,
+    OrganizationSetRoleResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /gitpod.v1.OrganizationService/LeaveOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">leave</a>(\*\*<a href="src/gitpod/types/organization_leave_params.py">params</a>) -> <a href="./src/gitpod/types/organization_leave_response.py">object</a></code>
+- <code title="post /gitpod.v1.OrganizationService/ListMembers">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">list_members</a>(\*\*<a href="src/gitpod/types/organization_list_members_params.py">params</a>) -> <a href="./src/gitpod/types/organization_list_members_response.py">OrganizationListMembersResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/SetRole">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">set_role</a>(\*\*<a href="src/gitpod/types/organization_set_role_params.py">params</a>) -> <a href="./src/gitpod/types/organization_set_role_response.py">object</a></code>
-
-## Members
-
-Types:
-
-```python
-from gitpod.types.organizations import MemberListResponse
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.OrganizationService/ListMembers">client.organizations.members.<a href="./src/gitpod/resources/organizations/members.py">list</a>(\*\*<a href="src/gitpod/types/organizations/member_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/member_list_response.py">MemberListResponse</a></code>
 
 ## Invite
 

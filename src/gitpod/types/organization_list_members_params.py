@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
-from ..._utils import PropertyInfo
+from .._utils import PropertyInfo
 
-__all__ = ["MemberListParams", "Pagination"]
+__all__ = ["OrganizationListMembersParams", "Pagination"]
 
 
-class MemberListParams(TypedDict, total=False):
+class OrganizationListMembersParams(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 

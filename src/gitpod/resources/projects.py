@@ -57,7 +57,7 @@ class ProjectsResource(SyncAPIResource):
     def create(
         self,
         *,
-        environment_class: object,
+        environment_class: project_create_params.EnvironmentClass,
         initializer: project_create_params.Initializer,
         connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,
@@ -259,7 +259,7 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        environment_class: object,
+        environment_class: project_create_params.EnvironmentClass,
         initializer: project_create_params.Initializer,
         connect_protocol_version: Literal[1],
         automations_file_path: str | NotGiven = NOT_GIVEN,

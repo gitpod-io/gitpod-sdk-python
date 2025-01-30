@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Union, Iterable
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -14,10 +14,17 @@ __all__ = [
     "SpecContent",
     "SpecContentInitializer",
     "SpecContentInitializerSpec",
+    "SpecContentInitializerSpecContextURL",
+    "SpecContentInitializerSpecContextURLContextURL",
+    "SpecContentInitializerSpecGit",
+    "SpecContentInitializerSpecGitGit",
     "SpecDevcontainer",
     "SpecMachine",
     "SpecPort",
     "SpecSecret",
+    "SpecSecretEnvironmentVariable",
+    "SpecSecretFilePath",
+    "SpecSecretGitCredentialHost",
     "SpecSSHPublicKey",
     "SpecTimeout",
 ]
@@ -55,8 +62,49 @@ class SpecAutomationsFile(TypedDict, total=False):
     session: str
 
 
-class SpecContentInitializerSpec:
-    pass
+class SpecContentInitializerSpecContextURLContextURL(TypedDict, total=False):
+    url: str
+    """url is the URL from which the environment is created"""
+
+
+class SpecContentInitializerSpecContextURL(TypedDict, total=False):
+    context_url: Required[Annotated[SpecContentInitializerSpecContextURLContextURL, PropertyInfo(alias="contextUrl")]]
+
+
+class SpecContentInitializerSpecGitGit(TypedDict, total=False):
+    checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Annotated[str, PropertyInfo(alias="remoteUri")]
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Annotated[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ],
+        PropertyInfo(alias="targetMode"),
+    ]
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class SpecContentInitializerSpecGit(TypedDict, total=False):
+    git: Required[SpecContentInitializerSpecGitGit]
+
+
+SpecContentInitializerSpec: TypeAlias = Union[SpecContentInitializerSpecContextURL, SpecContentInitializerSpecGit]
 
 
 class SpecContentInitializer(TypedDict, total=False):
@@ -114,8 +162,65 @@ class SpecPort(TypedDict, total=False):
     """port number"""
 
 
-class SpecSecret:
-    pass
+class SpecSecretEnvironmentVariable(TypedDict, total=False):
+    environment_variable: Required[Annotated[str, PropertyInfo(alias="environmentVariable")]]
+
+    name: str
+    """name is the human readable description of the secret"""
+
+    session: str
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: str
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Annotated[str, PropertyInfo(alias="sourceRef")]
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class SpecSecretFilePath(TypedDict, total=False):
+    file_path: Required[Annotated[str, PropertyInfo(alias="filePath")]]
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    name: str
+    """name is the human readable description of the secret"""
+
+    session: str
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: str
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Annotated[str, PropertyInfo(alias="sourceRef")]
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class SpecSecretGitCredentialHost(TypedDict, total=False):
+    git_credential_host: Required[Annotated[str, PropertyInfo(alias="gitCredentialHost")]]
+
+    name: str
+    """name is the human readable description of the secret"""
+
+    session: str
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: str
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Annotated[str, PropertyInfo(alias="sourceRef")]
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+SpecSecret: TypeAlias = Union[SpecSecretEnvironmentVariable, SpecSecretFilePath, SpecSecretGitCredentialHost]
 
 
 class SpecSSHPublicKey(TypedDict, total=False):

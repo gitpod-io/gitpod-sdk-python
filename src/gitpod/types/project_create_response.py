@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -11,8 +11,15 @@ from .._models import BaseModel
 __all__ = [
     "ProjectCreateResponse",
     "Project",
+    "ProjectEnvironmentClass",
+    "ProjectEnvironmentClassEnvironmentClassID",
+    "ProjectEnvironmentClassLocalRunner",
     "ProjectInitializer",
     "ProjectInitializerSpec",
+    "ProjectInitializerSpecContextURL",
+    "ProjectInitializerSpecContextURLContextURL",
+    "ProjectInitializerSpecGit",
+    "ProjectInitializerSpecGitGit",
     "ProjectMetadata",
     "ProjectMetadataCreator",
     "ProjectUsedBy",
@@ -20,8 +27,66 @@ __all__ = [
 ]
 
 
-class ProjectInitializerSpec:
-    pass
+class ProjectEnvironmentClassEnvironmentClassID(BaseModel):
+    environment_class_id: str = FieldInfo(alias="environmentClassId")
+    """Use a fixed environment class on a given Runner.
+
+    This cannot be a local runner's environment class.
+    """
+
+
+class ProjectEnvironmentClassLocalRunner(BaseModel):
+    local_runner: bool = FieldInfo(alias="localRunner")
+    """Use a local runner for the user"""
+
+
+ProjectEnvironmentClass: TypeAlias = Union[
+    ProjectEnvironmentClassEnvironmentClassID, ProjectEnvironmentClassLocalRunner
+]
+
+
+class ProjectInitializerSpecContextURLContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class ProjectInitializerSpecContextURL(BaseModel):
+    context_url: ProjectInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
+
+
+class ProjectInitializerSpecGitGit(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class ProjectInitializerSpecGit(BaseModel):
+    git: ProjectInitializerSpecGitGit
+
+
+ProjectInitializerSpec: TypeAlias = Union[ProjectInitializerSpecContextURL, ProjectInitializerSpecGit]
 
 
 class ProjectInitializer(BaseModel):
@@ -269,7 +334,7 @@ class ProjectUsedBy(BaseModel):
 
 
 class Project(BaseModel):
-    environment_class: object = FieldInfo(alias="environmentClass")
+    environment_class: ProjectEnvironmentClass = FieldInfo(alias="environmentClass")
 
     id: Optional[str] = None
     """id is the unique identifier for the project"""

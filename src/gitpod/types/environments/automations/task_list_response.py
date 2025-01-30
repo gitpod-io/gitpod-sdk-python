@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from pydantic import Field as FieldInfo
 
@@ -15,7 +15,12 @@ __all__ = [
     "TaskMetadata",
     "TaskMetadataCreator",
     "TaskMetadataTriggeredBy",
+    "TaskMetadataTriggeredByManual",
+    "TaskMetadataTriggeredByPostDevcontainerStart",
+    "TaskMetadataTriggeredByPostEnvironmentStart",
     "TaskSpec",
+    "TaskSpecRunsOn",
+    "TaskSpecRunsOnDocker",
 ]
 
 
@@ -44,8 +49,23 @@ class TaskMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class TaskMetadataTriggeredBy:
-    pass
+class TaskMetadataTriggeredByManual(BaseModel):
+    manual: bool
+
+
+class TaskMetadataTriggeredByPostDevcontainerStart(BaseModel):
+    post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
+
+
+class TaskMetadataTriggeredByPostEnvironmentStart(BaseModel):
+    post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
+
+
+TaskMetadataTriggeredBy: TypeAlias = Union[
+    TaskMetadataTriggeredByManual,
+    TaskMetadataTriggeredByPostDevcontainerStart,
+    TaskMetadataTriggeredByPostEnvironmentStart,
+]
 
 
 class TaskMetadata(BaseModel):
@@ -172,11 +192,21 @@ class TaskMetadata(BaseModel):
     """triggered_by is a list of trigger that start the task."""
 
 
+class TaskSpecRunsOnDocker(BaseModel):
+    environment: Optional[List[str]] = None
+
+    image: Optional[str] = None
+
+
+class TaskSpecRunsOn(BaseModel):
+    docker: TaskSpecRunsOnDocker
+
+
 class TaskSpec(BaseModel):
     command: Optional[str] = None
     """command contains the command the task should execute"""
 
-    runs_on: Optional[object] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the task should run on."""
 
 

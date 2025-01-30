@@ -103,31 +103,26 @@ class TestHostAuthenticationTokens:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_update(self, client: Gitpod) -> None:
+    def test_method_update_overload_1(self, client: Gitpod) -> None:
         host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
         host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
-            body={
-                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "token": "x",
-                "expiresAt": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "refreshToken": "refreshToken",
-            },
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: Gitpod) -> None:
+    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runner_configurations.host_authentication_tokens.with_raw_response.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
         )
 
@@ -137,9 +132,95 @@ class TestHostAuthenticationTokens:
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: Gitpod) -> None:
+    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = response.parse()
+            assert_matches_type(object, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_2(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
+        response = client.runner_configurations.host_authentication_tokens.with_raw_response.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = response.parse()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
+        with client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = response.parse()
+            assert_matches_type(object, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_3(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
+            token="x",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_3(self, client: Gitpod) -> None:
+        host_authentication_token = client.runner_configurations.host_authentication_tokens.update(
+            token="x",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
+        response = client.runner_configurations.host_authentication_tokens.with_raw_response.update(
+            token="x",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = response.parse()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
+        with client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
+            token="x",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -161,7 +242,7 @@ class TestHostAuthenticationTokens:
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runner_configurations.host_authentication_tokens.list(
             connect_protocol_version=1,
-            filter={},
+            filter={"runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -319,31 +400,26 @@ class TestAsyncHostAuthenticationTokens:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
-            body={
-                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "token": "x",
-                "expiresAt": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "refreshToken": "refreshToken",
-            },
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runner_configurations.host_authentication_tokens.with_raw_response.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
             connect_protocol_version=1,
         )
 
@@ -353,9 +429,95 @@ class TestAsyncHostAuthenticationTokens:
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
-            body={},
+            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = await response.parse()
+            assert_matches_type(object, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runner_configurations.host_authentication_tokens.with_raw_response.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = await response.parse()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
+            refresh_token="refreshToken",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            host_authentication_token = await response.parse()
+            assert_matches_type(object, host_authentication_token, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
+            token="x",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.update(
+            token="x",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runner_configurations.host_authentication_tokens.with_raw_response.update(
+            token="x",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        host_authentication_token = await response.parse()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runner_configurations.host_authentication_tokens.with_streaming_response.update(
+            token="x",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -377,7 +539,7 @@ class TestAsyncHostAuthenticationTokens:
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runner_configurations.host_authentication_tokens.list(
             connect_protocol_version=1,
-            filter={},
+            filter={"runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             pagination={
                 "token": "token",
                 "page_size": 100,

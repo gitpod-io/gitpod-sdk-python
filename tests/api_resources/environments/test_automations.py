@@ -38,7 +38,12 @@ class TestAutomations:
                         },
                         "description": "description",
                         "name": "x",
-                        "runs_on": {},
+                        "runs_on": {
+                            "docker": {
+                                "environment": ["string"],
+                                "image": "x",
+                            }
+                        },
                         "triggered_by": ["string"],
                     }
                 },
@@ -48,7 +53,12 @@ class TestAutomations:
                         "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
-                        "runs_on": {},
+                        "runs_on": {
+                            "docker": {
+                                "environment": ["string"],
+                                "image": "x",
+                            }
+                        },
                         "triggered_by": ["string"],
                     }
                 },
@@ -107,7 +117,12 @@ class TestAsyncAutomations:
                         },
                         "description": "description",
                         "name": "x",
-                        "runs_on": {},
+                        "runs_on": {
+                            "docker": {
+                                "environment": ["string"],
+                                "image": "x",
+                            }
+                        },
                         "triggered_by": ["string"],
                     }
                 },
@@ -117,7 +132,12 @@ class TestAsyncAutomations:
                         "depends_on": ["string"],
                         "description": "description",
                         "name": "x",
-                        "runs_on": {},
+                        "runs_on": {
+                            "docker": {
+                                "environment": ["string"],
+                                "image": "x",
+                            }
+                        },
                         "triggered_by": ["string"],
                     }
                 },
