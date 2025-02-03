@@ -531,46 +531,6 @@ class AsyncEnvironmentsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class SyncEnvironmentClassesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    environment_classes: List[_T]
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        environment_classes = self.environment_classes
-        if not environment_classes:
-            return []
-        return environment_classes
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = self.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
-class AsyncEnvironmentClassesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    environment_classes: List[_T]
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        environment_classes = self.environment_classes
-        if not environment_classes:
-            return []
-        return environment_classes
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = self.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
 class SyncServicesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     services: List[_T]
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
@@ -801,46 +761,6 @@ class AsyncProjectsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not projects:
             return []
         return projects
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = self.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
-class SyncPoliciesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    policies: List[_T]
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        policies = self.policies
-        if not policies:
-            return []
-        return policies
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = self.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
-class AsyncPoliciesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    policies: List[_T]
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        policies = self.policies
-        if not policies:
-            return []
-        return policies
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
