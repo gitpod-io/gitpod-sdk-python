@@ -14,17 +14,23 @@ __all__ = [
     "SpecContent",
     "SpecContentInitializer",
     "SpecContentInitializerSpec",
-    "SpecContentInitializerSpecContextURL",
-    "SpecContentInitializerSpecContextURLContextURL",
-    "SpecContentInitializerSpecGit",
-    "SpecContentInitializerSpecGitGit",
+    "SpecContentInitializerSpecUnionMember0",
+    "SpecContentInitializerSpecUnionMember0ContextURL",
+    "SpecContentInitializerSpecUnionMember0Git",
+    "SpecContentInitializerSpecUnionMember1",
+    "SpecContentInitializerSpecUnionMember1Git",
+    "SpecContentInitializerSpecUnionMember1ContextURL",
+    "SpecContentInitializerSpecUnionMember2",
+    "SpecContentInitializerSpecUnionMember2ContextURL",
+    "SpecContentInitializerSpecUnionMember2Git",
     "SpecDevcontainer",
     "SpecMachine",
     "SpecPort",
     "SpecSecret",
     "SpecSecretUnionMember0",
-    "SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
+    "SpecSecretUnionMember1",
     "SpecSecretUnionMember2",
+    "SpecSecretUnionMember3",
     "SpecSSHPublicKey",
     "SpecTimeout",
 ]
@@ -62,16 +68,12 @@ class SpecAutomationsFile(TypedDict, total=False):
     session: str
 
 
-class SpecContentInitializerSpecContextURLContextURL(TypedDict, total=False):
+class SpecContentInitializerSpecUnionMember0ContextURL(TypedDict, total=False):
     url: str
     """url is the URL from which the environment is created"""
 
 
-class SpecContentInitializerSpecContextURL(TypedDict, total=False):
-    context_url: Required[Annotated[SpecContentInitializerSpecContextURLContextURL, PropertyInfo(alias="contextUrl")]]
-
-
-class SpecContentInitializerSpecGitGit(TypedDict, total=False):
+class SpecContentInitializerSpecUnionMember0Git(TypedDict, total=False):
     checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
     """a path relative to the environment root in which the code will be checked out
 
@@ -100,11 +102,97 @@ class SpecContentInitializerSpecGitGit(TypedDict, total=False):
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class SpecContentInitializerSpecGit(TypedDict, total=False):
-    git: Required[SpecContentInitializerSpecGitGit]
+class SpecContentInitializerSpecUnionMember0(TypedDict, total=False):
+    context_url: Required[Annotated[SpecContentInitializerSpecUnionMember0ContextURL, PropertyInfo(alias="contextUrl")]]
+
+    git: SpecContentInitializerSpecUnionMember0Git
 
 
-SpecContentInitializerSpec: TypeAlias = Union[SpecContentInitializerSpecContextURL, SpecContentInitializerSpecGit]
+class SpecContentInitializerSpecUnionMember1Git(TypedDict, total=False):
+    checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Annotated[str, PropertyInfo(alias="remoteUri")]
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Annotated[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ],
+        PropertyInfo(alias="targetMode"),
+    ]
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class SpecContentInitializerSpecUnionMember1ContextURL(TypedDict, total=False):
+    url: str
+    """url is the URL from which the environment is created"""
+
+
+class SpecContentInitializerSpecUnionMember1(TypedDict, total=False):
+    git: Required[SpecContentInitializerSpecUnionMember1Git]
+
+    context_url: Annotated[SpecContentInitializerSpecUnionMember1ContextURL, PropertyInfo(alias="contextUrl")]
+
+
+class SpecContentInitializerSpecUnionMember2ContextURL(TypedDict, total=False):
+    url: str
+    """url is the URL from which the environment is created"""
+
+
+class SpecContentInitializerSpecUnionMember2Git(TypedDict, total=False):
+    checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Annotated[str, PropertyInfo(alias="remoteUri")]
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Annotated[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ],
+        PropertyInfo(alias="targetMode"),
+    ]
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class SpecContentInitializerSpecUnionMember2(TypedDict, total=False):
+    context_url: Annotated[SpecContentInitializerSpecUnionMember2ContextURL, PropertyInfo(alias="contextUrl")]
+
+    git: SpecContentInitializerSpecUnionMember2Git
+
+
+SpecContentInitializerSpec: TypeAlias = Union[
+    SpecContentInitializerSpecUnionMember0,
+    SpecContentInitializerSpecUnionMember1,
+    SpecContentInitializerSpecUnionMember2,
+]
 
 
 class SpecContentInitializer(TypedDict, total=False):
@@ -165,6 +253,11 @@ class SpecPort(TypedDict, total=False):
 class SpecSecretUnionMember0(TypedDict, total=False):
     environment_variable: Required[Annotated[str, PropertyInfo(alias="environmentVariable")]]
 
+    file_path: Annotated[str, PropertyInfo(alias="filePath")]
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    git_credential_host: Annotated[str, PropertyInfo(alias="gitCredentialHost")]
+
     name: str
     """name is the human readable description of the secret"""
 
@@ -181,9 +274,13 @@ class SpecSecretUnionMember0(TypedDict, total=False):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(TypedDict, total=False):
+class SpecSecretUnionMember1(TypedDict, total=False):
     file_path: Required[Annotated[str, PropertyInfo(alias="filePath")]]
     """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    environment_variable: Annotated[str, PropertyInfo(alias="environmentVariable")]
+
+    git_credential_host: Annotated[str, PropertyInfo(alias="gitCredentialHost")]
 
     name: str
     """name is the human readable description of the secret"""
@@ -204,6 +301,35 @@ class SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(Ty
 class SpecSecretUnionMember2(TypedDict, total=False):
     git_credential_host: Required[Annotated[str, PropertyInfo(alias="gitCredentialHost")]]
 
+    environment_variable: Annotated[str, PropertyInfo(alias="environmentVariable")]
+
+    file_path: Annotated[str, PropertyInfo(alias="filePath")]
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    name: str
+    """name is the human readable description of the secret"""
+
+    session: str
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: str
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Annotated[str, PropertyInfo(alias="sourceRef")]
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class SpecSecretUnionMember3(TypedDict, total=False):
+    environment_variable: Annotated[str, PropertyInfo(alias="environmentVariable")]
+
+    file_path: Annotated[str, PropertyInfo(alias="filePath")]
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    git_credential_host: Annotated[str, PropertyInfo(alias="gitCredentialHost")]
+
     name: str
     """name is the human readable description of the secret"""
 
@@ -221,9 +347,7 @@ class SpecSecretUnionMember2(TypedDict, total=False):
 
 
 SpecSecret: TypeAlias = Union[
-    SpecSecretUnionMember0,
-    SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
-    SpecSecretUnionMember2,
+    SpecSecretUnionMember0, SpecSecretUnionMember1, SpecSecretUnionMember2, SpecSecretUnionMember3
 ]
 
 

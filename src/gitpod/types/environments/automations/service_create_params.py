@@ -13,13 +13,15 @@ __all__ = [
     "Metadata",
     "MetadataCreator",
     "MetadataTriggeredBy",
-    "MetadataTriggeredByManual",
-    "MetadataTriggeredByPostDevcontainerStart",
-    "MetadataTriggeredByPostEnvironmentStart",
+    "MetadataTriggeredByUnionMember0",
+    "MetadataTriggeredByUnionMember1",
+    "MetadataTriggeredByUnionMember2",
+    "MetadataTriggeredByUnionMember3",
     "Spec",
     "SpecCommands",
     "SpecRunsOn",
     "SpecRunsOnDocker",
+    "SpecRunsOnDockerDocker",
 ]
 
 
@@ -52,20 +54,43 @@ class MetadataCreator(TypedDict, total=False):
     """Principal is the principal of the subject"""
 
 
-class MetadataTriggeredByManual(TypedDict, total=False):
+class MetadataTriggeredByUnionMember0(TypedDict, total=False):
     manual: Required[bool]
 
+    post_devcontainer_start: Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]
 
-class MetadataTriggeredByPostDevcontainerStart(TypedDict, total=False):
+    post_environment_start: Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]
+
+
+class MetadataTriggeredByUnionMember1(TypedDict, total=False):
     post_devcontainer_start: Required[Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]]
 
+    manual: bool
 
-class MetadataTriggeredByPostEnvironmentStart(TypedDict, total=False):
+    post_environment_start: Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]
+
+
+class MetadataTriggeredByUnionMember2(TypedDict, total=False):
     post_environment_start: Required[Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]]
+
+    manual: bool
+
+    post_devcontainer_start: Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]
+
+
+class MetadataTriggeredByUnionMember3(TypedDict, total=False):
+    manual: bool
+
+    post_devcontainer_start: Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]
+
+    post_environment_start: Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]
 
 
 MetadataTriggeredBy: TypeAlias = Union[
-    MetadataTriggeredByManual, MetadataTriggeredByPostDevcontainerStart, MetadataTriggeredByPostEnvironmentStart
+    MetadataTriggeredByUnionMember0,
+    MetadataTriggeredByUnionMember1,
+    MetadataTriggeredByUnionMember2,
+    MetadataTriggeredByUnionMember3,
 ]
 
 
@@ -226,14 +251,17 @@ class SpecCommands(TypedDict, total=False):
     """
 
 
-class SpecRunsOnDocker(TypedDict, total=False):
+class SpecRunsOnDockerDocker(TypedDict, total=False):
     environment: List[str]
 
     image: str
 
 
-class SpecRunsOn(TypedDict, total=False):
-    docker: Required[SpecRunsOnDocker]
+class SpecRunsOnDocker(TypedDict, total=False):
+    docker: Required[SpecRunsOnDockerDocker]
+
+
+SpecRunsOn: TypeAlias = Union[SpecRunsOnDocker, SpecRunsOnDocker]
 
 
 class Spec(TypedDict, total=False):

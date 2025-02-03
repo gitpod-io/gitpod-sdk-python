@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing_extensions import Literal
 
 import httpx
 
@@ -19,7 +19,6 @@ from ...types import (
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     is_given,
-    required_args,
     maybe_transform,
     strip_not_given,
     async_maybe_transform,
@@ -96,6 +95,13 @@ class RunnersResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        provider: Literal[
+            "RUNNER_PROVIDER_UNSPECIFIED",
+            "RUNNER_PROVIDER_AWS_EC2",
+            "RUNNER_PROVIDER_LINUX_HOST",
+            "RUNNER_PROVIDER_DESKTOP_MAC",
+        ]
+        | NotGiven = NOT_GIVEN,
         spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -118,6 +124,10 @@ class RunnersResource(SyncAPIResource):
           kind: RunnerKind represents the kind of a runner
 
           name: The runner name for humans
+
+          provider: RunnerProvider identifies the specific implementation type of a runner. Each
+              provider maps to a specific kind of runner (local or remote), as specified below
+              for each provider.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -144,6 +154,7 @@ class RunnersResource(SyncAPIResource):
                 {
                     "kind": kind,
                     "name": name,
+                    "provider": provider,
                     "spec": spec,
                 },
                 runner_create_params.RunnerCreateParams,
@@ -226,45 +237,10 @@ class RunnersResource(SyncAPIResource):
             cast_to=RunnerRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateRunner updates an environment runner.
-
-        Args:
-          name: The runner's name which is shown to users
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        spec: runner_update_params.Variant1Spec,
+        body: runner_update_params.Body,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -290,23 +266,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["name", "connect_protocol_version"], ["spec", "connect_protocol_version"])
-    def update(
-        self,
-        *,
-        name: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         extra_headers = {
             **strip_not_given(
                 {
@@ -318,13 +277,7 @@ class RunnersResource(SyncAPIResource):
         }
         return self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
-            body=maybe_transform(
-                {
-                    "name": name,
-                    "spec": spec,
-                },
-                runner_update_params.RunnerUpdateParams,
-            ),
+            body=maybe_transform(body, runner_update_params.RunnerUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -675,6 +628,13 @@ class AsyncRunnersResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        provider: Literal[
+            "RUNNER_PROVIDER_UNSPECIFIED",
+            "RUNNER_PROVIDER_AWS_EC2",
+            "RUNNER_PROVIDER_LINUX_HOST",
+            "RUNNER_PROVIDER_DESKTOP_MAC",
+        ]
+        | NotGiven = NOT_GIVEN,
         spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -697,6 +657,10 @@ class AsyncRunnersResource(AsyncAPIResource):
           kind: RunnerKind represents the kind of a runner
 
           name: The runner name for humans
+
+          provider: RunnerProvider identifies the specific implementation type of a runner. Each
+              provider maps to a specific kind of runner (local or remote), as specified below
+              for each provider.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -723,6 +687,7 @@ class AsyncRunnersResource(AsyncAPIResource):
                 {
                     "kind": kind,
                     "name": name,
+                    "provider": provider,
                     "spec": spec,
                 },
                 runner_create_params.RunnerCreateParams,
@@ -805,45 +770,10 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateRunner updates an environment runner.
-
-        Args:
-          name: The runner's name which is shown to users
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        spec: runner_update_params.Variant1Spec,
+        body: runner_update_params.Body,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -869,23 +799,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["name", "connect_protocol_version"], ["spec", "connect_protocol_version"])
-    async def update(
-        self,
-        *,
-        name: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         extra_headers = {
             **strip_not_given(
                 {
@@ -897,13 +810,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         }
         return await self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
-            body=await async_maybe_transform(
-                {
-                    "name": name,
-                    "spec": spec,
-                },
-                runner_update_params.RunnerUpdateParams,
-            ),
+            body=await async_maybe_transform(body, runner_update_params.RunnerUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

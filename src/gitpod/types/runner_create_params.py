@@ -21,6 +21,18 @@ class RunnerCreateParams(TypedDict, total=False):
     name: str
     """The runner name for humans"""
 
+    provider: Literal[
+        "RUNNER_PROVIDER_UNSPECIFIED",
+        "RUNNER_PROVIDER_AWS_EC2",
+        "RUNNER_PROVIDER_LINUX_HOST",
+        "RUNNER_PROVIDER_DESKTOP_MAC",
+    ]
+    """
+    RunnerProvider identifies the specific implementation type of a runner. Each
+    provider maps to a specific kind of runner (local or remote), as specified below
+    for each provider.
+    """
+
     spec: Spec
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]

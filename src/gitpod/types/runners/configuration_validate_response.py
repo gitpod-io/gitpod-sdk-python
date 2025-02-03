@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Union
+from typing import Union, Optional
 from typing_extensions import TypeAlias
 
 from pydantic import Field as FieldInfo
@@ -9,62 +9,58 @@ from ..._models import BaseModel
 
 __all__ = [
     "ConfigurationValidateResponse",
-    "EnvironmentClass",
-    "EnvironmentClassEnvironmentClass",
-    "EnvironmentClassEnvironmentClassDescriptionError",
-    "EnvironmentClassEnvironmentClassDisplayNameError",
-    "ScmIntegration",
-    "ScmIntegrationScmIntegration",
-    "ScmIntegrationScmIntegrationHostError",
-    "ScmIntegrationScmIntegrationOAuthError",
-    "ScmIntegrationScmIntegrationPatError",
-    "ScmIntegrationScmIntegrationScmIDError",
+    "UnionMember0",
+    "UnionMember0EnvironmentClass",
+    "UnionMember0ScmIntegration",
+    "UnionMember1",
+    "UnionMember1ScmIntegration",
+    "UnionMember1EnvironmentClass",
+    "UnionMember2",
+    "UnionMember2EnvironmentClass",
+    "UnionMember2ScmIntegration",
 ]
 
 
-class EnvironmentClassEnvironmentClassDescriptionError(BaseModel):
-    description_error: str = FieldInfo(alias="descriptionError")
+class UnionMember0EnvironmentClass:
+    pass
 
 
-class EnvironmentClassEnvironmentClassDisplayNameError(BaseModel):
-    display_name_error: str = FieldInfo(alias="displayNameError")
+class UnionMember0ScmIntegration:
+    pass
 
 
-EnvironmentClassEnvironmentClass: TypeAlias = Union[
-    EnvironmentClassEnvironmentClassDescriptionError, EnvironmentClassEnvironmentClassDisplayNameError
-]
+class UnionMember0(BaseModel):
+    environment_class: UnionMember0EnvironmentClass = FieldInfo(alias="environmentClass")
+
+    scm_integration: Optional[UnionMember0ScmIntegration] = FieldInfo(alias="scmIntegration", default=None)
 
 
-class EnvironmentClass(BaseModel):
-    environment_class: EnvironmentClassEnvironmentClass = FieldInfo(alias="environmentClass")
+class UnionMember1ScmIntegration:
+    pass
 
 
-class ScmIntegrationScmIntegrationHostError(BaseModel):
-    host_error: str = FieldInfo(alias="hostError")
+class UnionMember1EnvironmentClass:
+    pass
 
 
-class ScmIntegrationScmIntegrationOAuthError(BaseModel):
-    oauth_error: str = FieldInfo(alias="oauthError")
+class UnionMember1(BaseModel):
+    scm_integration: UnionMember1ScmIntegration = FieldInfo(alias="scmIntegration")
+
+    environment_class: Optional[UnionMember1EnvironmentClass] = FieldInfo(alias="environmentClass", default=None)
 
 
-class ScmIntegrationScmIntegrationPatError(BaseModel):
-    pat_error: str = FieldInfo(alias="patError")
+class UnionMember2EnvironmentClass:
+    pass
 
 
-class ScmIntegrationScmIntegrationScmIDError(BaseModel):
-    scm_id_error: str = FieldInfo(alias="scmIdError")
+class UnionMember2ScmIntegration:
+    pass
 
 
-ScmIntegrationScmIntegration: TypeAlias = Union[
-    ScmIntegrationScmIntegrationHostError,
-    ScmIntegrationScmIntegrationOAuthError,
-    ScmIntegrationScmIntegrationPatError,
-    ScmIntegrationScmIntegrationScmIDError,
-]
+class UnionMember2(BaseModel):
+    environment_class: Optional[UnionMember2EnvironmentClass] = FieldInfo(alias="environmentClass", default=None)
+
+    scm_integration: Optional[UnionMember2ScmIntegration] = FieldInfo(alias="scmIntegration", default=None)
 
 
-class ScmIntegration(BaseModel):
-    scm_integration: ScmIntegrationScmIntegration = FieldInfo(alias="scmIntegration")
-
-
-ConfigurationValidateResponse: TypeAlias = Union[EnvironmentClass, ScmIntegration]
+ConfigurationValidateResponse: TypeAlias = Union[UnionMember0, UnionMember1, UnionMember2]

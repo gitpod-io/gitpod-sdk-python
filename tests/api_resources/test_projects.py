@@ -35,8 +35,24 @@ class TestProjects:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
+            environment_class={
+                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "local_runner": True,
+            },
+            initializer={
+                "specs": [
+                    {
+                        "context_url": {"url": "https://example.com"},
+                        "git": {
+                            "checkout_location": "checkoutLocation",
+                            "clone_target": "cloneTarget",
+                            "remote_uri": "remoteUri",
+                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                            "upstream_remote_uri": "upstreamRemoteUri",
+                        },
+                    }
+                ]
+            },
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -121,26 +137,49 @@ class TestProjects:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
         project = client.projects.update(
-            automations_file_path="automationsFilePath",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.update(
-            automations_file_path="automationsFilePath",
+            body={
+                "automationsFilePath": "automationsFilePath",
+                "devcontainerFilePath": "devcontainerFilePath",
+                "environmentClass": {
+                    "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "local_runner": True,
+                },
+                "initializer": {
+                    "specs": [
+                        {
+                            "context_url": {"url": "https://example.com"},
+                            "git": {
+                                "checkout_location": "checkoutLocation",
+                                "clone_target": "cloneTarget",
+                                "remote_uri": "remoteUri",
+                                "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                "upstream_remote_uri": "upstreamRemoteUri",
+                            },
+                        }
+                    ]
+                },
+                "name": "x",
+                "projectId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
+    def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.update(
-            automations_file_path="automationsFilePath",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -150,181 +189,9 @@ class TestProjects:
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.update(
-            automations_file_path="automationsFilePath",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.projects.with_raw_response.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.projects.with_streaming_response.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_overload_3(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_3(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
-        response = client.projects.with_raw_response.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
-        with client.projects.with_streaming_response.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_overload_4(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            initializer={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_4(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_4(self, client: Gitpod) -> None:
-        response = client.projects.with_raw_response.update(
-            initializer={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_4(self, client: Gitpod) -> None:
-        with client.projects.with_streaming_response.update(
-            initializer={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_overload_5(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            name="x",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_5(self, client: Gitpod) -> None:
-        project = client.projects.update(
-            name="x",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_5(self, client: Gitpod) -> None:
-        response = client.projects.with_raw_response.update(
-            name="x",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_5(self, client: Gitpod) -> None:
-        with client.projects.with_streaming_response.update(
-            name="x",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -479,8 +346,24 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
+            environment_class={
+                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "local_runner": True,
+            },
+            initializer={
+                "specs": [
+                    {
+                        "context_url": {"url": "https://example.com"},
+                        "git": {
+                            "checkout_location": "checkoutLocation",
+                            "clone_target": "cloneTarget",
+                            "remote_uri": "remoteUri",
+                            "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                            "upstream_remote_uri": "upstreamRemoteUri",
+                        },
+                    }
+                ]
+            },
             connect_protocol_version=1,
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
@@ -565,26 +448,49 @@ class TestAsyncProjects:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.update(
-            automations_file_path="automationsFilePath",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.update(
-            automations_file_path="automationsFilePath",
+            body={
+                "automationsFilePath": "automationsFilePath",
+                "devcontainerFilePath": "devcontainerFilePath",
+                "environmentClass": {
+                    "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "local_runner": True,
+                },
+                "initializer": {
+                    "specs": [
+                        {
+                            "context_url": {"url": "https://example.com"},
+                            "git": {
+                                "checkout_location": "checkoutLocation",
+                                "clone_target": "cloneTarget",
+                                "remote_uri": "remoteUri",
+                                "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                "upstream_remote_uri": "upstreamRemoteUri",
+                            },
+                        }
+                    ]
+                },
+                "name": "x",
+                "projectId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.update(
-            automations_file_path="automationsFilePath",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -594,181 +500,9 @@ class TestAsyncProjects:
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.update(
-            automations_file_path="automationsFilePath",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = await response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.projects.with_raw_response.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.projects.with_streaming_response.update(
-            devcontainer_file_path="devcontainerFilePath",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = await response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.projects.with_raw_response.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.projects.with_streaming_response.update(
-            environment_class={"environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = await response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            initializer={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_4(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            initializer={"specs": [{"context_url": {"url": "https://example.com"}}]},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.projects.with_raw_response.update(
-            initializer={},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        async with async_client.projects.with_streaming_response.update(
-            initializer={},
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            project = await response.parse()
-            assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            name="x",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_5(self, async_client: AsyncGitpod) -> None:
-        project = await async_client.projects.update(
-            name="x",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.projects.with_raw_response.update(
-            name="x",
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        project = await response.parse()
-        assert_matches_type(ProjectUpdateResponse, project, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        async with async_client.projects.with_streaming_response.update(
-            name="x",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

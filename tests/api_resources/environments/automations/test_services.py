@@ -43,7 +43,13 @@ class TestServices:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "commands": {
@@ -148,9 +154,9 @@ class TestServices:
         service = client.environments.automations.services.update(
             connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            metadata={"description": "description"},
-            spec={"commands": {"ready": "ready"}},
-            status={"failure_message": "failureMessage"},
+            metadata={},
+            spec={},
+            status={},
             connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])
@@ -372,7 +378,13 @@ class TestAsyncServices:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "commands": {
@@ -477,9 +489,9 @@ class TestAsyncServices:
         service = await async_client.environments.automations.services.update(
             connect_protocol_version=1,
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            metadata={"description": "description"},
-            spec={"commands": {"ready": "ready"}},
-            status={"failure_message": "failureMessage"},
+            metadata={},
+            spec={},
+            status={},
             connect_timeout_ms=0,
         )
         assert_matches_type(object, service, path=["response"])

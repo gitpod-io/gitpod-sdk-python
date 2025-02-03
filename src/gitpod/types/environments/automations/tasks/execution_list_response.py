@@ -18,11 +18,23 @@ __all__ = [
     "TaskExecutionSpecPlan",
     "TaskExecutionSpecPlanStep",
     "TaskExecutionSpecPlanStepUnionMember0",
+    "TaskExecutionSpecPlanStepUnionMember0Task",
+    "TaskExecutionSpecPlanStepUnionMember0TaskSpec",
+    "TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOn",
+    "TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDocker",
+    "TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDockerDocker",
     "TaskExecutionSpecPlanStepUnionMember1",
     "TaskExecutionSpecPlanStepUnionMember1Task",
     "TaskExecutionSpecPlanStepUnionMember1TaskSpec",
     "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn",
     "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker",
+    "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDockerDocker",
+    "TaskExecutionSpecPlanStepUnionMember2",
+    "TaskExecutionSpecPlanStepUnionMember2Task",
+    "TaskExecutionSpecPlanStepUnionMember2TaskSpec",
+    "TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOn",
+    "TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDocker",
+    "TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDockerDocker",
     "TaskExecutionStatus",
     "TaskExecutionStatusStep",
 ]
@@ -343,6 +355,35 @@ class TaskExecutionMetadata(BaseModel):
     """task_id is the ID of the main task being executed."""
 
 
+class TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDockerDocker(BaseModel):
+    environment: Optional[List[str]] = None
+
+    image: Optional[str] = None
+
+
+class TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDocker(BaseModel):
+    docker: TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDockerDocker
+
+
+TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOn: TypeAlias = Union[
+    TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDocker, TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOnDocker
+]
+
+
+class TaskExecutionSpecPlanStepUnionMember0TaskSpec(BaseModel):
+    command: Optional[str] = None
+    """command contains the command the task should execute"""
+
+    runs_on: Optional[TaskExecutionSpecPlanStepUnionMember0TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    """runs_on specifies the environment the task should run on."""
+
+
+class TaskExecutionSpecPlanStepUnionMember0Task(BaseModel):
+    id: Optional[str] = None
+
+    spec: Optional[TaskExecutionSpecPlanStepUnionMember0TaskSpec] = None
+
+
 class TaskExecutionSpecPlanStepUnionMember0(BaseModel):
     service_id: str = FieldInfo(alias="serviceId")
 
@@ -353,15 +394,22 @@ class TaskExecutionSpecPlanStepUnionMember0(BaseModel):
 
     label: Optional[str] = None
 
+    task: Optional[TaskExecutionSpecPlanStepUnionMember0Task] = None
 
-class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker(BaseModel):
+
+class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDockerDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn(BaseModel):
-    docker: TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker
+class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker(BaseModel):
+    docker: TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDockerDocker
+
+
+TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn: TypeAlias = Union[
+    TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker, TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker
+]
 
 
 class TaskExecutionSpecPlanStepUnionMember1TaskSpec(BaseModel):
@@ -388,9 +436,53 @@ class TaskExecutionSpecPlanStepUnionMember1(BaseModel):
 
     label: Optional[str] = None
 
+    service_id: Optional[str] = FieldInfo(alias="serviceId", default=None)
+
+
+class TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDockerDocker(BaseModel):
+    environment: Optional[List[str]] = None
+
+    image: Optional[str] = None
+
+
+class TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDocker(BaseModel):
+    docker: TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDockerDocker
+
+
+TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOn: TypeAlias = Union[
+    TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDocker, TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOnDocker
+]
+
+
+class TaskExecutionSpecPlanStepUnionMember2TaskSpec(BaseModel):
+    command: Optional[str] = None
+    """command contains the command the task should execute"""
+
+    runs_on: Optional[TaskExecutionSpecPlanStepUnionMember2TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    """runs_on specifies the environment the task should run on."""
+
+
+class TaskExecutionSpecPlanStepUnionMember2Task(BaseModel):
+    id: Optional[str] = None
+
+    spec: Optional[TaskExecutionSpecPlanStepUnionMember2TaskSpec] = None
+
+
+class TaskExecutionSpecPlanStepUnionMember2(BaseModel):
+    id: Optional[str] = None
+    """ID is the ID of the execution step"""
+
+    depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
+
+    label: Optional[str] = None
+
+    service_id: Optional[str] = FieldInfo(alias="serviceId", default=None)
+
+    task: Optional[TaskExecutionSpecPlanStepUnionMember2Task] = None
+
 
 TaskExecutionSpecPlanStep: TypeAlias = Union[
-    TaskExecutionSpecPlanStepUnionMember0, TaskExecutionSpecPlanStepUnionMember1
+    TaskExecutionSpecPlanStepUnionMember0, TaskExecutionSpecPlanStepUnionMember1, TaskExecutionSpecPlanStepUnionMember2
 ]
 
 

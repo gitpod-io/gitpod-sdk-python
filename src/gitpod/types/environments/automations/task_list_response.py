@@ -15,12 +15,14 @@ __all__ = [
     "TaskMetadata",
     "TaskMetadataCreator",
     "TaskMetadataTriggeredBy",
-    "TaskMetadataTriggeredByManual",
-    "TaskMetadataTriggeredByPostDevcontainerStart",
-    "TaskMetadataTriggeredByPostEnvironmentStart",
+    "TaskMetadataTriggeredByUnionMember0",
+    "TaskMetadataTriggeredByUnionMember1",
+    "TaskMetadataTriggeredByUnionMember2",
+    "TaskMetadataTriggeredByUnionMember3",
     "TaskSpec",
     "TaskSpecRunsOn",
     "TaskSpecRunsOnDocker",
+    "TaskSpecRunsOnDockerDocker",
 ]
 
 
@@ -49,22 +51,43 @@ class TaskMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class TaskMetadataTriggeredByManual(BaseModel):
+class TaskMetadataTriggeredByUnionMember0(BaseModel):
     manual: bool
 
+    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
 
-class TaskMetadataTriggeredByPostDevcontainerStart(BaseModel):
+    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
+
+
+class TaskMetadataTriggeredByUnionMember1(BaseModel):
     post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
 
+    manual: Optional[bool] = None
 
-class TaskMetadataTriggeredByPostEnvironmentStart(BaseModel):
+    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
+
+
+class TaskMetadataTriggeredByUnionMember2(BaseModel):
     post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
+
+    manual: Optional[bool] = None
+
+    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
+
+
+class TaskMetadataTriggeredByUnionMember3(BaseModel):
+    manual: Optional[bool] = None
+
+    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
+
+    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
 
 
 TaskMetadataTriggeredBy: TypeAlias = Union[
-    TaskMetadataTriggeredByManual,
-    TaskMetadataTriggeredByPostDevcontainerStart,
-    TaskMetadataTriggeredByPostEnvironmentStart,
+    TaskMetadataTriggeredByUnionMember0,
+    TaskMetadataTriggeredByUnionMember1,
+    TaskMetadataTriggeredByUnionMember2,
+    TaskMetadataTriggeredByUnionMember3,
 ]
 
 
@@ -192,14 +215,17 @@ class TaskMetadata(BaseModel):
     """triggered_by is a list of trigger that start the task."""
 
 
-class TaskSpecRunsOnDocker(BaseModel):
+class TaskSpecRunsOnDockerDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class TaskSpecRunsOn(BaseModel):
-    docker: TaskSpecRunsOnDocker
+class TaskSpecRunsOnDocker(BaseModel):
+    docker: TaskSpecRunsOnDockerDocker
+
+
+TaskSpecRunsOn: TypeAlias = Union[TaskSpecRunsOnDocker, TaskSpecRunsOnDocker]
 
 
 class TaskSpec(BaseModel):

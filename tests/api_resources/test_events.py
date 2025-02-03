@@ -77,6 +77,7 @@ class TestEvents:
         event = client.events.watch(
             environment_id="environmentId",
             connect_protocol_version=1,
+            organization=True,
             connect_timeout_ms=0,
         )
         assert_matches_type(EventWatchResponse, event, path=["response"])
@@ -120,6 +121,7 @@ class TestEvents:
         event = client.events.watch(
             organization=True,
             connect_protocol_version=1,
+            environment_id="environmentId",
             connect_timeout_ms=0,
         )
         assert_matches_type(EventWatchResponse, event, path=["response"])
@@ -140,6 +142,47 @@ class TestEvents:
     def test_streaming_response_watch_overload_2(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch(
             organization=True,
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = response.parse()
+            assert_matches_type(EventWatchResponse, event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_watch_overload_3(self, client: Gitpod) -> None:
+        event = client.events.watch(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    def test_method_watch_with_all_params_overload_3(self, client: Gitpod) -> None:
+        event = client.events.watch(
+            connect_protocol_version=1,
+            environment_id="environmentId",
+            organization=True,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    def test_raw_response_watch_overload_3(self, client: Gitpod) -> None:
+        response = client.events.with_raw_response.watch(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = response.parse()
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    def test_streaming_response_watch_overload_3(self, client: Gitpod) -> None:
+        with client.events.with_streaming_response.watch(
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -214,6 +257,7 @@ class TestAsyncEvents:
         event = await async_client.events.watch(
             environment_id="environmentId",
             connect_protocol_version=1,
+            organization=True,
             connect_timeout_ms=0,
         )
         assert_matches_type(EventWatchResponse, event, path=["response"])
@@ -257,6 +301,7 @@ class TestAsyncEvents:
         event = await async_client.events.watch(
             organization=True,
             connect_protocol_version=1,
+            environment_id="environmentId",
             connect_timeout_ms=0,
         )
         assert_matches_type(EventWatchResponse, event, path=["response"])
@@ -277,6 +322,47 @@ class TestAsyncEvents:
     async def test_streaming_response_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch(
             organization=True,
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            event = await response.parse()
+            assert_matches_type(EventWatchResponse, event, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_watch_overload_3(self, async_client: AsyncGitpod) -> None:
+        event = await async_client.events.watch(
+            connect_protocol_version=1,
+        )
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    async def test_method_watch_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
+        event = await async_client.events.watch(
+            connect_protocol_version=1,
+            environment_id="environmentId",
+            organization=True,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    async def test_raw_response_watch_overload_3(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.events.with_raw_response.watch(
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        event = await response.parse()
+        assert_matches_type(EventWatchResponse, event, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_watch_overload_3(self, async_client: AsyncGitpod) -> None:
+        async with async_client.events.with_streaming_response.watch(
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
