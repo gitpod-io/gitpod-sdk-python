@@ -7,10 +7,16 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EventWatchParams", "Variant0", "Variant1", "Variant2"]
+__all__ = [
+    "EventWatchParams",
+    "EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment",
+    "OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued",
+]
 
 
-class Variant0(TypedDict, total=False):
+class EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment(
+    TypedDict, total=False
+):
     environment_id: Required[Annotated[str, PropertyInfo(alias="environmentId")]]
     """
     Environment scope produces events for the environment itself, all tasks, task
@@ -22,18 +28,13 @@ class Variant0(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    organization: bool
-    """Organization scope produces events for all projects, runners and environments
-
-    the caller can see within their organization. No task, task execution or service
-    events are produed.
-    """
-
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
 
 
-class Variant1(TypedDict, total=False):
+class OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued(
+    TypedDict, total=False
+):
     organization: Required[bool]
     """Organization scope produces events for all projects, runners and environments
 
@@ -44,39 +45,11 @@ class Variant1(TypedDict, total=False):
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
-    """
-    Environment scope produces events for the environment itself, all tasks, task
-    executions,
-
-    and services associated with that environment.
-    """
-
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
 
 
-class Variant2(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
-    """
-    Environment scope produces events for the environment itself, all tasks, task
-    executions,
-
-    and services associated with that environment.
-    """
-
-    organization: bool
-    """Organization scope produces events for all projects, runners and environments
-
-    the caller can see within their organization. No task, task execution or service
-    events are produed.
-    """
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
-
-EventWatchParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+EventWatchParams: TypeAlias = Union[
+    EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment,
+    OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued,
+]

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
+from typing_extensions import Literal, overload
 
 import httpx
 
@@ -17,6 +17,7 @@ from ...types import (
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
     is_given,
+    required_args,
     maybe_transform,
     strip_not_given,
     async_maybe_transform,
@@ -219,10 +220,89 @@ class ProjectsResource(SyncAPIResource):
             cast_to=ProjectRetrieveResponse,
         )
 
+    @overload
     def update(
         self,
         *,
-        body: project_update_params.Body,
+        automations_file_path: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          automations_file_path: automations_file_path is the path to the automations file relative to the repo
+              root path must not be absolute (start with a /):
+
+              ```
+              this.matches("^$|^[^/].*")
+              ```
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        devcontainer_file_path: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          devcontainer_file_path: devcontainer_file_path is the path to the devcontainer file relative to the repo
+              root path must not be absolute (start with a /):
+
+              ```
+              this.matches("^$|^[^/].*")
+              ```
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        environment_class: project_update_params.Variant2EnvironmentClass,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -248,6 +328,98 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        initializer: project_update_params.InitializerIsTheContentInitializerInitializer,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    def update(
+        self,
+        *,
+        name: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["automations_file_path", "connect_protocol_version"],
+        ["devcontainer_file_path", "connect_protocol_version"],
+        ["environment_class", "connect_protocol_version"],
+        ["initializer", "connect_protocol_version"],
+        ["name", "connect_protocol_version"],
+    )
+    def update(
+        self,
+        *,
+        automations_file_path: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
+        environment_class: project_update_params.Variant2EnvironmentClass | NotGiven = NOT_GIVEN,
+        initializer: project_update_params.InitializerIsTheContentInitializerInitializer | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
         extra_headers = {
             **strip_not_given(
                 {
@@ -259,7 +431,16 @@ class ProjectsResource(SyncAPIResource):
         }
         return self._post(
             "/gitpod.v1.ProjectService/UpdateProject",
-            body=maybe_transform(body, project_update_params.ProjectUpdateParams),
+            body=maybe_transform(
+                {
+                    "automations_file_path": automations_file_path,
+                    "devcontainer_file_path": devcontainer_file_path,
+                    "environment_class": environment_class,
+                    "initializer": initializer,
+                    "name": name,
+                },
+                project_update_params.ProjectUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -616,10 +797,89 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=ProjectRetrieveResponse,
         )
 
+    @overload
     async def update(
         self,
         *,
-        body: project_update_params.Body,
+        automations_file_path: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          automations_file_path: automations_file_path is the path to the automations file relative to the repo
+              root path must not be absolute (start with a /):
+
+              ```
+              this.matches("^$|^[^/].*")
+              ```
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        devcontainer_file_path: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          devcontainer_file_path: devcontainer_file_path is the path to the devcontainer file relative to the repo
+              root path must not be absolute (start with a /):
+
+              ```
+              this.matches("^$|^[^/].*")
+              ```
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        environment_class: project_update_params.Variant2EnvironmentClass,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -645,6 +905,98 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        initializer: project_update_params.InitializerIsTheContentInitializerInitializer,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @overload
+    async def update(
+        self,
+        *,
+        name: str,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
+        """
+        UpdateProject updates the properties of a Project.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["automations_file_path", "connect_protocol_version"],
+        ["devcontainer_file_path", "connect_protocol_version"],
+        ["environment_class", "connect_protocol_version"],
+        ["initializer", "connect_protocol_version"],
+        ["name", "connect_protocol_version"],
+    )
+    async def update(
+        self,
+        *,
+        automations_file_path: str | NotGiven = NOT_GIVEN,
+        connect_protocol_version: Literal[1],
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
+        environment_class: project_update_params.Variant2EnvironmentClass | NotGiven = NOT_GIVEN,
+        initializer: project_update_params.InitializerIsTheContentInitializerInitializer | NotGiven = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> ProjectUpdateResponse:
         extra_headers = {
             **strip_not_given(
                 {
@@ -656,7 +1008,16 @@ class AsyncProjectsResource(AsyncAPIResource):
         }
         return await self._post(
             "/gitpod.v1.ProjectService/UpdateProject",
-            body=await async_maybe_transform(body, project_update_params.ProjectUpdateParams),
+            body=await async_maybe_transform(
+                {
+                    "automations_file_path": automations_file_path,
+                    "devcontainer_file_path": devcontainer_file_path,
+                    "environment_class": environment_class,
+                    "initializer": initializer,
+                    "name": name,
+                },
+                project_update_params.ProjectUpdateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

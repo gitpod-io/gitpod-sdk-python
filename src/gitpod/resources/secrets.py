@@ -63,7 +63,6 @@ class SecretsResource(SyncAPIResource):
         *,
         environment_variable: bool,
         connect_protocol_version: Literal[1],
-        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -83,13 +82,6 @@ class SecretsResource(SyncAPIResource):
               secret
 
           connect_protocol_version: Define the version of the Connect protocol
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
 
           project_id: project_id is the ProjectID this Secret belongs to
 
@@ -113,7 +105,6 @@ class SecretsResource(SyncAPIResource):
         *,
         file_path: str,
         connect_protocol_version: Literal[1],
-        environment_variable: bool | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -138,9 +129,6 @@ class SecretsResource(SyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
           project_id: project_id is the ProjectID this Secret belongs to
 
           value: value is the plaintext value of the secret
@@ -157,71 +145,17 @@ class SecretsResource(SyncAPIResource):
         """
         ...
 
-    @overload
-    def create(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
-        """
-        CreateSecret creates a new secret.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
-
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["environment_variable", "connect_protocol_version"],
-        ["file_path", "connect_protocol_version"],
-        ["connect_protocol_version"],
-    )
+    @required_args(["environment_variable", "connect_protocol_version"], ["file_path", "connect_protocol_version"])
     def create(
         self,
         *,
         environment_variable: bool | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        file_path: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -243,10 +177,10 @@ class SecretsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "environment_variable": environment_variable,
-                    "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "value": value,
+                    "file_path": file_path,
                 },
                 secret_create_params.SecretCreateParams,
             ),
@@ -531,7 +465,6 @@ class AsyncSecretsResource(AsyncAPIResource):
         *,
         environment_variable: bool,
         connect_protocol_version: Literal[1],
-        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -551,13 +484,6 @@ class AsyncSecretsResource(AsyncAPIResource):
               secret
 
           connect_protocol_version: Define the version of the Connect protocol
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
 
           project_id: project_id is the ProjectID this Secret belongs to
 
@@ -581,7 +507,6 @@ class AsyncSecretsResource(AsyncAPIResource):
         *,
         file_path: str,
         connect_protocol_version: Literal[1],
-        environment_variable: bool | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -606,9 +531,6 @@ class AsyncSecretsResource(AsyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
           project_id: project_id is the ProjectID this Secret belongs to
 
           value: value is the plaintext value of the secret
@@ -625,71 +547,17 @@ class AsyncSecretsResource(AsyncAPIResource):
         """
         ...
 
-    @overload
-    async def create(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
-        """
-        CreateSecret creates a new secret.
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
-
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["environment_variable", "connect_protocol_version"],
-        ["file_path", "connect_protocol_version"],
-        ["connect_protocol_version"],
-    )
+    @required_args(["environment_variable", "connect_protocol_version"], ["file_path", "connect_protocol_version"])
     async def create(
         self,
         *,
         environment_variable: bool | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        file_path: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -711,10 +579,10 @@ class AsyncSecretsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "environment_variable": environment_variable,
-                    "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "value": value,
+                    "file_path": file_path,
                 },
                 secret_create_params.SecretCreateParams,
             ),

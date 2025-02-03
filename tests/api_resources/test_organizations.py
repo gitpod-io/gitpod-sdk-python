@@ -114,30 +114,26 @@ class TestOrganizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_update(self, client: Gitpod) -> None:
+    def test_method_update_overload_1(self, client: Gitpod) -> None:
         organization = client.organizations.update(
-            body={},
+            invite_domains={},
             connect_protocol_version=1,
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
         organization = client.organizations.update(
-            body={
-                "inviteDomains": {"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
-                "name": "name",
-                "organizationId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
+            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: Gitpod) -> None:
+    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.update(
-            body={},
+            invite_domains={},
             connect_protocol_version=1,
         )
 
@@ -147,9 +143,52 @@ class TestOrganizations:
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: Gitpod) -> None:
+    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.update(
-            body={},
+            invite_domains={},
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = response.parse()
+            assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_2(self, client: Gitpod) -> None:
+        organization = client.organizations.update(
+            name="name",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
+        organization = client.organizations.update(
+            name="name",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
+        response = client.organizations.with_raw_response.update(
+            name="name",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = response.parse()
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
+        with client.organizations.with_streaming_response.update(
+            name="name",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -260,7 +299,6 @@ class TestOrganizations:
         organization = client.organizations.join(
             invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_protocol_version=1,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
@@ -304,7 +342,6 @@ class TestOrganizations:
         organization = client.organizations.join(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_protocol_version=1,
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
@@ -325,47 +362,6 @@ class TestOrganizations:
     def test_streaming_response_join_overload_2(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.join(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = response.parse()
-            assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_join_overload_3(self, client: Gitpod) -> None:
-        organization = client.organizations.join(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    def test_method_join_with_all_params_overload_3(self, client: Gitpod) -> None:
-        organization = client.organizations.join(
-            connect_protocol_version=1,
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    def test_raw_response_join_overload_3(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.join(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = response.parse()
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    def test_streaming_response_join_overload_3(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.join(
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -599,30 +595,26 @@ class TestAsyncOrganizations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
-            body={},
+            invite_domains={},
             connect_protocol_version=1,
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
-            body={
-                "inviteDomains": {"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
-                "name": "name",
-                "organizationId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
+            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.update(
-            body={},
+            invite_domains={},
             connect_protocol_version=1,
         )
 
@@ -632,9 +624,52 @@ class TestAsyncOrganizations:
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.update(
-            body={},
+            invite_domains={},
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            organization = await response.parse()
+            assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.update(
+            name="name",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.update(
+            name="name",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.organizations.with_raw_response.update(
+            name="name",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        organization = await response.parse()
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        async with async_client.organizations.with_streaming_response.update(
+            name="name",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -745,7 +780,6 @@ class TestAsyncOrganizations:
         organization = await async_client.organizations.join(
             invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_protocol_version=1,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
@@ -789,7 +823,6 @@ class TestAsyncOrganizations:
         organization = await async_client.organizations.join(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_protocol_version=1,
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
@@ -810,47 +843,6 @@ class TestAsyncOrganizations:
     async def test_streaming_response_join_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.join(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = await response.parse()
-            assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_join_overload_3(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.join(
-            connect_protocol_version=1,
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    async def test_method_join_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.join(
-            connect_protocol_version=1,
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    async def test_raw_response_join_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.join(
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = await response.parse()
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_join_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.join(
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
