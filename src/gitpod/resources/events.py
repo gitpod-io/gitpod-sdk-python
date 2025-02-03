@@ -129,7 +129,6 @@ class EventsResource(SyncAPIResource):
         *,
         environment_id: str,
         connect_protocol_version: Literal[1],
-        organization: bool | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -148,11 +147,6 @@ class EventsResource(SyncAPIResource):
               and services associated with that environment.
 
           connect_protocol_version: Define the version of the Connect protocol
-
-          organization: Organization scope produces events for all projects, runners and environments
-
-              the caller can see within their organization. No task, task execution or service
-              events are produed.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -172,7 +166,6 @@ class EventsResource(SyncAPIResource):
         *,
         organization: bool,
         connect_protocol_version: Literal[1],
-        environment_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -192,11 +185,6 @@ class EventsResource(SyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
           connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
@@ -209,61 +197,14 @@ class EventsResource(SyncAPIResource):
         """
         ...
 
-    @overload
-    def watch(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
-        """
-        WatchEvents streams all requests events to the client
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
-          organization: Organization scope produces events for all projects, runners and environments
-
-              the caller can see within their organization. No task, task execution or service
-              events are produed.
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["environment_id", "connect_protocol_version"],
-        ["organization", "connect_protocol_version"],
-        ["connect_protocol_version"],
-    )
+    @required_args(["environment_id", "connect_protocol_version"], ["organization", "connect_protocol_version"])
     def watch(
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        organization: bool | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        organization: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -396,7 +337,6 @@ class AsyncEventsResource(AsyncAPIResource):
         *,
         environment_id: str,
         connect_protocol_version: Literal[1],
-        organization: bool | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -415,11 +355,6 @@ class AsyncEventsResource(AsyncAPIResource):
               and services associated with that environment.
 
           connect_protocol_version: Define the version of the Connect protocol
-
-          organization: Organization scope produces events for all projects, runners and environments
-
-              the caller can see within their organization. No task, task execution or service
-              events are produed.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -439,7 +374,6 @@ class AsyncEventsResource(AsyncAPIResource):
         *,
         organization: bool,
         connect_protocol_version: Literal[1],
-        environment_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -459,11 +393,6 @@ class AsyncEventsResource(AsyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
           connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
@@ -476,61 +405,14 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         ...
 
-    @overload
-    async def watch(
-        self,
-        *,
-        connect_protocol_version: Literal[1],
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization: bool | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
-        """
-        WatchEvents streams all requests events to the client
-
-        Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
-          organization: Organization scope produces events for all projects, runners and environments
-
-              the caller can see within their organization. No task, task execution or service
-              events are produed.
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["environment_id", "connect_protocol_version"],
-        ["organization", "connect_protocol_version"],
-        ["connect_protocol_version"],
-    )
+    @required_args(["environment_id", "connect_protocol_version"], ["organization", "connect_protocol_version"])
     async def watch(
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        organization: bool | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        organization: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

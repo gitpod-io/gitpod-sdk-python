@@ -5,22 +5,20 @@ from __future__ import annotations
 from typing import Union, Iterable
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
+from ..._types import Base64FileInput
 from ..._utils import PropertyInfo
+from ..._models import set_pydantic_config
 
 __all__ = [
     "ConfigurationValidateParams",
     "Variant0",
     "Variant0EnvironmentClass",
     "Variant0EnvironmentClassConfiguration",
-    "Variant0ScmIntegration",
     "Variant1",
     "Variant1ScmIntegration",
-    "Variant1EnvironmentClass",
-    "Variant1EnvironmentClassConfiguration",
-    "Variant2",
-    "Variant2EnvironmentClass",
-    "Variant2EnvironmentClassConfiguration",
-    "Variant2ScmIntegration",
+    "Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet",
+    "Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration",
+    "Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner",
 ]
 
 
@@ -31,8 +29,6 @@ class Variant0(TypedDict, total=False):
     """Define the version of the Connect protocol"""
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-    scm_integration: Annotated[Variant0ScmIntegration, PropertyInfo(alias="scmIntegration")]
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
@@ -70,108 +66,67 @@ class Variant0EnvironmentClass(TypedDict, total=False):
     """
 
 
-class Variant0ScmIntegration:
-    pass
-
-
 class Variant1(TypedDict, total=False):
     scm_integration: Required[Annotated[Variant1ScmIntegration, PropertyInfo(alias="scmIntegration")]]
 
     connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
     """Define the version of the Connect protocol"""
 
-    environment_class: Annotated[Variant1EnvironmentClass, PropertyInfo(alias="environmentClass")]
-
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
 
     connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
     """Define the timeout, in ms"""
 
 
-class Variant1ScmIntegration:
-    pass
+class Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet(
+    TypedDict, total=False
+):
+    oauth_client_id: Required[Annotated[str, PropertyInfo(alias="oauthClientId")]]
+    """oauth_client_id is the OAuth app's client ID, if OAuth is configured.
 
-
-class Variant1EnvironmentClassConfiguration(TypedDict, total=False):
-    key: str
-
-    value: str
-
-
-class Variant1EnvironmentClass(TypedDict, total=False):
-    id: str
-    """id is the unique identifier of the environment class"""
-
-    configuration: Iterable[Variant1EnvironmentClassConfiguration]
-    """configuration describes the configuration of the environment class"""
-
-    description: str
-    """description is a human readable description of the environment class"""
-
-    display_name: Annotated[str, PropertyInfo(alias="displayName")]
-    """display_name is the human readable name of the environment class"""
-
-    enabled: bool
-    """enabled indicates whether the environment class can be used to create
-
-    new environments.
-    """
-
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-    """
-    runner_id is the unique identifier of the runner the environment class belongs
-    to
+    If configured, oauth_client_secret must also be set.
     """
 
 
-class Variant2(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    environment_class: Annotated[Variant2EnvironmentClass, PropertyInfo(alias="environmentClass")]
-
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-    scm_integration: Annotated[Variant2ScmIntegration, PropertyInfo(alias="scmIntegration")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
-
-class Variant2EnvironmentClassConfiguration(TypedDict, total=False):
-    key: str
-
-    value: str
-
-
-class Variant2EnvironmentClass(TypedDict, total=False):
-    id: str
-    """id is the unique identifier of the environment class"""
-
-    configuration: Iterable[Variant2EnvironmentClassConfiguration]
-    """configuration describes the configuration of the environment class"""
-
-    description: str
-    """description is a human readable description of the environment class"""
-
-    display_name: Annotated[str, PropertyInfo(alias="displayName")]
-    """display_name is the human readable name of the environment class"""
-
-    enabled: bool
-    """enabled indicates whether the environment class can be used to create
-
-    new environments.
+class Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration(
+    TypedDict, total=False
+):
+    oauth_encrypted_client_secret: Required[
+        Annotated[Union[str, Base64FileInput], PropertyInfo(alias="oauthEncryptedClientSecret", format="base64")]
+    ]
     """
+    oauth_encrypted_client_secret is the OAuth app's client secret encrypted with
+    the runner's public key,
 
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-    """
-    runner_id is the unique identifier of the runner the environment class belongs
-    to
+    if OAuth is configured. This can be used to e.g. validate an already encrypted
+    client secret of an existing SCM integration.
     """
 
 
-class Variant2ScmIntegration:
-    pass
+set_pydantic_config(
+    Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration,
+    {"arbitrary_types_allowed": True},
+)
 
 
-ConfigurationValidateParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+class Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner(
+    TypedDict, total=False
+):
+    oauth_plaintext_client_secret: Required[Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]]
+    """
+    oauth_plaintext_client_secret is the OAuth app's client secret in clear text, if
+    OAuth is configured.
+
+    This can be set to validate any new client secret before it is encrypted and
+    stored. This value will not be stored and get encrypted with the runner's public
+    key before passing it to the runner.
+    """
+
+
+Variant1ScmIntegration: TypeAlias = Union[
+    Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet,
+    Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration,
+    Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner,
+]
+
+ConfigurationValidateParams: TypeAlias = Union[Variant0, Variant1]

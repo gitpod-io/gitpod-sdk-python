@@ -22,33 +22,26 @@ class TestScmIntegrations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_create(self, client: Gitpod) -> None:
+    def test_method_create_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    def test_method_create_with_all_params(self, client: Gitpod) -> None:
+    def test_method_create_with_all_params_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
-            body={
-                "host": "host",
-                "oauthClientId": "oauthClientId",
-                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
-                "pat": True,
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "scmId": "scmId",
-            },
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    def test_raw_response_create(self, client: Gitpod) -> None:
+    def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.create(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
 
@@ -58,9 +51,52 @@ class TestScmIntegrations:
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    def test_streaming_response_create(self, client: Gitpod) -> None:
+    def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.create(
-            body={},
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = response.parse()
+            assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_create_overload_2(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    def test_method_create_with_all_params_overload_2(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
+        response = client.runners.configurations.scm_integrations.with_raw_response.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = response.parse()
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
+        with client.runners.configurations.scm_integrations.with_streaming_response.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -119,31 +155,26 @@ class TestScmIntegrations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_update(self, client: Gitpod) -> None:
+    def test_method_update_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
-            body={
-                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "oauthClientId": "oauthClientId",
-                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
-                "pat": True,
-            },
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    def test_raw_response_update(self, client: Gitpod) -> None:
+    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.update(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
 
@@ -153,9 +184,95 @@ class TestScmIntegrations:
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    def test_streaming_response_update(self, client: Gitpod) -> None:
+    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.update(
-            body={},
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = response.parse()
+            assert_matches_type(object, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_2(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
+        response = client.runners.configurations.scm_integrations.with_raw_response.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = response.parse()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
+        with client.runners.configurations.scm_integrations.with_streaming_response.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = response.parse()
+            assert_matches_type(object, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_update_overload_3(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.update(
+            pat=True,
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params_overload_3(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.update(
+            pat=True,
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
+        response = client.runners.configurations.scm_integrations.with_raw_response.update(
+            pat=True,
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = response.parse()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
+        with client.runners.configurations.scm_integrations.with_streaming_response.update(
+            pat=True,
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -258,33 +375,26 @@ class TestAsyncScmIntegrations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_create(self, async_client: AsyncGitpod) -> None:
+    async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
+    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
-            body={
-                "host": "host",
-                "oauthClientId": "oauthClientId",
-                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
-                "pat": True,
-                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "scmId": "scmId",
-            },
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
 
@@ -294,9 +404,52 @@ class TestAsyncScmIntegrations:
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @parametrize
-    async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
-            body={},
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = await response.parse()
+            assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = await response.parse()
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -355,31 +508,26 @@ class TestAsyncScmIntegrations:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
-            body={
-                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                "oauthClientId": "oauthClientId",
-                "oauthPlaintextClientSecret": "oauthPlaintextClientSecret",
-                "pat": True,
-            },
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
-            body={},
+            oauth_client_id="oauthClientId",
             connect_protocol_version=1,
         )
 
@@ -389,9 +537,95 @@ class TestAsyncScmIntegrations:
         assert_matches_type(object, scm_integration, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
-            body={},
+            oauth_client_id="oauthClientId",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = await response.parse()
+            assert_matches_type(object, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = await response.parse()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            connect_protocol_version=1,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            scm_integration = await response.parse()
+            assert_matches_type(object, scm_integration, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.update(
+            pat=True,
+            connect_protocol_version=1,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params_overload_3(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.update(
+            pat=True,
+            connect_protocol_version=1,
+            connect_timeout_ms=0,
+        )
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
+            pat=True,
+            connect_protocol_version=1,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        scm_integration = await response.parse()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
+            pat=True,
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

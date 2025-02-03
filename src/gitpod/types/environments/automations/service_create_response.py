@@ -14,15 +14,13 @@ __all__ = [
     "ServiceMetadata",
     "ServiceMetadataCreator",
     "ServiceMetadataTriggeredBy",
-    "ServiceMetadataTriggeredByUnionMember0",
-    "ServiceMetadataTriggeredByUnionMember1",
-    "ServiceMetadataTriggeredByUnionMember2",
-    "ServiceMetadataTriggeredByUnionMember3",
+    "ServiceMetadataTriggeredByManual",
+    "ServiceMetadataTriggeredByPostDevcontainerStart",
+    "ServiceMetadataTriggeredByPostEnvironmentStart",
     "ServiceSpec",
     "ServiceSpecCommands",
     "ServiceSpecRunsOn",
     "ServiceSpecRunsOnDocker",
-    "ServiceSpecRunsOnDockerDocker",
     "ServiceStatus",
 ]
 
@@ -44,43 +42,22 @@ class ServiceMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class ServiceMetadataTriggeredByUnionMember0(BaseModel):
+class ServiceMetadataTriggeredByManual(BaseModel):
     manual: bool
 
-    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
 
-    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
-
-
-class ServiceMetadataTriggeredByUnionMember1(BaseModel):
+class ServiceMetadataTriggeredByPostDevcontainerStart(BaseModel):
     post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
 
-    manual: Optional[bool] = None
 
-    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
-
-
-class ServiceMetadataTriggeredByUnionMember2(BaseModel):
+class ServiceMetadataTriggeredByPostEnvironmentStart(BaseModel):
     post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
-
-    manual: Optional[bool] = None
-
-    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
-
-
-class ServiceMetadataTriggeredByUnionMember3(BaseModel):
-    manual: Optional[bool] = None
-
-    post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
-
-    post_environment_start: Optional[bool] = FieldInfo(alias="postEnvironmentStart", default=None)
 
 
 ServiceMetadataTriggeredBy: TypeAlias = Union[
-    ServiceMetadataTriggeredByUnionMember0,
-    ServiceMetadataTriggeredByUnionMember1,
-    ServiceMetadataTriggeredByUnionMember2,
-    ServiceMetadataTriggeredByUnionMember3,
+    ServiceMetadataTriggeredByManual,
+    ServiceMetadataTriggeredByPostDevcontainerStart,
+    ServiceMetadataTriggeredByPostEnvironmentStart,
 ]
 
 
@@ -241,17 +218,14 @@ class ServiceSpecCommands(BaseModel):
     """
 
 
-class ServiceSpecRunsOnDockerDocker(BaseModel):
+class ServiceSpecRunsOnDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class ServiceSpecRunsOnDocker(BaseModel):
-    docker: ServiceSpecRunsOnDockerDocker
-
-
-ServiceSpecRunsOn: TypeAlias = Union[ServiceSpecRunsOnDocker, ServiceSpecRunsOnDocker]
+class ServiceSpecRunsOn(BaseModel):
+    docker: ServiceSpecRunsOnDocker
 
 
 class ServiceSpec(BaseModel):
