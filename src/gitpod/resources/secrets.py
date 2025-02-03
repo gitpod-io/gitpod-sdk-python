@@ -312,12 +312,8 @@ class SecretsResource(SyncAPIResource):
     def get_value(
         self,
         *,
-        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        secret_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -331,16 +327,7 @@ class SecretsResource(SyncAPIResource):
         this operation, and only for secrets specified on the EnvironmentSpec.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -361,23 +348,11 @@ class SecretsResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._get(
+        return self._post(
             "/gitpod.v1.SecretService/GetSecretValue",
+            body=maybe_transform({"secret_id": secret_id}, secret_get_value_params.SecretGetValueParams),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    secret_get_value_params.SecretGetValueParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SecretGetValueResponse,
         )
@@ -714,12 +689,8 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def get_value(
         self,
         *,
-        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        secret_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -733,16 +704,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         this operation, and only for secrets specified on the EnvironmentSpec.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -763,23 +725,11 @@ class AsyncSecretsResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._get(
+        return await self._post(
             "/gitpod.v1.SecretService/GetSecretValue",
+            body=await async_maybe_transform({"secret_id": secret_id}, secret_get_value_params.SecretGetValueParams),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    secret_get_value_params.SecretGetValueParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=SecretGetValueResponse,
         )

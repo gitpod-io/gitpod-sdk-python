@@ -24,7 +24,7 @@ class TestAccounts:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         account = client.accounts.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
@@ -32,12 +32,8 @@ class TestAccounts:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
@@ -45,7 +41,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -57,7 +53,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -111,7 +107,7 @@ class TestAccounts:
     @parametrize
     def test_method_get_sso_login_url(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -119,12 +115,9 @@ class TestAccounts:
     @parametrize
     def test_method_get_sso_login_url_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            email="dev@stainlessapi.com",
             connect_timeout_ms=0,
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -132,7 +125,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_get_sso_login_url(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         )
 
@@ -144,7 +137,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_get_sso_login_url(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -209,7 +202,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
@@ -217,12 +210,8 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
@@ -230,7 +219,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -242,7 +231,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.retrieve(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -296,7 +285,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -304,12 +293,9 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_sso_login_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            email="dev@stainlessapi.com",
             connect_timeout_ms=0,
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -317,7 +303,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         )
 
@@ -329,7 +315,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.get_sso_login_url(
-            encoding="proto",
+            return_to="https://example.com",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

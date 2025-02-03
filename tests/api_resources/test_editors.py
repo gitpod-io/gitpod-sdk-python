@@ -24,7 +24,6 @@ class TestEditors:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         editor = client.editors.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
@@ -32,12 +31,8 @@ class TestEditors:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            id="id",
             connect_timeout_ms=0,
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
@@ -45,7 +40,6 @@ class TestEditors:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -57,7 +51,6 @@ class TestEditors:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -164,7 +157,6 @@ class TestAsyncEditors:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
@@ -172,12 +164,8 @@ class TestAsyncEditors:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            id="id",
             connect_timeout_ms=0,
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
@@ -185,7 +173,6 @@ class TestAsyncEditors:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -197,7 +184,6 @@ class TestAsyncEditors:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.retrieve(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

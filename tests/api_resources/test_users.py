@@ -20,7 +20,7 @@ class TestUsers:
     @parametrize
     def test_method_get_authenticated_user(self, client: Gitpod) -> None:
         user = client.users.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
@@ -28,12 +28,8 @@ class TestUsers:
     @parametrize
     def test_method_get_authenticated_user_with_all_params(self, client: Gitpod) -> None:
         user = client.users.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
@@ -41,7 +37,7 @@ class TestUsers:
     @parametrize
     def test_raw_response_get_authenticated_user(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -53,7 +49,7 @@ class TestUsers:
     @parametrize
     def test_streaming_response_get_authenticated_user(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -112,7 +108,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_method_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
@@ -120,12 +116,8 @@ class TestAsyncUsers:
     @parametrize
     async def test_method_get_authenticated_user_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
             connect_timeout_ms=0,
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
@@ -133,7 +125,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_raw_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -145,7 +137,7 @@ class TestAsyncUsers:
     @parametrize
     async def test_streaming_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.get_authenticated_user(
-            encoding="proto",
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

@@ -203,7 +203,6 @@ class TestSecrets:
     @parametrize
     def test_method_get_value(self, client: Gitpod) -> None:
         secret = client.secrets.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
@@ -211,12 +210,8 @@ class TestSecrets:
     @parametrize
     def test_method_get_value_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.get_value(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            secret_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
@@ -224,7 +219,6 @@ class TestSecrets:
     @parametrize
     def test_raw_response_get_value(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -236,7 +230,6 @@ class TestSecrets:
     @parametrize
     def test_streaming_response_get_value(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -474,7 +467,6 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_get_value(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
@@ -482,12 +474,8 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_get_value_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.get_value(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            secret_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
@@ -495,7 +483,6 @@ class TestAsyncSecrets:
     @parametrize
     async def test_raw_response_get_value(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -507,7 +494,6 @@ class TestAsyncSecrets:
     @parametrize
     async def test_streaming_response_get_value(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.get_value(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

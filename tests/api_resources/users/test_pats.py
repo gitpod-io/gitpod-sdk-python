@@ -107,7 +107,6 @@ class TestPats:
     @parametrize
     def test_method_get(self, client: Gitpod) -> None:
         pat = client.users.pats.get(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
@@ -115,12 +114,8 @@ class TestPats:
     @parametrize
     def test_method_get_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.get(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
@@ -128,7 +123,6 @@ class TestPats:
     @parametrize
     def test_raw_response_get(self, client: Gitpod) -> None:
         response = client.users.pats.with_raw_response.get(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -140,7 +134,6 @@ class TestPats:
     @parametrize
     def test_streaming_response_get(self, client: Gitpod) -> None:
         with client.users.pats.with_streaming_response.get(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -245,7 +238,6 @@ class TestAsyncPats:
     @parametrize
     async def test_method_get(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.get(
-            encoding="proto",
             connect_protocol_version=1,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
@@ -253,12 +245,8 @@ class TestAsyncPats:
     @parametrize
     async def test_method_get_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.get(
-            encoding="proto",
             connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
+            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             connect_timeout_ms=0,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
@@ -266,7 +254,6 @@ class TestAsyncPats:
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.pats.with_raw_response.get(
-            encoding="proto",
             connect_protocol_version=1,
         )
 
@@ -278,7 +265,6 @@ class TestAsyncPats:
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.pats.with_streaming_response.get(
-            encoding="proto",
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
