@@ -142,12 +142,8 @@ class EnvironmentsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        environment_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -163,16 +159,9 @@ class EnvironmentsResource(SyncAPIResource):
         +return NOT_FOUND Environment does not exist
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
 
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
+          environment_id: environment_id specifies the environment to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -193,23 +182,13 @@ class EnvironmentsResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._get(
+        return self._post(
             "/gitpod.v1.EnvironmentService/GetEnvironment",
+            body=maybe_transform(
+                {"environment_id": environment_id}, environment_retrieve_params.EnvironmentRetrieveParams
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    environment_retrieve_params.EnvironmentRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EnvironmentRetrieveResponse,
         )
@@ -813,12 +792,8 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        encoding: Literal["proto", "json"],
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        environment_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -834,16 +809,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         +return NOT_FOUND Environment does not exist
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
 
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
+          environment_id: environment_id specifies the environment to get
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -864,23 +832,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._get(
+        return await self._post(
             "/gitpod.v1.EnvironmentService/GetEnvironment",
+            body=await async_maybe_transform(
+                {"environment_id": environment_id}, environment_retrieve_params.EnvironmentRetrieveParams
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    environment_retrieve_params.EnvironmentRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EnvironmentRetrieveResponse,
         )

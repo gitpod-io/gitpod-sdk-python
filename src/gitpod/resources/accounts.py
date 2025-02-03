@@ -58,12 +58,8 @@ class AccountsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        encoding: Literal["proto", "json"],
+        body: object,
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -76,16 +72,7 @@ class AccountsResource(SyncAPIResource):
         GetAccount retrieves a single Account.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -106,23 +93,11 @@ class AccountsResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._get(
+        return self._post(
             "/gitpod.v1.AccountService/GetAccount",
+            body=maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    account_retrieve_params.AccountRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountRetrieveResponse,
         )
@@ -179,12 +154,9 @@ class AccountsResource(SyncAPIResource):
     def get_sso_login_url(
         self,
         *,
-        encoding: Literal["proto", "json"],
+        return_to: str,
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -197,16 +169,11 @@ class AccountsResource(SyncAPIResource):
         GetSSOLoginURL returns the URL to redirect the user to for SSO login.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
+          return_to: return_to is the URL the user will be redirected to after login
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
+          email: email is the email the user wants to login with
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -227,23 +194,17 @@ class AccountsResource(SyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return self._get(
+        return self._post(
             "/gitpod.v1.AccountService/GetSSOLoginURL",
+            body=maybe_transform(
+                {
+                    "return_to": return_to,
+                    "email": email,
+                },
+                account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountGetSSOLoginURLResponse,
         )
@@ -345,12 +306,8 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        encoding: Literal["proto", "json"],
+        body: object,
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -363,16 +320,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         GetAccount retrieves a single Account.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
           connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -393,23 +341,11 @@ class AsyncAccountsResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._get(
+        return await self._post(
             "/gitpod.v1.AccountService/GetAccount",
+            body=await async_maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    account_retrieve_params.AccountRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountRetrieveResponse,
         )
@@ -466,12 +402,9 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def get_sso_login_url(
         self,
         *,
-        encoding: Literal["proto", "json"],
+        return_to: str,
         connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
+        email: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -484,16 +417,11 @@ class AsyncAccountsResource(AsyncAPIResource):
         GetSSOLoginURL returns the URL to redirect the user to for SSO login.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
+          return_to: return_to is the URL the user will be redirected to after login
 
           connect_protocol_version: Define the version of the Connect protocol
 
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
+          email: email is the email the user wants to login with
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -514,23 +442,17 @@ class AsyncAccountsResource(AsyncAPIResource):
             ),
             **(extra_headers or {}),
         }
-        return await self._get(
+        return await self._post(
             "/gitpod.v1.AccountService/GetSSOLoginURL",
+            body=await async_maybe_transform(
+                {
+                    "return_to": return_to,
+                    "email": email,
+                },
+                account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
-                    },
-                    account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountGetSSOLoginURLResponse,
         )
