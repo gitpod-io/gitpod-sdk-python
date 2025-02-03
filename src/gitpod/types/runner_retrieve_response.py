@@ -314,6 +314,20 @@ class Runner(BaseModel):
     name: Optional[str] = None
     """The runner's name which is shown to users"""
 
+    provider: Optional[
+        Literal[
+            "RUNNER_PROVIDER_UNSPECIFIED",
+            "RUNNER_PROVIDER_AWS_EC2",
+            "RUNNER_PROVIDER_LINUX_HOST",
+            "RUNNER_PROVIDER_DESKTOP_MAC",
+        ]
+    ] = None
+    """
+    RunnerProvider identifies the specific implementation type of a runner. Each
+    provider maps to a specific kind of runner (local or remote), as specified below
+    for each provider.
+    """
+
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
 
     spec: Optional[RunnerSpec] = None

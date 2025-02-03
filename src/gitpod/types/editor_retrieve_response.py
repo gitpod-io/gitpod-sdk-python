@@ -12,6 +12,8 @@ __all__ = ["EditorRetrieveResponse", "Editor"]
 class Editor(BaseModel):
     id: Optional[str] = None
 
+    alias: Optional[str] = None
+
     icon_url: Optional[str] = FieldInfo(alias="iconUrl", default=None)
 
     installation_instructions: Optional[str] = FieldInfo(alias="installationInstructions", default=None)

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import Dict, List, Union
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -14,9 +14,11 @@ __all__ = [
     "AutomationsFileServicesCommands",
     "AutomationsFileServicesRunsOn",
     "AutomationsFileServicesRunsOnDocker",
+    "AutomationsFileServicesRunsOnDockerDocker",
     "AutomationsFileTasks",
     "AutomationsFileTasksRunsOn",
     "AutomationsFileTasksRunsOnDocker",
+    "AutomationsFileTasksRunsOnDockerDocker",
 ]
 
 
@@ -73,14 +75,19 @@ class AutomationsFileServicesCommands(TypedDict, total=False):
     """
 
 
-class AutomationsFileServicesRunsOnDocker(TypedDict, total=False):
+class AutomationsFileServicesRunsOnDockerDocker(TypedDict, total=False):
     environment: List[str]
 
     image: str
 
 
-class AutomationsFileServicesRunsOn(TypedDict, total=False):
-    docker: Required[AutomationsFileServicesRunsOnDocker]
+class AutomationsFileServicesRunsOnDocker(TypedDict, total=False):
+    docker: Required[AutomationsFileServicesRunsOnDockerDocker]
+
+
+AutomationsFileServicesRunsOn: TypeAlias = Union[
+    AutomationsFileServicesRunsOnDocker, AutomationsFileServicesRunsOnDocker
+]
 
 
 class AutomationsFileServices(TypedDict, total=False):
@@ -95,14 +102,17 @@ class AutomationsFileServices(TypedDict, total=False):
     triggered_by: Annotated[List[str], PropertyInfo(alias="triggeredBy")]
 
 
-class AutomationsFileTasksRunsOnDocker(TypedDict, total=False):
+class AutomationsFileTasksRunsOnDockerDocker(TypedDict, total=False):
     environment: List[str]
 
     image: str
 
 
-class AutomationsFileTasksRunsOn(TypedDict, total=False):
-    docker: Required[AutomationsFileTasksRunsOnDocker]
+class AutomationsFileTasksRunsOnDocker(TypedDict, total=False):
+    docker: Required[AutomationsFileTasksRunsOnDockerDocker]
+
+
+AutomationsFileTasksRunsOn: TypeAlias = Union[AutomationsFileTasksRunsOnDocker, AutomationsFileTasksRunsOnDocker]
 
 
 class AutomationsFileTasks(TypedDict, total=False):

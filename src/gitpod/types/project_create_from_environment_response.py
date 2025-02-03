@@ -12,14 +12,20 @@ __all__ = [
     "ProjectCreateFromEnvironmentResponse",
     "Project",
     "ProjectEnvironmentClass",
-    "ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass",
-    "ProjectEnvironmentClassUseALocalRunnerForTheUser",
+    "ProjectEnvironmentClassUnionMember0",
+    "ProjectEnvironmentClassUnionMember1",
+    "ProjectEnvironmentClassUnionMember2",
     "ProjectInitializer",
     "ProjectInitializerSpec",
-    "ProjectInitializerSpecContextURL",
-    "ProjectInitializerSpecContextURLContextURL",
-    "ProjectInitializerSpecGit",
-    "ProjectInitializerSpecGitGit",
+    "ProjectInitializerSpecUnionMember0",
+    "ProjectInitializerSpecUnionMember0ContextURL",
+    "ProjectInitializerSpecUnionMember0Git",
+    "ProjectInitializerSpecUnionMember1",
+    "ProjectInitializerSpecUnionMember1Git",
+    "ProjectInitializerSpecUnionMember1ContextURL",
+    "ProjectInitializerSpecUnionMember2",
+    "ProjectInitializerSpecUnionMember2ContextURL",
+    "ProjectInitializerSpecUnionMember2Git",
     "ProjectMetadata",
     "ProjectMetadataCreator",
     "ProjectUsedBy",
@@ -27,37 +33,50 @@ __all__ = [
 ]
 
 
-class ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(
-    BaseModel
-):
+class ProjectEnvironmentClassUnionMember0(BaseModel):
     environment_class_id: str = FieldInfo(alias="environmentClassId")
     """Use a fixed environment class on a given Runner.
 
     This cannot be a local runner's environment class.
     """
 
+    local_runner: Optional[bool] = FieldInfo(alias="localRunner", default=None)
+    """Use a local runner for the user"""
 
-class ProjectEnvironmentClassUseALocalRunnerForTheUser(BaseModel):
+
+class ProjectEnvironmentClassUnionMember1(BaseModel):
     local_runner: bool = FieldInfo(alias="localRunner")
+    """Use a local runner for the user"""
+
+    environment_class_id: Optional[str] = FieldInfo(alias="environmentClassId", default=None)
+    """Use a fixed environment class on a given Runner.
+
+    This cannot be a local runner's environment class.
+    """
+
+
+class ProjectEnvironmentClassUnionMember2(BaseModel):
+    environment_class_id: Optional[str] = FieldInfo(alias="environmentClassId", default=None)
+    """Use a fixed environment class on a given Runner.
+
+    This cannot be a local runner's environment class.
+    """
+
+    local_runner: Optional[bool] = FieldInfo(alias="localRunner", default=None)
     """Use a local runner for the user"""
 
 
 ProjectEnvironmentClass: TypeAlias = Union[
-    ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass,
-    ProjectEnvironmentClassUseALocalRunnerForTheUser,
+    ProjectEnvironmentClassUnionMember0, ProjectEnvironmentClassUnionMember1, ProjectEnvironmentClassUnionMember2
 ]
 
 
-class ProjectInitializerSpecContextURLContextURL(BaseModel):
+class ProjectInitializerSpecUnionMember0ContextURL(BaseModel):
     url: Optional[str] = None
     """url is the URL from which the environment is created"""
 
 
-class ProjectInitializerSpecContextURL(BaseModel):
-    context_url: ProjectInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
-
-
-class ProjectInitializerSpecGitGit(BaseModel):
+class ProjectInitializerSpecUnionMember0Git(BaseModel):
     checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
     """a path relative to the environment root in which the code will be checked out
 
@@ -85,11 +104,93 @@ class ProjectInitializerSpecGitGit(BaseModel):
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class ProjectInitializerSpecGit(BaseModel):
-    git: ProjectInitializerSpecGitGit
+class ProjectInitializerSpecUnionMember0(BaseModel):
+    context_url: ProjectInitializerSpecUnionMember0ContextURL = FieldInfo(alias="contextUrl")
+
+    git: Optional[ProjectInitializerSpecUnionMember0Git] = None
 
 
-ProjectInitializerSpec: TypeAlias = Union[ProjectInitializerSpecContextURL, ProjectInitializerSpecGit]
+class ProjectInitializerSpecUnionMember1Git(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class ProjectInitializerSpecUnionMember1ContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class ProjectInitializerSpecUnionMember1(BaseModel):
+    git: ProjectInitializerSpecUnionMember1Git
+
+    context_url: Optional[ProjectInitializerSpecUnionMember1ContextURL] = FieldInfo(alias="contextUrl", default=None)
+
+
+class ProjectInitializerSpecUnionMember2ContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class ProjectInitializerSpecUnionMember2Git(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class ProjectInitializerSpecUnionMember2(BaseModel):
+    context_url: Optional[ProjectInitializerSpecUnionMember2ContextURL] = FieldInfo(alias="contextUrl", default=None)
+
+    git: Optional[ProjectInitializerSpecUnionMember2Git] = None
+
+
+ProjectInitializerSpec: TypeAlias = Union[
+    ProjectInitializerSpecUnionMember0, ProjectInitializerSpecUnionMember1, ProjectInitializerSpecUnionMember2
+]
 
 
 class ProjectInitializer(BaseModel):

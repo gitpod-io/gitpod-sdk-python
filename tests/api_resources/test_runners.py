@@ -37,6 +37,7 @@ class TestRunners:
             connect_protocol_version=1,
             kind="RUNNER_KIND_UNSPECIFIED",
             name="xxx",
+            provider="RUNNER_PROVIDER_UNSPECIFIED",
             spec={
                 "configuration": {
                     "auto_update": True,
@@ -121,26 +122,30 @@ class TestRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
         runner = client.runners.update(
-            name="xxx",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.update(
-            name="xxx",
+            body={
+                "name": "xxx",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "spec": {},
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
+    def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.update(
-            name="xxx",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -150,52 +155,9 @@ class TestRunners:
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.update(
-            name="xxx",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        runner = client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_method_update_with_all_params_overload_2(self, client: Gitpod) -> None:
-        runner = client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.update(
-            spec={"configuration": {"auto_update": True}},
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
@@ -433,6 +395,7 @@ class TestAsyncRunners:
             connect_protocol_version=1,
             kind="RUNNER_KIND_UNSPECIFIED",
             name="xxx",
+            provider="RUNNER_PROVIDER_UNSPECIFIED",
             spec={
                 "configuration": {
                     "auto_update": True,
@@ -517,26 +480,30 @@ class TestAsyncRunners:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
-            name="xxx",
+            body={},
             connect_protocol_version=1,
         )
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
-            name="xxx",
+            body={
+                "name": "xxx",
+                "runnerId": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "spec": {},
+            },
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.update(
-            name="xxx",
+            body={},
             connect_protocol_version=1,
         )
 
@@ -546,52 +513,9 @@ class TestAsyncRunners:
         assert_matches_type(object, runner, path=["response"])
 
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.update(
-            name="xxx",
-            connect_protocol_version=1,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_method_update_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.update(
-            spec={"configuration": {"auto_update": True}},
-            connect_protocol_version=1,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.update(
-            spec={"configuration": {"auto_update": True}},
+            body={},
             connect_protocol_version=1,
         ) as response:
             assert not response.is_closed

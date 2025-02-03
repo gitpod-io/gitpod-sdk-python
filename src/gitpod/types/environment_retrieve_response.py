@@ -18,17 +18,23 @@ __all__ = [
     "EnvironmentSpecContent",
     "EnvironmentSpecContentInitializer",
     "EnvironmentSpecContentInitializerSpec",
-    "EnvironmentSpecContentInitializerSpecContextURL",
-    "EnvironmentSpecContentInitializerSpecContextURLContextURL",
-    "EnvironmentSpecContentInitializerSpecGit",
-    "EnvironmentSpecContentInitializerSpecGitGit",
+    "EnvironmentSpecContentInitializerSpecUnionMember0",
+    "EnvironmentSpecContentInitializerSpecUnionMember0ContextURL",
+    "EnvironmentSpecContentInitializerSpecUnionMember0Git",
+    "EnvironmentSpecContentInitializerSpecUnionMember1",
+    "EnvironmentSpecContentInitializerSpecUnionMember1Git",
+    "EnvironmentSpecContentInitializerSpecUnionMember1ContextURL",
+    "EnvironmentSpecContentInitializerSpecUnionMember2",
+    "EnvironmentSpecContentInitializerSpecUnionMember2ContextURL",
+    "EnvironmentSpecContentInitializerSpecUnionMember2Git",
     "EnvironmentSpecDevcontainer",
     "EnvironmentSpecMachine",
     "EnvironmentSpecPort",
     "EnvironmentSpecSecret",
     "EnvironmentSpecSecretUnionMember0",
-    "EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
+    "EnvironmentSpecSecretUnionMember1",
     "EnvironmentSpecSecretUnionMember2",
+    "EnvironmentSpecSecretUnionMember3",
     "EnvironmentSpecSSHPublicKey",
     "EnvironmentSpecTimeout",
     "EnvironmentStatus",
@@ -298,16 +304,12 @@ class EnvironmentSpecAutomationsFile(BaseModel):
     session: Optional[str] = None
 
 
-class EnvironmentSpecContentInitializerSpecContextURLContextURL(BaseModel):
+class EnvironmentSpecContentInitializerSpecUnionMember0ContextURL(BaseModel):
     url: Optional[str] = None
     """url is the URL from which the environment is created"""
 
 
-class EnvironmentSpecContentInitializerSpecContextURL(BaseModel):
-    context_url: EnvironmentSpecContentInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
-
-
-class EnvironmentSpecContentInitializerSpecGitGit(BaseModel):
+class EnvironmentSpecContentInitializerSpecUnionMember0Git(BaseModel):
     checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
     """a path relative to the environment root in which the code will be checked out
 
@@ -335,12 +337,98 @@ class EnvironmentSpecContentInitializerSpecGitGit(BaseModel):
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class EnvironmentSpecContentInitializerSpecGit(BaseModel):
-    git: EnvironmentSpecContentInitializerSpecGitGit
+class EnvironmentSpecContentInitializerSpecUnionMember0(BaseModel):
+    context_url: EnvironmentSpecContentInitializerSpecUnionMember0ContextURL = FieldInfo(alias="contextUrl")
+
+    git: Optional[EnvironmentSpecContentInitializerSpecUnionMember0Git] = None
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember1Git(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember1ContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember1(BaseModel):
+    git: EnvironmentSpecContentInitializerSpecUnionMember1Git
+
+    context_url: Optional[EnvironmentSpecContentInitializerSpecUnionMember1ContextURL] = FieldInfo(
+        alias="contextUrl", default=None
+    )
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember2ContextURL(BaseModel):
+    url: Optional[str] = None
+    """url is the URL from which the environment is created"""
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember2Git(BaseModel):
+    checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
+    """a path relative to the environment root in which the code will be checked out
+
+    to
+    """
+
+    clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
+    """the value for the clone target mode - use depends on the target mode"""
+
+    remote_uri: Optional[str] = FieldInfo(alias="remoteUri", default=None)
+    """remote_uri is the Git remote origin"""
+
+    target_mode: Optional[
+        Literal[
+            "CLONE_TARGET_MODE_UNSPECIFIED",
+            "CLONE_TARGET_MODE_REMOTE_HEAD",
+            "CLONE_TARGET_MODE_REMOTE_COMMIT",
+            "CLONE_TARGET_MODE_REMOTE_BRANCH",
+            "CLONE_TARGET_MODE_LOCAL_BRANCH",
+        ]
+    ] = FieldInfo(alias="targetMode", default=None)
+    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+
+    upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
+    """upstream_Remote_uri is the fork upstream of a repository"""
+
+
+class EnvironmentSpecContentInitializerSpecUnionMember2(BaseModel):
+    context_url: Optional[EnvironmentSpecContentInitializerSpecUnionMember2ContextURL] = FieldInfo(
+        alias="contextUrl", default=None
+    )
+
+    git: Optional[EnvironmentSpecContentInitializerSpecUnionMember2Git] = None
 
 
 EnvironmentSpecContentInitializerSpec: TypeAlias = Union[
-    EnvironmentSpecContentInitializerSpecContextURL, EnvironmentSpecContentInitializerSpecGit
+    EnvironmentSpecContentInitializerSpecUnionMember0,
+    EnvironmentSpecContentInitializerSpecUnionMember1,
+    EnvironmentSpecContentInitializerSpecUnionMember2,
 ]
 
 
@@ -398,6 +486,11 @@ class EnvironmentSpecPort(BaseModel):
 class EnvironmentSpecSecretUnionMember0(BaseModel):
     environment_variable: str = FieldInfo(alias="environmentVariable")
 
+    file_path: Optional[str] = FieldInfo(alias="filePath", default=None)
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    git_credential_host: Optional[str] = FieldInfo(alias="gitCredentialHost", default=None)
+
     name: Optional[str] = None
     """name is the human readable description of the secret"""
 
@@ -414,9 +507,13 @@ class EnvironmentSpecSecretUnionMember0(BaseModel):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(BaseModel):
+class EnvironmentSpecSecretUnionMember1(BaseModel):
     file_path: str = FieldInfo(alias="filePath")
     """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    environment_variable: Optional[str] = FieldInfo(alias="environmentVariable", default=None)
+
+    git_credential_host: Optional[str] = FieldInfo(alias="gitCredentialHost", default=None)
 
     name: Optional[str] = None
     """name is the human readable description of the secret"""
@@ -437,6 +534,35 @@ class EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretI
 class EnvironmentSpecSecretUnionMember2(BaseModel):
     git_credential_host: str = FieldInfo(alias="gitCredentialHost")
 
+    environment_variable: Optional[str] = FieldInfo(alias="environmentVariable", default=None)
+
+    file_path: Optional[str] = FieldInfo(alias="filePath", default=None)
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    name: Optional[str] = None
+    """name is the human readable description of the secret"""
+
+    session: Optional[str] = None
+    """
+    session indicated the current session of the secret. When the session does not
+    change, secrets are not reloaded in the environment.
+    """
+
+    source: Optional[str] = None
+    """source is the source of the secret, for now control-plane or runner"""
+
+    source_ref: Optional[str] = FieldInfo(alias="sourceRef", default=None)
+    """source_ref into the source, in case of control-plane this is uuid of the secret"""
+
+
+class EnvironmentSpecSecretUnionMember3(BaseModel):
+    environment_variable: Optional[str] = FieldInfo(alias="environmentVariable", default=None)
+
+    file_path: Optional[str] = FieldInfo(alias="filePath", default=None)
+    """file_path is the path inside the devcontainer where the secret is mounted"""
+
+    git_credential_host: Optional[str] = FieldInfo(alias="gitCredentialHost", default=None)
+
     name: Optional[str] = None
     """name is the human readable description of the secret"""
 
@@ -455,8 +581,9 @@ class EnvironmentSpecSecretUnionMember2(BaseModel):
 
 EnvironmentSpecSecret: TypeAlias = Union[
     EnvironmentSpecSecretUnionMember0,
-    EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
+    EnvironmentSpecSecretUnionMember1,
     EnvironmentSpecSecretUnionMember2,
+    EnvironmentSpecSecretUnionMember3,
 ]
 
 

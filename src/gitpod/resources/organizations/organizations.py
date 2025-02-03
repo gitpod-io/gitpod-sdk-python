@@ -224,11 +224,10 @@ class OrganizationsResource(SyncAPIResource):
             cast_to=OrganizationRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains,
+        body: organization_update_params.Body,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -242,8 +241,6 @@ class OrganizationsResource(SyncAPIResource):
         UpdateOrganization updates the properties of an Organization.
 
         Args:
-          invite_domains: invite_domains is the domain allowlist of the organization
-
           connect_protocol_version: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
@@ -256,58 +253,6 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
-        """
-        UpdateOrganization updates the properties of an Organization.
-
-        Args:
-          name: name is the new name of the organization
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["invite_domains", "connect_protocol_version"], ["name", "connect_protocol_version"])
-    def update(
-        self,
-        *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains
-        | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
         extra_headers = {
             **strip_not_given(
                 {
@@ -319,13 +264,7 @@ class OrganizationsResource(SyncAPIResource):
         }
         return self._post(
             "/gitpod.v1.OrganizationService/UpdateOrganization",
-            body=maybe_transform(
-                {
-                    "invite_domains": invite_domains,
-                    "name": name,
-                },
-                organization_update_params.OrganizationUpdateParams,
-            ),
+            body=maybe_transform(body, organization_update_params.OrganizationUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -461,6 +400,7 @@ class OrganizationsResource(SyncAPIResource):
         *,
         invite_id: str,
         connect_protocol_version: Literal[1],
+        organization_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -476,6 +416,8 @@ class OrganizationsResource(SyncAPIResource):
           invite_id: invite_id is the unique identifier of the invite to join the organization.
 
           connect_protocol_version: Define the version of the Connect protocol
+
+          organization_id: organization_id is the unique identifier of the Organization to join.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -495,6 +437,7 @@ class OrganizationsResource(SyncAPIResource):
         *,
         organization_id: str,
         connect_protocol_version: Literal[1],
+        invite_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -511,6 +454,8 @@ class OrganizationsResource(SyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
+          invite_id: invite_id is the unique identifier of the invite to join the organization.
+
           connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
@@ -523,14 +468,55 @@ class OrganizationsResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["invite_id", "connect_protocol_version"], ["organization_id", "connect_protocol_version"])
+    @overload
+    def join(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        invite_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrganizationJoinResponse:
+        """
+        JoinOrganization lets accounts join an Organization.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          invite_id: invite_id is the unique identifier of the invite to join the organization.
+
+          organization_id: organization_id is the unique identifier of the Organization to join.
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["invite_id", "connect_protocol_version"],
+        ["organization_id", "connect_protocol_version"],
+        ["connect_protocol_version"],
+    )
     def join(
         self,
         *,
         invite_id: str | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -903,11 +889,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=OrganizationRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains,
+        body: organization_update_params.Body,
         connect_protocol_version: Literal[1],
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -921,8 +906,6 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         UpdateOrganization updates the properties of an Organization.
 
         Args:
-          invite_domains: invite_domains is the domain allowlist of the organization
-
           connect_protocol_version: Define the version of the Connect protocol
 
           connect_timeout_ms: Define the timeout, in ms
@@ -935,58 +918,6 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
-        """
-        UpdateOrganization updates the properties of an Organization.
-
-        Args:
-          name: name is the new name of the organization
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["invite_domains", "connect_protocol_version"], ["name", "connect_protocol_version"])
-    async def update(
-        self,
-        *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains
-        | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
         extra_headers = {
             **strip_not_given(
                 {
@@ -998,13 +929,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         }
         return await self._post(
             "/gitpod.v1.OrganizationService/UpdateOrganization",
-            body=await async_maybe_transform(
-                {
-                    "invite_domains": invite_domains,
-                    "name": name,
-                },
-                organization_update_params.OrganizationUpdateParams,
-            ),
+            body=await async_maybe_transform(body, organization_update_params.OrganizationUpdateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1140,6 +1065,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         *,
         invite_id: str,
         connect_protocol_version: Literal[1],
+        organization_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1155,6 +1081,8 @@ class AsyncOrganizationsResource(AsyncAPIResource):
           invite_id: invite_id is the unique identifier of the invite to join the organization.
 
           connect_protocol_version: Define the version of the Connect protocol
+
+          organization_id: organization_id is the unique identifier of the Organization to join.
 
           connect_timeout_ms: Define the timeout, in ms
 
@@ -1174,6 +1102,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         *,
         organization_id: str,
         connect_protocol_version: Literal[1],
+        invite_id: str | NotGiven = NOT_GIVEN,
         connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1190,6 +1119,8 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           connect_protocol_version: Define the version of the Connect protocol
 
+          invite_id: invite_id is the unique identifier of the invite to join the organization.
+
           connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
@@ -1202,14 +1133,55 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["invite_id", "connect_protocol_version"], ["organization_id", "connect_protocol_version"])
+    @overload
+    async def join(
+        self,
+        *,
+        connect_protocol_version: Literal[1],
+        invite_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> OrganizationJoinResponse:
+        """
+        JoinOrganization lets accounts join an Organization.
+
+        Args:
+          connect_protocol_version: Define the version of the Connect protocol
+
+          invite_id: invite_id is the unique identifier of the invite to join the organization.
+
+          organization_id: organization_id is the unique identifier of the Organization to join.
+
+          connect_timeout_ms: Define the timeout, in ms
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        ...
+
+    @required_args(
+        ["invite_id", "connect_protocol_version"],
+        ["organization_id", "connect_protocol_version"],
+        ["connect_protocol_version"],
+    )
     async def join(
         self,
         *,
         invite_id: str | NotGiven = NOT_GIVEN,
         connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
+        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
