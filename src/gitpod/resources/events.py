@@ -24,6 +24,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 from ..types.event_list_response import EventListResponse
 from ..types.event_watch_response import EventWatchResponse
 
@@ -136,7 +137,7 @@ class EventsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
+    ) -> JSONLDecoder[EventWatchResponse]:
         """
         WatchEvents streams all requests events to the client
 
@@ -173,7 +174,7 @@ class EventsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
+    ) -> JSONLDecoder[EventWatchResponse]:
         """
         WatchEvents streams all requests events to the client
 
@@ -211,8 +212,8 @@ class EventsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
-        extra_headers = {"Accept": "application/connect+json", **(extra_headers or {})}
+    ) -> JSONLDecoder[EventWatchResponse]:
+        extra_headers = {"Accept": "application/jsonl", **(extra_headers or {})}
         extra_headers = {
             **strip_not_given(
                 {
@@ -234,7 +235,8 @@ class EventsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EventWatchResponse,
+            cast_to=JSONLDecoder[EventWatchResponse],
+            stream=True,
         )
 
 
@@ -344,7 +346,7 @@ class AsyncEventsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
+    ) -> AsyncJSONLDecoder[EventWatchResponse]:
         """
         WatchEvents streams all requests events to the client
 
@@ -381,7 +383,7 @@ class AsyncEventsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
+    ) -> AsyncJSONLDecoder[EventWatchResponse]:
         """
         WatchEvents streams all requests events to the client
 
@@ -419,8 +421,8 @@ class AsyncEventsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventWatchResponse:
-        extra_headers = {"Accept": "application/connect+json", **(extra_headers or {})}
+    ) -> AsyncJSONLDecoder[EventWatchResponse]:
+        extra_headers = {"Accept": "application/jsonl", **(extra_headers or {})}
         extra_headers = {
             **strip_not_given(
                 {
@@ -442,7 +444,8 @@ class AsyncEventsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EventWatchResponse,
+            cast_to=AsyncJSONLDecoder[EventWatchResponse],
+            stream=True,
         )
 
 

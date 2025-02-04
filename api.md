@@ -167,7 +167,7 @@ from gitpod.types import EventListResponse, EventWatchResponse
 Methods:
 
 - <code title="get /gitpod.v1.EventService/ListAuditLogs">client.events.<a href="./src/gitpod/resources/events.py">list</a>(\*\*<a href="src/gitpod/types/event_list_params.py">params</a>) -> <a href="./src/gitpod/types/event_list_response.py">EventListResponse</a></code>
-- <code title="post /gitpod.v1.EventService/WatchEvents">client.events.<a href="./src/gitpod/resources/events.py">watch</a>(\*\*<a href="src/gitpod/types/event_watch_params.py">params</a>) -> <a href="./src/gitpod/types/event_watch_response.py">EventWatchResponse</a></code>
+- <code title="post /gitpod.v1.EventService/WatchEvents">client.events.<a href="./src/gitpod/resources/events.py">watch</a>(\*\*<a href="src/gitpod/types/event_watch_params.py">params</a>) -> <a href="./src/gitpod/types/event_watch_response.py">JSONLDecoder[EventWatchResponse]</a></code>
 
 # Groups
 
