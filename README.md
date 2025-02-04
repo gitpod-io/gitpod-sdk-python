@@ -27,9 +27,12 @@ pip install git+ssh://git@github.com/stainless-sdks/gitpod-python.git
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from gitpod import Gitpod
 
-client = Gitpod()
+client = Gitpod(
+    bearer_token=os.environ.get("GITPOD_API_KEY"),  # This is the default and can be omitted
+)
 
 runner = client.runners.create(
     connect_protocol_version=1,
@@ -47,10 +50,13 @@ so that your Bearer Token is not stored in source control.
 Simply import `AsyncGitpod` instead of `Gitpod` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from gitpod import AsyncGitpod
 
-client = AsyncGitpod()
+client = AsyncGitpod(
+    bearer_token=os.environ.get("GITPOD_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
