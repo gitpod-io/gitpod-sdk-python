@@ -10,6 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import EventListResponse, EventWatchResponse
+from gitpod._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -64,14 +65,16 @@ class TestEvents:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch_overload_1(self, client: Gitpod) -> None:
         event = client.events.watch(
             environment_id="environmentId",
             connect_protocol_version=1,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch_with_all_params_overload_1(self, client: Gitpod) -> None:
         event = client.events.watch(
@@ -79,8 +82,9 @@ class TestEvents:
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_raw_response_watch_overload_1(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch(
@@ -91,8 +95,9 @@ class TestEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_streaming_response_watch_overload_1(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch(
@@ -103,18 +108,20 @@ class TestEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = response.parse()
-            assert_matches_type(EventWatchResponse, event, path=["response"])
+            assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch_overload_2(self, client: Gitpod) -> None:
         event = client.events.watch(
             organization=True,
             connect_protocol_version=1,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch_with_all_params_overload_2(self, client: Gitpod) -> None:
         event = client.events.watch(
@@ -122,8 +129,9 @@ class TestEvents:
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_raw_response_watch_overload_2(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch(
@@ -134,8 +142,9 @@ class TestEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_streaming_response_watch_overload_2(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch(
@@ -146,7 +155,7 @@ class TestEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = response.parse()
-            assert_matches_type(EventWatchResponse, event, path=["response"])
+            assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -201,14 +210,16 @@ class TestAsyncEvents:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
             environment_id="environmentId",
             connect_protocol_version=1,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
@@ -216,8 +227,9 @@ class TestAsyncEvents:
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_raw_response_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch(
@@ -228,8 +240,9 @@ class TestAsyncEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = await response.parse()
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_streaming_response_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch(
@@ -240,18 +253,20 @@ class TestAsyncEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = await response.parse()
-            assert_matches_type(EventWatchResponse, event, path=["response"])
+            assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
             organization=True,
             connect_protocol_version=1,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
@@ -259,8 +274,9 @@ class TestAsyncEvents:
             connect_protocol_version=1,
             connect_timeout_ms=0,
         )
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_raw_response_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch(
@@ -271,8 +287,9 @@ class TestAsyncEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = await response.parse()
-        assert_matches_type(EventWatchResponse, event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
+    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_streaming_response_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch(
@@ -283,6 +300,6 @@ class TestAsyncEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = await response.parse()
-            assert_matches_type(EventWatchResponse, event, path=["response"])
+            assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
