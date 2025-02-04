@@ -25,7 +25,7 @@ from gitpod import Gitpod, AsyncGitpod, APIResponseValidationError
 from gitpod._types import Omit
 from gitpod._models import BaseModel, FinalRequestOptions
 from gitpod._constants import RAW_RESPONSE_HEADER
-from gitpod._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from gitpod._exceptions import GitpodError, APIStatusError, APITimeoutError, APIResponseValidationError
 from gitpod._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
@@ -334,6 +334,16 @@ class TestGitpod:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = Gitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
+
+        with pytest.raises(GitpodError):
+            with update_env(**{"GITPOD_API_KEY": Omit()}):
+                client2 = Gitpod(base_url=base_url, bearer_token=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Gitpod(
@@ -1120,6 +1130,16 @@ class TestAsyncGitpod:
         request = client2._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
+
+    def test_validate_headers(self) -> None:
+        client = AsyncGitpod(base_url=base_url, bearer_token=bearer_token, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {bearer_token}"
+
+        with pytest.raises(GitpodError):
+            with update_env(**{"GITPOD_API_KEY": Omit()}):
+                client2 = AsyncGitpod(base_url=base_url, bearer_token=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncGitpod(
