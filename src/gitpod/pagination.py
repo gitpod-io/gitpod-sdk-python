@@ -176,7 +176,7 @@ class EnvironmentClassesPagePagination(BaseModel):
 
 
 class SyncEnvironmentClassesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    environment_classes: List[_T]
+    environment_classes: List[_T] = FieldInfo(alias="environmentClasses")
     pagination: Optional[EnvironmentClassesPagePagination] = None
 
     @override
@@ -199,7 +199,7 @@ class SyncEnvironmentClassesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncEnvironmentClassesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    environment_classes: List[_T]
+    environment_classes: List[_T] = FieldInfo(alias="environmentClasses")
     pagination: Optional[EnvironmentClassesPagePagination] = None
 
     @override
@@ -376,7 +376,7 @@ class LoginProvidersPagePagination(BaseModel):
 
 
 class SyncLoginProvidersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    login_providers: List[_T]
+    login_providers: List[_T] = FieldInfo(alias="loginProviders")
     pagination: Optional[LoginProvidersPagePagination] = None
 
     @override
@@ -399,7 +399,7 @@ class SyncLoginProvidersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncLoginProvidersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    login_providers: List[_T]
+    login_providers: List[_T] = FieldInfo(alias="loginProviders")
     pagination: Optional[LoginProvidersPagePagination] = None
 
     @override
@@ -527,7 +527,7 @@ class PersonalAccessTokensPagePagination(BaseModel):
 
 class SyncPersonalAccessTokensPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[PersonalAccessTokensPagePagination] = None
-    personal_access_tokens: List[_T]
+    personal_access_tokens: List[_T] = FieldInfo(alias="personalAccessTokens")
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -550,7 +550,7 @@ class SyncPersonalAccessTokensPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 class AsyncPersonalAccessTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[PersonalAccessTokensPagePagination] = None
-    personal_access_tokens: List[_T]
+    personal_access_tokens: List[_T] = FieldInfo(alias="personalAccessTokens")
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -827,7 +827,7 @@ class SSOConfigurationsPagePagination(BaseModel):
 
 class SyncSSOConfigurationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[SSOConfigurationsPagePagination] = None
-    sso_configurations: List[_T]
+    sso_configurations: List[_T] = FieldInfo(alias="ssoConfigurations")
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -850,7 +850,7 @@ class SyncSSOConfigurationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 class AsyncSSOConfigurationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[SSOConfigurationsPagePagination] = None
-    sso_configurations: List[_T]
+    sso_configurations: List[_T] = FieldInfo(alias="ssoConfigurations")
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -877,7 +877,7 @@ class TaskExecutionsPagePagination(BaseModel):
 
 class SyncTaskExecutionsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[TaskExecutionsPagePagination] = None
-    task_executions: List[_T]
+    task_executions: List[_T] = FieldInfo(alias="taskExecutions")
 
     @override
     def _get_page_items(self) -> List[_T]:
@@ -900,7 +900,7 @@ class SyncTaskExecutionsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 class AsyncTaskExecutionsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
     pagination: Optional[TaskExecutionsPagePagination] = None
-    task_executions: List[_T]
+    task_executions: List[_T] = FieldInfo(alias="taskExecutions")
 
     @override
     def _get_page_items(self) -> List[_T]:

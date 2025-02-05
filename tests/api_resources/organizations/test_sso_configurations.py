@@ -9,6 +9,7 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
+from gitpod.pagination import SyncSSOConfigurationsPage, AsyncSSOConfigurationsPage
 from gitpod.types.organizations import (
     SSOConfigurationListResponse,
     SSOConfigurationCreateResponse,
@@ -247,7 +248,9 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list()
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -260,7 +263,9 @@ class TestSSOConfigurations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -269,7 +274,9 @@ class TestSSOConfigurations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sso_configuration = response.parse()
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -278,7 +285,9 @@ class TestSSOConfigurations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sso_configuration = response.parse()
-            assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+            assert_matches_type(
+                SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+            )
 
         assert cast(Any, response.is_closed) is True
 
@@ -544,7 +553,9 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list()
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -557,7 +568,9 @@ class TestAsyncSSOConfigurations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -566,7 +579,9 @@ class TestAsyncSSOConfigurations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sso_configuration = await response.parse()
-        assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+        assert_matches_type(
+            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+        )
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -575,7 +590,9 @@ class TestAsyncSSOConfigurations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sso_configuration = await response.parse()
-            assert_matches_type(SSOConfigurationListResponse, sso_configuration, path=["response"])
+            assert_matches_type(
+                AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
+            )
 
         assert cast(Any, response.is_closed) is True
 

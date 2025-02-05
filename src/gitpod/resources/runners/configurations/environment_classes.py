@@ -21,7 +21,8 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
+from ....pagination import SyncEnvironmentClassesPage, AsyncEnvironmentClassesPage
+from ...._base_client import AsyncPaginator, make_request_options
 from ....types.runners.configurations import (
     environment_class_list_params,
     environment_class_create_params,
@@ -254,7 +255,7 @@ class EnvironmentClassesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EnvironmentClassListResponse:
+    ) -> SyncEnvironmentClassesPage[EnvironmentClassListResponse]:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -270,8 +271,9 @@ class EnvironmentClassesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses",
+            page=SyncEnvironmentClassesPage[EnvironmentClassListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -292,7 +294,8 @@ class EnvironmentClassesResource(SyncAPIResource):
                     environment_class_list_params.EnvironmentClassListParams,
                 ),
             ),
-            cast_to=EnvironmentClassListResponse,
+            model=EnvironmentClassListResponse,
+            method="post",
         )
 
 
@@ -502,7 +505,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    async def list(
+    def list(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
@@ -515,7 +518,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EnvironmentClassListResponse:
+    ) -> AsyncPaginator[EnvironmentClassListResponse, AsyncEnvironmentClassesPage[EnvironmentClassListResponse]]:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -531,9 +534,10 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses",
-            body=await async_maybe_transform(
+            page=AsyncEnvironmentClassesPage[EnvironmentClassListResponse],
+            body=maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
@@ -545,7 +549,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -553,7 +557,8 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
                     environment_class_list_params.EnvironmentClassListParams,
                 ),
             ),
-            cast_to=EnvironmentClassListResponse,
+            model=EnvironmentClassListResponse,
+            method="post",
         )
 
 

@@ -5,10 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._utils import maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -17,7 +14,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncEnvironmentClassesPage, AsyncEnvironmentClassesPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.environments import class_list_params
 from ...types.environments.class_list_response import ClassListResponse
 
@@ -57,7 +55,7 @@ class ClassesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassListResponse:
+    ) -> SyncEnvironmentClassesPage[ClassListResponse]:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
         details a user is able to use based on the query buf:lint:ignore
@@ -74,8 +72,9 @@ class ClassesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironmentClasses",
+            page=SyncEnvironmentClassesPage[ClassListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -96,7 +95,8 @@ class ClassesResource(SyncAPIResource):
                     class_list_params.ClassListParams,
                 ),
             ),
-            cast_to=ClassListResponse,
+            model=ClassListResponse,
+            method="post",
         )
 
 
@@ -120,7 +120,7 @@ class AsyncClassesResource(AsyncAPIResource):
         """
         return AsyncClassesResourceWithStreamingResponse(self)
 
-    async def list(
+    def list(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
@@ -133,7 +133,7 @@ class AsyncClassesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ClassListResponse:
+    ) -> AsyncPaginator[ClassListResponse, AsyncEnvironmentClassesPage[ClassListResponse]]:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
         details a user is able to use based on the query buf:lint:ignore
@@ -150,9 +150,10 @@ class AsyncClassesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironmentClasses",
-            body=await async_maybe_transform(
+            page=AsyncEnvironmentClassesPage[ClassListResponse],
+            body=maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
@@ -164,7 +165,7 @@ class AsyncClassesResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -172,7 +173,8 @@ class AsyncClassesResource(AsyncAPIResource):
                     class_list_params.ClassListParams,
                 ),
             ),
-            cast_to=ClassListResponse,
+            model=ClassListResponse,
+            method="post",
         )
 
 
