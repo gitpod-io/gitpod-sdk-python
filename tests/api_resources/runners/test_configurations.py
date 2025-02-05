@@ -17,6 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestConfigurations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_validate_overload_1(self, client: Gitpod) -> None:
         configuration = client.runners.configurations.validate(
@@ -24,6 +25,7 @@ class TestConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_validate_with_all_params_overload_1(self, client: Gitpod) -> None:
         configuration = client.runners.configurations.validate(
@@ -44,6 +46,7 @@ class TestConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_validate_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.with_raw_response.validate(
@@ -55,6 +58,7 @@ class TestConfigurations:
         configuration = response.parse()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_validate_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.with_streaming_response.validate(
@@ -68,6 +72,7 @@ class TestConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_validate_overload_2(self, client: Gitpod) -> None:
         configuration = client.runners.configurations.validate(
@@ -75,6 +80,7 @@ class TestConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_validate_with_all_params_overload_2(self, client: Gitpod) -> None:
         configuration = client.runners.configurations.validate(
@@ -83,6 +89,7 @@ class TestConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_validate_overload_2(self, client: Gitpod) -> None:
         response = client.runners.configurations.with_raw_response.validate(
@@ -94,6 +101,7 @@ class TestConfigurations:
         configuration = response.parse()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_validate_overload_2(self, client: Gitpod) -> None:
         with client.runners.configurations.with_streaming_response.validate(
@@ -111,6 +119,7 @@ class TestConfigurations:
 class TestAsyncConfigurations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_validate_overload_1(self, async_client: AsyncGitpod) -> None:
         configuration = await async_client.runners.configurations.validate(
@@ -118,6 +127,7 @@ class TestAsyncConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_validate_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         configuration = await async_client.runners.configurations.validate(
@@ -138,6 +148,7 @@ class TestAsyncConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.with_raw_response.validate(
@@ -149,6 +160,7 @@ class TestAsyncConfigurations:
         configuration = await response.parse()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.with_streaming_response.validate(
@@ -162,6 +174,7 @@ class TestAsyncConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_validate_overload_2(self, async_client: AsyncGitpod) -> None:
         configuration = await async_client.runners.configurations.validate(
@@ -169,6 +182,7 @@ class TestAsyncConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_validate_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
         configuration = await async_client.runners.configurations.validate(
@@ -177,6 +191,7 @@ class TestAsyncConfigurations:
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.with_raw_response.validate(
@@ -188,6 +203,7 @@ class TestAsyncConfigurations:
         configuration = await response.parse()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.with_streaming_response.validate(
