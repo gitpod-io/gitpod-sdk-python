@@ -59,7 +59,7 @@ class UsersResource(SyncAPIResource):
     def get_authenticated_user(
         self,
         *,
-        body: object,
+        empty: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -81,7 +81,7 @@ class UsersResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.UserService/GetAuthenticatedUser",
-            body=maybe_transform(body, user_get_authenticated_user_params.UserGetAuthenticatedUserParams),
+            body=maybe_transform({"empty": empty}, user_get_authenticated_user_params.UserGetAuthenticatedUserParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -155,7 +155,7 @@ class AsyncUsersResource(AsyncAPIResource):
     async def get_authenticated_user(
         self,
         *,
-        body: object,
+        empty: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -177,7 +177,9 @@ class AsyncUsersResource(AsyncAPIResource):
         """
         return await self._post(
             "/gitpod.v1.UserService/GetAuthenticatedUser",
-            body=await async_maybe_transform(body, user_get_authenticated_user_params.UserGetAuthenticatedUserParams),
+            body=await async_maybe_transform(
+                {"empty": empty}, user_get_authenticated_user_params.UserGetAuthenticatedUserParams
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

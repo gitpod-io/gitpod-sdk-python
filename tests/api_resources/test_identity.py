@@ -21,13 +21,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestIdentity:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_exchange_token(self, client: Gitpod) -> None:
         identity = client.identity.exchange_token()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_exchange_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.exchange_token(
@@ -35,7 +33,6 @@ class TestIdentity:
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_exchange_token(self, client: Gitpod) -> None:
         response = client.identity.with_raw_response.exchange_token()
@@ -45,7 +42,6 @@ class TestIdentity:
         identity = response.parse()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_exchange_token(self, client: Gitpod) -> None:
         with client.identity.with_streaming_response.exchange_token() as response:
@@ -57,32 +53,30 @@ class TestIdentity:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_get_authenticated_identity(self, client: Gitpod) -> None:
+        identity = client.identity.get_authenticated_identity()
+        assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
+
+    @parametrize
+    def test_method_get_authenticated_identity_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_authenticated_identity(
-            body={},
+            empty=True,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_authenticated_identity(self, client: Gitpod) -> None:
-        response = client.identity.with_raw_response.get_authenticated_identity(
-            body={},
-        )
+        response = client.identity.with_raw_response.get_authenticated_identity()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         identity = response.parse()
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_authenticated_identity(self, client: Gitpod) -> None:
-        with client.identity.with_streaming_response.get_authenticated_identity(
-            body={},
-        ) as response:
+        with client.identity.with_streaming_response.get_authenticated_identity() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -91,13 +85,11 @@ class TestIdentity:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_get_id_token(self, client: Gitpod) -> None:
         identity = client.identity.get_id_token()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_get_id_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_id_token(
@@ -105,7 +97,6 @@ class TestIdentity:
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_id_token(self, client: Gitpod) -> None:
         response = client.identity.with_raw_response.get_id_token()
@@ -115,7 +106,6 @@ class TestIdentity:
         identity = response.parse()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_id_token(self, client: Gitpod) -> None:
         with client.identity.with_streaming_response.get_id_token() as response:
@@ -131,13 +121,11 @@ class TestIdentity:
 class TestAsyncIdentity:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_exchange_token(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.exchange_token()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_exchange_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.exchange_token(
@@ -145,7 +133,6 @@ class TestAsyncIdentity:
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_exchange_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.identity.with_raw_response.exchange_token()
@@ -155,7 +142,6 @@ class TestAsyncIdentity:
         identity = await response.parse()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_exchange_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.identity.with_streaming_response.exchange_token() as response:
@@ -167,32 +153,30 @@ class TestAsyncIdentity:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
+        identity = await async_client.identity.get_authenticated_identity()
+        assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
+
+    @parametrize
+    async def test_method_get_authenticated_identity_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_authenticated_identity(
-            body={},
+            empty=True,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.identity.with_raw_response.get_authenticated_identity(
-            body={},
-        )
+        response = await async_client.identity.with_raw_response.get_authenticated_identity()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         identity = await response.parse()
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
-        async with async_client.identity.with_streaming_response.get_authenticated_identity(
-            body={},
-        ) as response:
+        async with async_client.identity.with_streaming_response.get_authenticated_identity() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -201,13 +185,11 @@ class TestAsyncIdentity:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_get_id_token(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_id_token()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_get_id_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_id_token(
@@ -215,7 +197,6 @@ class TestAsyncIdentity:
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_id_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.identity.with_raw_response.get_id_token()
@@ -225,7 +206,6 @@ class TestAsyncIdentity:
         identity = await response.parse()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_id_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.identity.with_streaming_response.get_id_token() as response:

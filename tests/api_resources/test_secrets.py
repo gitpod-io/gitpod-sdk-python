@@ -22,7 +22,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSecrets:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_overload_1(self, client: Gitpod) -> None:
         secret = client.secrets.create(
@@ -30,7 +29,6 @@ class TestSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params_overload_1(self, client: Gitpod) -> None:
         secret = client.secrets.create(
@@ -41,7 +39,6 @@ class TestSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.create(
@@ -53,7 +50,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.create(
@@ -67,7 +63,6 @@ class TestSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_overload_2(self, client: Gitpod) -> None:
         secret = client.secrets.create(
@@ -75,7 +70,6 @@ class TestSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params_overload_2(self, client: Gitpod) -> None:
         secret = client.secrets.create(
@@ -86,7 +80,6 @@ class TestSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.create(
@@ -98,7 +91,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.create(
@@ -112,13 +104,11 @@ class TestSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         secret = client.secrets.list()
         assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.list(
@@ -132,7 +122,6 @@ class TestSecrets:
         )
         assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.list()
@@ -142,7 +131,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.list() as response:
@@ -154,13 +142,11 @@ class TestSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         secret = client.secrets.delete()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.delete(
@@ -168,7 +154,6 @@ class TestSecrets:
         )
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.delete()
@@ -178,7 +163,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.delete() as response:
@@ -190,13 +174,11 @@ class TestSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_get_value(self, client: Gitpod) -> None:
         secret = client.secrets.get_value()
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_get_value_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.get_value(
@@ -204,7 +186,6 @@ class TestSecrets:
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_value(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.get_value()
@@ -214,7 +195,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_value(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.get_value() as response:
@@ -226,13 +206,11 @@ class TestSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_value(self, client: Gitpod) -> None:
         secret = client.secrets.update_value()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_value_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.update_value(
@@ -241,7 +219,6 @@ class TestSecrets:
         )
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_value(self, client: Gitpod) -> None:
         response = client.secrets.with_raw_response.update_value()
@@ -251,7 +228,6 @@ class TestSecrets:
         secret = response.parse()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_value(self, client: Gitpod) -> None:
         with client.secrets.with_streaming_response.update_value() as response:
@@ -267,7 +243,6 @@ class TestSecrets:
 class TestAsyncSecrets:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
@@ -275,7 +250,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
@@ -286,7 +260,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.create(
@@ -298,7 +271,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.create(
@@ -312,7 +284,6 @@ class TestAsyncSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
@@ -320,7 +291,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
@@ -331,7 +301,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.create(
@@ -343,7 +312,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.create(
@@ -357,13 +325,11 @@ class TestAsyncSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.list()
         assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.list(
@@ -377,7 +343,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.list()
@@ -387,7 +352,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.list() as response:
@@ -399,13 +363,11 @@ class TestAsyncSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.delete()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.delete(
@@ -413,7 +375,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.delete()
@@ -423,7 +384,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.delete() as response:
@@ -435,13 +395,11 @@ class TestAsyncSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_get_value(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.get_value()
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_get_value_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.get_value(
@@ -449,7 +407,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_value(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.get_value()
@@ -459,7 +416,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(SecretGetValueResponse, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_value(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.get_value() as response:
@@ -471,13 +427,11 @@ class TestAsyncSecrets:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_value(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.update_value()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_value_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.update_value(
@@ -486,7 +440,6 @@ class TestAsyncSecrets:
         )
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_value(self, async_client: AsyncGitpod) -> None:
         response = await async_client.secrets.with_raw_response.update_value()
@@ -496,7 +449,6 @@ class TestAsyncSecrets:
         secret = await response.parse()
         assert_matches_type(object, secret, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_value(self, async_client: AsyncGitpod) -> None:
         async with async_client.secrets.with_streaming_response.update_value() as response:

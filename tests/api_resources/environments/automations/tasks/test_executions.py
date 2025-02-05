@@ -21,13 +21,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestExecutions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.retrieve()
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.retrieve(
@@ -35,7 +33,6 @@ class TestExecutions:
         )
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.environments.automations.tasks.executions.with_raw_response.retrieve()
@@ -45,7 +42,6 @@ class TestExecutions:
         execution = response.parse()
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.environments.automations.tasks.executions.with_streaming_response.retrieve() as response:
@@ -57,13 +53,11 @@ class TestExecutions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.list()
         assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.list(
@@ -82,7 +76,6 @@ class TestExecutions:
         )
         assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.environments.automations.tasks.executions.with_raw_response.list()
@@ -92,7 +85,6 @@ class TestExecutions:
         execution = response.parse()
         assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.environments.automations.tasks.executions.with_streaming_response.list() as response:
@@ -104,13 +96,11 @@ class TestExecutions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_stop(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.stop()
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_stop_with_all_params(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.stop(
@@ -118,7 +108,6 @@ class TestExecutions:
         )
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_stop(self, client: Gitpod) -> None:
         response = client.environments.automations.tasks.executions.with_raw_response.stop()
@@ -128,7 +117,6 @@ class TestExecutions:
         execution = response.parse()
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_stop(self, client: Gitpod) -> None:
         with client.environments.automations.tasks.executions.with_streaming_response.stop() as response:
@@ -144,13 +132,11 @@ class TestExecutions:
 class TestAsyncExecutions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.retrieve()
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.retrieve(
@@ -158,7 +144,6 @@ class TestAsyncExecutions:
         )
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.environments.automations.tasks.executions.with_raw_response.retrieve()
@@ -168,7 +153,6 @@ class TestAsyncExecutions:
         execution = await response.parse()
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with (
@@ -182,13 +166,11 @@ class TestAsyncExecutions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.list()
         assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.list(
@@ -207,7 +189,6 @@ class TestAsyncExecutions:
         )
         assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.environments.automations.tasks.executions.with_raw_response.list()
@@ -217,7 +198,6 @@ class TestAsyncExecutions:
         execution = await response.parse()
         assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.environments.automations.tasks.executions.with_streaming_response.list() as response:
@@ -229,13 +209,11 @@ class TestAsyncExecutions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_stop(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.stop()
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_stop_with_all_params(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.stop(
@@ -243,7 +221,6 @@ class TestAsyncExecutions:
         )
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_stop(self, async_client: AsyncGitpod) -> None:
         response = await async_client.environments.automations.tasks.executions.with_raw_response.stop()
@@ -253,7 +230,6 @@ class TestAsyncExecutions:
         execution = await response.parse()
         assert_matches_type(object, execution, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGitpod) -> None:
         async with async_client.environments.automations.tasks.executions.with_streaming_response.stop() as response:
