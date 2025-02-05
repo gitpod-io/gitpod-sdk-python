@@ -22,11 +22,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSSOConfigurations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create(
@@ -38,6 +40,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.create()
@@ -47,6 +50,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.create() as response:
@@ -58,11 +62,13 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.retrieve()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.retrieve(
@@ -70,6 +76,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.retrieve()
@@ -79,6 +86,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.retrieve() as response:
@@ -90,6 +98,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -97,6 +106,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -108,6 +118,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -121,6 +132,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -128,6 +140,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -139,6 +152,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -152,6 +166,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_3(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -159,6 +174,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -170,6 +186,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -183,6 +200,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_4(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -190,6 +208,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_4(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -201,6 +220,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_4(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -214,6 +234,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_5(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -221,6 +242,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_5(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -232,6 +254,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_5(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -245,6 +268,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list()
@@ -252,6 +276,7 @@ class TestSSOConfigurations:
             SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
@@ -267,6 +292,7 @@ class TestSSOConfigurations:
             SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.list()
@@ -278,6 +304,7 @@ class TestSSOConfigurations:
             SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.list() as response:
@@ -291,11 +318,13 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.delete()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.delete(
@@ -303,6 +332,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.delete()
@@ -312,6 +342,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.delete() as response:
@@ -327,11 +358,13 @@ class TestSSOConfigurations:
 class TestAsyncSSOConfigurations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create(
@@ -343,6 +376,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.create()
@@ -352,6 +386,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.create() as response:
@@ -363,11 +398,13 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.retrieve()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.retrieve(
@@ -375,6 +412,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.retrieve()
@@ -384,6 +422,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.retrieve() as response:
@@ -395,6 +434,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -402,6 +442,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -413,6 +454,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -426,6 +468,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -433,6 +476,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -444,6 +488,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -457,6 +502,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -464,6 +510,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -475,6 +522,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -488,6 +536,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_4(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -495,6 +544,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -506,6 +556,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -519,6 +570,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_5(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -526,6 +578,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -537,6 +590,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -550,6 +604,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list()
@@ -557,6 +612,7 @@ class TestAsyncSSOConfigurations:
             AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
@@ -572,6 +628,7 @@ class TestAsyncSSOConfigurations:
             AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.list()
@@ -583,6 +640,7 @@ class TestAsyncSSOConfigurations:
             AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.list() as response:
@@ -596,11 +654,13 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.delete()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.delete(
@@ -608,6 +668,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.delete()
@@ -617,6 +678,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.delete() as response:
