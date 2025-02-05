@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..types import editor_list_params, editor_retrieve_params, editor_resolve_url_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -22,7 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.editor_list_response import EditorListResponse
 from ..types.editor_retrieve_response import EditorRetrieveResponse
 from ..types.editor_resolve_url_response import EditorResolveURLResponse
@@ -53,9 +50,7 @@ class EditorsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,11 +62,7 @@ class EditorsResource(SyncAPIResource):
         GetEditor returns the editor with the given ID
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           id: id is the ID of the editor to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -81,15 +72,6 @@ class EditorsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EditorService/GetEditor",
             body=maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
@@ -102,36 +84,21 @@ class EditorsResource(SyncAPIResource):
     def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorListResponse:
+    ) -> SyncPersonalAccessTokensPage[EditorListResponse]:
         """
         ListEditors lists all editors available to the caller
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
 
@@ -141,17 +108,10 @@ class EditorsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._get(
+        return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
+            page=SyncPersonalAccessTokensPage[EditorListResponse],
+            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -159,26 +119,22 @@ class EditorsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     editor_list_params.EditorListParams,
                 ),
             ),
-            cast_to=EditorListResponse,
+            model=EditorListResponse,
+            method="post",
         )
 
     def resolve_url(
         self,
         *,
-        connect_protocol_version: Literal[1],
         editor_id: str | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,15 +146,11 @@ class EditorsResource(SyncAPIResource):
         ResolveEditorURL resolves the editor's URL for an environment
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           editor_id: editorId is the ID of the editor to resolve the URL for
 
           environment_id: environmentId is the ID of the environment to resolve the URL for
 
           organization_id: organizationId is the ID of the organization to resolve the URL for
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -208,15 +160,6 @@ class EditorsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EditorService/ResolveEditorURL",
             body=maybe_transform(
@@ -257,9 +200,7 @@ class AsyncEditorsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -271,11 +212,7 @@ class AsyncEditorsResource(AsyncAPIResource):
         GetEditor returns the editor with the given ID
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           id: id is the ID of the editor to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -285,15 +222,6 @@ class AsyncEditorsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EditorService/GetEditor",
             body=await async_maybe_transform({"id": id}, editor_retrieve_params.EditorRetrieveParams),
@@ -303,39 +231,24 @@ class AsyncEditorsResource(AsyncAPIResource):
             cast_to=EditorRetrieveResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EditorListResponse:
+    ) -> AsyncPaginator[EditorListResponse, AsyncPersonalAccessTokensPage[EditorListResponse]]:
         """
         ListEditors lists all editors available to the caller
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
 
@@ -345,44 +258,33 @@ class AsyncEditorsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._get(
+        return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
+            page=AsyncPersonalAccessTokensPage[EditorListResponse],
+            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     editor_list_params.EditorListParams,
                 ),
             ),
-            cast_to=EditorListResponse,
+            model=EditorListResponse,
+            method="post",
         )
 
     async def resolve_url(
         self,
         *,
-        connect_protocol_version: Literal[1],
         editor_id: str | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -394,15 +296,11 @@ class AsyncEditorsResource(AsyncAPIResource):
         ResolveEditorURL resolves the editor's URL for an environment
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           editor_id: editorId is the ID of the editor to resolve the URL for
 
           environment_id: environmentId is the ID of the environment to resolve the URL for
 
           organization_id: organizationId is the ID of the organization to resolve the URL for
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -412,15 +310,6 @@ class AsyncEditorsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EditorService/ResolveEditorURL",
             body=await async_maybe_transform(

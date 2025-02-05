@@ -8,10 +8,8 @@ import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    is_given,
     required_args,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ..._compat import cached_property
@@ -22,7 +20,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.organizations import (
     sso_configuration_list_params,
     sso_configuration_create_params,
@@ -60,13 +59,11 @@ class SSOConfigurationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         client_id: str | NotGiven = NOT_GIVEN,
         client_secret: str | NotGiven = NOT_GIVEN,
         email_domain: str | NotGiven = NOT_GIVEN,
         issuer_url: str | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -78,8 +75,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         CreateSSOConfiguration creates a new SSO configuration for the organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           client_id: client_id is the client ID of the OIDC application set on the IdP
 
           client_secret: client_secret is the client secret of the OIDC application set on the IdP
@@ -87,8 +82,6 @@ class SSOConfigurationsResource(SyncAPIResource):
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -98,15 +91,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.OrganizationService/CreateSSOConfiguration",
             body=maybe_transform(
@@ -128,9 +112,7 @@ class SSOConfigurationsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         sso_configuration_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -142,11 +124,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         GetSSOConfiguration returns an SSO configuration.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -156,15 +134,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.OrganizationService/GetSSOConfiguration",
             body=maybe_transform(
@@ -182,8 +151,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         client_id: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -196,10 +163,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
         Args:
           client_id: client_id is the client ID of the SSO provider
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -216,8 +179,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         client_secret: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -230,10 +191,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
         Args:
           client_secret: client_secret is the client secret of the SSO provider
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -250,8 +207,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         email_domain: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -263,10 +218,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -282,8 +233,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         issuer_url: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -296,10 +245,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
         Args:
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -318,8 +263,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         state: Literal[
             "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
         ],
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -333,10 +276,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         Args:
           state: state is the state of the SSO configuration
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -347,19 +286,11 @@ class SSOConfigurationsResource(SyncAPIResource):
         """
         ...
 
-    @required_args(
-        ["client_id", "connect_protocol_version"],
-        ["client_secret", "connect_protocol_version"],
-        ["email_domain", "connect_protocol_version"],
-        ["issuer_url", "connect_protocol_version"],
-        ["state", "connect_protocol_version"],
-    )
+    @required_args(["client_id"], ["client_secret"], ["email_domain"], ["issuer_url"], ["state"])
     def update(
         self,
         *,
         client_id: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         client_secret: str | NotGiven = NOT_GIVEN,
         email_domain: str | NotGiven = NOT_GIVEN,
         issuer_url: str | NotGiven = NOT_GIVEN,
@@ -374,15 +305,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=maybe_transform(
@@ -404,36 +326,22 @@ class SSOConfigurationsResource(SyncAPIResource):
     def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SSOConfigurationListResponse:
+    ) -> SyncPersonalAccessTokensPage[SSOConfigurationListResponse]:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          organization_id: organization_id is the ID of the organization to list SSO configurations for.
 
           extra_headers: Send extra headers
 
@@ -443,17 +351,16 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._get(
+        return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
+            page=SyncPersonalAccessTokensPage[SSOConfigurationListResponse],
+            body=maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "pagination": pagination,
+                },
+                sso_configuration_list_params.SSOConfigurationListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -461,24 +368,20 @@ class SSOConfigurationsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            cast_to=SSOConfigurationListResponse,
+            model=SSOConfigurationListResponse,
+            method="post",
         )
 
     def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         sso_configuration_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -490,10 +393,6 @@ class SSOConfigurationsResource(SyncAPIResource):
         DeleteSSOConfiguration deletes an SSO configuration.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -502,15 +401,6 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.OrganizationService/DeleteSSOConfiguration",
             body=maybe_transform(
@@ -547,13 +437,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         client_id: str | NotGiven = NOT_GIVEN,
         client_secret: str | NotGiven = NOT_GIVEN,
         email_domain: str | NotGiven = NOT_GIVEN,
         issuer_url: str | NotGiven = NOT_GIVEN,
         organization_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -565,8 +453,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         CreateSSOConfiguration creates a new SSO configuration for the organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           client_id: client_id is the client ID of the OIDC application set on the IdP
 
           client_secret: client_secret is the client secret of the OIDC application set on the IdP
@@ -574,8 +460,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -585,15 +469,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.OrganizationService/CreateSSOConfiguration",
             body=await async_maybe_transform(
@@ -615,9 +490,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         sso_configuration_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -629,11 +502,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         GetSSOConfiguration returns an SSO configuration.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to get
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -643,15 +512,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.OrganizationService/GetSSOConfiguration",
             body=await async_maybe_transform(
@@ -669,8 +529,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         client_id: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -683,10 +541,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
         Args:
           client_id: client_id is the client ID of the SSO provider
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -703,8 +557,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         client_secret: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -717,10 +569,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
         Args:
           client_secret: client_secret is the client secret of the SSO provider
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -737,8 +585,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         email_domain: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -750,10 +596,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -769,8 +611,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         issuer_url: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -783,10 +623,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
         Args:
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -805,8 +641,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         state: Literal[
             "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
         ],
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -820,10 +654,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         Args:
           state: state is the state of the SSO configuration
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -834,19 +664,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(
-        ["client_id", "connect_protocol_version"],
-        ["client_secret", "connect_protocol_version"],
-        ["email_domain", "connect_protocol_version"],
-        ["issuer_url", "connect_protocol_version"],
-        ["state", "connect_protocol_version"],
-    )
+    @required_args(["client_id"], ["client_secret"], ["email_domain"], ["issuer_url"], ["state"])
     async def update(
         self,
         *,
         client_id: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         client_secret: str | NotGiven = NOT_GIVEN,
         email_domain: str | NotGiven = NOT_GIVEN,
         issuer_url: str | NotGiven = NOT_GIVEN,
@@ -861,15 +683,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=await async_maybe_transform(
@@ -888,39 +701,25 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    async def list(
+    def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SSOConfigurationListResponse:
+    ) -> AsyncPaginator[SSOConfigurationListResponse, AsyncPersonalAccessTokensPage[SSOConfigurationListResponse]]:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          organization_id: organization_id is the ID of the organization to list SSO configurations for.
 
           extra_headers: Send extra headers
 
@@ -930,42 +729,37 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._get(
+        return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
+            page=AsyncPersonalAccessTokensPage[SSOConfigurationListResponse],
+            body=maybe_transform(
+                {
+                    "organization_id": organization_id,
+                    "pagination": pagination,
+                },
+                sso_configuration_list_params.SSOConfigurationListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            cast_to=SSOConfigurationListResponse,
+            model=SSOConfigurationListResponse,
+            method="post",
         )
 
     async def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         sso_configuration_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -977,10 +771,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         DeleteSSOConfiguration deletes an SSO configuration.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -989,15 +779,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.OrganizationService/DeleteSSOConfiguration",
             body=await async_maybe_transform(

@@ -31,26 +31,19 @@ __all__ = [
 
 
 class EnvironmentCreateParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     spec: Spec
-    """EnvironmentSpec specifies the configuration of an environment for an environment
-
+    """
+    EnvironmentSpec specifies the configuration of an environment for an environment
     start
     """
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class SpecAutomationsFile(TypedDict, total=False):
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
-    environment,
-
-    relative to the repo root. path must not be absolute (start with a /):
+    environment, relative to the repo root. path must not be absolute (start with a
+    /):
 
     ```
     this.matches('^$|^[^/].*')
@@ -71,9 +64,8 @@ class SpecContentInitializerSpecContextURL(TypedDict, total=False):
 
 class SpecContentInitializerSpecGitGit(TypedDict, total=False):
     checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
-    """a path relative to the environment root in which the code will be checked out
-
-    to
+    """
+    a path relative to the environment root in which the code will be checked out to
     """
 
     clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]

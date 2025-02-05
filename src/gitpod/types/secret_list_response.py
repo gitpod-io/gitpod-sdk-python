@@ -21,9 +21,9 @@ __all__ = [
 
 class Pagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results. Empty if there are no
+    """Token passed for retreiving the next set of results.
 
-    more results
+    Empty if there are no more results
     """
 
 
@@ -54,8 +54,8 @@ class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret
     id: Optional[str] = None
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -155,8 +155,8 @@ class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret
     """The Project ID this Secret belongs to"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -271,8 +271,8 @@ class SecretAbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
     id: Optional[str] = None
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -372,8 +372,8 @@ class SecretAbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
     """The Project ID this Secret belongs to"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar

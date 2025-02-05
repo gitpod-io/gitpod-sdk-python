@@ -63,8 +63,8 @@ ServiceMetadataTriggeredBy: TypeAlias = Union[
 
 class ServiceMetadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -167,18 +167,14 @@ class ServiceMetadata(BaseModel):
     """name is a user-facing name for the service.
 
     Unlike the reference, this field is not unique, and not referenced by the
-    system.
-
-    This is a short descriptive name for the service.
+    system. This is a short descriptive name for the service.
     """
 
     reference: Optional[str] = None
     """
     reference is a user-facing identifier for the service which must be unique on
-    the environment.
-
-    It is used to express dependencies between services, and to identify the service
-    in user interactions (e.g. the CLI).
+    the environment. It is used to express dependencies between services, and to
+    identify the service in user interactions (e.g. the CLI).
     """
 
     triggered_by: Optional[List[ServiceMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
@@ -189,10 +185,8 @@ class ServiceSpecCommands(BaseModel):
     ready: Optional[str] = None
     """
     ready is an optional command that is run repeatedly until it exits with a zero
-    exit code.
-
-    If set, the service will first go into a Starting phase, and then into a Running
-    phase once the ready command exits with a zero exit code.
+    exit code. If set, the service will first go into a Starting phase, and then
+    into a Running phase once the ready command exits with a zero exit code.
     """
 
     start: Optional[str] = None
@@ -207,14 +201,13 @@ class ServiceSpecCommands(BaseModel):
     """
 
     stop: Optional[str] = None
-    """stop is an optional command that runs when the service is requested to stop.
-
-    If set, instead of sending a SIGTERM signal to the start command, the stop
-    command will be run. Once the stop command exits, the start command will receive
-    a SIGKILL signal. If the stop command exits with a non-zero exit code, the
-    service will transition to the Failed phase. If the stop command does not exit
-    within 2 minutes, a SIGKILL signal will be sent to both the start and stop
-    commands.
+    """
+    stop is an optional command that runs when the service is requested to stop. If
+    set, instead of sending a SIGTERM signal to the start command, the stop command
+    will be run. Once the stop command exits, the start command will receive a
+    SIGKILL signal. If the stop command exits with a non-zero exit code, the service
+    will transition to the Failed phase. If the stop command does not exit within 2
+    minutes, a SIGKILL signal will be sent to both the start and stop commands.
     """
 
 
@@ -257,9 +250,7 @@ class ServiceSpec(BaseModel):
     session: Optional[str] = None
     """session should be changed to trigger a restart of the service.
 
-    If a service exits it will
-
-    not be restarted until the session is changed.
+    If a service exits it will not be restarted until the session is changed.
     """
 
     spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
@@ -275,9 +266,8 @@ class ServiceStatus(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message summarises why the service failed to operate.
 
-    If this is non-empty
-
-    the service has failed to operate and will likely transition to a failed state.
+    If this is non-empty the service has failed to operate and will likely
+    transition to a failed state.
     """
 
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)

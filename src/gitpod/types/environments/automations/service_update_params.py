@@ -36,31 +36,23 @@ __all__ = [
 
 
 class ServiceUpdateParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     id: str
 
     metadata: Metadata
 
     spec: Spec
-    """Changing the spec of a service is a complex operation. The spec of a service
+    """Changing the spec of a service is a complex operation.
 
-    can only be updated if the service is in a stopped state. If the service is
-    running, it must be stopped first.
+    The spec of a service can only be updated if the service is in a stopped state.
+    If the service is running, it must be stopped first.
     """
 
     status: Status
     """Service status updates are only expected from the executing environment.
 
-    As a client
-
-    of this API you are not expected to provide this field. Updating this field
-    requires the `environmentservice:update_status` permission.
+    As a client of this API you are not expected to provide this field. Updating
+    this field requires the `environmentservice:update_status` permission.
     """
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class MetadataDescription(TypedDict, total=False):

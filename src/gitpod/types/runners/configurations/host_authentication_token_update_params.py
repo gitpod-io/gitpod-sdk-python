@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -13,8 +13,8 @@ __all__ = ["HostAuthenticationTokenUpdateParams", "Variant0", "Variant1", "Varia
 
 class Variant0(TypedDict, total=False):
     expires_at: Required[Annotated[Union[str, datetime], PropertyInfo(alias="expiresAt", format="iso8601")]]
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -104,31 +104,13 @@ class Variant0(TypedDict, total=False):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class Variant1(TypedDict, total=False):
     refresh_token: Required[Annotated[str, PropertyInfo(alias="refreshToken")]]
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class Variant2(TypedDict, total=False):
     token: Required[str]
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 HostAuthenticationTokenUpdateParams: TypeAlias = Union[Variant0, Variant1, Variant2]

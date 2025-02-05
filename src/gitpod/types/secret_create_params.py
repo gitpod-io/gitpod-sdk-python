@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -21,9 +21,6 @@ class SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret(Typed
     secret
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     name: str
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
@@ -31,9 +28,6 @@ class SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret(Typed
 
     value: str
     """value is the plaintext value of the secret"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class AbsolutePathToTheFileWhereTheSecretIsMounted(TypedDict, total=False):
@@ -47,9 +41,6 @@ class AbsolutePathToTheFileWhereTheSecretIsMounted(TypedDict, total=False):
     ```
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     name: str
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
@@ -57,9 +48,6 @@ class AbsolutePathToTheFileWhereTheSecretIsMounted(TypedDict, total=False):
 
     value: str
     """value is the plaintext value of the secret"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 SecretCreateParams: TypeAlias = Union[

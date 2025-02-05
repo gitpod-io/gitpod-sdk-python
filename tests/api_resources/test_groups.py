@@ -10,6 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import GroupListResponse
+from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,48 +20,38 @@ class TestGroups:
 
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        group = client.groups.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        group = client.groups.list()
+        assert_matches_type(SyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.groups.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = client.groups.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         group = response.parse()
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.groups.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        with client.groups.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             group = response.parse()
-            assert_matches_type(GroupListResponse, group, path=["response"])
+            assert_matches_type(SyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -70,47 +61,37 @@ class TestAsyncGroups:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        group = await async_client.groups.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        group = await async_client.groups.list()
+        assert_matches_type(AsyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.groups.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = await async_client.groups.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         group = await response.parse()
-        assert_matches_type(GroupListResponse, group, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.groups.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.groups.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             group = await response.parse()
-            assert_matches_type(GroupListResponse, group, path=["response"])
+            assert_matches_type(AsyncPersonalAccessTokensPage[GroupListResponse], group, path=["response"])
 
         assert cast(Any, response.is_closed) is True

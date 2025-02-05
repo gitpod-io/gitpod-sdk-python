@@ -23,25 +23,19 @@ class TestIdentity:
 
     @parametrize
     def test_method_exchange_token(self, client: Gitpod) -> None:
-        identity = client.identity.exchange_token(
-            connect_protocol_version=1,
-        )
+        identity = client.identity.exchange_token()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
     @parametrize
     def test_method_exchange_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.exchange_token(
-            connect_protocol_version=1,
             exchange_token="exchangeToken",
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
     @parametrize
     def test_raw_response_exchange_token(self, client: Gitpod) -> None:
-        response = client.identity.with_raw_response.exchange_token(
-            connect_protocol_version=1,
-        )
+        response = client.identity.with_raw_response.exchange_token()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -50,9 +44,7 @@ class TestIdentity:
 
     @parametrize
     def test_streaming_response_exchange_token(self, client: Gitpod) -> None:
-        with client.identity.with_streaming_response.exchange_token(
-            connect_protocol_version=1,
-        ) as response:
+        with client.identity.with_streaming_response.exchange_token() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -65,16 +57,6 @@ class TestIdentity:
     def test_method_get_authenticated_identity(self, client: Gitpod) -> None:
         identity = client.identity.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
-
-    @parametrize
-    def test_method_get_authenticated_identity_with_all_params(self, client: Gitpod) -> None:
-        identity = client.identity.get_authenticated_identity(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
@@ -82,7 +64,6 @@ class TestIdentity:
     def test_raw_response_get_authenticated_identity(self, client: Gitpod) -> None:
         response = client.identity.with_raw_response.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -94,7 +75,6 @@ class TestIdentity:
     def test_streaming_response_get_authenticated_identity(self, client: Gitpod) -> None:
         with client.identity.with_streaming_response.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,25 +86,19 @@ class TestIdentity:
 
     @parametrize
     def test_method_get_id_token(self, client: Gitpod) -> None:
-        identity = client.identity.get_id_token(
-            connect_protocol_version=1,
-        )
+        identity = client.identity.get_id_token()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
     @parametrize
     def test_method_get_id_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_id_token(
-            connect_protocol_version=1,
             audience=["string"],
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
     @parametrize
     def test_raw_response_get_id_token(self, client: Gitpod) -> None:
-        response = client.identity.with_raw_response.get_id_token(
-            connect_protocol_version=1,
-        )
+        response = client.identity.with_raw_response.get_id_token()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -133,9 +107,7 @@ class TestIdentity:
 
     @parametrize
     def test_streaming_response_get_id_token(self, client: Gitpod) -> None:
-        with client.identity.with_streaming_response.get_id_token(
-            connect_protocol_version=1,
-        ) as response:
+        with client.identity.with_streaming_response.get_id_token() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -150,25 +122,19 @@ class TestAsyncIdentity:
 
     @parametrize
     async def test_method_exchange_token(self, async_client: AsyncGitpod) -> None:
-        identity = await async_client.identity.exchange_token(
-            connect_protocol_version=1,
-        )
+        identity = await async_client.identity.exchange_token()
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
     @parametrize
     async def test_method_exchange_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.exchange_token(
-            connect_protocol_version=1,
             exchange_token="exchangeToken",
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
     @parametrize
     async def test_raw_response_exchange_token(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.identity.with_raw_response.exchange_token(
-            connect_protocol_version=1,
-        )
+        response = await async_client.identity.with_raw_response.exchange_token()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -177,9 +143,7 @@ class TestAsyncIdentity:
 
     @parametrize
     async def test_streaming_response_exchange_token(self, async_client: AsyncGitpod) -> None:
-        async with async_client.identity.with_streaming_response.exchange_token(
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.identity.with_streaming_response.exchange_token() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -192,16 +156,6 @@ class TestAsyncIdentity:
     async def test_method_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
-        )
-        assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
-
-    @parametrize
-    async def test_method_get_authenticated_identity_with_all_params(self, async_client: AsyncGitpod) -> None:
-        identity = await async_client.identity.get_authenticated_identity(
-            body={},
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetAuthenticatedIdentityResponse, identity, path=["response"])
 
@@ -209,7 +163,6 @@ class TestAsyncIdentity:
     async def test_raw_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         response = await async_client.identity.with_raw_response.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -221,7 +174,6 @@ class TestAsyncIdentity:
     async def test_streaming_response_get_authenticated_identity(self, async_client: AsyncGitpod) -> None:
         async with async_client.identity.with_streaming_response.get_authenticated_identity(
             body={},
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -233,25 +185,19 @@ class TestAsyncIdentity:
 
     @parametrize
     async def test_method_get_id_token(self, async_client: AsyncGitpod) -> None:
-        identity = await async_client.identity.get_id_token(
-            connect_protocol_version=1,
-        )
+        identity = await async_client.identity.get_id_token()
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
     @parametrize
     async def test_method_get_id_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_id_token(
-            connect_protocol_version=1,
             audience=["string"],
-            connect_timeout_ms=0,
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
     @parametrize
     async def test_raw_response_get_id_token(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.identity.with_raw_response.get_id_token(
-            connect_protocol_version=1,
-        )
+        response = await async_client.identity.with_raw_response.get_id_token()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -260,9 +206,7 @@ class TestAsyncIdentity:
 
     @parametrize
     async def test_streaming_response_get_id_token(self, async_client: AsyncGitpod) -> None:
-        async with async_client.identity.with_streaming_response.get_id_token(
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.identity.with_streaming_response.get_id_token() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

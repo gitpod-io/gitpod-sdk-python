@@ -40,21 +40,9 @@ __all__ = [
 class Variant0(TypedDict, total=False):
     metadata: Required[object]
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class Variant1(TypedDict, total=False):
     spec: Required[Variant1Spec]
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot(
@@ -63,9 +51,8 @@ class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomat
     automations_file_path: Required[Annotated[str, PropertyInfo(alias="automationsFilePath")]]
     """
     automations_file_path is the path to the automations file that is applied in the
-    environment,
-
-    relative to the repo root. path must not be absolute (start with a /):
+    environment, relative to the repo root. path must not be absolute (start with a
+    /):
 
     ```
     this.matches('^$|^[^/].*')
@@ -125,9 +112,8 @@ class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInit
     TypedDict, total=False
 ):
     checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
-    """a path relative to the environment root in which the code will be checked out
-
-    to
+    """
+    a path relative to the environment root in which the code will be checked out to
     """
 
     clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]

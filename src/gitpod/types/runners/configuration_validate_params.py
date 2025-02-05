@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union, Iterable
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Required, Annotated, TypeAlias, TypedDict
 
 from ..._types import Base64FileInput
 from ..._utils import PropertyInfo
@@ -25,13 +25,7 @@ __all__ = [
 class Variant0(TypedDict, total=False):
     environment_class: Required[Annotated[Variant0EnvironmentClass, PropertyInfo(alias="environmentClass")]]
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Variant0EnvironmentClassConfiguration(TypedDict, total=False):
@@ -54,9 +48,9 @@ class Variant0EnvironmentClass(TypedDict, total=False):
     """display_name is the human readable name of the environment class"""
 
     enabled: bool
-    """enabled indicates whether the environment class can be used to create
-
-    new environments.
+    """
+    enabled indicates whether the environment class can be used to create new
+    environments.
     """
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
@@ -69,22 +63,16 @@ class Variant0EnvironmentClass(TypedDict, total=False):
 class Variant1(TypedDict, total=False):
     scm_integration: Required[Annotated[Variant1ScmIntegration, PropertyInfo(alias="scmIntegration")]]
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet(
     TypedDict, total=False
 ):
     oauth_client_id: Required[Annotated[str, PropertyInfo(alias="oauthClientId")]]
-    """oauth_client_id is the OAuth app's client ID, if OAuth is configured.
-
-    If configured, oauth_client_secret must also be set.
+    """
+    oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
+    configured, oauth_client_secret must also be set.
     """
 
 
@@ -96,10 +84,8 @@ class Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecret
     ]
     """
     oauth_encrypted_client_secret is the OAuth app's client secret encrypted with
-    the runner's public key,
-
-    if OAuth is configured. This can be used to e.g. validate an already encrypted
-    client secret of an existing SCM integration.
+    the runner's public key, if OAuth is configured. This can be used to e.g.
+    validate an already encrypted client secret of an existing SCM integration.
     """
 
 
@@ -115,11 +101,9 @@ class Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecret
     oauth_plaintext_client_secret: Required[Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]]
     """
     oauth_plaintext_client_secret is the OAuth app's client secret in clear text, if
-    OAuth is configured.
-
-    This can be set to validate any new client secret before it is encrypted and
-    stored. This value will not be stored and get encrypted with the runner's public
-    key before passing it to the runner.
+    OAuth is configured. This can be set to validate any new client secret before it
+    is encrypted and stored. This value will not be stored and get encrypted with
+    the runner's public key before passing it to the runner.
     """
 
 

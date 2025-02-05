@@ -37,12 +37,6 @@ class AutomationsFilePathIsThePathToTheAutomationsFileRelativeToTheRepoRoot(Type
     ```
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class DevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot(TypedDict, total=False):
     devcontainer_file_path: Required[Annotated[str, PropertyInfo(alias="devcontainerFilePath")]]
@@ -55,21 +49,9 @@ class DevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot(Ty
     ```
     """
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class Variant2(TypedDict, total=False):
     environment_class: Required[Annotated[Variant2EnvironmentClass, PropertyInfo(alias="environmentClass")]]
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Variant2EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(
@@ -97,12 +79,6 @@ class InitializerIsTheContentInitializer(TypedDict, total=False):
     initializer: Required[InitializerIsTheContentInitializerInitializer]
     """EnvironmentInitializer specifies how an environment is to be initialized"""
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class InitializerIsTheContentInitializerInitializerSpecContextURLContextURL(TypedDict, total=False):
     url: str
@@ -119,9 +95,8 @@ class InitializerIsTheContentInitializerInitializerSpecContextURL(TypedDict, tot
 
 class InitializerIsTheContentInitializerInitializerSpecGitGit(TypedDict, total=False):
     checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
-    """a path relative to the environment root in which the code will be checked out
-
-    to
+    """
+    a path relative to the environment root in which the code will be checked out to
     """
 
     clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
@@ -161,12 +136,6 @@ class InitializerIsTheContentInitializerInitializer(TypedDict, total=False):
 
 class Variant4(TypedDict, total=False):
     name: Required[str]
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 ProjectUpdateParams: TypeAlias = Union[

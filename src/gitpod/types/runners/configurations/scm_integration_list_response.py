@@ -41,9 +41,9 @@ class Integration(BaseModel):
 
 class Pagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results. Empty if there are no
+    """Token passed for retreiving the next set of results.
 
-    more results
+    Empty if there are no more results
     """
 
 

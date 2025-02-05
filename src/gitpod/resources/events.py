@@ -2,17 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing_extensions import overload
 
 import httpx
 
 from ..types import event_list_params, event_watch_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
-    is_given,
     required_args,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -23,7 +21,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from .._base_client import AsyncPaginator, make_request_options
 from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 from ..types.event_list_response import EventListResponse
 from ..types.event_watch_response import EventWatchResponse
@@ -54,37 +53,23 @@ class EventsResource(SyncAPIResource):
     def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: event_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: event_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventListResponse:
+    ) -> SyncPersonalAccessTokensPage[EventListResponse]:
         """
         ListAuditLogs retrieves a paginated list of audit logs for the specified
         organization
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
 
@@ -94,17 +79,16 @@ class EventsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._get(
+        return self._get_api_list(
             "/gitpod.v1.EventService/ListAuditLogs",
+            page=SyncPersonalAccessTokensPage[EventListResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                event_list_params.EventListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -112,16 +96,14 @@ class EventsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     event_list_params.EventListParams,
                 ),
             ),
-            cast_to=EventListResponse,
+            model=EventListResponse,
+            method="post",
         )
 
     @overload
@@ -129,8 +111,6 @@ class EventsResource(SyncAPIResource):
         self,
         *,
         environment_id: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -143,13 +123,7 @@ class EventsResource(SyncAPIResource):
 
         Args:
           environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+              executions, and services associated with that environment.
 
           extra_headers: Send extra headers
 
@@ -166,8 +140,6 @@ class EventsResource(SyncAPIResource):
         self,
         *,
         organization: bool,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -180,13 +152,8 @@ class EventsResource(SyncAPIResource):
 
         Args:
           organization: Organization scope produces events for all projects, runners and environments
-
               the caller can see within their organization. No task, task execution or service
               events are produed.
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -198,13 +165,11 @@ class EventsResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["environment_id", "connect_protocol_version"], ["organization", "connect_protocol_version"])
+    @required_args(["environment_id"], ["organization"])
     def watch(
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         organization: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -214,15 +179,6 @@ class EventsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> JSONLDecoder[EventWatchResponse]:
         extra_headers = {"Accept": "application/jsonl", **(extra_headers or {})}
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.EventService/WatchEvents",
             body=maybe_transform(
@@ -260,40 +216,26 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         return AsyncEventsResourceWithStreamingResponse(self)
 
-    async def list(
+    def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: event_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: event_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> EventListResponse:
+    ) -> AsyncPaginator[EventListResponse, AsyncPersonalAccessTokensPage[EventListResponse]]:
         """
         ListAuditLogs retrieves a paginated list of audit logs for the specified
         organization
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
 
@@ -303,34 +245,31 @@ class AsyncEventsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._get(
+        return self._get_api_list(
             "/gitpod.v1.EventService/ListAuditLogs",
+            page=AsyncPersonalAccessTokensPage[EventListResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                event_list_params.EventListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     event_list_params.EventListParams,
                 ),
             ),
-            cast_to=EventListResponse,
+            model=EventListResponse,
+            method="post",
         )
 
     @overload
@@ -338,8 +277,6 @@ class AsyncEventsResource(AsyncAPIResource):
         self,
         *,
         environment_id: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -352,13 +289,7 @@ class AsyncEventsResource(AsyncAPIResource):
 
         Args:
           environment_id: Environment scope produces events for the environment itself, all tasks, task
-              executions,
-
-              and services associated with that environment.
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+              executions, and services associated with that environment.
 
           extra_headers: Send extra headers
 
@@ -375,8 +306,6 @@ class AsyncEventsResource(AsyncAPIResource):
         self,
         *,
         organization: bool,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -389,13 +318,8 @@ class AsyncEventsResource(AsyncAPIResource):
 
         Args:
           organization: Organization scope produces events for all projects, runners and environments
-
               the caller can see within their organization. No task, task execution or service
               events are produed.
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -407,13 +331,11 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["environment_id", "connect_protocol_version"], ["organization", "connect_protocol_version"])
+    @required_args(["environment_id"], ["organization"])
     async def watch(
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         organization: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -423,15 +345,6 @@ class AsyncEventsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncJSONLDecoder[EventWatchResponse]:
         extra_headers = {"Accept": "application/jsonl", **(extra_headers or {})}
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.EventService/WatchEvents",
             body=await async_maybe_transform(

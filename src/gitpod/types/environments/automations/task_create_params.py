@@ -23,9 +23,6 @@ __all__ = [
 
 
 class TaskCreateParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     depends_on: Annotated[List[str], PropertyInfo(alias="dependsOn")]
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
@@ -33,9 +30,6 @@ class TaskCreateParams(TypedDict, total=False):
     metadata: Metadata
 
     spec: Spec
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class MetadataCreator(TypedDict, total=False):
@@ -72,8 +66,8 @@ MetadataTriggeredBy: TypeAlias = Union[
 
 class Metadata(TypedDict, total=False):
     created_at: Annotated[Union[str, datetime], PropertyInfo(alias="createdAt", format="iso8601")]
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -176,18 +170,14 @@ class Metadata(TypedDict, total=False):
     """name is a user-facing name for the task.
 
     Unlike the reference, this field is not unique, and not referenced by the
-    system.
-
-    This is a short descriptive name for the task.
+    system. This is a short descriptive name for the task.
     """
 
     reference: str
     """
     reference is a user-facing identifier for the task which must be unique on the
-    environment.
-
-    It is used to express dependencies between tasks, and to identify the task in
-    user interactions (e.g. the CLI).
+    environment. It is used to express dependencies between tasks, and to identify
+    the task in user interactions (e.g. the CLI).
     """
 
     triggered_by: Annotated[Iterable[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]

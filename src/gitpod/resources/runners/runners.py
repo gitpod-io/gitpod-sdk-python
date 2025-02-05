@@ -18,10 +18,8 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    is_given,
     required_args,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from .policies import (
@@ -40,7 +38,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
+from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ..._base_client import AsyncPaginator, make_request_options
 from ...types.runner_list_response import RunnerListResponse
 from .configurations.configurations import (
     ConfigurationsResource,
@@ -90,7 +89,6 @@ class RunnersResource(SyncAPIResource):
     def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         kind: Literal[
             "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
         ]
@@ -104,7 +102,6 @@ class RunnersResource(SyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -115,13 +112,10 @@ class RunnersResource(SyncAPIResource):
         """CreateRunner creates a new runner with the server.
 
         Registrations are very
-
         short-lived and must be renewed every 30 seconds. Runners can be registered for
         an entire organisation or a single user.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           kind: RunnerKind represents the kind of a runner
 
           name: The runner name for humans
@@ -129,8 +123,6 @@ class RunnersResource(SyncAPIResource):
           provider: RunnerProvider identifies the specific implementation type of a runner. Each
               provider maps to a specific kind of runner (local or remote), as specified below
               for each provider.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -140,15 +132,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/CreateRunner",
             body=maybe_transform(
@@ -169,9 +152,7 @@ class RunnersResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -183,10 +164,6 @@ class RunnersResource(SyncAPIResource):
         GetRunner returns a single runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -195,15 +172,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/GetRunner",
             body=maybe_transform({"runner_id": runner_id}, runner_retrieve_params.RunnerRetrieveParams),
@@ -218,8 +186,6 @@ class RunnersResource(SyncAPIResource):
         self,
         *,
         name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -232,10 +198,6 @@ class RunnersResource(SyncAPIResource):
 
         Args:
           name: The runner's name which is shown to users
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -252,8 +214,6 @@ class RunnersResource(SyncAPIResource):
         self,
         *,
         spec: runner_update_params.Variant1Spec,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -265,10 +225,6 @@ class RunnersResource(SyncAPIResource):
         UpdateRunner updates an environment runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -279,13 +235,11 @@ class RunnersResource(SyncAPIResource):
         """
         ...
 
-    @required_args(["name", "connect_protocol_version"], ["spec", "connect_protocol_version"])
+    @required_args(["name"], ["spec"])
     def update(
         self,
         *,
         name: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -294,15 +248,6 @@ class RunnersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
             body=maybe_transform(
@@ -321,36 +266,22 @@ class RunnersResource(SyncAPIResource):
     def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: runner_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: runner_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RunnerListResponse:
+    ) -> SyncPersonalAccessTokensPage[RunnerListResponse]:
         """
         ListRunners returns all runners registered in the scope.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing runners
 
           extra_headers: Send extra headers
 
@@ -360,17 +291,16 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._get(
+        return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
+            page=SyncPersonalAccessTokensPage[RunnerListResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                runner_list_params.RunnerListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -378,25 +308,21 @@ class RunnersResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     runner_list_params.RunnerListParams,
                 ),
             ),
-            cast_to=RunnerListResponse,
+            model=RunnerListResponse,
+            method="post",
         )
 
     def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         force: bool | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -408,14 +334,10 @@ class RunnersResource(SyncAPIResource):
         DeleteRunner deletes an environment runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           force: force indicates whether the runner should be deleted forcefully. When force
               deleting a Runner, all Environments on the runner are also force deleted and
               regular Runner lifecycle is not respected. Force deleting can result in data
               loss.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -425,15 +347,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/DeleteRunner",
             body=maybe_transform(
@@ -452,10 +365,8 @@ class RunnersResource(SyncAPIResource):
     def check_authentication_for_host(
         self,
         *,
-        connect_protocol_version: Literal[1],
         host: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -465,16 +376,11 @@ class RunnersResource(SyncAPIResource):
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         CheckAuthenticationForHost asks a runner if the user is authenticated against a
-        particular host, e.g. an SCM system.
-
-        If not, this function will return a URL that the user should visit to
-        authenticate, or indicate that Personal Access Tokens are supported.
+        particular host, e.g. an SCM system. If not, this function will return a URL
+        that the user should visit to authenticate, or indicate that Personal Access
+        Tokens are supported.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -483,15 +389,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/CheckAuthenticationForHost",
             body=maybe_transform(
@@ -510,9 +407,7 @@ class RunnersResource(SyncAPIResource):
     def create_runner_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -520,17 +415,13 @@ class RunnersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerCreateRunnerTokenResponse:
-        """
-        CreateRunnerToken returns a token that can be used to authenticate as the
+        """CreateRunnerToken returns a token that can be used to authenticate as the
+        runner.
 
-        runner. Use this call to renew an outdated token - this does not expire any
+        Use this call to renew an outdated token - this does not expire any
         previouly issued tokens.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -539,15 +430,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/CreateRunnerToken",
             body=maybe_transform(
@@ -562,10 +444,8 @@ class RunnersResource(SyncAPIResource):
     def parse_context_url(
         self,
         *,
-        connect_protocol_version: Literal[1],
         context_url: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -588,10 +468,6 @@ class RunnersResource(SyncAPIResource):
           exist
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -600,15 +476,6 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerService/ParseContextURL",
             body=maybe_transform(
@@ -656,7 +523,6 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        connect_protocol_version: Literal[1],
         kind: Literal[
             "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
         ]
@@ -670,7 +536,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         ]
         | NotGiven = NOT_GIVEN,
         spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -681,13 +546,10 @@ class AsyncRunnersResource(AsyncAPIResource):
         """CreateRunner creates a new runner with the server.
 
         Registrations are very
-
         short-lived and must be renewed every 30 seconds. Runners can be registered for
         an entire organisation or a single user.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           kind: RunnerKind represents the kind of a runner
 
           name: The runner name for humans
@@ -695,8 +557,6 @@ class AsyncRunnersResource(AsyncAPIResource):
           provider: RunnerProvider identifies the specific implementation type of a runner. Each
               provider maps to a specific kind of runner (local or remote), as specified below
               for each provider.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -706,15 +566,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/CreateRunner",
             body=await async_maybe_transform(
@@ -735,9 +586,7 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -749,10 +598,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         GetRunner returns a single runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -761,15 +606,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/GetRunner",
             body=await async_maybe_transform({"runner_id": runner_id}, runner_retrieve_params.RunnerRetrieveParams),
@@ -784,8 +620,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -798,10 +632,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
         Args:
           name: The runner's name which is shown to users
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -818,8 +648,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         self,
         *,
         spec: runner_update_params.Variant1Spec,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -831,10 +659,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         UpdateRunner updates an environment runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -845,13 +669,11 @@ class AsyncRunnersResource(AsyncAPIResource):
         """
         ...
 
-    @required_args(["name", "connect_protocol_version"], ["spec", "connect_protocol_version"])
+    @required_args(["name"], ["spec"])
     async def update(
         self,
         *,
         name: str | NotGiven = NOT_GIVEN,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -860,15 +682,6 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
             body=await async_maybe_transform(
@@ -884,39 +697,25 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    async def list(
+    def list(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: runner_list_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: runner_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RunnerListResponse:
+    ) -> AsyncPaginator[RunnerListResponse, AsyncPersonalAccessTokensPage[RunnerListResponse]]:
         """
         ListRunners returns all runners registered in the scope.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
-
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing runners
 
           extra_headers: Send extra headers
 
@@ -926,43 +725,38 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._get(
+        return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
+            page=AsyncPersonalAccessTokensPage[RunnerListResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                runner_list_params.RunnerListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     runner_list_params.RunnerListParams,
                 ),
             ),
-            cast_to=RunnerListResponse,
+            model=RunnerListResponse,
+            method="post",
         )
 
     async def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         force: bool | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -974,14 +768,10 @@ class AsyncRunnersResource(AsyncAPIResource):
         DeleteRunner deletes an environment runner.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           force: force indicates whether the runner should be deleted forcefully. When force
               deleting a Runner, all Environments on the runner are also force deleted and
               regular Runner lifecycle is not respected. Force deleting can result in data
               loss.
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -991,15 +781,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/DeleteRunner",
             body=await async_maybe_transform(
@@ -1018,10 +799,8 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def check_authentication_for_host(
         self,
         *,
-        connect_protocol_version: Literal[1],
         host: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1031,16 +810,11 @@ class AsyncRunnersResource(AsyncAPIResource):
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         CheckAuthenticationForHost asks a runner if the user is authenticated against a
-        particular host, e.g. an SCM system.
-
-        If not, this function will return a URL that the user should visit to
-        authenticate, or indicate that Personal Access Tokens are supported.
+        particular host, e.g. an SCM system. If not, this function will return a URL
+        that the user should visit to authenticate, or indicate that Personal Access
+        Tokens are supported.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1049,15 +823,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/CheckAuthenticationForHost",
             body=await async_maybe_transform(
@@ -1076,9 +841,7 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def create_runner_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1086,17 +849,13 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> RunnerCreateRunnerTokenResponse:
-        """
-        CreateRunnerToken returns a token that can be used to authenticate as the
+        """CreateRunnerToken returns a token that can be used to authenticate as the
+        runner.
 
-        runner. Use this call to renew an outdated token - this does not expire any
+        Use this call to renew an outdated token - this does not expire any
         previouly issued tokens.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1105,15 +864,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/CreateRunnerToken",
             body=await async_maybe_transform(
@@ -1128,10 +878,8 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def parse_context_url(
         self,
         *,
-        connect_protocol_version: Literal[1],
         context_url: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1154,10 +902,6 @@ class AsyncRunnersResource(AsyncAPIResource):
           exist
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1166,15 +910,6 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerService/ParseContextURL",
             body=await async_maybe_transform(
