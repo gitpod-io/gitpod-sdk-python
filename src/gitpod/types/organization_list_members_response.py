@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,10 +8,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["OrganizationListMembersResponse", "Member", "Pagination"]
+__all__ = ["OrganizationListMembersResponse"]
 
 
-class Member(BaseModel):
+class OrganizationListMembersResponse(BaseModel):
     avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
 
     email: Optional[str] = None
@@ -122,19 +122,3 @@ class Member(BaseModel):
     ] = None
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class OrganizationListMembersResponse(BaseModel):
-    members: Optional[List[Member]] = None
-    """members are the members of the organization"""
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing members"""

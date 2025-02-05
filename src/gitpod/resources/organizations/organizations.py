@@ -39,7 +39,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ...pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from .sso_configurations import (
     SSOConfigurationsResource,
@@ -270,7 +270,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[OrganizationListResponse]:
+    ) -> SyncOrganizationsPage[OrganizationListResponse]:
         """
         ListOrganizations lists all organization the caller has access to.
 
@@ -289,7 +289,7 @@ class OrganizationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=SyncPersonalAccessTokensPage[OrganizationListResponse],
+            page=SyncOrganizationsPage[OrganizationListResponse],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -479,7 +479,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[OrganizationListMembersResponse]:
+    ) -> SyncMembersPage[OrganizationListMembersResponse]:
         """
         ListMembers lists all members of the specified organization.
 
@@ -498,7 +498,7 @@ class OrganizationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListMembers",
-            page=SyncPersonalAccessTokensPage[OrganizationListMembersResponse],
+            page=SyncMembersPage[OrganizationListMembersResponse],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -777,7 +777,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[OrganizationListResponse, AsyncPersonalAccessTokensPage[OrganizationListResponse]]:
+    ) -> AsyncPaginator[OrganizationListResponse, AsyncOrganizationsPage[OrganizationListResponse]]:
         """
         ListOrganizations lists all organization the caller has access to.
 
@@ -796,7 +796,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=AsyncPersonalAccessTokensPage[OrganizationListResponse],
+            page=AsyncOrganizationsPage[OrganizationListResponse],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -986,9 +986,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[
-        OrganizationListMembersResponse, AsyncPersonalAccessTokensPage[OrganizationListMembersResponse]
-    ]:
+    ) -> AsyncPaginator[OrganizationListMembersResponse, AsyncMembersPage[OrganizationListMembersResponse]]:
         """
         ListMembers lists all members of the specified organization.
 
@@ -1007,7 +1005,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListMembers",
-            page=AsyncPersonalAccessTokensPage[OrganizationListMembersResponse],
+            page=AsyncMembersPage[OrganizationListMembersResponse],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,

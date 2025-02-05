@@ -17,7 +17,7 @@ from gitpod.types import (
     RunnerCreateRunnerTokenResponse,
     RunnerCheckAuthenticationForHostResponse,
 )
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -164,7 +164,7 @@ class TestRunners:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         runner = client.runners.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -181,7 +181,7 @@ class TestRunners:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -190,7 +190,7 @@ class TestRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -199,7 +199,7 @@ class TestRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+            assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -477,7 +477,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -494,7 +494,7 @@ class TestAsyncRunners:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -503,7 +503,7 @@ class TestAsyncRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -512,7 +512,7 @@ class TestAsyncRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[RunnerListResponse], runner, path=["response"])
+            assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

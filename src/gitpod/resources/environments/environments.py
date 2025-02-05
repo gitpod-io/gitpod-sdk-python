@@ -40,7 +40,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ...pagination import SyncEnvironmentsPage, AsyncEnvironmentsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from .automations.automations import (
     AutomationsResource,
@@ -255,7 +255,7 @@ class EnvironmentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[EnvironmentListResponse]:
+    ) -> SyncEnvironmentsPage[EnvironmentListResponse]:
         """
         ListEnvironments returns a list of environments that match the query.
 
@@ -274,7 +274,7 @@ class EnvironmentsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
-            page=SyncPersonalAccessTokensPage[EnvironmentListResponse],
+            page=SyncEnvironmentsPage[EnvironmentListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -746,7 +746,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EnvironmentListResponse, AsyncPersonalAccessTokensPage[EnvironmentListResponse]]:
+    ) -> AsyncPaginator[EnvironmentListResponse, AsyncEnvironmentsPage[EnvironmentListResponse]]:
         """
         ListEnvironments returns a list of environments that match the query.
 
@@ -765,7 +765,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
-            page=AsyncPersonalAccessTokensPage[EnvironmentListResponse],
+            page=AsyncEnvironmentsPage[EnvironmentListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

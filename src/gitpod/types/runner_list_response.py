@@ -8,27 +8,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = [
-    "RunnerListResponse",
-    "Pagination",
-    "Runner",
-    "RunnerCreator",
-    "RunnerSpec",
-    "RunnerSpecConfiguration",
-    "RunnerStatus",
-    "RunnerStatusAdditionalInfo",
-]
+__all__ = ["RunnerListResponse", "Creator", "Spec", "SpecConfiguration", "Status", "StatusAdditionalInfo"]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class RunnerCreator(BaseModel):
+class Creator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -45,7 +28,7 @@ class RunnerCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class RunnerSpecConfiguration(BaseModel):
+class SpecConfiguration(BaseModel):
     auto_update: Optional[bool] = FieldInfo(alias="autoUpdate", default=None)
     """auto_update indicates whether the runner should automatically update itself."""
 
@@ -62,8 +45,8 @@ class RunnerSpecConfiguration(BaseModel):
     """The release channel the runner is on"""
 
 
-class RunnerSpec(BaseModel):
-    configuration: Optional[RunnerSpecConfiguration] = None
+class Spec(BaseModel):
+    configuration: Optional[SpecConfiguration] = None
     """The runner's configuration"""
 
     desired_phase: Optional[
@@ -80,14 +63,14 @@ class RunnerSpec(BaseModel):
     """RunnerPhase represents the phase a runner is in"""
 
 
-class RunnerStatusAdditionalInfo(BaseModel):
+class StatusAdditionalInfo(BaseModel):
     key: Optional[str] = None
 
     value: Optional[str] = None
 
 
-class RunnerStatus(BaseModel):
-    additional_info: Optional[List[RunnerStatusAdditionalInfo]] = FieldInfo(alias="additionalInfo", default=None)
+class Status(BaseModel):
+    additional_info: Optional[List[StatusAdditionalInfo]] = FieldInfo(alias="additionalInfo", default=None)
     """additional_info contains additional information about the runner, e.g.
 
     a CloudFormation stack URL.
@@ -219,7 +202,7 @@ class RunnerStatus(BaseModel):
     version: Optional[str] = None
 
 
-class Runner(BaseModel):
+class RunnerListResponse(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -312,7 +295,7 @@ class Runner(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[RunnerCreator] = None
+    creator: Optional[Creator] = None
     """creator is the identity of the creator of the environment"""
 
     kind: Optional[
@@ -339,10 +322,10 @@ class Runner(BaseModel):
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
 
-    spec: Optional[RunnerSpec] = None
+    spec: Optional[Spec] = None
     """The runner's specification"""
 
-    status: Optional[RunnerStatus] = None
+    status: Optional[Status] = None
     """RunnerStatus represents the status of a runner"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
@@ -436,11 +419,3 @@ class Runner(BaseModel):
     [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
     to obtain a formatter capable of generating timestamps in this format.
     """
-
-
-class RunnerListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing runners"""
-
-    runners: Optional[List[Runner]] = None
-    """The runners registered in the scope"""

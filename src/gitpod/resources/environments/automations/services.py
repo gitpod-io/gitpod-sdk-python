@@ -17,7 +17,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ....pagination import SyncServicesPage, AsyncServicesPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.environments.automations import (
     service_list_params,
@@ -192,7 +192,7 @@ class ServicesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[ServiceListResponse]:
+    ) -> SyncServicesPage[ServiceListResponse]:
         """
         ListServices
 
@@ -211,7 +211,7 @@ class ServicesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
-            page=SyncPersonalAccessTokensPage[ServiceListResponse],
+            page=SyncServicesPage[ServiceListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -505,7 +505,7 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ServiceListResponse, AsyncPersonalAccessTokensPage[ServiceListResponse]]:
+    ) -> AsyncPaginator[ServiceListResponse, AsyncServicesPage[ServiceListResponse]]:
         """
         ListServices
 
@@ -524,7 +524,7 @@ class AsyncServicesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
-            page=AsyncPersonalAccessTokensPage[ServiceListResponse],
+            page=AsyncServicesPage[ServiceListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

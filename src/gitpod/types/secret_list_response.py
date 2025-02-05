@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
@@ -10,24 +10,14 @@ from .._models import BaseModel
 
 __all__ = [
     "SecretListResponse",
-    "Pagination",
-    "Secret",
-    "SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret",
-    "SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator",
-    "SecretAbsolutePathToTheFileWhereTheSecretIsMounted",
-    "SecretAbsolutePathToTheFileWhereTheSecretIsMountedCreator",
+    "SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret",
+    "SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator",
+    "AbsolutePathToTheFileWhereTheSecretIsMounted",
+    "AbsolutePathToTheFileWhereTheSecretIsMountedCreator",
 ]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator(BaseModel):
+class SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -44,7 +34,7 @@ class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret
     """Principal is the principal of the subject"""
 
 
-class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret(BaseModel):
+class SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret(BaseModel):
     environment_variable: bool = FieldInfo(alias="environmentVariable")
     """
     secret will be created as an Environment Variable with the same name as the
@@ -145,7 +135,7 @@ class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator] = None
+    creator: Optional[SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecretCreator] = None
     """creator is the identity of the creator of the secret"""
 
     name: Optional[str] = None
@@ -247,7 +237,7 @@ class SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret
     """
 
 
-class SecretAbsolutePathToTheFileWhereTheSecretIsMountedCreator(BaseModel):
+class AbsolutePathToTheFileWhereTheSecretIsMountedCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -264,7 +254,7 @@ class SecretAbsolutePathToTheFileWhereTheSecretIsMountedCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class SecretAbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
+class AbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
     file_path: str = FieldInfo(alias="filePath")
     """absolute path to the file where the secret is mounted"""
 
@@ -362,7 +352,7 @@ class SecretAbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[SecretAbsolutePathToTheFileWhereTheSecretIsMountedCreator] = None
+    creator: Optional[AbsolutePathToTheFileWhereTheSecretIsMountedCreator] = None
     """creator is the identity of the creator of the secret"""
 
     name: Optional[str] = None
@@ -464,14 +454,6 @@ class SecretAbsolutePathToTheFileWhereTheSecretIsMounted(BaseModel):
     """
 
 
-Secret: TypeAlias = Union[
-    SecretSecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret,
-    SecretAbsolutePathToTheFileWhereTheSecretIsMounted,
+SecretListResponse: TypeAlias = Union[
+    SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret, AbsolutePathToTheFileWhereTheSecretIsMounted
 ]
-
-
-class SecretListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing secrets"""
-
-    secrets: Optional[List[Secret]] = None

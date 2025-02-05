@@ -20,8 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
-from ..._base_client import AsyncPaginator, make_request_options
+from ..._base_client import make_request_options
 from ...types.organizations import (
     sso_configuration_list_params,
     sso_configuration_create_params,
@@ -336,7 +335,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[SSOConfigurationListResponse]:
+    ) -> SSOConfigurationListResponse:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
@@ -351,9 +350,8 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return self._post(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
-            page=SyncPersonalAccessTokensPage[SSOConfigurationListResponse],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -374,8 +372,7 @@ class SSOConfigurationsResource(SyncAPIResource):
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            model=SSOConfigurationListResponse,
-            method="post",
+            cast_to=SSOConfigurationListResponse,
         )
 
     def delete(
@@ -701,7 +698,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    def list(
+    async def list(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
@@ -714,7 +711,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[SSOConfigurationListResponse, AsyncPersonalAccessTokensPage[SSOConfigurationListResponse]]:
+    ) -> SSOConfigurationListResponse:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
@@ -729,10 +726,9 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return await self._post(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
-            page=AsyncPersonalAccessTokensPage[SSOConfigurationListResponse],
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "organization_id": organization_id,
                     "pagination": pagination,
@@ -744,7 +740,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -752,8 +748,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            model=SSOConfigurationListResponse,
-            method="post",
+            cast_to=SSOConfigurationListResponse,
         )
 
     async def delete(

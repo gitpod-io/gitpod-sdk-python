@@ -21,7 +21,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ..pagination import SyncEntriesPage, AsyncEntriesPage
 from .._base_client import AsyncPaginator, make_request_options
 from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 from ..types.event_list_response import EventListResponse
@@ -63,7 +63,7 @@ class EventsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[EventListResponse]:
+    ) -> SyncEntriesPage[EventListResponse]:
         """
         ListAuditLogs retrieves a paginated list of audit logs for the specified
         organization
@@ -81,7 +81,7 @@ class EventsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EventService/ListAuditLogs",
-            page=SyncPersonalAccessTokensPage[EventListResponse],
+            page=SyncEntriesPage[EventListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -229,7 +229,7 @@ class AsyncEventsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EventListResponse, AsyncPersonalAccessTokensPage[EventListResponse]]:
+    ) -> AsyncPaginator[EventListResponse, AsyncEntriesPage[EventListResponse]]:
         """
         ListAuditLogs retrieves a paginated list of audit logs for the specified
         organization
@@ -247,7 +247,7 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EventService/ListAuditLogs",
-            page=AsyncPersonalAccessTokensPage[EventListResponse],
+            page=AsyncEntriesPage[EventListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

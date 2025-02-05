@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncServicesPage, AsyncServicesPage
 from gitpod.types.environments.automations import (
     ServiceListResponse,
     ServiceCreateResponse,
@@ -152,7 +152,7 @@ class TestServices:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         service = client.environments.automations.services.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -169,7 +169,7 @@ class TestServices:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -178,7 +178,7 @@ class TestServices:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         service = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -187,7 +187,7 @@ class TestServices:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             service = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+            assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -421,7 +421,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -438,7 +438,7 @@ class TestAsyncServices:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -447,7 +447,7 @@ class TestAsyncServices:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         service = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -456,7 +456,7 @@ class TestAsyncServices:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             service = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[ServiceListResponse], service, path=["response"])
+            assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

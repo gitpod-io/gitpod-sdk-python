@@ -19,7 +19,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ...pagination import SyncPoliciesPage, AsyncPoliciesPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.runners import policy_list_params, policy_create_params, policy_delete_params, policy_update_params
 from ...types.runners.policy_list_response import PolicyListResponse
@@ -152,7 +152,7 @@ class PoliciesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[PolicyListResponse]:
+    ) -> SyncPoliciesPage[PolicyListResponse]:
         """
         ListRunnerPolicies lists runner policies.
 
@@ -171,7 +171,7 @@ class PoliciesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunnerPolicies",
-            page=SyncPersonalAccessTokensPage[PolicyListResponse],
+            page=SyncPoliciesPage[PolicyListResponse],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -363,7 +363,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[PolicyListResponse, AsyncPersonalAccessTokensPage[PolicyListResponse]]:
+    ) -> AsyncPaginator[PolicyListResponse, AsyncPoliciesPage[PolicyListResponse]]:
         """
         ListRunnerPolicies lists runner policies.
 
@@ -382,7 +382,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunnerPolicies",
-            page=AsyncPersonalAccessTokensPage[PolicyListResponse],
+            page=AsyncPoliciesPage[PolicyListResponse],
             body=maybe_transform(
                 {
                     "pagination": pagination,

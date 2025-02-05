@@ -17,7 +17,7 @@ from gitpod.types import (
     OrganizationRetrieveResponse,
     OrganizationListMembersResponse,
 )
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -163,7 +163,7 @@ class TestOrganizations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         organization = client.organizations.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -176,7 +176,7 @@ class TestOrganizations:
             },
             scope="SCOPE_UNSPECIFIED",
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -185,7 +185,7 @@ class TestOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -194,7 +194,7 @@ class TestOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+            assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -327,9 +327,7 @@ class TestOrganizations:
     @parametrize
     def test_method_list_members(self, client: Gitpod) -> None:
         organization = client.organizations.list_members()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     def test_method_list_members_with_all_params(self, client: Gitpod) -> None:
@@ -342,9 +340,7 @@ class TestOrganizations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     def test_raw_response_list_members(self, client: Gitpod) -> None:
@@ -353,9 +349,7 @@ class TestOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = response.parse()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     def test_streaming_response_list_members(self, client: Gitpod) -> None:
@@ -364,9 +358,7 @@ class TestOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = response.parse()
-            assert_matches_type(
-                SyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-            )
+            assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -546,7 +538,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -559,7 +551,7 @@ class TestAsyncOrganizations:
             },
             scope="SCOPE_UNSPECIFIED",
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -568,7 +560,7 @@ class TestAsyncOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -577,9 +569,7 @@ class TestAsyncOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = await response.parse()
-            assert_matches_type(
-                AsyncPersonalAccessTokensPage[OrganizationListResponse], organization, path=["response"]
-            )
+            assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -712,9 +702,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list_members(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     async def test_method_list_members_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -727,9 +715,7 @@ class TestAsyncOrganizations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     async def test_raw_response_list_members(self, async_client: AsyncGitpod) -> None:
@@ -738,9 +724,7 @@ class TestAsyncOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = await response.parse()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-        )
+        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
     @parametrize
     async def test_streaming_response_list_members(self, async_client: AsyncGitpod) -> None:
@@ -749,9 +733,7 @@ class TestAsyncOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = await response.parse()
-            assert_matches_type(
-                AsyncPersonalAccessTokensPage[OrganizationListMembersResponse], organization, path=["response"]
-            )
+            assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

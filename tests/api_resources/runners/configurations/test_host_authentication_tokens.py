@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncTokensPage, AsyncTokensPage
 from gitpod.types.runners.configurations import (
     HostAuthenticationTokenListResponse,
     HostAuthenticationTokenCreateResponse,
@@ -190,9 +190,7 @@ class TestHostAuthenticationTokens:
     def test_method_list(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.list()
         assert_matches_type(
-            SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -207,9 +205,7 @@ class TestHostAuthenticationTokens:
             },
         )
         assert_matches_type(
-            SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -220,9 +216,7 @@ class TestHostAuthenticationTokens:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         host_authentication_token = response.parse()
         assert_matches_type(
-            SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -233,9 +227,7 @@ class TestHostAuthenticationTokens:
 
             host_authentication_token = response.parse()
             assert_matches_type(
-                SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-                host_authentication_token,
-                path=["response"],
+                SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
             )
 
         assert cast(Any, response.is_closed) is True
@@ -447,9 +439,7 @@ class TestAsyncHostAuthenticationTokens:
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.list()
         assert_matches_type(
-            AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -464,9 +454,7 @@ class TestAsyncHostAuthenticationTokens:
             },
         )
         assert_matches_type(
-            AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -477,9 +465,7 @@ class TestAsyncHostAuthenticationTokens:
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         host_authentication_token = await response.parse()
         assert_matches_type(
-            AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-            host_authentication_token,
-            path=["response"],
+            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
     @parametrize
@@ -492,9 +478,7 @@ class TestAsyncHostAuthenticationTokens:
 
             host_authentication_token = await response.parse()
             assert_matches_type(
-                AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
-                host_authentication_token,
-                path=["response"],
+                AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
             )
 
         assert cast(Any, response.is_closed) is True

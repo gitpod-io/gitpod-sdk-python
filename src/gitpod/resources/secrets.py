@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
 from typing_extensions import overload
 
 import httpx
@@ -27,7 +28,7 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ..pagination import SyncSecretsPage, AsyncSecretsPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.secret_list_response import SecretListResponse
 from ..types.secret_create_response import SecretCreateResponse
@@ -179,7 +180,7 @@ class SecretsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[SecretListResponse]:
+    ) -> SyncSecretsPage[SecretListResponse]:
         """
         ListSecrets lists secrets.
 
@@ -196,7 +197,7 @@ class SecretsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.SecretService/ListSecrets",
-            page=SyncPersonalAccessTokensPage[SecretListResponse],
+            page=SyncSecretsPage[SecretListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -217,7 +218,7 @@ class SecretsResource(SyncAPIResource):
                     secret_list_params.SecretListParams,
                 ),
             ),
-            model=SecretListResponse,
+            model=cast(Any, SecretListResponse),  # Union types cannot be passed in as arguments in the type system
             method="post",
         )
 
@@ -471,7 +472,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[SecretListResponse, AsyncPersonalAccessTokensPage[SecretListResponse]]:
+    ) -> AsyncPaginator[SecretListResponse, AsyncSecretsPage[SecretListResponse]]:
         """
         ListSecrets lists secrets.
 
@@ -488,7 +489,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.SecretService/ListSecrets",
-            page=AsyncPersonalAccessTokensPage[SecretListResponse],
+            page=AsyncSecretsPage[SecretListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -509,7 +510,7 @@ class AsyncSecretsResource(AsyncAPIResource):
                     secret_list_params.SecretListParams,
                 ),
             ),
-            model=SecretListResponse,
+            model=cast(Any, SecretListResponse),  # Union types cannot be passed in as arguments in the type system
             method="post",
         )
 

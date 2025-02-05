@@ -36,7 +36,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ...pagination import SyncProjectsPage, AsyncProjectsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.project_list_response import ProjectListResponse
 from ...types.project_create_response import ProjectCreateResponse
@@ -360,7 +360,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[ProjectListResponse]:
+    ) -> SyncProjectsPage[ProjectListResponse]:
         """
         ListProjects lists all projects the caller has access to.
 
@@ -377,7 +377,7 @@ class ProjectsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
-            page=SyncPersonalAccessTokensPage[ProjectListResponse],
+            page=SyncProjectsPage[ProjectListResponse],
             body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -785,7 +785,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ProjectListResponse, AsyncPersonalAccessTokensPage[ProjectListResponse]]:
+    ) -> AsyncPaginator[ProjectListResponse, AsyncProjectsPage[ProjectListResponse]]:
         """
         ListProjects lists all projects the caller has access to.
 
@@ -802,7 +802,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
-            page=AsyncPersonalAccessTokensPage[ProjectListResponse],
+            page=AsyncProjectsPage[ProjectListResponse],
             body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
             options=make_request_options(
                 extra_headers=extra_headers,

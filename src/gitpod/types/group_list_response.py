@@ -1,16 +1,16 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["GroupListResponse", "Group", "Pagination"]
+__all__ = ["GroupListResponse"]
 
 
-class Group(BaseModel):
+class GroupListResponse(BaseModel):
     id: Optional[str] = None
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
@@ -203,17 +203,3 @@ class Group(BaseModel):
     [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
     to obtain a formatter capable of generating timestamps in this format.
     """
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class GroupListResponse(BaseModel):
-    groups: Optional[List[Group]] = None
-
-    pagination: Optional[Pagination] = None

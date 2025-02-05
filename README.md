@@ -122,7 +122,7 @@ first_page = await client.environments.automations.services.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.pagination.personal_access_tokens)}")
+    print(f"number of items we just fetched: {len(next_page.services)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -133,8 +133,8 @@ Or just work directly with the returned data:
 first_page = await client.environments.automations.services.list()
 
 print(f"next page cursor: {first_page.pagination.next_token}")  # => "next page cursor: ..."
-for service in first_page.pagination.personal_access_tokens:
-    print(service.pagination)
+for service in first_page.services:
+    print(service.id)
 
 # Remove `await` for non-async usage.
 ```

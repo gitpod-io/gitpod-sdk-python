@@ -9,7 +9,6 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
 from gitpod.types.runners.configurations import (
     EnvironmentClassListResponse,
     EnvironmentClassCreateResponse,
@@ -190,9 +189,7 @@ class TestEnvironmentClasses:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         environment_class = client.runners.configurations.environment_classes.list()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -205,9 +202,7 @@ class TestEnvironmentClasses:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -216,9 +211,7 @@ class TestEnvironmentClasses:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment_class = response.parse()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -227,9 +220,7 @@ class TestEnvironmentClasses:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment_class = response.parse()
-            assert_matches_type(
-                SyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-            )
+            assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -407,9 +398,7 @@ class TestAsyncEnvironmentClasses:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runners.configurations.environment_classes.list()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -422,9 +411,7 @@ class TestAsyncEnvironmentClasses:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -433,9 +420,7 @@ class TestAsyncEnvironmentClasses:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment_class = await response.parse()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-        )
+        assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -444,8 +429,6 @@ class TestAsyncEnvironmentClasses:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment_class = await response.parse()
-            assert_matches_type(
-                AsyncPersonalAccessTokensPage[EnvironmentClassListResponse], environment_class, path=["response"]
-            )
+            assert_matches_type(EnvironmentClassListResponse, environment_class, path=["response"])
 
         assert cast(Any, response.is_closed) is True

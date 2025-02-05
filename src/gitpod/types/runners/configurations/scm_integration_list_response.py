@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["ScmIntegrationListResponse", "Integration", "IntegrationOAuth", "Pagination"]
+__all__ = ["ScmIntegrationListResponse", "OAuth"]
 
 
-class IntegrationOAuth(BaseModel):
+class OAuth(BaseModel):
     client_id: Optional[str] = FieldInfo(alias="clientId", default=None)
     """client_id is the OAuth app's client ID in clear text."""
 
@@ -20,8 +20,8 @@ class IntegrationOAuth(BaseModel):
     """
 
 
-class Integration(BaseModel):
-    oauth: IntegrationOAuth
+class ScmIntegrationListResponse(BaseModel):
+    oauth: OAuth
 
     id: Optional[str] = None
     """id is the unique identifier of the SCM integration"""
@@ -37,18 +37,3 @@ class Integration(BaseModel):
     scm_id references the scm_id in the runner's configuration schema that this
     integration is for
     """
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class ScmIntegrationListResponse(BaseModel):
-    integrations: Optional[List[Integration]] = None
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing scm integrations"""
