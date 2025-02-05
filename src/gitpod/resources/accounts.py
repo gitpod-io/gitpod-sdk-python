@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..types import (
@@ -14,9 +12,7 @@ from ..types import (
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -27,7 +23,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
+from ..pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from .._base_client import AsyncPaginator, make_request_options
 from ..types.account_retrieve_response import AccountRetrieveResponse
 from ..types.account_get_sso_login_url_response import AccountGetSSOLoginURLResponse
 from ..types.account_list_login_providers_response import AccountListLoginProvidersResponse
@@ -59,8 +56,6 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         body: object,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,10 +67,6 @@ class AccountsResource(SyncAPIResource):
         GetAccount retrieves a single Account.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -84,15 +75,6 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.AccountService/GetAccount",
             body=maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
@@ -105,9 +87,7 @@ class AccountsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         account_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -121,10 +101,6 @@ class AccountsResource(SyncAPIResource):
         an active member of any Organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -133,15 +109,6 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.AccountService/DeleteAccount",
             body=maybe_transform({"account_id": account_id}, account_delete_params.AccountDeleteParams),
@@ -155,9 +122,7 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         return_to: str,
-        connect_protocol_version: Literal[1],
         email: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,11 +136,7 @@ class AccountsResource(SyncAPIResource):
         Args:
           return_to: return_to is the URL the user will be redirected to after login
 
-          connect_protocol_version: Define the version of the Connect protocol
-
           email: email is the email the user wants to login with
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -185,15 +146,6 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.AccountService/GetSSOLoginURL",
             body=maybe_transform(
@@ -212,37 +164,25 @@ class AccountsResource(SyncAPIResource):
     def list_login_providers(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: account_list_login_providers_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: account_list_login_providers_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountListLoginProvidersResponse:
+    ) -> SyncPersonalAccessTokensPage[AccountListLoginProvidersResponse]:
         """
         ListLoginProviders returns the list of login providers matching the provided
         filters.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
+          filter: filter contains the filter options for listing login methods
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing login methods
 
           extra_headers: Send extra headers
 
@@ -252,17 +192,16 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return self._get(
+        return self._get_api_list(
             "/gitpod.v1.AccountService/ListLoginProviders",
+            page=SyncPersonalAccessTokensPage[AccountListLoginProvidersResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                account_list_login_providers_params.AccountListLoginProvidersParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -270,16 +209,14 @@ class AccountsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     account_list_login_providers_params.AccountListLoginProvidersParams,
                 ),
             ),
-            cast_to=AccountListLoginProvidersResponse,
+            model=AccountListLoginProvidersResponse,
+            method="post",
         )
 
 
@@ -307,8 +244,6 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         body: object,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -320,10 +255,6 @@ class AsyncAccountsResource(AsyncAPIResource):
         GetAccount retrieves a single Account.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -332,15 +263,6 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.AccountService/GetAccount",
             body=await async_maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
@@ -353,9 +275,7 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        connect_protocol_version: Literal[1],
         account_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -369,10 +289,6 @@ class AsyncAccountsResource(AsyncAPIResource):
         an active member of any Organization.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -381,15 +297,6 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.AccountService/DeleteAccount",
             body=await async_maybe_transform({"account_id": account_id}, account_delete_params.AccountDeleteParams),
@@ -403,9 +310,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         return_to: str,
-        connect_protocol_version: Literal[1],
         email: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -419,11 +324,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         Args:
           return_to: return_to is the URL the user will be redirected to after login
 
-          connect_protocol_version: Define the version of the Connect protocol
-
           email: email is the email the user wants to login with
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -433,15 +334,6 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.AccountService/GetSSOLoginURL",
             body=await async_maybe_transform(
@@ -457,40 +349,30 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=AccountGetSSOLoginURLResponse,
         )
 
-    async def list_login_providers(
+    def list_login_providers(
         self,
         *,
-        encoding: Literal["proto", "json"],
-        connect_protocol_version: Literal[1],
-        base64: bool | NotGiven = NOT_GIVEN,
-        compression: Literal["identity", "gzip", "br"] | NotGiven = NOT_GIVEN,
-        connect: Literal["v1"] | NotGiven = NOT_GIVEN,
-        message: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        filter: account_list_login_providers_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: account_list_login_providers_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AccountListLoginProvidersResponse:
+    ) -> AsyncPaginator[
+        AccountListLoginProvidersResponse, AsyncPersonalAccessTokensPage[AccountListLoginProvidersResponse]
+    ]:
         """
         ListLoginProviders returns the list of login providers matching the provided
         filters.
 
         Args:
-          encoding: Define which encoding or 'Message-Codec' to use
+          filter: filter contains the filter options for listing login methods
 
-          connect_protocol_version: Define the version of the Connect protocol
-
-          base64: Specifies if the message query param is base64 encoded, which may be required
-              for binary data
-
-          compression: Which compression algorithm to use for this request
-
-          connect: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
+          pagination: pagination contains the pagination options for listing login methods
 
           extra_headers: Send extra headers
 
@@ -500,34 +382,31 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
-        return await self._get(
+        return self._get_api_list(
             "/gitpod.v1.AccountService/ListLoginProviders",
+            page=AsyncPersonalAccessTokensPage[AccountListLoginProvidersResponse],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                account_list_login_providers_params.AccountListLoginProvidersParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
-                        "encoding": encoding,
-                        "base64": base64,
-                        "compression": compression,
-                        "connect": connect,
-                        "message": message,
+                        "token": token,
+                        "page_size": page_size,
                     },
                     account_list_login_providers_params.AccountListLoginProvidersParams,
                 ),
             ),
-            cast_to=AccountListLoginProvidersResponse,
+            model=AccountListLoginProvidersResponse,
+            method="post",
         )
 
 

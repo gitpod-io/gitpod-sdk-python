@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -12,14 +12,11 @@ __all__ = ["HostAuthenticationTokenCreateParams"]
 
 
 class HostAuthenticationTokenCreateParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     token: str
 
     expires_at: Annotated[Union[str, datetime], PropertyInfo(alias="expiresAt", format="iso8601")]
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -122,6 +119,3 @@ class HostAuthenticationTokenCreateParams(TypedDict, total=False):
     ]
 
     user_id: Annotated[str, PropertyInfo(alias="userId")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""

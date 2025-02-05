@@ -21,43 +21,19 @@ class ClientIDIsTheClientIDOfTheSSOProvider(TypedDict, total=False):
     client_id: Required[Annotated[str, PropertyInfo(alias="clientId")]]
     """client_id is the client ID of the SSO provider"""
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class ClientSecretIsTheClientSecretOfTheSSOProvider(TypedDict, total=False):
     client_secret: Required[Annotated[str, PropertyInfo(alias="clientSecret")]]
     """client_secret is the client secret of the SSO provider"""
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
-
 
 class Variant2(TypedDict, total=False):
     email_domain: Required[Annotated[str, PropertyInfo(alias="emailDomain")]]
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class IssuerURLIsTheURLOfTheIDPIssuer(TypedDict, total=False):
     issuer_url: Required[Annotated[str, PropertyInfo(alias="issuerUrl")]]
     """issuer_url is the URL of the IdP issuer"""
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class StateIsTheStateOfTheSSOConfiguration(TypedDict, total=False):
@@ -67,12 +43,6 @@ class StateIsTheStateOfTheSSOConfiguration(TypedDict, total=False):
         ]
     ]
     """state is the state of the SSO configuration"""
-
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 SSOConfigurationUpdateParams: TypeAlias = Union[

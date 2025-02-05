@@ -9,6 +9,7 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
+from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
 from gitpod.types.users import PatGetResponse, PatListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -19,72 +20,57 @@ class TestPats:
 
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        pat = client.users.pats.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        pat = client.users.pats.list()
+        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.users.pats.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = client.users.pats.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         pat = response.parse()
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.users.pats.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        with client.users.pats.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             pat = response.parse()
-            assert_matches_type(PatListResponse, pat, path=["response"])
+            assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
-        pat = client.users.pats.delete(
-            connect_protocol_version=1,
-        )
+        pat = client.users.pats.delete()
         assert_matches_type(object, pat, path=["response"])
 
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.delete(
-            connect_protocol_version=1,
             personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, pat, path=["response"])
 
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
-        response = client.users.pats.with_raw_response.delete(
-            connect_protocol_version=1,
-        )
+        response = client.users.pats.with_raw_response.delete()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -93,9 +79,7 @@ class TestPats:
 
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
-        with client.users.pats.with_streaming_response.delete(
-            connect_protocol_version=1,
-        ) as response:
+        with client.users.pats.with_streaming_response.delete() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -106,25 +90,19 @@ class TestPats:
 
     @parametrize
     def test_method_get(self, client: Gitpod) -> None:
-        pat = client.users.pats.get(
-            connect_protocol_version=1,
-        )
+        pat = client.users.pats.get()
         assert_matches_type(PatGetResponse, pat, path=["response"])
 
     @parametrize
     def test_method_get_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.get(
-            connect_protocol_version=1,
             personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Gitpod) -> None:
-        response = client.users.pats.with_raw_response.get(
-            connect_protocol_version=1,
-        )
+        response = client.users.pats.with_raw_response.get()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -133,9 +111,7 @@ class TestPats:
 
     @parametrize
     def test_streaming_response_get(self, client: Gitpod) -> None:
-        with client.users.pats.with_streaming_response.get(
-            connect_protocol_version=1,
-        ) as response:
+        with client.users.pats.with_streaming_response.get() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -150,72 +126,57 @@ class TestAsyncPats:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        pat = await async_client.users.pats.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        pat = await async_client.users.pats.list()
+        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.users.pats.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = await async_client.users.pats.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         pat = await response.parse()
-        assert_matches_type(PatListResponse, pat, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.users.pats.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.users.pats.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             pat = await response.parse()
-            assert_matches_type(PatListResponse, pat, path=["response"])
+            assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
-        pat = await async_client.users.pats.delete(
-            connect_protocol_version=1,
-        )
+        pat = await async_client.users.pats.delete()
         assert_matches_type(object, pat, path=["response"])
 
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.delete(
-            connect_protocol_version=1,
             personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
         )
         assert_matches_type(object, pat, path=["response"])
 
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.users.pats.with_raw_response.delete(
-            connect_protocol_version=1,
-        )
+        response = await async_client.users.pats.with_raw_response.delete()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -224,9 +185,7 @@ class TestAsyncPats:
 
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
-        async with async_client.users.pats.with_streaming_response.delete(
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.users.pats.with_streaming_response.delete() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -237,25 +196,19 @@ class TestAsyncPats:
 
     @parametrize
     async def test_method_get(self, async_client: AsyncGitpod) -> None:
-        pat = await async_client.users.pats.get(
-            connect_protocol_version=1,
-        )
+        pat = await async_client.users.pats.get()
         assert_matches_type(PatGetResponse, pat, path=["response"])
 
     @parametrize
     async def test_method_get_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.get(
-            connect_protocol_version=1,
             personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            connect_timeout_ms=0,
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.users.pats.with_raw_response.get(
-            connect_protocol_version=1,
-        )
+        response = await async_client.users.pats.with_raw_response.get()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -264,9 +217,7 @@ class TestAsyncPats:
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGitpod) -> None:
-        async with async_client.users.pats.with_streaming_response.get(
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.users.pats.with_streaming_response.get() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

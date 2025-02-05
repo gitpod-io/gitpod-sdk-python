@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal
 
 import httpx
 
@@ -14,9 +13,7 @@ from ..types import (
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from .._compat import cached_property
@@ -58,9 +55,7 @@ class IdentityResource(SyncAPIResource):
     def exchange_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         exchange_token: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -72,11 +67,7 @@ class IdentityResource(SyncAPIResource):
         ExchangeToken trades an exchange token for a new access token.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           exchange_token: exchange_token is the token to exchange
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -86,15 +77,6 @@ class IdentityResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.IdentityService/ExchangeToken",
             body=maybe_transform(
@@ -110,8 +92,6 @@ class IdentityResource(SyncAPIResource):
         self,
         *,
         body: object,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,10 +103,6 @@ class IdentityResource(SyncAPIResource):
         GetAuthenticatedIdentity allows to retrieve the current identity.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -135,15 +111,6 @@ class IdentityResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
             body=maybe_transform(
@@ -158,9 +125,7 @@ class IdentityResource(SyncAPIResource):
     def get_id_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         audience: List[str] | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,10 +138,6 @@ class IdentityResource(SyncAPIResource):
         other services.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -185,15 +146,6 @@ class IdentityResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.IdentityService/GetIDToken",
             body=maybe_transform({"audience": audience}, identity_get_id_token_params.IdentityGetIDTokenParams),
@@ -227,9 +179,7 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def exchange_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         exchange_token: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -241,11 +191,7 @@ class AsyncIdentityResource(AsyncAPIResource):
         ExchangeToken trades an exchange token for a new access token.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
           exchange_token: exchange_token is the token to exchange
-
-          connect_timeout_ms: Define the timeout, in ms
 
           extra_headers: Send extra headers
 
@@ -255,15 +201,6 @@ class AsyncIdentityResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.IdentityService/ExchangeToken",
             body=await async_maybe_transform(
@@ -279,8 +216,6 @@ class AsyncIdentityResource(AsyncAPIResource):
         self,
         *,
         body: object,
-        connect_protocol_version: Literal[1],
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -292,10 +227,6 @@ class AsyncIdentityResource(AsyncAPIResource):
         GetAuthenticatedIdentity allows to retrieve the current identity.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -304,15 +235,6 @@ class AsyncIdentityResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
             body=await async_maybe_transform(
@@ -327,9 +249,7 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def get_id_token(
         self,
         *,
-        connect_protocol_version: Literal[1],
         audience: List[str] | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -342,10 +262,6 @@ class AsyncIdentityResource(AsyncAPIResource):
         other services.
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -354,15 +270,6 @@ class AsyncIdentityResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.IdentityService/GetIDToken",
             body=await async_maybe_transform(

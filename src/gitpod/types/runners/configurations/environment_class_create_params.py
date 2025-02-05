@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -11,9 +11,6 @@ __all__ = ["EnvironmentClassCreateParams", "Configuration"]
 
 
 class EnvironmentClassCreateParams(TypedDict, total=False):
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
-
     configuration: Iterable[Configuration]
 
     description: str
@@ -21,9 +18,6 @@ class EnvironmentClassCreateParams(TypedDict, total=False):
     display_name: Annotated[str, PropertyInfo(alias="displayName")]
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
 
 
 class Configuration(TypedDict, total=False):

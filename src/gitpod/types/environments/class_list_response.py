@@ -29,9 +29,9 @@ class EnvironmentClass(BaseModel):
     """display_name is the human readable name of the environment class"""
 
     enabled: Optional[bool] = None
-    """enabled indicates whether the environment class can be used to create
-
-    new environments.
+    """
+    enabled indicates whether the environment class can be used to create new
+    environments.
     """
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
@@ -43,9 +43,9 @@ class EnvironmentClass(BaseModel):
 
 class Pagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results. Empty if there are no
+    """Token passed for retreiving the next set of results.
 
-    more results
+    Empty if there are no more results
     """
 
 

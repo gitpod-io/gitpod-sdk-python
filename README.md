@@ -34,9 +34,7 @@ client = Gitpod(
     bearer_token=os.environ.get("GITPOD_API_KEY"),  # This is the default and can be omitted
 )
 
-runner = client.runners.create(
-    connect_protocol_version=1,
-)
+runner = client.runners.create()
 print(runner.access_token)
 ```
 
@@ -60,9 +58,7 @@ client = AsyncGitpod(
 
 
 async def main() -> None:
-    runner = await client.runners.create(
-        connect_protocol_version=1,
-    )
+    runner = await client.runners.create()
     print(runner.access_token)
 
 
@@ -96,9 +92,7 @@ from gitpod import Gitpod
 client = Gitpod()
 
 try:
-    client.runners.create(
-        connect_protocol_version=1,
-    )
+    client.runners.create()
 except gitpod.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -141,9 +135,7 @@ client = Gitpod(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).runners.create(
-    connect_protocol_version=1,
-)
+client.with_options(max_retries=5).runners.create()
 ```
 
 ### Timeouts
@@ -166,9 +158,7 @@ client = Gitpod(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).runners.create(
-    connect_protocol_version=1,
-)
+client.with_options(timeout=5.0).runners.create()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -209,9 +199,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gitpod import Gitpod
 
 client = Gitpod()
-response = client.runners.with_raw_response.create(
-    connect_protocol_version=1,
-)
+response = client.runners.with_raw_response.create()
 print(response.headers.get('X-My-Header'))
 
 runner = response.parse()  # get the object that `runners.create()` would have returned
@@ -229,9 +217,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.runners.with_streaming_response.create(
-    connect_protocol_version=1,
-) as response:
+with client.runners.with_streaming_response.create() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

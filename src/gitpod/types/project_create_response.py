@@ -59,9 +59,8 @@ class ProjectInitializerSpecContextURL(BaseModel):
 
 class ProjectInitializerSpecGitGit(BaseModel):
     checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
-    """a path relative to the environment root in which the code will be checked out
-
-    to
+    """
+    a path relative to the environment root in which the code will be checked out to
     """
 
     clone_target: Optional[str] = FieldInfo(alias="cloneTarget", default=None)
@@ -115,8 +114,8 @@ class ProjectMetadataCreator(BaseModel):
 
 class ProjectMetadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar
@@ -216,8 +215,8 @@ class ProjectMetadata(BaseModel):
     """organization_id is the ID of the organization that contains the environment"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """A Timestamp represents a point in time independent of any time zone or local
-
+    """
+    A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
     resolution. The count is relative to an epoch at UTC midnight on January 1,
     1970, in the proleptic Gregorian calendar which extends the Gregorian calendar

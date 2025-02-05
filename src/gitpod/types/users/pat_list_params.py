@@ -2,33 +2,41 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import List
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["PatListParams"]
+__all__ = ["PatListParams", "Filter", "Pagination"]
 
 
 class PatListParams(TypedDict, total=False):
-    encoding: Required[Literal["proto", "json"]]
-    """Define which encoding or 'Message-Codec' to use"""
+    token: str
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
+    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
-    base64: bool
+    filter: Filter
+
+    pagination: Pagination
+
+
+class Filter(TypedDict, total=False):
+    user_ids: Annotated[List[str], PropertyInfo(alias="userIds")]
     """
-    Specifies if the message query param is base64 encoded, which may be required
-    for binary data
+    creator_ids filters the response to only Environments created by specified
+    members
     """
 
-    compression: Literal["identity", "gzip", "br"]
-    """Which compression algorithm to use for this request"""
 
-    connect: Literal["v1"]
-    """Define the version of the Connect protocol"""
+class Pagination(TypedDict, total=False):
+    token: str
+    """
+    Token for the next set of results that was returned as next_token of a
+    PaginationResponse
+    """
 
-    message: str
+    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
+    """Page size is the maximum number of results to retrieve per page. Defaults to 25.
 
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
+    Maximum 100.
+    """

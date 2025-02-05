@@ -10,6 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import EventListResponse, EventWatchResponse
+from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
 from gitpod._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -20,48 +21,44 @@ class TestEvents:
 
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        event = client.events.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(EventListResponse, event, path=["response"])
+        event = client.events.list()
+        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         event = client.events.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            filter={
+                "actor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
+                "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
+            },
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(EventListResponse, event, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.events.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = client.events.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
-        assert_matches_type(EventListResponse, event, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.events.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        with client.events.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = response.parse()
-            assert_matches_type(EventListResponse, event, path=["response"])
+            assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -70,17 +67,6 @@ class TestEvents:
     def test_method_watch_overload_1(self, client: Gitpod) -> None:
         event = client.events.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
-
-    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
-    @parametrize
-    def test_method_watch_with_all_params_overload_1(self, client: Gitpod) -> None:
-        event = client.events.watch(
-            environment_id="environmentId",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
@@ -89,7 +75,6 @@ class TestEvents:
     def test_raw_response_watch_overload_1(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -102,7 +87,6 @@ class TestEvents:
     def test_streaming_response_watch_overload_1(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -117,17 +101,6 @@ class TestEvents:
     def test_method_watch_overload_2(self, client: Gitpod) -> None:
         event = client.events.watch(
             organization=True,
-            connect_protocol_version=1,
-        )
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
-
-    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
-    @parametrize
-    def test_method_watch_with_all_params_overload_2(self, client: Gitpod) -> None:
-        event = client.events.watch(
-            organization=True,
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
 
@@ -136,7 +109,6 @@ class TestEvents:
     def test_raw_response_watch_overload_2(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch(
             organization=True,
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -149,7 +121,6 @@ class TestEvents:
     def test_streaming_response_watch_overload_2(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch(
             organization=True,
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -165,48 +136,44 @@ class TestAsyncEvents:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        event = await async_client.events.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(EventListResponse, event, path=["response"])
+        event = await async_client.events.list()
+        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.list(
-            encoding="proto",
-            connect_protocol_version=1,
-            base64=True,
-            compression="identity",
-            connect="v1",
-            message="message",
-            connect_timeout_ms=0,
+            token="token",
+            page_size=0,
+            filter={
+                "actor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
+                "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
+            },
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
         )
-        assert_matches_type(EventListResponse, event, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.events.with_raw_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        )
+        response = await async_client.events.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = await response.parse()
-        assert_matches_type(EventListResponse, event, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.events.with_streaming_response.list(
-            encoding="proto",
-            connect_protocol_version=1,
-        ) as response:
+        async with async_client.events.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = await response.parse()
-            assert_matches_type(EventListResponse, event, path=["response"])
+            assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -215,17 +182,6 @@ class TestAsyncEvents:
     async def test_method_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
-        )
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
-
-    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
-    @parametrize
-    async def test_method_watch_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
-        event = await async_client.events.watch(
-            environment_id="environmentId",
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
@@ -234,7 +190,6 @@ class TestAsyncEvents:
     async def test_raw_response_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -247,7 +202,6 @@ class TestAsyncEvents:
     async def test_streaming_response_watch_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch(
             environment_id="environmentId",
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -262,17 +216,6 @@ class TestAsyncEvents:
     async def test_method_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.watch(
             organization=True,
-            connect_protocol_version=1,
-        )
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
-
-    @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
-    @parametrize
-    async def test_method_watch_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        event = await async_client.events.watch(
-            organization=True,
-            connect_protocol_version=1,
-            connect_timeout_ms=0,
         )
         assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
 
@@ -281,7 +224,6 @@ class TestAsyncEvents:
     async def test_raw_response_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch(
             organization=True,
-            connect_protocol_version=1,
         )
 
         assert response.is_closed is True
@@ -294,7 +236,6 @@ class TestAsyncEvents:
     async def test_streaming_response_watch_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch(
             organization=True,
-            connect_protocol_version=1,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

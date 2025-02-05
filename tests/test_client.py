@@ -790,7 +790,7 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(connect_protocol_version=1)
+        response = client.runners.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -814,9 +814,7 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -839,9 +837,7 @@ class TestGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1591,7 +1587,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(connect_protocol_version=1)
+        response = await client.runners.with_raw_response.create()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1616,9 +1612,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1642,9 +1636,7 @@ class TestAsyncGitpod:
 
         respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(
-            connect_protocol_version=1, extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

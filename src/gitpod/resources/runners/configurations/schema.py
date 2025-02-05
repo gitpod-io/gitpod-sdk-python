@@ -2,15 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    is_given,
     maybe_transform,
-    strip_not_given,
     async_maybe_transform,
 )
 from ...._compat import cached_property
@@ -51,9 +47,7 @@ class SchemaResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,10 +59,6 @@ class SchemaResource(SyncAPIResource):
         GetRunnerConfigurationSchema retrieves the latest Runner configuration schema
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -77,15 +67,6 @@ class SchemaResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/GetRunnerConfigurationSchema",
             body=maybe_transform({"runner_id": runner_id}, schema_retrieve_params.SchemaRetrieveParams),
@@ -119,9 +100,7 @@ class AsyncSchemaResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        connect_protocol_version: Literal[1],
         runner_id: str | NotGiven = NOT_GIVEN,
-        connect_timeout_ms: float | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -133,10 +112,6 @@ class AsyncSchemaResource(AsyncAPIResource):
         GetRunnerConfigurationSchema retrieves the latest Runner configuration schema
 
         Args:
-          connect_protocol_version: Define the version of the Connect protocol
-
-          connect_timeout_ms: Define the timeout, in ms
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -145,15 +120,6 @@ class AsyncSchemaResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        extra_headers = {
-            **strip_not_given(
-                {
-                    "Connect-Protocol-Version": str(connect_protocol_version),
-                    "Connect-Timeout-Ms": str(connect_timeout_ms) if is_given(connect_timeout_ms) else NOT_GIVEN,
-                }
-            ),
-            **(extra_headers or {}),
-        }
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/GetRunnerConfigurationSchema",
             body=await async_maybe_transform({"runner_id": runner_id}, schema_retrieve_params.SchemaRetrieveParams),

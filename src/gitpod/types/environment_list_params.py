@@ -2,33 +2,90 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import List
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EnvironmentListParams"]
+__all__ = ["EnvironmentListParams", "Filter", "Pagination"]
 
 
 class EnvironmentListParams(TypedDict, total=False):
-    encoding: Required[Literal["proto", "json"]]
-    """Define which encoding or 'Message-Codec' to use"""
+    token: str
 
-    connect_protocol_version: Required[Annotated[Literal[1], PropertyInfo(alias="Connect-Protocol-Version")]]
-    """Define the version of the Connect protocol"""
+    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
-    base64: bool
+    filter: Filter
+
+    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    """organization_id is the ID of the organization that contains the environments"""
+
+    pagination: Pagination
+    """pagination contains the pagination options for listing environments"""
+
+
+class Filter(TypedDict, total=False):
+    creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
     """
-    Specifies if the message query param is base64 encoded, which may be required
-    for binary data
+    creator_ids filters the response to only Environments created by specified
+    members
     """
 
-    compression: Literal["identity", "gzip", "br"]
-    """Which compression algorithm to use for this request"""
+    project_ids: Annotated[List[str], PropertyInfo(alias="projectIds")]
+    """
+    project_ids filters the response to only Environments associated with the
+    specified projects
+    """
 
-    connect: Literal["v1"]
-    """Define the version of the Connect protocol"""
+    runner_ids: Annotated[List[str], PropertyInfo(alias="runnerIds")]
+    """
+    runner_ids filters the response to only Environments running on these Runner IDs
+    """
 
-    message: str
+    runner_kinds: Annotated[
+        List[
+            Literal[
+                "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
+            ]
+        ],
+        PropertyInfo(alias="runnerKinds"),
+    ]
+    """
+    runner_kinds filters the response to only Environments running on these Runner
+    Kinds
+    """
 
-    connect_timeout_ms: Annotated[float, PropertyInfo(alias="Connect-Timeout-Ms")]
-    """Define the timeout, in ms"""
+    status_phases: Annotated[
+        List[
+            Literal[
+                "ENVIRONMENT_PHASE_UNSPECIFIED",
+                "ENVIRONMENT_PHASE_CREATING",
+                "ENVIRONMENT_PHASE_STARTING",
+                "ENVIRONMENT_PHASE_RUNNING",
+                "ENVIRONMENT_PHASE_UPDATING",
+                "ENVIRONMENT_PHASE_STOPPING",
+                "ENVIRONMENT_PHASE_STOPPED",
+                "ENVIRONMENT_PHASE_DELETING",
+                "ENVIRONMENT_PHASE_DELETED",
+            ]
+        ],
+        PropertyInfo(alias="statusPhases"),
+    ]
+    """
+    actual_phases is a list of phases the environment must be in for it to be
+    returned in the API call
+    """
+
+
+class Pagination(TypedDict, total=False):
+    token: str
+    """
+    Token for the next set of results that was returned as next_token of a
+    PaginationResponse
+    """
+
+    page_size: Annotated[int, PropertyInfo(alias="pageSize")]
+    """Page size is the maximum number of results to retrieve per page. Defaults to 25.
+
+    Maximum 100.
+    """

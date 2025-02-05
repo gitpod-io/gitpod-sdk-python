@@ -27,8 +27,8 @@ class Editor(BaseModel):
 
 class Pagination(BaseModel):
     token: Optional[str] = None
-    """Token for the next set of results that was returned as next_token of a
-
+    """
+    Token for the next set of results that was returned as next_token of a
     PaginationResponse
     """
 
