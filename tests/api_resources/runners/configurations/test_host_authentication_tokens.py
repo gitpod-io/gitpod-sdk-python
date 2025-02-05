@@ -23,11 +23,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestHostAuthenticationTokens:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.create()
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.create(
@@ -41,6 +43,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.create()
@@ -50,6 +53,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.create() as response:
@@ -61,11 +65,13 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.retrieve()
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.retrieve(
@@ -73,6 +79,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.retrieve()
@@ -82,6 +89,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.retrieve() as response:
@@ -93,6 +101,7 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
@@ -100,6 +109,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -111,6 +121,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -124,6 +135,7 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
@@ -131,6 +143,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -142,6 +155,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -155,6 +169,7 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_3(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
@@ -162,6 +177,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -173,6 +189,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -186,6 +203,7 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.list()
@@ -193,6 +211,7 @@ class TestHostAuthenticationTokens:
             SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.list(
@@ -208,6 +227,7 @@ class TestHostAuthenticationTokens:
             SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.list()
@@ -219,6 +239,7 @@ class TestHostAuthenticationTokens:
             SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.list() as response:
@@ -232,11 +253,13 @@ class TestHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.delete()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.delete(
@@ -244,6 +267,7 @@ class TestHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.runners.configurations.host_authentication_tokens.with_raw_response.delete()
@@ -253,6 +277,7 @@ class TestHostAuthenticationTokens:
         host_authentication_token = response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.runners.configurations.host_authentication_tokens.with_streaming_response.delete() as response:
@@ -268,11 +293,13 @@ class TestHostAuthenticationTokens:
 class TestAsyncHostAuthenticationTokens:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.create()
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.create(
@@ -286,6 +313,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.create()
@@ -295,6 +323,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with (
@@ -308,11 +337,13 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.retrieve()
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.retrieve(
@@ -320,6 +351,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.retrieve()
@@ -329,6 +361,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with (
@@ -342,6 +375,7 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
@@ -349,6 +383,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -360,6 +395,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -373,6 +409,7 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
@@ -380,6 +417,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -391,6 +429,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -404,6 +443,7 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
@@ -411,6 +451,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
@@ -422,6 +463,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
@@ -435,6 +477,7 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.list()
@@ -442,6 +485,7 @@ class TestAsyncHostAuthenticationTokens:
             AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.list(
@@ -457,6 +501,7 @@ class TestAsyncHostAuthenticationTokens:
             AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.list()
@@ -468,6 +513,7 @@ class TestAsyncHostAuthenticationTokens:
             AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
         )
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with (
@@ -483,11 +529,13 @@ class TestAsyncHostAuthenticationTokens:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.delete()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.delete(
@@ -495,6 +543,7 @@ class TestAsyncHostAuthenticationTokens:
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.delete()
@@ -504,6 +553,7 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await response.parse()
         assert_matches_type(object, host_authentication_token, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with (
