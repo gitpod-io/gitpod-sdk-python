@@ -6,20 +6,20 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["ClassListResponse", "EnvironmentClass", "EnvironmentClassConfiguration", "Pagination"]
+__all__ = ["ClassListResponse", "Configuration"]
 
 
-class EnvironmentClassConfiguration(BaseModel):
+class Configuration(BaseModel):
     key: Optional[str] = None
 
     value: Optional[str] = None
 
 
-class EnvironmentClass(BaseModel):
+class ClassListResponse(BaseModel):
     id: Optional[str] = None
     """id is the unique identifier of the environment class"""
 
-    configuration: Optional[List[EnvironmentClassConfiguration]] = None
+    configuration: Optional[List[Configuration]] = None
     """configuration describes the configuration of the environment class"""
 
     description: Optional[str] = None
@@ -39,18 +39,3 @@ class EnvironmentClass(BaseModel):
     runner_id is the unique identifier of the runner the environment class belongs
     to
     """
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class ClassListResponse(BaseModel):
-    environment_classes: Optional[List[EnvironmentClass]] = FieldInfo(alias="environmentClasses", default=None)
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing environment classes"""

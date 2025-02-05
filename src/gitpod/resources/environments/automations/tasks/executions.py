@@ -17,7 +17,8 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....._base_client import make_request_options
+from .....pagination import SyncTaskExecutionsPage, AsyncTaskExecutionsPage
+from ....._base_client import AsyncPaginator, make_request_options
 from .....types.environments.automations.tasks import (
     execution_list_params,
     execution_stop_params,
@@ -94,7 +95,7 @@ class ExecutionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExecutionListResponse:
+    ) -> SyncTaskExecutionsPage[ExecutionListResponse]:
         """
         ListTaskExecutions
 
@@ -111,8 +112,9 @@ class ExecutionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
+            page=SyncTaskExecutionsPage[ExecutionListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -133,7 +135,8 @@ class ExecutionsResource(SyncAPIResource):
                     execution_list_params.ExecutionListParams,
                 ),
             ),
-            cast_to=ExecutionListResponse,
+            model=ExecutionListResponse,
+            method="post",
         )
 
     def stop(
@@ -221,7 +224,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
             cast_to=ExecutionRetrieveResponse,
         )
 
-    async def list(
+    def list(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
@@ -234,7 +237,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ExecutionListResponse:
+    ) -> AsyncPaginator[ExecutionListResponse, AsyncTaskExecutionsPage[ExecutionListResponse]]:
         """
         ListTaskExecutions
 
@@ -251,9 +254,10 @@ class AsyncExecutionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
-            body=await async_maybe_transform(
+            page=AsyncTaskExecutionsPage[ExecutionListResponse],
+            body=maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
@@ -265,7 +269,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -273,7 +277,8 @@ class AsyncExecutionsResource(AsyncAPIResource):
                     execution_list_params.ExecutionListParams,
                 ),
             ),
-            cast_to=ExecutionListResponse,
+            model=ExecutionListResponse,
+            method="post",
         )
 
     async def stop(

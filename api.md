@@ -16,7 +16,7 @@ Methods:
 - <code title="post /gitpod.v1.AccountService/GetAccount">client.accounts.<a href="./src/gitpod/resources/accounts.py">retrieve</a>(\*\*<a href="src/gitpod/types/account_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/account_retrieve_response.py">AccountRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.AccountService/DeleteAccount">client.accounts.<a href="./src/gitpod/resources/accounts.py">delete</a>(\*\*<a href="src/gitpod/types/account_delete_params.py">params</a>) -> <a href="./src/gitpod/types/account_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.AccountService/GetSSOLoginURL">client.accounts.<a href="./src/gitpod/resources/accounts.py">get_sso_login_url</a>(\*\*<a href="src/gitpod/types/account_get_sso_login_url_params.py">params</a>) -> <a href="./src/gitpod/types/account_get_sso_login_url_response.py">AccountGetSSOLoginURLResponse</a></code>
-- <code title="post /gitpod.v1.AccountService/ListLoginProviders">client.accounts.<a href="./src/gitpod/resources/accounts.py">list_login_providers</a>(\*\*<a href="src/gitpod/types/account_list_login_providers_params.py">params</a>) -> <a href="./src/gitpod/types/account_list_login_providers_response.py">AccountListLoginProvidersResponse</a></code>
+- <code title="post /gitpod.v1.AccountService/ListLoginProviders">client.accounts.<a href="./src/gitpod/resources/accounts.py">list_login_providers</a>(\*\*<a href="src/gitpod/types/account_list_login_providers_params.py">params</a>) -> <a href="./src/gitpod/types/account_list_login_providers_response.py">SyncLoginProvidersPage[AccountListLoginProvidersResponse]</a></code>
 
 # Editors
 
@@ -141,7 +141,7 @@ from gitpod.types.environments.automations.tasks import (
 Methods:
 
 - <code title="post /gitpod.v1.EnvironmentAutomationService/GetTaskExecution">client.environments.automations.tasks.executions.<a href="./src/gitpod/resources/environments/automations/tasks/executions.py">retrieve</a>(\*\*<a href="src/gitpod/types/environments/automations/tasks/execution_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/tasks/execution_retrieve_response.py">ExecutionRetrieveResponse</a></code>
-- <code title="post /gitpod.v1.EnvironmentAutomationService/ListTaskExecutions">client.environments.automations.tasks.executions.<a href="./src/gitpod/resources/environments/automations/tasks/executions.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/tasks/execution_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/tasks/execution_list_response.py">ExecutionListResponse</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/ListTaskExecutions">client.environments.automations.tasks.executions.<a href="./src/gitpod/resources/environments/automations/tasks/executions.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/tasks/execution_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/tasks/execution_list_response.py">SyncTaskExecutionsPage[ExecutionListResponse]</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StopTaskExecution">client.environments.automations.tasks.executions.<a href="./src/gitpod/resources/environments/automations/tasks/executions.py">stop</a>(\*\*<a href="src/gitpod/types/environments/automations/tasks/execution_stop_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/tasks/execution_stop_response.py">object</a></code>
 
 ## Classes
@@ -154,7 +154,7 @@ from gitpod.types.environments import ClassListResponse
 
 Methods:
 
-- <code title="post /gitpod.v1.EnvironmentService/ListEnvironmentClasses">client.environments.classes.<a href="./src/gitpod/resources/environments/classes.py">list</a>(\*\*<a href="src/gitpod/types/environments/class_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/class_list_response.py">ClassListResponse</a></code>
+- <code title="post /gitpod.v1.EnvironmentService/ListEnvironmentClasses">client.environments.classes.<a href="./src/gitpod/resources/environments/classes.py">list</a>(\*\*<a href="src/gitpod/types/environments/class_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/class_list_response.py">SyncEnvironmentClassesPage[ClassListResponse]</a></code>
 
 # Events
 
@@ -266,7 +266,7 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/CreateSSOConfiguration">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">create</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_create_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_create_response.py">SSOConfigurationCreateResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/GetSSOConfiguration">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_retrieve_response.py">SSOConfigurationRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/UpdateSSOConfiguration">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">update</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_update_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_update_response.py">object</a></code>
-- <code title="post /gitpod.v1.OrganizationService/ListSSOConfigurations">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">list</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_list_response.py">SSOConfigurationListResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/ListSSOConfigurations">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">list</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_list_response.py">SyncSSOConfigurationsPage[SSOConfigurationListResponse]</a></code>
 - <code title="post /gitpod.v1.OrganizationService/DeleteSSOConfiguration">client.organizations.sso_configurations.<a href="./src/gitpod/resources/organizations/sso_configurations.py">delete</a>(\*\*<a href="src/gitpod/types/organizations/sso_configuration_delete_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/sso_configuration_delete_response.py">object</a></code>
 
 # Projects
@@ -371,7 +371,7 @@ Methods:
 - <code title="post /gitpod.v1.RunnerConfigurationService/CreateEnvironmentClass">client.runners.configurations.environment_classes.<a href="./src/gitpod/resources/runners/configurations/environment_classes.py">create</a>(\*\*<a href="src/gitpod/types/runners/configurations/environment_class_create_params.py">params</a>) -> <a href="./src/gitpod/types/runners/configurations/environment_class_create_response.py">EnvironmentClassCreateResponse</a></code>
 - <code title="post /gitpod.v1.RunnerConfigurationService/GetEnvironmentClass">client.runners.configurations.environment_classes.<a href="./src/gitpod/resources/runners/configurations/environment_classes.py">retrieve</a>(\*\*<a href="src/gitpod/types/runners/configurations/environment_class_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/runners/configurations/environment_class_retrieve_response.py">EnvironmentClassRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.RunnerConfigurationService/UpdateEnvironmentClass">client.runners.configurations.environment_classes.<a href="./src/gitpod/resources/runners/configurations/environment_classes.py">update</a>(\*\*<a href="src/gitpod/types/runners/configurations/environment_class_update_params.py">params</a>) -> <a href="./src/gitpod/types/runners/configurations/environment_class_update_response.py">object</a></code>
-- <code title="post /gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses">client.runners.configurations.environment_classes.<a href="./src/gitpod/resources/runners/configurations/environment_classes.py">list</a>(\*\*<a href="src/gitpod/types/runners/configurations/environment_class_list_params.py">params</a>) -> <a href="./src/gitpod/types/runners/configurations/environment_class_list_response.py">EnvironmentClassListResponse</a></code>
+- <code title="post /gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses">client.runners.configurations.environment_classes.<a href="./src/gitpod/resources/runners/configurations/environment_classes.py">list</a>(\*\*<a href="src/gitpod/types/runners/configurations/environment_class_list_params.py">params</a>) -> <a href="./src/gitpod/types/runners/configurations/environment_class_list_response.py">SyncEnvironmentClassesPage[EnvironmentClassListResponse]</a></code>
 
 ### HostAuthenticationTokens
 
@@ -494,6 +494,6 @@ from gitpod.types.users import PatListResponse, PatDeleteResponse, PatGetRespons
 
 Methods:
 
-- <code title="post /gitpod.v1.UserService/ListPersonalAccessTokens">client.users.pats.<a href="./src/gitpod/resources/users/pats.py">list</a>(\*\*<a href="src/gitpod/types/users/pat_list_params.py">params</a>) -> <a href="./src/gitpod/types/users/pat_list_response.py">PatListResponse</a></code>
+- <code title="post /gitpod.v1.UserService/ListPersonalAccessTokens">client.users.pats.<a href="./src/gitpod/resources/users/pats.py">list</a>(\*\*<a href="src/gitpod/types/users/pat_list_params.py">params</a>) -> <a href="./src/gitpod/types/users/pat_list_response.py">SyncPersonalAccessTokensPage[PatListResponse]</a></code>
 - <code title="post /gitpod.v1.UserService/DeletePersonalAccessToken">client.users.pats.<a href="./src/gitpod/resources/users/pats.py">delete</a>(\*\*<a href="src/gitpod/types/users/pat_delete_params.py">params</a>) -> <a href="./src/gitpod/types/users/pat_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.UserService/GetPersonalAccessToken">client.users.pats.<a href="./src/gitpod/resources/users/pats.py">get</a>(\*\*<a href="src/gitpod/types/users/pat_get_params.py">params</a>) -> <a href="./src/gitpod/types/users/pat_get_response.py">PatGetResponse</a></code>

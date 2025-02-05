@@ -14,6 +14,7 @@ from gitpod.types import (
     AccountGetSSOLoginURLResponse,
     AccountListLoginProvidersResponse,
 )
+from gitpod.pagination import SyncLoginProvidersPage, AsyncLoginProvidersPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -126,7 +127,7 @@ class TestAccounts:
     @parametrize
     def test_method_list_login_providers(self, client: Gitpod) -> None:
         account = client.accounts.list_login_providers()
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     def test_method_list_login_providers_with_all_params(self, client: Gitpod) -> None:
@@ -139,7 +140,7 @@ class TestAccounts:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     def test_raw_response_list_login_providers(self, client: Gitpod) -> None:
@@ -148,7 +149,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     def test_streaming_response_list_login_providers(self, client: Gitpod) -> None:
@@ -157,7 +158,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+            assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -270,7 +271,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_list_login_providers(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.list_login_providers()
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     async def test_method_list_login_providers_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -283,7 +284,7 @@ class TestAsyncAccounts:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     async def test_raw_response_list_login_providers(self, async_client: AsyncGitpod) -> None:
@@ -292,7 +293,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
     @parametrize
     async def test_streaming_response_list_login_providers(self, async_client: AsyncGitpod) -> None:
@@ -301,6 +302,6 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AccountListLoginProvidersResponse, account, path=["response"])
+            assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True

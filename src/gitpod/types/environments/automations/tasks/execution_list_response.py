@@ -10,33 +10,23 @@ from ....._models import BaseModel
 
 __all__ = [
     "ExecutionListResponse",
-    "Pagination",
-    "TaskExecution",
-    "TaskExecutionMetadata",
-    "TaskExecutionMetadataCreator",
-    "TaskExecutionSpec",
-    "TaskExecutionSpecPlan",
-    "TaskExecutionSpecPlanStep",
-    "TaskExecutionSpecPlanStepUnionMember0",
-    "TaskExecutionSpecPlanStepUnionMember1",
-    "TaskExecutionSpecPlanStepUnionMember1Task",
-    "TaskExecutionSpecPlanStepUnionMember1TaskSpec",
-    "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn",
-    "TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker",
-    "TaskExecutionStatus",
-    "TaskExecutionStatusStep",
+    "Metadata",
+    "MetadataCreator",
+    "Spec",
+    "SpecPlan",
+    "SpecPlanStep",
+    "SpecPlanStepUnionMember0",
+    "SpecPlanStepUnionMember1",
+    "SpecPlanStepUnionMember1Task",
+    "SpecPlanStepUnionMember1TaskSpec",
+    "SpecPlanStepUnionMember1TaskSpecRunsOn",
+    "SpecPlanStepUnionMember1TaskSpecRunsOnDocker",
+    "Status",
+    "StatusStep",
 ]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class TaskExecutionMetadataCreator(BaseModel):
+class MetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -53,7 +43,7 @@ class TaskExecutionMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class TaskExecutionMetadata(BaseModel):
+class Metadata(BaseModel):
     completed_at: Optional[datetime] = FieldInfo(alias="completedAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -238,7 +228,7 @@ class TaskExecutionMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[TaskExecutionMetadataCreator] = None
+    creator: Optional[MetadataCreator] = None
     """creator describes the principal who created/started the task run."""
 
     environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
@@ -343,7 +333,7 @@ class TaskExecutionMetadata(BaseModel):
     """task_id is the ID of the main task being executed."""
 
 
-class TaskExecutionSpecPlanStepUnionMember0(BaseModel):
+class SpecPlanStepUnionMember0(BaseModel):
     service_id: str = FieldInfo(alias="serviceId")
 
     id: Optional[str] = None
@@ -354,32 +344,32 @@ class TaskExecutionSpecPlanStepUnionMember0(BaseModel):
     label: Optional[str] = None
 
 
-class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker(BaseModel):
+class SpecPlanStepUnionMember1TaskSpecRunsOnDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn(BaseModel):
-    docker: TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOnDocker
+class SpecPlanStepUnionMember1TaskSpecRunsOn(BaseModel):
+    docker: SpecPlanStepUnionMember1TaskSpecRunsOnDocker
 
 
-class TaskExecutionSpecPlanStepUnionMember1TaskSpec(BaseModel):
+class SpecPlanStepUnionMember1TaskSpec(BaseModel):
     command: Optional[str] = None
     """command contains the command the task should execute"""
 
-    runs_on: Optional[TaskExecutionSpecPlanStepUnionMember1TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[SpecPlanStepUnionMember1TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the task should run on."""
 
 
-class TaskExecutionSpecPlanStepUnionMember1Task(BaseModel):
+class SpecPlanStepUnionMember1Task(BaseModel):
     id: Optional[str] = None
 
-    spec: Optional[TaskExecutionSpecPlanStepUnionMember1TaskSpec] = None
+    spec: Optional[SpecPlanStepUnionMember1TaskSpec] = None
 
 
-class TaskExecutionSpecPlanStepUnionMember1(BaseModel):
-    task: TaskExecutionSpecPlanStepUnionMember1Task
+class SpecPlanStepUnionMember1(BaseModel):
+    task: SpecPlanStepUnionMember1Task
 
     id: Optional[str] = None
     """ID is the ID of the execution step"""
@@ -389,16 +379,14 @@ class TaskExecutionSpecPlanStepUnionMember1(BaseModel):
     label: Optional[str] = None
 
 
-TaskExecutionSpecPlanStep: TypeAlias = Union[
-    TaskExecutionSpecPlanStepUnionMember0, TaskExecutionSpecPlanStepUnionMember1
-]
+SpecPlanStep: TypeAlias = Union[SpecPlanStepUnionMember0, SpecPlanStepUnionMember1]
 
 
-class TaskExecutionSpecPlan(BaseModel):
-    steps: Optional[List[TaskExecutionSpecPlanStep]] = None
+class SpecPlan(BaseModel):
+    steps: Optional[List[SpecPlanStep]] = None
 
 
-class TaskExecutionSpec(BaseModel):
+class Spec(BaseModel):
     desired_phase: Optional[
         Literal[
             "TASK_EXECUTION_PHASE_UNSPECIFIED",
@@ -414,7 +402,7 @@ class TaskExecutionSpec(BaseModel):
     Used to stop a running task execution early.
     """
 
-    plan: Optional[List[TaskExecutionSpecPlan]] = None
+    plan: Optional[List[SpecPlan]] = None
     """plan is a list of groups of steps.
 
     The steps in a group are executed concurrently, while the groups are executed
@@ -422,7 +410,7 @@ class TaskExecutionSpec(BaseModel):
     """
 
 
-class TaskExecutionStatusStep(BaseModel):
+class StatusStep(BaseModel):
     id: Optional[str] = None
     """ID is the ID of the execution step"""
 
@@ -446,7 +434,7 @@ class TaskExecutionStatusStep(BaseModel):
     """phase is the current phase of the execution step"""
 
 
-class TaskExecutionStatus(BaseModel):
+class Status(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message summarises why the task execution failed to operate.
 
@@ -481,24 +469,18 @@ class TaskExecutionStatus(BaseModel):
     a.status_version < b.status_version then a was the status before b.
     """
 
-    steps: Optional[List[TaskExecutionStatusStep]] = None
+    steps: Optional[List[StatusStep]] = None
     """steps provides the status for each individual step of the task execution.
 
     If a step is missing it has not yet started.
     """
 
 
-class TaskExecution(BaseModel):
+class ExecutionListResponse(BaseModel):
     id: Optional[str] = None
 
-    metadata: Optional[TaskExecutionMetadata] = None
+    metadata: Optional[Metadata] = None
 
-    spec: Optional[TaskExecutionSpec] = None
+    spec: Optional[Spec] = None
 
-    status: Optional[TaskExecutionStatus] = None
-
-
-class ExecutionListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-
-    task_executions: Optional[List[TaskExecution]] = FieldInfo(alias="taskExecutions", default=None)
+    status: Optional[Status] = None

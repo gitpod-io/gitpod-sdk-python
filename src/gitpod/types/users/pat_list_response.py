@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,18 +8,10 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["PatListResponse", "Pagination", "PersonalAccessToken", "PersonalAccessTokenCreator"]
+__all__ = ["PatListResponse", "Creator"]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class PersonalAccessTokenCreator(BaseModel):
+class Creator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -36,7 +28,7 @@ class PersonalAccessTokenCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class PersonalAccessToken(BaseModel):
+class PatListResponse(BaseModel):
     id: Optional[str] = None
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
@@ -131,7 +123,7 @@ class PersonalAccessToken(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[PersonalAccessTokenCreator] = None
+    creator: Optional[Creator] = None
 
     description: Optional[str] = None
 
@@ -320,9 +312,3 @@ class PersonalAccessToken(BaseModel):
     """
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
-
-
-class PatListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-
-    personal_access_tokens: Optional[List[PersonalAccessToken]] = FieldInfo(alias="personalAccessTokens", default=None)
