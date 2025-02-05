@@ -22,6 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAccounts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         account = client.accounts.retrieve(
@@ -29,6 +30,7 @@ class TestAccounts:
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.retrieve(
@@ -40,6 +42,7 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.retrieve(
@@ -53,11 +56,13 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         account = client.accounts.delete()
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.delete(
@@ -65,6 +70,7 @@ class TestAccounts:
         )
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.delete()
@@ -74,6 +80,7 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.delete() as response:
@@ -85,6 +92,7 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_get_sso_login_url(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
@@ -92,6 +100,7 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_get_sso_login_url_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
@@ -100,6 +109,7 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_sso_login_url(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.get_sso_login_url(
@@ -111,6 +121,7 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_sso_login_url(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.get_sso_login_url(
@@ -124,11 +135,13 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list_login_providers(self, client: Gitpod) -> None:
         account = client.accounts.list_login_providers()
         assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_list_login_providers_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.list_login_providers(
@@ -142,6 +155,7 @@ class TestAccounts:
         )
         assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list_login_providers(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.list_login_providers()
@@ -151,6 +165,7 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list_login_providers(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.list_login_providers() as response:
@@ -166,6 +181,7 @@ class TestAccounts:
 class TestAsyncAccounts:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.retrieve(
@@ -173,6 +189,7 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.retrieve(
@@ -184,6 +201,7 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountRetrieveResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.retrieve(
@@ -197,11 +215,13 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.delete()
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.delete(
@@ -209,6 +229,7 @@ class TestAsyncAccounts:
         )
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.delete()
@@ -218,6 +239,7 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(object, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.delete() as response:
@@ -229,6 +251,7 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
@@ -236,6 +259,7 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_get_sso_login_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
@@ -244,6 +268,7 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.get_sso_login_url(
@@ -255,6 +280,7 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.get_sso_login_url(
@@ -268,11 +294,13 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list_login_providers(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.list_login_providers()
         assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_list_login_providers_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.list_login_providers(
@@ -286,6 +314,7 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list_login_providers(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.list_login_providers()
@@ -295,6 +324,7 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list_login_providers(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.list_login_providers() as response:

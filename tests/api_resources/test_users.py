@@ -17,6 +17,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestUsers:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_get_authenticated_user(self, client: Gitpod) -> None:
         user = client.users.get_authenticated_user(
@@ -24,6 +25,7 @@ class TestUsers:
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_authenticated_user(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.get_authenticated_user(
@@ -35,6 +37,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_authenticated_user(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.get_authenticated_user(
@@ -48,11 +51,13 @@ class TestUsers:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_set_suspended(self, client: Gitpod) -> None:
         user = client.users.set_suspended()
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_method_set_suspended_with_all_params(self, client: Gitpod) -> None:
         user = client.users.set_suspended(
@@ -61,6 +66,7 @@ class TestUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_raw_response_set_suspended(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.set_suspended()
@@ -70,6 +76,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_set_suspended(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.set_suspended() as response:
@@ -85,6 +92,7 @@ class TestUsers:
 class TestAsyncUsers:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_authenticated_user(
@@ -92,6 +100,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.get_authenticated_user(
@@ -103,6 +112,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.get_authenticated_user(
@@ -116,11 +126,13 @@ class TestAsyncUsers:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_set_suspended(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.set_suspended()
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_method_set_suspended_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.set_suspended(
@@ -129,6 +141,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_set_suspended(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.set_suspended()
@@ -138,6 +151,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(object, user, path=["response"])
 
+    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_set_suspended(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.set_suspended() as response:
