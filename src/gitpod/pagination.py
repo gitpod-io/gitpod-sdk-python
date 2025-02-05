@@ -5,7 +5,7 @@ from typing_extensions import override
 
 from pydantic import Field as FieldInfo
 
-from ._models import GenericModel
+from ._models import BaseModel, GenericModel
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
 __all__ = [
@@ -127,21 +127,17 @@ class AsyncPersonalAccessTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]
         return PageInfo(params={"token": next_token})
 
 
-class OrganizationsPagePagination(GenericModel, Generic[_T]):
+class OrganizationsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    organizations: Optional[List[_T]] = None
 
 
 class SyncOrganizationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[OrganizationsPagePagination[_T]] = None
+    organizations: List[_T]
+    pagination: Optional[OrganizationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        organizations = None
-        if self.pagination is not None:
-            if self.pagination.organizations is not None:
-                organizations = self.pagination.organizations
+        organizations = self.organizations
         if not organizations:
             return []
         return organizations
@@ -159,14 +155,12 @@ class SyncOrganizationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncOrganizationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[OrganizationsPagePagination[_T]] = None
+    organizations: List[_T]
+    pagination: Optional[OrganizationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        organizations = None
-        if self.pagination is not None:
-            if self.pagination.organizations is not None:
-                organizations = self.pagination.organizations
+        organizations = self.organizations
         if not organizations:
             return []
         return organizations
@@ -183,21 +177,17 @@ class AsyncOrganizationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class MembersPagePagination(GenericModel, Generic[_T]):
-    members: Optional[List[_T]] = None
-
+class MembersPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncMembersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[MembersPagePagination[_T]] = None
+    members: List[_T]
+    pagination: Optional[MembersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        members = None
-        if self.pagination is not None:
-            if self.pagination.members is not None:
-                members = self.pagination.members
+        members = self.members
         if not members:
             return []
         return members
@@ -215,14 +205,12 @@ class SyncMembersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncMembersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[MembersPagePagination[_T]] = None
+    members: List[_T]
+    pagination: Optional[MembersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        members = None
-        if self.pagination is not None:
-            if self.pagination.members is not None:
-                members = self.pagination.members
+        members = self.members
         if not members:
             return []
         return members
@@ -239,21 +227,17 @@ class AsyncMembersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class SSOConfigurationsPagePagination(GenericModel, Generic[_T]):
+class SSOConfigurationsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    sso_configurations: Optional[List[_T]] = None
 
 
 class SyncSSOConfigurationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[SSOConfigurationsPagePagination[_T]] = None
+    sso_configurations: List[_T] = FieldInfo(alias="ssoConfigurations")
+    pagination: Optional[SSOConfigurationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        sso_configurations = None
-        if self.pagination is not None:
-            if self.pagination.sso_configurations is not None:
-                sso_configurations = self.pagination.sso_configurations
+        sso_configurations = self.sso_configurations
         if not sso_configurations:
             return []
         return sso_configurations
@@ -271,14 +255,12 @@ class SyncSSOConfigurationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncSSOConfigurationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[SSOConfigurationsPagePagination[_T]] = None
+    sso_configurations: List[_T] = FieldInfo(alias="ssoConfigurations")
+    pagination: Optional[SSOConfigurationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        sso_configurations = None
-        if self.pagination is not None:
-            if self.pagination.sso_configurations is not None:
-                sso_configurations = self.pagination.sso_configurations
+        sso_configurations = self.sso_configurations
         if not sso_configurations:
             return []
         return sso_configurations
@@ -295,21 +277,17 @@ class AsyncSSOConfigurationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class LoginProvidersPagePagination(GenericModel, Generic[_T]):
-    login_providers: Optional[List[_T]] = None
-
+class LoginProvidersPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncLoginProvidersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[LoginProvidersPagePagination[_T]] = None
+    login_providers: List[_T] = FieldInfo(alias="loginProviders")
+    pagination: Optional[LoginProvidersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        login_providers = None
-        if self.pagination is not None:
-            if self.pagination.login_providers is not None:
-                login_providers = self.pagination.login_providers
+        login_providers = self.login_providers
         if not login_providers:
             return []
         return login_providers
@@ -327,14 +305,12 @@ class SyncLoginProvidersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncLoginProvidersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[LoginProvidersPagePagination[_T]] = None
+    login_providers: List[_T] = FieldInfo(alias="loginProviders")
+    pagination: Optional[LoginProvidersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        login_providers = None
-        if self.pagination is not None:
-            if self.pagination.login_providers is not None:
-                login_providers = self.pagination.login_providers
+        login_providers = self.login_providers
         if not login_providers:
             return []
         return login_providers
@@ -351,21 +327,17 @@ class AsyncLoginProvidersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class EditorsPagePagination(GenericModel, Generic[_T]):
-    editors: Optional[List[_T]] = None
-
+class EditorsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncEditorsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EditorsPagePagination[_T]] = None
+    editors: List[_T]
+    pagination: Optional[EditorsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        editors = None
-        if self.pagination is not None:
-            if self.pagination.editors is not None:
-                editors = self.pagination.editors
+        editors = self.editors
         if not editors:
             return []
         return editors
@@ -383,14 +355,12 @@ class SyncEditorsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncEditorsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EditorsPagePagination[_T]] = None
+    editors: List[_T]
+    pagination: Optional[EditorsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        editors = None
-        if self.pagination is not None:
-            if self.pagination.editors is not None:
-                editors = self.pagination.editors
+        editors = self.editors
         if not editors:
             return []
         return editors
@@ -407,21 +377,17 @@ class AsyncEditorsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class TokensPagePagination(GenericModel, Generic[_T]):
+class TokensPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    tokens: Optional[List[_T]] = None
 
 
 class SyncTokensPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TokensPagePagination[_T]] = None
+    tokens: List[_T]
+    pagination: Optional[TokensPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        tokens = None
-        if self.pagination is not None:
-            if self.pagination.tokens is not None:
-                tokens = self.pagination.tokens
+        tokens = self.tokens
         if not tokens:
             return []
         return tokens
@@ -439,14 +405,12 @@ class SyncTokensPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TokensPagePagination[_T]] = None
+    tokens: List[_T]
+    pagination: Optional[TokensPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        tokens = None
-        if self.pagination is not None:
-            if self.pagination.tokens is not None:
-                tokens = self.pagination.tokens
+        tokens = self.tokens
         if not tokens:
             return []
         return tokens
@@ -463,21 +427,17 @@ class AsyncTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class IntegrationsPagePagination(GenericModel, Generic[_T]):
-    integrations: Optional[List[_T]] = None
-
+class IntegrationsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncIntegrationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[IntegrationsPagePagination[_T]] = None
+    integrations: List[_T]
+    pagination: Optional[IntegrationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        integrations = None
-        if self.pagination is not None:
-            if self.pagination.integrations is not None:
-                integrations = self.pagination.integrations
+        integrations = self.integrations
         if not integrations:
             return []
         return integrations
@@ -495,14 +455,12 @@ class SyncIntegrationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncIntegrationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[IntegrationsPagePagination[_T]] = None
+    integrations: List[_T]
+    pagination: Optional[IntegrationsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        integrations = None
-        if self.pagination is not None:
-            if self.pagination.integrations is not None:
-                integrations = self.pagination.integrations
+        integrations = self.integrations
         if not integrations:
             return []
         return integrations
@@ -519,21 +477,17 @@ class AsyncIntegrationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class EnvironmentClassesPagePagination(GenericModel, Generic[_T]):
-    environment_classes: Optional[List[_T]] = None
-
+class EnvironmentClassesPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncEnvironmentClassesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EnvironmentClassesPagePagination[_T]] = None
+    environment_classes: List[_T] = FieldInfo(alias="environmentClasses")
+    pagination: Optional[EnvironmentClassesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        environment_classes = None
-        if self.pagination is not None:
-            if self.pagination.environment_classes is not None:
-                environment_classes = self.pagination.environment_classes
+        environment_classes = self.environment_classes
         if not environment_classes:
             return []
         return environment_classes
@@ -551,14 +505,12 @@ class SyncEnvironmentClassesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncEnvironmentClassesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EnvironmentClassesPagePagination[_T]] = None
+    environment_classes: List[_T] = FieldInfo(alias="environmentClasses")
+    pagination: Optional[EnvironmentClassesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        environment_classes = None
-        if self.pagination is not None:
-            if self.pagination.environment_classes is not None:
-                environment_classes = self.pagination.environment_classes
+        environment_classes = self.environment_classes
         if not environment_classes:
             return []
         return environment_classes
@@ -575,21 +527,17 @@ class AsyncEnvironmentClassesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class RunnersPagePagination(GenericModel, Generic[_T]):
+class RunnersPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    runners: Optional[List[_T]] = None
 
 
 class SyncRunnersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[RunnersPagePagination[_T]] = None
+    runners: List[_T]
+    pagination: Optional[RunnersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        runners = None
-        if self.pagination is not None:
-            if self.pagination.runners is not None:
-                runners = self.pagination.runners
+        runners = self.runners
         if not runners:
             return []
         return runners
@@ -607,14 +555,12 @@ class SyncRunnersPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncRunnersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[RunnersPagePagination[_T]] = None
+    runners: List[_T]
+    pagination: Optional[RunnersPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        runners = None
-        if self.pagination is not None:
-            if self.pagination.runners is not None:
-                runners = self.pagination.runners
+        runners = self.runners
         if not runners:
             return []
         return runners
@@ -631,21 +577,17 @@ class AsyncRunnersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class PoliciesPagePagination(GenericModel, Generic[_T]):
+class PoliciesPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    policies: Optional[List[_T]] = None
 
 
 class SyncPoliciesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[PoliciesPagePagination[_T]] = None
+    policies: List[_T]
+    pagination: Optional[PoliciesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        policies = None
-        if self.pagination is not None:
-            if self.pagination.policies is not None:
-                policies = self.pagination.policies
+        policies = self.policies
         if not policies:
             return []
         return policies
@@ -663,14 +605,12 @@ class SyncPoliciesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncPoliciesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[PoliciesPagePagination[_T]] = None
+    policies: List[_T]
+    pagination: Optional[PoliciesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        policies = None
-        if self.pagination is not None:
-            if self.pagination.policies is not None:
-                policies = self.pagination.policies
+        policies = self.policies
         if not policies:
             return []
         return policies
@@ -687,21 +627,17 @@ class AsyncPoliciesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class EnvironmentsPagePagination(GenericModel, Generic[_T]):
-    environments: Optional[List[_T]] = None
-
+class EnvironmentsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncEnvironmentsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EnvironmentsPagePagination[_T]] = None
+    environments: List[_T]
+    pagination: Optional[EnvironmentsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        environments = None
-        if self.pagination is not None:
-            if self.pagination.environments is not None:
-                environments = self.pagination.environments
+        environments = self.environments
         if not environments:
             return []
         return environments
@@ -719,14 +655,12 @@ class SyncEnvironmentsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncEnvironmentsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EnvironmentsPagePagination[_T]] = None
+    environments: List[_T]
+    pagination: Optional[EnvironmentsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        environments = None
-        if self.pagination is not None:
-            if self.pagination.environments is not None:
-                environments = self.pagination.environments
+        environments = self.environments
         if not environments:
             return []
         return environments
@@ -743,21 +677,17 @@ class AsyncEnvironmentsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class ServicesPagePagination(GenericModel, Generic[_T]):
+class ServicesPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    services: Optional[List[_T]] = None
 
 
 class SyncServicesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[ServicesPagePagination[_T]] = None
+    services: List[_T]
+    pagination: Optional[ServicesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        services = None
-        if self.pagination is not None:
-            if self.pagination.services is not None:
-                services = self.pagination.services
+        services = self.services
         if not services:
             return []
         return services
@@ -775,14 +705,12 @@ class SyncServicesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncServicesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[ServicesPagePagination[_T]] = None
+    services: List[_T]
+    pagination: Optional[ServicesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        services = None
-        if self.pagination is not None:
-            if self.pagination.services is not None:
-                services = self.pagination.services
+        services = self.services
         if not services:
             return []
         return services
@@ -799,21 +727,17 @@ class AsyncServicesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class TasksPagePagination(GenericModel, Generic[_T]):
+class TasksPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    tasks: Optional[List[_T]] = None
 
 
 class SyncTasksPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TasksPagePagination[_T]] = None
+    tasks: List[_T]
+    pagination: Optional[TasksPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        tasks = None
-        if self.pagination is not None:
-            if self.pagination.tasks is not None:
-                tasks = self.pagination.tasks
+        tasks = self.tasks
         if not tasks:
             return []
         return tasks
@@ -831,14 +755,12 @@ class SyncTasksPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncTasksPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TasksPagePagination[_T]] = None
+    tasks: List[_T]
+    pagination: Optional[TasksPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        tasks = None
-        if self.pagination is not None:
-            if self.pagination.tasks is not None:
-                tasks = self.pagination.tasks
+        tasks = self.tasks
         if not tasks:
             return []
         return tasks
@@ -855,21 +777,17 @@ class AsyncTasksPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class TaskExecutionsPagePagination(GenericModel, Generic[_T]):
+class TaskExecutionsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    task_executions: Optional[List[_T]] = None
 
 
 class SyncTaskExecutionsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TaskExecutionsPagePagination[_T]] = None
+    task_executions: List[_T] = FieldInfo(alias="taskExecutions")
+    pagination: Optional[TaskExecutionsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        task_executions = None
-        if self.pagination is not None:
-            if self.pagination.task_executions is not None:
-                task_executions = self.pagination.task_executions
+        task_executions = self.task_executions
         if not task_executions:
             return []
         return task_executions
@@ -887,14 +805,12 @@ class SyncTaskExecutionsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncTaskExecutionsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[TaskExecutionsPagePagination[_T]] = None
+    task_executions: List[_T] = FieldInfo(alias="taskExecutions")
+    pagination: Optional[TaskExecutionsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        task_executions = None
-        if self.pagination is not None:
-            if self.pagination.task_executions is not None:
-                task_executions = self.pagination.task_executions
+        task_executions = self.task_executions
         if not task_executions:
             return []
         return task_executions
@@ -911,21 +827,17 @@ class AsyncTaskExecutionsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class EntriesPagePagination(GenericModel, Generic[_T]):
-    entries: Optional[List[_T]] = None
-
+class EntriesPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncEntriesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EntriesPagePagination[_T]] = None
+    entries: List[_T]
+    pagination: Optional[EntriesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        entries = None
-        if self.pagination is not None:
-            if self.pagination.entries is not None:
-                entries = self.pagination.entries
+        entries = self.entries
         if not entries:
             return []
         return entries
@@ -943,14 +855,12 @@ class SyncEntriesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncEntriesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[EntriesPagePagination[_T]] = None
+    entries: List[_T]
+    pagination: Optional[EntriesPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        entries = None
-        if self.pagination is not None:
-            if self.pagination.entries is not None:
-                entries = self.pagination.entries
+        entries = self.entries
         if not entries:
             return []
         return entries
@@ -967,21 +877,17 @@ class AsyncEntriesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class GroupsPagePagination(GenericModel, Generic[_T]):
-    groups: Optional[List[_T]] = None
-
+class GroupsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
 
 class SyncGroupsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[GroupsPagePagination[_T]] = None
+    groups: List[_T]
+    pagination: Optional[GroupsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        groups = None
-        if self.pagination is not None:
-            if self.pagination.groups is not None:
-                groups = self.pagination.groups
+        groups = self.groups
         if not groups:
             return []
         return groups
@@ -999,14 +905,12 @@ class SyncGroupsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncGroupsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[GroupsPagePagination[_T]] = None
+    groups: List[_T]
+    pagination: Optional[GroupsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        groups = None
-        if self.pagination is not None:
-            if self.pagination.groups is not None:
-                groups = self.pagination.groups
+        groups = self.groups
         if not groups:
             return []
         return groups
@@ -1023,21 +927,17 @@ class AsyncGroupsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class ProjectsPagePagination(GenericModel, Generic[_T]):
+class ProjectsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    projects: Optional[List[_T]] = None
 
 
 class SyncProjectsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[ProjectsPagePagination[_T]] = None
+    projects: List[_T]
+    pagination: Optional[ProjectsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        projects = None
-        if self.pagination is not None:
-            if self.pagination.projects is not None:
-                projects = self.pagination.projects
+        projects = self.projects
         if not projects:
             return []
         return projects
@@ -1055,14 +955,12 @@ class SyncProjectsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncProjectsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[ProjectsPagePagination[_T]] = None
+    projects: List[_T]
+    pagination: Optional[ProjectsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        projects = None
-        if self.pagination is not None:
-            if self.pagination.projects is not None:
-                projects = self.pagination.projects
+        projects = self.projects
         if not projects:
             return []
         return projects
@@ -1079,21 +977,17 @@ class AsyncProjectsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
-class SecretsPagePagination(GenericModel, Generic[_T]):
+class SecretsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-    secrets: Optional[List[_T]] = None
 
 
 class SyncSecretsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[SecretsPagePagination[_T]] = None
+    secrets: List[_T]
+    pagination: Optional[SecretsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        secrets = None
-        if self.pagination is not None:
-            if self.pagination.secrets is not None:
-                secrets = self.pagination.secrets
+        secrets = self.secrets
         if not secrets:
             return []
         return secrets
@@ -1111,14 +1005,12 @@ class SyncSecretsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
 
 
 class AsyncSecretsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    pagination: Optional[SecretsPagePagination[_T]] = None
+    secrets: List[_T]
+    pagination: Optional[SecretsPagePagination] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        secrets = None
-        if self.pagination is not None:
-            if self.pagination.secrets is not None:
-                secrets = self.pagination.secrets
+        secrets = self.secrets
         if not secrets:
             return []
         return secrets
