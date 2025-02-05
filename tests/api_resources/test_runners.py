@@ -25,13 +25,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRunners:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         runner = client.runners.create()
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.create(
@@ -49,7 +47,6 @@ class TestRunners:
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.create()
@@ -59,7 +56,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.create() as response:
@@ -71,13 +67,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         runner = client.runners.retrieve()
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.retrieve(
@@ -85,7 +79,6 @@ class TestRunners:
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.retrieve()
@@ -95,7 +88,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.retrieve() as response:
@@ -107,7 +99,6 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         runner = client.runners.update(
@@ -115,7 +106,6 @@ class TestRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.update(
@@ -127,7 +117,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.update(
@@ -141,7 +130,6 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         runner = client.runners.update(
@@ -149,7 +137,6 @@ class TestRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.update(
@@ -161,7 +148,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.update(
@@ -175,13 +161,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         runner = client.runners.list()
         assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.list(
@@ -199,7 +183,6 @@ class TestRunners:
         )
         assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.list()
@@ -209,7 +192,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.list() as response:
@@ -221,13 +203,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         runner = client.runners.delete()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.delete(
@@ -236,7 +216,6 @@ class TestRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.delete()
@@ -246,7 +225,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.delete() as response:
@@ -258,13 +236,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_check_authentication_for_host(self, client: Gitpod) -> None:
         runner = client.runners.check_authentication_for_host()
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_check_authentication_for_host_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.check_authentication_for_host(
@@ -273,7 +249,6 @@ class TestRunners:
         )
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_check_authentication_for_host(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.check_authentication_for_host()
@@ -283,7 +258,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_check_authentication_for_host(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.check_authentication_for_host() as response:
@@ -295,13 +269,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_runner_token(self, client: Gitpod) -> None:
         runner = client.runners.create_runner_token()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_runner_token_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.create_runner_token(
@@ -309,7 +281,6 @@ class TestRunners:
         )
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_runner_token(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.create_runner_token()
@@ -319,7 +290,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_runner_token(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.create_runner_token() as response:
@@ -331,13 +301,11 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_parse_context_url(self, client: Gitpod) -> None:
         runner = client.runners.parse_context_url()
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_parse_context_url_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.parse_context_url(
@@ -346,7 +314,6 @@ class TestRunners:
         )
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_parse_context_url(self, client: Gitpod) -> None:
         response = client.runners.with_raw_response.parse_context_url()
@@ -356,7 +323,6 @@ class TestRunners:
         runner = response.parse()
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_parse_context_url(self, client: Gitpod) -> None:
         with client.runners.with_streaming_response.parse_context_url() as response:
@@ -372,13 +338,11 @@ class TestRunners:
 class TestAsyncRunners:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create()
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create(
@@ -396,7 +360,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.create()
@@ -406,7 +369,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.create() as response:
@@ -418,13 +380,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.retrieve()
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.retrieve(
@@ -432,7 +392,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.retrieve()
@@ -442,7 +401,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.retrieve() as response:
@@ -454,7 +412,6 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
@@ -462,7 +419,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.update(
@@ -474,7 +430,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.update(
@@ -488,7 +443,6 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
@@ -496,7 +450,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.update(
@@ -508,7 +461,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.update(
@@ -522,13 +474,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list()
         assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list(
@@ -546,7 +496,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.list()
@@ -556,7 +505,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.list() as response:
@@ -568,13 +516,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.delete()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.delete(
@@ -583,7 +529,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.delete()
@@ -593,7 +538,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(object, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.delete() as response:
@@ -605,13 +549,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_check_authentication_for_host(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.check_authentication_for_host()
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_check_authentication_for_host_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.check_authentication_for_host(
@@ -620,7 +562,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_check_authentication_for_host(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.check_authentication_for_host()
@@ -630,7 +571,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_check_authentication_for_host(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.check_authentication_for_host() as response:
@@ -642,13 +582,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_runner_token(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create_runner_token()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_runner_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create_runner_token(
@@ -656,7 +594,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_runner_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.create_runner_token()
@@ -666,7 +603,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_runner_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.create_runner_token() as response:
@@ -678,13 +614,11 @@ class TestAsyncRunners:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_parse_context_url(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.parse_context_url()
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_parse_context_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.parse_context_url(
@@ -693,7 +627,6 @@ class TestAsyncRunners:
         )
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_parse_context_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.with_raw_response.parse_context_url()
@@ -703,7 +636,6 @@ class TestAsyncRunners:
         runner = await response.parse()
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_parse_context_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.with_streaming_response.parse_context_url() as response:

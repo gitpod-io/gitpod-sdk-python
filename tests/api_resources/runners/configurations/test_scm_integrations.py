@@ -22,7 +22,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestScmIntegrations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
@@ -30,7 +29,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.create(
@@ -42,7 +40,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.create(
@@ -56,7 +53,6 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_overload_2(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
@@ -64,7 +60,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.create(
@@ -76,7 +71,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.create(
@@ -90,13 +84,11 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.retrieve()
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.retrieve(
@@ -104,7 +96,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.retrieve()
@@ -114,7 +105,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.retrieve() as response:
@@ -126,7 +116,6 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
@@ -134,7 +123,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -146,7 +134,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -160,7 +147,6 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
@@ -168,7 +154,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -180,7 +165,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -194,7 +178,6 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_3(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
@@ -202,7 +185,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -214,7 +196,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -228,13 +209,11 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.list()
         assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.list(
@@ -248,7 +227,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.list()
@@ -258,7 +236,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.list() as response:
@@ -270,13 +247,11 @@ class TestScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.delete()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.delete(
@@ -284,7 +259,6 @@ class TestScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.runners.configurations.scm_integrations.with_raw_response.delete()
@@ -294,7 +268,6 @@ class TestScmIntegrations:
         scm_integration = response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.runners.configurations.scm_integrations.with_streaming_response.delete() as response:
@@ -310,7 +283,6 @@ class TestScmIntegrations:
 class TestAsyncScmIntegrations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
@@ -318,7 +290,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
@@ -330,7 +301,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
@@ -344,7 +314,6 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
@@ -352,7 +321,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
@@ -364,7 +332,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
@@ -378,13 +345,11 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.retrieve()
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.retrieve(
@@ -392,7 +357,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.retrieve()
@@ -402,7 +366,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.retrieve() as response:
@@ -414,7 +377,6 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
@@ -422,7 +384,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -434,7 +395,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -448,7 +408,6 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
@@ -456,7 +415,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -468,7 +426,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -482,7 +439,6 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
@@ -490,7 +446,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
@@ -502,7 +457,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
@@ -516,13 +470,11 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.list()
         assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.list(
@@ -536,7 +488,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.list()
@@ -546,7 +497,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.list() as response:
@@ -558,13 +508,11 @@ class TestAsyncScmIntegrations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.delete()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.delete(
@@ -572,7 +520,6 @@ class TestAsyncScmIntegrations:
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.runners.configurations.scm_integrations.with_raw_response.delete()
@@ -582,7 +529,6 @@ class TestAsyncScmIntegrations:
         scm_integration = await response.parse()
         assert_matches_type(object, scm_integration, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.runners.configurations.scm_integrations.with_streaming_response.delete() as response:

@@ -22,13 +22,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEditors:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         editor = client.editors.retrieve()
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.retrieve(
@@ -36,7 +34,6 @@ class TestEditors:
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.retrieve()
@@ -46,7 +43,6 @@ class TestEditors:
         editor = response.parse()
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.retrieve() as response:
@@ -58,13 +54,11 @@ class TestEditors:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         editor = client.editors.list()
         assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.list(
@@ -77,7 +71,6 @@ class TestEditors:
         )
         assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.list()
@@ -87,7 +80,6 @@ class TestEditors:
         editor = response.parse()
         assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.list() as response:
@@ -99,13 +91,11 @@ class TestEditors:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_resolve_url(self, client: Gitpod) -> None:
         editor = client.editors.resolve_url()
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_resolve_url_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.resolve_url(
@@ -115,7 +105,6 @@ class TestEditors:
         )
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_resolve_url(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.resolve_url()
@@ -125,7 +114,6 @@ class TestEditors:
         editor = response.parse()
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_resolve_url(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.resolve_url() as response:
@@ -141,13 +129,11 @@ class TestEditors:
 class TestAsyncEditors:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve()
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve(
@@ -155,7 +141,6 @@ class TestAsyncEditors:
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.retrieve()
@@ -165,7 +150,6 @@ class TestAsyncEditors:
         editor = await response.parse()
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.retrieve() as response:
@@ -177,13 +161,11 @@ class TestAsyncEditors:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.list()
         assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.list(
@@ -196,7 +178,6 @@ class TestAsyncEditors:
         )
         assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.list()
@@ -206,7 +187,6 @@ class TestAsyncEditors:
         editor = await response.parse()
         assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.list() as response:
@@ -218,13 +198,11 @@ class TestAsyncEditors:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_resolve_url(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.resolve_url()
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_resolve_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.resolve_url(
@@ -234,7 +212,6 @@ class TestAsyncEditors:
         )
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_resolve_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.resolve_url()
@@ -244,7 +221,6 @@ class TestAsyncEditors:
         editor = await response.parse()
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_resolve_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.resolve_url() as response:

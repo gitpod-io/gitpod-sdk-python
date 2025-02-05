@@ -25,13 +25,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestOrganizations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         organization = client.organizations.create()
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.create(
@@ -41,7 +39,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.create()
@@ -51,7 +48,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.create() as response:
@@ -63,13 +59,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         organization = client.organizations.retrieve()
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.retrieve(
@@ -77,7 +71,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.retrieve()
@@ -87,7 +80,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.retrieve() as response:
@@ -99,7 +91,6 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_1(self, client: Gitpod) -> None:
         organization = client.organizations.update(
@@ -107,7 +98,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
         organization = client.organizations.update(
@@ -115,7 +105,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.update(
@@ -127,7 +116,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.update(
@@ -141,7 +129,6 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_update_overload_2(self, client: Gitpod) -> None:
         organization = client.organizations.update(
@@ -149,7 +136,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.update(
@@ -161,7 +147,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.update(
@@ -175,13 +160,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         organization = client.organizations.list()
         assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.list(
@@ -195,7 +178,6 @@ class TestOrganizations:
         )
         assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.list()
@@ -205,7 +187,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.list() as response:
@@ -217,13 +198,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         organization = client.organizations.delete()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.delete(
@@ -231,7 +210,6 @@ class TestOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.delete()
@@ -241,7 +219,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.delete() as response:
@@ -253,7 +230,6 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_join_overload_1(self, client: Gitpod) -> None:
         organization = client.organizations.join(
@@ -261,7 +237,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_join_overload_1(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.join(
@@ -273,7 +248,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_join_overload_1(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.join(
@@ -287,7 +261,6 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_join_overload_2(self, client: Gitpod) -> None:
         organization = client.organizations.join(
@@ -295,7 +268,6 @@ class TestOrganizations:
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_join_overload_2(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.join(
@@ -307,7 +279,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_join_overload_2(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.join(
@@ -321,13 +292,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_leave(self, client: Gitpod) -> None:
         organization = client.organizations.leave()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_leave_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.leave(
@@ -335,7 +304,6 @@ class TestOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_leave(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.leave()
@@ -345,7 +313,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_leave(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.leave() as response:
@@ -357,13 +324,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_members(self, client: Gitpod) -> None:
         organization = client.organizations.list_members()
         assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_members_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.list_members(
@@ -377,7 +342,6 @@ class TestOrganizations:
         )
         assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list_members(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.list_members()
@@ -387,7 +351,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list_members(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.list_members() as response:
@@ -399,13 +362,11 @@ class TestOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_set_role(self, client: Gitpod) -> None:
         organization = client.organizations.set_role()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_set_role_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.set_role(
@@ -415,7 +376,6 @@ class TestOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_set_role(self, client: Gitpod) -> None:
         response = client.organizations.with_raw_response.set_role()
@@ -425,7 +385,6 @@ class TestOrganizations:
         organization = response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_set_role(self, client: Gitpod) -> None:
         with client.organizations.with_streaming_response.set_role() as response:
@@ -441,13 +400,11 @@ class TestOrganizations:
 class TestAsyncOrganizations:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.create()
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.create(
@@ -457,7 +414,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.create()
@@ -467,7 +423,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.create() as response:
@@ -479,13 +434,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.retrieve()
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.retrieve(
@@ -493,7 +446,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.retrieve()
@@ -503,7 +455,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.retrieve() as response:
@@ -515,7 +466,6 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
@@ -523,7 +473,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
@@ -531,7 +480,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.update(
@@ -543,7 +491,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.update(
@@ -557,7 +504,6 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
@@ -565,7 +511,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.update(
@@ -577,7 +522,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.update(
@@ -591,13 +535,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list()
         assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list(
@@ -611,7 +553,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.list()
@@ -621,7 +562,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.list() as response:
@@ -633,13 +573,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.delete()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.delete(
@@ -647,7 +585,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.delete()
@@ -657,7 +594,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.delete() as response:
@@ -669,7 +605,6 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_join_overload_1(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.join(
@@ -677,7 +612,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_join_overload_1(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.join(
@@ -689,7 +623,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_join_overload_1(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.join(
@@ -703,7 +636,6 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_join_overload_2(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.join(
@@ -711,7 +643,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_join_overload_2(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.join(
@@ -723,7 +654,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_join_overload_2(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.join(
@@ -737,13 +667,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_leave(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.leave()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_leave_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.leave(
@@ -751,7 +679,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_leave(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.leave()
@@ -761,7 +688,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_leave(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.leave() as response:
@@ -773,13 +699,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_members(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members()
         assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_members_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members(
@@ -793,7 +717,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list_members(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.list_members()
@@ -803,7 +726,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list_members(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.list_members() as response:
@@ -815,13 +737,11 @@ class TestAsyncOrganizations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_set_role(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.set_role()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_set_role_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.set_role(
@@ -831,7 +751,6 @@ class TestAsyncOrganizations:
         )
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_set_role(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.with_raw_response.set_role()
@@ -841,7 +760,6 @@ class TestAsyncOrganizations:
         organization = await response.parse()
         assert_matches_type(object, organization, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_set_role(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.with_streaming_response.set_role() as response:
