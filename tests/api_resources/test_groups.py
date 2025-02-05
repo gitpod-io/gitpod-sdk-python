@@ -18,13 +18,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestGroups:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         group = client.groups.list()
         assert_matches_type(SyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.list(
@@ -37,7 +35,6 @@ class TestGroups:
         )
         assert_matches_type(SyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.list()
@@ -47,7 +44,6 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(SyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.list() as response:
@@ -63,13 +59,11 @@ class TestGroups:
 class TestAsyncGroups:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.list()
         assert_matches_type(AsyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.list(
@@ -82,7 +76,6 @@ class TestAsyncGroups:
         )
         assert_matches_type(AsyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.list()
@@ -92,7 +85,6 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(AsyncGroupsPage[GroupListResponse], group, path=["response"])
 
-    @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.list() as response:

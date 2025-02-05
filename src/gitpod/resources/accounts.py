@@ -55,7 +55,7 @@ class AccountsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        body: object,
+        empty: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,7 +77,7 @@ class AccountsResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.AccountService/GetAccount",
-            body=maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
+            body=maybe_transform({"empty": empty}, account_retrieve_params.AccountRetrieveParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -243,7 +243,7 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        body: object,
+        empty: bool | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -265,7 +265,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         return await self._post(
             "/gitpod.v1.AccountService/GetAccount",
-            body=await async_maybe_transform(body, account_retrieve_params.AccountRetrieveParams),
+            body=await async_maybe_transform({"empty": empty}, account_retrieve_params.AccountRetrieveParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
