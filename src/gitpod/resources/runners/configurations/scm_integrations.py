@@ -20,7 +20,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ....pagination import SyncIntegrationsPage, AsyncIntegrationsPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.runners.configurations import (
     scm_integration_list_params,
@@ -312,7 +312,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[ScmIntegrationListResponse]:
+    ) -> SyncIntegrationsPage[ScmIntegrationListResponse]:
         """
         ListSCMIntegrations returns all SCM integrations configured for a runner.
 
@@ -329,7 +329,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListSCMIntegrations",
-            page=SyncPersonalAccessTokensPage[ScmIntegrationListResponse],
+            page=SyncIntegrationsPage[ScmIntegrationListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -663,7 +663,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ScmIntegrationListResponse, AsyncPersonalAccessTokensPage[ScmIntegrationListResponse]]:
+    ) -> AsyncPaginator[ScmIntegrationListResponse, AsyncIntegrationsPage[ScmIntegrationListResponse]]:
         """
         ListSCMIntegrations returns all SCM integrations configured for a runner.
 
@@ -680,7 +680,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListSCMIntegrations",
-            page=AsyncPersonalAccessTokensPage[ScmIntegrationListResponse],
+            page=AsyncIntegrationsPage[ScmIntegrationListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

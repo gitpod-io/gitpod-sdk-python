@@ -9,7 +9,7 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncIntegrationsPage, AsyncIntegrationsPage
 from gitpod.types.runners.configurations import (
     ScmIntegrationListResponse,
     ScmIntegrationCreateResponse,
@@ -212,9 +212,7 @@ class TestScmIntegrations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.list()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -227,9 +225,7 @@ class TestScmIntegrations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -238,9 +234,7 @@ class TestScmIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scm_integration = response.parse()
-        assert_matches_type(
-            SyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -249,9 +243,7 @@ class TestScmIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scm_integration = response.parse()
-            assert_matches_type(
-                SyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-            )
+            assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -481,9 +473,7 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.list()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -496,9 +486,7 @@ class TestAsyncScmIntegrations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -507,9 +495,7 @@ class TestAsyncScmIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scm_integration = await response.parse()
-        assert_matches_type(
-            AsyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-        )
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -518,9 +504,7 @@ class TestAsyncScmIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scm_integration = await response.parse()
-            assert_matches_type(
-                AsyncPersonalAccessTokensPage[ScmIntegrationListResponse], scm_integration, path=["response"]
-            )
+            assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

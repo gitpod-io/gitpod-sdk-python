@@ -17,7 +17,7 @@ from gitpod.types import (
     EnvironmentCreateFromProjectResponse,
 )
 from gitpod._utils import parse_datetime
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncEnvironmentsPage, AsyncEnvironmentsPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -199,7 +199,7 @@ class TestEnvironments:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         environment = client.environments.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -219,7 +219,7 @@ class TestEnvironments:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -228,7 +228,7 @@ class TestEnvironments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -237,7 +237,7 @@ class TestEnvironments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+            assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -662,7 +662,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -682,7 +682,7 @@ class TestAsyncEnvironments:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -691,7 +691,7 @@ class TestAsyncEnvironments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -700,7 +700,7 @@ class TestAsyncEnvironments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[EnvironmentListResponse], environment, path=["response"])
+            assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

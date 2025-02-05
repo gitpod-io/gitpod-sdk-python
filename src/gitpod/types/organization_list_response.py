@@ -7,15 +7,15 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["OrganizationListResponse", "Organization", "OrganizationInviteDomains", "Pagination"]
+__all__ = ["OrganizationListResponse", "InviteDomains"]
 
 
-class OrganizationInviteDomains(BaseModel):
+class InviteDomains(BaseModel):
     domains: Optional[List[str]] = None
     """domains is the list of domains that are allowed to join the organization"""
 
 
-class Organization(BaseModel):
+class OrganizationListResponse(BaseModel):
     id: Optional[str] = None
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
@@ -110,7 +110,7 @@ class Organization(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    invite_domains: Optional[OrganizationInviteDomains] = FieldInfo(alias="inviteDomains", default=None)
+    invite_domains: Optional[InviteDomains] = FieldInfo(alias="inviteDomains", default=None)
 
     name: Optional[str] = None
 
@@ -205,19 +205,3 @@ class Organization(BaseModel):
     [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
     to obtain a formatter capable of generating timestamps in this format.
     """
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class OrganizationListResponse(BaseModel):
-    organizations: Optional[List[Organization]] = None
-    """organizations are the organizations that matched the query"""
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing organizations"""

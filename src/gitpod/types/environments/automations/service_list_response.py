@@ -10,31 +10,21 @@ from ...._models import BaseModel
 
 __all__ = [
     "ServiceListResponse",
-    "Pagination",
-    "Service",
-    "ServiceMetadata",
-    "ServiceMetadataCreator",
-    "ServiceMetadataTriggeredBy",
-    "ServiceMetadataTriggeredByManual",
-    "ServiceMetadataTriggeredByPostDevcontainerStart",
-    "ServiceMetadataTriggeredByPostEnvironmentStart",
-    "ServiceSpec",
-    "ServiceSpecCommands",
-    "ServiceSpecRunsOn",
-    "ServiceSpecRunsOnDocker",
-    "ServiceStatus",
+    "Metadata",
+    "MetadataCreator",
+    "MetadataTriggeredBy",
+    "MetadataTriggeredByManual",
+    "MetadataTriggeredByPostDevcontainerStart",
+    "MetadataTriggeredByPostEnvironmentStart",
+    "Spec",
+    "SpecCommands",
+    "SpecRunsOn",
+    "SpecRunsOnDocker",
+    "Status",
 ]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class ServiceMetadataCreator(BaseModel):
+class MetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -51,26 +41,24 @@ class ServiceMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class ServiceMetadataTriggeredByManual(BaseModel):
+class MetadataTriggeredByManual(BaseModel):
     manual: bool
 
 
-class ServiceMetadataTriggeredByPostDevcontainerStart(BaseModel):
+class MetadataTriggeredByPostDevcontainerStart(BaseModel):
     post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
 
 
-class ServiceMetadataTriggeredByPostEnvironmentStart(BaseModel):
+class MetadataTriggeredByPostEnvironmentStart(BaseModel):
     post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
 
 
-ServiceMetadataTriggeredBy: TypeAlias = Union[
-    ServiceMetadataTriggeredByManual,
-    ServiceMetadataTriggeredByPostDevcontainerStart,
-    ServiceMetadataTriggeredByPostEnvironmentStart,
+MetadataTriggeredBy: TypeAlias = Union[
+    MetadataTriggeredByManual, MetadataTriggeredByPostDevcontainerStart, MetadataTriggeredByPostEnvironmentStart
 ]
 
 
-class ServiceMetadata(BaseModel):
+class Metadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -163,7 +151,7 @@ class ServiceMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[ServiceMetadataCreator] = None
+    creator: Optional[MetadataCreator] = None
     """creator describes the principal who created the service."""
 
     description: Optional[str] = None
@@ -186,11 +174,11 @@ class ServiceMetadata(BaseModel):
     identify the service in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[ServiceMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[MetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the service."""
 
 
-class ServiceSpecCommands(BaseModel):
+class SpecCommands(BaseModel):
     ready: Optional[str] = None
     """
     ready is an optional command that is run repeatedly until it exits with a zero
@@ -220,18 +208,18 @@ class ServiceSpecCommands(BaseModel):
     """
 
 
-class ServiceSpecRunsOnDocker(BaseModel):
+class SpecRunsOnDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class ServiceSpecRunsOn(BaseModel):
-    docker: ServiceSpecRunsOnDocker
+class SpecRunsOn(BaseModel):
+    docker: SpecRunsOnDocker
 
 
-class ServiceSpec(BaseModel):
-    commands: Optional[ServiceSpecCommands] = None
+class Spec(BaseModel):
+    commands: Optional[SpecCommands] = None
     """
     commands contains the commands to start, stop and check the readiness of the
     service
@@ -253,7 +241,7 @@ class ServiceSpec(BaseModel):
     Used to start or stop the service.
     """
 
-    runs_on: Optional[ServiceSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[SpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the service should run on."""
 
     session: Optional[str] = None
@@ -271,7 +259,7 @@ class ServiceSpec(BaseModel):
     """
 
 
-class ServiceStatus(BaseModel):
+class Status(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message summarises why the service failed to operate.
 
@@ -308,19 +296,13 @@ class ServiceStatus(BaseModel):
     """
 
 
-class Service(BaseModel):
+class ServiceListResponse(BaseModel):
     id: Optional[str] = None
 
     environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
 
-    metadata: Optional[ServiceMetadata] = None
+    metadata: Optional[Metadata] = None
 
-    spec: Optional[ServiceSpec] = None
+    spec: Optional[Spec] = None
 
-    status: Optional[ServiceStatus] = None
-
-
-class ServiceListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-
-    services: Optional[List[Service]] = None
+    status: Optional[Status] = None

@@ -14,7 +14,7 @@ from gitpod.types import (
     SecretCreateResponse,
     SecretGetValueResponse,
 )
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncSecretsPage, AsyncSecretsPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -107,7 +107,7 @@ class TestSecrets:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         secret = client.secrets.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -120,7 +120,7 @@ class TestSecrets:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -129,7 +129,7 @@ class TestSecrets:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         secret = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -138,7 +138,7 @@ class TestSecrets:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             secret = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+            assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -328,7 +328,7 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -341,7 +341,7 @@ class TestAsyncSecrets:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -350,7 +350,7 @@ class TestAsyncSecrets:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         secret = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -359,7 +359,7 @@ class TestAsyncSecrets:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             secret = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[SecretListResponse], secret, path=["response"])
+            assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

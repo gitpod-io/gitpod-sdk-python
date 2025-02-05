@@ -10,29 +10,19 @@ from ...._models import BaseModel
 
 __all__ = [
     "TaskListResponse",
-    "Pagination",
-    "Task",
-    "TaskMetadata",
-    "TaskMetadataCreator",
-    "TaskMetadataTriggeredBy",
-    "TaskMetadataTriggeredByManual",
-    "TaskMetadataTriggeredByPostDevcontainerStart",
-    "TaskMetadataTriggeredByPostEnvironmentStart",
-    "TaskSpec",
-    "TaskSpecRunsOn",
-    "TaskSpecRunsOnDocker",
+    "Metadata",
+    "MetadataCreator",
+    "MetadataTriggeredBy",
+    "MetadataTriggeredByManual",
+    "MetadataTriggeredByPostDevcontainerStart",
+    "MetadataTriggeredByPostEnvironmentStart",
+    "Spec",
+    "SpecRunsOn",
+    "SpecRunsOnDocker",
 ]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class TaskMetadataCreator(BaseModel):
+class MetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -49,26 +39,24 @@ class TaskMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class TaskMetadataTriggeredByManual(BaseModel):
+class MetadataTriggeredByManual(BaseModel):
     manual: bool
 
 
-class TaskMetadataTriggeredByPostDevcontainerStart(BaseModel):
+class MetadataTriggeredByPostDevcontainerStart(BaseModel):
     post_devcontainer_start: bool = FieldInfo(alias="postDevcontainerStart")
 
 
-class TaskMetadataTriggeredByPostEnvironmentStart(BaseModel):
+class MetadataTriggeredByPostEnvironmentStart(BaseModel):
     post_environment_start: bool = FieldInfo(alias="postEnvironmentStart")
 
 
-TaskMetadataTriggeredBy: TypeAlias = Union[
-    TaskMetadataTriggeredByManual,
-    TaskMetadataTriggeredByPostDevcontainerStart,
-    TaskMetadataTriggeredByPostEnvironmentStart,
+MetadataTriggeredBy: TypeAlias = Union[
+    MetadataTriggeredByManual, MetadataTriggeredByPostDevcontainerStart, MetadataTriggeredByPostEnvironmentStart
 ]
 
 
-class TaskMetadata(BaseModel):
+class Metadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -161,7 +149,7 @@ class TaskMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[TaskMetadataCreator] = None
+    creator: Optional[MetadataCreator] = None
     """creator describes the principal who created the task."""
 
     description: Optional[str] = None
@@ -184,29 +172,29 @@ class TaskMetadata(BaseModel):
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[TaskMetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[MetadataTriggeredBy]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the task."""
 
 
-class TaskSpecRunsOnDocker(BaseModel):
+class SpecRunsOnDocker(BaseModel):
     environment: Optional[List[str]] = None
 
     image: Optional[str] = None
 
 
-class TaskSpecRunsOn(BaseModel):
-    docker: TaskSpecRunsOnDocker
+class SpecRunsOn(BaseModel):
+    docker: SpecRunsOnDocker
 
 
-class TaskSpec(BaseModel):
+class Spec(BaseModel):
     command: Optional[str] = None
     """command contains the command the task should execute"""
 
-    runs_on: Optional[TaskSpecRunsOn] = FieldInfo(alias="runsOn", default=None)
+    runs_on: Optional[SpecRunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the task should run on."""
 
 
-class Task(BaseModel):
+class TaskListResponse(BaseModel):
     id: Optional[str] = None
 
     depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
@@ -214,12 +202,6 @@ class Task(BaseModel):
 
     environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
 
-    metadata: Optional[TaskMetadata] = None
+    metadata: Optional[Metadata] = None
 
-    spec: Optional[TaskSpec] = None
-
-
-class TaskListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-
-    tasks: Optional[List[Task]] = None
+    spec: Optional[Spec] = None

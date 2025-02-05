@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import EventListResponse, EventWatchResponse
-from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from gitpod.pagination import SyncEntriesPage, AsyncEntriesPage
 from gitpod._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -22,7 +22,7 @@ class TestEvents:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         event = client.events.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
@@ -40,7 +40,7 @@ class TestEvents:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
@@ -49,7 +49,7 @@ class TestEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
@@ -58,7 +58,7 @@ class TestEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+            assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -137,7 +137,7 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
@@ -155,7 +155,7 @@ class TestAsyncEvents:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
@@ -164,7 +164,7 @@ class TestAsyncEvents:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         event = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+        assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
@@ -173,7 +173,7 @@ class TestAsyncEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             event = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[EventListResponse], event, path=["response"])
+            assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

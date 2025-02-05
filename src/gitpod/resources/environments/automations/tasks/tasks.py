@@ -27,7 +27,7 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .....pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from .....pagination import SyncTasksPage, AsyncTasksPage
 from ....._base_client import AsyncPaginator, make_request_options
 from .....types.environments.automations import (
     task_list_params,
@@ -202,7 +202,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[TaskListResponse]:
+    ) -> SyncTasksPage[TaskListResponse]:
         """
         ListTasks
 
@@ -221,7 +221,7 @@ class TasksResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            page=SyncPersonalAccessTokensPage[TaskListResponse],
+            page=SyncTasksPage[TaskListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -470,7 +470,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[TaskListResponse, AsyncPersonalAccessTokensPage[TaskListResponse]]:
+    ) -> AsyncPaginator[TaskListResponse, AsyncTasksPage[TaskListResponse]]:
         """
         ListTasks
 
@@ -489,7 +489,7 @@ class AsyncTasksResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            page=AsyncPersonalAccessTokensPage[TaskListResponse],
+            page=AsyncTasksPage[TaskListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

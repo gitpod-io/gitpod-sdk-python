@@ -22,7 +22,7 @@ from ...._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ....pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ....pagination import SyncTokensPage, AsyncTokensPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.runners.configurations import (
     host_authentication_token_list_params,
@@ -449,7 +449,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse]:
+    ) -> SyncTokensPage[HostAuthenticationTokenListResponse]:
         """
         ListHostAuthenticationTokens
 
@@ -464,7 +464,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
-            page=SyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
+            page=SyncTokensPage[HostAuthenticationTokenListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -931,9 +931,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[
-        HostAuthenticationTokenListResponse, AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse]
-    ]:
+    ) -> AsyncPaginator[HostAuthenticationTokenListResponse, AsyncTokensPage[HostAuthenticationTokenListResponse]]:
         """
         ListHostAuthenticationTokens
 
@@ -948,7 +946,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
-            page=AsyncPersonalAccessTokensPage[HostAuthenticationTokenListResponse],
+            page=AsyncTokensPage[HostAuthenticationTokenListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

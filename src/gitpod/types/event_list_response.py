@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,10 +8,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["EventListResponse", "Entry", "Pagination"]
+__all__ = ["EventListResponse"]
 
 
-class Entry(BaseModel):
+class EventListResponse(BaseModel):
     id: Optional[str] = None
 
     action: Optional[str] = None
@@ -145,18 +145,3 @@ class Entry(BaseModel):
             "RESOURCE_TYPE_SSO_CONFIG",
         ]
     ] = FieldInfo(alias="subjectType", default=None)
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class EventListResponse(BaseModel):
-    entries: Optional[List[Entry]] = None
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing environments"""

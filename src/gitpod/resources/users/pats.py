@@ -17,9 +17,8 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
 from ...types.users import pat_get_params, pat_list_params, pat_delete_params
-from ..._base_client import AsyncPaginator, make_request_options
+from ..._base_client import make_request_options
 from ...types.users.pat_get_response import PatGetResponse
 from ...types.users.pat_list_response import PatListResponse
 
@@ -59,7 +58,7 @@ class PatsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[PatListResponse]:
+    ) -> PatListResponse:
         """
         ListPersonalAccessTokens
 
@@ -72,9 +71,8 @@ class PatsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return self._post(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
-            page=SyncPersonalAccessTokensPage[PatListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -95,8 +93,7 @@ class PatsResource(SyncAPIResource):
                     pat_list_params.PatListParams,
                 ),
             ),
-            model=PatListResponse,
-            method="post",
+            cast_to=PatListResponse,
         )
 
     def delete(
@@ -186,7 +183,7 @@ class AsyncPatsResource(AsyncAPIResource):
         """
         return AsyncPatsResourceWithStreamingResponse(self)
 
-    def list(
+    async def list(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
@@ -199,7 +196,7 @@ class AsyncPatsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[PatListResponse, AsyncPersonalAccessTokensPage[PatListResponse]]:
+    ) -> PatListResponse:
         """
         ListPersonalAccessTokens
 
@@ -212,10 +209,9 @@ class AsyncPatsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return await self._post(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
-            page=AsyncPersonalAccessTokensPage[PatListResponse],
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
@@ -227,7 +223,7 @@ class AsyncPatsResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -235,8 +231,7 @@ class AsyncPatsResource(AsyncAPIResource):
                     pat_list_params.PatListParams,
                 ),
             ),
-            model=PatListResponse,
-            method="post",
+            cast_to=PatListResponse,
         )
 
     async def delete(

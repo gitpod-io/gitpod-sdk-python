@@ -10,35 +10,23 @@ from .._models import BaseModel
 
 __all__ = [
     "ProjectListResponse",
-    "Pagination",
-    "Project",
-    "ProjectEnvironmentClass",
-    "ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass",
-    "ProjectEnvironmentClassUseALocalRunnerForTheUser",
-    "ProjectInitializer",
-    "ProjectInitializerSpec",
-    "ProjectInitializerSpecContextURL",
-    "ProjectInitializerSpecContextURLContextURL",
-    "ProjectInitializerSpecGit",
-    "ProjectInitializerSpecGitGit",
-    "ProjectMetadata",
-    "ProjectMetadataCreator",
-    "ProjectUsedBy",
-    "ProjectUsedBySubject",
+    "EnvironmentClass",
+    "EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass",
+    "EnvironmentClassUseALocalRunnerForTheUser",
+    "Initializer",
+    "InitializerSpec",
+    "InitializerSpecContextURL",
+    "InitializerSpecContextURLContextURL",
+    "InitializerSpecGit",
+    "InitializerSpecGitGit",
+    "Metadata",
+    "MetadataCreator",
+    "UsedBy",
+    "UsedBySubject",
 ]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(
-    BaseModel
-):
+class EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass(BaseModel):
     environment_class_id: str = FieldInfo(alias="environmentClassId")
     """Use a fixed environment class on a given Runner.
 
@@ -46,27 +34,27 @@ class ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBe
     """
 
 
-class ProjectEnvironmentClassUseALocalRunnerForTheUser(BaseModel):
+class EnvironmentClassUseALocalRunnerForTheUser(BaseModel):
     local_runner: bool = FieldInfo(alias="localRunner")
     """Use a local runner for the user"""
 
 
-ProjectEnvironmentClass: TypeAlias = Union[
-    ProjectEnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass,
-    ProjectEnvironmentClassUseALocalRunnerForTheUser,
+EnvironmentClass: TypeAlias = Union[
+    EnvironmentClassUseAFixedEnvironmentClassOnAGivenRunnerThisCannotBeALocalRunnerSEnvironmentClass,
+    EnvironmentClassUseALocalRunnerForTheUser,
 ]
 
 
-class ProjectInitializerSpecContextURLContextURL(BaseModel):
+class InitializerSpecContextURLContextURL(BaseModel):
     url: Optional[str] = None
     """url is the URL from which the environment is created"""
 
 
-class ProjectInitializerSpecContextURL(BaseModel):
-    context_url: ProjectInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
+class InitializerSpecContextURL(BaseModel):
+    context_url: InitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
 
 
-class ProjectInitializerSpecGitGit(BaseModel):
+class InitializerSpecGitGit(BaseModel):
     checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
     """
     a path relative to the environment root in which the code will be checked out to
@@ -93,18 +81,18 @@ class ProjectInitializerSpecGitGit(BaseModel):
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class ProjectInitializerSpecGit(BaseModel):
-    git: ProjectInitializerSpecGitGit
+class InitializerSpecGit(BaseModel):
+    git: InitializerSpecGitGit
 
 
-ProjectInitializerSpec: TypeAlias = Union[ProjectInitializerSpecContextURL, ProjectInitializerSpecGit]
+InitializerSpec: TypeAlias = Union[InitializerSpecContextURL, InitializerSpecGit]
 
 
-class ProjectInitializer(BaseModel):
-    specs: Optional[List[ProjectInitializerSpec]] = None
+class Initializer(BaseModel):
+    specs: Optional[List[InitializerSpec]] = None
 
 
-class ProjectMetadataCreator(BaseModel):
+class MetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -121,7 +109,7 @@ class ProjectMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class ProjectMetadata(BaseModel):
+class Metadata(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -214,7 +202,7 @@ class ProjectMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[ProjectMetadataCreator] = None
+    creator: Optional[MetadataCreator] = None
     """creator is the identity of the project creator"""
 
     name: Optional[str] = None
@@ -316,7 +304,7 @@ class ProjectMetadata(BaseModel):
     """
 
 
-class ProjectUsedBySubject(BaseModel):
+class UsedBySubject(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -333,8 +321,8 @@ class ProjectUsedBySubject(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class ProjectUsedBy(BaseModel):
-    subjects: Optional[List[ProjectUsedBySubject]] = None
+class UsedBy(BaseModel):
+    subjects: Optional[List[UsedBySubject]] = None
     """
     Subjects are the 10 most recent subjects who have used the project to create an
     environment
@@ -344,8 +332,8 @@ class ProjectUsedBy(BaseModel):
     """Total number of unique subjects who have used the project"""
 
 
-class Project(BaseModel):
-    environment_class: ProjectEnvironmentClass = FieldInfo(alias="environmentClass")
+class ProjectListResponse(BaseModel):
+    environment_class: EnvironmentClass = FieldInfo(alias="environmentClass")
 
     id: Optional[str] = None
     """id is the unique identifier for the project"""
@@ -362,16 +350,9 @@ class Project(BaseModel):
     root
     """
 
-    initializer: Optional[ProjectInitializer] = None
+    initializer: Optional[Initializer] = None
     """EnvironmentInitializer specifies how an environment is to be initialized"""
 
-    metadata: Optional[ProjectMetadata] = None
+    metadata: Optional[Metadata] = None
 
-    used_by: Optional[ProjectUsedBy] = FieldInfo(alias="usedBy", default=None)
-
-
-class ProjectListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing organizations"""
-
-    projects: Optional[List[Project]] = None
+    used_by: Optional[UsedBy] = FieldInfo(alias="usedBy", default=None)

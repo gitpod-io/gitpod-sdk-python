@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -8,18 +8,10 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 
-__all__ = ["HostAuthenticationTokenListResponse", "Pagination", "Token"]
+__all__ = ["HostAuthenticationTokenListResponse"]
 
 
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class Token(BaseModel):
+class HostAuthenticationTokenListResponse(BaseModel):
     id: Optional[str] = None
 
     expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
@@ -127,9 +119,3 @@ class Token(BaseModel):
     ] = None
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
-
-
-class HostAuthenticationTokenListResponse(BaseModel):
-    pagination: Optional[Pagination] = None
-
-    tokens: Optional[List[Token]] = None

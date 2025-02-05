@@ -38,7 +38,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
+from ...pagination import SyncRunnersPage, AsyncRunnersPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.runner_list_response import RunnerListResponse
 from .configurations.configurations import (
@@ -276,7 +276,7 @@ class RunnersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[RunnerListResponse]:
+    ) -> SyncRunnersPage[RunnerListResponse]:
         """
         ListRunners returns all runners registered in the scope.
 
@@ -293,7 +293,7 @@ class RunnersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
-            page=SyncPersonalAccessTokensPage[RunnerListResponse],
+            page=SyncRunnersPage[RunnerListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -710,7 +710,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[RunnerListResponse, AsyncPersonalAccessTokensPage[RunnerListResponse]]:
+    ) -> AsyncPaginator[RunnerListResponse, AsyncRunnersPage[RunnerListResponse]]:
         """
         ListRunners returns all runners registered in the scope.
 
@@ -727,7 +727,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
-            page=AsyncPersonalAccessTokensPage[RunnerListResponse],
+            page=AsyncRunnersPage[RunnerListResponse],
             body=maybe_transform(
                 {
                     "filter": filter,

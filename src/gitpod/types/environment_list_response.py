@@ -10,47 +10,45 @@ from .._models import BaseModel
 
 __all__ = [
     "EnvironmentListResponse",
-    "Environment",
-    "EnvironmentMetadata",
-    "EnvironmentMetadataCreator",
-    "EnvironmentSpec",
-    "EnvironmentSpecAutomationsFile",
-    "EnvironmentSpecContent",
-    "EnvironmentSpecContentInitializer",
-    "EnvironmentSpecContentInitializerSpec",
-    "EnvironmentSpecContentInitializerSpecContextURL",
-    "EnvironmentSpecContentInitializerSpecContextURLContextURL",
-    "EnvironmentSpecContentInitializerSpecGit",
-    "EnvironmentSpecContentInitializerSpecGitGit",
-    "EnvironmentSpecDevcontainer",
-    "EnvironmentSpecMachine",
-    "EnvironmentSpecPort",
-    "EnvironmentSpecSecret",
-    "EnvironmentSpecSecretUnionMember0",
-    "EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
-    "EnvironmentSpecSecretUnionMember2",
-    "EnvironmentSpecSSHPublicKey",
-    "EnvironmentSpecTimeout",
-    "EnvironmentStatus",
-    "EnvironmentStatusActivitySignal",
-    "EnvironmentStatusAutomationsFile",
-    "EnvironmentStatusContent",
-    "EnvironmentStatusContentGit",
-    "EnvironmentStatusContentGitChangedFile",
-    "EnvironmentStatusDevcontainer",
-    "EnvironmentStatusEnvironmentURLs",
-    "EnvironmentStatusEnvironmentURLsPort",
-    "EnvironmentStatusEnvironmentURLsSSH",
-    "EnvironmentStatusMachine",
-    "EnvironmentStatusMachineVersions",
-    "EnvironmentStatusRunnerAck",
-    "EnvironmentStatusSecret",
-    "EnvironmentStatusSSHPublicKey",
-    "Pagination",
+    "Metadata",
+    "MetadataCreator",
+    "Spec",
+    "SpecAutomationsFile",
+    "SpecContent",
+    "SpecContentInitializer",
+    "SpecContentInitializerSpec",
+    "SpecContentInitializerSpecContextURL",
+    "SpecContentInitializerSpecContextURLContextURL",
+    "SpecContentInitializerSpecGit",
+    "SpecContentInitializerSpecGitGit",
+    "SpecDevcontainer",
+    "SpecMachine",
+    "SpecPort",
+    "SpecSecret",
+    "SpecSecretUnionMember0",
+    "SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted",
+    "SpecSecretUnionMember2",
+    "SpecSSHPublicKey",
+    "SpecTimeout",
+    "Status",
+    "StatusActivitySignal",
+    "StatusAutomationsFile",
+    "StatusContent",
+    "StatusContentGit",
+    "StatusContentGitChangedFile",
+    "StatusDevcontainer",
+    "StatusEnvironmentURLs",
+    "StatusEnvironmentURLsPort",
+    "StatusEnvironmentURLsSSH",
+    "StatusMachine",
+    "StatusMachineVersions",
+    "StatusRunnerAck",
+    "StatusSecret",
+    "StatusSSHPublicKey",
 ]
 
 
-class EnvironmentMetadataCreator(BaseModel):
+class MetadataCreator(BaseModel):
     id: Optional[str] = None
     """id is the UUID of the subject"""
 
@@ -67,7 +65,7 @@ class EnvironmentMetadataCreator(BaseModel):
     """Principal is the principal of the subject"""
 
 
-class EnvironmentMetadata(BaseModel):
+class Metadata(BaseModel):
     annotations: Optional[Dict[str, str]] = None
     """
     annotations are key/value pairs that gets attached to the environment.
@@ -166,7 +164,7 @@ class EnvironmentMetadata(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Optional[EnvironmentMetadataCreator] = None
+    creator: Optional[MetadataCreator] = None
     """creator is the identity of the creator of the environment"""
 
     last_started_at: Optional[datetime] = FieldInfo(alias="lastStartedAt", default=None)
@@ -283,7 +281,7 @@ class EnvironmentMetadata(BaseModel):
     """Runner is the ID of the runner that runs this environment."""
 
 
-class EnvironmentSpecAutomationsFile(BaseModel):
+class SpecAutomationsFile(BaseModel):
     automations_file_path: Optional[str] = FieldInfo(alias="automationsFilePath", default=None)
     """
     automations_file_path is the path to the automations file that is applied in the
@@ -298,16 +296,16 @@ class EnvironmentSpecAutomationsFile(BaseModel):
     session: Optional[str] = None
 
 
-class EnvironmentSpecContentInitializerSpecContextURLContextURL(BaseModel):
+class SpecContentInitializerSpecContextURLContextURL(BaseModel):
     url: Optional[str] = None
     """url is the URL from which the environment is created"""
 
 
-class EnvironmentSpecContentInitializerSpecContextURL(BaseModel):
-    context_url: EnvironmentSpecContentInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
+class SpecContentInitializerSpecContextURL(BaseModel):
+    context_url: SpecContentInitializerSpecContextURLContextURL = FieldInfo(alias="contextUrl")
 
 
-class EnvironmentSpecContentInitializerSpecGitGit(BaseModel):
+class SpecContentInitializerSpecGitGit(BaseModel):
     checkout_location: Optional[str] = FieldInfo(alias="checkoutLocation", default=None)
     """
     a path relative to the environment root in which the code will be checked out to
@@ -334,33 +332,31 @@ class EnvironmentSpecContentInitializerSpecGitGit(BaseModel):
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class EnvironmentSpecContentInitializerSpecGit(BaseModel):
-    git: EnvironmentSpecContentInitializerSpecGitGit
+class SpecContentInitializerSpecGit(BaseModel):
+    git: SpecContentInitializerSpecGitGit
 
 
-EnvironmentSpecContentInitializerSpec: TypeAlias = Union[
-    EnvironmentSpecContentInitializerSpecContextURL, EnvironmentSpecContentInitializerSpecGit
-]
+SpecContentInitializerSpec: TypeAlias = Union[SpecContentInitializerSpecContextURL, SpecContentInitializerSpecGit]
 
 
-class EnvironmentSpecContentInitializer(BaseModel):
-    specs: Optional[List[EnvironmentSpecContentInitializerSpec]] = None
+class SpecContentInitializer(BaseModel):
+    specs: Optional[List[SpecContentInitializerSpec]] = None
 
 
-class EnvironmentSpecContent(BaseModel):
+class SpecContent(BaseModel):
     git_email: Optional[str] = FieldInfo(alias="gitEmail", default=None)
     """The Git email address"""
 
     git_username: Optional[str] = FieldInfo(alias="gitUsername", default=None)
     """The Git username"""
 
-    initializer: Optional[EnvironmentSpecContentInitializer] = None
+    initializer: Optional[SpecContentInitializer] = None
     """EnvironmentInitializer specifies how an environment is to be initialized"""
 
     session: Optional[str] = None
 
 
-class EnvironmentSpecDevcontainer(BaseModel):
+class SpecDevcontainer(BaseModel):
     devcontainer_file_path: Optional[str] = FieldInfo(alias="devcontainerFilePath", default=None)
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
@@ -374,14 +370,14 @@ class EnvironmentSpecDevcontainer(BaseModel):
     session: Optional[str] = None
 
 
-class EnvironmentSpecMachine(BaseModel):
+class SpecMachine(BaseModel):
     class_: Optional[str] = FieldInfo(alias="class", default=None)
     """Class denotes the class of the environment we ought to start"""
 
     session: Optional[str] = None
 
 
-class EnvironmentSpecPort(BaseModel):
+class SpecPort(BaseModel):
     admission: Optional[
         Literal["ADMISSION_LEVEL_UNSPECIFIED", "ADMISSION_LEVEL_OWNER_ONLY", "ADMISSION_LEVEL_EVERYONE"]
     ] = None
@@ -394,7 +390,7 @@ class EnvironmentSpecPort(BaseModel):
     """port number"""
 
 
-class EnvironmentSpecSecretUnionMember0(BaseModel):
+class SpecSecretUnionMember0(BaseModel):
     environment_variable: str = FieldInfo(alias="environmentVariable")
 
     name: Optional[str] = None
@@ -413,7 +409,7 @@ class EnvironmentSpecSecretUnionMember0(BaseModel):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(BaseModel):
+class SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted(BaseModel):
     file_path: str = FieldInfo(alias="filePath")
     """file_path is the path inside the devcontainer where the secret is mounted"""
 
@@ -433,7 +429,7 @@ class EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretI
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-class EnvironmentSpecSecretUnionMember2(BaseModel):
+class SpecSecretUnionMember2(BaseModel):
     git_credential_host: str = FieldInfo(alias="gitCredentialHost")
 
     name: Optional[str] = None
@@ -452,14 +448,14 @@ class EnvironmentSpecSecretUnionMember2(BaseModel):
     """source_ref into the source, in case of control-plane this is uuid of the secret"""
 
 
-EnvironmentSpecSecret: TypeAlias = Union[
-    EnvironmentSpecSecretUnionMember0,
-    EnvironmentSpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
-    EnvironmentSpecSecretUnionMember2,
+SpecSecret: TypeAlias = Union[
+    SpecSecretUnionMember0,
+    SpecSecretFilePathIsThePathInsideTheDevcontainerWhereTheSecretIsMounted,
+    SpecSecretUnionMember2,
 ]
 
 
-class EnvironmentSpecSSHPublicKey(BaseModel):
+class SpecSSHPublicKey(BaseModel):
     id: Optional[str] = None
     """id is the unique identifier of the public key"""
 
@@ -467,7 +463,7 @@ class EnvironmentSpecSSHPublicKey(BaseModel):
     """value is the actual public key in the public key file format"""
 
 
-class EnvironmentSpecTimeout(BaseModel):
+class SpecTimeout(BaseModel):
     disconnected: Optional[str] = None
     """
     A Duration represents a signed, fixed-length span of time represented as a count
@@ -530,16 +526,16 @@ class EnvironmentSpecTimeout(BaseModel):
     """
 
 
-class EnvironmentSpec(BaseModel):
+class Spec(BaseModel):
     admission: Optional[
         Literal["ADMISSION_LEVEL_UNSPECIFIED", "ADMISSION_LEVEL_OWNER_ONLY", "ADMISSION_LEVEL_EVERYONE"]
     ] = None
     """Admission level describes who can access an environment instance and its ports."""
 
-    automations_file: Optional[EnvironmentSpecAutomationsFile] = FieldInfo(alias="automationsFile", default=None)
+    automations_file: Optional[SpecAutomationsFile] = FieldInfo(alias="automationsFile", default=None)
     """automations_file is the automations file spec of the environment"""
 
-    content: Optional[EnvironmentSpecContent] = None
+    content: Optional[SpecContent] = None
     """content is the content spec of the environment"""
 
     desired_phase: Optional[
@@ -557,16 +553,16 @@ class EnvironmentSpec(BaseModel):
     ] = FieldInfo(alias="desiredPhase", default=None)
     """Phase is the desired phase of the environment"""
 
-    devcontainer: Optional[EnvironmentSpecDevcontainer] = None
+    devcontainer: Optional[SpecDevcontainer] = None
     """devcontainer is the devcontainer spec of the environment"""
 
-    machine: Optional[EnvironmentSpecMachine] = None
+    machine: Optional[SpecMachine] = None
     """machine is the machine spec of the environment"""
 
-    ports: Optional[List[EnvironmentSpecPort]] = None
+    ports: Optional[List[SpecPort]] = None
     """ports is the set of ports which ought to be exposed to the internet"""
 
-    secrets: Optional[List[EnvironmentSpecSecret]] = None
+    secrets: Optional[List[SpecSecret]] = None
     """secrets are confidential data that is mounted into the environment"""
 
     spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
@@ -577,14 +573,14 @@ class EnvironmentSpec(BaseModel):
     b.spec_version then a was the spec before b.
     """
 
-    ssh_public_keys: Optional[List[EnvironmentSpecSSHPublicKey]] = FieldInfo(alias="sshPublicKeys", default=None)
+    ssh_public_keys: Optional[List[SpecSSHPublicKey]] = FieldInfo(alias="sshPublicKeys", default=None)
     """ssh_public_keys are the public keys used to ssh into the environment"""
 
-    timeout: Optional[EnvironmentSpecTimeout] = None
+    timeout: Optional[SpecTimeout] = None
     """Timeout configures the environment timeout"""
 
 
-class EnvironmentStatusActivitySignal(BaseModel):
+class StatusActivitySignal(BaseModel):
     source: Optional[str] = None
     """
     source of the activity signal, such as "VS Code", "SSH", or "Automations". It
@@ -685,7 +681,7 @@ class EnvironmentStatusActivitySignal(BaseModel):
     """
 
 
-class EnvironmentStatusAutomationsFile(BaseModel):
+class StatusAutomationsFile(BaseModel):
     automations_file_path: Optional[str] = FieldInfo(alias="automationsFilePath", default=None)
     """
     automations_file_path is the path to the automations file relative to the repo
@@ -725,7 +721,7 @@ class EnvironmentStatusAutomationsFile(BaseModel):
     """
 
 
-class EnvironmentStatusContentGitChangedFile(BaseModel):
+class StatusContentGitChangedFile(BaseModel):
     change_type: Optional[
         Literal[
             "CHANGE_TYPE_UNSPECIFIED",
@@ -744,13 +740,11 @@ class EnvironmentStatusContentGitChangedFile(BaseModel):
     """path is the path of the file"""
 
 
-class EnvironmentStatusContentGit(BaseModel):
+class StatusContentGit(BaseModel):
     branch: Optional[str] = None
     """branch is branch we're currently on"""
 
-    changed_files: Optional[List[EnvironmentStatusContentGitChangedFile]] = FieldInfo(
-        alias="changedFiles", default=None
-    )
+    changed_files: Optional[List[StatusContentGitChangedFile]] = FieldInfo(alias="changedFiles", default=None)
     """
     changed_files is an array of changed files in the environment, possibly
     truncated
@@ -777,14 +771,14 @@ class EnvironmentStatusContentGit(BaseModel):
     """
 
 
-class EnvironmentStatusContent(BaseModel):
+class StatusContent(BaseModel):
     content_location_in_machine: Optional[str] = FieldInfo(alias="contentLocationInMachine", default=None)
     """content_location_in_machine is the location of the content in the machine"""
 
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains the reason the content initialization failed."""
 
-    git: Optional[EnvironmentStatusContentGit] = None
+    git: Optional[StatusContentGit] = None
     """
     git is the Git working copy status of the environment. Note: this is a
     best-effort field and more often than not will not be present. Its absence does
@@ -813,7 +807,7 @@ class EnvironmentStatusContent(BaseModel):
     """
 
 
-class EnvironmentStatusDevcontainer(BaseModel):
+class StatusDevcontainer(BaseModel):
     container_id: Optional[str] = FieldInfo(alias="containerId", default=None)
     """container_id is the ID of the container."""
 
@@ -876,7 +870,7 @@ class EnvironmentStatusDevcontainer(BaseModel):
     """
 
 
-class EnvironmentStatusEnvironmentURLsPort(BaseModel):
+class StatusEnvironmentURLsPort(BaseModel):
     port: Optional[int] = None
     """port is the port number of the environment port"""
 
@@ -884,27 +878,27 @@ class EnvironmentStatusEnvironmentURLsPort(BaseModel):
     """url is the URL at which the environment port can be accessed"""
 
 
-class EnvironmentStatusEnvironmentURLsSSH(BaseModel):
+class StatusEnvironmentURLsSSH(BaseModel):
     url: Optional[str] = None
 
 
-class EnvironmentStatusEnvironmentURLs(BaseModel):
+class StatusEnvironmentURLs(BaseModel):
     logs: Optional[str] = None
     """logs is the URL at which the environment logs can be accessed."""
 
-    ports: Optional[List[EnvironmentStatusEnvironmentURLsPort]] = None
+    ports: Optional[List[StatusEnvironmentURLsPort]] = None
 
-    ssh: Optional[EnvironmentStatusEnvironmentURLsSSH] = None
+    ssh: Optional[StatusEnvironmentURLsSSH] = None
     """SSH is the URL at which the environment can be accessed via SSH."""
 
 
-class EnvironmentStatusMachineVersions(BaseModel):
+class StatusMachineVersions(BaseModel):
     supervisor_commit: Optional[str] = FieldInfo(alias="supervisorCommit", default=None)
 
     supervisor_version: Optional[str] = FieldInfo(alias="supervisorVersion", default=None)
 
 
-class EnvironmentStatusMachine(BaseModel):
+class StatusMachine(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains the reason the machine failed to operate."""
 
@@ -931,7 +925,7 @@ class EnvironmentStatusMachine(BaseModel):
     If this field is empty, the environment has not timed out.
     """
 
-    versions: Optional[EnvironmentStatusMachineVersions] = None
+    versions: Optional[StatusMachineVersions] = None
     """versions contains the versions of components in the machine."""
 
     warning_message: Optional[str] = FieldInfo(alias="warningMessage", default=None)
@@ -941,7 +935,7 @@ class EnvironmentStatusMachine(BaseModel):
     """
 
 
-class EnvironmentStatusRunnerAck(BaseModel):
+class StatusRunnerAck(BaseModel):
     message: Optional[str] = None
 
     spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
@@ -956,7 +950,7 @@ class EnvironmentStatusRunnerAck(BaseModel):
     ] = FieldInfo(alias="statusCode", default=None)
 
 
-class EnvironmentStatusSecret(BaseModel):
+class StatusSecret(BaseModel):
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains the reason the secret failed to be materialize."""
 
@@ -983,7 +977,7 @@ class EnvironmentStatusSecret(BaseModel):
     """
 
 
-class EnvironmentStatusSSHPublicKey(BaseModel):
+class StatusSSHPublicKey(BaseModel):
     id: Optional[str] = None
     """id is the unique identifier of the public key"""
 
@@ -1000,20 +994,20 @@ class EnvironmentStatusSSHPublicKey(BaseModel):
     """phase is the current phase of the public key"""
 
 
-class EnvironmentStatus(BaseModel):
-    activity_signal: Optional[EnvironmentStatusActivitySignal] = FieldInfo(alias="activitySignal", default=None)
+class Status(BaseModel):
+    activity_signal: Optional[StatusActivitySignal] = FieldInfo(alias="activitySignal", default=None)
     """EnvironmentActivitySignal used to signal activity for an environment."""
 
-    automations_file: Optional[EnvironmentStatusAutomationsFile] = FieldInfo(alias="automationsFile", default=None)
+    automations_file: Optional[StatusAutomationsFile] = FieldInfo(alias="automationsFile", default=None)
     """automations_file contains the status of the automations file."""
 
-    content: Optional[EnvironmentStatusContent] = None
+    content: Optional[StatusContent] = None
     """content contains the status of the environment content."""
 
-    devcontainer: Optional[EnvironmentStatusDevcontainer] = None
+    devcontainer: Optional[StatusDevcontainer] = None
     """devcontainer contains the status of the devcontainer."""
 
-    environment_urls: Optional[EnvironmentStatusEnvironmentURLs] = FieldInfo(alias="environmentUrls", default=None)
+    environment_urls: Optional[StatusEnvironmentURLs] = FieldInfo(alias="environmentUrls", default=None)
     """
     environment_url contains the URL at which the environment can be accessed. This
     field is only set if the environment is running.
@@ -1026,7 +1020,7 @@ class EnvironmentStatus(BaseModel):
     transition to a stopped state.
     """
 
-    machine: Optional[EnvironmentStatusMachine] = None
+    machine: Optional[StatusMachine] = None
     """machine contains the status of the environment machine"""
 
     phase: Optional[
@@ -1047,16 +1041,16 @@ class EnvironmentStatus(BaseModel):
     environment is in its lifecycle
     """
 
-    runner_ack: Optional[EnvironmentStatusRunnerAck] = FieldInfo(alias="runnerAck", default=None)
+    runner_ack: Optional[StatusRunnerAck] = FieldInfo(alias="runnerAck", default=None)
     """
     RunnerACK is the acknowledgement from the runner that is has received the
     environment spec.
     """
 
-    secrets: Optional[List[EnvironmentStatusSecret]] = None
+    secrets: Optional[List[StatusSecret]] = None
     """secrets contains the status of the environment secrets"""
 
-    ssh_public_keys: Optional[List[EnvironmentStatusSSHPublicKey]] = FieldInfo(alias="sshPublicKeys", default=None)
+    ssh_public_keys: Optional[List[StatusSSHPublicKey]] = FieldInfo(alias="sshPublicKeys", default=None)
     """ssh_public_keys contains the status of the environment ssh public keys"""
 
     status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
@@ -1075,7 +1069,7 @@ class EnvironmentStatus(BaseModel):
     """
 
 
-class Environment(BaseModel):
+class EnvironmentListResponse(BaseModel):
     id: Optional[str] = None
     """ID is a unique identifier of this environment.
 
@@ -1083,33 +1077,17 @@ class Environment(BaseModel):
     manager
     """
 
-    metadata: Optional[EnvironmentMetadata] = None
+    metadata: Optional[Metadata] = None
     """
     EnvironmentMetadata is data associated with an environment that's required for
     other parts of the system to function
     """
 
-    spec: Optional[EnvironmentSpec] = None
+    spec: Optional[Spec] = None
     """
     EnvironmentSpec specifies the configuration of an environment for an environment
     start
     """
 
-    status: Optional[EnvironmentStatus] = None
+    status: Optional[Status] = None
     """EnvironmentStatus describes an environment status"""
-
-
-class Pagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-    """Token passed for retreiving the next set of results.
-
-    Empty if there are no more results
-    """
-
-
-class EnvironmentListResponse(BaseModel):
-    environments: Optional[List[Environment]] = None
-    """environments are the environments that matched the query"""
-
-    pagination: Optional[Pagination] = None
-    """pagination contains the pagination options for listing environments"""
