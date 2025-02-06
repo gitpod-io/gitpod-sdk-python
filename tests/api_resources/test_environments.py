@@ -144,18 +144,24 @@ class TestEnvironments:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
+        environment = client.environments.update()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.update(
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={},
+            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
         )
         assert_matches_type(object, environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.environments.with_raw_response.update(
-            metadata={},
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.environments.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,44 +170,8 @@ class TestEnvironments:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.environments.with_streaming_response.update(
-            metadata={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            environment = response.parse()
-            assert_matches_type(object, environment, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        environment = client.environments.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        )
-        assert_matches_type(object, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.environments.with_raw_response.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        environment = response.parse()
-        assert_matches_type(object, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.environments.with_streaming_response.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.environments.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -649,18 +619,24 @@ class TestAsyncEnvironments:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        environment = await async_client.environments.update()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.update(
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={},
+            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
         )
         assert_matches_type(object, environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.with_raw_response.update(
-            metadata={},
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.environments.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -669,44 +645,8 @@ class TestAsyncEnvironments:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.with_streaming_response.update(
-            metadata={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            environment = await response.parse()
-            assert_matches_type(object, environment, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        environment = await async_client.environments.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        )
-        assert_matches_type(object, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.with_raw_response.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        environment = await response.parse()
-        assert_matches_type(object, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.with_streaming_response.update(
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
-        ) as response:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.environments.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
