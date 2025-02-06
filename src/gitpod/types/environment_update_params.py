@@ -2,50 +2,52 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .._utils import PropertyInfo
 
 __all__ = [
     "EnvironmentUpdateParams",
-    "Variant0",
-    "Variant1",
-    "Variant1Spec",
-    "Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment",
-    "Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile",
-    "Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot",
-    "Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession",
-    "Variant1SpecContent",
-    "Variant1SpecContentContent",
-    "Variant1SpecContentContentTheGitEmailAddress",
-    "Variant1SpecContentContentTheGitUsername",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit",
-    "Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit",
-    "Variant1SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization",
-    "Variant1SpecDevcontainer",
-    "Variant1SpecDevcontainerDevcontainer",
-    "Variant1SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot",
-    "Variant1SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild",
-    "Variant1SpecTimeoutConfiguresTheEnvironmentTimeout",
-    "Variant1SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout",
+    "Spec",
+    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment",
+    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile",
+    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot",
+    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession",
+    "SpecContent",
+    "SpecContentContent",
+    "SpecContentContentTheGitEmailAddress",
+    "SpecContentContentTheGitUsername",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit",
+    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit",
+    "SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization",
+    "SpecDevcontainer",
+    "SpecDevcontainerDevcontainer",
+    "SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot",
+    "SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild",
+    "SpecTimeoutConfiguresTheEnvironmentTimeout",
+    "SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout",
 ]
 
 
-class Variant0(TypedDict, total=False):
-    metadata: Required[object]
+class EnvironmentUpdateParams(TypedDict, total=False):
+    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
+    """environment_id specifies which environment should be updated.
+
+    +required
+    """
+
+    metadata: Optional[object]
+
+    spec: Optional[Spec]
 
 
-class Variant1(TypedDict, total=False):
-    spec: Required[Variant1Spec]
-
-
-class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot(
+class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot(
     TypedDict, total=False
 ):
     automations_file_path: Required[Annotated[str, PropertyInfo(alias="automationsFilePath")]]
@@ -60,55 +62,55 @@ class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomat
     """
 
 
-class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession(TypedDict, total=False):
+class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession(TypedDict, total=False):
     session: Required[str]
 
 
-Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile: TypeAlias = Union[
-    Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot,
-    Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession,
+SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile: TypeAlias = Union[
+    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot,
+    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession,
 ]
 
 
-class Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment(TypedDict, total=False):
+class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment(TypedDict, total=False):
     automations_file: Required[
         Annotated[
-            Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile,
+            SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile,
             PropertyInfo(alias="automationsFile"),
         ]
     ]
     """automations_file is the automations file spec of the environment"""
 
 
-class Variant1SpecContentContentTheGitEmailAddress(TypedDict, total=False):
+class SpecContentContentTheGitEmailAddress(TypedDict, total=False):
     git_email: Required[Annotated[str, PropertyInfo(alias="gitEmail")]]
     """The Git email address"""
 
 
-class Variant1SpecContentContentTheGitUsername(TypedDict, total=False):
+class SpecContentContentTheGitUsername(TypedDict, total=False):
     git_username: Required[Annotated[str, PropertyInfo(alias="gitUsername")]]
     """The Git username"""
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL(
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL(
     TypedDict, total=False
 ):
     url: str
     """url is the URL from which the environment is created"""
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL(
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL(
     TypedDict, total=False
 ):
     context_url: Required[
         Annotated[
-            Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL,
+            SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL,
             PropertyInfo(alias="contextUrl"),
         ]
     ]
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit(
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit(
     TypedDict, total=False
 ):
     checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
@@ -138,49 +140,45 @@ class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInit
     """upstream_Remote_uri is the fork upstream of a repository"""
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit(
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit(
     TypedDict, total=False
 ):
-    git: Required[
-        Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit
-    ]
+    git: Required[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit]
 
 
-Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec: TypeAlias = Union[
-    Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL,
-    Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit,
+SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec: TypeAlias = Union[
+    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL,
+    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit,
 ]
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer(
-    TypedDict, total=False
-):
-    specs: Iterable[Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec]
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer(TypedDict, total=False):
+    specs: Iterable[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec]
 
 
-class Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized(TypedDict, total=False):
-    initializer: Required[Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer]
+class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized(TypedDict, total=False):
+    initializer: Required[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer]
     """EnvironmentInitializer specifies how an environment is to be initialized"""
 
 
-class Variant1SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization(TypedDict, total=False):
+class SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization(TypedDict, total=False):
     session: Required[str]
     """session should be changed to trigger a content reinitialization"""
 
 
-Variant1SpecContentContent: TypeAlias = Union[
-    Variant1SpecContentContentTheGitEmailAddress,
-    Variant1SpecContentContentTheGitUsername,
-    Variant1SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized,
-    Variant1SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization,
+SpecContentContent: TypeAlias = Union[
+    SpecContentContentTheGitEmailAddress,
+    SpecContentContentTheGitUsername,
+    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized,
+    SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization,
 ]
 
 
-class Variant1SpecContent(TypedDict, total=False):
-    content: Required[Variant1SpecContentContent]
+class SpecContent(TypedDict, total=False):
+    content: Required[SpecContentContent]
 
 
-class Variant1SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot(
+class SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot(
     TypedDict, total=False
 ):
     devcontainer_file_path: Required[Annotated[str, PropertyInfo(alias="devcontainerFilePath")]]
@@ -194,22 +192,22 @@ class Variant1SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevc
     """
 
 
-class Variant1SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild(TypedDict, total=False):
+class SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild(TypedDict, total=False):
     session: Required[str]
     """session should be changed to trigger a devcontainer rebuild"""
 
 
-Variant1SpecDevcontainerDevcontainer: TypeAlias = Union[
-    Variant1SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot,
-    Variant1SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild,
+SpecDevcontainerDevcontainer: TypeAlias = Union[
+    SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot,
+    SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild,
 ]
 
 
-class Variant1SpecDevcontainer(TypedDict, total=False):
-    devcontainer: Required[Variant1SpecDevcontainerDevcontainer]
+class SpecDevcontainer(TypedDict, total=False):
+    devcontainer: Required[SpecDevcontainerDevcontainer]
 
 
-class Variant1SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout(TypedDict, total=False):
+class SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout(TypedDict, total=False):
     disconnected: Required[str]
     """
     A Duration represents a signed, fixed-length span of time represented as a count
@@ -272,16 +270,14 @@ class Variant1SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout(TypedDict, total
     """
 
 
-class Variant1SpecTimeoutConfiguresTheEnvironmentTimeout(TypedDict, total=False):
-    timeout: Required[Variant1SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout]
+class SpecTimeoutConfiguresTheEnvironmentTimeout(TypedDict, total=False):
+    timeout: Required[SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout]
     """Timeout configures the environment timeout"""
 
 
-Variant1Spec: TypeAlias = Union[
-    Variant1SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment,
-    Variant1SpecContent,
-    Variant1SpecDevcontainer,
-    Variant1SpecTimeoutConfiguresTheEnvironmentTimeout,
+Spec: TypeAlias = Union[
+    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment,
+    SpecContent,
+    SpecDevcontainer,
+    SpecTimeoutConfiguresTheEnvironmentTimeout,
 ]
-
-EnvironmentUpdateParams: TypeAlias = Union[Variant0, Variant1]
