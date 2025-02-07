@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,8 +11,8 @@ __all__ = ["AccountGetSSOLoginURLParams"]
 
 
 class AccountGetSSOLoginURLParams(TypedDict, total=False):
-    return_to: Required[Annotated[str, PropertyInfo(alias="returnTo")]]
-    """return_to is the URL the user will be redirected to after login"""
-
     email: str
     """email is the email the user wants to login with"""
+
+    return_to: Annotated[Optional[str], PropertyInfo(alias="returnTo")]
+    """return_to is the URL the user will be redirected to after login"""

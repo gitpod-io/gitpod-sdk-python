@@ -2,53 +2,32 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing import Dict, Optional
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
+from .sso_configuration_state import SSOConfigurationState
 
-__all__ = [
-    "SSOConfigurationUpdateParams",
-    "ClientIDIsTheClientIDOfTheSSOProvider",
-    "ClientSecretIsTheClientSecretOfTheSSOProvider",
-    "Variant2",
-    "IssuerURLIsTheURLOfTheIDPIssuer",
-    "StateIsTheStateOfTheSSOConfiguration",
-]
+__all__ = ["SSOConfigurationUpdateParams"]
 
 
-class ClientIDIsTheClientIDOfTheSSOProvider(TypedDict, total=False):
-    client_id: Required[Annotated[str, PropertyInfo(alias="clientId")]]
+class SSOConfigurationUpdateParams(TypedDict, total=False):
+    claims: Dict[str, str]
+    """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
+
+    client_id: Annotated[Optional[str], PropertyInfo(alias="clientId")]
     """client_id is the client ID of the SSO provider"""
 
-
-class ClientSecretIsTheClientSecretOfTheSSOProvider(TypedDict, total=False):
-    client_secret: Required[Annotated[str, PropertyInfo(alias="clientSecret")]]
+    client_secret: Annotated[Optional[str], PropertyInfo(alias="clientSecret")]
     """client_secret is the client secret of the SSO provider"""
 
+    email_domain: Annotated[Optional[str], PropertyInfo(alias="emailDomain")]
 
-class Variant2(TypedDict, total=False):
-    email_domain: Required[Annotated[str, PropertyInfo(alias="emailDomain")]]
-
-
-class IssuerURLIsTheURLOfTheIDPIssuer(TypedDict, total=False):
-    issuer_url: Required[Annotated[str, PropertyInfo(alias="issuerUrl")]]
+    issuer_url: Annotated[Optional[str], PropertyInfo(alias="issuerUrl")]
     """issuer_url is the URL of the IdP issuer"""
 
+    sso_configuration_id: Annotated[str, PropertyInfo(alias="ssoConfigurationId")]
+    """sso_configuration_id is the ID of the SSO configuration to update"""
 
-class StateIsTheStateOfTheSSOConfiguration(TypedDict, total=False):
-    state: Required[
-        Literal[
-            "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
-        ]
-    ]
+    state: Optional[SSOConfigurationState]
     """state is the state of the SSO configuration"""
-
-
-SSOConfigurationUpdateParams: TypeAlias = Union[
-    ClientIDIsTheClientIDOfTheSSOProvider,
-    ClientSecretIsTheClientSecretOfTheSSOProvider,
-    Variant2,
-    IssuerURLIsTheURLOfTheIDPIssuer,
-    StateIsTheStateOfTheSSOConfiguration,
-]

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
+from .project_role import ProjectRole
 
 __all__ = ["PolicyCreateParams"]
 
@@ -16,4 +17,4 @@ class PolicyCreateParams(TypedDict, total=False):
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id specifies the project identifier"""
 
-    role: Literal["PROJECT_ROLE_UNSPECIFIED", "PROJECT_ROLE_ADMIN", "PROJECT_ROLE_USER"]
+    role: ProjectRole

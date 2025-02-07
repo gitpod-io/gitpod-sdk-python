@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
-from typing_extensions import overload
-
 import httpx
 
 from .schema import (
@@ -17,7 +14,6 @@ from .schema import (
 )
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -55,6 +51,7 @@ from .host_authentication_tokens import (
     HostAuthenticationTokensResourceWithStreamingResponse,
     AsyncHostAuthenticationTokensResourceWithStreamingResponse,
 )
+from ....types.shared_params.environment_class import EnvironmentClass
 from ....types.runners.configuration_validate_response import ConfigurationValidateResponse
 
 __all__ = ["ConfigurationsResource", "AsyncConfigurationsResource"]
@@ -96,12 +93,12 @@ class ConfigurationsResource(SyncAPIResource):
         """
         return ConfigurationsResourceWithStreamingResponse(self)
 
-    @overload
     def validate(
         self,
         *,
-        environment_class: configuration_validate_params.Variant0EnvironmentClass,
+        environment_class: EnvironmentClass | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
+        scm_integration: configuration_validate_params.ScmIntegration | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,70 +120,20 @@ class ConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def validate(
-        self,
-        *,
-        scm_integration: configuration_validate_params.Variant1ScmIntegration,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConfigurationValidateResponse:
-        """ValidateRunnerConfiguration validates a runner configuration (e.g.
-
-        environment
-        class, SCM integration) with the runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["environment_class"], ["scm_integration"])
-    def validate(
-        self,
-        *,
-        environment_class: configuration_validate_params.Variant0EnvironmentClass | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        scm_integration: configuration_validate_params.Variant1ScmIntegration | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConfigurationValidateResponse:
-        return cast(
-            ConfigurationValidateResponse,
-            self._post(
-                "/gitpod.v1.RunnerConfigurationService/ValidateRunnerConfiguration",
-                body=maybe_transform(
-                    {
-                        "environment_class": environment_class,
-                        "runner_id": runner_id,
-                        "scm_integration": scm_integration,
-                    },
-                    configuration_validate_params.ConfigurationValidateParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ConfigurationValidateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return self._post(
+            "/gitpod.v1.RunnerConfigurationService/ValidateRunnerConfiguration",
+            body=maybe_transform(
+                {
+                    "environment_class": environment_class,
+                    "runner_id": runner_id,
+                    "scm_integration": scm_integration,
+                },
+                configuration_validate_params.ConfigurationValidateParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConfigurationValidateResponse,
         )
 
 
@@ -226,12 +173,12 @@ class AsyncConfigurationsResource(AsyncAPIResource):
         """
         return AsyncConfigurationsResourceWithStreamingResponse(self)
 
-    @overload
     async def validate(
         self,
         *,
-        environment_class: configuration_validate_params.Variant0EnvironmentClass,
+        environment_class: EnvironmentClass | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
+        scm_integration: configuration_validate_params.ScmIntegration | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -253,70 +200,20 @@ class AsyncConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def validate(
-        self,
-        *,
-        scm_integration: configuration_validate_params.Variant1ScmIntegration,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConfigurationValidateResponse:
-        """ValidateRunnerConfiguration validates a runner configuration (e.g.
-
-        environment
-        class, SCM integration) with the runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["environment_class"], ["scm_integration"])
-    async def validate(
-        self,
-        *,
-        environment_class: configuration_validate_params.Variant0EnvironmentClass | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        scm_integration: configuration_validate_params.Variant1ScmIntegration | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ConfigurationValidateResponse:
-        return cast(
-            ConfigurationValidateResponse,
-            await self._post(
-                "/gitpod.v1.RunnerConfigurationService/ValidateRunnerConfiguration",
-                body=await async_maybe_transform(
-                    {
-                        "environment_class": environment_class,
-                        "runner_id": runner_id,
-                        "scm_integration": scm_integration,
-                    },
-                    configuration_validate_params.ConfigurationValidateParams,
-                ),
-                options=make_request_options(
-                    extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-                ),
-                cast_to=cast(
-                    Any, ConfigurationValidateResponse
-                ),  # Union types cannot be passed in as arguments in the type system
+        return await self._post(
+            "/gitpod.v1.RunnerConfigurationService/ValidateRunnerConfiguration",
+            body=await async_maybe_transform(
+                {
+                    "environment_class": environment_class,
+                    "runner_id": runner_id,
+                    "scm_integration": scm_integration,
+                },
+                configuration_validate_params.ConfigurationValidateParams,
             ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ConfigurationValidateResponse,
         )
 
 

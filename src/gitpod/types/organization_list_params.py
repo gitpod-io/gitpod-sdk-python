@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
+from .scope import Scope
 from .._utils import PropertyInfo
 
 __all__ = ["OrganizationListParams", "Pagination"]
@@ -17,7 +18,7 @@ class OrganizationListParams(TypedDict, total=False):
     pagination: Pagination
     """pagination contains the pagination options for listing organizations"""
 
-    scope: Literal["SCOPE_UNSPECIFIED", "SCOPE_MEMBER", "SCOPE_ALL"]
+    scope: Scope
     """scope is the scope of the organizations to list"""
 
 

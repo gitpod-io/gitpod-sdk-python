@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ....._utils import PropertyInfo
+from ....shared.task_execution_phase import TaskExecutionPhase
 
 __all__ = ["ExecutionListParams", "Filter", "Pagination"]
 
@@ -26,16 +27,7 @@ class Filter(TypedDict, total=False):
     environment_ids: Annotated[List[str], PropertyInfo(alias="environmentIds")]
     """environment_ids filters the response to only task runs of these environments"""
 
-    phases: List[
-        Literal[
-            "TASK_EXECUTION_PHASE_UNSPECIFIED",
-            "TASK_EXECUTION_PHASE_PENDING",
-            "TASK_EXECUTION_PHASE_RUNNING",
-            "TASK_EXECUTION_PHASE_SUCCEEDED",
-            "TASK_EXECUTION_PHASE_FAILED",
-            "TASK_EXECUTION_PHASE_STOPPED",
-        ]
-    ]
+    phases: List[TaskExecutionPhase]
     """phases filters the response to only task runs in these phases"""
 
     task_ids: Annotated[List[str], PropertyInfo(alias="taskIds")]

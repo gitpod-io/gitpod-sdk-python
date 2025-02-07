@@ -2,19 +2,10 @@
 
 from typing import Optional
 
-from pydantic import Field as FieldInfo
-
+from .account import Account
 from .._models import BaseModel
 
-__all__ = ["AccountRetrieveResponse", "Account"]
-
-
-class Account(BaseModel):
-    organization_id: str = FieldInfo(alias="organizationId")
-    """
-    organization_id is the ID of the organization the account is owned by if it's
-    created through custom SSO
-    """
+__all__ = ["AccountRetrieveResponse"]
 
 
 class AccountRetrieveResponse(BaseModel):

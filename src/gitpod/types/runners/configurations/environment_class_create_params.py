@@ -6,21 +6,16 @@ from typing import Iterable
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from ...shared_params.field_value import FieldValue
 
-__all__ = ["EnvironmentClassCreateParams", "Configuration"]
+__all__ = ["EnvironmentClassCreateParams"]
 
 
 class EnvironmentClassCreateParams(TypedDict, total=False):
-    configuration: Iterable[Configuration]
+    configuration: Iterable[FieldValue]
 
     description: str
 
     display_name: Annotated[str, PropertyInfo(alias="displayName")]
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-
-class Configuration(TypedDict, total=False):
-    key: str
-
-    value: str

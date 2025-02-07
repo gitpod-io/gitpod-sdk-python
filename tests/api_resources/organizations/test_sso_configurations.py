@@ -11,7 +11,7 @@ from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.pagination import SyncSSOConfigurationsPage, AsyncSSOConfigurationsPage
 from gitpod.types.organizations import (
-    SSOConfigurationListResponse,
+    SSOConfiguration,
     SSOConfigurationCreateResponse,
     SSOConfigurationRetrieveResponse,
 )
@@ -100,154 +100,28 @@ class TestSSOConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
+        sso_configuration = client.organizations.sso_configurations.update()
+        assert_matches_type(object, sso_configuration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
+            claims={"foo": "string"},
             client_id="x",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update(
-            client_id="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update(
-            client_id="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.update(
             client_secret="x",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update(
-            client_secret="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update(
-            client_secret="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_3(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.update(
             email_domain="xxxx",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update(
-            email_domain="xxxx",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update(
-            email_domain="xxxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_4(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.update(
             issuer_url="https://example.com",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_4(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update(
-            issuer_url="https://example.com",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_4(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update(
-            issuer_url="https://example.com",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_5(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_5(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update(
-            state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.organizations.sso_configurations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -256,10 +130,8 @@ class TestSSOConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_5(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update(
-            state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.organizations.sso_configurations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -272,9 +144,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list()
-        assert_matches_type(
-            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -288,9 +158,7 @@ class TestSSOConfigurations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -300,9 +168,7 @@ class TestSSOConfigurations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sso_configuration = response.parse()
-        assert_matches_type(
-            SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -312,9 +178,7 @@ class TestSSOConfigurations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sso_configuration = response.parse()
-            assert_matches_type(
-                SyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-            )
+            assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -436,154 +300,28 @@ class TestAsyncSSOConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        sso_configuration = await async_client.organizations.sso_configurations.update()
+        assert_matches_type(object, sso_configuration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
+            claims={"foo": "string"},
             client_id="x",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            client_id="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = await response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            client_id="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = await response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.update(
             client_secret="x",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            client_secret="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = await response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            client_secret="x",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = await response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.update(
             email_domain="xxxx",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            email_domain="xxxx",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = await response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            email_domain="xxxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = await response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.update(
             issuer_url="https://example.com",
-        )
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            issuer_url="https://example.com",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        sso_configuration = await response.parse()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_4(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            issuer_url="https://example.com",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            sso_configuration = await response.parse()
-            assert_matches_type(object, sso_configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.organizations.sso_configurations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -592,10 +330,8 @@ class TestAsyncSSOConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_5(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
-        ) as response:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.organizations.sso_configurations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -608,9 +344,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list()
-        assert_matches_type(
-            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -624,9 +358,7 @@ class TestAsyncSSOConfigurations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -636,9 +368,7 @@ class TestAsyncSSOConfigurations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         sso_configuration = await response.parse()
-        assert_matches_type(
-            AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-        )
+        assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -648,9 +378,7 @@ class TestAsyncSSOConfigurations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             sso_configuration = await response.parse()
-            assert_matches_type(
-                AsyncSSOConfigurationsPage[SSOConfigurationListResponse], sso_configuration, path=["response"]
-            )
+            assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

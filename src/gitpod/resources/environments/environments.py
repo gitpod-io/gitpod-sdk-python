@@ -41,6 +41,7 @@ from ..._response import (
 )
 from ...pagination import SyncEnvironmentsPage, AsyncEnvironmentsPage
 from ..._base_client import AsyncPaginator, make_request_options
+from ...types.environment import Environment
 from .automations.automations import (
     AutomationsResource,
     AsyncAutomationsResource,
@@ -49,9 +50,10 @@ from .automations.automations import (
     AutomationsResourceWithStreamingResponse,
     AsyncAutomationsResourceWithStreamingResponse,
 )
-from ...types.environment_list_response import EnvironmentListResponse
+from ...types.environment_spec_param import EnvironmentSpecParam
 from ...types.environment_create_response import EnvironmentCreateResponse
 from ...types.environment_retrieve_response import EnvironmentRetrieveResponse
+from ...types.environment_activity_signal_param import EnvironmentActivitySignalParam
 from ...types.environment_create_logs_token_response import EnvironmentCreateLogsTokenResponse
 from ...types.environment_create_from_project_response import EnvironmentCreateFromProjectResponse
 
@@ -89,7 +91,7 @@ class EnvironmentsResource(SyncAPIResource):
     def create(
         self,
         *,
-        spec: environment_create_params.Spec | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,6 +101,44 @@ class EnvironmentsResource(SyncAPIResource):
     ) -> EnvironmentCreateResponse:
         """
         CreateEnvironment creates a new environment and starts it.
+
+        The `class` field must be a valid environment class ID. You can find a list of
+        available environment classes with the `ListEnvironmentClasses` method.
+
+        ### Examples
+
+        - from context URL:
+
+          Creates an environment from a context URL, e.g. a GitHub repository.
+
+          ```yaml
+          spec:
+            machine:
+              class: "61000000-0000-0000-0000-000000000000"
+            content:
+              initializer:
+                specs:
+                  - contextUrl:
+                      url: "https://github.com/gitpod-io/gitpod"
+          ```
+
+        - from Git repository:
+
+          Creates an environment from a Git repository directly. While less convenient,
+          this is useful if you want to specify a specific branch, commit, etc.
+
+          ```yaml
+          spec:
+            machine:
+              class: "61000000-0000-0000-0000-000000000000"
+            content:
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/gitpod-io/gitpod"
+                      cloneTarget: "main"
+                      targetMode: "CLONE_TARGET_MODE_REMOTE_BRANCH"
+          ```
 
         Args:
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
@@ -134,9 +174,6 @@ class EnvironmentsResource(SyncAPIResource):
     ) -> EnvironmentRetrieveResponse:
         """
         GetEnvironment returns a single environment.
-
-        +return NOT_FOUND User does not have access to an environment with the given ID
-        +return NOT_FOUND Environment does not exist
 
         Args:
           environment_id: environment_id specifies the environment to get
@@ -219,7 +256,7 @@ class EnvironmentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncEnvironmentsPage[EnvironmentListResponse]:
+    ) -> SyncEnvironmentsPage[Environment]:
         """
         ListEnvironments returns a list of environments that match the query.
 
@@ -238,7 +275,7 @@ class EnvironmentsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
-            page=SyncEnvironmentsPage[EnvironmentListResponse],
+            page=SyncEnvironmentsPage[Environment],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -260,7 +297,7 @@ class EnvironmentsResource(SyncAPIResource):
                     environment_list_params.EnvironmentListParams,
                 ),
             ),
-            model=EnvironmentListResponse,
+            model=Environment,
             method="post",
         )
 
@@ -318,7 +355,7 @@ class EnvironmentsResource(SyncAPIResource):
         self,
         *,
         project_id: str | NotGiven = NOT_GIVEN,
-        spec: environment_create_from_project_params.Spec | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -401,7 +438,7 @@ class EnvironmentsResource(SyncAPIResource):
     def mark_active(
         self,
         *,
-        activity_signal: environment_mark_active_params.ActivitySignal | NotGiven = NOT_GIVEN,
+        activity_signal: EnvironmentActivitySignalParam | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -545,7 +582,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        spec: environment_create_params.Spec | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -555,6 +592,44 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     ) -> EnvironmentCreateResponse:
         """
         CreateEnvironment creates a new environment and starts it.
+
+        The `class` field must be a valid environment class ID. You can find a list of
+        available environment classes with the `ListEnvironmentClasses` method.
+
+        ### Examples
+
+        - from context URL:
+
+          Creates an environment from a context URL, e.g. a GitHub repository.
+
+          ```yaml
+          spec:
+            machine:
+              class: "61000000-0000-0000-0000-000000000000"
+            content:
+              initializer:
+                specs:
+                  - contextUrl:
+                      url: "https://github.com/gitpod-io/gitpod"
+          ```
+
+        - from Git repository:
+
+          Creates an environment from a Git repository directly. While less convenient,
+          this is useful if you want to specify a specific branch, commit, etc.
+
+          ```yaml
+          spec:
+            machine:
+              class: "61000000-0000-0000-0000-000000000000"
+            content:
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/gitpod-io/gitpod"
+                      cloneTarget: "main"
+                      targetMode: "CLONE_TARGET_MODE_REMOTE_BRANCH"
+          ```
 
         Args:
           spec: EnvironmentSpec specifies the configuration of an environment for an environment
@@ -590,9 +665,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     ) -> EnvironmentRetrieveResponse:
         """
         GetEnvironment returns a single environment.
-
-        +return NOT_FOUND User does not have access to an environment with the given ID
-        +return NOT_FOUND Environment does not exist
 
         Args:
           environment_id: environment_id specifies the environment to get
@@ -675,7 +747,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EnvironmentListResponse, AsyncEnvironmentsPage[EnvironmentListResponse]]:
+    ) -> AsyncPaginator[Environment, AsyncEnvironmentsPage[Environment]]:
         """
         ListEnvironments returns a list of environments that match the query.
 
@@ -694,7 +766,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironments",
-            page=AsyncEnvironmentsPage[EnvironmentListResponse],
+            page=AsyncEnvironmentsPage[Environment],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -716,7 +788,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
                     environment_list_params.EnvironmentListParams,
                 ),
             ),
-            model=EnvironmentListResponse,
+            model=Environment,
             method="post",
         )
 
@@ -774,7 +846,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         self,
         *,
         project_id: str | NotGiven = NOT_GIVEN,
-        spec: environment_create_from_project_params.Spec | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -857,7 +929,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def mark_active(
         self,
         *,
-        activity_signal: environment_mark_active_params.ActivitySignal | NotGiven = NOT_GIVEN,
+        activity_signal: EnvironmentActivitySignalParam | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

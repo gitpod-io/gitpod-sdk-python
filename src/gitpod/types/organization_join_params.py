@@ -2,29 +2,16 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = [
-    "OrganizationJoinParams",
-    "InviteIDIsTheUniqueIdentifierOfTheInviteToJoinTheOrganization",
-    "OrganizationIDIsTheUniqueIdentifierOfTheOrganizationToJoin",
-]
+__all__ = ["OrganizationJoinParams"]
 
 
-class InviteIDIsTheUniqueIdentifierOfTheInviteToJoinTheOrganization(TypedDict, total=False):
-    invite_id: Required[Annotated[str, PropertyInfo(alias="inviteId")]]
+class OrganizationJoinParams(TypedDict, total=False):
+    invite_id: Annotated[str, PropertyInfo(alias="inviteId")]
     """invite_id is the unique identifier of the invite to join the organization."""
 
-
-class OrganizationIDIsTheUniqueIdentifierOfTheOrganizationToJoin(TypedDict, total=False):
-    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
+    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
     """organization_id is the unique identifier of the Organization to join."""
-
-
-OrganizationJoinParams: TypeAlias = Union[
-    InviteIDIsTheUniqueIdentifierOfTheInviteToJoinTheOrganization,
-    OrganizationIDIsTheUniqueIdentifierOfTheOrganizationToJoin,
-]

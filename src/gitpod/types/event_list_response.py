@@ -2,11 +2,12 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .resource_type import ResourceType
+from .shared.principal import Principal
 
 __all__ = ["EventListResponse"]
 
@@ -18,16 +19,7 @@ class EventListResponse(BaseModel):
 
     actor_id: Optional[str] = FieldInfo(alias="actorId", default=None)
 
-    actor_principal: Optional[
-        Literal[
-            "PRINCIPAL_UNSPECIFIED",
-            "PRINCIPAL_ACCOUNT",
-            "PRINCIPAL_USER",
-            "PRINCIPAL_RUNNER",
-            "PRINCIPAL_ENVIRONMENT",
-            "PRINCIPAL_SERVICE_ACCOUNT",
-        ]
-    ] = FieldInfo(alias="actorPrincipal", default=None)
+    actor_principal: Optional[Principal] = FieldInfo(alias="actorPrincipal", default=None)
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
@@ -123,25 +115,4 @@ class EventListResponse(BaseModel):
 
     subject_id: Optional[str] = FieldInfo(alias="subjectId", default=None)
 
-    subject_type: Optional[
-        Literal[
-            "RESOURCE_TYPE_UNSPECIFIED",
-            "RESOURCE_TYPE_ENVIRONMENT",
-            "RESOURCE_TYPE_RUNNER",
-            "RESOURCE_TYPE_PROJECT",
-            "RESOURCE_TYPE_TASK",
-            "RESOURCE_TYPE_TASK_EXECUTION",
-            "RESOURCE_TYPE_SERVICE",
-            "RESOURCE_TYPE_ORGANIZATION",
-            "RESOURCE_TYPE_USER",
-            "RESOURCE_TYPE_ENVIRONMENT_CLASS",
-            "RESOURCE_TYPE_RUNNER_SCM_INTEGRATION",
-            "RESOURCE_TYPE_HOST_AUTHENTICATION_TOKEN",
-            "RESOURCE_TYPE_GROUP",
-            "RESOURCE_TYPE_PERSONAL_ACCESS_TOKEN",
-            "RESOURCE_TYPE_USER_PREFERENCE",
-            "RESOURCE_TYPE_SERVICE_ACCOUNT",
-            "RESOURCE_TYPE_SECRET",
-            "RESOURCE_TYPE_SSO_CONFIG",
-        ]
-    ] = FieldInfo(alias="subjectType", default=None)
+    subject_type: Optional[ResourceType] = FieldInfo(alias="subjectType", default=None)

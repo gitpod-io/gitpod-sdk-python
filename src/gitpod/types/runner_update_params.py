@@ -2,85 +2,39 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .runner_phase import RunnerPhase
+from .runner_release_channel import RunnerReleaseChannel
 
-__all__ = [
-    "RunnerUpdateParams",
-    "TheRunnerSNameWhichIsShownToUsers",
-    "Variant1",
-    "Variant1Spec",
-    "Variant1SpecConfiguration",
-    "Variant1SpecConfigurationConfiguration",
-    "Variant1SpecConfigurationConfigurationAutoUpdateIndicatesWhetherTheRunnerShouldAutomaticallyUpdateItself",
-    "Variant1SpecConfigurationConfigurationTheReleaseChannelTheRunnerIsOn",
-    "Variant1SpecDesiredPhaseCanCurrentlyOnlyBeUpdatedOnLocalConfigurationRunnersToToggleWhetherLocalRunnersAreAllowedForRunningEnvironmentsInTheOrganizationSetToActiveToEnableLocalRunnersInactiveToDisableAllLocalRunnersExistingLocalRunnersAndTheirEnvironmentsWillStopAndCannotBeStartedAgainUntilTheDesiredPhaseIsSetToActiveUseThisCarefullyAsItWillAffectAllUsersInTheOrganizationWhoUseLocalRunners",
-]
+__all__ = ["RunnerUpdateParams", "Spec", "SpecConfiguration"]
 
 
-class TheRunnerSNameWhichIsShownToUsers(TypedDict, total=False):
-    name: Required[str]
+class RunnerUpdateParams(TypedDict, total=False):
+    name: Optional[str]
     """The runner's name which is shown to users"""
 
+    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
+    """runner_id specifies which runner to be updated.
 
-class Variant1(TypedDict, total=False):
-    spec: Required[Variant1Spec]
+    +required
+    """
+
+    spec: Optional[Spec]
 
 
-class Variant1SpecConfigurationConfigurationAutoUpdateIndicatesWhetherTheRunnerShouldAutomaticallyUpdateItself(
-    TypedDict, total=False
-):
-    auto_update: Required[Annotated[bool, PropertyInfo(alias="autoUpdate")]]
+class SpecConfiguration(TypedDict, total=False):
+    auto_update: Annotated[Optional[bool], PropertyInfo(alias="autoUpdate")]
     """auto_update indicates whether the runner should automatically update itself."""
 
-
-class Variant1SpecConfigurationConfigurationTheReleaseChannelTheRunnerIsOn(TypedDict, total=False):
-    release_channel: Required[
-        Annotated[
-            Literal[
-                "RUNNER_RELEASE_CHANNEL_UNSPECIFIED", "RUNNER_RELEASE_CHANNEL_STABLE", "RUNNER_RELEASE_CHANNEL_LATEST"
-            ],
-            PropertyInfo(alias="releaseChannel"),
-        ]
-    ]
+    release_channel: Annotated[Optional[RunnerReleaseChannel], PropertyInfo(alias="releaseChannel")]
     """The release channel the runner is on"""
 
 
-Variant1SpecConfigurationConfiguration: TypeAlias = Union[
-    Variant1SpecConfigurationConfigurationAutoUpdateIndicatesWhetherTheRunnerShouldAutomaticallyUpdateItself,
-    Variant1SpecConfigurationConfigurationTheReleaseChannelTheRunnerIsOn,
-]
+class Spec(TypedDict, total=False):
+    configuration: Optional[SpecConfiguration]
 
-
-class Variant1SpecConfiguration(TypedDict, total=False):
-    configuration: Required[Variant1SpecConfigurationConfiguration]
-
-
-class Variant1SpecDesiredPhaseCanCurrentlyOnlyBeUpdatedOnLocalConfigurationRunnersToToggleWhetherLocalRunnersAreAllowedForRunningEnvironmentsInTheOrganizationSetToActiveToEnableLocalRunnersInactiveToDisableAllLocalRunnersExistingLocalRunnersAndTheirEnvironmentsWillStopAndCannotBeStartedAgainUntilTheDesiredPhaseIsSetToActiveUseThisCarefullyAsItWillAffectAllUsersInTheOrganizationWhoUseLocalRunners(
-    TypedDict, total=False
-):
-    desired_phase: Required[
-        Annotated[
-            Literal[
-                "RUNNER_PHASE_UNSPECIFIED",
-                "RUNNER_PHASE_CREATED",
-                "RUNNER_PHASE_INACTIVE",
-                "RUNNER_PHASE_ACTIVE",
-                "RUNNER_PHASE_DELETING",
-                "RUNNER_PHASE_DELETED",
-                "RUNNER_PHASE_DEGRADED",
-            ],
-            PropertyInfo(alias="desiredPhase"),
-        ]
-    ]
+    desired_phase: Annotated[Optional[RunnerPhase], PropertyInfo(alias="desiredPhase")]
     """RunnerPhase represents the phase a runner is in"""
-
-
-Variant1Spec: TypeAlias = Union[
-    Variant1SpecConfiguration,
-    Variant1SpecDesiredPhaseCanCurrentlyOnlyBeUpdatedOnLocalConfigurationRunnersToToggleWhetherLocalRunnersAreAllowedForRunningEnvironmentsInTheOrganizationSetToActiveToEnableLocalRunnersInactiveToDisableAllLocalRunnersExistingLocalRunnersAndTheirEnvironmentsWillStopAndCannotBeStartedAgainUntilTheDesiredPhaseIsSetToActiveUseThisCarefullyAsItWillAffectAllUsersInTheOrganizationWhoUseLocalRunners,
-]
-
-RunnerUpdateParams: TypeAlias = Union[TheRunnerSNameWhichIsShownToUsers, Variant1]
