@@ -12,7 +12,7 @@ from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncTasksPage, AsyncTasksPage
 from gitpod.types.environments.automations import (
-    TaskListResponse,
+    Task,
     TaskStartResponse,
     TaskCreateResponse,
     TaskRetrieveResponse,
@@ -45,7 +45,13 @@ class TestTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "command": "command",
@@ -129,8 +135,28 @@ class TestTasks:
         task = client.environments.automations.tasks.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            metadata={"description": "description"},
-            spec={"command": "command"},
+            metadata={
+                "description": "description",
+                "name": "x",
+                "triggered_by": {
+                    "trigger": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                        }
+                    ]
+                },
+            },
+            spec={
+                "command": "command",
+                "runs_on": {
+                    "docker": {
+                        "environment": ["string"],
+                        "image": "x",
+                    }
+                },
+            },
         )
         assert_matches_type(object, task, path=["response"])
 
@@ -160,7 +186,7 @@ class TestTasks:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.list()
-        assert_matches_type(SyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(SyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -178,7 +204,7 @@ class TestTasks:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(SyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -188,7 +214,7 @@ class TestTasks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         task = response.parse()
-        assert_matches_type(SyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(SyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -198,7 +224,7 @@ class TestTasks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             task = response.parse()
-            assert_matches_type(SyncTasksPage[TaskListResponse], task, path=["response"])
+            assert_matches_type(SyncTasksPage[Task], task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -299,7 +325,13 @@ class TestAsyncTasks:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "command": "command",
@@ -383,8 +415,28 @@ class TestAsyncTasks:
         task = await async_client.environments.automations.tasks.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            metadata={"description": "description"},
-            spec={"command": "command"},
+            metadata={
+                "description": "description",
+                "name": "x",
+                "triggered_by": {
+                    "trigger": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                        }
+                    ]
+                },
+            },
+            spec={
+                "command": "command",
+                "runs_on": {
+                    "docker": {
+                        "environment": ["string"],
+                        "image": "x",
+                    }
+                },
+            },
         )
         assert_matches_type(object, task, path=["response"])
 
@@ -414,7 +466,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.list()
-        assert_matches_type(AsyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(AsyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -432,7 +484,7 @@ class TestAsyncTasks:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(AsyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -442,7 +494,7 @@ class TestAsyncTasks:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         task = await response.parse()
-        assert_matches_type(AsyncTasksPage[TaskListResponse], task, path=["response"])
+        assert_matches_type(AsyncTasksPage[Task], task, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -452,7 +504,7 @@ class TestAsyncTasks:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             task = await response.parse()
-            assert_matches_type(AsyncTasksPage[TaskListResponse], task, path=["response"])
+            assert_matches_type(AsyncTasksPage[Task], task, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

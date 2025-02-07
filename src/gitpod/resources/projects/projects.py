@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import overload
+from typing import Optional
 
 import httpx
 
@@ -16,7 +16,6 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -38,10 +37,12 @@ from ..._response import (
 )
 from ...pagination import SyncProjectsPage, AsyncProjectsPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.project_list_response import ProjectListResponse
+from ...types.project import Project
 from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
+from ...types.environment_initializer_param import EnvironmentInitializerParam
+from ...types.project_environment_class_param import ProjectEnvironmentClassParam
 from ...types.project_create_from_environment_response import ProjectCreateFromEnvironmentResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
@@ -74,8 +75,8 @@ class ProjectsResource(SyncAPIResource):
     def create(
         self,
         *,
-        environment_class: project_create_params.EnvironmentClass,
-        initializer: project_create_params.Initializer,
+        environment_class: ProjectEnvironmentClassParam,
+        initializer: EnvironmentInitializerParam,
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -166,11 +167,15 @@ class ProjectsResource(SyncAPIResource):
             cast_to=ProjectRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        automations_file_path: str,
+        automations_file_path: Optional[str] | NotGiven = NOT_GIVEN,
+        devcontainer_file_path: Optional[str] | NotGiven = NOT_GIVEN,
+        environment_class: Optional[ProjectEnvironmentClassParam] | NotGiven = NOT_GIVEN,
+        initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        project_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -189,32 +194,6 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        devcontainer_file_path: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
           devcontainer_file_path: devcontainer_file_path is the path to the devcontainer file relative to the repo
               root path must not be absolute (start with a /):
 
@@ -222,60 +201,10 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        environment_class: project_update_params.Variant2EnvironmentClass,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        initializer: project_update_params.InitializerIsTheContentInitializerInitializer,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
 
+          project_id: project_id specifies the project identifier
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -284,52 +213,6 @@ class ProjectsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["automations_file_path"], ["devcontainer_file_path"], ["environment_class"], ["initializer"], ["name"]
-    )
-    def update(
-        self,
-        *,
-        automations_file_path: str | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
-        environment_class: project_update_params.Variant2EnvironmentClass | NotGiven = NOT_GIVEN,
-        initializer: project_update_params.InitializerIsTheContentInitializerInitializer | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
         return self._post(
             "/gitpod.v1.ProjectService/UpdateProject",
             body=maybe_transform(
@@ -339,6 +222,7 @@ class ProjectsResource(SyncAPIResource):
                     "environment_class": environment_class,
                     "initializer": initializer,
                     "name": name,
+                    "project_id": project_id,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
@@ -360,7 +244,7 @@ class ProjectsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncProjectsPage[ProjectListResponse]:
+    ) -> SyncProjectsPage[Project]:
         """
         ListProjects lists all projects the caller has access to.
 
@@ -377,7 +261,7 @@ class ProjectsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
-            page=SyncProjectsPage[ProjectListResponse],
+            page=SyncProjectsPage[Project],
             body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -392,7 +276,7 @@ class ProjectsResource(SyncAPIResource):
                     project_list_params.ProjectListParams,
                 ),
             ),
-            model=ProjectListResponse,
+            model=Project,
             method="post",
         )
 
@@ -499,8 +383,8 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        environment_class: project_create_params.EnvironmentClass,
-        initializer: project_create_params.Initializer,
+        environment_class: ProjectEnvironmentClassParam,
+        initializer: EnvironmentInitializerParam,
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -591,11 +475,15 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=ProjectRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        automations_file_path: str,
+        automations_file_path: Optional[str] | NotGiven = NOT_GIVEN,
+        devcontainer_file_path: Optional[str] | NotGiven = NOT_GIVEN,
+        environment_class: Optional[ProjectEnvironmentClassParam] | NotGiven = NOT_GIVEN,
+        initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        project_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -614,32 +502,6 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        devcontainer_file_path: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
           devcontainer_file_path: devcontainer_file_path is the path to the devcontainer file relative to the repo
               root path must not be absolute (start with a /):
 
@@ -647,60 +509,10 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        environment_class: project_update_params.Variant2EnvironmentClass,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        initializer: project_update_params.InitializerIsTheContentInitializerInitializer,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
 
+          project_id: project_id specifies the project identifier
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -709,52 +521,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
-        """
-        UpdateProject updates the properties of a Project.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(
-        ["automations_file_path"], ["devcontainer_file_path"], ["environment_class"], ["initializer"], ["name"]
-    )
-    async def update(
-        self,
-        *,
-        automations_file_path: str | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
-        environment_class: project_update_params.Variant2EnvironmentClass | NotGiven = NOT_GIVEN,
-        initializer: project_update_params.InitializerIsTheContentInitializerInitializer | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> ProjectUpdateResponse:
         return await self._post(
             "/gitpod.v1.ProjectService/UpdateProject",
             body=await async_maybe_transform(
@@ -764,6 +530,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "environment_class": environment_class,
                     "initializer": initializer,
                     "name": name,
+                    "project_id": project_id,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
@@ -785,7 +552,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ProjectListResponse, AsyncProjectsPage[ProjectListResponse]]:
+    ) -> AsyncPaginator[Project, AsyncProjectsPage[Project]]:
         """
         ListProjects lists all projects the caller has access to.
 
@@ -802,7 +569,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
-            page=AsyncProjectsPage[ProjectListResponse],
+            page=AsyncProjectsPage[Project],
             body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -817,7 +584,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     project_list_params.ProjectListParams,
                 ),
             ),
-            model=ProjectListResponse,
+            model=Project,
             method="post",
         )
 

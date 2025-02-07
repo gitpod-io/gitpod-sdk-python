@@ -12,7 +12,7 @@ from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncTokensPage, AsyncTokensPage
 from gitpod.types.runners.configurations import (
-    HostAuthenticationTokenListResponse,
+    HostAuthenticationToken,
     HostAuthenticationTokenCreateResponse,
     HostAuthenticationTokenRetrieveResponse,
 )
@@ -103,18 +103,25 @@ class TestHostAuthenticationTokens:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
+        host_authentication_token = client.runners.configurations.host_authentication_tokens.update()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="x",
             expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            refresh_token="refreshToken",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.runners.configurations.host_authentication_tokens.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -123,78 +130,8 @@ class TestHostAuthenticationTokens:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            host_authentication_token = response.parse()
-            assert_matches_type(object, host_authentication_token, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
-            refresh_token="refreshToken",
-        )
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            refresh_token="refreshToken",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        host_authentication_token = response.parse()
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            refresh_token="refreshToken",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            host_authentication_token = response.parse()
-            assert_matches_type(object, host_authentication_token, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_3(self, client: Gitpod) -> None:
-        host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
-            token="x",
-        )
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
-        response = client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            token="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        host_authentication_token = response.parse()
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
-        with client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            token="x",
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.runners.configurations.host_authentication_tokens.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -207,9 +144,7 @@ class TestHostAuthenticationTokens:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.list()
-        assert_matches_type(
-            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(SyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -217,15 +152,16 @@ class TestHostAuthenticationTokens:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.list(
             token="token",
             page_size=0,
-            filter={"runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            filter={
+                "runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(SyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -235,9 +171,7 @@ class TestHostAuthenticationTokens:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         host_authentication_token = response.parse()
-        assert_matches_type(
-            SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(SyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -247,9 +181,7 @@ class TestHostAuthenticationTokens:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             host_authentication_token = response.parse()
-            assert_matches_type(
-                SyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-            )
+            assert_matches_type(SyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -377,18 +309,25 @@ class TestAsyncHostAuthenticationTokens:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update()
+        assert_matches_type(object, host_authentication_token, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="x",
             expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
+            refresh_token="refreshToken",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -397,77 +336,9 @@ class TestAsyncHostAuthenticationTokens:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            host_authentication_token = await response.parse()
-            assert_matches_type(object, host_authentication_token, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
-            refresh_token="refreshToken",
-        )
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            refresh_token="refreshToken",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        host_authentication_token = await response.parse()
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            refresh_token="refreshToken",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            host_authentication_token = await response.parse()
-            assert_matches_type(object, host_authentication_token, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
-            token="x",
-        )
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.host_authentication_tokens.with_raw_response.update(
-            token="x",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        host_authentication_token = await response.parse()
-        assert_matches_type(object, host_authentication_token, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update(
-            token="x",
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with (
+            async_client.runners.configurations.host_authentication_tokens.with_streaming_response.update()
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -481,9 +352,7 @@ class TestAsyncHostAuthenticationTokens:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.list()
-        assert_matches_type(
-            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(AsyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -491,15 +360,16 @@ class TestAsyncHostAuthenticationTokens:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.list(
             token="token",
             page_size=0,
-            filter={"runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+            filter={
+                "runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             pagination={
                 "token": "token",
                 "page_size": 100,
             },
         )
-        assert_matches_type(
-            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(AsyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -509,9 +379,7 @@ class TestAsyncHostAuthenticationTokens:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         host_authentication_token = await response.parse()
-        assert_matches_type(
-            AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-        )
+        assert_matches_type(AsyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -523,9 +391,7 @@ class TestAsyncHostAuthenticationTokens:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             host_authentication_token = await response.parse()
-            assert_matches_type(
-                AsyncTokensPage[HostAuthenticationTokenListResponse], host_authentication_token, path=["response"]
-            )
+            assert_matches_type(AsyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

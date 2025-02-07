@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -21,8 +19,15 @@ from ..._response import (
 )
 from ...pagination import SyncPoliciesPage, AsyncPoliciesPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.runners import policy_list_params, policy_create_params, policy_delete_params, policy_update_params
-from ...types.runners.policy_list_response import PolicyListResponse
+from ...types.runners import (
+    RunnerRole,
+    policy_list_params,
+    policy_create_params,
+    policy_delete_params,
+    policy_update_params,
+)
+from ...types.runners.runner_role import RunnerRole
+from ...types.runners.runner_policy import RunnerPolicy
 from ...types.runners.policy_create_response import PolicyCreateResponse
 from ...types.runners.policy_update_response import PolicyUpdateResponse
 
@@ -53,7 +58,7 @@ class PoliciesResource(SyncAPIResource):
         self,
         *,
         group_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: RunnerRole | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,7 +103,7 @@ class PoliciesResource(SyncAPIResource):
         self,
         *,
         group_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: RunnerRole | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -152,7 +157,7 @@ class PoliciesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPoliciesPage[PolicyListResponse]:
+    ) -> SyncPoliciesPage[RunnerPolicy]:
         """
         ListRunnerPolicies lists runner policies.
 
@@ -171,7 +176,7 @@ class PoliciesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunnerPolicies",
-            page=SyncPoliciesPage[PolicyListResponse],
+            page=SyncPoliciesPage[RunnerPolicy],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -192,7 +197,7 @@ class PoliciesResource(SyncAPIResource):
                     policy_list_params.PolicyListParams,
                 ),
             ),
-            model=PolicyListResponse,
+            model=RunnerPolicy,
             method="post",
         )
 
@@ -264,7 +269,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         self,
         *,
         group_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: RunnerRole | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -309,7 +314,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         self,
         *,
         group_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["RUNNER_ROLE_UNSPECIFIED", "RUNNER_ROLE_ADMIN", "RUNNER_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: RunnerRole | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -363,7 +368,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[PolicyListResponse, AsyncPoliciesPage[PolicyListResponse]]:
+    ) -> AsyncPaginator[RunnerPolicy, AsyncPoliciesPage[RunnerPolicy]]:
         """
         ListRunnerPolicies lists runner policies.
 
@@ -382,7 +387,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunnerPolicies",
-            page=AsyncPoliciesPage[PolicyListResponse],
+            page=AsyncPoliciesPage[RunnerPolicy],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -403,7 +408,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     policy_list_params.PolicyListParams,
                 ),
             ),
-            model=PolicyListResponse,
+            model=RunnerPolicy,
             method="post",
         )
 

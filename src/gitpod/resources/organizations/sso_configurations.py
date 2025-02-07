@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing import Dict, Optional
 
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -23,13 +22,15 @@ from ..._response import (
 from ...pagination import SyncSSOConfigurationsPage, AsyncSSOConfigurationsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.organizations import (
+    SSOConfigurationState,
     sso_configuration_list_params,
     sso_configuration_create_params,
     sso_configuration_delete_params,
     sso_configuration_update_params,
     sso_configuration_retrieve_params,
 )
-from ...types.organizations.sso_configuration_list_response import SSOConfigurationListResponse
+from ...types.organizations.sso_configuration import SSOConfiguration
+from ...types.organizations.sso_configuration_state import SSOConfigurationState
 from ...types.organizations.sso_configuration_create_response import SSOConfigurationCreateResponse
 from ...types.organizations.sso_configuration_retrieve_response import SSOConfigurationRetrieveResponse
 
@@ -146,11 +147,16 @@ class SSOConfigurationsResource(SyncAPIResource):
             cast_to=SSOConfigurationRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        client_id: str,
+        claims: Dict[str, str] | NotGiven = NOT_GIVEN,
+        client_id: Optional[str] | NotGiven = NOT_GIVEN,
+        client_secret: Optional[str] | NotGiven = NOT_GIVEN,
+        email_domain: Optional[str] | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -162,118 +168,16 @@ class SSOConfigurationsResource(SyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
+          claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
+
           client_id: client_id is the client ID of the SSO provider
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        client_secret: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           client_secret: client_secret is the client secret of the SSO provider
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        email_domain: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        issuer_url: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           issuer_url: issuer_url is the URL of the IdP issuer
 
-          extra_headers: Send extra headers
+          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        state: Literal[
-            "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
-        ],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           state: state is the state of the SSO configuration
 
           extra_headers: Send extra headers
@@ -284,35 +188,16 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["client_id"], ["client_secret"], ["email_domain"], ["issuer_url"], ["state"])
-    def update(
-        self,
-        *,
-        client_id: str | NotGiven = NOT_GIVEN,
-        client_secret: str | NotGiven = NOT_GIVEN,
-        email_domain: str | NotGiven = NOT_GIVEN,
-        issuer_url: str | NotGiven = NOT_GIVEN,
-        state: Literal[
-            "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
-        ]
-        | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return self._post(
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=maybe_transform(
                 {
+                    "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "email_domain": email_domain,
                     "issuer_url": issuer_url,
+                    "sso_configuration_id": sso_configuration_id,
                     "state": state,
                 },
                 sso_configuration_update_params.SSOConfigurationUpdateParams,
@@ -336,7 +221,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncSSOConfigurationsPage[SSOConfigurationListResponse]:
+    ) -> SyncSSOConfigurationsPage[SSOConfiguration]:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
@@ -353,7 +238,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
-            page=SyncSSOConfigurationsPage[SSOConfigurationListResponse],
+            page=SyncSSOConfigurationsPage[SSOConfiguration],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -374,7 +259,7 @@ class SSOConfigurationsResource(SyncAPIResource):
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            model=SSOConfigurationListResponse,
+            model=SSOConfiguration,
             method="post",
         )
 
@@ -524,11 +409,16 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
             cast_to=SSOConfigurationRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        client_id: str,
+        claims: Dict[str, str] | NotGiven = NOT_GIVEN,
+        client_id: Optional[str] | NotGiven = NOT_GIVEN,
+        client_secret: Optional[str] | NotGiven = NOT_GIVEN,
+        email_domain: Optional[str] | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -540,118 +430,16 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
+          claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
+
           client_id: client_id is the client ID of the SSO provider
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        client_secret: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           client_secret: client_secret is the client secret of the SSO provider
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        email_domain: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        issuer_url: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           issuer_url: issuer_url is the URL of the IdP issuer
 
-          extra_headers: Send extra headers
+          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        state: Literal[
-            "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
-        ],
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSSOConfiguration updates the SSO configuration for the organization.
-
-        Args:
           state: state is the state of the SSO configuration
 
           extra_headers: Send extra headers
@@ -662,35 +450,16 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["client_id"], ["client_secret"], ["email_domain"], ["issuer_url"], ["state"])
-    async def update(
-        self,
-        *,
-        client_id: str | NotGiven = NOT_GIVEN,
-        client_secret: str | NotGiven = NOT_GIVEN,
-        email_domain: str | NotGiven = NOT_GIVEN,
-        issuer_url: str | NotGiven = NOT_GIVEN,
-        state: Literal[
-            "SSO_CONFIGURATION_STATE_UNSPECIFIED", "SSO_CONFIGURATION_STATE_INACTIVE", "SSO_CONFIGURATION_STATE_ACTIVE"
-        ]
-        | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return await self._post(
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=await async_maybe_transform(
                 {
+                    "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "email_domain": email_domain,
                     "issuer_url": issuer_url,
+                    "sso_configuration_id": sso_configuration_id,
                     "state": state,
                 },
                 sso_configuration_update_params.SSOConfigurationUpdateParams,
@@ -714,7 +483,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[SSOConfigurationListResponse, AsyncSSOConfigurationsPage[SSOConfigurationListResponse]]:
+    ) -> AsyncPaginator[SSOConfiguration, AsyncSSOConfigurationsPage[SSOConfiguration]]:
         """
         ListSSOConfigurations lists all SSO configurations matching provided filters.
 
@@ -731,7 +500,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListSSOConfigurations",
-            page=AsyncSSOConfigurationsPage[SSOConfigurationListResponse],
+            page=AsyncSSOConfigurationsPage[SSOConfiguration],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -752,7 +521,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     sso_configuration_list_params.SSOConfigurationListParams,
                 ),
             ),
-            model=SSOConfigurationListResponse,
+            model=SSOConfiguration,
             method="post",
         )
 

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing import List, Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
@@ -21,11 +22,14 @@ class EnvironmentClassListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    enabled: Required[bool]
+    enabled: Optional[bool]
     """
     enabled filters the response to only enabled or disabled environment classes. If
     not set, all environment classes are returned.
     """
+
+    runner_ids: Annotated[List[str], PropertyInfo(alias="runnerIds")]
+    """runner_ids filters the response to only EnvironmentClasses of these Runner IDs"""
 
 
 class Pagination(TypedDict, total=False):

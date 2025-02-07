@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing import Optional
 
 import httpx
 
 from ...types import (
+    Scope,
     organization_join_params,
     organization_list_params,
     organization_leave_params,
@@ -27,7 +28,6 @@ from .invites import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -40,6 +40,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ...pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
+from ...types.scope import Scope
 from ..._base_client import AsyncPaginator, make_request_options
 from .sso_configurations import (
     SSOConfigurationsResource,
@@ -49,12 +50,14 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from ...types.organization import Organization
+from ...types.organization_member import OrganizationMember
+from ...types.invite_domains_param import InviteDomainsParam
+from ...types.shared.organization_role import OrganizationRole
 from ...types.organization_join_response import OrganizationJoinResponse
-from ...types.organization_list_response import OrganizationListResponse
 from ...types.organization_create_response import OrganizationCreateResponse
 from ...types.organization_update_response import OrganizationUpdateResponse
 from ...types.organization_retrieve_response import OrganizationRetrieveResponse
-from ...types.organization_list_members_response import OrganizationListMembersResponse
 
 __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
@@ -172,11 +175,12 @@ class OrganizationsResource(SyncAPIResource):
             cast_to=OrganizationRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains,
+        invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,34 +194,10 @@ class OrganizationsResource(SyncAPIResource):
         Args:
           invite_domains: invite_domains is the domain allowlist of the organization
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
-        """
-        UpdateOrganization updates the properties of an Organization.
-
-        Args:
           name: name is the new name of the organization
 
+          organization_id: organization_id is the ID of the organization to update the settings for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -226,28 +206,13 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["invite_domains"], ["name"])
-    def update(
-        self,
-        *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains
-        | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
         return self._post(
             "/gitpod.v1.OrganizationService/UpdateOrganization",
             body=maybe_transform(
                 {
                     "invite_domains": invite_domains,
                     "name": name,
+                    "organization_id": organization_id,
                 },
                 organization_update_params.OrganizationUpdateParams,
             ),
@@ -263,14 +228,14 @@ class OrganizationsResource(SyncAPIResource):
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         pagination: organization_list_params.Pagination | NotGiven = NOT_GIVEN,
-        scope: Literal["SCOPE_UNSPECIFIED", "SCOPE_MEMBER", "SCOPE_ALL"] | NotGiven = NOT_GIVEN,
+        scope: Scope | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOrganizationsPage[OrganizationListResponse]:
+    ) -> SyncOrganizationsPage[Organization]:
         """
         ListOrganizations lists all organization the caller has access to.
 
@@ -289,7 +254,7 @@ class OrganizationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=SyncOrganizationsPage[OrganizationListResponse],
+            page=SyncOrganizationsPage[Organization],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -310,7 +275,7 @@ class OrganizationsResource(SyncAPIResource):
                     organization_list_params.OrganizationListParams,
                 ),
             ),
-            model=OrganizationListResponse,
+            model=Organization,
             method="post",
         )
 
@@ -350,11 +315,11 @@ class OrganizationsResource(SyncAPIResource):
             cast_to=object,
         )
 
-    @overload
     def join(
         self,
         *,
-        invite_id: str,
+        invite_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -368,32 +333,6 @@ class OrganizationsResource(SyncAPIResource):
         Args:
           invite_id: invite_id is the unique identifier of the invite to join the organization.
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def join(
-        self,
-        *,
-        organization_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationJoinResponse:
-        """
-        JoinOrganization lets accounts join an Organization.
-
-        Args:
           organization_id: organization_id is the unique identifier of the Organization to join.
 
           extra_headers: Send extra headers
@@ -404,21 +343,6 @@ class OrganizationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["invite_id"], ["organization_id"])
-    def join(
-        self,
-        *,
-        invite_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationJoinResponse:
         return self._post(
             "/gitpod.v1.OrganizationService/JoinOrganization",
             body=maybe_transform(
@@ -479,7 +403,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncMembersPage[OrganizationListMembersResponse]:
+    ) -> SyncMembersPage[OrganizationMember]:
         """
         ListMembers lists all members of the specified organization.
 
@@ -498,7 +422,7 @@ class OrganizationsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListMembers",
-            page=SyncMembersPage[OrganizationListMembersResponse],
+            page=SyncMembersPage[OrganizationMember],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -519,7 +443,7 @@ class OrganizationsResource(SyncAPIResource):
                     organization_list_members_params.OrganizationListMembersParams,
                 ),
             ),
-            model=OrganizationListMembersResponse,
+            model=OrganizationMember,
             method="post",
         )
 
@@ -527,8 +451,7 @@ class OrganizationsResource(SyncAPIResource):
         self,
         *,
         organization_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["ORGANIZATION_ROLE_UNSPECIFIED", "ORGANIZATION_ROLE_ADMIN", "ORGANIZATION_ROLE_MEMBER"]
-        | NotGiven = NOT_GIVEN,
+        role: OrganizationRole | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -679,11 +602,12 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=OrganizationRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains,
+        invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -697,34 +621,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         Args:
           invite_domains: invite_domains is the domain allowlist of the organization
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
-        """
-        UpdateOrganization updates the properties of an Organization.
-
-        Args:
           name: name is the new name of the organization
 
+          organization_id: organization_id is the ID of the organization to update the settings for.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -733,28 +633,13 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["invite_domains"], ["name"])
-    async def update(
-        self,
-        *,
-        invite_domains: organization_update_params.InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains
-        | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationUpdateResponse:
         return await self._post(
             "/gitpod.v1.OrganizationService/UpdateOrganization",
             body=await async_maybe_transform(
                 {
                     "invite_domains": invite_domains,
                     "name": name,
+                    "organization_id": organization_id,
                 },
                 organization_update_params.OrganizationUpdateParams,
             ),
@@ -770,14 +655,14 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         pagination: organization_list_params.Pagination | NotGiven = NOT_GIVEN,
-        scope: Literal["SCOPE_UNSPECIFIED", "SCOPE_MEMBER", "SCOPE_ALL"] | NotGiven = NOT_GIVEN,
+        scope: Scope | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[OrganizationListResponse, AsyncOrganizationsPage[OrganizationListResponse]]:
+    ) -> AsyncPaginator[Organization, AsyncOrganizationsPage[Organization]]:
         """
         ListOrganizations lists all organization the caller has access to.
 
@@ -796,7 +681,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=AsyncOrganizationsPage[OrganizationListResponse],
+            page=AsyncOrganizationsPage[Organization],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -817,7 +702,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
                     organization_list_params.OrganizationListParams,
                 ),
             ),
-            model=OrganizationListResponse,
+            model=Organization,
             method="post",
         )
 
@@ -857,11 +742,11 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             cast_to=object,
         )
 
-    @overload
     async def join(
         self,
         *,
-        invite_id: str,
+        invite_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -875,32 +760,6 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         Args:
           invite_id: invite_id is the unique identifier of the invite to join the organization.
 
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def join(
-        self,
-        *,
-        organization_id: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationJoinResponse:
-        """
-        JoinOrganization lets accounts join an Organization.
-
-        Args:
           organization_id: organization_id is the unique identifier of the Organization to join.
 
           extra_headers: Send extra headers
@@ -911,21 +770,6 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["invite_id"], ["organization_id"])
-    async def join(
-        self,
-        *,
-        invite_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OrganizationJoinResponse:
         return await self._post(
             "/gitpod.v1.OrganizationService/JoinOrganization",
             body=await async_maybe_transform(
@@ -986,7 +830,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[OrganizationListMembersResponse, AsyncMembersPage[OrganizationListMembersResponse]]:
+    ) -> AsyncPaginator[OrganizationMember, AsyncMembersPage[OrganizationMember]]:
         """
         ListMembers lists all members of the specified organization.
 
@@ -1005,7 +849,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.OrganizationService/ListMembers",
-            page=AsyncMembersPage[OrganizationListMembersResponse],
+            page=AsyncMembersPage[OrganizationMember],
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
@@ -1026,7 +870,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
                     organization_list_members_params.OrganizationListMembersParams,
                 ),
             ),
-            model=OrganizationListMembersResponse,
+            model=OrganizationMember,
             method="post",
         )
 
@@ -1034,8 +878,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         self,
         *,
         organization_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["ORGANIZATION_ROLE_UNSPECIFIED", "ORGANIZATION_ROLE_ADMIN", "ORGANIZATION_ROLE_MEMBER"]
-        | NotGiven = NOT_GIVEN,
+        role: OrganizationRole | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

@@ -2,23 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = [
-    "ScmIntegrationUpdateParams",
-    "OAuthClientIDCanBeSetToUpdateTheOAuthAppSClientIDIfAnEmptyStringIsSetTheOAuthConfigurationWillBeRemovedRegardlessOfWhetherAClientSecretIsSetAndAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingTheOAuthAppWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate",
-    "OAuthPlaintextClientSecretCanBeSetToUpdateTheOAuthAppSClientSecretTheCleartextSecretWillBeEncryptedWithTheRunnerSPublicKeyBeforeBeingStored",
-    "PatCanBeSetToEnableOrDisablePersonalAccessTokensSupportWhenDisablingPaTsAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingAPatWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate",
-]
+__all__ = ["ScmIntegrationUpdateParams"]
 
 
-class OAuthClientIDCanBeSetToUpdateTheOAuthAppSClientIDIfAnEmptyStringIsSetTheOAuthConfigurationWillBeRemovedRegardlessOfWhetherAClientSecretIsSetAndAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingTheOAuthAppWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate(
-    TypedDict, total=False
-):
-    oauth_client_id: Required[Annotated[str, PropertyInfo(alias="oauthClientId")]]
+class ScmIntegrationUpdateParams(TypedDict, total=False):
+    id: str
+
+    oauth_client_id: Annotated[Optional[str], PropertyInfo(alias="oauthClientId")]
     """
     oauth_client_id can be set to update the OAuth app's client ID. If an empty
     string is set, the OAuth configuration will be removed (regardless of whether a
@@ -28,22 +23,14 @@ class OAuthClientIDCanBeSetToUpdateTheOAuthAppSClientIDIfAnEmptyStringIsSetTheOA
     until they re-authenticate.
     """
 
-
-class OAuthPlaintextClientSecretCanBeSetToUpdateTheOAuthAppSClientSecretTheCleartextSecretWillBeEncryptedWithTheRunnerSPublicKeyBeforeBeingStored(
-    TypedDict, total=False
-):
-    oauth_plaintext_client_secret: Required[Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]]
+    oauth_plaintext_client_secret: Annotated[Optional[str], PropertyInfo(alias="oauthPlaintextClientSecret")]
     """
     oauth_plaintext_client_secret can be set to update the OAuth app's client
     secret. The cleartext secret will be encrypted with the runner's public key
     before being stored.
     """
 
-
-class PatCanBeSetToEnableOrDisablePersonalAccessTokensSupportWhenDisablingPaTsAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingAPatWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate(
-    TypedDict, total=False
-):
-    pat: Required[bool]
+    pat: Optional[bool]
     """
     pat can be set to enable or disable Personal Access Tokens support. When
     disabling PATs, any existing Host Authentication Tokens for the SCM
@@ -51,10 +38,3 @@ class PatCanBeSetToEnableOrDisablePersonalAccessTokensSupportWhenDisablingPaTsAn
     This might lead to users being unable to access their repositories until they
     re-authenticate.
     """
-
-
-ScmIntegrationUpdateParams: TypeAlias = Union[
-    OAuthClientIDCanBeSetToUpdateTheOAuthAppSClientIDIfAnEmptyStringIsSetTheOAuthConfigurationWillBeRemovedRegardlessOfWhetherAClientSecretIsSetAndAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingTheOAuthAppWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate,
-    OAuthPlaintextClientSecretCanBeSetToUpdateTheOAuthAppSClientSecretTheCleartextSecretWillBeEncryptedWithTheRunnerSPublicKeyBeforeBeingStored,
-    PatCanBeSetToEnableOrDisablePersonalAccessTokensSupportWhenDisablingPaTsAnyExistingHostAuthenticationTokensForTheScmIntegrationSRunnerAndHostThatWereCreatedUsingAPatWillBeDeletedThisMightLeadToUsersBeingUnableToAccessTheirRepositoriesUntilTheyReAuthenticate,
-]

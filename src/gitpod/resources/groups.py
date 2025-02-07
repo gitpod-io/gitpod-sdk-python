@@ -16,8 +16,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from ..pagination import SyncGroupsPage, AsyncGroupsPage
+from ..types.group import Group
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.group_list_response import GroupListResponse
 
 __all__ = ["GroupsResource", "AsyncGroupsResource"]
 
@@ -54,7 +54,7 @@ class GroupsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncGroupsPage[GroupListResponse]:
+    ) -> SyncGroupsPage[Group]:
         """
         ListGroups lists groups
 
@@ -71,7 +71,7 @@ class GroupsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.GroupService/ListGroups",
-            page=SyncGroupsPage[GroupListResponse],
+            page=SyncGroupsPage[Group],
             body=maybe_transform({"pagination": pagination}, group_list_params.GroupListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -86,7 +86,7 @@ class GroupsResource(SyncAPIResource):
                     group_list_params.GroupListParams,
                 ),
             ),
-            model=GroupListResponse,
+            model=Group,
             method="post",
         )
 
@@ -123,7 +123,7 @@ class AsyncGroupsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[GroupListResponse, AsyncGroupsPage[GroupListResponse]]:
+    ) -> AsyncPaginator[Group, AsyncGroupsPage[Group]]:
         """
         ListGroups lists groups
 
@@ -140,7 +140,7 @@ class AsyncGroupsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.GroupService/ListGroups",
-            page=AsyncGroupsPage[GroupListResponse],
+            page=AsyncGroupsPage[Group],
             body=maybe_transform({"pagination": pagination}, group_list_params.GroupListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -155,7 +155,7 @@ class AsyncGroupsResource(AsyncAPIResource):
                     group_list_params.GroupListParams,
                 ),
             ),
-            model=GroupListResponse,
+            model=Group,
             method="post",
         )
 

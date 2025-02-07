@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .runner_kind import RunnerKind
+from .environment_phase import EnvironmentPhase
 
 __all__ = ["EnvironmentListParams", "Filter", "Pagination"]
 
@@ -42,35 +44,13 @@ class Filter(TypedDict, total=False):
     runner_ids filters the response to only Environments running on these Runner IDs
     """
 
-    runner_kinds: Annotated[
-        List[
-            Literal[
-                "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
-            ]
-        ],
-        PropertyInfo(alias="runnerKinds"),
-    ]
+    runner_kinds: Annotated[List[RunnerKind], PropertyInfo(alias="runnerKinds")]
     """
     runner_kinds filters the response to only Environments running on these Runner
     Kinds
     """
 
-    status_phases: Annotated[
-        List[
-            Literal[
-                "ENVIRONMENT_PHASE_UNSPECIFIED",
-                "ENVIRONMENT_PHASE_CREATING",
-                "ENVIRONMENT_PHASE_STARTING",
-                "ENVIRONMENT_PHASE_RUNNING",
-                "ENVIRONMENT_PHASE_UPDATING",
-                "ENVIRONMENT_PHASE_STOPPING",
-                "ENVIRONMENT_PHASE_STOPPED",
-                "ENVIRONMENT_PHASE_DELETING",
-                "ENVIRONMENT_PHASE_DELETED",
-            ]
-        ],
-        PropertyInfo(alias="statusPhases"),
-    ]
+    status_phases: Annotated[List[EnvironmentPhase], PropertyInfo(alias="statusPhases")]
     """
     actual_phases is a list of phases the environment must be in for it to be
     returned in the API call

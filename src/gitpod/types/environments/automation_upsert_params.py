@@ -2,26 +2,16 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
+from .automations_file_param import AutomationsFileParam
 
-__all__ = [
-    "AutomationUpsertParams",
-    "AutomationsFile",
-    "AutomationsFileServices",
-    "AutomationsFileServicesCommands",
-    "AutomationsFileServicesRunsOn",
-    "AutomationsFileServicesRunsOnDocker",
-    "AutomationsFileTasks",
-    "AutomationsFileTasksRunsOn",
-    "AutomationsFileTasksRunsOnDocker",
-]
+__all__ = ["AutomationUpsertParams"]
 
 
 class AutomationUpsertParams(TypedDict, total=False):
-    automations_file: Annotated[AutomationsFile, PropertyInfo(alias="automationsFile")]
+    automations_file: Annotated[AutomationsFileParam, PropertyInfo(alias="automationsFile")]
     """
     WARN: Do not remove any field here, as it will break reading automation yaml
     files. We error if there are any unknown fields in the yaml (to ensure the yaml
@@ -30,89 +20,3 @@ class AutomationUpsertParams(TypedDict, total=False):
     """
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
-
-
-class AutomationsFileServicesCommands(TypedDict, total=False):
-    ready: str
-    """
-    ready is an optional command that is run repeatedly until it exits with a zero
-    exit code. If set, the service will first go into a Starting phase, and then
-    into a Running phase once the ready command exits with a zero exit code.
-    """
-
-    start: str
-    """
-    start is the command to start and run the service. If start exits, the service
-    will transition to the following phase:
-
-    - Stopped: if the exit code is 0
-    - Failed: if the exit code is not 0 If the stop command is not set, the start
-      command will receive a SIGTERM signal when the service is requested to stop.
-      If it does not exit within 2 minutes, it will receive a SIGKILL signal.
-    """
-
-    stop: str
-    """
-    stop is an optional command that runs when the service is requested to stop. If
-    set, instead of sending a SIGTERM signal to the start command, the stop command
-    will be run. Once the stop command exits, the start command will receive a
-    SIGKILL signal. If the stop command exits with a non-zero exit code, the service
-    will transition to the Failed phase. If the stop command does not exit within 2
-    minutes, a SIGKILL signal will be sent to both the start and stop commands.
-    """
-
-
-class AutomationsFileServicesRunsOnDocker(TypedDict, total=False):
-    environment: List[str]
-
-    image: str
-
-
-class AutomationsFileServicesRunsOn(TypedDict, total=False):
-    docker: Required[AutomationsFileServicesRunsOnDocker]
-
-
-class AutomationsFileServices(TypedDict, total=False):
-    commands: AutomationsFileServicesCommands
-
-    description: str
-
-    name: str
-
-    runs_on: Annotated[AutomationsFileServicesRunsOn, PropertyInfo(alias="runsOn")]
-
-    triggered_by: Annotated[
-        List[Literal["manual", "postEnvironmentStart", "postDevcontainerStart"]], PropertyInfo(alias="triggeredBy")
-    ]
-
-
-class AutomationsFileTasksRunsOnDocker(TypedDict, total=False):
-    environment: List[str]
-
-    image: str
-
-
-class AutomationsFileTasksRunsOn(TypedDict, total=False):
-    docker: Required[AutomationsFileTasksRunsOnDocker]
-
-
-class AutomationsFileTasks(TypedDict, total=False):
-    command: str
-
-    depends_on: Annotated[List[str], PropertyInfo(alias="dependsOn")]
-
-    description: str
-
-    name: str
-
-    runs_on: Annotated[AutomationsFileTasksRunsOn, PropertyInfo(alias="runsOn")]
-
-    triggered_by: Annotated[
-        List[Literal["manual", "postEnvironmentStart", "postDevcontainerStart"]], PropertyInfo(alias="triggeredBy")
-    ]
-
-
-class AutomationsFile(TypedDict, total=False):
-    services: Dict[str, AutomationsFileServices]
-
-    tasks: Dict[str, AutomationsFileTasks]

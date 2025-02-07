@@ -2,28 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import List, Iterable, Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from ...shared_params.runs_on import RunsOn
+from ...shared_params.automation_trigger import AutomationTrigger
 
-__all__ = [
-    "TaskUpdateParams",
-    "Metadata",
-    "MetadataDescription",
-    "MetadataName",
-    "MetadataTriggeredBy",
-    "MetadataTriggeredByTriggeredBy",
-    "MetadataTriggeredByTriggeredByTrigger",
-    "MetadataTriggeredByTriggeredByTriggerManual",
-    "MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart",
-    "MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart",
-    "Spec",
-    "SpecCommand",
-    "SpecRunsOn",
-    "SpecRunsOnRunsOn",
-    "SpecRunsOnRunsOnDocker",
-]
+__all__ = ["TaskUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec"]
 
 
 class TaskUpdateParams(TypedDict, total=False):
@@ -37,60 +23,19 @@ class TaskUpdateParams(TypedDict, total=False):
     spec: Spec
 
 
-class MetadataDescription(TypedDict, total=False):
-    description: Required[str]
-
-
-class MetadataName(TypedDict, total=False):
-    name: Required[str]
-
-
-class MetadataTriggeredByTriggeredByTriggerManual(TypedDict, total=False):
-    manual: Required[bool]
-
-
-class MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart(TypedDict, total=False):
-    post_devcontainer_start: Required[Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]]
-
-
-class MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart(TypedDict, total=False):
-    post_environment_start: Required[Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]]
-
-
-MetadataTriggeredByTriggeredByTrigger: TypeAlias = Union[
-    MetadataTriggeredByTriggeredByTriggerManual,
-    MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart,
-    MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart,
-]
-
-
-class MetadataTriggeredByTriggeredBy(TypedDict, total=False):
-    trigger: Iterable[MetadataTriggeredByTriggeredByTrigger]
-
-
 class MetadataTriggeredBy(TypedDict, total=False):
-    triggered_by: Required[Annotated[MetadataTriggeredByTriggeredBy, PropertyInfo(alias="triggeredBy")]]
+    trigger: Iterable[AutomationTrigger]
 
 
-Metadata: TypeAlias = Union[MetadataDescription, MetadataName, MetadataTriggeredBy]
+class Metadata(TypedDict, total=False):
+    description: Optional[str]
+
+    name: Optional[str]
+
+    triggered_by: Annotated[Optional[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]
 
 
-class SpecCommand(TypedDict, total=False):
-    command: Required[str]
+class Spec(TypedDict, total=False):
+    command: Optional[str]
 
-
-class SpecRunsOnRunsOnDocker(TypedDict, total=False):
-    environment: List[str]
-
-    image: str
-
-
-class SpecRunsOnRunsOn(TypedDict, total=False):
-    docker: Required[SpecRunsOnRunsOnDocker]
-
-
-class SpecRunsOn(TypedDict, total=False):
-    runs_on: Required[Annotated[SpecRunsOnRunsOn, PropertyInfo(alias="runsOn")]]
-
-
-Spec: TypeAlias = Union[SpecCommand, SpecRunsOn]
+    runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]

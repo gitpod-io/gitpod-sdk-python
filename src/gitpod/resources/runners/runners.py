@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal, overload
+from typing import Optional
 
 import httpx
 
 from ...types import (
+    RunnerKind,
+    RunnerProvider,
     runner_list_params,
     runner_create_params,
     runner_delete_params,
@@ -18,7 +20,6 @@ from ...types import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -40,7 +41,10 @@ from ..._response import (
 )
 from ...pagination import SyncRunnersPage, AsyncRunnersPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.runner_list_response import RunnerListResponse
+from ...types.runner import Runner
+from ...types.runner_kind import RunnerKind
+from ...types.runner_provider import RunnerProvider
+from ...types.runner_spec_param import RunnerSpecParam
 from .configurations.configurations import (
     ConfigurationsResource,
     AsyncConfigurationsResource,
@@ -89,19 +93,10 @@ class RunnersResource(SyncAPIResource):
     def create(
         self,
         *,
-        kind: Literal[
-            "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
-        ]
-        | NotGiven = NOT_GIVEN,
+        kind: RunnerKind | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        provider: Literal[
-            "RUNNER_PROVIDER_UNSPECIFIED",
-            "RUNNER_PROVIDER_AWS_EC2",
-            "RUNNER_PROVIDER_LINUX_HOST",
-            "RUNNER_PROVIDER_DESKTOP_MAC",
-        ]
-        | NotGiven = NOT_GIVEN,
-        spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
+        provider: RunnerProvider | NotGiven = NOT_GIVEN,
+        spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -181,11 +176,12 @@ class RunnersResource(SyncAPIResource):
             cast_to=RunnerRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        name: str,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        spec: Optional[runner_update_params.Spec] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -199,6 +195,10 @@ class RunnersResource(SyncAPIResource):
         Args:
           name: The runner's name which is shown to users
 
+          runner_id: runner_id specifies which runner to be updated.
+
+              +required
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -207,52 +207,12 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        spec: runner_update_params.Variant1Spec,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateRunner updates an environment runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["name"], ["spec"])
-    def update(
-        self,
-        *,
-        name: str | NotGiven = NOT_GIVEN,
-        spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
             body=maybe_transform(
                 {
                     "name": name,
+                    "runner_id": runner_id,
                     "spec": spec,
                 },
                 runner_update_params.RunnerUpdateParams,
@@ -276,7 +236,7 @@ class RunnersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncRunnersPage[RunnerListResponse]:
+    ) -> SyncRunnersPage[Runner]:
         """
         ListRunners returns all runners registered in the scope.
 
@@ -293,7 +253,7 @@ class RunnersResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
-            page=SyncRunnersPage[RunnerListResponse],
+            page=SyncRunnersPage[Runner],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -314,7 +274,7 @@ class RunnersResource(SyncAPIResource):
                     runner_list_params.RunnerListParams,
                 ),
             ),
-            model=RunnerListResponse,
+            model=Runner,
             method="post",
         )
 
@@ -419,7 +379,7 @@ class RunnersResource(SyncAPIResource):
         runner.
 
         Use this call to renew an outdated token - this does not expire any
-        previouly issued tokens.
+        previously issued tokens.
 
         Args:
           extra_headers: Send extra headers
@@ -523,19 +483,10 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        kind: Literal[
-            "RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"
-        ]
-        | NotGiven = NOT_GIVEN,
+        kind: RunnerKind | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
-        provider: Literal[
-            "RUNNER_PROVIDER_UNSPECIFIED",
-            "RUNNER_PROVIDER_AWS_EC2",
-            "RUNNER_PROVIDER_LINUX_HOST",
-            "RUNNER_PROVIDER_DESKTOP_MAC",
-        ]
-        | NotGiven = NOT_GIVEN,
-        spec: runner_create_params.Spec | NotGiven = NOT_GIVEN,
+        provider: RunnerProvider | NotGiven = NOT_GIVEN,
+        spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -615,11 +566,12 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        name: str,
+        name: Optional[str] | NotGiven = NOT_GIVEN,
+        runner_id: str | NotGiven = NOT_GIVEN,
+        spec: Optional[runner_update_params.Spec] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -633,6 +585,10 @@ class AsyncRunnersResource(AsyncAPIResource):
         Args:
           name: The runner's name which is shown to users
 
+          runner_id: runner_id specifies which runner to be updated.
+
+              +required
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -641,52 +597,12 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        spec: runner_update_params.Variant1Spec,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateRunner updates an environment runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["name"], ["spec"])
-    async def update(
-        self,
-        *,
-        name: str | NotGiven = NOT_GIVEN,
-        spec: runner_update_params.Variant1Spec | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return await self._post(
             "/gitpod.v1.RunnerService/UpdateRunner",
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "runner_id": runner_id,
                     "spec": spec,
                 },
                 runner_update_params.RunnerUpdateParams,
@@ -710,7 +626,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[RunnerListResponse, AsyncRunnersPage[RunnerListResponse]]:
+    ) -> AsyncPaginator[Runner, AsyncRunnersPage[Runner]]:
         """
         ListRunners returns all runners registered in the scope.
 
@@ -727,7 +643,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerService/ListRunners",
-            page=AsyncRunnersPage[RunnerListResponse],
+            page=AsyncRunnersPage[Runner],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -748,7 +664,7 @@ class AsyncRunnersResource(AsyncAPIResource):
                     runner_list_params.RunnerListParams,
                 ),
             ),
-            model=RunnerListResponse,
+            model=Runner,
             method="post",
         )
 
@@ -853,7 +769,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         runner.
 
         Use this call to renew an outdated token - this does not expire any
-        previouly issued tokens.
+        previously issued tokens.
 
         Args:
           extra_headers: Send extra headers

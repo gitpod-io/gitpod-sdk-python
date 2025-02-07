@@ -2,40 +2,23 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = [
-    "EventWatchParams",
-    "EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment",
-    "OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued",
-]
+__all__ = ["EventWatchParams"]
 
 
-class EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment(
-    TypedDict, total=False
-):
-    environment_id: Required[Annotated[str, PropertyInfo(alias="environmentId")]]
+class EventWatchParams(TypedDict, total=False):
+    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
     """
     Environment scope produces events for the environment itself, all tasks, task
     executions, and services associated with that environment.
     """
 
-
-class OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued(
-    TypedDict, total=False
-):
-    organization: Required[bool]
+    organization: bool
     """
     Organization scope produces events for all projects, runners and environments
     the caller can see within their organization. No task, task execution or service
     events are produed.
     """
-
-
-EventWatchParams: TypeAlias = Union[
-    EnvironmentScopeProducesEventsForTheEnvironmentItselfAllTasksTaskExecutionsAndServicesAssociatedWithThatEnvironment,
-    OrganizationScopeProducesEventsForAllProjectsRunnersAndEnvironmentsTheCallerCanSeeWithinTheirOrganizationNoTaskTaskExecutionOrServiceEventsAreProdued,
-]

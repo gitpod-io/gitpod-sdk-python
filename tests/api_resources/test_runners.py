@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
-    RunnerListResponse,
+    Runner,
     RunnerCreateResponse,
     RunnerRetrieveResponse,
     RunnerParseContextURLResponse,
@@ -109,18 +109,30 @@ class TestRunners:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
+        runner = client.runners.update()
+        assert_matches_type(object, runner, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.update(
             name="xxx",
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            spec={
+                "configuration": {
+                    "auto_update": True,
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                },
+                "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
+            },
         )
         assert_matches_type(object, runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.update(
-            name="xxx",
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -129,44 +141,8 @@ class TestRunners:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.update(
-            name="xxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        runner = client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.with_raw_response.update(
-            spec={"configuration": {"auto_update": True}},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.runners.with_streaming_response.update(
-            spec={"configuration": {"auto_update": True}},
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -179,7 +155,7 @@ class TestRunners:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         runner = client.runners.list()
-        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -197,7 +173,7 @@ class TestRunners:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -207,7 +183,7 @@ class TestRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = response.parse()
-        assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(SyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -217,7 +193,7 @@ class TestRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = response.parse()
-            assert_matches_type(SyncRunnersPage[RunnerListResponse], runner, path=["response"])
+            assert_matches_type(SyncRunnersPage[Runner], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -456,18 +432,30 @@ class TestAsyncRunners:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.update()
+        assert_matches_type(object, runner, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
             name="xxx",
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            spec={
+                "configuration": {
+                    "auto_update": True,
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                },
+                "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
+            },
         )
         assert_matches_type(object, runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.update(
-            name="xxx",
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -476,44 +464,8 @@ class TestAsyncRunners:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.update(
-            name="xxx",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            runner = await response.parse()
-            assert_matches_type(object, runner, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        runner = await async_client.runners.update(
-            spec={"configuration": {"auto_update": True}},
-        )
-        assert_matches_type(object, runner, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.with_raw_response.update(
-            spec={"configuration": {"auto_update": True}},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        runner = await response.parse()
-        assert_matches_type(object, runner, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.with_streaming_response.update(
-            spec={"configuration": {"auto_update": True}},
-        ) as response:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -526,7 +478,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list()
-        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -544,7 +496,7 @@ class TestAsyncRunners:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -554,7 +506,7 @@ class TestAsyncRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = await response.parse()
-        assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
+        assert_matches_type(AsyncRunnersPage[Runner], runner, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -564,7 +516,7 @@ class TestAsyncRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = await response.parse()
-            assert_matches_type(AsyncRunnersPage[RunnerListResponse], runner, path=["response"])
+            assert_matches_type(AsyncRunnersPage[Runner], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

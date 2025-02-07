@@ -2,17 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import datetime
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["HostAuthenticationTokenUpdateParams", "Variant0", "Variant1", "Variant2"]
+__all__ = ["HostAuthenticationTokenUpdateParams"]
 
 
-class Variant0(TypedDict, total=False):
-    expires_at: Required[Annotated[Union[str, datetime], PropertyInfo(alias="expiresAt", format="iso8601")]]
+class HostAuthenticationTokenUpdateParams(TypedDict, total=False):
+    id: str
+
+    token: Optional[str]
+
+    expires_at: Annotated[Union[str, datetime, None], PropertyInfo(alias="expiresAt", format="iso8601")]
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -104,13 +108,4 @@ class Variant0(TypedDict, total=False):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-
-class Variant1(TypedDict, total=False):
-    refresh_token: Required[Annotated[str, PropertyInfo(alias="refreshToken")]]
-
-
-class Variant2(TypedDict, total=False):
-    token: Required[str]
-
-
-HostAuthenticationTokenUpdateParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+    refresh_token: Annotated[Optional[str], PropertyInfo(alias="refreshToken")]
