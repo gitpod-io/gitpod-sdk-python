@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing_extensions import Literal
-
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -21,8 +19,15 @@ from ..._response import (
 )
 from ...pagination import SyncPoliciesPage, AsyncPoliciesPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.projects import policy_list_params, policy_create_params, policy_delete_params, policy_update_params
-from ...types.projects.policy_list_response import PolicyListResponse
+from ...types.projects import (
+    ProjectRole,
+    policy_list_params,
+    policy_create_params,
+    policy_delete_params,
+    policy_update_params,
+)
+from ...types.projects.project_role import ProjectRole
+from ...types.projects.project_policy import ProjectPolicy
 from ...types.projects.policy_create_response import PolicyCreateResponse
 from ...types.projects.policy_update_response import PolicyUpdateResponse
 
@@ -54,7 +59,7 @@ class PoliciesResource(SyncAPIResource):
         *,
         group_id: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["PROJECT_ROLE_UNSPECIFIED", "PROJECT_ROLE_ADMIN", "PROJECT_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: ProjectRole | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,7 +104,7 @@ class PoliciesResource(SyncAPIResource):
         *,
         group_id: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["PROJECT_ROLE_UNSPECIFIED", "PROJECT_ROLE_ADMIN", "PROJECT_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: ProjectRole | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,7 +157,7 @@ class PoliciesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPoliciesPage[PolicyListResponse]:
+    ) -> SyncPoliciesPage[ProjectPolicy]:
         """
         ListProjectPolicies lists policies for a project.
 
@@ -171,7 +176,7 @@ class PoliciesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjectPolicies",
-            page=SyncPoliciesPage[PolicyListResponse],
+            page=SyncPoliciesPage[ProjectPolicy],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -192,7 +197,7 @@ class PoliciesResource(SyncAPIResource):
                     policy_list_params.PolicyListParams,
                 ),
             ),
-            model=PolicyListResponse,
+            model=ProjectPolicy,
             method="post",
         )
 
@@ -265,7 +270,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         *,
         group_id: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["PROJECT_ROLE_UNSPECIFIED", "PROJECT_ROLE_ADMIN", "PROJECT_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: ProjectRole | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -310,7 +315,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         *,
         group_id: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
-        role: Literal["PROJECT_ROLE_UNSPECIFIED", "PROJECT_ROLE_ADMIN", "PROJECT_ROLE_USER"] | NotGiven = NOT_GIVEN,
+        role: ProjectRole | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -363,7 +368,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[PolicyListResponse, AsyncPoliciesPage[PolicyListResponse]]:
+    ) -> AsyncPaginator[ProjectPolicy, AsyncPoliciesPage[ProjectPolicy]]:
         """
         ListProjectPolicies lists policies for a project.
 
@@ -382,7 +387,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjectPolicies",
-            page=AsyncPoliciesPage[PolicyListResponse],
+            page=AsyncPoliciesPage[ProjectPolicy],
             body=maybe_transform(
                 {
                     "pagination": pagination,
@@ -403,7 +408,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     policy_list_params.PolicyListParams,
                 ),
             ),
-            model=PolicyListResponse,
+            model=ProjectPolicy,
             method="post",
         )
 

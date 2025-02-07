@@ -10,8 +10,8 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.pagination import SyncTaskExecutionsPage, AsyncTaskExecutionsPage
+from gitpod.types.shared import TaskExecution
 from gitpod.types.environments.automations.tasks import (
-    ExecutionListResponse,
     ExecutionRetrieveResponse,
 )
 
@@ -61,7 +61,7 @@ class TestExecutions:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.list()
-        assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(SyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -80,7 +80,7 @@ class TestExecutions:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(SyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -90,7 +90,7 @@ class TestExecutions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         execution = response.parse()
-        assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(SyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -100,7 +100,7 @@ class TestExecutions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             execution = response.parse()
-            assert_matches_type(SyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+            assert_matches_type(SyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -186,7 +186,7 @@ class TestAsyncExecutions:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.list()
-        assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(AsyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -205,7 +205,7 @@ class TestAsyncExecutions:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(AsyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -215,7 +215,7 @@ class TestAsyncExecutions:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         execution = await response.parse()
-        assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+        assert_matches_type(AsyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -225,7 +225,7 @@ class TestAsyncExecutions:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             execution = await response.parse()
-            assert_matches_type(AsyncTaskExecutionsPage[ExecutionListResponse], execution, path=["response"])
+            assert_matches_type(AsyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

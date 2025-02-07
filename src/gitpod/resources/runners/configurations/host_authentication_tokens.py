@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
 from datetime import datetime
-from typing_extensions import Literal, overload
 
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -25,13 +23,15 @@ from ...._response import (
 from ....pagination import SyncTokensPage, AsyncTokensPage
 from ...._base_client import AsyncPaginator, make_request_options
 from ....types.runners.configurations import (
+    HostAuthenticationTokenSource,
     host_authentication_token_list_params,
     host_authentication_token_create_params,
     host_authentication_token_delete_params,
     host_authentication_token_update_params,
     host_authentication_token_retrieve_params,
 )
-from ....types.runners.configurations.host_authentication_token_list_response import HostAuthenticationTokenListResponse
+from ....types.runners.configurations.host_authentication_token import HostAuthenticationToken
+from ....types.runners.configurations.host_authentication_token_source import HostAuthenticationTokenSource
 from ....types.runners.configurations.host_authentication_token_create_response import (
     HostAuthenticationTokenCreateResponse,
 )
@@ -70,12 +70,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         host: str | NotGiven = NOT_GIVEN,
         refresh_token: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        source: Literal[
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_PAT",
-        ]
-        | NotGiven = NOT_GIVEN,
+        source: HostAuthenticationTokenSource | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -239,11 +234,13 @@ class HostAuthenticationTokensResource(SyncAPIResource):
             cast_to=HostAuthenticationTokenRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        expires_at: Union[str, datetime],
+        id: str | NotGiven = NOT_GIVEN,
+        token: Optional[str] | NotGiven = NOT_GIVEN,
+        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        refresh_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -352,81 +349,14 @@ class HostAuthenticationTokensResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        refresh_token: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateHostAuthenticationToken
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        token: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateHostAuthenticationToken
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["expires_at"], ["refresh_token"], ["token"])
-    def update(
-        self,
-        *,
-        expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        refresh_token: str | NotGiven = NOT_GIVEN,
-        token: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateHostAuthenticationToken",
             body=maybe_transform(
                 {
+                    "id": id,
+                    "token": token,
                     "expires_at": expires_at,
                     "refresh_token": refresh_token,
-                    "token": token,
                 },
                 host_authentication_token_update_params.HostAuthenticationTokenUpdateParams,
             ),
@@ -449,7 +379,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncTokensPage[HostAuthenticationTokenListResponse]:
+    ) -> SyncTokensPage[HostAuthenticationToken]:
         """
         ListHostAuthenticationTokens
 
@@ -464,7 +394,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
-            page=SyncTokensPage[HostAuthenticationTokenListResponse],
+            page=SyncTokensPage[HostAuthenticationToken],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -485,7 +415,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
                     host_authentication_token_list_params.HostAuthenticationTokenListParams,
                 ),
             ),
-            model=HostAuthenticationTokenListResponse,
+            model=HostAuthenticationToken,
             method="post",
         )
 
@@ -552,12 +482,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         host: str | NotGiven = NOT_GIVEN,
         refresh_token: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
-        source: Literal[
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
-            "HOST_AUTHENTICATION_TOKEN_SOURCE_PAT",
-        ]
-        | NotGiven = NOT_GIVEN,
+        source: HostAuthenticationTokenSource | NotGiven = NOT_GIVEN,
         user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -721,11 +646,13 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
             cast_to=HostAuthenticationTokenRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        expires_at: Union[str, datetime],
+        id: str | NotGiven = NOT_GIVEN,
+        token: Optional[str] | NotGiven = NOT_GIVEN,
+        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
+        refresh_token: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -834,81 +761,14 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        refresh_token: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateHostAuthenticationToken
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        token: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateHostAuthenticationToken
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["expires_at"], ["refresh_token"], ["token"])
-    async def update(
-        self,
-        *,
-        expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        refresh_token: str | NotGiven = NOT_GIVEN,
-        token: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateHostAuthenticationToken",
             body=await async_maybe_transform(
                 {
+                    "id": id,
+                    "token": token,
                     "expires_at": expires_at,
                     "refresh_token": refresh_token,
-                    "token": token,
                 },
                 host_authentication_token_update_params.HostAuthenticationTokenUpdateParams,
             ),
@@ -931,7 +791,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[HostAuthenticationTokenListResponse, AsyncTokensPage[HostAuthenticationTokenListResponse]]:
+    ) -> AsyncPaginator[HostAuthenticationToken, AsyncTokensPage[HostAuthenticationToken]]:
         """
         ListHostAuthenticationTokens
 
@@ -946,7 +806,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListHostAuthenticationTokens",
-            page=AsyncTokensPage[HostAuthenticationTokenListResponse],
+            page=AsyncTokensPage[HostAuthenticationToken],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -967,7 +827,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
                     host_authentication_token_list_params.HostAuthenticationTokenListParams,
                 ),
             ),
-            model=HostAuthenticationTokenListResponse,
+            model=HostAuthenticationToken,
             method="post",
         )
 

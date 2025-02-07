@@ -2,37 +2,15 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .service_phase import ServicePhase
+from ...shared_params.runs_on import RunsOn
+from ...shared_params.automation_trigger import AutomationTrigger
 
-__all__ = [
-    "ServiceUpdateParams",
-    "Metadata",
-    "MetadataDescription",
-    "MetadataName",
-    "MetadataTriggeredBy",
-    "MetadataTriggeredByTriggeredBy",
-    "MetadataTriggeredByTriggeredByTrigger",
-    "MetadataTriggeredByTriggeredByTriggerManual",
-    "MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart",
-    "MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart",
-    "Spec",
-    "SpecCommands",
-    "SpecCommandsCommands",
-    "SpecCommandsCommandsReady",
-    "SpecCommandsCommandsStart",
-    "SpecCommandsCommandsStop",
-    "SpecRunsOn",
-    "SpecRunsOnRunsOn",
-    "SpecRunsOnRunsOnDocker",
-    "Status",
-    "StatusFailureMessage",
-    "StatusLogURL",
-    "StatusPhase",
-    "StatusSession",
-]
+__all__ = ["ServiceUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec", "SpecCommands", "Status"]
 
 
 class ServiceUpdateParams(TypedDict, total=False):
@@ -55,104 +33,37 @@ class ServiceUpdateParams(TypedDict, total=False):
     """
 
 
-class MetadataDescription(TypedDict, total=False):
-    description: Required[str]
-
-
-class MetadataName(TypedDict, total=False):
-    name: Required[str]
-
-
-class MetadataTriggeredByTriggeredByTriggerManual(TypedDict, total=False):
-    manual: Required[bool]
-
-
-class MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart(TypedDict, total=False):
-    post_devcontainer_start: Required[Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]]
-
-
-class MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart(TypedDict, total=False):
-    post_environment_start: Required[Annotated[bool, PropertyInfo(alias="postEnvironmentStart")]]
-
-
-MetadataTriggeredByTriggeredByTrigger: TypeAlias = Union[
-    MetadataTriggeredByTriggeredByTriggerManual,
-    MetadataTriggeredByTriggeredByTriggerPostDevcontainerStart,
-    MetadataTriggeredByTriggeredByTriggerPostEnvironmentStart,
-]
-
-
-class MetadataTriggeredByTriggeredBy(TypedDict, total=False):
-    trigger: Iterable[MetadataTriggeredByTriggeredByTrigger]
-
-
 class MetadataTriggeredBy(TypedDict, total=False):
-    triggered_by: Required[Annotated[MetadataTriggeredByTriggeredBy, PropertyInfo(alias="triggeredBy")]]
+    trigger: Iterable[AutomationTrigger]
 
 
-Metadata: TypeAlias = Union[MetadataDescription, MetadataName, MetadataTriggeredBy]
+class Metadata(TypedDict, total=False):
+    description: Optional[str]
 
+    name: Optional[str]
 
-class SpecCommandsCommandsReady(TypedDict, total=False):
-    ready: Required[str]
-
-
-class SpecCommandsCommandsStart(TypedDict, total=False):
-    start: Required[str]
-
-
-class SpecCommandsCommandsStop(TypedDict, total=False):
-    stop: Required[str]
-
-
-SpecCommandsCommands: TypeAlias = Union[SpecCommandsCommandsReady, SpecCommandsCommandsStart, SpecCommandsCommandsStop]
+    triggered_by: Annotated[Optional[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]
 
 
 class SpecCommands(TypedDict, total=False):
-    commands: Required[SpecCommandsCommands]
+    ready: Optional[str]
+
+    start: Optional[str]
+
+    stop: Optional[str]
 
 
-class SpecRunsOnRunsOnDocker(TypedDict, total=False):
-    environment: List[str]
+class Spec(TypedDict, total=False):
+    commands: Optional[SpecCommands]
 
-    image: str
-
-
-class SpecRunsOnRunsOn(TypedDict, total=False):
-    docker: Required[SpecRunsOnRunsOnDocker]
+    runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]
 
 
-class SpecRunsOn(TypedDict, total=False):
-    runs_on: Required[Annotated[SpecRunsOnRunsOn, PropertyInfo(alias="runsOn")]]
+class Status(TypedDict, total=False):
+    failure_message: Annotated[Optional[str], PropertyInfo(alias="failureMessage")]
 
+    log_url: Annotated[Optional[str], PropertyInfo(alias="logUrl")]
 
-Spec: TypeAlias = Union[SpecCommands, SpecRunsOn]
+    phase: Optional[ServicePhase]
 
-
-class StatusFailureMessage(TypedDict, total=False):
-    failure_message: Required[Annotated[str, PropertyInfo(alias="failureMessage")]]
-
-
-class StatusLogURL(TypedDict, total=False):
-    log_url: Required[Annotated[str, PropertyInfo(alias="logUrl")]]
-
-
-class StatusPhase(TypedDict, total=False):
-    phase: Required[
-        Literal[
-            "SERVICE_PHASE_UNSPECIFIED",
-            "SERVICE_PHASE_STARTING",
-            "SERVICE_PHASE_RUNNING",
-            "SERVICE_PHASE_STOPPING",
-            "SERVICE_PHASE_STOPPED",
-            "SERVICE_PHASE_FAILED",
-            "SERVICE_PHASE_DELETED",
-        ]
-    ]
-
-
-class StatusSession(TypedDict, total=False):
-    session: Required[str]
-
-
-Status: TypeAlias = Union[StatusFailureMessage, StatusLogURL, StatusPhase, StatusSession]
+    session: Optional[str]

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["HostAuthenticationTokenListParams", "Filter", "FilterRunnerID", "FilterUserID", "Pagination"]
+__all__ = ["HostAuthenticationTokenListParams", "Filter", "Pagination"]
 
 
 class HostAuthenticationTokenListParams(TypedDict, total=False):
@@ -20,15 +20,10 @@ class HostAuthenticationTokenListParams(TypedDict, total=False):
     pagination: Pagination
 
 
-class FilterRunnerID(TypedDict, total=False):
-    runner_id: Required[Annotated[str, PropertyInfo(alias="runnerId")]]
+class Filter(TypedDict, total=False):
+    runner_id: Annotated[Optional[str], PropertyInfo(alias="runnerId")]
 
-
-class FilterUserID(TypedDict, total=False):
-    user_id: Required[Annotated[str, PropertyInfo(alias="userId")]]
-
-
-Filter: TypeAlias = Union[FilterRunnerID, FilterUserID]
+    user_id: Annotated[Optional[str], PropertyInfo(alias="userId")]
 
 
 class Pagination(TypedDict, total=False):

@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import datetime
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .host_authentication_token_source import HostAuthenticationTokenSource
 
 __all__ = ["HostAuthenticationTokenCreateParams"]
 
@@ -112,10 +113,6 @@ class HostAuthenticationTokenCreateParams(TypedDict, total=False):
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
 
-    source: Literal[
-        "HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
-        "HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
-        "HOST_AUTHENTICATION_TOKEN_SOURCE_PAT",
-    ]
+    source: HostAuthenticationTokenSource
 
     user_id: Annotated[str, PropertyInfo(alias="userId")]

@@ -20,7 +20,7 @@ from .._response import (
 )
 from ..pagination import SyncEditorsPage, AsyncEditorsPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.editor_list_response import EditorListResponse
+from ..types.editor import Editor
 from ..types.editor_retrieve_response import EditorRetrieveResponse
 from ..types.editor_resolve_url_response import EditorResolveURLResponse
 
@@ -93,7 +93,7 @@ class EditorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncEditorsPage[EditorListResponse]:
+    ) -> SyncEditorsPage[Editor]:
         """
         ListEditors lists all editors available to the caller
 
@@ -110,7 +110,7 @@ class EditorsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
-            page=SyncEditorsPage[EditorListResponse],
+            page=SyncEditorsPage[Editor],
             body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -125,7 +125,7 @@ class EditorsResource(SyncAPIResource):
                     editor_list_params.EditorListParams,
                 ),
             ),
-            model=EditorListResponse,
+            model=Editor,
             method="post",
         )
 
@@ -243,7 +243,7 @@ class AsyncEditorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EditorListResponse, AsyncEditorsPage[EditorListResponse]]:
+    ) -> AsyncPaginator[Editor, AsyncEditorsPage[Editor]]:
         """
         ListEditors lists all editors available to the caller
 
@@ -260,7 +260,7 @@ class AsyncEditorsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
-            page=AsyncEditorsPage[EditorListResponse],
+            page=AsyncEditorsPage[Editor],
             body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -275,7 +275,7 @@ class AsyncEditorsResource(AsyncAPIResource):
                     editor_list_params.EditorListParams,
                 ),
             ),
-            model=EditorListResponse,
+            model=Editor,
             method="post",
         )
 

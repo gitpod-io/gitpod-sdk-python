@@ -3,6 +3,6 @@
 from __future__ import annotations
 
 from .class_list_params import ClassListParams as ClassListParams
-from .class_list_response import ClassListResponse as ClassListResponse
+from .automations_file_param import AutomationsFileParam as AutomationsFileParam
 from .automation_upsert_params import AutomationUpsertParams as AutomationUpsertParams
 from .automation_upsert_response import AutomationUpsertResponse as AutomationUpsertResponse

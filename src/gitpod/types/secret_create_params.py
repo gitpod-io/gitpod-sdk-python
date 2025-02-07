@@ -2,36 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = [
-    "SecretCreateParams",
-    "SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret",
-    "AbsolutePathToTheFileWhereTheSecretIsMounted",
-]
+__all__ = ["SecretCreateParams"]
 
 
-class SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret(TypedDict, total=False):
-    environment_variable: Required[Annotated[bool, PropertyInfo(alias="environmentVariable")]]
+class SecretCreateParams(TypedDict, total=False):
+    environment_variable: Annotated[bool, PropertyInfo(alias="environmentVariable")]
     """
     secret will be created as an Environment Variable with the same name as the
     secret
     """
 
-    name: str
-
-    project_id: Annotated[str, PropertyInfo(alias="projectId")]
-    """project_id is the ProjectID this Secret belongs to"""
-
-    value: str
-    """value is the plaintext value of the secret"""
-
-
-class AbsolutePathToTheFileWhereTheSecretIsMounted(TypedDict, total=False):
-    file_path: Required[Annotated[str, PropertyInfo(alias="filePath")]]
+    file_path: Annotated[str, PropertyInfo(alias="filePath")]
     """
     absolute path to the file where the secret is mounted value must be an absolute
     path (start with a /):
@@ -48,8 +33,3 @@ class AbsolutePathToTheFileWhereTheSecretIsMounted(TypedDict, total=False):
 
     value: str
     """value is the plaintext value of the secret"""
-
-
-SecretCreateParams: TypeAlias = Union[
-    SecretWillBeCreatedAsAnEnvironmentVariableWithTheSameNameAsTheSecret, AbsolutePathToTheFileWhereTheSecretIsMounted
-]

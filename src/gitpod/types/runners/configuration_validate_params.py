@@ -2,85 +2,39 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Union, Optional
+from typing_extensions import Annotated, TypedDict
 
 from ..._types import Base64FileInput
 from ..._utils import PropertyInfo
 from ..._models import set_pydantic_config
+from ..shared_params.environment_class import EnvironmentClass
 
-__all__ = [
-    "ConfigurationValidateParams",
-    "Variant0",
-    "Variant0EnvironmentClass",
-    "Variant0EnvironmentClassConfiguration",
-    "Variant1",
-    "Variant1ScmIntegration",
-    "Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet",
-    "Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration",
-    "Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner",
-]
+__all__ = ["ConfigurationValidateParams", "ScmIntegration"]
 
 
-class Variant0(TypedDict, total=False):
-    environment_class: Required[Annotated[Variant0EnvironmentClass, PropertyInfo(alias="environmentClass")]]
+class ConfigurationValidateParams(TypedDict, total=False):
+    environment_class: Annotated[EnvironmentClass, PropertyInfo(alias="environmentClass")]
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
 
-
-class Variant0EnvironmentClassConfiguration(TypedDict, total=False):
-    key: str
-
-    value: str
+    scm_integration: Annotated[ScmIntegration, PropertyInfo(alias="scmIntegration")]
 
 
-class Variant0EnvironmentClass(TypedDict, total=False):
+class ScmIntegration(TypedDict, total=False):
     id: str
-    """id is the unique identifier of the environment class"""
+    """id is the unique identifier of the SCM integration"""
 
-    configuration: Iterable[Variant0EnvironmentClassConfiguration]
-    """configuration describes the configuration of the environment class"""
+    host: str
 
-    description: str
-    """description is a human readable description of the environment class"""
-
-    display_name: Annotated[str, PropertyInfo(alias="displayName")]
-    """display_name is the human readable name of the environment class"""
-
-    enabled: bool
-    """
-    enabled indicates whether the environment class can be used to create new
-    environments.
-    """
-
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-    """
-    runner_id is the unique identifier of the runner the environment class belongs
-    to
-    """
-
-
-class Variant1(TypedDict, total=False):
-    scm_integration: Required[Annotated[Variant1ScmIntegration, PropertyInfo(alias="scmIntegration")]]
-
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-
-
-class Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet(
-    TypedDict, total=False
-):
-    oauth_client_id: Required[Annotated[str, PropertyInfo(alias="oauthClientId")]]
+    oauth_client_id: Annotated[Optional[str], PropertyInfo(alias="oauthClientId")]
     """
     oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
     configured, oauth_client_secret must also be set.
     """
 
-
-class Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration(
-    TypedDict, total=False
-):
-    oauth_encrypted_client_secret: Required[
-        Annotated[Union[str, Base64FileInput], PropertyInfo(alias="oauthEncryptedClientSecret", format="base64")]
+    oauth_encrypted_client_secret: Annotated[
+        Union[str, Base64FileInput], PropertyInfo(alias="oauthEncryptedClientSecret", format="base64")
     ]
     """
     oauth_encrypted_client_secret is the OAuth app's client secret encrypted with
@@ -88,17 +42,7 @@ class Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecret
     validate an already encrypted client secret of an existing SCM integration.
     """
 
-
-set_pydantic_config(
-    Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration,
-    {"arbitrary_types_allowed": True},
-)
-
-
-class Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner(
-    TypedDict, total=False
-):
-    oauth_plaintext_client_secret: Required[Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]]
+    oauth_plaintext_client_secret: Annotated[str, PropertyInfo(alias="oauthPlaintextClientSecret")]
     """
     oauth_plaintext_client_secret is the OAuth app's client secret in clear text, if
     OAuth is configured. This can be set to validate any new client secret before it
@@ -106,11 +50,13 @@ class Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecret
     the runner's public key before passing it to the runner.
     """
 
+    pat: bool
 
-Variant1ScmIntegration: TypeAlias = Union[
-    Variant1ScmIntegrationOAuthClientIDIsTheOAuthAppSClientIDIfOAuthIsConfiguredIfConfiguredOAuthClientSecretMustAlsoBeSet,
-    Variant1ScmIntegrationOAuthEncryptedClientSecretIsTheOAuthAppSClientSecretEncryptedWithTheRunnerSPublicKeyIfOAuthIsConfiguredThisCanBeUsedToEGValidateAnAlreadyEncryptedClientSecretOfAnExistingScmIntegration,
-    Variant1ScmIntegrationOAuthPlaintextClientSecretIsTheOAuthAppSClientSecretInClearTextIfOAuthIsConfiguredThisCanBeSetToValidateAnyNewClientSecretBeforeItIsEncryptedAndStoredThisValueWillNotBeStoredAndGetEncryptedWithTheRunnerSPublicKeyBeforePassingItToTheRunner,
-]
+    scm_id: Annotated[str, PropertyInfo(alias="scmId")]
+    """
+    scm_id references the scm_id in the runner's configuration schema that this
+    integration is for
+    """
 
-ConfigurationValidateParams: TypeAlias = Union[Variant0, Variant1]
+
+set_pydantic_config(ScmIntegration, {"arbitrary_types_allowed": True})

@@ -28,7 +28,9 @@ from ....types.environments.automations import (
     service_update_params,
     service_retrieve_params,
 )
-from ....types.environments.automations.service_list_response import ServiceListResponse
+from ....types.environments.automations.service import Service
+from ....types.environments.automations.service_spec_param import ServiceSpecParam
+from ....types.environments.automations.service_metadata_param import ServiceMetadataParam
 from ....types.environments.automations.service_create_response import ServiceCreateResponse
 from ....types.environments.automations.service_retrieve_response import ServiceRetrieveResponse
 
@@ -59,8 +61,8 @@ class ServicesResource(SyncAPIResource):
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: service_create_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: service_create_params.Spec | NotGiven = NOT_GIVEN,
+        metadata: ServiceMetadataParam | NotGiven = NOT_GIVEN,
+        spec: ServiceSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -192,7 +194,7 @@ class ServicesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncServicesPage[ServiceListResponse]:
+    ) -> SyncServicesPage[Service]:
         """
         ListServices
 
@@ -211,7 +213,7 @@ class ServicesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
-            page=SyncServicesPage[ServiceListResponse],
+            page=SyncServicesPage[Service],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -232,7 +234,7 @@ class ServicesResource(SyncAPIResource):
                     service_list_params.ServiceListParams,
                 ),
             ),
-            model=ServiceListResponse,
+            model=Service,
             method="post",
         )
 
@@ -372,8 +374,8 @@ class AsyncServicesResource(AsyncAPIResource):
         self,
         *,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: service_create_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: service_create_params.Spec | NotGiven = NOT_GIVEN,
+        metadata: ServiceMetadataParam | NotGiven = NOT_GIVEN,
+        spec: ServiceSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -505,7 +507,7 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ServiceListResponse, AsyncServicesPage[ServiceListResponse]]:
+    ) -> AsyncPaginator[Service, AsyncServicesPage[Service]]:
         """
         ListServices
 
@@ -524,7 +526,7 @@ class AsyncServicesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListServices",
-            page=AsyncServicesPage[ServiceListResponse],
+            page=AsyncServicesPage[Service],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -545,7 +547,7 @@ class AsyncServicesResource(AsyncAPIResource):
                     service_list_params.ServiceListParams,
                 ),
             ),
-            model=ServiceListResponse,
+            model=Service,
             method="post",
         )
 

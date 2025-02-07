@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
-from typing_extensions import overload
-
 import httpx
 
 from ..types import (
@@ -16,7 +13,6 @@ from ..types import (
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -30,7 +26,7 @@ from .._response import (
 )
 from ..pagination import SyncSecretsPage, AsyncSecretsPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.secret_list_response import SecretListResponse
+from ..types.secret import Secret
 from ..types.secret_create_response import SecretCreateResponse
 from ..types.secret_get_value_response import SecretGetValueResponse
 
@@ -57,11 +53,11 @@ class SecretsResource(SyncAPIResource):
         """
         return SecretsResourceWithStreamingResponse(self)
 
-    @overload
     def create(
         self,
         *,
-        environment_variable: bool,
+        environment_variable: bool | NotGiven = NOT_GIVEN,
+        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -79,39 +75,6 @@ class SecretsResource(SyncAPIResource):
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def create(
-        self,
-        *,
-        file_path: str,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
-        """
-        CreateSecret creates a new secret.
-
-        Args:
           file_path: absolute path to the file where the secret is mounted value must be an absolute
               path (start with a /):
 
@@ -131,33 +94,15 @@ class SecretsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["environment_variable"], ["file_path"])
-    def create(
-        self,
-        *,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
         return self._post(
             "/gitpod.v1.SecretService/CreateSecret",
             body=maybe_transform(
                 {
                     "environment_variable": environment_variable,
+                    "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "value": value,
-                    "file_path": file_path,
                 },
                 secret_create_params.SecretCreateParams,
             ),
@@ -180,7 +125,7 @@ class SecretsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncSecretsPage[SecretListResponse]:
+    ) -> SyncSecretsPage[Secret]:
         """
         ListSecrets lists secrets.
 
@@ -197,7 +142,7 @@ class SecretsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.SecretService/ListSecrets",
-            page=SyncSecretsPage[SecretListResponse],
+            page=SyncSecretsPage[Secret],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -218,7 +163,7 @@ class SecretsResource(SyncAPIResource):
                     secret_list_params.SecretListParams,
                 ),
             ),
-            model=cast(Any, SecretListResponse),  # Union types cannot be passed in as arguments in the type system
+            model=Secret,
             method="post",
         )
 
@@ -349,11 +294,11 @@ class AsyncSecretsResource(AsyncAPIResource):
         """
         return AsyncSecretsResourceWithStreamingResponse(self)
 
-    @overload
     async def create(
         self,
         *,
-        environment_variable: bool,
+        environment_variable: bool | NotGiven = NOT_GIVEN,
+        file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
@@ -371,39 +316,6 @@ class AsyncSecretsResource(AsyncAPIResource):
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def create(
-        self,
-        *,
-        file_path: str,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
-        """
-        CreateSecret creates a new secret.
-
-        Args:
           file_path: absolute path to the file where the secret is mounted value must be an absolute
               path (start with a /):
 
@@ -423,33 +335,15 @@ class AsyncSecretsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @required_args(["environment_variable"], ["file_path"])
-    async def create(
-        self,
-        *,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
         return await self._post(
             "/gitpod.v1.SecretService/CreateSecret",
             body=await async_maybe_transform(
                 {
                     "environment_variable": environment_variable,
+                    "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "value": value,
-                    "file_path": file_path,
                 },
                 secret_create_params.SecretCreateParams,
             ),
@@ -472,7 +366,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[SecretListResponse, AsyncSecretsPage[SecretListResponse]]:
+    ) -> AsyncPaginator[Secret, AsyncSecretsPage[Secret]]:
         """
         ListSecrets lists secrets.
 
@@ -489,7 +383,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.SecretService/ListSecrets",
-            page=AsyncSecretsPage[SecretListResponse],
+            page=AsyncSecretsPage[Secret],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -510,7 +404,7 @@ class AsyncSecretsResource(AsyncAPIResource):
                     secret_list_params.SecretListParams,
                 ),
             ),
-            model=cast(Any, SecretListResponse),  # Union types cannot be passed in as arguments in the type system
+            model=Secret,
             method="post",
         )
 

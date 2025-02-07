@@ -37,7 +37,9 @@ from .....types.environments.automations import (
     task_update_params,
     task_retrieve_params,
 )
-from .....types.environments.automations.task_list_response import TaskListResponse
+from .....types.environments.automations.task import Task
+from .....types.environments.automations.task_spec_param import TaskSpecParam
+from .....types.environments.automations.task_metadata_param import TaskMetadataParam
 from .....types.environments.automations.task_start_response import TaskStartResponse
 from .....types.environments.automations.task_create_response import TaskCreateResponse
 from .....types.environments.automations.task_retrieve_response import TaskRetrieveResponse
@@ -74,8 +76,8 @@ class TasksResource(SyncAPIResource):
         *,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: task_create_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: task_create_params.Spec | NotGiven = NOT_GIVEN,
+        metadata: TaskMetadataParam | NotGiven = NOT_GIVEN,
+        spec: TaskSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -202,7 +204,7 @@ class TasksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncTasksPage[TaskListResponse]:
+    ) -> SyncTasksPage[Task]:
         """
         ListTasks
 
@@ -221,7 +223,7 @@ class TasksResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            page=SyncTasksPage[TaskListResponse],
+            page=SyncTasksPage[Task],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -242,7 +244,7 @@ class TasksResource(SyncAPIResource):
                     task_list_params.TaskListParams,
                 ),
             ),
-            model=TaskListResponse,
+            model=Task,
             method="post",
         )
 
@@ -342,8 +344,8 @@ class AsyncTasksResource(AsyncAPIResource):
         *,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: task_create_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: task_create_params.Spec | NotGiven = NOT_GIVEN,
+        metadata: TaskMetadataParam | NotGiven = NOT_GIVEN,
+        spec: TaskSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,7 +472,7 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[TaskListResponse, AsyncTasksPage[TaskListResponse]]:
+    ) -> AsyncPaginator[Task, AsyncTasksPage[Task]]:
         """
         ListTasks
 
@@ -489,7 +491,7 @@ class AsyncTasksResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTasks",
-            page=AsyncTasksPage[TaskListResponse],
+            page=AsyncTasksPage[Task],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -510,7 +512,7 @@ class AsyncTasksResource(AsyncAPIResource):
                     task_list_params.TaskListParams,
                 ),
             ),
-            model=TaskListResponse,
+            model=Task,
             method="post",
         )
 

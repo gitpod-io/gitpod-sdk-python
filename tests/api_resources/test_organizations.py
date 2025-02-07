@@ -10,12 +10,12 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
+    Organization,
+    OrganizationMember,
     OrganizationJoinResponse,
-    OrganizationListResponse,
     OrganizationCreateResponse,
     OrganizationUpdateResponse,
     OrganizationRetrieveResponse,
-    OrganizationListMembersResponse,
 )
 from gitpod.pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
 
@@ -101,26 +101,24 @@ class TestOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
-        organization = client.organizations.update(
-            invite_domains={},
-        )
+    def test_method_update(self, client: Gitpod) -> None:
+        organization = client.organizations.update()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.update(
             invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
+            name="name",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.update(
-            invite_domains={},
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.organizations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -129,44 +127,8 @@ class TestOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.update(
-            invite_domains={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = response.parse()
-            assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        organization = client.organizations.update(
-            name="name",
-        )
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.update(
-            name="name",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = response.parse()
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.update(
-            name="name",
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.organizations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -179,7 +141,7 @@ class TestOrganizations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         organization = client.organizations.list()
-        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -193,7 +155,7 @@ class TestOrganizations:
             },
             scope="SCOPE_UNSPECIFIED",
         )
-        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -203,7 +165,7 @@ class TestOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = response.parse()
-        assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -213,7 +175,7 @@ class TestOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = response.parse()
-            assert_matches_type(SyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+            assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -255,18 +217,23 @@ class TestOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_join_overload_1(self, client: Gitpod) -> None:
+    def test_method_join(self, client: Gitpod) -> None:
+        organization = client.organizations.join()
+        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_join_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.join(
             invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_join_overload_1(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.join(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+    def test_raw_response_join(self, client: Gitpod) -> None:
+        response = client.organizations.with_raw_response.join()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -275,44 +242,8 @@ class TestOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_join_overload_1(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.join(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = response.parse()
-            assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_join_overload_2(self, client: Gitpod) -> None:
-        organization = client.organizations.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_join_overload_2(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = response.parse()
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_join_overload_2(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
+    def test_streaming_response_join(self, client: Gitpod) -> None:
+        with client.organizations.with_streaming_response.join() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -361,7 +292,7 @@ class TestOrganizations:
     @parametrize
     def test_method_list_members(self, client: Gitpod) -> None:
         organization = client.organizations.list_members()
-        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -375,7 +306,7 @@ class TestOrganizations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -385,7 +316,7 @@ class TestOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = response.parse()
-        assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -395,7 +326,7 @@ class TestOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = response.parse()
-            assert_matches_type(SyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+            assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -517,26 +448,24 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.update(
-            invite_domains={},
-        )
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.update()
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
             invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
+            name="name",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.update(
-            invite_domains={},
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.organizations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -545,44 +474,8 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.update(
-            invite_domains={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = await response.parse()
-            assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.update(
-            name="name",
-        )
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.update(
-            name="name",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = await response.parse()
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.update(
-            name="name",
-        ) as response:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.organizations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -595,7 +488,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list()
-        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -609,7 +502,7 @@ class TestAsyncOrganizations:
             },
             scope="SCOPE_UNSPECIFIED",
         )
-        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -619,7 +512,7 @@ class TestAsyncOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = await response.parse()
-        assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -629,7 +522,7 @@ class TestAsyncOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = await response.parse()
-            assert_matches_type(AsyncOrganizationsPage[OrganizationListResponse], organization, path=["response"])
+            assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -671,18 +564,23 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_join_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_join(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.join()
+        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_join_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.join(
             invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_join_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.join(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
+    async def test_raw_response_join(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.organizations.with_raw_response.join()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -691,44 +589,8 @@ class TestAsyncOrganizations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_join_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.join(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = await response.parse()
-            assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_join_overload_2(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_join_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = await response.parse()
-        assert_matches_type(OrganizationJoinResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_join_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.join(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        ) as response:
+    async def test_streaming_response_join(self, async_client: AsyncGitpod) -> None:
+        async with async_client.organizations.with_streaming_response.join() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -777,7 +639,7 @@ class TestAsyncOrganizations:
     @parametrize
     async def test_method_list_members(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members()
-        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -791,7 +653,7 @@ class TestAsyncOrganizations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -801,7 +663,7 @@ class TestAsyncOrganizations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         organization = await response.parse()
-        assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+        assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -811,7 +673,7 @@ class TestAsyncOrganizations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             organization = await response.parse()
-            assert_matches_type(AsyncMembersPage[OrganizationListMembersResponse], organization, path=["response"])
+            assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

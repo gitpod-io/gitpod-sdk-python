@@ -35,6 +35,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.environments import automation_upsert_params
+from ....types.environments.automations_file_param import AutomationsFileParam
 from ....types.environments.automation_upsert_response import AutomationUpsertResponse
 
 __all__ = ["AutomationsResource", "AsyncAutomationsResource"]
@@ -71,7 +72,7 @@ class AutomationsResource(SyncAPIResource):
     def upsert(
         self,
         *,
-        automations_file: automation_upsert_params.AutomationsFile | NotGiven = NOT_GIVEN,
+        automations_file: AutomationsFileParam | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -144,7 +145,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
     async def upsert(
         self,
         *,
-        automations_file: automation_upsert_params.AutomationsFile | NotGiven = NOT_GIVEN,
+        automations_file: AutomationsFileParam | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.

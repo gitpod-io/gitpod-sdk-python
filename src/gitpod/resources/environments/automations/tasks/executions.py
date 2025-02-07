@@ -19,12 +19,12 @@ from ....._response import (
 )
 from .....pagination import SyncTaskExecutionsPage, AsyncTaskExecutionsPage
 from ....._base_client import AsyncPaginator, make_request_options
+from .....types.shared.task_execution import TaskExecution
 from .....types.environments.automations.tasks import (
     execution_list_params,
     execution_stop_params,
     execution_retrieve_params,
 )
-from .....types.environments.automations.tasks.execution_list_response import ExecutionListResponse
 from .....types.environments.automations.tasks.execution_retrieve_response import ExecutionRetrieveResponse
 
 __all__ = ["ExecutionsResource", "AsyncExecutionsResource"]
@@ -95,7 +95,7 @@ class ExecutionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncTaskExecutionsPage[ExecutionListResponse]:
+    ) -> SyncTaskExecutionsPage[TaskExecution]:
         """
         ListTaskExecutions
 
@@ -114,7 +114,7 @@ class ExecutionsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
-            page=SyncTaskExecutionsPage[ExecutionListResponse],
+            page=SyncTaskExecutionsPage[TaskExecution],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -135,7 +135,7 @@ class ExecutionsResource(SyncAPIResource):
                     execution_list_params.ExecutionListParams,
                 ),
             ),
-            model=ExecutionListResponse,
+            model=TaskExecution,
             method="post",
         )
 
@@ -237,7 +237,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ExecutionListResponse, AsyncTaskExecutionsPage[ExecutionListResponse]]:
+    ) -> AsyncPaginator[TaskExecution, AsyncTaskExecutionsPage[TaskExecution]]:
         """
         ListTaskExecutions
 
@@ -256,7 +256,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentAutomationService/ListTaskExecutions",
-            page=AsyncTaskExecutionsPage[ExecutionListResponse],
+            page=AsyncTaskExecutionsPage[TaskExecution],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -277,7 +277,7 @@ class AsyncExecutionsResource(AsyncAPIResource):
                     execution_list_params.ExecutionListParams,
                 ),
             ),
-            model=ExecutionListResponse,
+            model=TaskExecution,
             method="post",
         )
 

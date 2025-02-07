@@ -11,7 +11,7 @@ from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.pagination import SyncIntegrationsPage, AsyncIntegrationsPage
 from gitpod.types.runners.configurations import (
-    ScmIntegrationListResponse,
+    ScmIntegration,
     ScmIntegrationCreateResponse,
     ScmIntegrationRetrieveResponse,
 )
@@ -24,18 +24,27 @@ class TestScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_overload_1(self, client: Gitpod) -> None:
+    def test_method_create(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.create()
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_create_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
+            host="host",
             oauth_client_id="oauthClientId",
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            pat=True,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            scm_id="scmId",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.configurations.scm_integrations.with_raw_response.create(
-            oauth_client_id="oauthClientId",
-        )
+    def test_raw_response_create(self, client: Gitpod) -> None:
+        response = client.runners.configurations.scm_integrations.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -44,44 +53,8 @@ class TestScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
-        with client.runners.configurations.scm_integrations.with_streaming_response.create(
-            oauth_client_id="oauthClientId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = response.parse()
-            assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_overload_2(self, client: Gitpod) -> None:
-        scm_integration = client.runners.configurations.scm_integrations.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.configurations.scm_integrations.with_raw_response.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = response.parse()
-        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
-        with client.runners.configurations.scm_integrations.with_streaming_response.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        ) as response:
+    def test_streaming_response_create(self, client: Gitpod) -> None:
+        with client.runners.configurations.scm_integrations.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -128,18 +101,25 @@ class TestScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_update_overload_1(self, client: Gitpod) -> None:
+    def test_method_update(self, client: Gitpod) -> None:
+        scm_integration = client.runners.configurations.scm_integrations.update()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             oauth_client_id="oauthClientId",
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            pat=True,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_update_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.configurations.scm_integrations.with_raw_response.update(
-            oauth_client_id="oauthClientId",
-        )
+    def test_raw_response_update(self, client: Gitpod) -> None:
+        response = client.runners.configurations.scm_integrations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -148,78 +128,8 @@ class TestScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_update_overload_1(self, client: Gitpod) -> None:
-        with client.runners.configurations.scm_integrations.with_streaming_response.update(
-            oauth_client_id="oauthClientId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = response.parse()
-            assert_matches_type(object, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_2(self, client: Gitpod) -> None:
-        scm_integration = client.runners.configurations.scm_integrations.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.configurations.scm_integrations.with_raw_response.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = response.parse()
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_2(self, client: Gitpod) -> None:
-        with client.runners.configurations.scm_integrations.with_streaming_response.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = response.parse()
-            assert_matches_type(object, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_overload_3(self, client: Gitpod) -> None:
-        scm_integration = client.runners.configurations.scm_integrations.update(
-            pat=True,
-        )
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_update_overload_3(self, client: Gitpod) -> None:
-        response = client.runners.configurations.scm_integrations.with_raw_response.update(
-            pat=True,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = response.parse()
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_update_overload_3(self, client: Gitpod) -> None:
-        with client.runners.configurations.scm_integrations.with_streaming_response.update(
-            pat=True,
-        ) as response:
+    def test_streaming_response_update(self, client: Gitpod) -> None:
+        with client.runners.configurations.scm_integrations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -232,7 +142,7 @@ class TestScmIntegrations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.list()
-        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(SyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -246,7 +156,7 @@ class TestScmIntegrations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(SyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -256,7 +166,7 @@ class TestScmIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scm_integration = response.parse()
-        assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(SyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -266,7 +176,7 @@ class TestScmIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scm_integration = response.parse()
-            assert_matches_type(SyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+            assert_matches_type(SyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -312,18 +222,27 @@ class TestAsyncScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_create(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.create()
+        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
+            host="host",
             oauth_client_id="oauthClientId",
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            pat=True,
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            scm_id="scmId",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
-            oauth_client_id="oauthClientId",
-        )
+    async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.scm_integrations.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -332,44 +251,8 @@ class TestAsyncScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
-            oauth_client_id="oauthClientId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = await response.parse()
-            assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        scm_integration = await async_client.runners.configurations.scm_integrations.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.scm_integrations.with_raw_response.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = await response.parse()
-        assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.scm_integrations.with_streaming_response.create(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        ) as response:
+    async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.scm_integrations.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -416,18 +299,25 @@ class TestAsyncScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_update_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_update(self, async_client: AsyncGitpod) -> None:
+        scm_integration = await async_client.runners.configurations.scm_integrations.update()
+        assert_matches_type(object, scm_integration, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
+            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             oauth_client_id="oauthClientId",
+            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            pat=True,
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
-            oauth_client_id="oauthClientId",
-        )
+    async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -436,78 +326,8 @@ class TestAsyncScmIntegrations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_update_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
-            oauth_client_id="oauthClientId",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = await response.parse()
-            assert_matches_type(object, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        scm_integration = await async_client.runners.configurations.scm_integrations.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = await response.parse()
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            scm_integration = await response.parse()
-            assert_matches_type(object, scm_integration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        scm_integration = await async_client.runners.configurations.scm_integrations.update(
-            pat=True,
-        )
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.scm_integrations.with_raw_response.update(
-            pat=True,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        scm_integration = await response.parse()
-        assert_matches_type(object, scm_integration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_update_overload_3(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update(
-            pat=True,
-        ) as response:
+    async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.scm_integrations.with_streaming_response.update() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -520,7 +340,7 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.list()
-        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -534,7 +354,7 @@ class TestAsyncScmIntegrations:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -544,7 +364,7 @@ class TestAsyncScmIntegrations:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         scm_integration = await response.parse()
-        assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+        assert_matches_type(AsyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -554,7 +374,7 @@ class TestAsyncScmIntegrations:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             scm_integration = await response.parse()
-            assert_matches_type(AsyncIntegrationsPage[ScmIntegrationListResponse], scm_integration, path=["response"])
+            assert_matches_type(AsyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

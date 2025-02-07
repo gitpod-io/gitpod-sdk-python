@@ -21,7 +21,7 @@ from ...pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessToken
 from ...types.users import pat_get_params, pat_list_params, pat_delete_params
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.users.pat_get_response import PatGetResponse
-from ...types.users.pat_list_response import PatListResponse
+from ...types.users.personal_access_token import PersonalAccessToken
 
 __all__ = ["PatsResource", "AsyncPatsResource"]
 
@@ -59,7 +59,7 @@ class PatsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncPersonalAccessTokensPage[PatListResponse]:
+    ) -> SyncPersonalAccessTokensPage[PersonalAccessToken]:
         """
         ListPersonalAccessTokens
 
@@ -74,7 +74,7 @@ class PatsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
-            page=SyncPersonalAccessTokensPage[PatListResponse],
+            page=SyncPersonalAccessTokensPage[PersonalAccessToken],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -95,7 +95,7 @@ class PatsResource(SyncAPIResource):
                     pat_list_params.PatListParams,
                 ),
             ),
-            model=PatListResponse,
+            model=PersonalAccessToken,
             method="post",
         )
 
@@ -199,7 +199,7 @@ class AsyncPatsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[PatListResponse, AsyncPersonalAccessTokensPage[PatListResponse]]:
+    ) -> AsyncPaginator[PersonalAccessToken, AsyncPersonalAccessTokensPage[PersonalAccessToken]]:
         """
         ListPersonalAccessTokens
 
@@ -214,7 +214,7 @@ class AsyncPatsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.UserService/ListPersonalAccessTokens",
-            page=AsyncPersonalAccessTokensPage[PatListResponse],
+            page=AsyncPersonalAccessTokensPage[PersonalAccessToken],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -235,7 +235,7 @@ class AsyncPatsResource(AsyncAPIResource):
                     pat_list_params.PatListParams,
                 ),
             ),
-            model=PatListResponse,
+            model=PersonalAccessToken,
             method="post",
         )
 

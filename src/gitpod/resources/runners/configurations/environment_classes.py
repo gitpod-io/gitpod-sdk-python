@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import overload
+from typing import Iterable, Optional
 
 import httpx
 
 from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ...._utils import (
-    required_args,
     maybe_transform,
     async_maybe_transform,
 )
@@ -29,7 +27,8 @@ from ....types.runners.configurations import (
     environment_class_update_params,
     environment_class_retrieve_params,
 )
-from ....types.runners.configurations.environment_class_list_response import EnvironmentClassListResponse
+from ....types.shared.environment_class import EnvironmentClass
+from ....types.shared_params.field_value import FieldValue
 from ....types.runners.configurations.environment_class_create_response import EnvironmentClassCreateResponse
 from ....types.runners.configurations.environment_class_retrieve_response import EnvironmentClassRetrieveResponse
 
@@ -59,7 +58,7 @@ class EnvironmentClassesResource(SyncAPIResource):
     def create(
         self,
         *,
-        configuration: Iterable[environment_class_create_params.Configuration] | NotGiven = NOT_GIVEN,
+        configuration: Iterable[FieldValue] | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         display_name: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
@@ -134,11 +133,13 @@ class EnvironmentClassesResource(SyncAPIResource):
             cast_to=EnvironmentClassRetrieveResponse,
         )
 
-    @overload
     def update(
         self,
         *,
-        description: str,
+        description: Optional[str] | NotGiven = NOT_GIVEN,
+        display_name: Optional[str] | NotGiven = NOT_GIVEN,
+        enabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        environment_class_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -158,74 +159,6 @@ class EnvironmentClassesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        display_name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateEnvironmentClass updates an existing environment class on a runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    def update(
-        self,
-        *,
-        enabled: bool,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateEnvironmentClass updates an existing environment class on a runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["description"], ["display_name"], ["enabled"])
-    def update(
-        self,
-        *,
-        description: str | NotGiven = NOT_GIVEN,
-        display_name: str | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateEnvironmentClass",
             body=maybe_transform(
@@ -233,6 +166,7 @@ class EnvironmentClassesResource(SyncAPIResource):
                     "description": description,
                     "display_name": display_name,
                     "enabled": enabled,
+                    "environment_class_id": environment_class_id,
                 },
                 environment_class_update_params.EnvironmentClassUpdateParams,
             ),
@@ -255,7 +189,7 @@ class EnvironmentClassesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncEnvironmentClassesPage[EnvironmentClassListResponse]:
+    ) -> SyncEnvironmentClassesPage[EnvironmentClass]:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -273,7 +207,7 @@ class EnvironmentClassesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses",
-            page=SyncEnvironmentClassesPage[EnvironmentClassListResponse],
+            page=SyncEnvironmentClassesPage[EnvironmentClass],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -294,7 +228,7 @@ class EnvironmentClassesResource(SyncAPIResource):
                     environment_class_list_params.EnvironmentClassListParams,
                 ),
             ),
-            model=EnvironmentClassListResponse,
+            model=EnvironmentClass,
             method="post",
         )
 
@@ -322,7 +256,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        configuration: Iterable[environment_class_create_params.Configuration] | NotGiven = NOT_GIVEN,
+        configuration: Iterable[FieldValue] | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         display_name: str | NotGiven = NOT_GIVEN,
         runner_id: str | NotGiven = NOT_GIVEN,
@@ -397,11 +331,13 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
             cast_to=EnvironmentClassRetrieveResponse,
         )
 
-    @overload
     async def update(
         self,
         *,
-        description: str,
+        description: Optional[str] | NotGiven = NOT_GIVEN,
+        display_name: Optional[str] | NotGiven = NOT_GIVEN,
+        enabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        environment_class_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -421,74 +357,6 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        display_name: str,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateEnvironmentClass updates an existing environment class on a runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @overload
-    async def update(
-        self,
-        *,
-        enabled: bool,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateEnvironmentClass updates an existing environment class on a runner.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        ...
-
-    @required_args(["description"], ["display_name"], ["enabled"])
-    async def update(
-        self,
-        *,
-        description: str | NotGiven = NOT_GIVEN,
-        display_name: str | NotGiven = NOT_GIVEN,
-        enabled: bool | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
         return await self._post(
             "/gitpod.v1.RunnerConfigurationService/UpdateEnvironmentClass",
             body=await async_maybe_transform(
@@ -496,6 +364,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
                     "description": description,
                     "display_name": display_name,
                     "enabled": enabled,
+                    "environment_class_id": environment_class_id,
                 },
                 environment_class_update_params.EnvironmentClassUpdateParams,
             ),
@@ -518,7 +387,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EnvironmentClassListResponse, AsyncEnvironmentClassesPage[EnvironmentClassListResponse]]:
+    ) -> AsyncPaginator[EnvironmentClass, AsyncEnvironmentClassesPage[EnvironmentClass]]:
         """
         ListEnvironmentClasses returns all environment classes configured for a runner.
         buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
@@ -536,7 +405,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.RunnerConfigurationService/ListEnvironmentClasses",
-            page=AsyncEnvironmentClassesPage[EnvironmentClassListResponse],
+            page=AsyncEnvironmentClassesPage[EnvironmentClass],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -557,7 +426,7 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
                     environment_class_list_params.EnvironmentClassListParams,
                 ),
             ),
-            model=EnvironmentClassListResponse,
+            model=EnvironmentClass,
             method="post",
         )
 

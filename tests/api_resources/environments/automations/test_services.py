@@ -12,7 +12,7 @@ from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncServicesPage, AsyncServicesPage
 from gitpod.types.environments.automations import (
-    ServiceListResponse,
+    Service,
     ServiceCreateResponse,
     ServiceRetrieveResponse,
 )
@@ -43,7 +43,13 @@ class TestServices:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "commands": {
@@ -133,9 +139,38 @@ class TestServices:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            metadata={"description": "description"},
-            spec={"commands": {"ready": "ready"}},
-            status={"failure_message": "failureMessage"},
+            metadata={
+                "description": "description",
+                "name": "x",
+                "triggered_by": {
+                    "trigger": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                        }
+                    ]
+                },
+            },
+            spec={
+                "commands": {
+                    "ready": "ready",
+                    "start": "start",
+                    "stop": "stop",
+                },
+                "runs_on": {
+                    "docker": {
+                        "environment": ["string"],
+                        "image": "x",
+                    }
+                },
+            },
+            status={
+                "failure_message": "failureMessage",
+                "log_url": "logUrl",
+                "phase": "SERVICE_PHASE_UNSPECIFIED",
+                "session": "session",
+            },
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -165,7 +200,7 @@ class TestServices:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         service = client.environments.automations.services.list()
-        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -183,7 +218,7 @@ class TestServices:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -193,7 +228,7 @@ class TestServices:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         service = response.parse()
-        assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(SyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -203,7 +238,7 @@ class TestServices:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             service = response.parse()
-            assert_matches_type(SyncServicesPage[ServiceListResponse], service, path=["response"])
+            assert_matches_type(SyncServicesPage[Service], service, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -340,7 +375,13 @@ class TestAsyncServices:
                 "description": "description",
                 "name": "x",
                 "reference": "reference",
-                "triggered_by": [{"manual": True}],
+                "triggered_by": [
+                    {
+                        "manual": True,
+                        "post_devcontainer_start": True,
+                        "post_environment_start": True,
+                    }
+                ],
             },
             spec={
                 "commands": {
@@ -430,9 +471,38 @@ class TestAsyncServices:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.update(
             id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            metadata={"description": "description"},
-            spec={"commands": {"ready": "ready"}},
-            status={"failure_message": "failureMessage"},
+            metadata={
+                "description": "description",
+                "name": "x",
+                "triggered_by": {
+                    "trigger": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                        }
+                    ]
+                },
+            },
+            spec={
+                "commands": {
+                    "ready": "ready",
+                    "start": "start",
+                    "stop": "stop",
+                },
+                "runs_on": {
+                    "docker": {
+                        "environment": ["string"],
+                        "image": "x",
+                    }
+                },
+            },
+            status={
+                "failure_message": "failureMessage",
+                "log_url": "logUrl",
+                "phase": "SERVICE_PHASE_UNSPECIFIED",
+                "session": "session",
+            },
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -462,7 +532,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.list()
-        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -480,7 +550,7 @@ class TestAsyncServices:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -490,7 +560,7 @@ class TestAsyncServices:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         service = await response.parse()
-        assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
+        assert_matches_type(AsyncServicesPage[Service], service, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -500,7 +570,7 @@ class TestAsyncServices:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             service = await response.parse()
-            assert_matches_type(AsyncServicesPage[ServiceListResponse], service, path=["response"])
+            assert_matches_type(AsyncServicesPage[Service], service, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

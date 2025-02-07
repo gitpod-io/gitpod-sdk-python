@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
-    EditorListResponse,
+    Editor,
     EditorRetrieveResponse,
     EditorResolveURLResponse,
 )
@@ -62,7 +62,7 @@ class TestEditors:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         editor = client.editors.list()
-        assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(SyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -75,7 +75,7 @@ class TestEditors:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(SyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -85,7 +85,7 @@ class TestEditors:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         editor = response.parse()
-        assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(SyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -95,7 +95,7 @@ class TestEditors:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             editor = response.parse()
-            assert_matches_type(SyncEditorsPage[EditorListResponse], editor, path=["response"])
+            assert_matches_type(SyncEditorsPage[Editor], editor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -181,7 +181,7 @@ class TestAsyncEditors:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.list()
-        assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(AsyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -194,7 +194,7 @@ class TestAsyncEditors:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(AsyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -204,7 +204,7 @@ class TestAsyncEditors:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         editor = await response.parse()
-        assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
+        assert_matches_type(AsyncEditorsPage[Editor], editor, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -214,7 +214,7 @@ class TestAsyncEditors:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             editor = await response.parse()
-            assert_matches_type(AsyncEditorsPage[EditorListResponse], editor, path=["response"])
+            assert_matches_type(AsyncEditorsPage[Editor], editor, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

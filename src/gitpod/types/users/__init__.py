@@ -6,4 +6,4 @@ from .pat_get_params import PatGetParams as PatGetParams
 from .pat_list_params import PatListParams as PatListParams
 from .pat_get_response import PatGetResponse as PatGetResponse
 from .pat_delete_params import PatDeleteParams as PatDeleteParams
-from .pat_list_response import PatListResponse as PatListResponse
+from .personal_access_token import PersonalAccessToken as PersonalAccessToken

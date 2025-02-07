@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ..types import (
@@ -25,9 +27,9 @@ from .._response import (
 )
 from ..pagination import SyncLoginProvidersPage, AsyncLoginProvidersPage
 from .._base_client import AsyncPaginator, make_request_options
+from ..types.login_provider import LoginProvider
 from ..types.account_retrieve_response import AccountRetrieveResponse
 from ..types.account_get_sso_login_url_response import AccountGetSSOLoginURLResponse
-from ..types.account_list_login_providers_response import AccountListLoginProvidersResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -121,8 +123,8 @@ class AccountsResource(SyncAPIResource):
     def get_sso_login_url(
         self,
         *,
-        return_to: str,
         email: str | NotGiven = NOT_GIVEN,
+        return_to: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -134,9 +136,9 @@ class AccountsResource(SyncAPIResource):
         GetSSOLoginURL returns the URL to redirect the user to for SSO login.
 
         Args:
-          return_to: return_to is the URL the user will be redirected to after login
-
           email: email is the email the user wants to login with
+
+          return_to: return_to is the URL the user will be redirected to after login
 
           extra_headers: Send extra headers
 
@@ -150,8 +152,8 @@ class AccountsResource(SyncAPIResource):
             "/gitpod.v1.AccountService/GetSSOLoginURL",
             body=maybe_transform(
                 {
-                    "return_to": return_to,
                     "email": email,
+                    "return_to": return_to,
                 },
                 account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
             ),
@@ -174,7 +176,7 @@ class AccountsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncLoginProvidersPage[AccountListLoginProvidersResponse]:
+    ) -> SyncLoginProvidersPage[LoginProvider]:
         """
         ListLoginProviders returns the list of login providers matching the provided
         filters.
@@ -194,7 +196,7 @@ class AccountsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.AccountService/ListLoginProviders",
-            page=SyncLoginProvidersPage[AccountListLoginProvidersResponse],
+            page=SyncLoginProvidersPage[LoginProvider],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -215,7 +217,7 @@ class AccountsResource(SyncAPIResource):
                     account_list_login_providers_params.AccountListLoginProvidersParams,
                 ),
             ),
-            model=AccountListLoginProvidersResponse,
+            model=LoginProvider,
             method="post",
         )
 
@@ -309,8 +311,8 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def get_sso_login_url(
         self,
         *,
-        return_to: str,
         email: str | NotGiven = NOT_GIVEN,
+        return_to: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -322,9 +324,9 @@ class AsyncAccountsResource(AsyncAPIResource):
         GetSSOLoginURL returns the URL to redirect the user to for SSO login.
 
         Args:
-          return_to: return_to is the URL the user will be redirected to after login
-
           email: email is the email the user wants to login with
+
+          return_to: return_to is the URL the user will be redirected to after login
 
           extra_headers: Send extra headers
 
@@ -338,8 +340,8 @@ class AsyncAccountsResource(AsyncAPIResource):
             "/gitpod.v1.AccountService/GetSSOLoginURL",
             body=await async_maybe_transform(
                 {
-                    "return_to": return_to,
                     "email": email,
+                    "return_to": return_to,
                 },
                 account_get_sso_login_url_params.AccountGetSSOLoginURLParams,
             ),
@@ -362,7 +364,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[AccountListLoginProvidersResponse, AsyncLoginProvidersPage[AccountListLoginProvidersResponse]]:
+    ) -> AsyncPaginator[LoginProvider, AsyncLoginProvidersPage[LoginProvider]]:
         """
         ListLoginProviders returns the list of login providers matching the provided
         filters.
@@ -382,7 +384,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.AccountService/ListLoginProviders",
-            page=AsyncLoginProvidersPage[AccountListLoginProvidersResponse],
+            page=AsyncLoginProvidersPage[LoginProvider],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -403,7 +405,7 @@ class AsyncAccountsResource(AsyncAPIResource):
                     account_list_login_providers_params.AccountListLoginProvidersParams,
                 ),
             ),
-            model=AccountListLoginProvidersResponse,
+            model=LoginProvider,
             method="post",
         )
 
