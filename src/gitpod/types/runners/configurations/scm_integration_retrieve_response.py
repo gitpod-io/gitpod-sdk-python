@@ -2,27 +2,11 @@
 
 from typing import Optional
 
-from pydantic import Field as FieldInfo
-
 from ...._models import BaseModel
+from .scm_integration import ScmIntegration
 
-__all__ = ["ScmIntegrationRetrieveResponse", "Integration", "IntegrationOAuth"]
-
-
-class IntegrationOAuth(BaseModel):
-    client_id: Optional[str] = FieldInfo(alias="clientId", default=None)
-    """client_id is the OAuth app's client ID in clear text."""
-
-    encrypted_client_secret: Optional[str] = FieldInfo(alias="encryptedClientSecret", default=None)
-    """
-    encrypted_client_secret is the OAuth app's secret encrypted with the runner's
-    public key.
-    """
-
-
-class Integration(BaseModel):
-    oauth: IntegrationOAuth
+__all__ = ["ScmIntegrationRetrieveResponse"]
 
 
 class ScmIntegrationRetrieveResponse(BaseModel):
-    integration: Optional[Integration] = None
+    integration: Optional[ScmIntegration] = None

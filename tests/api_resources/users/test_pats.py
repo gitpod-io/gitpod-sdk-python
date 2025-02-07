@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.pagination import SyncPersonalAccessTokensPage, AsyncPersonalAccessTokensPage
-from gitpod.types.users import PatGetResponse, PatListResponse
+from gitpod.types.users import PatGetResponse, PersonalAccessToken
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestPats:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         pat = client.users.pats.list()
-        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -36,7 +36,7 @@ class TestPats:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -46,7 +46,7 @@ class TestPats:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         pat = response.parse()
-        assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(SyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -56,7 +56,7 @@ class TestPats:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             pat = response.parse()
-            assert_matches_type(SyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+            assert_matches_type(SyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -140,7 +140,7 @@ class TestAsyncPats:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.list()
-        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -154,7 +154,7 @@ class TestAsyncPats:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -164,7 +164,7 @@ class TestAsyncPats:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         pat = await response.parse()
-        assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+        assert_matches_type(AsyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -174,7 +174,7 @@ class TestAsyncPats:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             pat = await response.parse()
-            assert_matches_type(AsyncPersonalAccessTokensPage[PatListResponse], pat, path=["response"])
+            assert_matches_type(AsyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

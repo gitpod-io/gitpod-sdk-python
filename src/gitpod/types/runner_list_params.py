@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .runner_kind import RunnerKind
+from .runner_provider import RunnerProvider
 
 __all__ = ["RunnerListParams", "Filter", "Pagination"]
 
@@ -25,19 +27,10 @@ class Filter(TypedDict, total=False):
     creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
     """creator_ids filters the response to only runner created by specified users"""
 
-    kinds: List[
-        Literal["RUNNER_KIND_UNSPECIFIED", "RUNNER_KIND_LOCAL", "RUNNER_KIND_REMOTE", "RUNNER_KIND_LOCAL_CONFIGURATION"]
-    ]
+    kinds: List[RunnerKind]
     """kinds filters the response to only runners of the specified kinds"""
 
-    providers: List[
-        Literal[
-            "RUNNER_PROVIDER_UNSPECIFIED",
-            "RUNNER_PROVIDER_AWS_EC2",
-            "RUNNER_PROVIDER_LINUX_HOST",
-            "RUNNER_PROVIDER_DESKTOP_MAC",
-        ]
-    ]
+    providers: List[RunnerProvider]
     """providers filters the response to only runners of the specified providers"""
 
 

@@ -2,24 +2,19 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 
-__all__ = ["EnvironmentClassUpdateParams", "Variant0", "Variant1", "Variant2"]
+__all__ = ["EnvironmentClassUpdateParams"]
 
 
-class Variant0(TypedDict, total=False):
-    description: Required[str]
+class EnvironmentClassUpdateParams(TypedDict, total=False):
+    description: Optional[str]
 
+    display_name: Annotated[Optional[str], PropertyInfo(alias="displayName")]
 
-class Variant1(TypedDict, total=False):
-    display_name: Required[Annotated[str, PropertyInfo(alias="displayName")]]
+    enabled: Optional[bool]
 
-
-class Variant2(TypedDict, total=False):
-    enabled: Required[bool]
-
-
-EnvironmentClassUpdateParams: TypeAlias = Union[Variant0, Variant1, Variant2]
+    environment_class_id: Annotated[str, PropertyInfo(alias="environmentClassId")]

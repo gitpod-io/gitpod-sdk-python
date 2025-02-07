@@ -2,36 +2,22 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
-from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .admission_level import AdmissionLevel
+from .environment_initializer_param import EnvironmentInitializerParam
 
 __all__ = [
     "EnvironmentUpdateParams",
     "Spec",
-    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment",
-    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile",
-    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot",
-    "SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession",
+    "SpecAutomationsFile",
     "SpecContent",
-    "SpecContentContent",
-    "SpecContentContentTheGitEmailAddress",
-    "SpecContentContentTheGitUsername",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit",
-    "SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit",
-    "SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization",
     "SpecDevcontainer",
-    "SpecDevcontainerDevcontainer",
-    "SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot",
-    "SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild",
-    "SpecTimeoutConfiguresTheEnvironmentTimeout",
-    "SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout",
+    "SpecPort",
+    "SpecSSHPublicKey",
+    "SpecTimeout",
 ]
 
 
@@ -47,10 +33,8 @@ class EnvironmentUpdateParams(TypedDict, total=False):
     spec: Optional[Spec]
 
 
-class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot(
-    TypedDict, total=False
-):
-    automations_file_path: Required[Annotated[str, PropertyInfo(alias="automationsFilePath")]]
+class SpecAutomationsFile(TypedDict, total=False):
+    automations_file_path: Annotated[Optional[str], PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
     environment, relative to the repo root. path must not be absolute (start with a
@@ -61,127 +45,25 @@ class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile
     ```
     """
 
-
-class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession(TypedDict, total=False):
-    session: Required[str]
-
-
-SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile: TypeAlias = Union[
-    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileAutomationsFilePathIsThePathToTheAutomationsFileThatIsAppliedInTheEnvironmentRelativeToTheRepoRoot,
-    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFileSession,
-]
-
-
-class SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment(TypedDict, total=False):
-    automations_file: Required[
-        Annotated[
-            SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironmentAutomationsFile,
-            PropertyInfo(alias="automationsFile"),
-        ]
-    ]
-    """automations_file is the automations file spec of the environment"""
-
-
-class SpecContentContentTheGitEmailAddress(TypedDict, total=False):
-    git_email: Required[Annotated[str, PropertyInfo(alias="gitEmail")]]
-    """The Git email address"""
-
-
-class SpecContentContentTheGitUsername(TypedDict, total=False):
-    git_username: Required[Annotated[str, PropertyInfo(alias="gitUsername")]]
-    """The Git username"""
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL(
-    TypedDict, total=False
-):
-    url: str
-    """url is the URL from which the environment is created"""
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL(
-    TypedDict, total=False
-):
-    context_url: Required[
-        Annotated[
-            SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURLContextURL,
-            PropertyInfo(alias="contextUrl"),
-        ]
-    ]
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit(
-    TypedDict, total=False
-):
-    checkout_location: Annotated[str, PropertyInfo(alias="checkoutLocation")]
-    """
-    a path relative to the environment root in which the code will be checked out to
-    """
-
-    clone_target: Annotated[str, PropertyInfo(alias="cloneTarget")]
-    """the value for the clone target mode - use depends on the target mode"""
-
-    remote_uri: Annotated[str, PropertyInfo(alias="remoteUri")]
-    """remote_uri is the Git remote origin"""
-
-    target_mode: Annotated[
-        Literal[
-            "CLONE_TARGET_MODE_UNSPECIFIED",
-            "CLONE_TARGET_MODE_REMOTE_HEAD",
-            "CLONE_TARGET_MODE_REMOTE_COMMIT",
-            "CLONE_TARGET_MODE_REMOTE_BRANCH",
-            "CLONE_TARGET_MODE_LOCAL_BRANCH",
-        ],
-        PropertyInfo(alias="targetMode"),
-    ]
-    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
-
-    upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
-    """upstream_Remote_uri is the fork upstream of a repository"""
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit(
-    TypedDict, total=False
-):
-    git: Required[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGitGit]
-
-
-SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec: TypeAlias = Union[
-    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecContextURL,
-    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpecGit,
-]
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer(TypedDict, total=False):
-    specs: Iterable[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializerSpec]
-
-
-class SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized(TypedDict, total=False):
-    initializer: Required[SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitializedInitializer]
-    """EnvironmentInitializer specifies how an environment is to be initialized"""
-
-
-class SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization(TypedDict, total=False):
-    session: Required[str]
-    """session should be changed to trigger a content reinitialization"""
-
-
-SpecContentContent: TypeAlias = Union[
-    SpecContentContentTheGitEmailAddress,
-    SpecContentContentTheGitUsername,
-    SpecContentContentInitializerConfiguresHowTheEnvironmentIsToBeInitialized,
-    SpecContentContentSessionShouldBeChangedToTriggerAContentReinitialization,
-]
+    session: Optional[str]
 
 
 class SpecContent(TypedDict, total=False):
-    content: Required[SpecContentContent]
+    git_email: Annotated[Optional[str], PropertyInfo(alias="gitEmail")]
+    """The Git email address"""
+
+    git_username: Annotated[Optional[str], PropertyInfo(alias="gitUsername")]
+    """The Git username"""
+
+    initializer: Optional[EnvironmentInitializerParam]
+    """EnvironmentInitializer specifies how an environment is to be initialized"""
+
+    session: Optional[str]
+    """session should be changed to trigger a content reinitialization"""
 
 
-class SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot(
-    TypedDict, total=False
-):
-    devcontainer_file_path: Required[Annotated[str, PropertyInfo(alias="devcontainerFilePath")]]
+class SpecDevcontainer(TypedDict, total=False):
+    devcontainer_file_path: Annotated[Optional[str], PropertyInfo(alias="devcontainerFilePath")]
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
     root path must not be absolute (start with a /):
@@ -191,24 +73,34 @@ class SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainer
     ```
     """
 
-
-class SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild(TypedDict, total=False):
-    session: Required[str]
+    session: Optional[str]
     """session should be changed to trigger a devcontainer rebuild"""
 
 
-SpecDevcontainerDevcontainer: TypeAlias = Union[
-    SpecDevcontainerDevcontainerDevcontainerFilePathIsThePathToTheDevcontainerFileRelativeToTheRepoRoot,
-    SpecDevcontainerDevcontainerSessionShouldBeChangedToTriggerADevcontainerRebuild,
-]
+class SpecPort(TypedDict, total=False):
+    admission: AdmissionLevel
+    """Admission level describes who can access an environment instance and its ports."""
+
+    name: str
+    """name of this port"""
+
+    port: int
+    """port number"""
 
 
-class SpecDevcontainer(TypedDict, total=False):
-    devcontainer: Required[SpecDevcontainerDevcontainer]
+class SpecSSHPublicKey(TypedDict, total=False):
+    id: str
+    """id is the unique identifier of the public key"""
+
+    value: Optional[str]
+    """
+    value is the actual public key in the public key file format if not provided,
+    the public key will be removed
+    """
 
 
-class SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout(TypedDict, total=False):
-    disconnected: Required[str]
+class SpecTimeout(TypedDict, total=False):
+    disconnected: Optional[str]
     """
     A Duration represents a signed, fixed-length span of time represented as a count
     of seconds and fractions of seconds at nanosecond resolution. It is independent
@@ -270,14 +162,22 @@ class SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout(TypedDict, total=False):
     """
 
 
-class SpecTimeoutConfiguresTheEnvironmentTimeout(TypedDict, total=False):
-    timeout: Required[SpecTimeoutConfiguresTheEnvironmentTimeoutTimeout]
+class Spec(TypedDict, total=False):
+    automations_file: Annotated[Optional[SpecAutomationsFile], PropertyInfo(alias="automationsFile")]
+    """automations_file is the automations file spec of the environment"""
+
+    content: Optional[SpecContent]
+
+    devcontainer: Optional[SpecDevcontainer]
+
+    ports: Iterable[SpecPort]
+    """ports controls port sharing"""
+
+    ssh_public_keys: Annotated[Iterable[SpecSSHPublicKey], PropertyInfo(alias="sshPublicKeys")]
+    """
+    ssh_public_keys are the public keys to update empty array means nothing to
+    update
+    """
+
+    timeout: Optional[SpecTimeout]
     """Timeout configures the environment timeout"""
-
-
-Spec: TypeAlias = Union[
-    SpecAutomationsFileIsTheAutomationsFileSpecOfTheEnvironment,
-    SpecContent,
-    SpecDevcontainer,
-    SpecTimeoutConfiguresTheEnvironmentTimeout,
-]

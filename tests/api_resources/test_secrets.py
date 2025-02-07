@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
-    SecretListResponse,
+    Secret,
     SecretCreateResponse,
     SecretGetValueResponse,
 )
@@ -24,61 +24,15 @@ class TestSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_overload_1(self, client: Gitpod) -> None:
-        secret = client.secrets.create(
-            environment_variable=True,
-        )
+    def test_method_create(self, client: Gitpod) -> None:
+        secret = client.secrets.create()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_create_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_create_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.create(
             environment_variable=True,
-            name="name",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            value="x",
-        )
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_create_overload_1(self, client: Gitpod) -> None:
-        response = client.secrets.with_raw_response.create(
-            environment_variable=True,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        secret = response.parse()
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_create_overload_1(self, client: Gitpod) -> None:
-        with client.secrets.with_streaming_response.create(
-            environment_variable=True,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            secret = response.parse()
-            assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_overload_2(self, client: Gitpod) -> None:
-        secret = client.secrets.create(
-            file_path="filePath",
-        )
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params_overload_2(self, client: Gitpod) -> None:
-        secret = client.secrets.create(
             file_path="filePath",
             name="name",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -88,10 +42,8 @@ class TestSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_create_overload_2(self, client: Gitpod) -> None:
-        response = client.secrets.with_raw_response.create(
-            file_path="filePath",
-        )
+    def test_raw_response_create(self, client: Gitpod) -> None:
+        response = client.secrets.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -100,10 +52,8 @@ class TestSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_create_overload_2(self, client: Gitpod) -> None:
-        with client.secrets.with_streaming_response.create(
-            file_path="filePath",
-        ) as response:
+    def test_streaming_response_create(self, client: Gitpod) -> None:
+        with client.secrets.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -116,7 +66,7 @@ class TestSecrets:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         secret = client.secrets.list()
-        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -130,7 +80,7 @@ class TestSecrets:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -140,7 +90,7 @@ class TestSecrets:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         secret = response.parse()
-        assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -150,7 +100,7 @@ class TestSecrets:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             secret = response.parse()
-            assert_matches_type(SyncSecretsPage[SecretListResponse], secret, path=["response"])
+            assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -269,61 +219,15 @@ class TestAsyncSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_overload_1(self, async_client: AsyncGitpod) -> None:
-        secret = await async_client.secrets.create(
-            environment_variable=True,
-        )
+    async def test_method_create(self, async_client: AsyncGitpod) -> None:
+        secret = await async_client.secrets.create()
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_create_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
             environment_variable=True,
-            name="name",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            value="x",
-        )
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.secrets.with_raw_response.create(
-            environment_variable=True,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        secret = await response.parse()
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_create_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.secrets.with_streaming_response.create(
-            environment_variable=True,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            secret = await response.parse()
-            assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        secret = await async_client.secrets.create(
-            file_path="filePath",
-        )
-        assert_matches_type(SecretCreateResponse, secret, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        secret = await async_client.secrets.create(
             file_path="filePath",
             name="name",
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -333,10 +237,8 @@ class TestAsyncSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.secrets.with_raw_response.create(
-            file_path="filePath",
-        )
+    async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.secrets.with_raw_response.create()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -345,10 +247,8 @@ class TestAsyncSecrets:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_create_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.secrets.with_streaming_response.create(
-            file_path="filePath",
-        ) as response:
+    async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
+        async with async_client.secrets.with_streaming_response.create() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -361,7 +261,7 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.list()
-        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -375,7 +275,7 @@ class TestAsyncSecrets:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -385,7 +285,7 @@ class TestAsyncSecrets:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         secret = await response.parse()
-        assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
+        assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -395,7 +295,7 @@ class TestAsyncSecrets:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             secret = await response.parse()
-            assert_matches_type(AsyncSecretsPage[SecretListResponse], secret, path=["response"])
+            assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

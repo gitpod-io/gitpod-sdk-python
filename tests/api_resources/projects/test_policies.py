@@ -11,7 +11,7 @@ from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.pagination import SyncPoliciesPage, AsyncPoliciesPage
 from gitpod.types.projects import (
-    PolicyListResponse,
+    ProjectPolicy,
     PolicyCreateResponse,
     PolicyUpdateResponse,
 )
@@ -102,7 +102,7 @@ class TestPolicies:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         policy = client.projects.policies.list()
-        assert_matches_type(SyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(SyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -116,7 +116,7 @@ class TestPolicies:
             },
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(SyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(SyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -126,7 +126,7 @@ class TestPolicies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         policy = response.parse()
-        assert_matches_type(SyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(SyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -136,7 +136,7 @@ class TestPolicies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             policy = response.parse()
-            assert_matches_type(SyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+            assert_matches_type(SyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -261,7 +261,7 @@ class TestAsyncPolicies:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         policy = await async_client.projects.policies.list()
-        assert_matches_type(AsyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(AsyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -275,7 +275,7 @@ class TestAsyncPolicies:
             },
             project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
-        assert_matches_type(AsyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(AsyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -285,7 +285,7 @@ class TestAsyncPolicies:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         policy = await response.parse()
-        assert_matches_type(AsyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+        assert_matches_type(AsyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -295,7 +295,7 @@ class TestAsyncPolicies:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             policy = await response.parse()
-            assert_matches_type(AsyncPoliciesPage[PolicyListResponse], policy, path=["response"])
+            assert_matches_type(AsyncPoliciesPage[ProjectPolicy], policy, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -19,15 +19,13 @@ class TestConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_validate_overload_1(self, client: Gitpod) -> None:
-        configuration = client.runners.configurations.validate(
-            environment_class={},
-        )
+    def test_method_validate(self, client: Gitpod) -> None:
+        configuration = client.runners.configurations.validate()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_method_validate_with_all_params_overload_1(self, client: Gitpod) -> None:
+    def test_method_validate_with_all_params(self, client: Gitpod) -> None:
         configuration = client.runners.configurations.validate(
             environment_class={
                 "id": "id",
@@ -43,15 +41,22 @@ class TestConfigurations:
                 "runner_id": "runnerId",
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            scm_integration={
+                "id": "id",
+                "host": "host",
+                "oauth_client_id": "oauthClientId",
+                "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
+                "oauth_plaintext_client_secret": "oauthPlaintextClientSecret",
+                "pat": True,
+                "scm_id": "scmId",
+            },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    def test_raw_response_validate_overload_1(self, client: Gitpod) -> None:
-        response = client.runners.configurations.with_raw_response.validate(
-            environment_class={},
-        )
+    def test_raw_response_validate(self, client: Gitpod) -> None:
+        response = client.runners.configurations.with_raw_response.validate()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -60,53 +65,8 @@ class TestConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    def test_streaming_response_validate_overload_1(self, client: Gitpod) -> None:
-        with client.runners.configurations.with_streaming_response.validate(
-            environment_class={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            configuration = response.parse()
-            assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_validate_overload_2(self, client: Gitpod) -> None:
-        configuration = client.runners.configurations.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        )
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_validate_with_all_params_overload_2(self, client: Gitpod) -> None:
-        configuration = client.runners.configurations.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_validate_overload_2(self, client: Gitpod) -> None:
-        response = client.runners.configurations.with_raw_response.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        configuration = response.parse()
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_validate_overload_2(self, client: Gitpod) -> None:
-        with client.runners.configurations.with_streaming_response.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        ) as response:
+    def test_streaming_response_validate(self, client: Gitpod) -> None:
+        with client.runners.configurations.with_streaming_response.validate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -121,15 +81,13 @@ class TestAsyncConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_validate_overload_1(self, async_client: AsyncGitpod) -> None:
-        configuration = await async_client.runners.configurations.validate(
-            environment_class={},
-        )
+    async def test_method_validate(self, async_client: AsyncGitpod) -> None:
+        configuration = await async_client.runners.configurations.validate()
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_method_validate_with_all_params_overload_1(self, async_client: AsyncGitpod) -> None:
+    async def test_method_validate_with_all_params(self, async_client: AsyncGitpod) -> None:
         configuration = await async_client.runners.configurations.validate(
             environment_class={
                 "id": "id",
@@ -145,15 +103,22 @@ class TestAsyncConfigurations:
                 "runner_id": "runnerId",
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            scm_integration={
+                "id": "id",
+                "host": "host",
+                "oauth_client_id": "oauthClientId",
+                "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
+                "oauth_plaintext_client_secret": "oauthPlaintextClientSecret",
+                "pat": True,
+                "scm_id": "scmId",
+            },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
-    async def test_raw_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.with_raw_response.validate(
-            environment_class={},
-        )
+    async def test_raw_response_validate(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.configurations.with_raw_response.validate()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -162,53 +127,8 @@ class TestAsyncConfigurations:
 
     @pytest.mark.skip()
     @parametrize
-    async def test_streaming_response_validate_overload_1(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.with_streaming_response.validate(
-            environment_class={},
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            configuration = await response.parse()
-            assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        configuration = await async_client.runners.configurations.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        )
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_validate_with_all_params_overload_2(self, async_client: AsyncGitpod) -> None:
-        configuration = await async_client.runners.configurations.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        )
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.runners.configurations.with_raw_response.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        configuration = await response.parse()
-        assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_validate_overload_2(self, async_client: AsyncGitpod) -> None:
-        async with async_client.runners.configurations.with_streaming_response.validate(
-            scm_integration={"oauth_client_id": "oauthClientId"},
-        ) as response:
+    async def test_streaming_response_validate(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.configurations.with_streaming_response.validate() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

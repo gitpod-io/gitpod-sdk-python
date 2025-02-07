@@ -17,7 +17,7 @@ from ..._response import (
 from ...pagination import SyncEnvironmentClassesPage, AsyncEnvironmentClassesPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.environments import class_list_params
-from ...types.environments.class_list_response import ClassListResponse
+from ...types.shared.environment_class import EnvironmentClass
 
 __all__ = ["ClassesResource", "AsyncClassesResource"]
 
@@ -55,7 +55,7 @@ class ClassesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncEnvironmentClassesPage[ClassListResponse]:
+    ) -> SyncEnvironmentClassesPage[EnvironmentClass]:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
         details a user is able to use based on the query buf:lint:ignore
@@ -74,7 +74,7 @@ class ClassesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironmentClasses",
-            page=SyncEnvironmentClassesPage[ClassListResponse],
+            page=SyncEnvironmentClassesPage[EnvironmentClass],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -95,7 +95,7 @@ class ClassesResource(SyncAPIResource):
                     class_list_params.ClassListParams,
                 ),
             ),
-            model=ClassListResponse,
+            model=EnvironmentClass,
             method="post",
         )
 
@@ -133,7 +133,7 @@ class AsyncClassesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[ClassListResponse, AsyncEnvironmentClassesPage[ClassListResponse]]:
+    ) -> AsyncPaginator[EnvironmentClass, AsyncEnvironmentClassesPage[EnvironmentClass]]:
         """
         ListEnvironmentClasses returns the list of environment classes with runner
         details a user is able to use based on the query buf:lint:ignore
@@ -152,7 +152,7 @@ class AsyncClassesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/gitpod.v1.EnvironmentService/ListEnvironmentClasses",
-            page=AsyncEnvironmentClassesPage[ClassListResponse],
+            page=AsyncEnvironmentClassesPage[EnvironmentClass],
             body=maybe_transform(
                 {
                     "filter": filter,
@@ -173,7 +173,7 @@ class AsyncClassesResource(AsyncAPIResource):
                     class_list_params.ClassListParams,
                 ),
             ),
-            model=ClassListResponse,
+            model=EnvironmentClass,
             method="post",
         )
 

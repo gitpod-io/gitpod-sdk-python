@@ -2,36 +2,21 @@
 
 from __future__ import annotations
 
-from typing import List, Union
-from typing_extensions import Required, Annotated, TypeAlias, TypedDict
+from typing import Optional
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .invite_domains_param import InviteDomainsParam
 
-__all__ = [
-    "OrganizationUpdateParams",
-    "InviteDomainsIsTheDomainAllowlistOfTheOrganization",
-    "InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains",
-    "NameIsTheNewNameOfTheOrganization",
-]
+__all__ = ["OrganizationUpdateParams"]
 
 
-class InviteDomainsIsTheDomainAllowlistOfTheOrganization(TypedDict, total=False):
-    invite_domains: Required[
-        Annotated[InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains, PropertyInfo(alias="inviteDomains")]
-    ]
+class OrganizationUpdateParams(TypedDict, total=False):
+    invite_domains: Annotated[Optional[InviteDomainsParam], PropertyInfo(alias="inviteDomains")]
     """invite_domains is the domain allowlist of the organization"""
 
-
-class InviteDomainsIsTheDomainAllowlistOfTheOrganizationInviteDomains(TypedDict, total=False):
-    domains: List[str]
-    """domains is the list of domains that are allowed to join the organization"""
-
-
-class NameIsTheNewNameOfTheOrganization(TypedDict, total=False):
-    name: Required[str]
+    name: Optional[str]
     """name is the new name of the organization"""
 
-
-OrganizationUpdateParams: TypeAlias = Union[
-    InviteDomainsIsTheDomainAllowlistOfTheOrganization, NameIsTheNewNameOfTheOrganization
-]
+    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    """organization_id is the ID of the organization to update the settings for."""

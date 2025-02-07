@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from typing import List
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .resource_type import ResourceType
+from .shared.principal import Principal
 
 __all__ = ["EventListParams", "Filter", "Pagination"]
 
@@ -24,47 +26,11 @@ class EventListParams(TypedDict, total=False):
 class Filter(TypedDict, total=False):
     actor_ids: Annotated[List[str], PropertyInfo(alias="actorIds")]
 
-    actor_principals: Annotated[
-        List[
-            Literal[
-                "PRINCIPAL_UNSPECIFIED",
-                "PRINCIPAL_ACCOUNT",
-                "PRINCIPAL_USER",
-                "PRINCIPAL_RUNNER",
-                "PRINCIPAL_ENVIRONMENT",
-                "PRINCIPAL_SERVICE_ACCOUNT",
-            ]
-        ],
-        PropertyInfo(alias="actorPrincipals"),
-    ]
+    actor_principals: Annotated[List[Principal], PropertyInfo(alias="actorPrincipals")]
 
     subject_ids: Annotated[List[str], PropertyInfo(alias="subjectIds")]
 
-    subject_types: Annotated[
-        List[
-            Literal[
-                "RESOURCE_TYPE_UNSPECIFIED",
-                "RESOURCE_TYPE_ENVIRONMENT",
-                "RESOURCE_TYPE_RUNNER",
-                "RESOURCE_TYPE_PROJECT",
-                "RESOURCE_TYPE_TASK",
-                "RESOURCE_TYPE_TASK_EXECUTION",
-                "RESOURCE_TYPE_SERVICE",
-                "RESOURCE_TYPE_ORGANIZATION",
-                "RESOURCE_TYPE_USER",
-                "RESOURCE_TYPE_ENVIRONMENT_CLASS",
-                "RESOURCE_TYPE_RUNNER_SCM_INTEGRATION",
-                "RESOURCE_TYPE_HOST_AUTHENTICATION_TOKEN",
-                "RESOURCE_TYPE_GROUP",
-                "RESOURCE_TYPE_PERSONAL_ACCESS_TOKEN",
-                "RESOURCE_TYPE_USER_PREFERENCE",
-                "RESOURCE_TYPE_SERVICE_ACCOUNT",
-                "RESOURCE_TYPE_SECRET",
-                "RESOURCE_TYPE_SSO_CONFIG",
-            ]
-        ],
-        PropertyInfo(alias="subjectTypes"),
-    ]
+    subject_types: Annotated[List[ResourceType], PropertyInfo(alias="subjectTypes")]
 
 
 class Pagination(TypedDict, total=False):

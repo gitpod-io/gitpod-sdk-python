@@ -10,7 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
-    EnvironmentListResponse,
+    Environment,
     EnvironmentCreateResponse,
     EnvironmentRetrieveResponse,
     EnvironmentCreateLogsTokenResponse,
@@ -44,7 +44,20 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://github.com/gitpod-io/gitpod"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -53,7 +66,7 @@ class TestEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "class": "61000000-0000-0000-0000-000000000000",
                     "session": "session",
                 },
                 "ports": [
@@ -66,6 +79,8 @@ class TestEnvironments:
                 "secrets": [
                     {
                         "environment_variable": "environmentVariable",
+                        "file_path": "filePath",
+                        "git_credential_host": "gitCredentialHost",
                         "name": "name",
                         "session": "session",
                         "source": "source",
@@ -154,7 +169,49 @@ class TestEnvironments:
         environment = client.environments.update(
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={},
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
+            spec={
+                "automations_file": {
+                    "automations_file_path": "automationsFilePath",
+                    "session": "session",
+                },
+                "content": {
+                    "git_email": "gitEmail",
+                    "git_username": "gitUsername",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "session": "session",
+                },
+                "devcontainer": {
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "session": "session",
+                },
+                "ports": [
+                    {
+                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
+                        "name": "x",
+                        "port": 1,
+                    }
+                ],
+                "ssh_public_keys": [
+                    {
+                        "id": "id",
+                        "value": "value",
+                    }
+                ],
+                "timeout": {"disconnected": "+9125115.360s"},
+            },
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -184,7 +241,7 @@ class TestEnvironments:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         environment = client.environments.list()
-        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -205,7 +262,7 @@ class TestEnvironments:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -215,7 +272,7 @@ class TestEnvironments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment = response.parse()
-        assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(SyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -225,7 +282,7 @@ class TestEnvironments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment = response.parse()
-            assert_matches_type(SyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+            assert_matches_type(SyncEnvironmentsPage[Environment], environment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -286,7 +343,20 @@ class TestEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -308,6 +378,8 @@ class TestEnvironments:
                 "secrets": [
                     {
                         "environment_variable": "environmentVariable",
+                        "file_path": "filePath",
+                        "git_credential_host": "gitCredentialHost",
                         "name": "name",
                         "session": "session",
                         "source": "source",
@@ -519,7 +591,20 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://github.com/gitpod-io/gitpod"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -528,7 +613,7 @@ class TestAsyncEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "class": "61000000-0000-0000-0000-000000000000",
                     "session": "session",
                 },
                 "ports": [
@@ -541,6 +626,8 @@ class TestAsyncEnvironments:
                 "secrets": [
                     {
                         "environment_variable": "environmentVariable",
+                        "file_path": "filePath",
+                        "git_credential_host": "gitCredentialHost",
                         "name": "name",
                         "session": "session",
                         "source": "source",
@@ -629,7 +716,49 @@ class TestAsyncEnvironments:
         environment = await async_client.environments.update(
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             metadata={},
-            spec={"automations_file": {"automations_file_path": "automationsFilePath"}},
+            spec={
+                "automations_file": {
+                    "automations_file_path": "automationsFilePath",
+                    "session": "session",
+                },
+                "content": {
+                    "git_email": "gitEmail",
+                    "git_username": "gitUsername",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "session": "session",
+                },
+                "devcontainer": {
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "session": "session",
+                },
+                "ports": [
+                    {
+                        "admission": "ADMISSION_LEVEL_UNSPECIFIED",
+                        "name": "x",
+                        "port": 1,
+                    }
+                ],
+                "ssh_public_keys": [
+                    {
+                        "id": "id",
+                        "value": "value",
+                    }
+                ],
+                "timeout": {"disconnected": "+9125115.360s"},
+            },
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -659,7 +788,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.list()
-        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -680,7 +809,7 @@ class TestAsyncEnvironments:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -690,7 +819,7 @@ class TestAsyncEnvironments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         environment = await response.parse()
-        assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+        assert_matches_type(AsyncEnvironmentsPage[Environment], environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -700,7 +829,7 @@ class TestAsyncEnvironments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             environment = await response.parse()
-            assert_matches_type(AsyncEnvironmentsPage[EnvironmentListResponse], environment, path=["response"])
+            assert_matches_type(AsyncEnvironmentsPage[Environment], environment, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -761,7 +890,20 @@ class TestAsyncEnvironments:
                 "content": {
                     "git_email": "gitEmail",
                     "git_username": "gitUsername",
-                    "initializer": {"specs": [{"context_url": {"url": "https://example.com"}}]},
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
                     "session": "session",
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
@@ -783,6 +925,8 @@ class TestAsyncEnvironments:
                 "secrets": [
                     {
                         "environment_variable": "environmentVariable",
+                        "file_path": "filePath",
+                        "git_credential_host": "gitCredentialHost",
                         "name": "name",
                         "session": "session",
                         "source": "source",

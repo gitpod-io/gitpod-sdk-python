@@ -10,9 +10,9 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
+    LoginProvider,
     AccountRetrieveResponse,
     AccountGetSSOLoginURLResponse,
-    AccountListLoginProvidersResponse,
 )
 from gitpod.pagination import SyncLoginProvidersPage, AsyncLoginProvidersPage
 
@@ -97,26 +97,22 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_method_get_sso_login_url(self, client: Gitpod) -> None:
-        account = client.accounts.get_sso_login_url(
-            return_to="https://example.com",
-        )
+        account = client.accounts.get_sso_login_url()
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_get_sso_login_url_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
-            return_to="https://example.com",
             email="dev@stainlessapi.com",
+            return_to="https://example.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_sso_login_url(self, client: Gitpod) -> None:
-        response = client.accounts.with_raw_response.get_sso_login_url(
-            return_to="https://example.com",
-        )
+        response = client.accounts.with_raw_response.get_sso_login_url()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -126,9 +122,7 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_sso_login_url(self, client: Gitpod) -> None:
-        with client.accounts.with_streaming_response.get_sso_login_url(
-            return_to="https://example.com",
-        ) as response:
+        with client.accounts.with_streaming_response.get_sso_login_url() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -141,7 +135,7 @@ class TestAccounts:
     @parametrize
     def test_method_list_login_providers(self, client: Gitpod) -> None:
         account = client.accounts.list_login_providers()
-        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -155,7 +149,7 @@ class TestAccounts:
                 "page_size": 100,
             },
         )
-        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -165,7 +159,7 @@ class TestAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = response.parse()
-        assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(SyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -175,7 +169,7 @@ class TestAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = response.parse()
-            assert_matches_type(SyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+            assert_matches_type(SyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -258,26 +252,22 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_method_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        account = await async_client.accounts.get_sso_login_url(
-            return_to="https://example.com",
-        )
+        account = await async_client.accounts.get_sso_login_url()
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_get_sso_login_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
-            return_to="https://example.com",
             email="dev@stainlessapi.com",
+            return_to="https://example.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.accounts.with_raw_response.get_sso_login_url(
-            return_to="https://example.com",
-        )
+        response = await async_client.accounts.with_raw_response.get_sso_login_url()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -287,9 +277,7 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        async with async_client.accounts.with_streaming_response.get_sso_login_url(
-            return_to="https://example.com",
-        ) as response:
+        async with async_client.accounts.with_streaming_response.get_sso_login_url() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -302,7 +290,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_list_login_providers(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.list_login_providers()
-        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -316,7 +304,7 @@ class TestAsyncAccounts:
                 "page_size": 100,
             },
         )
-        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -326,7 +314,7 @@ class TestAsyncAccounts:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         account = await response.parse()
-        assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+        assert_matches_type(AsyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
@@ -336,6 +324,6 @@ class TestAsyncAccounts:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             account = await response.parse()
-            assert_matches_type(AsyncLoginProvidersPage[AccountListLoginProvidersResponse], account, path=["response"])
+            assert_matches_type(AsyncLoginProvidersPage[LoginProvider], account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
