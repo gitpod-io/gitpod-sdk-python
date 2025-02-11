@@ -19,9 +19,6 @@ class EnvironmentListParams(TypedDict, total=False):
 
     filter: Filter
 
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
-    """organization_id is the ID of the organization that contains the environments"""
-
     pagination: Pagination
     """pagination contains the pagination options for listing environments"""
 

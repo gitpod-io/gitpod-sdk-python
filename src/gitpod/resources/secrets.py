@@ -56,6 +56,7 @@ class SecretsResource(SyncAPIResource):
     def create(
         self,
         *,
+        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
         environment_variable: bool | NotGiven = NOT_GIVEN,
         file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -72,6 +73,13 @@ class SecretsResource(SyncAPIResource):
         CreateSecret creates a new secret.
 
         Args:
+          container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
+              the docker host value must be a valid registry hostname with optional port:
+
+              ```
+              this.matches("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9](:[0-9]+)?$")
+              ```
+
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
@@ -98,6 +106,7 @@ class SecretsResource(SyncAPIResource):
             "/gitpod.v1.SecretService/CreateSecret",
             body=maybe_transform(
                 {
+                    "container_registry_basic_auth_host": container_registry_basic_auth_host,
                     "environment_variable": environment_variable,
                     "file_path": file_path,
                     "name": name,
@@ -297,6 +306,7 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
         environment_variable: bool | NotGiven = NOT_GIVEN,
         file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
@@ -313,6 +323,13 @@ class AsyncSecretsResource(AsyncAPIResource):
         CreateSecret creates a new secret.
 
         Args:
+          container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
+              the docker host value must be a valid registry hostname with optional port:
+
+              ```
+              this.matches("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9](:[0-9]+)?$")
+              ```
+
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
@@ -339,6 +356,7 @@ class AsyncSecretsResource(AsyncAPIResource):
             "/gitpod.v1.SecretService/CreateSecret",
             body=await async_maybe_transform(
                 {
+                    "container_registry_basic_auth_host": container_registry_basic_auth_host,
                     "environment_variable": environment_variable,
                     "file_path": file_path,
                     "name": name,

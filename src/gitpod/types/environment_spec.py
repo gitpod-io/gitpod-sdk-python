@@ -83,6 +83,12 @@ class Port(BaseModel):
 
 
 class Secret(BaseModel):
+    container_registry_basic_auth_host: Optional[str] = FieldInfo(alias="containerRegistryBasicAuthHost", default=None)
+    """
+    container_registry_basic_auth_host is the hostname of the container registry
+    that supports basic auth
+    """
+
     environment_variable: Optional[str] = FieldInfo(alias="environmentVariable", default=None)
 
     file_path: Optional[str] = FieldInfo(alias="filePath", default=None)

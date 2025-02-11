@@ -90,6 +90,12 @@ class Port(TypedDict, total=False):
 
 
 class Secret(TypedDict, total=False):
+    container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
+    """
+    container_registry_basic_auth_host is the hostname of the container registry
+    that supports basic auth
+    """
+
     environment_variable: Annotated[str, PropertyInfo(alias="environmentVariable")]
 
     file_path: Annotated[str, PropertyInfo(alias="filePath")]
