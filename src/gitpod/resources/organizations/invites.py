@@ -33,7 +33,7 @@ class InvitesResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/gitpod-io/flex-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#accessing-raw-response-data-eg-headers
         """
         return InvitesResourceWithRawResponse(self)
 
@@ -42,7 +42,7 @@ class InvitesResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/gitpod-io/flex-sdk-python#with_streaming_response
+        For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
         return InvitesResourceWithStreamingResponse(self)
 
@@ -155,7 +155,7 @@ class AsyncInvitesResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/gitpod-io/flex-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#accessing-raw-response-data-eg-headers
         """
         return AsyncInvitesResourceWithRawResponse(self)
 
@@ -164,7 +164,7 @@ class AsyncInvitesResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/gitpod-io/flex-sdk-python#with_streaming_response
+        For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
         return AsyncInvitesResourceWithStreamingResponse(self)
 
