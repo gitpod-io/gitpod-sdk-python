@@ -10,6 +10,16 @@ __all__ = ["SecretCreateParams"]
 
 
 class SecretCreateParams(TypedDict, total=False):
+    container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
+    """
+    secret will be mounted as a docker config in the environment VM, mount will have
+    the docker host value must be a valid registry hostname with optional port:
+
+    ```
+    this.matches('^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9](:[0-9]+)?$')
+    ```
+    """
+
     environment_variable: Annotated[bool, PropertyInfo(alias="environmentVariable")]
     """
     secret will be created as an Environment Variable with the same name as the

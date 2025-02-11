@@ -154,8 +154,11 @@ class TestEnvironmentClasses:
             token="token",
             page_size=0,
             filter={
+                "can_create_environments": True,
                 "enabled": True,
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
+                "runner_providers": ["RUNNER_PROVIDER_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
@@ -324,8 +327,11 @@ class TestAsyncEnvironmentClasses:
             token="token",
             page_size=0,
             filter={
+                "can_create_environments": True,
                 "enabled": True,
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
+                "runner_providers": ["RUNNER_PROVIDER_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
