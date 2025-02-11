@@ -1,6 +1,6 @@
 # Gitpod Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/gitpod.svg)](https://pypi.org/project/gitpod/)
+[![PyPI version](https://img.shields.io/pypi/v/gitpod-sdk.svg)](https://pypi.org/project/gitpod-sdk/)
 
 The Gitpod Python library provides convenient access to the Gitpod REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -15,12 +15,9 @@ The REST API documentation can be found on [docs.gitpod.com](https://docs.gitpod
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/gitpod-io/gitpod-sdk-python.git
+# install from PyPI
+pip install --pre gitpod-sdk
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre gitpod`
 
 ## Usage
 

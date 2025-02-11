@@ -1,5 +1,5 @@
 [project]
-name = "gitpod"
+name = "gitpod-sdk"
 version = "0.1.0-alpha.1"
 description = "The official Python library for the gitpod API"
 dynamic = ["readme"]
