@@ -78,6 +78,7 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
                         "git_credential_host": "gitCredentialHost",
@@ -256,7 +257,6 @@ class TestEnvironments:
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -377,6 +377,7 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
                         "git_credential_host": "gitCredentialHost",
@@ -625,6 +626,7 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
                         "git_credential_host": "gitCredentialHost",
@@ -803,7 +805,6 @@ class TestAsyncEnvironments:
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -924,6 +925,7 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
                         "git_credential_host": "gitCredentialHost",

@@ -14,6 +14,9 @@ __all__ = ["Secret"]
 class Secret(BaseModel):
     id: Optional[str] = None
 
+    container_registry_basic_auth_host: Optional[str] = FieldInfo(alias="containerRegistryBasicAuthHost", default=None)
+    """secret will be mounted as a registry secret"""
+
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
