@@ -51,6 +51,14 @@ from .sso_configurations import (
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
 from ...types.organization import Organization
+from .domain_verifications import (
+    DomainVerificationsResource,
+    AsyncDomainVerificationsResource,
+    DomainVerificationsResourceWithRawResponse,
+    AsyncDomainVerificationsResourceWithRawResponse,
+    DomainVerificationsResourceWithStreamingResponse,
+    AsyncDomainVerificationsResourceWithStreamingResponse,
+)
 from ...types.organization_member import OrganizationMember
 from ...types.invite_domains_param import InviteDomainsParam
 from ...types.shared.organization_role import OrganizationRole
@@ -63,6 +71,10 @@ __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
 
 class OrganizationsResource(SyncAPIResource):
+    @cached_property
+    def domain_verifications(self) -> DomainVerificationsResource:
+        return DomainVerificationsResource(self._client)
+
     @cached_property
     def invites(self) -> InvitesResource:
         return InvitesResource(self._client)
@@ -490,6 +502,10 @@ class OrganizationsResource(SyncAPIResource):
 
 
 class AsyncOrganizationsResource(AsyncAPIResource):
+    @cached_property
+    def domain_verifications(self) -> AsyncDomainVerificationsResource:
+        return AsyncDomainVerificationsResource(self._client)
+
     @cached_property
     def invites(self) -> AsyncInvitesResource:
         return AsyncInvitesResource(self._client)
@@ -949,6 +965,10 @@ class OrganizationsResourceWithRawResponse:
         )
 
     @cached_property
+    def domain_verifications(self) -> DomainVerificationsResourceWithRawResponse:
+        return DomainVerificationsResourceWithRawResponse(self._organizations.domain_verifications)
+
+    @cached_property
     def invites(self) -> InvitesResourceWithRawResponse:
         return InvitesResourceWithRawResponse(self._organizations.invites)
 
@@ -988,6 +1008,10 @@ class AsyncOrganizationsResourceWithRawResponse:
         self.set_role = async_to_raw_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def domain_verifications(self) -> AsyncDomainVerificationsResourceWithRawResponse:
+        return AsyncDomainVerificationsResourceWithRawResponse(self._organizations.domain_verifications)
 
     @cached_property
     def invites(self) -> AsyncInvitesResourceWithRawResponse:
@@ -1031,6 +1055,10 @@ class OrganizationsResourceWithStreamingResponse:
         )
 
     @cached_property
+    def domain_verifications(self) -> DomainVerificationsResourceWithStreamingResponse:
+        return DomainVerificationsResourceWithStreamingResponse(self._organizations.domain_verifications)
+
+    @cached_property
     def invites(self) -> InvitesResourceWithStreamingResponse:
         return InvitesResourceWithStreamingResponse(self._organizations.invites)
 
@@ -1070,6 +1098,10 @@ class AsyncOrganizationsResourceWithStreamingResponse:
         self.set_role = async_to_streamed_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def domain_verifications(self) -> AsyncDomainVerificationsResourceWithStreamingResponse:
+        return AsyncDomainVerificationsResourceWithStreamingResponse(self._organizations.domain_verifications)
 
     @cached_property
     def invites(self) -> AsyncInvitesResourceWithStreamingResponse:

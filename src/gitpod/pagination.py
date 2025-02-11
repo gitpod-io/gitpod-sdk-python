@@ -9,6 +9,9 @@ from ._models import BaseModel
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
 __all__ = [
+    "DomainVerificationsPagePagination",
+    "SyncDomainVerificationsPage",
+    "AsyncDomainVerificationsPage",
     "EditorsPagePagination",
     "SyncEditorsPage",
     "AsyncEditorsPage",
@@ -69,6 +72,56 @@ __all__ = [
 ]
 
 _T = TypeVar("_T")
+
+
+class DomainVerificationsPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncDomainVerificationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    domain_verifications: List[_T] = FieldInfo(alias="domainVerifications")
+    pagination: Optional[DomainVerificationsPagePagination] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        domain_verifications = self.domain_verifications
+        if not domain_verifications:
+            return []
+        return domain_verifications
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncDomainVerificationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    domain_verifications: List[_T] = FieldInfo(alias="domainVerifications")
+    pagination: Optional[DomainVerificationsPagePagination] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        domain_verifications = self.domain_verifications
+        if not domain_verifications:
+            return []
+        return domain_verifications
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
 
 
 class EditorsPagePagination(BaseModel):

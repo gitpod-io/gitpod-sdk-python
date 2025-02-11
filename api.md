@@ -259,6 +259,29 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/ListMembers">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">list_members</a>(\*\*<a href="src/gitpod/types/organization_list_members_params.py">params</a>) -> <a href="./src/gitpod/types/organization_member.py">SyncMembersPage[OrganizationMember]</a></code>
 - <code title="post /gitpod.v1.OrganizationService/SetRole">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">set_role</a>(\*\*<a href="src/gitpod/types/organization_set_role_params.py">params</a>) -> <a href="./src/gitpod/types/organization_set_role_response.py">object</a></code>
 
+## DomainVerifications
+
+Types:
+
+```python
+from gitpod.types.organizations import (
+    DomainVerification,
+    DomainVerificationState,
+    DomainVerificationCreateResponse,
+    DomainVerificationRetrieveResponse,
+    DomainVerificationDeleteResponse,
+    DomainVerificationVerifyResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.OrganizationService/CreateDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">create</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_create_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_create_response.py">DomainVerificationCreateResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/GetDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_retrieve_response.py">DomainVerificationRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/ListDomainVerifications">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">list</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification.py">SyncDomainVerificationsPage[DomainVerification]</a></code>
+- <code title="post /gitpod.v1.OrganizationService/DeleteDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">delete</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_delete_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_delete_response.py">object</a></code>
+- <code title="post /gitpod.v1.OrganizationService/VerifyDomain">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">verify</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_verify_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_verify_response.py">DomainVerificationVerifyResponse</a></code>
+
 ## Invites
 
 Types:
