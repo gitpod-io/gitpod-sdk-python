@@ -24,8 +24,22 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from .domain_verifications import (
+    DomainVerificationsResource,
+    AsyncDomainVerificationsResource,
+    DomainVerificationsResourceWithRawResponse,
+    AsyncDomainVerificationsResourceWithRawResponse,
+    DomainVerificationsResourceWithStreamingResponse,
+    AsyncDomainVerificationsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "DomainVerificationsResource",
+    "AsyncDomainVerificationsResource",
+    "DomainVerificationsResourceWithRawResponse",
+    "AsyncDomainVerificationsResourceWithRawResponse",
+    "DomainVerificationsResourceWithStreamingResponse",
+    "AsyncDomainVerificationsResourceWithStreamingResponse",
     "InvitesResource",
     "AsyncInvitesResource",
     "InvitesResourceWithRawResponse",
