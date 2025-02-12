@@ -8,7 +8,7 @@ from typing_extensions import Annotated, TypedDict
 from ...._utils import PropertyInfo
 from .service_phase import ServicePhase
 from ...shared_params.runs_on import RunsOn
-from ...shared_params.automation_trigger import AutomationTrigger
+from ...shared_params.automation_trigge import AutomationTrigge
 
 __all__ = ["ServiceUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec", "SpecCommands", "Status"]
 
@@ -34,7 +34,7 @@ class ServiceUpdateParams(TypedDict, total=False):
 
 
 class MetadataTriggeredBy(TypedDict, total=False):
-    trigger: Iterable[AutomationTrigger]
+    trigger: Iterable[AutomationTrigge]
 
 
 class Metadata(TypedDict, total=False):

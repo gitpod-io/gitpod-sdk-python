@@ -8,7 +8,7 @@ from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 from ...shared_params.subject import Subject
-from ...shared_params.automation_trigger import AutomationTrigger
+from ...shared_params.automation_trigge import AutomationTrigge
 
 __all__ = ["ServiceMetadataParam"]
 
@@ -129,5 +129,5 @@ class ServiceMetadataParam(TypedDict, total=False):
     identify the service in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Annotated[Iterable[AutomationTrigger], PropertyInfo(alias="triggeredBy")]
+    triggered_by: Annotated[Iterable[AutomationTrigge], PropertyInfo(alias="triggeredBy")]
     """triggered_by is a list of trigger that start the service."""

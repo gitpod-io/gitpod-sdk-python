@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .subject import Subject
 from ..._models import BaseModel
-from .automation_trigger import AutomationTrigger
+from .automation_trigge import AutomationTrigge
 
 __all__ = ["TaskMetadata"]
 
@@ -128,5 +128,5 @@ class TaskMetadata(BaseModel):
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[AutomationTrigger]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[AutomationTrigge]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the task."""
