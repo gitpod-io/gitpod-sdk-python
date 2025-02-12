@@ -1,20 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
-
-from typing import Union, Iterable
+from typing import List, Optional
 from datetime import datetime
-from typing_extensions import Annotated, TypedDict
 
-from ...._utils import PropertyInfo
-from ...shared_params.subject import Subject
-from ...shared_params.automation_trigger import AutomationTrigger
+from pydantic import Field as FieldInfo
 
-__all__ = ["TaskMetadataParam"]
+from .subject import Subject
+from ..._models import BaseModel
+from .automation_trigger import AutomationTrigger
+
+__all__ = ["TaskMetadata"]
 
 
-class TaskMetadataParam(TypedDict, total=False):
-    created_at: Annotated[Union[str, datetime], PropertyInfo(alias="createdAt", format="iso8601")]
+class TaskMetadata(BaseModel):
+    created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -106,28 +105,28 @@ class TaskMetadataParam(TypedDict, total=False):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    creator: Subject
+    creator: Optional[Subject] = None
     """creator describes the principal who created the task."""
 
-    description: str
+    description: Optional[str] = None
     """description is a user-facing description for the task.
 
     It can be used to provide context and documentation for the task.
     """
 
-    name: str
+    name: Optional[str] = None
     """name is a user-facing name for the task.
 
     Unlike the reference, this field is not unique, and not referenced by the
     system. This is a short descriptive name for the task.
     """
 
-    reference: str
+    reference: Optional[str] = None
     """
     reference is a user-facing identifier for the task which must be unique on the
     environment. It is used to express dependencies between tasks, and to identify
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Annotated[Iterable[AutomationTrigger], PropertyInfo(alias="triggeredBy")]
+    triggered_by: Optional[List[AutomationTrigger]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the task."""

@@ -9,11 +9,14 @@ from .editor import Editor as Editor
 from .runner import Runner as Runner
 from .secret import Secret as Secret
 from .shared import (
+    Task as Task,
     RunsOn as RunsOn,
     Subject as Subject,
+    TaskSpec as TaskSpec,
     Principal as Principal,
     FieldValue as FieldValue,
     UserStatus as UserStatus,
+    TaskMetadata as TaskMetadata,
     TaskExecution as TaskExecution,
     EnvironmentClass as EnvironmentClass,
     OrganizationRole as OrganizationRole,

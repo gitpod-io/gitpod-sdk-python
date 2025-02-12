@@ -2,8 +2,8 @@
 
 from typing import Optional
 
-from .task import Task
 from ...._models import BaseModel
+from ...shared.task import Task
 
 __all__ = ["TaskRetrieveResponse"]
 
