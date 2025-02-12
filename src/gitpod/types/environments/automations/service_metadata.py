@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 from ...shared.subject import Subject
-from ...shared.automation_trigge import AutomationTrigge
+from ...shared.automation_trigger import AutomationTrigger
 
 __all__ = ["ServiceMetadata"]
 
@@ -128,5 +128,5 @@ class ServiceMetadata(BaseModel):
     identify the service in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Optional[List[AutomationTrigge]] = FieldInfo(alias="triggeredBy", default=None)
+    triggered_by: Optional[List[AutomationTrigger]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the service."""

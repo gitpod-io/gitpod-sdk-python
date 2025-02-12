@@ -2,7 +2,7 @@
 
 ```python
 from gitpod.types import (
-    AutomationTrigge,
+    AutomationTrigger,
     EnvironmentClass,
     FieldValue,
     OrganizationRole,

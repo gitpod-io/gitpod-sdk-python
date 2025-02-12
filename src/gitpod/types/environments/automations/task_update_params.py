@@ -7,7 +7,7 @@ from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 from ...shared_params.runs_on import RunsOn
-from ...shared_params.automation_trigge import AutomationTrigge
+from ...shared_params.automation_trigger import AutomationTrigger
 
 __all__ = ["TaskUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec"]
 
@@ -24,7 +24,7 @@ class TaskUpdateParams(TypedDict, total=False):
 
 
 class MetadataTriggeredBy(TypedDict, total=False):
-    trigger: Iterable[AutomationTrigge]
+    trigger: Iterable[AutomationTrigger]
 
 
 class Metadata(TypedDict, total=False):
