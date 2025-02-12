@@ -8,7 +8,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .subject import Subject
 from ..._utils import PropertyInfo
-from .automation_trigge import AutomationTrigge
+from .automation_trigger import AutomationTrigger
 
 __all__ = ["TaskMetadata"]
 
@@ -129,5 +129,5 @@ class TaskMetadata(TypedDict, total=False):
     the task in user interactions (e.g. the CLI).
     """
 
-    triggered_by: Annotated[Iterable[AutomationTrigge], PropertyInfo(alias="triggeredBy")]
+    triggered_by: Annotated[Iterable[AutomationTrigger], PropertyInfo(alias="triggeredBy")]
     """triggered_by is a list of trigger that start the task."""
