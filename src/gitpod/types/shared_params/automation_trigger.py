@@ -6,10 +6,10 @@ from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["AutomationTrigge"]
+__all__ = ["AutomationTrigger"]
 
 
-class AutomationTrigge(TypedDict, total=False):
+class AutomationTrigger(TypedDict, total=False):
     manual: bool
 
     post_devcontainer_start: Annotated[bool, PropertyInfo(alias="postDevcontainerStart")]
