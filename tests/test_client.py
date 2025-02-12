@@ -735,13 +735,13 @@ class TestGitpod:
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(
             side_effect=httpx.TimeoutException("Test timeout error")
         )
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/gitpod.v1.RunnerService/CreateRunner",
+                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
                 body=cast(object, dict()),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -752,11 +752,11 @@ class TestGitpod:
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(return_value=httpx.Response(500))
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/gitpod.v1.RunnerService/CreateRunner",
+                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
                 body=cast(object, dict()),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -788,9 +788,9 @@ class TestGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create()
+        response = client.identity.with_raw_response.get_authenticated_identity()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -812,9 +812,11 @@ class TestGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.identity.with_raw_response.get_authenticated_identity(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -835,9 +837,11 @@ class TestGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.identity.with_raw_response.get_authenticated_identity(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1531,13 +1535,13 @@ class TestAsyncGitpod:
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(
             side_effect=httpx.TimeoutException("Test timeout error")
         )
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/gitpod.v1.RunnerService/CreateRunner",
+                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
                 body=cast(object, dict()),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1548,11 +1552,11 @@ class TestAsyncGitpod:
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(return_value=httpx.Response(500))
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/gitpod.v1.RunnerService/CreateRunner",
+                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
                 body=cast(object, dict()),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
@@ -1585,9 +1589,9 @@ class TestAsyncGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create()
+        response = await client.identity.with_raw_response.get_authenticated_identity()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1610,9 +1614,11 @@ class TestAsyncGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": Omit()})
+        response = await client.identity.with_raw_response.get_authenticated_identity(
+            extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1634,9 +1640,11 @@ class TestAsyncGitpod:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/gitpod.v1.RunnerService/CreateRunner").mock(side_effect=retry_handler)
+        respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(side_effect=retry_handler)
 
-        response = await client.runners.with_raw_response.create(extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.identity.with_raw_response.get_authenticated_identity(
+            extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

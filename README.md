@@ -31,8 +31,8 @@ client = Gitpod(
     bearer_token=os.environ.get("GITPOD_API_KEY"),  # This is the default and can be omitted
 )
 
-runner = client.runners.create()
-print(runner.access_token)
+response = client.identity.get_authenticated_identity()
+print(response.organization_id)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -55,8 +55,8 @@ client = AsyncGitpod(
 
 
 async def main() -> None:
-    runner = await client.runners.create()
-    print(runner.access_token)
+    response = await client.identity.get_authenticated_identity()
+    print(response.organization_id)
 
 
 asyncio.run(main())
@@ -84,12 +84,12 @@ from gitpod import Gitpod
 
 client = Gitpod()
 
-all_services = []
+all_environments = []
 # Automatically fetches more pages as needed.
-for service in client.environments.automations.services.list():
-    # Do something with service here
-    all_services.append(service)
-print(all_services)
+for environment in client.environments.list():
+    # Do something with environment here
+    all_environments.append(environment)
+print(all_environments)
 ```
 
 Or, asynchronously:
@@ -102,11 +102,11 @@ client = AsyncGitpod()
 
 
 async def main() -> None:
-    all_services = []
+    all_environments = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for service in client.environments.automations.services.list():
-        all_services.append(service)
-    print(all_services)
+    async for environment in client.environments.list():
+        all_environments.append(environment)
+    print(all_environments)
 
 
 asyncio.run(main())
@@ -115,11 +115,11 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.environments.automations.services.list()
+first_page = await client.environments.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.services)}")
+    print(f"number of items we just fetched: {len(next_page.environments)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -127,11 +127,11 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.environments.automations.services.list()
+first_page = await client.environments.list()
 
 print(f"next page cursor: {first_page.pagination.next_token}")  # => "next page cursor: ..."
-for service in first_page.services:
-    print(service.id)
+for environment in first_page.environments:
+    print(environment.id)
 
 # Remove `await` for non-async usage.
 ```
@@ -152,7 +152,7 @@ from gitpod import Gitpod
 client = Gitpod()
 
 try:
-    client.runners.create()
+    client.identity.get_authenticated_identity()
 except gitpod.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -195,7 +195,7 @@ client = Gitpod(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).runners.create()
+client.with_options(max_retries=5).identity.get_authenticated_identity()
 ```
 
 ### Timeouts
@@ -218,7 +218,7 @@ client = Gitpod(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).runners.create()
+client.with_options(timeout=5.0).identity.get_authenticated_identity()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -259,11 +259,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from gitpod import Gitpod
 
 client = Gitpod()
-response = client.runners.with_raw_response.create()
+response = client.identity.with_raw_response.get_authenticated_identity()
 print(response.headers.get('X-My-Header'))
 
-runner = response.parse()  # get the object that `runners.create()` would have returned
-print(runner.access_token)
+identity = response.parse()  # get the object that `identity.get_authenticated_identity()` would have returned
+print(identity.organization_id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/gitpod-io/gitpod-sdk-python/tree/main/src/gitpod/_response.py) object.
@@ -277,7 +277,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.runners.with_streaming_response.create() as response:
+with client.identity.with_streaming_response.get_authenticated_identity() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
