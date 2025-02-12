@@ -4,8 +4,8 @@ from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
+from ..._models import BaseModel
 from .task_spec import TaskSpec
-from ...._models import BaseModel
 from .task_metadata import TaskMetadata
 
 __all__ = ["Task"]

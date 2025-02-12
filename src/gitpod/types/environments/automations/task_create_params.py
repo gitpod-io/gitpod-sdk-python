@@ -6,8 +6,8 @@ from typing import List
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
-from .task_spec_param import TaskSpecParam
-from .task_metadata_param import TaskMetadataParam
+from ...shared_params.task_spec import TaskSpec
+from ...shared_params.task_metadata import TaskMetadata
 
 __all__ = ["TaskCreateParams"]
 
@@ -17,6 +17,6 @@ class TaskCreateParams(TypedDict, total=False):
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
 
-    metadata: TaskMetadataParam
+    metadata: TaskMetadata
 
-    spec: TaskSpecParam
+    spec: TaskSpec
