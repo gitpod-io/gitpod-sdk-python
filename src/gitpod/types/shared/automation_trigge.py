@@ -6,10 +6,10 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["AutomationTrigger"]
+__all__ = ["AutomationTrigge"]
 
 
-class AutomationTrigger(BaseModel):
+class AutomationTrigge(BaseModel):
     manual: Optional[bool] = None
 
     post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
