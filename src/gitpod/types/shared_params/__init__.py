@@ -6,7 +6,7 @@ from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
 from .field_value import FieldValue as FieldValue
 from .task_metadata import TaskMetadata as TaskMetadata
+from .automation_trigge import AutomationTrigge as AutomationTrigge
 from .environment_class import EnvironmentClass as EnvironmentClass
 from .organization_role import OrganizationRole as OrganizationRole
-from .automation_trigger import AutomationTrigger as AutomationTrigger
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
