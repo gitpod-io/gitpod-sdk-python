@@ -5,8 +5,8 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .task_spec import TaskSpec
 from .task_execution_phase import TaskExecutionPhase
-from ..environments.automations.task_spec import TaskSpec
 
 __all__ = ["TaskExecutionSpec", "Plan", "PlanStep", "PlanStepTask"]
 
