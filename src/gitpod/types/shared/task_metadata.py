@@ -5,9 +5,9 @@ from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
-from ...._models import BaseModel
-from ...shared.subject import Subject
-from ...shared.automation_trigger import AutomationTrigger
+from .subject import Subject
+from ..._models import BaseModel
+from .automation_trigger import AutomationTrigger
 
 __all__ = ["TaskMetadata"]
 

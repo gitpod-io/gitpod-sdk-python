@@ -9,11 +9,14 @@ from gitpod.types import (
     Principal,
     RunsOn,
     Subject,
+    Task,
     TaskExecution,
     TaskExecutionMetadata,
     TaskExecutionPhase,
     TaskExecutionSpec,
     TaskExecutionStatus,
+    TaskMetadata,
+    TaskSpec,
     UserStatus,
 )
 ```
@@ -141,9 +144,6 @@ Types:
 
 ```python
 from gitpod.types.environments.automations import (
-    Task,
-    TaskMetadata,
-    TaskSpec,
     TaskCreateResponse,
     TaskRetrieveResponse,
     TaskUpdateResponse,
@@ -157,7 +157,7 @@ Methods:
 - <code title="post /gitpod.v1.EnvironmentAutomationService/CreateTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">create</a>(\*\*<a href="src/gitpod/types/environments/automations/task_create_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_create_response.py">TaskCreateResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/GetTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">retrieve</a>(\*\*<a href="src/gitpod/types/environments/automations/task_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_retrieve_response.py">TaskRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/UpdateTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">update</a>(\*\*<a href="src/gitpod/types/environments/automations/task_update_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_update_response.py">object</a></code>
-- <code title="post /gitpod.v1.EnvironmentAutomationService/ListTasks">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/task_list_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task.py">SyncTasksPage[Task]</a></code>
+- <code title="post /gitpod.v1.EnvironmentAutomationService/ListTasks">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">list</a>(\*\*<a href="src/gitpod/types/environments/automations/task_list_params.py">params</a>) -> <a href="./src/gitpod/types/shared/task.py">SyncTasksPage[Task]</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/DeleteTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">delete</a>(\*\*<a href="src/gitpod/types/environments/automations/task_delete_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentAutomationService/StartTask">client.environments.automations.tasks.<a href="./src/gitpod/resources/environments/automations/tasks/tasks.py">start</a>(\*\*<a href="src/gitpod/types/environments/automations/task_start_params.py">params</a>) -> <a href="./src/gitpod/types/environments/automations/task_start_response.py">TaskStartResponse</a></code>
 
@@ -258,6 +258,29 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/LeaveOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">leave</a>(\*\*<a href="src/gitpod/types/organization_leave_params.py">params</a>) -> <a href="./src/gitpod/types/organization_leave_response.py">object</a></code>
 - <code title="post /gitpod.v1.OrganizationService/ListMembers">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">list_members</a>(\*\*<a href="src/gitpod/types/organization_list_members_params.py">params</a>) -> <a href="./src/gitpod/types/organization_member.py">SyncMembersPage[OrganizationMember]</a></code>
 - <code title="post /gitpod.v1.OrganizationService/SetRole">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">set_role</a>(\*\*<a href="src/gitpod/types/organization_set_role_params.py">params</a>) -> <a href="./src/gitpod/types/organization_set_role_response.py">object</a></code>
+
+## DomainVerifications
+
+Types:
+
+```python
+from gitpod.types.organizations import (
+    DomainVerification,
+    DomainVerificationState,
+    DomainVerificationCreateResponse,
+    DomainVerificationRetrieveResponse,
+    DomainVerificationDeleteResponse,
+    DomainVerificationVerifyResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.OrganizationService/CreateDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">create</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_create_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_create_response.py">DomainVerificationCreateResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/GetDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_retrieve_response.py">DomainVerificationRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/ListDomainVerifications">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">list</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification.py">SyncDomainVerificationsPage[DomainVerification]</a></code>
+- <code title="post /gitpod.v1.OrganizationService/DeleteDomainVerification">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">delete</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_delete_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_delete_response.py">object</a></code>
+- <code title="post /gitpod.v1.OrganizationService/VerifyDomain">client.organizations.domain_verifications.<a href="./src/gitpod/resources/organizations/domain_verifications.py">verify</a>(\*\*<a href="src/gitpod/types/organizations/domain_verification_verify_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/domain_verification_verify_response.py">DomainVerificationVerifyResponse</a></code>
 
 ## Invites
 

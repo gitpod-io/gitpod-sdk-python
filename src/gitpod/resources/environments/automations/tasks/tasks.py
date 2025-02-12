@@ -29,6 +29,8 @@ from ....._response import (
 )
 from .....pagination import SyncTasksPage, AsyncTasksPage
 from ....._base_client import AsyncPaginator, make_request_options
+from .....types.shared.task import Task
+from .....types.shared_params.task_spec import TaskSpec
 from .....types.environments.automations import (
     task_list_params,
     task_start_params,
@@ -37,9 +39,7 @@ from .....types.environments.automations import (
     task_update_params,
     task_retrieve_params,
 )
-from .....types.environments.automations.task import Task
-from .....types.environments.automations.task_spec_param import TaskSpecParam
-from .....types.environments.automations.task_metadata_param import TaskMetadataParam
+from .....types.shared_params.task_metadata import TaskMetadata
 from .....types.environments.automations.task_start_response import TaskStartResponse
 from .....types.environments.automations.task_create_response import TaskCreateResponse
 from .....types.environments.automations.task_retrieve_response import TaskRetrieveResponse
@@ -76,8 +76,8 @@ class TasksResource(SyncAPIResource):
         *,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: TaskMetadataParam | NotGiven = NOT_GIVEN,
-        spec: TaskSpecParam | NotGiven = NOT_GIVEN,
+        metadata: TaskMetadata | NotGiven = NOT_GIVEN,
+        spec: TaskSpec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -344,8 +344,8 @@ class AsyncTasksResource(AsyncAPIResource):
         *,
         depends_on: List[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: TaskMetadataParam | NotGiven = NOT_GIVEN,
-        spec: TaskSpecParam | NotGiven = NOT_GIVEN,
+        metadata: TaskMetadata | NotGiven = NOT_GIVEN,
+        spec: TaskSpec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

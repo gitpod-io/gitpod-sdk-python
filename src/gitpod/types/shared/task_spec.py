@@ -4,8 +4,8 @@ from typing import Optional
 
 from pydantic import Field as FieldInfo
 
-from ...._models import BaseModel
-from ...shared.runs_on import RunsOn
+from .runs_on import RunsOn
+from ..._models import BaseModel
 
 __all__ = ["TaskSpec"]
 

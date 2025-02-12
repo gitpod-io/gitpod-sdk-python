@@ -248,7 +248,6 @@ class EnvironmentsResource(SyncAPIResource):
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -261,8 +260,6 @@ class EnvironmentsResource(SyncAPIResource):
         ListEnvironments returns a list of environments that match the query.
 
         Args:
-          organization_id: organization_id is the ID of the organization that contains the environments
-
           pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
@@ -279,7 +276,6 @@ class EnvironmentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "filter": filter,
-                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 environment_list_params.EnvironmentListParams,
@@ -739,7 +735,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
         filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -752,8 +747,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         ListEnvironments returns a list of environments that match the query.
 
         Args:
-          organization_id: organization_id is the ID of the organization that contains the environments
-
           pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
@@ -770,7 +763,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             body=maybe_transform(
                 {
                     "filter": filter,
-                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
                 environment_list_params.EnvironmentListParams,

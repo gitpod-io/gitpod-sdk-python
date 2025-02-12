@@ -11,8 +11,8 @@ from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncTasksPage, AsyncTasksPage
+from gitpod.types.shared import Task
 from gitpod.types.environments.automations import (
-    Task,
     TaskStartResponse,
     TaskCreateResponse,
     TaskRetrieveResponse,

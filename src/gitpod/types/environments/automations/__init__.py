@@ -2,14 +2,10 @@
 
 from __future__ import annotations
 
-from .task import Task as Task
 from .service import Service as Service
-from .task_spec import TaskSpec as TaskSpec
 from .service_spec import ServiceSpec as ServiceSpec
 from .service_phase import ServicePhase as ServicePhase
-from .task_metadata import TaskMetadata as TaskMetadata
 from .service_status import ServiceStatus as ServiceStatus
-from .task_spec_param import TaskSpecParam as TaskSpecParam
 from .service_metadata import ServiceMetadata as ServiceMetadata
 from .task_list_params import TaskListParams as TaskListParams
 from .task_start_params import TaskStartParams as TaskStartParams
@@ -19,7 +15,6 @@ from .task_delete_params import TaskDeleteParams as TaskDeleteParams
 from .task_update_params import TaskUpdateParams as TaskUpdateParams
 from .service_list_params import ServiceListParams as ServiceListParams
 from .service_stop_params import ServiceStopParams as ServiceStopParams
-from .task_metadata_param import TaskMetadataParam as TaskMetadataParam
 from .task_start_response import TaskStartResponse as TaskStartResponse
 from .service_start_params import ServiceStartParams as ServiceStartParams
 from .task_create_response import TaskCreateResponse as TaskCreateResponse

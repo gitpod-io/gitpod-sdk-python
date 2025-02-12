@@ -4,96 +4,72 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import (
-    secret_list_params,
-    secret_create_params,
-    secret_delete_params,
-    secret_get_value_params,
-    secret_update_value_params,
-)
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from .._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncSecretsPage, AsyncSecretsPage
-from .._base_client import AsyncPaginator, make_request_options
-from ..types.secret import Secret
-from ..types.secret_create_response import SecretCreateResponse
-from ..types.secret_get_value_response import SecretGetValueResponse
+from ...pagination import SyncDomainVerificationsPage, AsyncDomainVerificationsPage
+from ..._base_client import AsyncPaginator, make_request_options
+from ...types.organizations import (
+    domain_verification_list_params,
+    domain_verification_create_params,
+    domain_verification_delete_params,
+    domain_verification_verify_params,
+    domain_verification_retrieve_params,
+)
+from ...types.organizations.domain_verification import DomainVerification
+from ...types.organizations.domain_verification_create_response import DomainVerificationCreateResponse
+from ...types.organizations.domain_verification_verify_response import DomainVerificationVerifyResponse
+from ...types.organizations.domain_verification_retrieve_response import DomainVerificationRetrieveResponse
 
-__all__ = ["SecretsResource", "AsyncSecretsResource"]
+__all__ = ["DomainVerificationsResource", "AsyncDomainVerificationsResource"]
 
 
-class SecretsResource(SyncAPIResource):
+class DomainVerificationsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> SecretsResourceWithRawResponse:
+    def with_raw_response(self) -> DomainVerificationsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#accessing-raw-response-data-eg-headers
         """
-        return SecretsResourceWithRawResponse(self)
+        return DomainVerificationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> SecretsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> DomainVerificationsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
-        return SecretsResourceWithStreamingResponse(self)
+        return DomainVerificationsResourceWithStreamingResponse(self)
 
     def create(
         self,
         *,
-        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        domain: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
+    ) -> DomainVerificationCreateResponse:
         """
-        CreateSecret creates a new secret.
+        CreateDomainVerification creates a new domain verification request
 
         Args:
-          container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker host value must be a valid registry hostname with optional port:
-
-              ```
-              this.matches("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9](:[0-9]+)?$")
-              ```
-
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
-
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -103,22 +79,53 @@ class SecretsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/gitpod.v1.SecretService/CreateSecret",
+            "/gitpod.v1.OrganizationService/CreateDomainVerification",
             body=maybe_transform(
                 {
-                    "container_registry_basic_auth_host": container_registry_basic_auth_host,
-                    "environment_variable": environment_variable,
-                    "file_path": file_path,
-                    "name": name,
-                    "project_id": project_id,
-                    "value": value,
+                    "domain": domain,
+                    "organization_id": organization_id,
                 },
-                secret_create_params.SecretCreateParams,
+                domain_verification_create_params.DomainVerificationCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SecretCreateResponse,
+            cast_to=DomainVerificationCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        *,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DomainVerificationRetrieveResponse:
+        """
+        GetDomainVerification retrieves a domain verification request
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.OrganizationService/GetDomainVerification",
+            body=maybe_transform(
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_retrieve_params.DomainVerificationRetrieveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DomainVerificationRetrieveResponse,
         )
 
     def list(
@@ -126,21 +133,19 @@ class SecretsResource(SyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        filter: secret_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: secret_list_params.Pagination | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: domain_verification_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncSecretsPage[Secret]:
+    ) -> SyncDomainVerificationsPage[DomainVerification]:
         """
-        ListSecrets lists secrets.
+        ListDomainVerifications lists all domain verifications for an organization
 
         Args:
-          pagination: pagination contains the pagination options for listing environments
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -150,14 +155,14 @@ class SecretsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/gitpod.v1.SecretService/ListSecrets",
-            page=SyncSecretsPage[Secret],
+            "/gitpod.v1.OrganizationService/ListDomainVerifications",
+            page=SyncDomainVerificationsPage[DomainVerification],
             body=maybe_transform(
                 {
-                    "filter": filter,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
-                secret_list_params.SecretListParams,
+                domain_verification_list_params.DomainVerificationListParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -169,17 +174,17 @@ class SecretsResource(SyncAPIResource):
                         "token": token,
                         "page_size": page_size,
                     },
-                    secret_list_params.SecretListParams,
+                    domain_verification_list_params.DomainVerificationListParams,
                 ),
             ),
-            model=Secret,
+            model=DomainVerification,
             method="post",
         )
 
     def delete(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -188,7 +193,7 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSecret deletes a secret.
+        DeleteDomainVerification deletes a domain verification request
 
         Args:
           extra_headers: Send extra headers
@@ -200,81 +205,10 @@ class SecretsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/gitpod.v1.SecretService/DeleteSecret",
-            body=maybe_transform({"secret_id": secret_id}, secret_delete_params.SecretDeleteParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    def get_value(
-        self,
-        *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretGetValueResponse:
-        """
-        GetSecretValue retrieves the value of a secret Only Environments can perform
-        this operation, and only for secrets specified on the EnvironmentSpec.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/gitpod.v1.SecretService/GetSecretValue",
-            body=maybe_transform({"secret_id": secret_id}, secret_get_value_params.SecretGetValueParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SecretGetValueResponse,
-        )
-
-    def update_value(
-        self,
-        *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSecretValue updates the value of a secret.
-
-        Args:
-          value: value is the plaintext value of the secret
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/gitpod.v1.SecretService/UpdateSecretValue",
+            "/gitpod.v1.OrganizationService/DeleteDomainVerification",
             body=maybe_transform(
-                {
-                    "secret_id": secret_id,
-                    "value": value,
-                },
-                secret_update_value_params.SecretUpdateValueParams,
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_delete_params.DomainVerificationDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -282,68 +216,78 @@ class SecretsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def verify(
+        self,
+        *,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DomainVerificationVerifyResponse:
+        """
+        VerifyDomain verifies a domain ownership
 
-class AsyncSecretsResource(AsyncAPIResource):
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.OrganizationService/VerifyDomain",
+            body=maybe_transform(
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_verify_params.DomainVerificationVerifyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DomainVerificationVerifyResponse,
+        )
+
+
+class AsyncDomainVerificationsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncSecretsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncDomainVerificationsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncSecretsResourceWithRawResponse(self)
+        return AsyncDomainVerificationsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncSecretsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncDomainVerificationsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
-        return AsyncSecretsResourceWithStreamingResponse(self)
+        return AsyncDomainVerificationsResourceWithStreamingResponse(self)
 
     async def create(
         self,
         *,
-        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        domain: str | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretCreateResponse:
+    ) -> DomainVerificationCreateResponse:
         """
-        CreateSecret creates a new secret.
+        CreateDomainVerification creates a new domain verification request
 
         Args:
-          container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker host value must be a valid registry hostname with optional port:
-
-              ```
-              this.matches("^[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9](:[0-9]+)?$")
-              ```
-
-          environment_variable: secret will be created as an Environment Variable with the same name as the
-              secret
-
-          file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
-
-              ```
-              this.matches("^/(?:[^/]*/)*.*$")
-              ```
-
-          project_id: project_id is the ProjectID this Secret belongs to
-
-          value: value is the plaintext value of the secret
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -353,22 +297,53 @@ class AsyncSecretsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/gitpod.v1.SecretService/CreateSecret",
+            "/gitpod.v1.OrganizationService/CreateDomainVerification",
             body=await async_maybe_transform(
                 {
-                    "container_registry_basic_auth_host": container_registry_basic_auth_host,
-                    "environment_variable": environment_variable,
-                    "file_path": file_path,
-                    "name": name,
-                    "project_id": project_id,
-                    "value": value,
+                    "domain": domain,
+                    "organization_id": organization_id,
                 },
-                secret_create_params.SecretCreateParams,
+                domain_verification_create_params.DomainVerificationCreateParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SecretCreateResponse,
+            cast_to=DomainVerificationCreateResponse,
+        )
+
+    async def retrieve(
+        self,
+        *,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DomainVerificationRetrieveResponse:
+        """
+        GetDomainVerification retrieves a domain verification request
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.OrganizationService/GetDomainVerification",
+            body=await async_maybe_transform(
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_retrieve_params.DomainVerificationRetrieveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DomainVerificationRetrieveResponse,
         )
 
     def list(
@@ -376,21 +351,19 @@ class AsyncSecretsResource(AsyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        filter: secret_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: secret_list_params.Pagination | NotGiven = NOT_GIVEN,
+        organization_id: str | NotGiven = NOT_GIVEN,
+        pagination: domain_verification_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Secret, AsyncSecretsPage[Secret]]:
+    ) -> AsyncPaginator[DomainVerification, AsyncDomainVerificationsPage[DomainVerification]]:
         """
-        ListSecrets lists secrets.
+        ListDomainVerifications lists all domain verifications for an organization
 
         Args:
-          pagination: pagination contains the pagination options for listing environments
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -400,14 +373,14 @@ class AsyncSecretsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/gitpod.v1.SecretService/ListSecrets",
-            page=AsyncSecretsPage[Secret],
+            "/gitpod.v1.OrganizationService/ListDomainVerifications",
+            page=AsyncDomainVerificationsPage[DomainVerification],
             body=maybe_transform(
                 {
-                    "filter": filter,
+                    "organization_id": organization_id,
                     "pagination": pagination,
                 },
-                secret_list_params.SecretListParams,
+                domain_verification_list_params.DomainVerificationListParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -419,17 +392,17 @@ class AsyncSecretsResource(AsyncAPIResource):
                         "token": token,
                         "page_size": page_size,
                     },
-                    secret_list_params.SecretListParams,
+                    domain_verification_list_params.DomainVerificationListParams,
                 ),
             ),
-            model=Secret,
+            model=DomainVerification,
             method="post",
         )
 
     async def delete(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -438,7 +411,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSecret deletes a secret.
+        DeleteDomainVerification deletes a domain verification request
 
         Args:
           extra_headers: Send extra headers
@@ -450,81 +423,10 @@ class AsyncSecretsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/gitpod.v1.SecretService/DeleteSecret",
-            body=await async_maybe_transform({"secret_id": secret_id}, secret_delete_params.SecretDeleteParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
-    async def get_value(
-        self,
-        *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SecretGetValueResponse:
-        """
-        GetSecretValue retrieves the value of a secret Only Environments can perform
-        this operation, and only for secrets specified on the EnvironmentSpec.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/gitpod.v1.SecretService/GetSecretValue",
-            body=await async_maybe_transform({"secret_id": secret_id}, secret_get_value_params.SecretGetValueParams),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=SecretGetValueResponse,
-        )
-
-    async def update_value(
-        self,
-        *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        UpdateSecretValue updates the value of a secret.
-
-        Args:
-          value: value is the plaintext value of the secret
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/gitpod.v1.SecretService/UpdateSecretValue",
+            "/gitpod.v1.OrganizationService/DeleteDomainVerification",
             body=await async_maybe_transform(
-                {
-                    "secret_id": secret_id,
-                    "value": value,
-                },
-                secret_update_value_params.SecretUpdateValueParams,
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_delete_params.DomainVerificationDeleteParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -532,86 +434,121 @@ class AsyncSecretsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def verify(
+        self,
+        *,
+        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DomainVerificationVerifyResponse:
+        """
+        VerifyDomain verifies a domain ownership
 
-class SecretsResourceWithRawResponse:
-    def __init__(self, secrets: SecretsResource) -> None:
-        self._secrets = secrets
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.OrganizationService/VerifyDomain",
+            body=await async_maybe_transform(
+                {"domain_verification_id": domain_verification_id},
+                domain_verification_verify_params.DomainVerificationVerifyParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DomainVerificationVerifyResponse,
+        )
+
+
+class DomainVerificationsResourceWithRawResponse:
+    def __init__(self, domain_verifications: DomainVerificationsResource) -> None:
+        self._domain_verifications = domain_verifications
 
         self.create = to_raw_response_wrapper(
-            secrets.create,
+            domain_verifications.create,
+        )
+        self.retrieve = to_raw_response_wrapper(
+            domain_verifications.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            secrets.list,
+            domain_verifications.list,
         )
         self.delete = to_raw_response_wrapper(
-            secrets.delete,
+            domain_verifications.delete,
         )
-        self.get_value = to_raw_response_wrapper(
-            secrets.get_value,
-        )
-        self.update_value = to_raw_response_wrapper(
-            secrets.update_value,
+        self.verify = to_raw_response_wrapper(
+            domain_verifications.verify,
         )
 
 
-class AsyncSecretsResourceWithRawResponse:
-    def __init__(self, secrets: AsyncSecretsResource) -> None:
-        self._secrets = secrets
+class AsyncDomainVerificationsResourceWithRawResponse:
+    def __init__(self, domain_verifications: AsyncDomainVerificationsResource) -> None:
+        self._domain_verifications = domain_verifications
 
         self.create = async_to_raw_response_wrapper(
-            secrets.create,
+            domain_verifications.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            domain_verifications.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            secrets.list,
+            domain_verifications.list,
         )
         self.delete = async_to_raw_response_wrapper(
-            secrets.delete,
+            domain_verifications.delete,
         )
-        self.get_value = async_to_raw_response_wrapper(
-            secrets.get_value,
-        )
-        self.update_value = async_to_raw_response_wrapper(
-            secrets.update_value,
+        self.verify = async_to_raw_response_wrapper(
+            domain_verifications.verify,
         )
 
 
-class SecretsResourceWithStreamingResponse:
-    def __init__(self, secrets: SecretsResource) -> None:
-        self._secrets = secrets
+class DomainVerificationsResourceWithStreamingResponse:
+    def __init__(self, domain_verifications: DomainVerificationsResource) -> None:
+        self._domain_verifications = domain_verifications
 
         self.create = to_streamed_response_wrapper(
-            secrets.create,
+            domain_verifications.create,
+        )
+        self.retrieve = to_streamed_response_wrapper(
+            domain_verifications.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            secrets.list,
+            domain_verifications.list,
         )
         self.delete = to_streamed_response_wrapper(
-            secrets.delete,
+            domain_verifications.delete,
         )
-        self.get_value = to_streamed_response_wrapper(
-            secrets.get_value,
-        )
-        self.update_value = to_streamed_response_wrapper(
-            secrets.update_value,
+        self.verify = to_streamed_response_wrapper(
+            domain_verifications.verify,
         )
 
 
-class AsyncSecretsResourceWithStreamingResponse:
-    def __init__(self, secrets: AsyncSecretsResource) -> None:
-        self._secrets = secrets
+class AsyncDomainVerificationsResourceWithStreamingResponse:
+    def __init__(self, domain_verifications: AsyncDomainVerificationsResource) -> None:
+        self._domain_verifications = domain_verifications
 
         self.create = async_to_streamed_response_wrapper(
-            secrets.create,
+            domain_verifications.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            domain_verifications.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            secrets.list,
+            domain_verifications.list,
         )
         self.delete = async_to_streamed_response_wrapper(
-            secrets.delete,
+            domain_verifications.delete,
         )
-        self.get_value = async_to_streamed_response_wrapper(
-            secrets.get_value,
-        )
-        self.update_value = async_to_streamed_response_wrapper(
-            secrets.update_value,
+        self.verify = async_to_streamed_response_wrapper(
+            domain_verifications.verify,
         )
