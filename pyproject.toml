@@ -55,6 +55,9 @@ dev-dependencies = [
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
     "nest_asyncio==1.6.0",
+    "paramiko>=3.5.1",
+    "anthropic>=0.45.2",
+    "types-paramiko>=3.5.0.20240928",
 ]
 
 [tool.rye.scripts]
