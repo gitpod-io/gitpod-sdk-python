@@ -23,10 +23,12 @@ from pydantic import ValidationError
 
 from gitpod import Gitpod, AsyncGitpod, APIResponseValidationError
 from gitpod._types import Omit
+from gitpod._utils import maybe_transform
 from gitpod._models import BaseModel, FinalRequestOptions
 from gitpod._constants import RAW_RESPONSE_HEADER
 from gitpod._exceptions import GitpodError, APIStatusError, APITimeoutError, APIResponseValidationError
 from gitpod._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
+from gitpod.types.identity_get_authenticated_identity_params import IdentityGetAuthenticatedIdentityParams
 
 from .utils import update_env
 
@@ -742,7 +744,7 @@ class TestGitpod:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, dict()),
+                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -757,7 +759,7 @@ class TestGitpod:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, dict()),
+                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1542,7 +1544,7 @@ class TestAsyncGitpod:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, dict()),
+                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1557,7 +1559,7 @@ class TestAsyncGitpod:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, dict()),
+                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
