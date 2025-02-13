@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Required, TypedDict
 
 __all__ = ["EditorRetrieveParams"]
 
 
 class EditorRetrieveParams(TypedDict, total=False):
-    id: str
+    id: Required[str]
     """id is the ID of the editor to get"""
