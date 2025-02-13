@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,11 +10,11 @@ __all__ = ["EditorResolveURLParams"]
 
 
 class EditorResolveURLParams(TypedDict, total=False):
-    editor_id: Annotated[str, PropertyInfo(alias="editorId")]
+    editor_id: Required[Annotated[str, PropertyInfo(alias="editorId")]]
     """editorId is the ID of the editor to resolve the URL for"""
 
-    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
+    environment_id: Required[Annotated[str, PropertyInfo(alias="environmentId")]]
     """environmentId is the ID of the environment to resolve the URL for"""
 
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
     """organizationId is the ID of the organization to resolve the URL for"""
