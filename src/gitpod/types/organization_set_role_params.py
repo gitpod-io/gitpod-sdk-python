@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .shared.organization_role import OrganizationRole
@@ -11,8 +11,8 @@ __all__ = ["OrganizationSetRoleParams"]
 
 
 class OrganizationSetRoleParams(TypedDict, total=False):
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
+
+    user_id: Required[Annotated[str, PropertyInfo(alias="userId")]]
 
     role: OrganizationRole
-
-    user_id: Annotated[str, PropertyInfo(alias="userId")]

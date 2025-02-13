@@ -60,11 +60,11 @@ class SSOConfigurationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        client_id: str | NotGiven = NOT_GIVEN,
-        client_secret: str | NotGiven = NOT_GIVEN,
-        email_domain: str | NotGiven = NOT_GIVEN,
-        issuer_url: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        client_id: str,
+        client_secret: str,
+        email_domain: str,
+        issuer_url: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -113,7 +113,7 @@ class SSOConfigurationsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -150,12 +150,12 @@ class SSOConfigurationsResource(SyncAPIResource):
     def update(
         self,
         *,
+        sso_configuration_id: str,
         claims: Dict[str, str] | NotGiven = NOT_GIVEN,
         client_id: Optional[str] | NotGiven = NOT_GIVEN,
         client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         email_domain: Optional[str] | NotGiven = NOT_GIVEN,
         issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
         state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -168,6 +168,8 @@ class SSOConfigurationsResource(SyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
+          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
+
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
           client_id: client_id is the client ID of the SSO provider
@@ -175,8 +177,6 @@ class SSOConfigurationsResource(SyncAPIResource):
           client_secret: client_secret is the client secret of the SSO provider
 
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
           state: state is the state of the SSO configuration
 
@@ -192,12 +192,12 @@ class SSOConfigurationsResource(SyncAPIResource):
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=maybe_transform(
                 {
+                    "sso_configuration_id": sso_configuration_id,
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "email_domain": email_domain,
                     "issuer_url": issuer_url,
-                    "sso_configuration_id": sso_configuration_id,
                     "state": state,
                 },
                 sso_configuration_update_params.SSOConfigurationUpdateParams,
@@ -211,9 +211,9 @@ class SSOConfigurationsResource(SyncAPIResource):
     def list(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -266,7 +266,7 @@ class SSOConfigurationsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -322,11 +322,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        client_id: str | NotGiven = NOT_GIVEN,
-        client_secret: str | NotGiven = NOT_GIVEN,
-        email_domain: str | NotGiven = NOT_GIVEN,
-        issuer_url: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        client_id: str,
+        client_secret: str,
+        email_domain: str,
+        issuer_url: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -375,7 +375,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -412,12 +412,12 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def update(
         self,
         *,
+        sso_configuration_id: str,
         claims: Dict[str, str] | NotGiven = NOT_GIVEN,
         client_id: Optional[str] | NotGiven = NOT_GIVEN,
         client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         email_domain: Optional[str] | NotGiven = NOT_GIVEN,
         issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
         state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -430,6 +430,8 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         UpdateSSOConfiguration updates the SSO configuration for the organization.
 
         Args:
+          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
+
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
           client_id: client_id is the client ID of the SSO provider
@@ -437,8 +439,6 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
           client_secret: client_secret is the client secret of the SSO provider
 
           issuer_url: issuer_url is the URL of the IdP issuer
-
-          sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
           state: state is the state of the SSO configuration
 
@@ -454,12 +454,12 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
             "/gitpod.v1.OrganizationService/UpdateSSOConfiguration",
             body=await async_maybe_transform(
                 {
+                    "sso_configuration_id": sso_configuration_id,
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "email_domain": email_domain,
                     "issuer_url": issuer_url,
-                    "sso_configuration_id": sso_configuration_id,
                     "state": state,
                 },
                 sso_configuration_update_params.SSOConfigurationUpdateParams,
@@ -473,9 +473,9 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     def list(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -528,7 +528,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        sso_configuration_id: str | NotGiven = NOT_GIVEN,
+        sso_configuration_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

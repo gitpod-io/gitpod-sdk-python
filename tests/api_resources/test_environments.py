@@ -66,7 +66,7 @@ class TestEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "61000000-0000-0000-0000-000000000000",
+                    "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
                 },
                 "ports": [
@@ -125,21 +125,17 @@ class TestEnvironments:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
-        environment = client.environments.retrieve()
-        assert_matches_type(EnvironmentRetrieveResponse, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.retrieve(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(EnvironmentRetrieveResponse, environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
-        response = client.environments.with_raw_response.retrieve()
+        response = client.environments.with_raw_response.retrieve(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -149,7 +145,9 @@ class TestEnvironments:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
-        with client.environments.with_streaming_response.retrieve() as response:
+        with client.environments.with_streaming_response.retrieve(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -168,7 +166,7 @@ class TestEnvironments:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.update(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={},
             spec={
                 "automations_file": {
@@ -207,8 +205,8 @@ class TestEnvironments:
                 ],
                 "ssh_public_keys": [
                     {
-                        "id": "id",
-                        "value": "value",
+                        "id": "0194b7c1-c954-718d-91a4-9a742aa5fc11",
+                        "value": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...",
                     }
                 ],
                 "timeout": {"disconnected": "+9125115.360s"},
@@ -251,9 +249,9 @@ class TestEnvironments:
             token="token",
             page_size=0,
             filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
@@ -296,8 +294,8 @@ class TestEnvironments:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.delete(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            force=True,
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            force=False,
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -333,7 +331,7 @@ class TestEnvironments:
     @parametrize
     def test_method_create_from_project_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.create_from_project(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -365,7 +363,7 @@ class TestEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
                 },
                 "ports": [
@@ -394,7 +392,7 @@ class TestEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "+9125115.360s"},
+                "timeout": {"disconnected": "14400s"},
             },
         )
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])
@@ -431,7 +429,7 @@ class TestEnvironments:
     @parametrize
     def test_method_create_logs_token_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.create_logs_token(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(EnvironmentCreateLogsTokenResponse, environment, path=["response"])
 
@@ -468,10 +466,10 @@ class TestEnvironments:
     def test_method_mark_active_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.mark_active(
             activity_signal={
-                "source": "xxx",
-                "timestamp": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "source": "VS Code",
+                "timestamp": parse_datetime("2025-02-12T14:30:00Z"),
             },
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -507,7 +505,7 @@ class TestEnvironments:
     @parametrize
     def test_method_start_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.start(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -543,7 +541,7 @@ class TestEnvironments:
     @parametrize
     def test_method_stop_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.stop(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -614,7 +612,7 @@ class TestAsyncEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "61000000-0000-0000-0000-000000000000",
+                    "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
                 },
                 "ports": [
@@ -673,21 +671,17 @@ class TestAsyncEnvironments:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
-        environment = await async_client.environments.retrieve()
-        assert_matches_type(EnvironmentRetrieveResponse, environment, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.retrieve(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(EnvironmentRetrieveResponse, environment, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.environments.with_raw_response.retrieve()
+        response = await async_client.environments.with_raw_response.retrieve(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -697,7 +691,9 @@ class TestAsyncEnvironments:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        async with async_client.environments.with_streaming_response.retrieve() as response:
+        async with async_client.environments.with_streaming_response.retrieve(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -716,7 +712,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.update(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={},
             spec={
                 "automations_file": {
@@ -755,8 +751,8 @@ class TestAsyncEnvironments:
                 ],
                 "ssh_public_keys": [
                     {
-                        "id": "id",
-                        "value": "value",
+                        "id": "0194b7c1-c954-718d-91a4-9a742aa5fc11",
+                        "value": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...",
                     }
                 ],
                 "timeout": {"disconnected": "+9125115.360s"},
@@ -799,9 +795,9 @@ class TestAsyncEnvironments:
             token="token",
             page_size=0,
             filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
@@ -844,8 +840,8 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.delete(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            force=True,
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            force=False,
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -881,7 +877,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_create_from_project_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create_from_project(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -913,7 +909,7 @@ class TestAsyncEnvironments:
                     "session": "session",
                 },
                 "machine": {
-                    "class": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
                 },
                 "ports": [
@@ -942,7 +938,7 @@ class TestAsyncEnvironments:
                         "value": "value",
                     }
                 ],
-                "timeout": {"disconnected": "+9125115.360s"},
+                "timeout": {"disconnected": "14400s"},
             },
         )
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])
@@ -979,7 +975,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_create_logs_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create_logs_token(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(EnvironmentCreateLogsTokenResponse, environment, path=["response"])
 
@@ -1016,10 +1012,10 @@ class TestAsyncEnvironments:
     async def test_method_mark_active_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.mark_active(
             activity_signal={
-                "source": "xxx",
-                "timestamp": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "source": "VS Code",
+                "timestamp": parse_datetime("2025-02-12T14:30:00Z"),
             },
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -1055,7 +1051,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.start(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 
@@ -1091,7 +1087,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_stop_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.stop(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
 

@@ -13,11 +13,9 @@ __all__ = ["Account"]
 
 
 class Account(BaseModel):
-    id: Optional[str] = None
+    id: str
 
-    avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
-
-    created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
+    created_at: datetime = FieldInfo(alias="createdAt")
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -109,27 +107,17 @@ class Account(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    email: Optional[str] = None
+    email: str
 
-    joinables: Optional[List[JoinableOrganization]] = None
+    name: str
 
-    memberships: Optional[List[AccountMembership]] = None
-
-    name: Optional[str] = None
-
-    organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)
-    """
-    organization_id is the ID of the organization the account is owned by if it's
-    created through custom SSO
-    """
-
-    public_email_provider: Optional[bool] = FieldInfo(alias="publicEmailProvider", default=None)
+    public_email_provider: bool = FieldInfo(alias="publicEmailProvider")
     """
     public_email_provider is true if the email for the Account matches a known
     public email provider
     """
 
-    updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
+    updated_at: datetime = FieldInfo(alias="updatedAt")
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -219,4 +207,16 @@ class Account(BaseModel):
     Joda Time's
     [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
     to obtain a formatter capable of generating timestamps in this format.
+    """
+
+    avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
+
+    joinables: Optional[List[JoinableOrganization]] = None
+
+    memberships: Optional[List[AccountMembership]] = None
+
+    organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)
+    """
+    organization_id is the ID of the organization the account is owned by if it's
+    created through custom SSO
     """
