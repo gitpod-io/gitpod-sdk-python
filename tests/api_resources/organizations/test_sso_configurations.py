@@ -25,12 +25,6 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.create()
-        assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create(
             client_id="x",
             client_secret="x",
@@ -43,7 +37,13 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.create()
+        response = client.organizations.sso_configurations.with_raw_response.create(
+            client_id="x",
+            client_secret="x",
+            email_domain="xxxx",
+            issuer_url="https://example.com",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -53,7 +53,13 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.create() as response:
+        with client.organizations.sso_configurations.with_streaming_response.create(
+            client_id="x",
+            client_secret="x",
+            email_domain="xxxx",
+            issuer_url="https://example.com",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -65,12 +71,6 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.retrieve()
-        assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.retrieve(
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -79,7 +79,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.retrieve()
+        response = client.organizations.sso_configurations.with_raw_response.retrieve(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -89,7 +91,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.retrieve() as response:
+        with client.organizations.sso_configurations.with_streaming_response.retrieve(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -101,19 +105,21 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.update()
+        sso_configuration = client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(object, sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             claims={"foo": "string"},
             client_id="x",
             client_secret="x",
             email_domain="xxxx",
             issuer_url="https://example.com",
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
@@ -121,7 +127,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.update()
+        response = client.organizations.sso_configurations.with_raw_response.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -131,7 +139,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.update() as response:
+        with client.organizations.sso_configurations.with_streaming_response.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -143,16 +153,18 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.list()
+        sso_configuration = client.organizations.sso_configurations.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
             page_size=0,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -163,7 +175,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.list()
+        response = client.organizations.sso_configurations.with_raw_response.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -173,7 +187,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.list() as response:
+        with client.organizations.sso_configurations.with_streaming_response.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -185,12 +201,6 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
-        sso_configuration = client.organizations.sso_configurations.delete()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.delete(
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -199,7 +209,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
-        response = client.organizations.sso_configurations.with_raw_response.delete()
+        response = client.organizations.sso_configurations.with_raw_response.delete(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -209,7 +221,9 @@ class TestSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
-        with client.organizations.sso_configurations.with_streaming_response.delete() as response:
+        with client.organizations.sso_configurations.with_streaming_response.delete(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -225,12 +239,6 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.create()
-        assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create(
             client_id="x",
             client_secret="x",
@@ -243,7 +251,13 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.create()
+        response = await async_client.organizations.sso_configurations.with_raw_response.create(
+            client_id="x",
+            client_secret="x",
+            email_domain="xxxx",
+            issuer_url="https://example.com",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -253,7 +267,13 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.create() as response:
+        async with async_client.organizations.sso_configurations.with_streaming_response.create(
+            client_id="x",
+            client_secret="x",
+            email_domain="xxxx",
+            issuer_url="https://example.com",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -265,12 +285,6 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.retrieve()
-        assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.retrieve(
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -279,7 +293,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.retrieve()
+        response = await async_client.organizations.sso_configurations.with_raw_response.retrieve(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -289,7 +305,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.retrieve() as response:
+        async with async_client.organizations.sso_configurations.with_streaming_response.retrieve(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -301,19 +319,21 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.update()
+        sso_configuration = await async_client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(object, sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             claims={"foo": "string"},
             client_id="x",
             client_secret="x",
             email_domain="xxxx",
             issuer_url="https://example.com",
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
@@ -321,7 +341,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.update()
+        response = await async_client.organizations.sso_configurations.with_raw_response.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -331,7 +353,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.update() as response:
+        async with async_client.organizations.sso_configurations.with_streaming_response.update(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -343,16 +367,18 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.list()
+        sso_configuration = await async_client.organizations.sso_configurations.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
             page_size=0,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -363,7 +389,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.list()
+        response = await async_client.organizations.sso_configurations.with_raw_response.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -373,7 +401,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.list() as response:
+        async with async_client.organizations.sso_configurations.with_streaming_response.list(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -385,12 +415,6 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
-        sso_configuration = await async_client.organizations.sso_configurations.delete()
-        assert_matches_type(object, sso_configuration, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.delete(
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -399,7 +423,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.sso_configurations.with_raw_response.delete()
+        response = await async_client.organizations.sso_configurations.with_raw_response.delete(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -409,7 +435,9 @@ class TestAsyncSSOConfigurations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.sso_configurations.with_streaming_response.delete() as response:
+        async with async_client.organizations.sso_configurations.with_streaming_response.delete(
+            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

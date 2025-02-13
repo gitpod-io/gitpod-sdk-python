@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,6 +10,9 @@ __all__ = ["OrganizationCreateParams"]
 
 
 class OrganizationCreateParams(TypedDict, total=False):
+    name: Required[str]
+    """name is the organization name"""
+
     invite_accounts_with_matching_domain: Annotated[bool, PropertyInfo(alias="inviteAccountsWithMatchingDomain")]
     """
     Should other Accounts with the same domain be automatically invited to the
@@ -21,6 +24,3 @@ class OrganizationCreateParams(TypedDict, total=False):
     join_organization decides whether the Identity issuing this request joins the
     org on creation
     """
-
-    name: str
-    """name is the organization name"""

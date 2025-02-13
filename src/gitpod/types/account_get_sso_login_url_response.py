@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 
 from pydantic import Field as FieldInfo
 
@@ -10,5 +9,5 @@ __all__ = ["AccountGetSSOLoginURLResponse"]
 
 
 class AccountGetSSOLoginURLResponse(BaseModel):
-    login_url: Optional[str] = FieldInfo(alias="loginUrl", default=None)
+    login_url: str = FieldInfo(alias="loginUrl")
     """login_url is the URL to redirect the user to for SSO login"""

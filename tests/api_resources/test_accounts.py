@@ -61,12 +61,6 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
-        account = client.accounts.delete()
-        assert_matches_type(object, account, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.delete(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -75,7 +69,9 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
-        response = client.accounts.with_raw_response.delete()
+        response = client.accounts.with_raw_response.delete(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -85,7 +81,9 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
-        with client.accounts.with_streaming_response.delete() as response:
+        with client.accounts.with_streaming_response.delete(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -97,7 +95,9 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_method_get_sso_login_url(self, client: Gitpod) -> None:
-        account = client.accounts.get_sso_login_url()
+        account = client.accounts.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
@@ -112,7 +112,9 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_get_sso_login_url(self, client: Gitpod) -> None:
-        response = client.accounts.with_raw_response.get_sso_login_url()
+        response = client.accounts.with_raw_response.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -122,7 +124,9 @@ class TestAccounts:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_get_sso_login_url(self, client: Gitpod) -> None:
-        with client.accounts.with_streaming_response.get_sso_login_url() as response:
+        with client.accounts.with_streaming_response.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -216,12 +220,6 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
-        account = await async_client.accounts.delete()
-        assert_matches_type(object, account, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.delete(
             account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -230,7 +228,9 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.accounts.with_raw_response.delete()
+        response = await async_client.accounts.with_raw_response.delete(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -240,7 +240,9 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
-        async with async_client.accounts.with_streaming_response.delete() as response:
+        async with async_client.accounts.with_streaming_response.delete(
+            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -252,7 +254,9 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_method_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        account = await async_client.accounts.get_sso_login_url()
+        account = await async_client.accounts.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
     @pytest.mark.skip()
@@ -267,7 +271,9 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.accounts.with_raw_response.get_sso_login_url()
+        response = await async_client.accounts.with_raw_response.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -277,7 +283,9 @@ class TestAsyncAccounts:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
-        async with async_client.accounts.with_streaming_response.get_sso_login_url() as response:
+        async with async_client.accounts.with_streaming_response.get_sso_login_url(
+            email="dev@stainlessapi.com",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

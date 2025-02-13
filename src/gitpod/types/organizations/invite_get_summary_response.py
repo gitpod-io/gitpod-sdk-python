@@ -10,7 +10,7 @@ __all__ = ["InviteGetSummaryResponse"]
 
 
 class InviteGetSummaryResponse(BaseModel):
-    organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)
+    organization_id: str = FieldInfo(alias="organizationId")
 
     organization_member_count: Optional[int] = FieldInfo(alias="organizationMemberCount", default=None)
 

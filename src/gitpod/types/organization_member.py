@@ -13,16 +13,14 @@ __all__ = ["OrganizationMember"]
 
 
 class OrganizationMember(BaseModel):
-    avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
+    email: str
 
-    email: Optional[str] = None
+    full_name: str = FieldInfo(alias="fullName")
 
-    full_name: Optional[str] = FieldInfo(alias="fullName", default=None)
-
-    login_provider: Optional[str] = FieldInfo(alias="loginProvider", default=None)
+    login_provider: str = FieldInfo(alias="loginProvider")
     """login_provider is the login provider the user uses to sign in"""
 
-    member_since: Optional[datetime] = FieldInfo(alias="memberSince", default=None)
+    member_since: datetime = FieldInfo(alias="memberSince")
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
@@ -114,8 +112,10 @@ class OrganizationMember(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
-    role: Optional[OrganizationRole] = None
+    role: OrganizationRole
 
-    status: Optional[UserStatus] = None
+    status: UserStatus
 
-    user_id: Optional[str] = FieldInfo(alias="userId", default=None)
+    user_id: str = FieldInfo(alias="userId")
+
+    avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
