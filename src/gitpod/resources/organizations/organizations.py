@@ -105,9 +105,9 @@ class OrganizationsResource(SyncAPIResource):
     def create(
         self,
         *,
+        name: str,
         invite_accounts_with_matching_domain: bool | NotGiven = NOT_GIVEN,
         join_organization: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -119,13 +119,13 @@ class OrganizationsResource(SyncAPIResource):
         CreateOrganization creates a new Organization.
 
         Args:
+          name: name is the organization name
+
           invite_accounts_with_matching_domain: Should other Accounts with the same domain be automatically invited to the
               organization?
 
           join_organization: join_organization decides whether the Identity issuing this request joins the
               org on creation
-
-          name: name is the organization name
 
           extra_headers: Send extra headers
 
@@ -139,9 +139,9 @@ class OrganizationsResource(SyncAPIResource):
             "/gitpod.v1.OrganizationService/CreateOrganization",
             body=maybe_transform(
                 {
+                    "name": name,
                     "invite_accounts_with_matching_domain": invite_accounts_with_matching_domain,
                     "join_organization": join_organization,
-                    "name": name,
                 },
                 organization_create_params.OrganizationCreateParams,
             ),
@@ -154,7 +154,7 @@ class OrganizationsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -190,9 +190,9 @@ class OrganizationsResource(SyncAPIResource):
     def update(
         self,
         *,
+        organization_id: str,
         invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -204,11 +204,11 @@ class OrganizationsResource(SyncAPIResource):
         UpdateOrganization updates the properties of an Organization.
 
         Args:
+          organization_id: organization_id is the ID of the organization to update the settings for.
+
           invite_domains: invite_domains is the domain allowlist of the organization
 
           name: name is the new name of the organization
-
-          organization_id: organization_id is the ID of the organization to update the settings for.
 
           extra_headers: Send extra headers
 
@@ -222,9 +222,9 @@ class OrganizationsResource(SyncAPIResource):
             "/gitpod.v1.OrganizationService/UpdateOrganization",
             body=maybe_transform(
                 {
+                    "organization_id": organization_id,
                     "invite_domains": invite_domains,
                     "name": name,
-                    "organization_id": organization_id,
                 },
                 organization_update_params.OrganizationUpdateParams,
             ),
@@ -294,7 +294,7 @@ class OrganizationsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -373,7 +373,7 @@ class OrganizationsResource(SyncAPIResource):
     def leave(
         self,
         *,
-        user_id: str | NotGiven = NOT_GIVEN,
+        user_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -405,9 +405,9 @@ class OrganizationsResource(SyncAPIResource):
     def list_members(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -462,9 +462,9 @@ class OrganizationsResource(SyncAPIResource):
     def set_role(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
+        user_id: str,
         role: OrganizationRole | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -489,8 +489,8 @@ class OrganizationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
-                    "role": role,
                     "user_id": user_id,
+                    "role": role,
                 },
                 organization_set_role_params.OrganizationSetRoleParams,
             ),
@@ -536,9 +536,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        name: str,
         invite_accounts_with_matching_domain: bool | NotGiven = NOT_GIVEN,
         join_organization: bool | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -550,13 +550,13 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         CreateOrganization creates a new Organization.
 
         Args:
+          name: name is the organization name
+
           invite_accounts_with_matching_domain: Should other Accounts with the same domain be automatically invited to the
               organization?
 
           join_organization: join_organization decides whether the Identity issuing this request joins the
               org on creation
-
-          name: name is the organization name
 
           extra_headers: Send extra headers
 
@@ -570,9 +570,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             "/gitpod.v1.OrganizationService/CreateOrganization",
             body=await async_maybe_transform(
                 {
+                    "name": name,
                     "invite_accounts_with_matching_domain": invite_accounts_with_matching_domain,
                     "join_organization": join_organization,
-                    "name": name,
                 },
                 organization_create_params.OrganizationCreateParams,
             ),
@@ -585,7 +585,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -621,9 +621,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def update(
         self,
         *,
+        organization_id: str,
         invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -635,11 +635,11 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         UpdateOrganization updates the properties of an Organization.
 
         Args:
+          organization_id: organization_id is the ID of the organization to update the settings for.
+
           invite_domains: invite_domains is the domain allowlist of the organization
 
           name: name is the new name of the organization
-
-          organization_id: organization_id is the ID of the organization to update the settings for.
 
           extra_headers: Send extra headers
 
@@ -653,9 +653,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             "/gitpod.v1.OrganizationService/UpdateOrganization",
             body=await async_maybe_transform(
                 {
+                    "organization_id": organization_id,
                     "invite_domains": invite_domains,
                     "name": name,
-                    "organization_id": organization_id,
                 },
                 organization_update_params.OrganizationUpdateParams,
             ),
@@ -725,7 +725,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -804,7 +804,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def leave(
         self,
         *,
-        user_id: str | NotGiven = NOT_GIVEN,
+        user_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -836,9 +836,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     def list_members(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -893,9 +893,9 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def set_role(
         self,
         *,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        organization_id: str,
+        user_id: str,
         role: OrganizationRole | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -920,8 +920,8 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "organization_id": organization_id,
-                    "role": role,
                     "user_id": user_id,
+                    "role": role,
                 },
                 organization_set_role_params.OrganizationSetRoleParams,
             ),

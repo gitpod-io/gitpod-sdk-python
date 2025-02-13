@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, Optional
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 from .sso_configuration_state import SSOConfigurationState
@@ -12,6 +12,9 @@ __all__ = ["SSOConfigurationUpdateParams"]
 
 
 class SSOConfigurationUpdateParams(TypedDict, total=False):
+    sso_configuration_id: Required[Annotated[str, PropertyInfo(alias="ssoConfigurationId")]]
+    """sso_configuration_id is the ID of the SSO configuration to update"""
+
     claims: Dict[str, str]
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
 
@@ -25,9 +28,6 @@ class SSOConfigurationUpdateParams(TypedDict, total=False):
 
     issuer_url: Annotated[Optional[str], PropertyInfo(alias="issuerUrl")]
     """issuer_url is the URL of the IdP issuer"""
-
-    sso_configuration_id: Annotated[str, PropertyInfo(alias="ssoConfigurationId")]
-    """sso_configuration_id is the ID of the SSO configuration to update"""
 
     state: Optional[SSOConfigurationState]
     """state is the state of the SSO configuration"""

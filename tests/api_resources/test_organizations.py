@@ -28,23 +28,27 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
-        organization = client.organizations.create()
-        assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_create_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.create(
-            invite_accounts_with_matching_domain=True,
-            join_organization=True,
             name="xxx",
         )
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_with_all_params(self, client: Gitpod) -> None:
+        organization = client.organizations.create(
+            name="xxx",
+            invite_accounts_with_matching_domain=True,
+            join_organization=True,
+        )
+        assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.create()
+        response = client.organizations.with_raw_response.create(
+            name="xxx",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -54,7 +58,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.create() as response:
+        with client.organizations.with_streaming_response.create(
+            name="xxx",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -66,12 +72,6 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
-        organization = client.organizations.retrieve()
-        assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.retrieve(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -80,7 +80,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.retrieve()
+        response = client.organizations.with_raw_response.retrieve(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -90,7 +92,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.retrieve() as response:
+        with client.organizations.with_streaming_response.retrieve(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -102,23 +106,27 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
-        organization = client.organizations.update()
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_update_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.update(
-            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
-            name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_update_with_all_params(self, client: Gitpod) -> None:
+        organization = client.organizations.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
+            name="name",
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.update()
+        response = client.organizations.with_raw_response.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -128,7 +136,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.update() as response:
+        with client.organizations.with_streaming_response.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -182,12 +192,6 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
-        organization = client.organizations.delete()
-        assert_matches_type(object, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.delete(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -196,7 +200,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.delete()
+        response = client.organizations.with_raw_response.delete(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -206,7 +212,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.delete() as response:
+        with client.organizations.with_streaming_response.delete(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -255,12 +263,6 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_leave(self, client: Gitpod) -> None:
-        organization = client.organizations.leave()
-        assert_matches_type(object, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_leave_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.leave(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -269,7 +271,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_leave(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.leave()
+        response = client.organizations.with_raw_response.leave(
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -279,7 +283,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_leave(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.leave() as response:
+        with client.organizations.with_streaming_response.leave(
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -291,16 +297,18 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_list_members(self, client: Gitpod) -> None:
-        organization = client.organizations.list_members()
+        organization = client.organizations.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_method_list_members_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
             page_size=0,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -311,7 +319,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_list_members(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.list_members()
+        response = client.organizations.with_raw_response.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -321,7 +331,9 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_list_members(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.list_members() as response:
+        with client.organizations.with_streaming_response.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -333,7 +345,10 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_method_set_role(self, client: Gitpod) -> None:
-        organization = client.organizations.set_role()
+        organization = client.organizations.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @pytest.mark.skip()
@@ -341,15 +356,18 @@ class TestOrganizations:
     def test_method_set_role_with_all_params(self, client: Gitpod) -> None:
         organization = client.organizations.set_role(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            role="ORGANIZATION_ROLE_UNSPECIFIED",
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            role="ORGANIZATION_ROLE_UNSPECIFIED",
         )
         assert_matches_type(object, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_set_role(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.set_role()
+        response = client.organizations.with_raw_response.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -359,7 +377,10 @@ class TestOrganizations:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_set_role(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.set_role() as response:
+        with client.organizations.with_streaming_response.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -375,23 +396,27 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.create()
-        assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.create(
-            invite_accounts_with_matching_domain=True,
-            join_organization=True,
             name="xxx",
         )
         assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.create(
+            name="xxx",
+            invite_accounts_with_matching_domain=True,
+            join_organization=True,
+        )
+        assert_matches_type(OrganizationCreateResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.create()
+        response = await async_client.organizations.with_raw_response.create(
+            name="xxx",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -401,7 +426,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.create() as response:
+        async with async_client.organizations.with_streaming_response.create(
+            name="xxx",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -413,12 +440,6 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.retrieve()
-        assert_matches_type(OrganizationRetrieveResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.retrieve(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -427,7 +448,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.retrieve()
+        response = await async_client.organizations.with_raw_response.retrieve(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -437,7 +460,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.retrieve() as response:
+        async with async_client.organizations.with_streaming_response.retrieve(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -449,23 +474,27 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.update()
-        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.update(
-            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
-            name="name",
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
+        organization = await async_client.organizations.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_domains={"domains": ["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"]},
+            name="name",
+        )
+        assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.update()
+        response = await async_client.organizations.with_raw_response.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -475,7 +504,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.update() as response:
+        async with async_client.organizations.with_streaming_response.update(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -529,12 +560,6 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.delete()
-        assert_matches_type(object, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.delete(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -543,7 +568,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.delete()
+        response = await async_client.organizations.with_raw_response.delete(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -553,7 +580,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.delete() as response:
+        async with async_client.organizations.with_streaming_response.delete(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -602,12 +631,6 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_leave(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.leave()
-        assert_matches_type(object, organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_leave_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.leave(
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
@@ -616,7 +639,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_leave(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.leave()
+        response = await async_client.organizations.with_raw_response.leave(
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -626,7 +651,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_leave(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.leave() as response:
+        async with async_client.organizations.with_streaming_response.leave(
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -638,16 +665,18 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_members(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.list_members()
+        organization = await async_client.organizations.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_method_list_members_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             token="token",
             page_size=0,
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             pagination={
                 "token": "token",
                 "page_size": 100,
@@ -658,7 +687,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_list_members(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.list_members()
+        response = await async_client.organizations.with_raw_response.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -668,7 +699,9 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_list_members(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.list_members() as response:
+        async with async_client.organizations.with_streaming_response.list_members(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -680,7 +713,10 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_method_set_role(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.set_role()
+        organization = await async_client.organizations.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
         assert_matches_type(object, organization, path=["response"])
 
     @pytest.mark.skip()
@@ -688,15 +724,18 @@ class TestAsyncOrganizations:
     async def test_method_set_role_with_all_params(self, async_client: AsyncGitpod) -> None:
         organization = await async_client.organizations.set_role(
             organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            role="ORGANIZATION_ROLE_UNSPECIFIED",
             user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            role="ORGANIZATION_ROLE_UNSPECIFIED",
         )
         assert_matches_type(object, organization, path=["response"])
 
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_set_role(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.set_role()
+        response = await async_client.organizations.with_raw_response.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -706,7 +745,10 @@ class TestAsyncOrganizations:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_set_role(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.set_role() as response:
+        async with async_client.organizations.with_streaming_response.set_role(
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

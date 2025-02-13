@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 
 from pydantic import Field as FieldInfo
 
@@ -11,4 +10,4 @@ __all__ = ["DomainVerificationRetrieveResponse"]
 
 
 class DomainVerificationRetrieveResponse(BaseModel):
-    domain_verification: Optional[DomainVerification] = FieldInfo(alias="domainVerification", default=None)
+    domain_verification: DomainVerification = FieldInfo(alias="domainVerification")
