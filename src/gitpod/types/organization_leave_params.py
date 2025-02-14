@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -10,4 +10,4 @@ __all__ = ["OrganizationLeaveParams"]
 
 
 class OrganizationLeaveParams(TypedDict, total=False):
-    user_id: Annotated[str, PropertyInfo(alias="userId")]
+    user_id: Required[Annotated[str, PropertyInfo(alias="userId")]]

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,12 +10,12 @@ __all__ = ["SSOConfigurationListParams", "Pagination"]
 
 
 class SSOConfigurationListParams(TypedDict, total=False):
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
+    """organization_id is the ID of the organization to list SSO configurations for."""
+
     token: str
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
-
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
-    """organization_id is the ID of the organization to list SSO configurations for."""
 
     pagination: Pagination
 

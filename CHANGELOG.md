@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.0-alpha.3 (2025-02-14)
+
+Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
+
+### Features
+
+* **api:** manual updates ([#24](https://github.com/gitpod-io/gitpod-sdk-python/issues/24)) ([b14af5b](https://github.com/gitpod-io/gitpod-sdk-python/commit/b14af5b14f013a2d966b6dca24abcc45975555e5))
+* **api:** manual updates ([#25](https://github.com/gitpod-io/gitpod-sdk-python/issues/25)) ([a13ae46](https://github.com/gitpod-io/gitpod-sdk-python/commit/a13ae465471d0323a2151fc904c8214f295e5a90))
+* **api:** manual updates ([#28](https://github.com/gitpod-io/gitpod-sdk-python/issues/28)) ([b763659](https://github.com/gitpod-io/gitpod-sdk-python/commit/b763659e5a226b94311d5f898534794879b279f8))
+* **api:** manual updates ([#30](https://github.com/gitpod-io/gitpod-sdk-python/issues/30)) ([45bdb31](https://github.com/gitpod-io/gitpod-sdk-python/commit/45bdb315c9e912833b335244ac1fdb7737c423c2))
+* **api:** update examples ([#22](https://github.com/gitpod-io/gitpod-sdk-python/issues/22)) ([a3a0b9d](https://github.com/gitpod-io/gitpod-sdk-python/commit/a3a0b9dbb81bc5915ca65948fc570b406b2b587e))
+* **api:** update with latest API spec ([#27](https://github.com/gitpod-io/gitpod-sdk-python/issues/27)) ([80f6e19](https://github.com/gitpod-io/gitpod-sdk-python/commit/80f6e194b049fa48e82fe310c9c56e632588bfb9))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#31](https://github.com/gitpod-io/gitpod-sdk-python/issues/31)) ([507a01e](https://github.com/gitpod-io/gitpod-sdk-python/commit/507a01eb2eaed68da316448a12a98d13034b57f7))
+
+
+### Chores
+
+* **internal:** update client tests ([#26](https://github.com/gitpod-io/gitpod-sdk-python/issues/26)) ([e4040d1](https://github.com/gitpod-io/gitpod-sdk-python/commit/e4040d15067dea4ce6eb57742e6857bd8c227c4b))
+* **internal:** update client tests ([#32](https://github.com/gitpod-io/gitpod-sdk-python/issues/32)) ([47d7150](https://github.com/gitpod-io/gitpod-sdk-python/commit/47d715021c3ca29e930c5b9e928e2f4aeb201ecc))
+
 ## 0.1.0-alpha.2 (2025-02-12)
 
 Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)

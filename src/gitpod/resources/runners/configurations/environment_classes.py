@@ -191,8 +191,8 @@ class EnvironmentClassesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncEnvironmentClassesPage[EnvironmentClass]:
         """
-        ListEnvironmentClasses returns all environment classes configured for a runner.
-        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE ListEnvironmentClasses returns all
+        environment classes configured for a runner.
 
         Args:
           pagination: pagination contains the pagination options for listing environment classes
@@ -389,8 +389,8 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[EnvironmentClass, AsyncEnvironmentClassesPage[EnvironmentClass]]:
         """
-        ListEnvironmentClasses returns all environment classes configured for a runner.
-        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE
+        buf:lint:ignore RPC_REQUEST_RESPONSE_UNIQUE ListEnvironmentClasses returns all
+        environment classes configured for a runner.
 
         Args:
           pagination: pagination contains the pagination options for listing environment classes

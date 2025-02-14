@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,4 +10,4 @@ __all__ = ["InviteRetrieveParams"]
 
 
 class InviteRetrieveParams(TypedDict, total=False):
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]

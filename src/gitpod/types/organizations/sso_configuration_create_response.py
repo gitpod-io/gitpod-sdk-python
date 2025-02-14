@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 
 from pydantic import Field as FieldInfo
 
@@ -11,5 +10,5 @@ __all__ = ["SSOConfigurationCreateResponse"]
 
 
 class SSOConfigurationCreateResponse(BaseModel):
-    sso_configuration: Optional[SSOConfiguration] = FieldInfo(alias="ssoConfiguration", default=None)
+    sso_configuration: SSOConfiguration = FieldInfo(alias="ssoConfiguration")
     """sso_configuration is the created SSO configuration"""

@@ -50,7 +50,7 @@ class EditorsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -132,9 +132,9 @@ class EditorsResource(SyncAPIResource):
     def resolve_url(
         self,
         *,
-        editor_id: str | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        editor_id: str,
+        environment_id: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -200,7 +200,7 @@ class AsyncEditorsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -282,9 +282,9 @@ class AsyncEditorsResource(AsyncAPIResource):
     async def resolve_url(
         self,
         *,
-        editor_id: str | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        editor_id: str,
+        environment_id: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

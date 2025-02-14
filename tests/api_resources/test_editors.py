@@ -25,12 +25,6 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
-        editor = client.editors.retrieve()
-        assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.retrieve(
             id="id",
         )
@@ -39,7 +33,9 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
-        response = client.editors.with_raw_response.retrieve()
+        response = client.editors.with_raw_response.retrieve(
+            id="id",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -49,7 +45,9 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
-        with client.editors.with_streaming_response.retrieve() as response:
+        with client.editors.with_streaming_response.retrieve(
+            id="id",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -102,12 +100,6 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_method_resolve_url(self, client: Gitpod) -> None:
-        editor = client.editors.resolve_url()
-        assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_resolve_url_with_all_params(self, client: Gitpod) -> None:
         editor = client.editors.resolve_url(
             editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -118,7 +110,11 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_raw_response_resolve_url(self, client: Gitpod) -> None:
-        response = client.editors.with_raw_response.resolve_url()
+        response = client.editors.with_raw_response.resolve_url(
+            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -128,7 +124,11 @@ class TestEditors:
     @pytest.mark.skip()
     @parametrize
     def test_streaming_response_resolve_url(self, client: Gitpod) -> None:
-        with client.editors.with_streaming_response.resolve_url() as response:
+        with client.editors.with_streaming_response.resolve_url(
+            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -144,12 +144,6 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
-        editor = await async_client.editors.retrieve()
-        assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve(
             id="id",
         )
@@ -158,7 +152,9 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.editors.with_raw_response.retrieve()
+        response = await async_client.editors.with_raw_response.retrieve(
+            id="id",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -168,7 +164,9 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
-        async with async_client.editors.with_streaming_response.retrieve() as response:
+        async with async_client.editors.with_streaming_response.retrieve(
+            id="id",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -221,12 +219,6 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_method_resolve_url(self, async_client: AsyncGitpod) -> None:
-        editor = await async_client.editors.resolve_url()
-        assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_resolve_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.resolve_url(
             editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -237,7 +229,11 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_raw_response_resolve_url(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.editors.with_raw_response.resolve_url()
+        response = await async_client.editors.with_raw_response.resolve_url(
+            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -247,7 +243,11 @@ class TestAsyncEditors:
     @pytest.mark.skip()
     @parametrize
     async def test_streaming_response_resolve_url(self, async_client: AsyncGitpod) -> None:
-        async with async_client.editors.with_streaming_response.resolve_url() as response:
+        async with async_client.editors.with_streaming_response.resolve_url(
+            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

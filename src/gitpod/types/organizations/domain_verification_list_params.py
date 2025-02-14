@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
@@ -10,11 +10,11 @@ __all__ = ["DomainVerificationListParams", "Pagination"]
 
 
 class DomainVerificationListParams(TypedDict, total=False):
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
+
     token: str
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
-
-    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
 
     pagination: Pagination
 

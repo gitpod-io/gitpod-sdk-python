@@ -57,8 +57,8 @@ class DomainVerificationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        domain: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        domain: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -96,7 +96,7 @@ class DomainVerificationsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,9 +131,9 @@ class DomainVerificationsResource(SyncAPIResource):
     def list(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: domain_verification_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -184,7 +184,7 @@ class DomainVerificationsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -219,7 +219,7 @@ class DomainVerificationsResource(SyncAPIResource):
     def verify(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -275,8 +275,8 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        domain: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        domain: str,
+        organization_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -314,7 +314,7 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -349,9 +349,9 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
     def list(
         self,
         *,
+        organization_id: str,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
         pagination: domain_verification_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -402,7 +402,7 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -437,7 +437,7 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
     async def verify(
         self,
         *,
-        domain_verification_id: str | NotGiven = NOT_GIVEN,
+        domain_verification_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
