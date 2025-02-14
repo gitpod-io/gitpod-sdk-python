@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
@@ -19,7 +20,7 @@ class DomainVerification(BaseModel):
 
     state: DomainVerificationState
 
-    verified_at: datetime = FieldInfo(alias="verifiedAt")
+    verified_at: Optional[datetime] = FieldInfo(alias="verifiedAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local
     calendar, encoded as a count of seconds and fractions of seconds at nanosecond
