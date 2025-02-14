@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any, Optional, cast
 from typing_extensions import Literal
 
 import httpx
+
+from ._utils import is_dict
+from ._models import construct_type
+from .types.shared.error_code import ErrorCode
+from .types.shared.arbitrary_data import ArbitraryData
 
 __all__ = [
     "BadRequestError",
@@ -37,11 +43,34 @@ class APIError(GitpodError):
     If there was no response associated with this error then it will be `None`.
     """
 
-    def __init__(self, message: str, request: httpx.Request, *, body: object | None) -> None:  # noqa: ARG002
+    code: Optional[ErrorCode] = None
+    """
+    The status code, which should be an enum value of
+    [google.rpc.Code][google.rpc.Code].
+    """
+    detail: Optional[ArbitraryData] = None
+    """
+    Contains an arbitrary serialized message along with a @type that describes the
+    type of the serialized message.
+    """
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+    def __init__(self, message: str, request: httpx.Request, *, body: object | None) -> None:
         super().__init__(message)
         self.request = request
         self.message = message
         self.body = body
+
+        if is_dict(body):
+            self.code = cast(Any, construct_type(type_=Optional[ErrorCode], value=body.get("code")))
+            self.detail = cast(Any, construct_type(type_=Optional[ArbitraryData], value=body.get("detail")))
+        else:
+            self.code = None
+            self.detail = None
 
 
 class APIResponseValidationError(APIError):
