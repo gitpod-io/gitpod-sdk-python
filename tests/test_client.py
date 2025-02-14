@@ -744,7 +744,7 @@ class TestGitpod:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
+                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -759,7 +759,7 @@ class TestGitpod:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
+                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1544,7 +1544,7 @@ class TestAsyncGitpod:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
+                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1559,7 +1559,7 @@ class TestAsyncGitpod:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform(dict(), IdentityGetAuthenticatedIdentityParams)),
+                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
