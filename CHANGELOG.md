@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3 (2025-02-14)
+
+Full Changelog: [v0.1.2...v0.1.3](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.2...v0.1.3)
+
+### Chores
+
+* **internal:** add jsonl unit tests ([#43](https://github.com/gitpod-io/gitpod-sdk-python/issues/43)) ([8641b53](https://github.com/gitpod-io/gitpod-sdk-python/commit/8641b53116b20dd8e329f229afd84ec6a100fcef))
+* **internal:** codegen related update ([#41](https://github.com/gitpod-io/gitpod-sdk-python/issues/41)) ([e5dceda](https://github.com/gitpod-io/gitpod-sdk-python/commit/e5dceda109bb01cf538dce83c3ab16d60461eb3d))
+
 ## 0.1.2 (2025-02-14)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.1...v0.1.2)
