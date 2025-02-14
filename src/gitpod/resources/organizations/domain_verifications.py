@@ -67,7 +67,34 @@ class DomainVerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationCreateResponse:
         """
-        CreateDomainVerification creates a new domain verification request
+        Initiates domain verification process to enable organization features.
+
+        Use this method to:
+
+        - Start domain ownership verification
+        - Enable automatic team joining
+        - Set up SSO restrictions
+        - Configure email-based policies
+
+        ### Examples
+
+        - Verify primary domain:
+
+          Starts verification for main company domain.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          domain: "acme-corp.com"
+          ```
+
+        - Verify subsidiary domain:
+
+          Adds verification for additional company domain.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          domain: "acme-subsidiary.com"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -105,7 +132,23 @@ class DomainVerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationRetrieveResponse:
         """
-        GetDomainVerification retrieves a domain verification request
+        Retrieves the status of a domain verification request.
+
+        Use this method to:
+
+        - Check verification progress
+        - View verification requirements
+        - Monitor domain status
+
+        ### Examples
+
+        - Get verification status:
+
+          Checks the current state of a domain verification.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -143,7 +186,37 @@ class DomainVerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncDomainVerificationsPage[DomainVerification]:
         """
-        ListDomainVerifications lists all domain verifications for an organization
+        Lists and monitors domain verification status across an organization.
+
+        Use this method to:
+
+        - Track verification progress
+        - View all verified domains
+        - Monitor pending verifications
+        - Audit domain settings
+
+        ### Examples
+
+        - List all verifications:
+
+          Shows all domain verifications regardless of status.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+          ```
+
+        - List with pagination:
+
+          Retrieves next page of verifications.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+            token: "next-page-token-from-previous-response"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -193,7 +266,23 @@ class DomainVerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteDomainVerification deletes a domain verification request
+        Removes a domain verification request.
+
+        Use this method to:
+
+        - Cancel pending verifications
+        - Remove verified domains
+        - Clean up unused domain records
+
+        ### Examples
+
+        - Delete verification:
+
+          Removes a domain verification request.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -228,7 +317,23 @@ class DomainVerificationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationVerifyResponse:
         """
-        VerifyDomain verifies a domain ownership
+        Verifies domain ownership for an organization.
+
+        Use this method to:
+
+        - Complete domain verification process
+        - Enable domain-based features
+        - Validate DNS configuration
+
+        ### Examples
+
+        - Verify domain ownership:
+
+          Verifies ownership after DNS records are configured.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -285,7 +390,34 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationCreateResponse:
         """
-        CreateDomainVerification creates a new domain verification request
+        Initiates domain verification process to enable organization features.
+
+        Use this method to:
+
+        - Start domain ownership verification
+        - Enable automatic team joining
+        - Set up SSO restrictions
+        - Configure email-based policies
+
+        ### Examples
+
+        - Verify primary domain:
+
+          Starts verification for main company domain.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          domain: "acme-corp.com"
+          ```
+
+        - Verify subsidiary domain:
+
+          Adds verification for additional company domain.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          domain: "acme-subsidiary.com"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -323,7 +455,23 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationRetrieveResponse:
         """
-        GetDomainVerification retrieves a domain verification request
+        Retrieves the status of a domain verification request.
+
+        Use this method to:
+
+        - Check verification progress
+        - View verification requirements
+        - Monitor domain status
+
+        ### Examples
+
+        - Get verification status:
+
+          Checks the current state of a domain verification.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -361,7 +509,37 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[DomainVerification, AsyncDomainVerificationsPage[DomainVerification]]:
         """
-        ListDomainVerifications lists all domain verifications for an organization
+        Lists and monitors domain verification status across an organization.
+
+        Use this method to:
+
+        - Track verification progress
+        - View all verified domains
+        - Monitor pending verifications
+        - Audit domain settings
+
+        ### Examples
+
+        - List all verifications:
+
+          Shows all domain verifications regardless of status.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+          ```
+
+        - List with pagination:
+
+          Retrieves next page of verifications.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+            token: "next-page-token-from-previous-response"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -411,7 +589,23 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteDomainVerification deletes a domain verification request
+        Removes a domain verification request.
+
+        Use this method to:
+
+        - Cancel pending verifications
+        - Remove verified domains
+        - Clean up unused domain records
+
+        ### Examples
+
+        - Delete verification:
+
+          Removes a domain verification request.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -446,7 +640,23 @@ class AsyncDomainVerificationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DomainVerificationVerifyResponse:
         """
-        VerifyDomain verifies a domain ownership
+        Verifies domain ownership for an organization.
+
+        Use this method to:
+
+        - Complete domain verification process
+        - Enable domain-based features
+        - Validate DNS configuration
+
+        ### Examples
+
+        - Verify domain ownership:
+
+          Verifies ownership after DNS records are configured.
+
+          ```yaml
+          domainVerificationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers

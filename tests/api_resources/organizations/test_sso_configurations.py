@@ -26,11 +26,11 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
@@ -38,11 +38,11 @@ class TestSSOConfigurations:
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -54,11 +54,11 @@ class TestSSOConfigurations:
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -72,7 +72,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
@@ -80,7 +80,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -92,7 +92,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -106,7 +106,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
@@ -114,10 +114,10 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             claims={"foo": "string"},
-            client_id="x",
-            client_secret="x",
+            client_id="new-client-id",
+            client_secret="new-client-secret",
             email_domain="xxxx",
             issuer_url="https://example.com",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
@@ -128,7 +128,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -140,7 +140,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -154,7 +154,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
@@ -162,12 +162,12 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             token="token",
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
@@ -176,7 +176,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -188,7 +188,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -202,7 +202,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
@@ -210,7 +210,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -222,7 +222,7 @@ class TestSSOConfigurations:
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -240,11 +240,11 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
@@ -252,11 +252,11 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -268,11 +268,11 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.create(
-            client_id="x",
-            client_secret="x",
-            email_domain="xxxx",
-            issuer_url="https://example.com",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            email_domain="acme-corp.com",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -286,7 +286,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
@@ -294,7 +294,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -306,7 +306,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.retrieve(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -320,7 +320,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
@@ -328,10 +328,10 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             claims={"foo": "string"},
-            client_id="x",
-            client_secret="x",
+            client_id="new-client-id",
+            client_secret="new-client-secret",
             email_domain="xxxx",
             issuer_url="https://example.com",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
@@ -342,7 +342,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -354,7 +354,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -368,7 +368,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
@@ -376,12 +376,12 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             token="token",
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
@@ -390,7 +390,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -402,7 +402,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.list(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -416,7 +416,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
@@ -424,7 +424,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -436,7 +436,7 @@ class TestAsyncSSOConfigurations:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.delete(
-            sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
