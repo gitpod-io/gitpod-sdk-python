@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.gitpod.io](https://docs.gitpod.
 
 ```sh
 # install from PyPI
-pip install --pre gitpod-sdk
+pip install gitpod-sdk
 ```
 
 ## Usage
