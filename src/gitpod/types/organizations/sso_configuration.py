@@ -15,11 +15,6 @@ class SSOConfiguration(BaseModel):
     id: str
     """id is the unique identifier of the SSO configuration"""
 
-    client_id: str = FieldInfo(alias="clientId")
-    """client_id is the client ID of the OIDC application set on the IdP"""
-
-    email_domain: str = FieldInfo(alias="emailDomain")
-
     issuer_url: str = FieldInfo(alias="issuerUrl")
     """issuer_url is the URL of the IdP issuer"""
 
@@ -33,3 +28,8 @@ class SSOConfiguration(BaseModel):
 
     claims: Optional[Dict[str, str]] = None
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
+
+    client_id: Optional[str] = FieldInfo(alias="clientId", default=None)
+    """client_id is the client ID of the OIDC application set on the IdP"""
+
+    email_domain: Optional[str] = FieldInfo(alias="emailDomain", default=None)

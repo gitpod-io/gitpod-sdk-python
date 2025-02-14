@@ -111,12 +111,6 @@ class Account(BaseModel):
 
     name: str
 
-    public_email_provider: bool = FieldInfo(alias="publicEmailProvider")
-    """
-    public_email_provider is true if the email for the Account matches a known
-    public email provider
-    """
-
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """
     A Timestamp represents a point in time independent of any time zone or local
@@ -219,4 +213,10 @@ class Account(BaseModel):
     """
     organization_id is the ID of the organization the account is owned by if it's
     created through custom SSO
+    """
+
+    public_email_provider: Optional[bool] = FieldInfo(alias="publicEmailProvider", default=None)
+    """
+    public_email_provider is true if the email for the Account matches a known
+    public email provider
     """
