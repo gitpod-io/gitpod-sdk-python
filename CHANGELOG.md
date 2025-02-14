@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2 (2025-02-14)
+
+Full Changelog: [v0.1.1...v0.1.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.1...v0.1.2)
+
+### Features
+
+* **api:** manual updates ([#39](https://github.com/gitpod-io/gitpod-sdk-python/issues/39)) ([31f6c01](https://github.com/gitpod-io/gitpod-sdk-python/commit/31f6c01e50663c19a4e11808458b4bbd3fb38ead))
+* **api:** Organizations Open API docs ([#37](https://github.com/gitpod-io/gitpod-sdk-python/issues/37)) ([ed6623d](https://github.com/gitpod-io/gitpod-sdk-python/commit/ed6623dbad5cf3605f8d5e3d07450cc30576ad0f))
+
 ## 0.1.1 (2025-02-14)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.0-alpha.3...v0.1.1)
