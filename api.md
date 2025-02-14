@@ -2,8 +2,10 @@
 
 ```python
 from gitpod.types import (
+    ArbitraryData,
     AutomationTrigger,
     EnvironmentClass,
+    ErrorCode,
     FieldValue,
     OrganizationRole,
     Principal,
