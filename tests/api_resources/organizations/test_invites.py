@@ -25,7 +25,7 @@ class TestInvites:
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         invite = client.organizations.invites.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(InviteCreateResponse, invite, path=["response"])
 
@@ -33,7 +33,7 @@ class TestInvites:
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.invites.with_raw_response.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -45,7 +45,7 @@ class TestInvites:
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.invites.with_streaming_response.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -93,7 +93,7 @@ class TestInvites:
     @parametrize
     def test_method_get_summary(self, client: Gitpod) -> None:
         invite = client.organizations.invites.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(InviteGetSummaryResponse, invite, path=["response"])
 
@@ -101,7 +101,7 @@ class TestInvites:
     @parametrize
     def test_raw_response_get_summary(self, client: Gitpod) -> None:
         response = client.organizations.invites.with_raw_response.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -113,7 +113,7 @@ class TestInvites:
     @parametrize
     def test_streaming_response_get_summary(self, client: Gitpod) -> None:
         with client.organizations.invites.with_streaming_response.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -131,7 +131,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         invite = await async_client.organizations.invites.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(InviteCreateResponse, invite, path=["response"])
 
@@ -139,7 +139,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.invites.with_raw_response.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -151,7 +151,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.invites.with_streaming_response.create(
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -199,7 +199,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_method_get_summary(self, async_client: AsyncGitpod) -> None:
         invite = await async_client.organizations.invites.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(InviteGetSummaryResponse, invite, path=["response"])
 
@@ -207,7 +207,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_raw_response_get_summary(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.invites.with_raw_response.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -219,7 +219,7 @@ class TestAsyncInvites:
     @parametrize
     async def test_streaming_response_get_summary(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.invites.with_streaming_response.get_summary(
-            invite_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            invite_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
