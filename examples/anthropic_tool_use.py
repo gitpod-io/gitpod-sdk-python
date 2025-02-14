@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# export ANTHROPIC_API_KEY=...
+# python -m examples.anthropic_tool_use
 
 from __future__ import annotations
 
@@ -10,6 +11,8 @@ from anthropic.types import ToolParam, MessageParam
 import gitpod.lib as util
 from gitpod import AsyncGitpod
 from gitpod.types.environment_initializer_param import Spec
+
+from .scm_auth import verify_context_url  # type: ignore
 
 gpclient = AsyncGitpod()
 llmclient = Anthropic()
@@ -41,8 +44,7 @@ async def create_environment(args: dict[str, str], cleanup: util.Disposables) ->
     env_class = await util.find_most_used_environment_class(gpclient)
     if not env_class:
         raise Exception("No environment class found. Please create one first.")
-    env_class_id = env_class.id
-    assert env_class_id is not None
+    await verify_context_url(gpclient, args["context_url"], env_class.runner_id)
 
     environment = (await gpclient.environments.create(
         spec={
@@ -54,18 +56,15 @@ async def create_environment(args: dict[str, str], cleanup: util.Disposables) ->
                     }
                 )]},
             },
-            "machine": {"class": env_class_id},
+            "machine": {"class": env_class.id},
         }
     )).environment
-    assert environment is not None
-    environment_id = environment.id
-    assert environment_id is not None
-    cleanup.add(lambda: asyncio.run(gpclient.environments.delete(environment_id=environment_id)))    
+    cleanup.adda(lambda: gpclient.environments.delete(environment_id=environment.id))
     
-    print(f"\nCreated environment: {environment_id} - waiting for it to be ready...")
-    await util.wait_for_environment_ready(gpclient, environment_id)
-    print(f"\nEnvironment is ready: {environment_id}")
-    return environment_id
+    print(f"\nCreated environment: {environment.id} - waiting for it to be ready...")
+    await util.wait_for_environment_running(gpclient, environment.id)
+    print(f"\nEnvironment is ready: {environment.id}")
+    return environment.id
 
 async def execute_command(args: dict[str, str]) -> str:
     lines_iter = await util.run_command(gpclient, args["environment_id"], args["command"])
@@ -135,6 +134,4 @@ async def main(cleanup: util.Disposables) -> None:
 
 if __name__ == "__main__":
     import asyncio
-    disposables = util.Disposables()
-    with disposables:
-        asyncio.run(main(disposables))
+    asyncio.run(util.with_disposables(main))

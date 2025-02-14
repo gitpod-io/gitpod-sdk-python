@@ -25,21 +25,17 @@ async def run_service(
         }
     )).services
 
-    service_id: Optional[str] = None
     if not services:
         service = (await client.environments.automations.services.create(   
             environment_id=environment_id,
             spec=spec,
             metadata=metadata
         )).service
-        assert service is not None
-        service_id = service.id
     else:
-        service_id = services[0].id
-    assert service_id is not None
+        service = services[0]
 
-    await client.environments.automations.services.start(id=service_id)
-    log_url = await wait_for_service_log_url(client, environment_id, service_id)
+    await client.environments.automations.services.start(id=service.id)
+    log_url = await wait_for_service_log_url(client, environment_id, service.id)
     return stream_logs(client, environment_id, log_url)
 
 async def run_command(client: AsyncGitpod, environment_id: str, command: str) -> AsyncIterator[str]:
@@ -50,7 +46,6 @@ async def run_command(client: AsyncGitpod, environment_id: str, command: str) ->
         }
     )).tasks
 
-    task_id: Optional[str] = None
     if not tasks:
         task = (await client.environments.automations.tasks.create(
             spec={
@@ -63,23 +58,17 @@ async def run_command(client: AsyncGitpod, environment_id: str, command: str) ->
                 "reference": TASK_REFERENCE,
             },
         )).task
-        assert task is not None
-        task_id = task.id
     else:
-        task_id = tasks[0].id
-        assert task_id is not None
+        task = tasks[0]
         await client.environments.automations.tasks.update(
-            id=task_id,
+            id=task.id,
             spec={
                 "command": command,
             },
         )
-    assert task_id is not None
-    task_execution = (await client.environments.automations.tasks.start(id=task_id)).task_execution
-    assert task_execution is not None
-    task_execution_id = task_execution.id
-    assert task_execution_id is not None
-    log_url = await wait_for_task_log_url(client, environment_id, task_execution_id)
+
+    task_execution = (await client.environments.automations.tasks.start(id=task.id)).task_execution
+    log_url = await wait_for_task_log_url(client, environment_id, task_execution.id)
     return stream_logs(client, environment_id, log_url)
 
 async def wait_for_task_log_url(client: AsyncGitpod, environment_id: str, task_execution_id: str) -> str:
