@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 
 from pydantic import Field as FieldInfo
 
@@ -11,14 +12,14 @@ __all__ = ["Editor"]
 class Editor(BaseModel):
     id: str
 
-    alias: str
-
-    icon_url: str = FieldInfo(alias="iconUrl")
-
     installation_instructions: str = FieldInfo(alias="installationInstructions")
 
     name: str
 
-    short_description: str = FieldInfo(alias="shortDescription")
-
     url_template: str = FieldInfo(alias="urlTemplate")
+
+    alias: Optional[str] = None
+
+    icon_url: Optional[str] = FieldInfo(alias="iconUrl", default=None)
+
+    short_description: Optional[str] = FieldInfo(alias="shortDescription", default=None)
