@@ -11,7 +11,7 @@ __all__ = ["Environment"]
 
 
 class Environment(BaseModel):
-    id: Optional[str] = None
+    id: str
     """ID is a unique identifier of this environment.
 
     No other environment with the same name must be managed by this environment

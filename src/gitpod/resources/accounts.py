@@ -66,7 +66,24 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveResponse:
         """
-        GetAccount retrieves a single Account.
+        Gets information about the currently authenticated account.
+
+        Use this method to:
+
+        - Retrieve account profile information
+        - Check organization memberships
+        - View account settings
+        - Get joinable organizations
+
+        ### Examples
+
+        - Get account details:
+
+          Retrieves information about the authenticated account.
+
+          ```yaml
+          {}
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -97,10 +114,26 @@ class AccountsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """DeleteAccount deletes an Account.
+        """
+        Deletes an account permanently.
 
-        To Delete an Account, the Account must not be
-        an active member of any Organization.
+        Use this method to:
+
+        - Remove unused accounts
+        - Clean up test accounts
+        - Complete account deletion requests
+
+        The account must not be an active member of any organization.
+
+        ### Examples
+
+        - Delete account:
+
+          Permanently removes an account.
+
+          ```yaml
+          accountId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -133,7 +166,32 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountGetSSOLoginURLResponse:
         """
-        GetSSOLoginURL returns the URL to redirect the user to for SSO login.
+        Gets the SSO login URL for a specific email domain.
+
+        Use this method to:
+
+        - Initiate SSO authentication
+        - Get organization-specific login URLs
+        - Handle SSO redirects
+
+        ### Examples
+
+        - Get login URL:
+
+          Retrieves SSO URL for email domain.
+
+          ```yaml
+          email: "user@company.com"
+          ```
+
+        - Get URL with return path:
+
+          Gets SSO URL with specific return location.
+
+          ```yaml
+          email: "user@company.com"
+          returnTo: "https://gitpod.io/workspaces"
+          ```
 
         Args:
           email: email is the email the user wants to login with
@@ -178,8 +236,35 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncLoginProvidersPage[LoginProvider]:
         """
-        ListLoginProviders returns the list of login providers matching the provided
-        filters.
+        Lists available login providers with optional filtering.
+
+        Use this method to:
+
+        - View supported authentication methods
+        - Get provider-specific login URLs
+        - Filter providers by invite
+
+        ### Examples
+
+        - List all providers:
+
+          Shows all available login providers.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - List for specific invite:
+
+          Shows providers available for an invite.
+
+          ```yaml
+          filter:
+            inviteId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing login methods
@@ -254,7 +339,24 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountRetrieveResponse:
         """
-        GetAccount retrieves a single Account.
+        Gets information about the currently authenticated account.
+
+        Use this method to:
+
+        - Retrieve account profile information
+        - Check organization memberships
+        - View account settings
+        - Get joinable organizations
+
+        ### Examples
+
+        - Get account details:
+
+          Retrieves information about the authenticated account.
+
+          ```yaml
+          {}
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -285,10 +387,26 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """DeleteAccount deletes an Account.
+        """
+        Deletes an account permanently.
 
-        To Delete an Account, the Account must not be
-        an active member of any Organization.
+        Use this method to:
+
+        - Remove unused accounts
+        - Clean up test accounts
+        - Complete account deletion requests
+
+        The account must not be an active member of any organization.
+
+        ### Examples
+
+        - Delete account:
+
+          Permanently removes an account.
+
+          ```yaml
+          accountId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -321,7 +439,32 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AccountGetSSOLoginURLResponse:
         """
-        GetSSOLoginURL returns the URL to redirect the user to for SSO login.
+        Gets the SSO login URL for a specific email domain.
+
+        Use this method to:
+
+        - Initiate SSO authentication
+        - Get organization-specific login URLs
+        - Handle SSO redirects
+
+        ### Examples
+
+        - Get login URL:
+
+          Retrieves SSO URL for email domain.
+
+          ```yaml
+          email: "user@company.com"
+          ```
+
+        - Get URL with return path:
+
+          Gets SSO URL with specific return location.
+
+          ```yaml
+          email: "user@company.com"
+          returnTo: "https://gitpod.io/workspaces"
+          ```
 
         Args:
           email: email is the email the user wants to login with
@@ -366,8 +509,35 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[LoginProvider, AsyncLoginProvidersPage[LoginProvider]]:
         """
-        ListLoginProviders returns the list of login providers matching the provided
-        filters.
+        Lists available login providers with optional filtering.
+
+        Use this method to:
+
+        - View supported authentication methods
+        - Get provider-specific login URLs
+        - Filter providers by invite
+
+        ### Examples
+
+        - List all providers:
+
+          Shows all available login providers.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - List for specific invite:
+
+          Shows providers available for an invite.
+
+          ```yaml
+          filter:
+            inviteId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing login methods

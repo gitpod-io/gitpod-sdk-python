@@ -33,16 +33,16 @@ class TestServices:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.create(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
-                "description": "description",
-                "name": "x",
-                "reference": "reference",
+                "description": "Runs the development web server",
+                "name": "Web Server",
+                "reference": "web-server",
                 "triggered_by": [
                     {
                         "manual": True,
@@ -53,8 +53,8 @@ class TestServices:
             },
             spec={
                 "commands": {
-                    "ready": "ready",
-                    "start": "x",
+                    "ready": "curl -s http://localhost:3000",
+                    "start": "npm run dev",
                     "stop": "stop",
                 },
                 "desired_phase": "SERVICE_PHASE_UNSPECIFIED",
@@ -102,7 +102,7 @@ class TestServices:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ServiceRetrieveResponse, service, path=["response"])
 
@@ -138,7 +138,7 @@ class TestServices:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             metadata={
                 "description": "description",
                 "name": "x",
@@ -154,8 +154,8 @@ class TestServices:
             },
             spec={
                 "commands": {
-                    "ready": "ready",
-                    "start": "start",
+                    "ready": "curl -s http://localhost:8080",
+                    "start": "npm run start:dev",
                     "stop": "stop",
                 },
                 "runs_on": {
@@ -210,12 +210,12 @@ class TestServices:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
+                "references": ["web-server", "database"],
                 "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncServicesPage[Service], service, path=["response"])
@@ -252,8 +252,8 @@ class TestServices:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            force=True,
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            force=False,
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -289,7 +289,7 @@ class TestServices:
     @parametrize
     def test_method_start_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.start(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -325,7 +325,7 @@ class TestServices:
     @parametrize
     def test_method_stop_with_all_params(self, client: Gitpod) -> None:
         service = client.environments.automations.services.stop(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -365,16 +365,16 @@ class TestAsyncServices:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.create(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
-                "description": "description",
-                "name": "x",
-                "reference": "reference",
+                "description": "Runs the development web server",
+                "name": "Web Server",
+                "reference": "web-server",
                 "triggered_by": [
                     {
                         "manual": True,
@@ -385,8 +385,8 @@ class TestAsyncServices:
             },
             spec={
                 "commands": {
-                    "ready": "ready",
-                    "start": "x",
+                    "ready": "curl -s http://localhost:3000",
+                    "start": "npm run dev",
                     "stop": "stop",
                 },
                 "desired_phase": "SERVICE_PHASE_UNSPECIFIED",
@@ -434,7 +434,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ServiceRetrieveResponse, service, path=["response"])
 
@@ -470,7 +470,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             metadata={
                 "description": "description",
                 "name": "x",
@@ -486,8 +486,8 @@ class TestAsyncServices:
             },
             spec={
                 "commands": {
-                    "ready": "ready",
-                    "start": "start",
+                    "ready": "curl -s http://localhost:8080",
+                    "start": "npm run start:dev",
                     "stop": "stop",
                 },
                 "runs_on": {
@@ -542,12 +542,12 @@ class TestAsyncServices:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
+                "references": ["web-server", "database"],
                 "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncServicesPage[Service], service, path=["response"])
@@ -584,8 +584,8 @@ class TestAsyncServices:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            force=True,
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            force=False,
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -621,7 +621,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.start(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, service, path=["response"])
 
@@ -657,7 +657,7 @@ class TestAsyncServices:
     @parametrize
     async def test_method_stop_with_all_params(self, async_client: AsyncGitpod) -> None:
         service = await async_client.environments.automations.services.stop(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, service, path=["response"])
 

@@ -62,7 +62,7 @@ class TestAccounts:
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         account = client.accounts.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(object, account, path=["response"])
 
@@ -70,7 +70,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
 
         assert response.is_closed is True
@@ -82,7 +82,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -96,7 +96,7 @@ class TestAccounts:
     @parametrize
     def test_method_get_sso_login_url(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
@@ -104,7 +104,7 @@ class TestAccounts:
     @parametrize
     def test_method_get_sso_login_url_with_all_params(self, client: Gitpod) -> None:
         account = client.accounts.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
             return_to="https://example.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -113,7 +113,7 @@ class TestAccounts:
     @parametrize
     def test_raw_response_get_sso_login_url(self, client: Gitpod) -> None:
         response = client.accounts.with_raw_response.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         )
 
         assert response.is_closed is True
@@ -125,7 +125,7 @@ class TestAccounts:
     @parametrize
     def test_streaming_response_get_sso_login_url(self, client: Gitpod) -> None:
         with client.accounts.with_streaming_response.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -150,7 +150,7 @@ class TestAccounts:
             filter={"invite_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncLoginProvidersPage[LoginProvider], account, path=["response"])
@@ -221,7 +221,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(object, account, path=["response"])
 
@@ -229,7 +229,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
 
         assert response.is_closed is True
@@ -241,7 +241,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.delete(
-            account_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -255,7 +255,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
 
@@ -263,7 +263,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_sso_login_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         account = await async_client.accounts.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
             return_to="https://example.com",
         )
         assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
@@ -272,7 +272,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_raw_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.accounts.with_raw_response.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         )
 
         assert response.is_closed is True
@@ -284,7 +284,7 @@ class TestAsyncAccounts:
     @parametrize
     async def test_streaming_response_get_sso_login_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.accounts.with_streaming_response.get_sso_login_url(
-            email="dev@stainlessapi.com",
+            email="user@company.com",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -309,7 +309,7 @@ class TestAsyncAccounts:
             filter={"invite_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncLoginProvidersPage[LoginProvider], account, path=["response"])
