@@ -14,6 +14,12 @@ class EnvironmentClass(BaseModel):
     id: str
     """id is the unique identifier of the environment class"""
 
+    runner_id: str = FieldInfo(alias="runnerId")
+    """
+    runner_id is the unique identifier of the runner the environment class belongs
+    to
+    """
+
     configuration: Optional[List[FieldValue]] = None
     """configuration describes the configuration of the environment class"""
 
@@ -27,10 +33,4 @@ class EnvironmentClass(BaseModel):
     """
     enabled indicates whether the environment class can be used to create new
     environments.
-    """
-
-    runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
-    """
-    runner_id is the unique identifier of the runner the environment class belongs
-    to
     """

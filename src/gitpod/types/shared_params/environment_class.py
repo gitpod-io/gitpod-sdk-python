@@ -15,6 +15,12 @@ class EnvironmentClass(TypedDict, total=False):
     id: Required[str]
     """id is the unique identifier of the environment class"""
 
+    runner_id: Required[Annotated[str, PropertyInfo(alias="runnerId")]]
+    """
+    runner_id is the unique identifier of the runner the environment class belongs
+    to
+    """
+
     configuration: Iterable[FieldValue]
     """configuration describes the configuration of the environment class"""
 
@@ -28,10 +34,4 @@ class EnvironmentClass(TypedDict, total=False):
     """
     enabled indicates whether the environment class can be used to create new
     environments.
-    """
-
-    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
-    """
-    runner_id is the unique identifier of the runner the environment class belongs
-    to
     """

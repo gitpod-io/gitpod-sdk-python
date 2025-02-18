@@ -11,7 +11,7 @@ __all__ = ["TaskExecution"]
 
 
 class TaskExecution(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     metadata: Optional[TaskExecutionMetadata] = None
 

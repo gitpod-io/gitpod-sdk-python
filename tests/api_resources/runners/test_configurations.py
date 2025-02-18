@@ -29,6 +29,7 @@ class TestConfigurations:
         configuration = client.runners.configurations.validate(
             environment_class={
                 "id": "id",
+                "runner_id": "runnerId",
                 "configuration": [
                     {
                         "key": "key",
@@ -38,7 +39,6 @@ class TestConfigurations:
                 "description": "xxx",
                 "display_name": "xxx",
                 "enabled": True,
-                "runner_id": "runnerId",
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             scm_integration={
@@ -91,6 +91,7 @@ class TestAsyncConfigurations:
         configuration = await async_client.runners.configurations.validate(
             environment_class={
                 "id": "id",
+                "runner_id": "runnerId",
                 "configuration": [
                     {
                         "key": "key",
@@ -100,7 +101,6 @@ class TestAsyncConfigurations:
                 "description": "xxx",
                 "display_name": "xxx",
                 "enabled": True,
-                "runner_id": "runnerId",
             },
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             scm_integration={
