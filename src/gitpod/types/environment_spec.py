@@ -14,6 +14,7 @@ __all__ = [
     "AutomationsFile",
     "Content",
     "Devcontainer",
+    "DevcontainerDotfiles",
     "Machine",
     "Port",
     "Secret",
@@ -50,6 +51,25 @@ class Content(BaseModel):
     session: Optional[str] = None
 
 
+class DevcontainerDotfiles(BaseModel):
+    repository: str
+    """URL of a dotfiles Git repository (e.g. https://github.com/owner/repository)"""
+
+    install_command: Optional[str] = FieldInfo(alias="installCommand", default=None)
+    """install_command is the command to run after cloning the dotfiles repository.
+
+    Defaults to run the first file of `install.sh`, `install`, `bootstrap.sh`,
+    `bootstrap`, `setup.sh` and `setup` found in the dotfiles repository's root
+    folder.
+    """
+
+    target_path: Optional[str] = FieldInfo(alias="targetPath", default=None)
+    """target_path is the path to clone the dotfiles repository to.
+
+    Defaults to `~/dotfiles`.
+    """
+
+
 class Devcontainer(BaseModel):
     devcontainer_file_path: Optional[str] = FieldInfo(alias="devcontainerFilePath", default=None)
     """
@@ -60,6 +80,9 @@ class Devcontainer(BaseModel):
     this.matches('^$|^[^/].*')
     ```
     """
+
+    dotfiles: Optional[DevcontainerDotfiles] = None
+    """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
 
     session: Optional[str] = None
 
