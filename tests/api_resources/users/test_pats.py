@@ -30,10 +30,10 @@ class TestPats:
         pat = client.users.pats.list(
             token="token",
             page_size=0,
-            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={"user_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"]},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
@@ -70,7 +70,7 @@ class TestPats:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.delete(
-            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            personal_access_token_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, pat, path=["response"])
 
@@ -106,7 +106,7 @@ class TestPats:
     @parametrize
     def test_method_get_with_all_params(self, client: Gitpod) -> None:
         pat = client.users.pats.get(
-            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            personal_access_token_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
 
@@ -148,10 +148,10 @@ class TestAsyncPats:
         pat = await async_client.users.pats.list(
             token="token",
             page_size=0,
-            filter={"user_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={"user_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"]},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncPersonalAccessTokensPage[PersonalAccessToken], pat, path=["response"])
@@ -188,7 +188,7 @@ class TestAsyncPats:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.delete(
-            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            personal_access_token_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, pat, path=["response"])
 
@@ -224,7 +224,7 @@ class TestAsyncPats:
     @parametrize
     async def test_method_get_with_all_params(self, async_client: AsyncGitpod) -> None:
         pat = await async_client.users.pats.get(
-            personal_access_token_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            personal_access_token_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PatGetResponse, pat, path=["response"])
 

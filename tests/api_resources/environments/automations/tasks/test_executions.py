@@ -31,7 +31,7 @@ class TestExecutions:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
@@ -71,13 +71,13 @@ class TestExecutions:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED"],
+                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED", "TASK_EXECUTION_PHASE_PENDING"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "task_references": ["string"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
@@ -114,7 +114,7 @@ class TestExecutions:
     @parametrize
     def test_method_stop_with_all_params(self, client: Gitpod) -> None:
         execution = client.environments.automations.tasks.executions.stop(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, execution, path=["response"])
 
@@ -154,7 +154,7 @@ class TestAsyncExecutions:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ExecutionRetrieveResponse, execution, path=["response"])
 
@@ -196,13 +196,13 @@ class TestAsyncExecutions:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED"],
+                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED", "TASK_EXECUTION_PHASE_PENDING"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "task_references": ["string"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncTaskExecutionsPage[TaskExecution], execution, path=["response"])
@@ -239,7 +239,7 @@ class TestAsyncExecutions:
     @parametrize
     async def test_method_stop_with_all_params(self, async_client: AsyncGitpod) -> None:
         execution = await async_client.environments.automations.tasks.executions.stop(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, execution, path=["response"])
 

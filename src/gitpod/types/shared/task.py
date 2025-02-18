@@ -12,7 +12,7 @@ __all__ = ["Task"]
 
 
 class Task(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     depends_on: Optional[List[str]] = FieldInfo(alias="dependsOn", default=None)
     """dependencies specifies the IDs of the automations this task depends on."""
