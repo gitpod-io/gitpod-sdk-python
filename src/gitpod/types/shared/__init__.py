@@ -9,7 +9,6 @@ from .error_code import ErrorCode as ErrorCode
 from .field_value import FieldValue as FieldValue
 from .user_status import UserStatus as UserStatus
 from .task_metadata import TaskMetadata as TaskMetadata
-from .arbitrary_data import ArbitraryData as ArbitraryData
 from .task_execution import TaskExecution as TaskExecution
 from .environment_class import EnvironmentClass as EnvironmentClass
 from .organization_role import OrganizationRole as OrganizationRole
