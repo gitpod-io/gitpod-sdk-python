@@ -39,7 +39,6 @@ class EnvironmentState:
         try:
             resp = await self.client.environments.retrieve(environment_id=self.environment_id)
             env = resp.environment
-            assert env is not None
             self._environment = env
             self._ready.set()
             for listener in list(self._listeners):
@@ -135,7 +134,7 @@ class EnvironmentState:
             await event.wait()
             if result is None:
                 raise RuntimeError("wait_until completed but result is None")
-            return result 
+            return result # type: ignore[unreachable] 
         finally:
             self._listeners.remove(listener)
 
@@ -144,11 +143,11 @@ class EnvironmentState:
         if not env.status:
             return False
             
-        if env.status.phase in ["ENVIRONMENT_PHASE_STOPPING", "ENVIRONMENT_PHASE_STOPPED", 
+        if env.status.failure_message:
+            raise RuntimeError(f"Environment {env.id} failed: {'; '.join(env.status.failure_message)}")
+        elif env.status.phase in ["ENVIRONMENT_PHASE_STOPPING", "ENVIRONMENT_PHASE_STOPPED", 
                               "ENVIRONMENT_PHASE_DELETING", "ENVIRONMENT_PHASE_DELETED"]:
             raise RuntimeError(f"Environment {env.id} is in unexpected phase: {env.status.phase}")
-        elif env.status.failure_message:
-            raise RuntimeError(f"Environment {env.id} failed: {'; '.join(env.status.failure_message)}")
         
         return env.status.phase == "ENVIRONMENT_PHASE_RUNNING"
 
@@ -212,7 +211,7 @@ class EnvironmentState:
             return True if self.check_ssh_key_applied(env, key_id, key_value) else None
         await self.wait_until(check_key)
 
-async def wait_for_environment_ready(client: AsyncGitpod, environment_id: str) -> None:
+async def wait_for_environment_running(client: AsyncGitpod, environment_id: str) -> None:
     env = EnvironmentState(client, environment_id)
     try: 
         await env.wait_until_running()
@@ -240,6 +239,9 @@ async def find_most_used_environment_class(client: AsyncGitpod) -> Optional[Envi
     if not environment_class_id:
         return None
     
+    return await find_environment_class_by_id(client, environment_class_id)
+
+async def find_environment_class_by_id(client: AsyncGitpod, environment_class_id: str) -> Optional[EnvironmentClass]:
     classes_resp = await client.environments.classes.list(filter={"can_create_environments": True})
     while classes_resp:
         for cls in classes_resp.environment_classes:

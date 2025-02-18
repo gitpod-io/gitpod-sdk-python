@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import sys
 import asyncio
 from io import StringIO
@@ -11,10 +9,12 @@ from gitpod import AsyncGitpod
 from gitpod.types.environment_spec_param import EnvironmentSpecParam
 from gitpod.types.environment_initializer_param import Spec
 
+from .scm_auth import verify_context_url  # type: ignore
+
 
 # Examples:
-# - ./examples/fs_access.py
-# - ./examples/fs_access.py https://github.com/gitpod-io/empty
+# - python -m examples.fs_access
+# - python -m examples.fs_access https://github.com/gitpod-io/empty
 async def main(cleanup: util.Disposables) -> None:
     client = AsyncGitpod()
 
@@ -25,8 +25,6 @@ async def main(cleanup: util.Disposables) -> None:
         print("Error: No environment class found. Please create one first.")
         sys.exit(1)
     print(f"Found environment class: {env_class.display_name} ({env_class.description})")
-    env_class_id = env_class.id
-    assert env_class_id is not None
     
     print("Generating SSH key pair")
     key = paramiko.RSAKey.generate(2048)
@@ -39,13 +37,14 @@ async def main(cleanup: util.Disposables) -> None:
     key_id = "fs-access-example"
     spec: EnvironmentSpecParam = {
         "desired_phase": "ENVIRONMENT_PHASE_RUNNING",
-        "machine": {"class": env_class_id},
+        "machine": {"class": env_class.id},
         "ssh_public_keys": [{
             "id": key_id,
             "value": public_key
         }]
     }
     if context_url:
+        await verify_context_url(client, context_url, env_class.runner_id)
         spec["content"] = {
             "initializer": {"specs": [Spec(
                 context_url={
@@ -56,13 +55,10 @@ async def main(cleanup: util.Disposables) -> None:
 
     print("Creating environment")
     environment = (await client.environments.create(spec=spec)).environment
-    assert environment is not None
-    environment_id = environment.id
-    assert environment_id is not None
-    cleanup.add(lambda: asyncio.run(client.environments.delete(environment_id=environment_id)))
+    cleanup.adda(lambda: client.environments.delete(environment_id=environment.id))
 
-    env = util.EnvironmentState(client, environment_id)
-    cleanup.add(lambda: asyncio.run(env.close()))
+    env = util.EnvironmentState(client, environment.id)
+    cleanup.adda(lambda: env.close())
 
     print("Waiting for environment to be running")
     await env.wait_until_running()
@@ -104,6 +100,4 @@ async def main(cleanup: util.Disposables) -> None:
         print(f"File content: {content.decode()}")
 
 if __name__ == "__main__":
-    disposables = util.Disposables()
-    with disposables:
-        asyncio.run(main(disposables))
+    asyncio.run(util.with_disposables(main))
