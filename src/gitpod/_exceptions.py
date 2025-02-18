@@ -10,7 +10,6 @@ import httpx
 from ._utils import is_dict
 from ._models import construct_type
 from .types.shared.error_code import ErrorCode
-from .types.shared.arbitrary_data import ArbitraryData
 
 __all__ = [
     "BadRequestError",
@@ -48,11 +47,6 @@ class APIError(GitpodError):
     The status code, which should be an enum value of
     [google.rpc.Code][google.rpc.Code].
     """
-    detail: Optional[ArbitraryData] = None
-    """
-    Contains an arbitrary serialized message along with a @type that describes the
-    type of the serialized message.
-    """
 
     def __init__(self, message: str, request: httpx.Request, *, body: object | None) -> None:
         super().__init__(message)
@@ -62,10 +56,8 @@ class APIError(GitpodError):
 
         if is_dict(body):
             self.code = cast(Any, construct_type(type_=Optional[ErrorCode], value=body.get("code")))
-            self.detail = cast(Any, construct_type(type_=Optional[ArbitraryData], value=body.get("detail")))
         else:
             self.code = None
-            self.detail = None
 
 
 class APIResponseValidationError(APIError):
