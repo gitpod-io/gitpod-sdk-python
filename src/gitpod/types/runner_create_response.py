@@ -11,6 +11,8 @@ __all__ = ["RunnerCreateResponse"]
 
 
 class RunnerCreateResponse(BaseModel):
+    runner: Runner
+
     access_token: Optional[str] = FieldInfo(alias="accessToken", default=None)
     """deprecated, will be removed. Use exchange_token instead."""
 
@@ -20,5 +22,3 @@ class RunnerCreateResponse(BaseModel):
     for an access token, using the IdentityService.ExchangeToken rpc. The token
     expires after 24 hours.
     """
-
-    runner: Optional[Runner] = None
