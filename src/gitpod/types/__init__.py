@@ -18,7 +18,6 @@ from .shared import (
     FieldValue as FieldValue,
     UserStatus as UserStatus,
     TaskMetadata as TaskMetadata,
-    ArbitraryData as ArbitraryData,
     TaskExecution as TaskExecution,
     EnvironmentClass as EnvironmentClass,
     OrganizationRole as OrganizationRole,
