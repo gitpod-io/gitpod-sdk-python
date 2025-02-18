@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import sys
 import asyncio
 
@@ -8,10 +6,12 @@ from gitpod import AsyncGitpod
 from gitpod.types.environment_spec_param import EnvironmentSpecParam
 from gitpod.types.environment_initializer_param import Spec
 
+from .scm_auth import verify_context_url  # type: ignore
+
 
 # Examples:
-# - ./examples/run_command.py 'echo "Hello World!"'
-# - ./examples/run_command.py 'echo "Hello World!"' https://github.com/gitpod-io/empty
+# - python -m examples.run_command 'echo "Hello World!"'
+# - python -m examples.run_command 'echo "Hello World!"' https://github.com/gitpod-io/empty
 async def main(cleanup: util.Disposables) -> None:
     client = AsyncGitpod()
 
@@ -27,14 +27,13 @@ async def main(cleanup: util.Disposables) -> None:
         print("Error: No environment class found. Please create one first.")
         sys.exit(1)
     print(f"Found environment class: {env_class.display_name} ({env_class.description})")
-    env_class_id = env_class.id
-    assert env_class_id is not None
-
+    
     spec: EnvironmentSpecParam = {
         "desired_phase": "ENVIRONMENT_PHASE_RUNNING",
-        "machine": {"class": env_class_id},
+        "machine": {"class": env_class.id},
     }
     if context_url:
+        await verify_context_url(client, context_url, env_class.runner_id)
         spec["content"] = {
             "initializer": {"specs": [Spec(
                 context_url={
@@ -45,20 +44,15 @@ async def main(cleanup: util.Disposables) -> None:
 
     print("Creating environment")
     environment = (await client.environments.create(spec=spec)).environment
-    assert environment is not None
-    environment_id = environment.id
-    assert environment_id is not None
-    cleanup.add(lambda: asyncio.run(client.environments.delete(environment_id=environment_id)))
+    cleanup.adda(lambda: client.environments.delete(environment_id=environment.id))
 
     print("Waiting for environment to be ready")
-    await util.wait_for_environment_ready(client, environment_id)
+    await util.wait_for_environment_running(client, environment.id)
 
     print("Running command")
-    lines = await util.run_command(client, environment_id, command)
+    lines = await util.run_command(client, environment.id, command)
     async for line in lines:
         print(line)
 
 if __name__ == "__main__":
-    disposables = util.Disposables()
-    with disposables:
-        asyncio.run(main(disposables))
+    asyncio.run(util.with_disposables(main))

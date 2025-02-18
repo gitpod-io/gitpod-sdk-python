@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import sys
 import asyncio
 
@@ -8,27 +6,27 @@ from gitpod import AsyncGitpod
 from gitpod.types.environment_spec_param import EnvironmentSpecParam
 from gitpod.types.environment_initializer_param import Spec
 
+from .scm_auth import verify_context_url  # type: ignore
+
 
 # Examples:
-# - ./examples/run_service.py
-# - ./examples/run_service.py https://github.com/gitpod-io/empty
+# - python -m examples.run_service
+# - python -m examples.run_service https://github.com/gitpod-io/empty
 async def main(cleanup: util.Disposables) -> None:
     client = AsyncGitpod()
 
     context_url = sys.argv[1] if len(sys.argv) > 1 else None
-
+    
     env_class = await util.find_most_used_environment_class(client)
     if not env_class:
         print("Error: No environment class found. Please create one first.")
         sys.exit(1)
     print(f"Found environment class: {env_class.display_name} ({env_class.description})")
-    env_class_id = env_class.id
-    assert env_class_id is not None
     
     port = 8888
     spec: EnvironmentSpecParam = {
         "desired_phase": "ENVIRONMENT_PHASE_RUNNING",
-        "machine": {"class": env_class_id},
+        "machine": {"class": env_class.id},
         "ports": [{
             "name": "Lama Service",
             "port": port,
@@ -36,28 +34,25 @@ async def main(cleanup: util.Disposables) -> None:
         }]
     }
     if context_url:
+        await verify_context_url(client, context_url, env_class.runner_id)
         spec["content"] = {
             "initializer": {"specs": [Spec(
-             context_url={
-                 "url": context_url
-             }
-        )]}
-    }
+                 context_url={
+                     "url": context_url
+                }
+            )]}
+        }
 
-    print("Creating environment")
     environment = (await client.environments.create(spec=spec)).environment
-    assert environment is not None
-    environment_id = environment.id
-    assert environment_id is not None
-    cleanup.add(lambda: asyncio.run(client.environments.delete(environment_id=environment_id)))
+    cleanup.adda(lambda: client.environments.delete(environment_id=environment.id))
     
     print("Waiting for environment to be ready")
-    env = util.EnvironmentState(client, environment_id)
-    cleanup.add(lambda: asyncio.run(env.close()))
+    env = util.EnvironmentState(client, environment.id)
+    cleanup.adda(lambda: env.close())
     await env.wait_until_running()
 
     print("Starting Lama Service")
-    lines = await util.run_service(client, environment_id, {
+    lines = await util.run_service(client, environment.id, {
         "name":"Lama Service",
         "description":"Lama Service", 
         "reference":"lama-service"
@@ -75,6 +70,4 @@ async def main(cleanup: util.Disposables) -> None:
         print(line)
 
 if __name__ == "__main__":
-    disposables = util.Disposables()
-    with disposables:
-        asyncio.run(main(disposables))
+    asyncio.run(util.with_disposables(main))
