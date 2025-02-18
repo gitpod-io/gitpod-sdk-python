@@ -26,7 +26,7 @@ class TestEditors:
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         editor = client.editors.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
@@ -34,7 +34,7 @@ class TestEditors:
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -46,7 +46,7 @@ class TestEditors:
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -70,7 +70,7 @@ class TestEditors:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncEditorsPage[Editor], editor, path=["response"])
@@ -101,9 +101,9 @@ class TestEditors:
     @parametrize
     def test_method_resolve_url(self, client: Gitpod) -> None:
         editor = client.editors.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
@@ -111,9 +111,9 @@ class TestEditors:
     @parametrize
     def test_raw_response_resolve_url(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -125,9 +125,9 @@ class TestEditors:
     @parametrize
     def test_streaming_response_resolve_url(self, client: Gitpod) -> None:
         with client.editors.with_streaming_response.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -145,7 +145,7 @@ class TestAsyncEditors:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EditorRetrieveResponse, editor, path=["response"])
 
@@ -153,7 +153,7 @@ class TestAsyncEditors:
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
 
         assert response.is_closed is True
@@ -165,7 +165,7 @@ class TestAsyncEditors:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.retrieve(
-            id="id",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -189,7 +189,7 @@ class TestAsyncEditors:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncEditorsPage[Editor], editor, path=["response"])
@@ -220,9 +220,9 @@ class TestAsyncEditors:
     @parametrize
     async def test_method_resolve_url(self, async_client: AsyncGitpod) -> None:
         editor = await async_client.editors.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 
@@ -230,9 +230,9 @@ class TestAsyncEditors:
     @parametrize
     async def test_raw_response_resolve_url(self, async_client: AsyncGitpod) -> None:
         response = await async_client.editors.with_raw_response.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
 
         assert response.is_closed is True
@@ -244,9 +244,9 @@ class TestAsyncEditors:
     @parametrize
     async def test_streaming_response_resolve_url(self, async_client: AsyncGitpod) -> None:
         async with async_client.editors.with_streaming_response.resolve_url(
-            editor_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            organization_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

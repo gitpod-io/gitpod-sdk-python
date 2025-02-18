@@ -63,8 +63,8 @@ class TestUsers:
     @parametrize
     def test_method_set_suspended_with_all_params(self, client: Gitpod) -> None:
         user = client.users.set_suspended(
-            suspended=True,
-            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            suspended=False,
+            user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(object, user, path=["response"])
 
@@ -140,8 +140,8 @@ class TestAsyncUsers:
     @parametrize
     async def test_method_set_suspended_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.set_suspended(
-            suspended=True,
-            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            suspended=False,
+            user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(object, user, path=["response"])
 

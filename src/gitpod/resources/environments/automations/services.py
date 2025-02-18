@@ -71,7 +71,52 @@ class ServicesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ServiceCreateResponse:
         """
-        CreateService
+        Creates a new automation service for an environment.
+
+        Use this method to:
+
+        - Set up long-running services
+        - Configure service triggers
+        - Define service dependencies
+        - Specify runtime environments
+
+        ### Examples
+
+        - Create basic service:
+
+          Creates a simple service with start command.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "web-server"
+            name: "Web Server"
+            description: "Runs the development web server"
+            triggeredBy:
+              - postDevcontainerStart: true
+          spec:
+            commands:
+              start: "npm run dev"
+              ready: "curl -s http://localhost:3000"
+          ```
+
+        - Create Docker-based service:
+
+          Creates a service running in a specific container.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "redis"
+            name: "Redis Server"
+            description: "Redis cache service"
+          spec:
+            commands:
+              start: "redis-server"
+            runsOn:
+              docker:
+                image: "redis:7"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -110,7 +155,24 @@ class ServicesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ServiceRetrieveResponse:
         """
-        GetService
+        Gets details about a specific automation service.
+
+        Use this method to:
+
+        - Check service status
+        - View service configuration
+        - Monitor service health
+        - Retrieve service metadata
+
+        ### Examples
+
+        - Get service details:
+
+          Retrieves information about a specific service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -145,7 +207,41 @@ class ServicesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateService
+        Updates an automation service configuration.
+
+        Use this method to:
+
+        - Modify service commands
+        - Update triggers
+        - Change runtime settings
+        - Adjust dependencies
+
+        ### Examples
+
+        - Update commands:
+
+          Changes service start and ready commands.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          spec:
+            commands:
+              start: "npm run start:dev"
+              ready: "curl -s http://localhost:8080"
+          ```
+
+        - Update triggers:
+
+          Modifies when the service starts.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          metadata:
+            triggeredBy:
+              trigger:
+                - postDevcontainerStart: true
+                - manual: true
+          ```
 
         Args:
           spec: Changing the spec of a service is a complex operation. The spec of a service can
@@ -196,7 +292,37 @@ class ServicesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncServicesPage[Service]:
         """
-        ListServices
+        Lists automation services with optional filtering.
+
+        Use this method to:
+
+        - View all services in an environment
+        - Filter services by reference
+        - Monitor service status
+
+        ### Examples
+
+        - List environment services:
+
+          Shows all services for an environment.
+
+          ```yaml
+          filter:
+            environmentIds: ["07e03a28-65a5-4d98-b532-8ea67b188048"]
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by reference:
+
+          Lists services matching specific references.
+
+          ```yaml
+          filter:
+            references: ["web-server", "database"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing services
@@ -250,10 +376,36 @@ class ServicesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """DeleteService deletes a service.
+        """Deletes an automation service.
 
         This call does not block until the service is
         deleted. If the service is not stopped it will be stopped before deletion.
+
+        Use this method to:
+
+        - Remove unused services
+        - Clean up service configurations
+        - Stop and delete services
+
+        ### Examples
+
+        - Delete service:
+
+          Removes a service after stopping it.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          force: false
+          ```
+
+        - Force delete:
+
+          Immediately removes a service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          force: true
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -290,11 +442,27 @@ class ServicesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """StartService starts a service.
+        """Starts an automation service.
 
         This call does not block until the service is
         started. This call will not error if the service is already running or has been
         started.
+
+        Use this method to:
+
+        - Start stopped services
+        - Resume service operations
+        - Trigger service initialization
+
+        ### Examples
+
+        - Start service:
+
+          Starts a previously stopped service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -325,11 +493,27 @@ class ServicesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """StopService stops a service.
+        """Stops an automation service.
 
         This call does not block until the service is
         stopped. This call will not error if the service is already stopped or has been
         stopped.
+
+        Use this method to:
+
+        - Pause service operations
+        - Gracefully stop services
+        - Prepare for updates
+
+        ### Examples
+
+        - Stop service:
+
+          Gracefully stops a running service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -384,7 +568,52 @@ class AsyncServicesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ServiceCreateResponse:
         """
-        CreateService
+        Creates a new automation service for an environment.
+
+        Use this method to:
+
+        - Set up long-running services
+        - Configure service triggers
+        - Define service dependencies
+        - Specify runtime environments
+
+        ### Examples
+
+        - Create basic service:
+
+          Creates a simple service with start command.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "web-server"
+            name: "Web Server"
+            description: "Runs the development web server"
+            triggeredBy:
+              - postDevcontainerStart: true
+          spec:
+            commands:
+              start: "npm run dev"
+              ready: "curl -s http://localhost:3000"
+          ```
+
+        - Create Docker-based service:
+
+          Creates a service running in a specific container.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "redis"
+            name: "Redis Server"
+            description: "Redis cache service"
+          spec:
+            commands:
+              start: "redis-server"
+            runsOn:
+              docker:
+                image: "redis:7"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -423,7 +652,24 @@ class AsyncServicesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ServiceRetrieveResponse:
         """
-        GetService
+        Gets details about a specific automation service.
+
+        Use this method to:
+
+        - Check service status
+        - View service configuration
+        - Monitor service health
+        - Retrieve service metadata
+
+        ### Examples
+
+        - Get service details:
+
+          Retrieves information about a specific service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -458,7 +704,41 @@ class AsyncServicesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateService
+        Updates an automation service configuration.
+
+        Use this method to:
+
+        - Modify service commands
+        - Update triggers
+        - Change runtime settings
+        - Adjust dependencies
+
+        ### Examples
+
+        - Update commands:
+
+          Changes service start and ready commands.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          spec:
+            commands:
+              start: "npm run start:dev"
+              ready: "curl -s http://localhost:8080"
+          ```
+
+        - Update triggers:
+
+          Modifies when the service starts.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          metadata:
+            triggeredBy:
+              trigger:
+                - postDevcontainerStart: true
+                - manual: true
+          ```
 
         Args:
           spec: Changing the spec of a service is a complex operation. The spec of a service can
@@ -509,7 +789,37 @@ class AsyncServicesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Service, AsyncServicesPage[Service]]:
         """
-        ListServices
+        Lists automation services with optional filtering.
+
+        Use this method to:
+
+        - View all services in an environment
+        - Filter services by reference
+        - Monitor service status
+
+        ### Examples
+
+        - List environment services:
+
+          Shows all services for an environment.
+
+          ```yaml
+          filter:
+            environmentIds: ["07e03a28-65a5-4d98-b532-8ea67b188048"]
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by reference:
+
+          Lists services matching specific references.
+
+          ```yaml
+          filter:
+            references: ["web-server", "database"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing services
@@ -563,10 +873,36 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """DeleteService deletes a service.
+        """Deletes an automation service.
 
         This call does not block until the service is
         deleted. If the service is not stopped it will be stopped before deletion.
+
+        Use this method to:
+
+        - Remove unused services
+        - Clean up service configurations
+        - Stop and delete services
+
+        ### Examples
+
+        - Delete service:
+
+          Removes a service after stopping it.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          force: false
+          ```
+
+        - Force delete:
+
+          Immediately removes a service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          force: true
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -603,11 +939,27 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """StartService starts a service.
+        """Starts an automation service.
 
         This call does not block until the service is
         started. This call will not error if the service is already running or has been
         started.
+
+        Use this method to:
+
+        - Start stopped services
+        - Resume service operations
+        - Trigger service initialization
+
+        ### Examples
+
+        - Start service:
+
+          Starts a previously stopped service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -638,11 +990,27 @@ class AsyncServicesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
-        """StopService stops a service.
+        """Stops an automation service.
 
         This call does not block until the service is
         stopped. This call will not error if the service is already stopped or has been
         stopped.
+
+        Use this method to:
+
+        - Pause service operations
+        - Gracefully stop services
+        - Prepare for updates
+
+        ### Examples
+
+        - Stop service:
+
+          Gracefully stops a running service.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers

@@ -11,7 +11,7 @@ __all__ = ["EnvironmentClass"]
 
 
 class EnvironmentClass(BaseModel):
-    id: Optional[str] = None
+    id: str
     """id is the unique identifier of the environment class"""
 
     configuration: Optional[List[FieldValue]] = None
