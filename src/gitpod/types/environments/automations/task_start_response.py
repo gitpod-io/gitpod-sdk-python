@@ -1,6 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
 
 from pydantic import Field as FieldInfo
 
@@ -11,4 +10,4 @@ __all__ = ["TaskStartResponse"]
 
 
 class TaskStartResponse(BaseModel):
-    task_execution: Optional[TaskExecution] = FieldInfo(alias="taskExecution", default=None)
+    task_execution: TaskExecution = FieldInfo(alias="taskExecution")

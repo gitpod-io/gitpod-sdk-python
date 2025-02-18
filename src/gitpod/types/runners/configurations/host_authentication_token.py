@@ -12,7 +12,7 @@ __all__ = ["HostAuthenticationToken"]
 
 
 class HostAuthenticationToken(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     expires_at: Optional[datetime] = FieldInfo(alias="expiresAt", default=None)
     """
