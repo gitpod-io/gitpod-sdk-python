@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-02-18)
+
+Full Changelog: [v0.1.6...v0.2.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.6...v0.2.0)
+
+### Features
+
+* feat(auth): Add SCM authentication support for repository access ([#44](https://github.com/gitpod-io/gitpod-sdk-python/issues/44)) ([6a5dc38](https://github.com/gitpod-io/gitpod-sdk-python/commit/6a5dc385ea6a8ea0f5ea9ef18c61380d6c617221))
+
 ## 0.1.6 (2025-02-18)
 
 Full Changelog: [v0.1.5...v0.1.6](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.1.5...v0.1.6)
