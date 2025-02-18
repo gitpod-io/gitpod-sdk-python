@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Optional, cast
+from typing import Any, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -53,11 +53,6 @@ class APIError(GitpodError):
     Contains an arbitrary serialized message along with a @type that describes the
     type of the serialized message.
     """
-    if TYPE_CHECKING:
-        # Stub to indicate that arbitrary properties are accepted.
-        # To access properties that are not valid identifiers you can use `getattr`, e.g.
-        # `getattr(obj, '$type')`
-        def __getattr__(self, attr: str) -> object: ...
 
     def __init__(self, message: str, request: httpx.Request, *, body: object | None) -> None:
         super().__init__(message)
