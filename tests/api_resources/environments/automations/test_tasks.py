@@ -35,16 +35,16 @@ class TestTasks:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.create(
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
-                "description": "description",
-                "name": "x",
-                "reference": "reference",
+                "description": "Builds the project artifacts",
+                "name": "Build Project",
+                "reference": "build",
                 "triggered_by": [
                     {
                         "manual": True,
@@ -54,7 +54,7 @@ class TestTasks:
                 ],
             },
             spec={
-                "command": "command",
+                "command": "npm run build",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -97,7 +97,7 @@ class TestTasks:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
 
@@ -133,7 +133,7 @@ class TestTasks:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             metadata={
                 "description": "description",
@@ -149,7 +149,7 @@ class TestTasks:
                 },
             },
             spec={
-                "command": "command",
+                "command": "npm run test:coverage",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -196,12 +196,12 @@ class TestTasks:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
+                "references": ["build", "test"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncTasksPage[Task], task, path=["response"])
@@ -238,7 +238,7 @@ class TestTasks:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, task, path=["response"])
 
@@ -274,7 +274,7 @@ class TestTasks:
     @parametrize
     def test_method_start_with_all_params(self, client: Gitpod) -> None:
         task = client.environments.automations.tasks.start(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(TaskStartResponse, task, path=["response"])
 
@@ -315,16 +315,16 @@ class TestAsyncTasks:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.create(
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
                     "id": "id",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
-                "description": "description",
-                "name": "x",
-                "reference": "reference",
+                "description": "Builds the project artifacts",
+                "name": "Build Project",
+                "reference": "build",
                 "triggered_by": [
                     {
                         "manual": True,
@@ -334,7 +334,7 @@ class TestAsyncTasks:
                 ],
             },
             spec={
-                "command": "command",
+                "command": "npm run build",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -377,7 +377,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(TaskRetrieveResponse, task, path=["response"])
 
@@ -413,7 +413,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             depends_on=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             metadata={
                 "description": "description",
@@ -429,7 +429,7 @@ class TestAsyncTasks:
                 },
             },
             spec={
-                "command": "command",
+                "command": "npm run test:coverage",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -476,12 +476,12 @@ class TestAsyncTasks:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "references": ["x"],
+                "references": ["build", "test"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncTasksPage[Task], task, path=["response"])
@@ -518,7 +518,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, task, path=["response"])
 
@@ -554,7 +554,7 @@ class TestAsyncTasks:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncGitpod) -> None:
         task = await async_client.environments.automations.tasks.start(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(TaskStartResponse, task, path=["response"])
 

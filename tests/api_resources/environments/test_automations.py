@@ -29,14 +29,14 @@ class TestAutomations:
         automation = client.environments.automations.upsert(
             automations_file={
                 "services": {
-                    "foo": {
+                    "web-server": {
                         "commands": {
-                            "ready": "ready",
-                            "start": "x",
+                            "ready": "curl -s http://localhost:3000",
+                            "start": "npm run dev",
                             "stop": "stop",
                         },
-                        "description": "description",
-                        "name": "x",
+                        "description": "Development web server",
+                        "name": "Web Server",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
@@ -47,11 +47,11 @@ class TestAutomations:
                     }
                 },
                 "tasks": {
-                    "foo": {
-                        "command": "x",
+                    "build": {
+                        "command": "npm run build",
                         "depends_on": ["string"],
-                        "description": "description",
-                        "name": "x",
+                        "description": "Builds the project artifacts",
+                        "name": "Build Project",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
@@ -62,7 +62,7 @@ class TestAutomations:
                     }
                 },
             },
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 
@@ -104,14 +104,14 @@ class TestAsyncAutomations:
         automation = await async_client.environments.automations.upsert(
             automations_file={
                 "services": {
-                    "foo": {
+                    "web-server": {
                         "commands": {
-                            "ready": "ready",
-                            "start": "x",
+                            "ready": "curl -s http://localhost:3000",
+                            "start": "npm run dev",
                             "stop": "stop",
                         },
-                        "description": "description",
-                        "name": "x",
+                        "description": "Development web server",
+                        "name": "Web Server",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
@@ -122,11 +122,11 @@ class TestAsyncAutomations:
                     }
                 },
                 "tasks": {
-                    "foo": {
-                        "command": "x",
+                    "build": {
+                        "command": "npm run build",
                         "depends_on": ["string"],
-                        "description": "description",
-                        "name": "x",
+                        "description": "Builds the project artifacts",
+                        "name": "Build Project",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
@@ -137,7 +137,7 @@ class TestAsyncAutomations:
                     }
                 },
             },
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(AutomationUpsertResponse, automation, path=["response"])
 

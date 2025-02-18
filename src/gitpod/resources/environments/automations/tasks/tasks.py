@@ -86,7 +86,47 @@ class TasksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskCreateResponse:
         """
-        CreateTask
+        Creates a new automation task.
+
+        Use this method to:
+
+        - Define one-off or scheduled tasks
+        - Set up build or test automation
+        - Configure task dependencies
+        - Specify execution environments
+
+        ### Examples
+
+        - Create basic task:
+
+          Creates a simple build task.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "build"
+            name: "Build Project"
+            description: "Builds the project artifacts"
+            triggeredBy:
+              - postEnvironmentStart: true
+          spec:
+            command: "npm run build"
+          ```
+
+        - Create task with dependencies:
+
+          Creates a task that depends on other services.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "test"
+            name: "Run Tests"
+            description: "Runs the test suite"
+          spec:
+            command: "npm test"
+          dependsOn: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -126,7 +166,23 @@ class TasksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskRetrieveResponse:
         """
-        GetTask
+        Gets details about a specific automation task.
+
+        Use this method to:
+
+        - Check task configuration
+        - View task dependencies
+        - Monitor task status
+
+        ### Examples
+
+        - Get task details:
+
+          Retrieves information about a specific task.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -161,7 +217,38 @@ class TasksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateTask
+        Updates an automation task configuration.
+
+        Use this method to:
+
+        - Modify task commands
+        - Update task triggers
+        - Change dependencies
+        - Adjust execution settings
+
+        ### Examples
+
+        - Update command:
+
+          Changes the task's command.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          spec:
+            command: "npm run test:coverage"
+          ```
+
+        - Update triggers:
+
+          Modifies when the task runs.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          metadata:
+            triggeredBy:
+              trigger:
+                - postEnvironmentStart: true
+          ```
 
         Args:
           depends_on: dependencies specifies the IDs of the automations this task depends on.
@@ -206,7 +293,37 @@ class TasksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncTasksPage[Task]:
         """
-        ListTasks
+        Lists automation tasks with optional filtering.
+
+        Use this method to:
+
+        - View all tasks in an environment
+        - Filter tasks by reference
+        - Monitor task status
+
+        ### Examples
+
+        - List environment tasks:
+
+          Shows all tasks for an environment.
+
+          ```yaml
+          filter:
+            environmentIds: ["07e03a28-65a5-4d98-b532-8ea67b188048"]
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by reference:
+
+          Lists tasks matching specific references.
+
+          ```yaml
+          filter:
+            references: ["build", "test"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing tasks
@@ -260,7 +377,23 @@ class TasksResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteTask
+        Deletes an automation task.
+
+        Use this method to:
+
+        - Remove unused tasks
+        - Clean up task configurations
+        - Delete obsolete automations
+
+        ### Examples
+
+        - Delete task:
+
+          Removes a task and its configuration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -291,10 +424,26 @@ class TasksResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskStartResponse:
-        """StartTask starts a task, i.e.
+        """Starts a task by creating a new task execution.
 
-        creates a task execution. This call does not block
-        until the task is started; the task will be started asynchronously.
+        This call does not block until
+        the task is started; the task will be started asynchronously.
+
+        Use this method to:
+
+        - Trigger task execution
+        - Run one-off tasks
+        - Start scheduled tasks immediately
+
+        ### Examples
+
+        - Start task:
+
+          Creates a new execution of a task.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -354,7 +503,47 @@ class AsyncTasksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskCreateResponse:
         """
-        CreateTask
+        Creates a new automation task.
+
+        Use this method to:
+
+        - Define one-off or scheduled tasks
+        - Set up build or test automation
+        - Configure task dependencies
+        - Specify execution environments
+
+        ### Examples
+
+        - Create basic task:
+
+          Creates a simple build task.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "build"
+            name: "Build Project"
+            description: "Builds the project artifacts"
+            triggeredBy:
+              - postEnvironmentStart: true
+          spec:
+            command: "npm run build"
+          ```
+
+        - Create task with dependencies:
+
+          Creates a task that depends on other services.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          metadata:
+            reference: "test"
+            name: "Run Tests"
+            description: "Runs the test suite"
+          spec:
+            command: "npm test"
+          dependsOn: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -394,7 +583,23 @@ class AsyncTasksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskRetrieveResponse:
         """
-        GetTask
+        Gets details about a specific automation task.
+
+        Use this method to:
+
+        - Check task configuration
+        - View task dependencies
+        - Monitor task status
+
+        ### Examples
+
+        - Get task details:
+
+          Retrieves information about a specific task.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -429,7 +634,38 @@ class AsyncTasksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateTask
+        Updates an automation task configuration.
+
+        Use this method to:
+
+        - Modify task commands
+        - Update task triggers
+        - Change dependencies
+        - Adjust execution settings
+
+        ### Examples
+
+        - Update command:
+
+          Changes the task's command.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          spec:
+            command: "npm run test:coverage"
+          ```
+
+        - Update triggers:
+
+          Modifies when the task runs.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          metadata:
+            triggeredBy:
+              trigger:
+                - postEnvironmentStart: true
+          ```
 
         Args:
           depends_on: dependencies specifies the IDs of the automations this task depends on.
@@ -474,7 +710,37 @@ class AsyncTasksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Task, AsyncTasksPage[Task]]:
         """
-        ListTasks
+        Lists automation tasks with optional filtering.
+
+        Use this method to:
+
+        - View all tasks in an environment
+        - Filter tasks by reference
+        - Monitor task status
+
+        ### Examples
+
+        - List environment tasks:
+
+          Shows all tasks for an environment.
+
+          ```yaml
+          filter:
+            environmentIds: ["07e03a28-65a5-4d98-b532-8ea67b188048"]
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by reference:
+
+          Lists tasks matching specific references.
+
+          ```yaml
+          filter:
+            references: ["build", "test"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           filter: filter contains the filter options for listing tasks
@@ -528,7 +794,23 @@ class AsyncTasksResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteTask
+        Deletes an automation task.
+
+        Use this method to:
+
+        - Remove unused tasks
+        - Clean up task configurations
+        - Delete obsolete automations
+
+        ### Examples
+
+        - Delete task:
+
+          Removes a task and its configuration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -559,10 +841,26 @@ class AsyncTasksResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> TaskStartResponse:
-        """StartTask starts a task, i.e.
+        """Starts a task by creating a new task execution.
 
-        creates a task execution. This call does not block
-        until the task is started; the task will be started asynchronously.
+        This call does not block until
+        the task is started; the task will be started asynchronously.
+
+        Use this method to:
+
+        - Trigger task execution
+        - Run one-off tasks
+        - Start scheduled tasks immediately
+
+        ### Examples
+
+        - Start task:
+
+          Creates a new execution of a task.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers

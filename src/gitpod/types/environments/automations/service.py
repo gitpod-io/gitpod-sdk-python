@@ -13,7 +13,7 @@ __all__ = ["Service"]
 
 
 class Service(BaseModel):
-    id: Optional[str] = None
+    id: str
 
     environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
 

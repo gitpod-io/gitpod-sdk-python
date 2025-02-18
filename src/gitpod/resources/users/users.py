@@ -68,7 +68,24 @@ class UsersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> UserGetAuthenticatedUserResponse:
         """
-        GetAuthenticatedUser allows to retrieve the current user.
+        Gets information about the currently authenticated user.
+
+        Use this method to:
+
+        - Get user profile information
+        - Check authentication status
+        - Retrieve user settings
+        - Verify account details
+
+        ### Examples
+
+        - Get current user:
+
+          Retrieves details about the authenticated user.
+
+          ```yaml
+          {}
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -101,7 +118,33 @@ class UsersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        SetSuspended sets the suspended state of the user.
+        Sets whether a user account is suspended.
+
+        Use this method to:
+
+        - Suspend problematic users
+        - Reactivate suspended accounts
+        - Manage user access
+
+        ### Examples
+
+        - Suspend user:
+
+          Suspends a user account.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          suspended: true
+          ```
+
+        - Reactivate user:
+
+          Removes suspension from a user account.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          suspended: false
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -164,7 +207,24 @@ class AsyncUsersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> UserGetAuthenticatedUserResponse:
         """
-        GetAuthenticatedUser allows to retrieve the current user.
+        Gets information about the currently authenticated user.
+
+        Use this method to:
+
+        - Get user profile information
+        - Check authentication status
+        - Retrieve user settings
+        - Verify account details
+
+        ### Examples
+
+        - Get current user:
+
+          Retrieves details about the authenticated user.
+
+          ```yaml
+          {}
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -199,7 +259,33 @@ class AsyncUsersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        SetSuspended sets the suspended state of the user.
+        Sets whether a user account is suspended.
+
+        Use this method to:
+
+        - Suspend problematic users
+        - Reactivate suspended accounts
+        - Manage user access
+
+        ### Examples
+
+        - Suspend user:
+
+          Suspends a user account.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          suspended: true
+          ```
+
+        - Reactivate user:
+
+          Removes suspension from a user account.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          suspended: false
+          ```
 
         Args:
           extra_headers: Send extra headers

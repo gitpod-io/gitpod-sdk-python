@@ -31,7 +31,7 @@ class TestIdentity:
     @parametrize
     def test_method_exchange_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.exchange_token(
-            exchange_token="exchangeToken",
+            exchange_token="exchange-token-value",
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
@@ -103,7 +103,7 @@ class TestIdentity:
     @parametrize
     def test_method_get_id_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_id_token(
-            audience=["string"],
+            audience=["https://api.gitpod.io", "https://ws.gitpod.io"],
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
@@ -143,7 +143,7 @@ class TestAsyncIdentity:
     @parametrize
     async def test_method_exchange_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.exchange_token(
-            exchange_token="exchangeToken",
+            exchange_token="exchange-token-value",
         )
         assert_matches_type(IdentityExchangeTokenResponse, identity, path=["response"])
 
@@ -215,7 +215,7 @@ class TestAsyncIdentity:
     @parametrize
     async def test_method_get_id_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_id_token(
-            audience=["string"],
+            audience=["https://api.gitpod.io", "https://ws.gitpod.io"],
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 

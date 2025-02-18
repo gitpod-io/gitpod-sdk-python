@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 from .field_value import FieldValue
@@ -12,7 +12,7 @@ __all__ = ["EnvironmentClass"]
 
 
 class EnvironmentClass(TypedDict, total=False):
-    id: str
+    id: Required[str]
     """id is the unique identifier of the environment class"""
 
     configuration: Iterable[FieldValue]

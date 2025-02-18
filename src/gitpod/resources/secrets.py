@@ -70,7 +70,49 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SecretCreateResponse:
         """
-        CreateSecret creates a new secret.
+        Creates a new secret for a project.
+
+        Use this method to:
+
+        - Store sensitive configuration values
+        - Set up environment variables
+        - Configure registry authentication
+        - Add file-based secrets
+
+        ### Examples
+
+        - Create environment variable:
+
+          Creates a secret that will be available as an environment variable.
+
+          ```yaml
+          name: "DATABASE_URL"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "postgresql://user:pass@localhost:5432/db"
+          environmentVariable: true
+          ```
+
+        - Create file secret:
+
+          Creates a secret that will be mounted as a file.
+
+          ```yaml
+          name: "SSH_KEY"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "-----BEGIN RSA PRIVATE KEY-----\n..."
+          filePath: "/home/gitpod/.ssh/id_rsa"
+          ```
+
+        - Create registry auth:
+
+          Creates credentials for private container registry.
+
+          ```yaml
+          name: "DOCKER_AUTH"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "username:password"
+          containerRegistryBasicAuthHost: "https://registry.example.com"
+          ```
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
@@ -132,7 +174,25 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncSecretsPage[Secret]:
         """
-        ListSecrets lists secrets.
+        Lists secrets with optional filtering.
+
+        Use this method to:
+
+        - View all project secrets
+        - Filter secrets by project
+
+        ### Examples
+
+        - List project secrets:
+
+          Shows all secrets for a project.
+
+          ```yaml
+          filter:
+            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing environments
@@ -184,7 +244,22 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSecret deletes a secret.
+        Deletes a secret permanently.
+
+        Use this method to:
+
+        - Remove unused secrets
+        - Clean up old credentials
+
+        ### Examples
+
+        - Delete secret:
+
+          Permanently removes a secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -215,9 +290,25 @@ class SecretsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SecretGetValueResponse:
-        """
-        GetSecretValue retrieves the value of a secret Only Environments can perform
-        this operation, and only for secrets specified on the EnvironmentSpec.
+        """Gets the value of a secret.
+
+        Only available to environments that are authorized
+        to access the secret.
+
+        Use this method to:
+
+        - Retrieve secret values
+        - Access credentials
+
+        ### Examples
+
+        - Get secret value:
+
+          Retrieves the value of a specific secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -250,7 +341,23 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateSecretValue updates the value of a secret.
+        Updates the value of an existing secret.
+
+        Use this method to:
+
+        - Rotate secret values
+        - Update credentials
+
+        ### Examples
+
+        - Update secret value:
+
+          Changes the value of an existing secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          value: "new-secret-value"
+          ```
 
         Args:
           value: value is the plaintext value of the secret
@@ -316,7 +423,49 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SecretCreateResponse:
         """
-        CreateSecret creates a new secret.
+        Creates a new secret for a project.
+
+        Use this method to:
+
+        - Store sensitive configuration values
+        - Set up environment variables
+        - Configure registry authentication
+        - Add file-based secrets
+
+        ### Examples
+
+        - Create environment variable:
+
+          Creates a secret that will be available as an environment variable.
+
+          ```yaml
+          name: "DATABASE_URL"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "postgresql://user:pass@localhost:5432/db"
+          environmentVariable: true
+          ```
+
+        - Create file secret:
+
+          Creates a secret that will be mounted as a file.
+
+          ```yaml
+          name: "SSH_KEY"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "-----BEGIN RSA PRIVATE KEY-----\n..."
+          filePath: "/home/gitpod/.ssh/id_rsa"
+          ```
+
+        - Create registry auth:
+
+          Creates credentials for private container registry.
+
+          ```yaml
+          name: "DOCKER_AUTH"
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          value: "username:password"
+          containerRegistryBasicAuthHost: "https://registry.example.com"
+          ```
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
@@ -378,7 +527,25 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Secret, AsyncSecretsPage[Secret]]:
         """
-        ListSecrets lists secrets.
+        Lists secrets with optional filtering.
+
+        Use this method to:
+
+        - View all project secrets
+        - Filter secrets by project
+
+        ### Examples
+
+        - List project secrets:
+
+          Shows all secrets for a project.
+
+          ```yaml
+          filter:
+            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing environments
@@ -430,7 +597,22 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSecret deletes a secret.
+        Deletes a secret permanently.
+
+        Use this method to:
+
+        - Remove unused secrets
+        - Clean up old credentials
+
+        ### Examples
+
+        - Delete secret:
+
+          Permanently removes a secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -461,9 +643,25 @@ class AsyncSecretsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SecretGetValueResponse:
-        """
-        GetSecretValue retrieves the value of a secret Only Environments can perform
-        this operation, and only for secrets specified on the EnvironmentSpec.
+        """Gets the value of a secret.
+
+        Only available to environments that are authorized
+        to access the secret.
+
+        Use this method to:
+
+        - Retrieve secret values
+        - Access credentials
+
+        ### Examples
+
+        - Get secret value:
+
+          Retrieves the value of a specific secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -496,7 +694,23 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateSecretValue updates the value of a secret.
+        Updates the value of an existing secret.
+
+        Use this method to:
+
+        - Rotate secret values
+        - Update credentials
+
+        ### Examples
+
+        - Update secret value:
+
+          Changes the value of an existing secret.
+
+          ```yaml
+          secretId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          value: "new-secret-value"
+          ```
 
         Args:
           value: value is the plaintext value of the secret

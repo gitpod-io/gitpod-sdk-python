@@ -82,7 +82,40 @@ class AutomationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AutomationUpsertResponse:
         """
-        UpsertAutomationsFile upserts the automations file for the given environment.
+        Upserts the automations file for the given environment.
+
+        Use this method to:
+
+        - Configure environment automations
+        - Update automation settings
+        - Manage automation files
+
+        ### Examples
+
+        - Update automations file:
+
+          Updates or creates the automations configuration.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          automationsFile:
+            services:
+              web-server:
+                name: "Web Server"
+                description: "Development web server"
+                commands:
+                  start: "npm run dev"
+                  ready: "curl -s http://localhost:3000"
+                triggeredBy:
+                  - postDevcontainerStart
+            tasks:
+              build:
+                name: "Build Project"
+                description: "Builds the project artifacts"
+                command: "npm run build"
+                triggeredBy:
+                  - postEnvironmentStart
+          ```
 
         Args:
           automations_file: WARN: Do not remove any field here, as it will break reading automation yaml
@@ -155,7 +188,40 @@ class AsyncAutomationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AutomationUpsertResponse:
         """
-        UpsertAutomationsFile upserts the automations file for the given environment.
+        Upserts the automations file for the given environment.
+
+        Use this method to:
+
+        - Configure environment automations
+        - Update automation settings
+        - Manage automation files
+
+        ### Examples
+
+        - Update automations file:
+
+          Updates or creates the automations configuration.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          automationsFile:
+            services:
+              web-server:
+                name: "Web Server"
+                description: "Development web server"
+                commands:
+                  start: "npm run dev"
+                  ready: "curl -s http://localhost:3000"
+                triggeredBy:
+                  - postDevcontainerStart
+            tasks:
+              build:
+                name: "Build Project"
+                description: "Builds the project artifacts"
+                command: "npm run build"
+                triggeredBy:
+                  - postEnvironmentStart
+          ```
 
         Args:
           automations_file: WARN: Do not remove any field here, as it will break reading automation yaml
