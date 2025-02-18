@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
@@ -15,6 +15,7 @@ __all__ = [
     "AutomationsFile",
     "Content",
     "Devcontainer",
+    "DevcontainerDotfiles",
     "Machine",
     "Port",
     "Secret",
@@ -51,6 +52,25 @@ class Content(TypedDict, total=False):
     session: str
 
 
+class DevcontainerDotfiles(TypedDict, total=False):
+    repository: Required[str]
+    """URL of a dotfiles Git repository (e.g. https://github.com/owner/repository)"""
+
+    install_command: Annotated[str, PropertyInfo(alias="installCommand")]
+    """install_command is the command to run after cloning the dotfiles repository.
+
+    Defaults to run the first file of `install.sh`, `install`, `bootstrap.sh`,
+    `bootstrap`, `setup.sh` and `setup` found in the dotfiles repository's root
+    folder.
+    """
+
+    target_path: Annotated[str, PropertyInfo(alias="targetPath")]
+    """target_path is the path to clone the dotfiles repository to.
+
+    Defaults to `~/dotfiles`.
+    """
+
+
 class Devcontainer(TypedDict, total=False):
     devcontainer_file_path: Annotated[str, PropertyInfo(alias="devcontainerFilePath")]
     """
@@ -61,6 +81,9 @@ class Devcontainer(TypedDict, total=False):
     this.matches('^$|^[^/].*')
     ```
     """
+
+    dotfiles: DevcontainerDotfiles
+    """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
 
     session: str
 

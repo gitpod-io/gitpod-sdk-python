@@ -12,7 +12,7 @@ __all__ = ["User"]
 
 
 class User(BaseModel):
-    id: Optional[str] = None
+    id: str
     """id is a UUID of the user"""
 
     avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
