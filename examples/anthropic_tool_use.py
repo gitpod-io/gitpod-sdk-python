@@ -19,7 +19,7 @@ llmclient = Anthropic()
 
 user_message: MessageParam = {
     "role": "user",
-    "content": "What is the test coverage for this repository: https://github.com/gitpod-io/gitpod-sdk-go",
+    "content": "Find the test coverage for this repository: https://github.com/gitpod-io/gitpod-sdk-go. Once done, make sure all tests pass by removing the test files.",
 }
 tools: list[ToolParam] = [
     {
@@ -59,7 +59,7 @@ async def create_environment(args: dict[str, str], cleanup: util.Disposables) ->
             "machine": {"class": env_class.id},
         }
     )).environment
-    cleanup.adda(lambda: gpclient.environments.delete(environment_id=environment.id))
+    # cleanup.adda(lambda: gpclient.environments.delete(environment_id=environment.id))
     
     print(f"\nCreated environment: {environment.id} - waiting for it to be ready...")
     await util.wait_for_environment_running(gpclient, environment.id)
@@ -82,7 +82,12 @@ async def main(cleanup: util.Disposables) -> None:
             messages=messages,
             tools=tools,
         )
-        print(f"\nResponse: {message.model_dump_json(indent=2)}")
+        # pretty print the message and tool use
+        for c in message.content:
+            if c.type == "tool_use":
+                print(f"\nTool use: {c.model_dump_json(indent=2)}")
+            elif c.type == "text":
+                print(f"\nText: {c.text}")
         
         if message.stop_reason != "tool_use":
             print(f"\nFinal response reached! {message.model_dump_json(indent=2)}")

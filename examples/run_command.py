@@ -44,7 +44,7 @@ async def main(cleanup: util.Disposables) -> None:
 
     print("Creating environment")
     environment = (await client.environments.create(spec=spec)).environment
-    cleanup.adda(lambda: client.environments.delete(environment_id=environment.id))
+    # cleanup.adda(lambda: client.environments.delete(environment_id=environment.id))
 
     print("Waiting for environment to be ready")
     await util.wait_for_environment_running(client, environment.id)
