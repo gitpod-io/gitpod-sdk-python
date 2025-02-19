@@ -32,14 +32,14 @@ class TestEvents:
             token="token",
             page_size=0,
             filter={
-                "actor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
                 "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
@@ -120,14 +120,14 @@ class TestAsyncEvents:
             token="token",
             page_size=0,
             filter={
-                "actor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
                 "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
