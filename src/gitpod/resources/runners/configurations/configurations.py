@@ -106,10 +106,30 @@ class ConfigurationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ConfigurationValidateResponse:
-        """ValidateRunnerConfiguration validates a runner configuration (e.g.
+        """
+        Validates a runner configuration.
 
-        environment
-        class, SCM integration) with the runner.
+        Use this method to:
+
+        - Check configuration validity
+        - Verify integration settings
+        - Validate environment classes
+
+        ### Examples
+
+        - Validate SCM integration:
+
+          Checks if an SCM integration is valid.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmIntegration:
+            id: "integration-id"
+            scmId: "github"
+            host: "github.com"
+            oauthClientId: "client_id"
+            oauthPlaintextClientSecret: "client_secret"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -186,10 +206,30 @@ class AsyncConfigurationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ConfigurationValidateResponse:
-        """ValidateRunnerConfiguration validates a runner configuration (e.g.
+        """
+        Validates a runner configuration.
 
-        environment
-        class, SCM integration) with the runner.
+        Use this method to:
+
+        - Check configuration validity
+        - Verify integration settings
+        - Validate environment classes
+
+        ### Examples
+
+        - Validate SCM integration:
+
+          Checks if an SCM integration is valid.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmIntegration:
+            id: "integration-id"
+            scmId: "github"
+            host: "github.com"
+            oauthClientId: "client_id"
+            oauthPlaintextClientSecret: "client_secret"
+          ```
 
         Args:
           extra_headers: Send extra headers

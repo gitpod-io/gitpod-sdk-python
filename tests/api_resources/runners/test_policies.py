@@ -32,9 +32,9 @@ class TestPolicies:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         policy = client.runners.policies.create(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             role="RUNNER_ROLE_UNSPECIFIED",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PolicyCreateResponse, policy, path=["response"])
 
@@ -70,9 +70,9 @@ class TestPolicies:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         policy = client.runners.policies.update(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             role="RUNNER_ROLE_UNSPECIFIED",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PolicyUpdateResponse, policy, path=["response"])
 
@@ -112,9 +112,9 @@ class TestPolicies:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(SyncPoliciesPage[RunnerPolicy], policy, path=["response"])
 
@@ -150,8 +150,8 @@ class TestPolicies:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         policy = client.runners.policies.delete(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, policy, path=["response"])
 
@@ -191,9 +191,9 @@ class TestAsyncPolicies:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         policy = await async_client.runners.policies.create(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             role="RUNNER_ROLE_UNSPECIFIED",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PolicyCreateResponse, policy, path=["response"])
 
@@ -229,9 +229,9 @@ class TestAsyncPolicies:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         policy = await async_client.runners.policies.update(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             role="RUNNER_ROLE_UNSPECIFIED",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(PolicyUpdateResponse, policy, path=["response"])
 
@@ -271,9 +271,9 @@ class TestAsyncPolicies:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(AsyncPoliciesPage[RunnerPolicy], policy, path=["response"])
 
@@ -309,8 +309,8 @@ class TestAsyncPolicies:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         policy = await async_client.runners.policies.delete(
-            group_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, policy, path=["response"])
 

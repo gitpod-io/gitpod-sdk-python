@@ -88,7 +88,46 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectCreateResponse:
         """
-        CreateProject creates a new Project.
+        Creates a new project with specified configuration.
+
+        Use this method to:
+
+        - Set up development projects
+        - Configure project environments
+        - Define project settings
+        - Initialize project content
+
+        ### Examples
+
+        - Create basic project:
+
+          Creates a project with minimal configuration.
+
+          ```yaml
+          name: "Web Application"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          initializer:
+            specs:
+              - git:
+                  remoteUri: "https://github.com/org/repo"
+          ```
+
+        - Create project with devcontainer:
+
+          Creates a project with custom development container.
+
+          ```yaml
+          name: "Backend Service"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          initializer:
+            specs:
+              - git:
+                  remoteUri: "https://github.com/org/backend"
+          devcontainerFilePath: ".devcontainer/devcontainer.json"
+          automationsFilePath: ".gitpod/automations.yaml"
+          ```
 
         Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
@@ -145,7 +184,23 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectRetrieveResponse:
         """
-        GetProject retrieves a single Project.
+        Gets details about a specific project.
+
+        Use this method to:
+
+        - View project configuration
+        - Check project status
+        - Get project metadata
+
+        ### Examples
+
+        - Get project details:
+
+          Retrieves information about a specific project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ```
 
         Args:
           project_id: project_id specifies the project identifier
@@ -184,7 +239,35 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectUpdateResponse:
         """
-        UpdateProject updates the properties of a Project.
+        Updates a project's configuration.
+
+        Use this method to:
+
+        - Modify project settings
+        - Update environment class
+        - Change project name
+        - Configure initializers
+
+        ### Examples
+
+        - Update project name:
+
+          Changes the project's display name.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          name: "New Project Name"
+          ```
+
+        - Update environment class:
+
+          Changes the project's environment class.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
@@ -246,7 +329,24 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncProjectsPage[Project]:
         """
-        ListProjects lists all projects the caller has access to.
+        Lists projects with optional filtering.
+
+        Use this method to:
+
+        - View all accessible projects
+        - Browse project configurations
+        - Monitor project status
+
+        ### Examples
+
+        - List projects:
+
+          Shows all projects with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing organizations
@@ -292,7 +392,23 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteProject deletes the specified project.
+        Deletes a project permanently.
+
+        Use this method to:
+
+        - Remove unused projects
+        - Clean up test projects
+        - Delete obsolete configurations
+
+        ### Examples
+
+        - Delete project:
+
+          Permanently removes a project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ```
 
         Args:
           project_id: project_id specifies the project identifier
@@ -327,7 +443,24 @@ class ProjectsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectCreateFromEnvironmentResponse:
         """
-        CreateProject creates a new Project using an environment as template.
+        Creates a new project using an existing environment as a template.
+
+        Use this method to:
+
+        - Clone environment configurations
+        - Create projects from templates
+        - Share environment setups
+
+        ### Examples
+
+        - Create from environment:
+
+          Creates a project based on existing environment.
+
+          ```yaml
+          name: "Frontend Project"
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
 
         Args:
           environment_id: environment_id specifies the environment identifier
@@ -396,7 +529,46 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectCreateResponse:
         """
-        CreateProject creates a new Project.
+        Creates a new project with specified configuration.
+
+        Use this method to:
+
+        - Set up development projects
+        - Configure project environments
+        - Define project settings
+        - Initialize project content
+
+        ### Examples
+
+        - Create basic project:
+
+          Creates a project with minimal configuration.
+
+          ```yaml
+          name: "Web Application"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          initializer:
+            specs:
+              - git:
+                  remoteUri: "https://github.com/org/repo"
+          ```
+
+        - Create project with devcontainer:
+
+          Creates a project with custom development container.
+
+          ```yaml
+          name: "Backend Service"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          initializer:
+            specs:
+              - git:
+                  remoteUri: "https://github.com/org/backend"
+          devcontainerFilePath: ".devcontainer/devcontainer.json"
+          automationsFilePath: ".gitpod/automations.yaml"
+          ```
 
         Args:
           initializer: EnvironmentInitializer specifies how an environment is to be initialized
@@ -453,7 +625,23 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectRetrieveResponse:
         """
-        GetProject retrieves a single Project.
+        Gets details about a specific project.
+
+        Use this method to:
+
+        - View project configuration
+        - Check project status
+        - Get project metadata
+
+        ### Examples
+
+        - Get project details:
+
+          Retrieves information about a specific project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ```
 
         Args:
           project_id: project_id specifies the project identifier
@@ -492,7 +680,35 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectUpdateResponse:
         """
-        UpdateProject updates the properties of a Project.
+        Updates a project's configuration.
+
+        Use this method to:
+
+        - Modify project settings
+        - Update environment class
+        - Change project name
+        - Configure initializers
+
+        ### Examples
+
+        - Update project name:
+
+          Changes the project's display name.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          name: "New Project Name"
+          ```
+
+        - Update environment class:
+
+          Changes the project's environment class.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          environmentClass:
+            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
@@ -554,7 +770,24 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Project, AsyncProjectsPage[Project]]:
         """
-        ListProjects lists all projects the caller has access to.
+        Lists projects with optional filtering.
+
+        Use this method to:
+
+        - View all accessible projects
+        - Browse project configurations
+        - Monitor project status
+
+        ### Examples
+
+        - List projects:
+
+          Shows all projects with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing organizations
@@ -600,7 +833,23 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteProject deletes the specified project.
+        Deletes a project permanently.
+
+        Use this method to:
+
+        - Remove unused projects
+        - Clean up test projects
+        - Delete obsolete configurations
+
+        ### Examples
+
+        - Delete project:
+
+          Permanently removes a project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ```
 
         Args:
           project_id: project_id specifies the project identifier
@@ -635,7 +884,24 @@ class AsyncProjectsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ProjectCreateFromEnvironmentResponse:
         """
-        CreateProject creates a new Project using an environment as template.
+        Creates a new project using an existing environment as a template.
+
+        Use this method to:
+
+        - Clone environment configurations
+        - Create projects from templates
+        - Share environment setups
+
+        ### Examples
+
+        - Create from environment:
+
+          Creates a project based on existing environment.
+
+          ```yaml
+          name: "Frontend Project"
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
 
         Args:
           environment_id: environment_id specifies the environment identifier
