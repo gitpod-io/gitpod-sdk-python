@@ -1,4 +1,4 @@
-# Gitpod MCP Server
+# Gitpod MCP Server Example
 
 A Modal Context Protocol (MCP) server that enables Claude Desktop to interact with Gitpod's API. This integration allows Claude to create Gitpod environments, check identity information, and perform other Gitpod-related tasks directly through natural language commands.
 
@@ -14,12 +14,10 @@ A Modal Context Protocol (MCP) server that enables Claude Desktop to interact wi
 ## 🚀 Available Tools
 
 1. **get-identity**
-
    - Get authenticated identity information from Gitpod
    - No additional parameters required
 
 2. **create-environment**
-
    - Create a new Gitpod environment from a repository URL
    - Optional parameter: `repository_url` (defaults to https://github.com/gitpod-io/empty)
 
@@ -28,33 +26,24 @@ A Modal Context Protocol (MCP) server that enables Claude Desktop to interact wi
    - Required parameter: `command` (command to run in the environment)
    - Optional parameter: `repository_url` (defaults to https://github.com/gitpod-io/empty)
 
-## 📋 Prerequisites
+## Prerequisites
 
-- Python 3.11 or higher
+- Python 3.8 or higher
 - Claude Desktop application
-- Gitpod flex account and Personal Access Token
-- `uv` package manager (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
+- Gitpod flex account and API token
 
-## ⚙️ Installation
+## Installation
 
-1. Clone the repository:
-
+1. Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/gitpod-io/gitpod-sdk-python
-cd gitpod-sdk-python/examples/mcp-server
+cd gitpod-sdk-python
+./scripts/bootstrap
 ```
 
-2. Install dependencies:
+## Configuration
 
-```bash
-uv sync
-```
-
-## 🔑 Configuration
-
-1. Get your Gitpod API token:
-
-   - Go to [Gitpod Flex Dashboard](https://app.gitpod.io/settings/personal-access-tokens) → Settings → Personal access tokens
+1. Get your Gitpod API token from [Gitpod Flex Dashboard](https://app.gitpod.io/settings/personal-access-tokens)
 
 2. Configure Claude Desktop:
    Create or update `~/Library/Application\ Support/Claude/claude_desktop_config.json`:
@@ -63,12 +52,9 @@ uv sync
    {
      "mcpServers": {
        "gitpod-mcp": {
-         "command": "/path/to/uv",
+         "command": "python",
          "args": [
-           "--directory",
-           "/path/to/gitpod-sdk-python/examples/mcp-server",
-           "run",
-           "server.py"
+           "/path/to/gitpod-sdk-python/examples/mcp-server/server.py"
          ],
          "env": {
            "GITPOD_LOG": "info",
@@ -81,16 +67,14 @@ uv sync
 
 ## 🎯 Usage Examples
 
-Here are some ways you can interact with the MCP server through Claude:
+Here are some ways you can interact with the MCP server through Claude Desktop:
 
 1. Check your Gitpod identity:
-
    ```
    "Get my Gitpod identity"
    ```
 
 2. Create a new environment:
-
    ```
    "Create a Gitpod environment"
    "Create a Gitpod environment for https://github.com/my/repo"
@@ -107,13 +91,11 @@ Here are some ways you can interact with the MCP server through Claude:
 The server logs all activities to `gitpod_mcp.log` in the project directory. Common issues:
 
 1. **Authentication Errors**
-
    - Verify your Gitpod API token is valid
    - Check if the token has the required scopes
    - Look for authentication errors in the log
 
 2. **Environment Creation Issues**
-
    - Ensure the repository URL is accessible
    - Check if you have an environment class available
    - Verify your Gitpod account has available resources

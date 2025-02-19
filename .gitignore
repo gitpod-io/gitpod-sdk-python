@@ -13,4 +13,5 @@ dist
 .env
 .envrc
 codegen.log
+gitpod_mcp.log
 Brewfile.lock.json
