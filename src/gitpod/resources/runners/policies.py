@@ -68,7 +68,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyCreateResponse:
         """
-        CreateRunnerPolicy creates a new runner policy.
+        Creates a new policy for a runner.
+
+        Use this method to:
+
+        - Set up access controls
+        - Define group permissions
+        - Configure role-based access
+
+        ### Examples
+
+        - Create admin policy:
+
+          Grants admin access to a group.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: RUNNER_ROLE_ADMIN
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -113,7 +131,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyUpdateResponse:
         """
-        UpdateRunnerPolicy an existing runner policy.
+        Updates an existing runner policy.
+
+        Use this method to:
+
+        - Modify access levels
+        - Change group roles
+        - Update permissions
+
+        ### Examples
+
+        - Update policy role:
+
+          Changes a group's access level.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: RUNNER_ROLE_USER
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -159,7 +195,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncPoliciesPage[RunnerPolicy]:
         """
-        ListRunnerPolicies lists runner policies.
+        Lists policies for a runner.
+
+        Use this method to:
+
+        - View access controls
+        - Check policy configurations
+        - Audit permissions
+
+        ### Examples
+
+        - List policies:
+
+          Shows all policies for a runner.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing project policies
@@ -214,7 +268,24 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteRunnerPolicy deletes a runner policy.
+        Deletes a runner policy.
+
+        Use this method to:
+
+        - Remove access controls
+        - Revoke permissions
+        - Clean up policies
+
+        ### Examples
+
+        - Delete policy:
+
+          Removes a group's access policy.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -279,7 +350,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyCreateResponse:
         """
-        CreateRunnerPolicy creates a new runner policy.
+        Creates a new policy for a runner.
+
+        Use this method to:
+
+        - Set up access controls
+        - Define group permissions
+        - Configure role-based access
+
+        ### Examples
+
+        - Create admin policy:
+
+          Grants admin access to a group.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: RUNNER_ROLE_ADMIN
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -324,7 +413,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyUpdateResponse:
         """
-        UpdateRunnerPolicy an existing runner policy.
+        Updates an existing runner policy.
+
+        Use this method to:
+
+        - Modify access levels
+        - Change group roles
+        - Update permissions
+
+        ### Examples
+
+        - Update policy role:
+
+          Changes a group's access level.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: RUNNER_ROLE_USER
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -370,7 +477,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[RunnerPolicy, AsyncPoliciesPage[RunnerPolicy]]:
         """
-        ListRunnerPolicies lists runner policies.
+        Lists policies for a runner.
+
+        Use this method to:
+
+        - View access controls
+        - Check policy configurations
+        - Audit permissions
+
+        ### Examples
+
+        - List policies:
+
+          Shows all policies for a runner.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing project policies
@@ -425,7 +550,24 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteRunnerPolicy deletes a runner policy.
+        Deletes a runner policy.
+
+        Use this method to:
+
+        - Remove access controls
+        - Revoke permissions
+        - Clean up policies
+
+        ### Examples
+
+        - Delete policy:
+
+          Removes a group's access policy.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
