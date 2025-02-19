@@ -1,11 +1,9 @@
-import os
-import sys
 import asyncio
+import json
 import logging
-import threading
-from typing import Optional
+import os
 
-from gitpod import Gitpod, AsyncGitpod
+from gitpod import AsyncGitpod
 import gitpod.lib as util
 from gitpod.types.environment_spec_param import EnvironmentSpecParam
 from gitpod.types.environment_initializer_param import Spec
@@ -52,22 +50,21 @@ class GitpodMCPServer:
 
         if not self.gitpod_api_key:
             # Try to load from claude_desktop_config.json as fallback
-            config_path = os.path.expanduser("~/Library/Application Support/Claude/claude_desktop_config.json")
+            config_path = os.path.expanduser("~/Library/Application\ Support/Claude/claude_desktop_config.json")
             try:
-                import json
                 with open(config_path) as f:
                     config = json.load(f)
                     self.gitpod_api_key = config["mcpServers"]["gitpod-mcp"]["env"]["GITPOD_API_KEY"]
                     logger.info("Successfully loaded API key from claude_desktop_config.json")
             except FileNotFoundError:
                 logger.error(f"Config file not found at {config_path}")
-                raise ValueError("GITPOD_API_KEY not found in environment or config file")
+                raise ValueError("GITPOD_API_KEY not found in environment or config file") from None
             except KeyError as e:
                 logger.error(f"Missing key in config file: {e}")
-                raise ValueError(f"Invalid config structure: {e}")
+                raise ValueError(f"Invalid config structure: {e}") from e
             except Exception as e:
                 logger.error(f"Unexpected error loading config: {str(e)}", exc_info=True)
-                raise ValueError("Failed to load GITPOD_API_KEY from config")
+                raise ValueError("Failed to load GITPOD_API_KEY from config") from e
 
         # Initialize Gitpod client
         try:
