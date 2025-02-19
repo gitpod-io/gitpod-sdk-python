@@ -1,16 +1,17 @@
-import asyncio
-import json
-import logging
 import os
+import json
+import asyncio
+import logging
 
-from gitpod import AsyncGitpod
+import mcp.types as types
+import mcp.server.stdio
+from mcp.server import Server, NotificationOptions
+from mcp.server.models import InitializationOptions
+
 import gitpod.lib as util
+from gitpod import AsyncGitpod
 from gitpod.types.environment_spec_param import EnvironmentSpecParam
 from gitpod.types.environment_initializer_param import Spec
-import mcp.server.stdio
-import mcp.types as types
-from mcp.server import NotificationOptions, Server
-from mcp.server.models import InitializationOptions
 
 # Configure logging with more detailed format
 logging.basicConfig(
