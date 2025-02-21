@@ -130,7 +130,7 @@ class ProjectsResource(SyncAPIResource):
           ```
 
         Args:
-          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+          initializer: initializer is the content initializer
 
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
               root path must not be absolute (start with a /):
@@ -284,7 +284,7 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+          initializer: initializer is the content initializer
 
           project_id: project_id specifies the project identifier
 
@@ -571,7 +571,7 @@ class AsyncProjectsResource(AsyncAPIResource):
           ```
 
         Args:
-          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+          initializer: initializer is the content initializer
 
           automations_file_path: automations_file_path is the path to the automations file relative to the repo
               root path must not be absolute (start with a /):
@@ -725,7 +725,7 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
-          initializer: EnvironmentInitializer specifies how an environment is to be initialized
+          initializer: initializer is the content initializer
 
           project_id: project_id specifies the project identifier
 

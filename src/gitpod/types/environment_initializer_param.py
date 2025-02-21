@@ -37,7 +37,7 @@ class SpecGit(TypedDict, total=False):
         ],
         PropertyInfo(alias="targetMode"),
     ]
-    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+    """the target mode determines what gets checked out"""
 
     upstream_remote_uri: Annotated[str, PropertyInfo(alias="upstreamRemoteUri")]
     """upstream_Remote_uri is the fork upstream of a repository"""

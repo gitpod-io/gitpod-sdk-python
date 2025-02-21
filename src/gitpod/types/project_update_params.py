@@ -36,7 +36,7 @@ class ProjectUpdateParams(TypedDict, total=False):
     environment_class: Annotated[Optional[ProjectEnvironmentClassParam], PropertyInfo(alias="environmentClass")]
 
     initializer: Optional[EnvironmentInitializerParam]
-    """EnvironmentInitializer specifies how an environment is to be initialized"""
+    """initializer is the content initializer"""
 
     name: Optional[str]
 

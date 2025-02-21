@@ -116,7 +116,12 @@ class SecretsResource(SyncAPIResource):
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker registry host
+              the docker registry host value must be a valid registry host (e.g.
+              registry.docker.com, https://registry.docker.com, ghcr.io:5050):
+
+              ```
+              this.matches("^[a-zA-Z0-9.-/:]+(:[0-9]+)?$")
+              ```
 
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
@@ -469,7 +474,12 @@ class AsyncSecretsResource(AsyncAPIResource):
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker registry host
+              the docker registry host value must be a valid registry host (e.g.
+              registry.docker.com, https://registry.docker.com, ghcr.io:5050):
+
+              ```
+              this.matches("^[a-zA-Z0-9.-/:]+(:[0-9]+)?$")
+              ```
 
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret

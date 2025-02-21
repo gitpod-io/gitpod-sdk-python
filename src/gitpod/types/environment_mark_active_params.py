@@ -12,7 +12,7 @@ __all__ = ["EnvironmentMarkActiveParams"]
 
 class EnvironmentMarkActiveParams(TypedDict, total=False):
     activity_signal: Annotated[EnvironmentActivitySignalParam, PropertyInfo(alias="activitySignal")]
-    """EnvironmentActivitySignal used to signal activity for an environment."""
+    """activity_signal specifies the activity."""
 
     environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
     """The ID of the environment to update activity for."""

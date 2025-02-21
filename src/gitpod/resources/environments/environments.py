@@ -164,8 +164,8 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
-          spec: EnvironmentSpec specifies the configuration of an environment for an environment
-              start
+          spec: spec is the configuration of the environment that's required for the to start
+              the environment
 
           extra_headers: Send extra headers
 
@@ -540,8 +540,9 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
-          spec: EnvironmentSpec specifies the configuration of an environment for an environment
-              start
+          spec: Spec is the configuration of the environment that's required for the runner to
+              start the environment Configuration already defined in the Project will override
+              parts of the spec, if set
 
           extra_headers: Send extra headers
 
@@ -651,7 +652,7 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
-          activity_signal: EnvironmentActivitySignal used to signal activity for an environment.
+          activity_signal: activity_signal specifies the activity.
 
           environment_id: The ID of the environment to update activity for.
 
@@ -880,8 +881,8 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
-          spec: EnvironmentSpec specifies the configuration of an environment for an environment
-              start
+          spec: spec is the configuration of the environment that's required for the to start
+              the environment
 
           extra_headers: Send extra headers
 
@@ -1256,8 +1257,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
-          spec: EnvironmentSpec specifies the configuration of an environment for an environment
-              start
+          spec: Spec is the configuration of the environment that's required for the runner to
+              start the environment Configuration already defined in the Project will override
+              parts of the spec, if set
 
           extra_headers: Send extra headers
 
@@ -1367,7 +1369,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
-          activity_signal: EnvironmentActivitySignal used to signal activity for an environment.
+          activity_signal: activity_signal specifies the activity.
 
           environment_id: The ID of the environment to update activity for.
 
