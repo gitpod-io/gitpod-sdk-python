@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 (2025-02-21)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([#61](https://github.com/gitpod-io/gitpod-sdk-python/issues/61)) ([f8a2a44](https://github.com/gitpod-io/gitpod-sdk-python/commit/f8a2a44972841b5799dddf39cefb1e75a29e67be))
+* **api:** manual updates ([#64](https://github.com/gitpod-io/gitpod-sdk-python/issues/64)) ([f29b9ba](https://github.com/gitpod-io/gitpod-sdk-python/commit/f29b9ba65db6e3c1737c2d781e82ac3bcd457e3a))
+* **client:** allow passing `NotGiven` for body ([#63](https://github.com/gitpod-io/gitpod-sdk-python/issues/63)) ([a62be8a](https://github.com/gitpod-io/gitpod-sdk-python/commit/a62be8a6e5ce5af0aeaec008db7f0a214222515d))
+
+
+### Bug Fixes
+
+* **client:** mark some request bodies as optional ([a62be8a](https://github.com/gitpod-io/gitpod-sdk-python/commit/a62be8a6e5ce5af0aeaec008db7f0a214222515d))
+
 ## 0.2.1 (2025-02-18)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.2.0...v0.2.1)

@@ -13,7 +13,12 @@ class SecretCreateParams(TypedDict, total=False):
     container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
     """
     secret will be mounted as a docker config in the environment VM, mount will have
-    the docker registry host
+    the docker registry host value must be a valid registry host (e.g.
+    registry.docker.com, https://registry.docker.com, ghcr.io:5050):
+
+    ```
+    this.matches('^[a-zA-Z0-9.-/:]+(:[0-9]+)?$')
+    ```
     """
 
     environment_variable: Annotated[bool, PropertyInfo(alias="environmentVariable")]

@@ -32,7 +32,7 @@ class TestGroups:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncGroupsPage[Group], group, path=["response"])
@@ -77,7 +77,7 @@ class TestAsyncGroups:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncGroupsPage[Group], group, path=["response"])

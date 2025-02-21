@@ -36,7 +36,7 @@ class SpecGit(BaseModel):
             "CLONE_TARGET_MODE_LOCAL_BRANCH",
         ]
     ] = FieldInfo(alias="targetMode", default=None)
-    """CloneTargetMode is the target state in which we want to leave a GitEnvironment"""
+    """the target mode determines what gets checked out"""
 
     upstream_remote_uri: Optional[str] = FieldInfo(alias="upstreamRemoteUri", default=None)
     """upstream_Remote_uri is the fork upstream of a repository"""

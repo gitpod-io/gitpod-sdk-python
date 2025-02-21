@@ -32,12 +32,12 @@ class TestScmIntegrations:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
-            host="host",
-            oauth_client_id="oauthClientId",
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            host="github.com",
+            oauth_client_id="client_id",
+            oauth_plaintext_client_secret="client_secret",
             pat=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            scm_id="scmId",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_id="github",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -73,7 +73,7 @@ class TestScmIntegrations:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
@@ -109,9 +109,9 @@ class TestScmIntegrations:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            oauth_client_id="oauthClientId",
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            oauth_client_id="new_client_id",
+            oauth_plaintext_client_secret="new_client_secret",
             pat=True,
         )
         assert_matches_type(object, scm_integration, path=["response"])
@@ -150,10 +150,10 @@ class TestScmIntegrations:
         scm_integration = client.runners.configurations.scm_integrations.list(
             token="token",
             page_size=0,
-            filter={"runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={"runner_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
@@ -190,7 +190,7 @@ class TestScmIntegrations:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
@@ -230,12 +230,12 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
-            host="host",
-            oauth_client_id="oauthClientId",
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            host="github.com",
+            oauth_client_id="client_id",
+            oauth_plaintext_client_secret="client_secret",
             pat=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            scm_id="scmId",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_id="github",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -271,7 +271,7 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(ScmIntegrationRetrieveResponse, scm_integration, path=["response"])
 
@@ -307,9 +307,9 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            oauth_client_id="oauthClientId",
-            oauth_plaintext_client_secret="oauthPlaintextClientSecret",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            oauth_client_id="new_client_id",
+            oauth_plaintext_client_secret="new_client_secret",
             pat=True,
         )
         assert_matches_type(object, scm_integration, path=["response"])
@@ -348,10 +348,10 @@ class TestAsyncScmIntegrations:
         scm_integration = await async_client.runners.configurations.scm_integrations.list(
             token="token",
             page_size=0,
-            filter={"runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={"runner_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]},
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncIntegrationsPage[ScmIntegration], scm_integration, path=["response"])
@@ -388,7 +388,7 @@ class TestAsyncScmIntegrations:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, scm_integration, path=["response"])
 

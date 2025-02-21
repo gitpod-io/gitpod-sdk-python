@@ -38,7 +38,7 @@ class TestProjects:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
             environment_class={
-                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "local_runner": True,
             },
             initializer={
@@ -48,7 +48,7 @@ class TestProjects:
                         "git": {
                             "checkout_location": "checkoutLocation",
                             "clone_target": "cloneTarget",
-                            "remote_uri": "remoteUri",
+                            "remote_uri": "https://github.com/org/repo",
                             "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                             "upstream_remote_uri": "upstreamRemoteUri",
                         },
@@ -57,7 +57,7 @@ class TestProjects:
             },
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
-            name="x",
+            name="Web Application",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
@@ -99,7 +99,7 @@ class TestProjects:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.retrieve(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
@@ -138,7 +138,7 @@ class TestProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             environment_class={
-                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "local_runner": True,
             },
             initializer={
@@ -156,7 +156,7 @@ class TestProjects:
                 ]
             },
             name="x",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
@@ -196,7 +196,7 @@ class TestProjects:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncProjectsPage[Project], project, path=["response"])
@@ -233,7 +233,7 @@ class TestProjects:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.delete(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -269,8 +269,8 @@ class TestProjects:
     @parametrize
     def test_method_create_from_environment_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create_from_environment(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            name="x",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            name="Frontend Project",
         )
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
@@ -314,7 +314,7 @@ class TestAsyncProjects:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
             environment_class={
-                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "local_runner": True,
             },
             initializer={
@@ -324,7 +324,7 @@ class TestAsyncProjects:
                         "git": {
                             "checkout_location": "checkoutLocation",
                             "clone_target": "cloneTarget",
-                            "remote_uri": "remoteUri",
+                            "remote_uri": "https://github.com/org/repo",
                             "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
                             "upstream_remote_uri": "upstreamRemoteUri",
                         },
@@ -333,7 +333,7 @@ class TestAsyncProjects:
             },
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
-            name="x",
+            name="Web Application",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
@@ -375,7 +375,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.retrieve(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
@@ -414,7 +414,7 @@ class TestAsyncProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             environment_class={
-                "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "local_runner": True,
             },
             initializer={
@@ -432,7 +432,7 @@ class TestAsyncProjects:
                 ]
             },
             name="x",
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
@@ -472,7 +472,7 @@ class TestAsyncProjects:
             page_size=0,
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncProjectsPage[Project], project, path=["response"])
@@ -509,7 +509,7 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.delete(
-            project_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
         assert_matches_type(object, project, path=["response"])
 
@@ -545,8 +545,8 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_from_environment_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create_from_environment(
-            environment_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            name="x",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            name="Frontend Project",
         )
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 

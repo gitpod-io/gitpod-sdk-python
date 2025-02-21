@@ -32,7 +32,7 @@ class TestSecrets:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.create(
-            container_registry_basic_auth_host="https://example.com",
+            container_registry_basic_auth_host="containerRegistryBasicAuthHost",
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
@@ -228,7 +228,7 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
-            container_registry_basic_auth_host="https://example.com",
+            container_registry_basic_auth_host="containerRegistryBasicAuthHost",
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",

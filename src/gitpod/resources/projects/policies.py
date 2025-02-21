@@ -68,7 +68,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyCreateResponse:
         """
-        CreateProjectPolicy creates a Project Policy.
+        Creates a new policy for a project.
+
+        Use this method to:
+
+        - Set up access controls
+        - Define group permissions
+        - Configure role-based access
+
+        ### Examples
+
+        - Create admin policy:
+
+          Grants admin access to a group.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: PROJECT_ROLE_ADMIN
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -113,7 +131,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyUpdateResponse:
         """
-        UpdateProjectPolicy updates a Project Policy.
+        Updates an existing project policy.
+
+        Use this method to:
+
+        - Modify access levels
+        - Change group roles
+        - Update permissions
+
+        ### Examples
+
+        - Update policy role:
+
+          Changes a group's access level.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: PROJECT_ROLE_EDITOR
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -159,7 +195,25 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncPoliciesPage[ProjectPolicy]:
         """
-        ListProjectPolicies lists policies for a project.
+        Lists policies for a project.
+
+        Use this method to:
+
+        - View access controls
+        - Check policy configurations
+        - Audit permissions
+
+        ### Examples
+
+        - List policies:
+
+          Shows all policies for a project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing project policies
@@ -214,7 +268,24 @@ class PoliciesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteProjectPolicy deletes a Project Policy.
+        Deletes a project policy.
+
+        Use this method to:
+
+        - Remove access controls
+        - Revoke permissions
+        - Clean up policies
+
+        ### Examples
+
+        - Delete policy:
+
+          Removes a group's access policy.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -279,7 +350,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyCreateResponse:
         """
-        CreateProjectPolicy creates a Project Policy.
+        Creates a new policy for a project.
+
+        Use this method to:
+
+        - Set up access controls
+        - Define group permissions
+        - Configure role-based access
+
+        ### Examples
+
+        - Create admin policy:
+
+          Grants admin access to a group.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: PROJECT_ROLE_ADMIN
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -324,7 +413,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> PolicyUpdateResponse:
         """
-        UpdateProjectPolicy updates a Project Policy.
+        Updates an existing project policy.
+
+        Use this method to:
+
+        - Modify access levels
+        - Change group roles
+        - Update permissions
+
+        ### Examples
+
+        - Update policy role:
+
+          Changes a group's access level.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          role: PROJECT_ROLE_EDITOR
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
@@ -370,7 +477,25 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[ProjectPolicy, AsyncPoliciesPage[ProjectPolicy]]:
         """
-        ListProjectPolicies lists policies for a project.
+        Lists policies for a project.
+
+        Use this method to:
+
+        - View access controls
+        - Check policy configurations
+        - Audit permissions
+
+        ### Examples
+
+        - List policies:
+
+          Shows all policies for a project.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing project policies
@@ -425,7 +550,24 @@ class AsyncPoliciesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteProjectPolicy deletes a Project Policy.
+        Deletes a project policy.
+
+        Use this method to:
+
+        - Remove access controls
+        - Revoke permissions
+        - Clean up policies
+
+        ### Examples
+
+        - Delete policy:
+
+          Removes a group's access policy.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          groupId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
 
         Args:
           group_id: group_id specifies the group_id identifier
