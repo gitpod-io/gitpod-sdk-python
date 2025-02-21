@@ -47,7 +47,7 @@ class Content(TypedDict, total=False):
     """The Git username"""
 
     initializer: EnvironmentInitializerParam
-    """EnvironmentInitializer specifies how an environment is to be initialized"""
+    """initializer configures how the environment is to be initialized"""
 
     session: str
 
@@ -55,20 +55,6 @@ class Content(TypedDict, total=False):
 class DevcontainerDotfiles(TypedDict, total=False):
     repository: Required[str]
     """URL of a dotfiles Git repository (e.g. https://github.com/owner/repository)"""
-
-    install_command: Annotated[str, PropertyInfo(alias="installCommand")]
-    """install_command is the command to run after cloning the dotfiles repository.
-
-    Defaults to run the first file of `install.sh`, `install`, `bootstrap.sh`,
-    `bootstrap`, `setup.sh` and `setup` found in the dotfiles repository's root
-    folder.
-    """
-
-    target_path: Annotated[str, PropertyInfo(alias="targetPath")]
-    """target_path is the path to clone the dotfiles repository to.
-
-    Defaults to `~/dotfiles`.
-    """
 
 
 class Devcontainer(TypedDict, total=False):
@@ -103,7 +89,7 @@ class Machine(_MachineReservedKeywords, total=False):
 
 class Port(TypedDict, total=False):
     admission: AdmissionLevel
-    """Admission level describes who can access an environment instance and its ports."""
+    """policy of this port"""
 
     name: str
     """name of this port"""
@@ -153,69 +139,14 @@ class SSHPublicKey(TypedDict, total=False):
 class Timeout(TypedDict, total=False):
     disconnected: str
     """
-    A Duration represents a signed, fixed-length span of time represented as a count
-    of seconds and fractions of seconds at nanosecond resolution. It is independent
-    of any calendar and concepts like "day" or "month". It is related to Timestamp
-    in that the difference between two Timestamp values is a Duration and it can be
-    added or subtracted from a Timestamp. Range is approximately +-10,000 years.
-
-    # Examples
-
-    Example 1: Compute Duration from two Timestamps in pseudo code.
-
-         Timestamp start = ...;
-         Timestamp end = ...;
-         Duration duration = ...;
-
-         duration.seconds = end.seconds - start.seconds;
-         duration.nanos = end.nanos - start.nanos;
-
-         if (duration.seconds < 0 && duration.nanos > 0) {
-           duration.seconds += 1;
-           duration.nanos -= 1000000000;
-         } else if (duration.seconds > 0 && duration.nanos < 0) {
-           duration.seconds -= 1;
-           duration.nanos += 1000000000;
-         }
-
-    Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.
-
-         Timestamp start = ...;
-         Duration duration = ...;
-         Timestamp end = ...;
-
-         end.seconds = start.seconds + duration.seconds;
-         end.nanos = start.nanos + duration.nanos;
-
-         if (end.nanos < 0) {
-           end.seconds -= 1;
-           end.nanos += 1000000000;
-         } else if (end.nanos >= 1000000000) {
-           end.seconds += 1;
-           end.nanos -= 1000000000;
-         }
-
-    Example 3: Compute Duration from datetime.timedelta in Python.
-
-         td = datetime.timedelta(days=3, minutes=10)
-         duration = Duration()
-         duration.FromTimedelta(td)
-
-    # JSON Mapping
-
-    In JSON format, the Duration type is encoded as a string rather than an object,
-    where the string ends in the suffix "s" (indicating seconds) and is preceded by
-    the number of seconds, with nanoseconds expressed as fractional seconds. For
-    example, 3 seconds with 0 nanoseconds should be encoded in JSON format as "3s",
-    while 3 seconds and 1 nanosecond should be expressed in JSON format as
-    "3.000000001s", and 3 seconds and 1 microsecond should be expressed in JSON
-    format as "3.000001s".
+    inacitivity is the maximum time of disconnection before the environment is
+    stopped or paused. Minimum duration is 30 minutes. Set to 0 to disable.
     """
 
 
 class EnvironmentSpecParam(TypedDict, total=False):
     admission: AdmissionLevel
-    """Admission level describes who can access an environment instance and its ports."""
+    """admission controlls who can access the environment and its ports."""
 
     automations_file: Annotated[AutomationsFile, PropertyInfo(alias="automationsFile")]
     """automations_file is the automations file spec of the environment"""

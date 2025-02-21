@@ -43,7 +43,7 @@ class Project(BaseModel):
     """
 
     initializer: Optional[EnvironmentInitializer] = None
-    """EnvironmentInitializer specifies how an environment is to be initialized"""
+    """initializer is the content initializer"""
 
     metadata: Optional[ProjectMetadata] = None
 
