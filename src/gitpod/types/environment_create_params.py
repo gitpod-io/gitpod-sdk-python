@@ -12,6 +12,6 @@ __all__ = ["EnvironmentCreateParams"]
 class EnvironmentCreateParams(TypedDict, total=False):
     spec: EnvironmentSpecParam
     """
-    EnvironmentSpec specifies the configuration of an environment for an environment
-    start
+    spec is the configuration of the environment that's required for the to start
+    the environment
     """

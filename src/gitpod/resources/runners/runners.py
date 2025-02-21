@@ -148,13 +148,15 @@ class RunnersResource(SyncAPIResource):
           ```
 
         Args:
-          kind: RunnerKind represents the kind of a runner
+          kind: The runner's kind This field is optional and here for backwards-compatibility.
+              Use the provider field instead. If provider is set, the runner's kind will be
+              deduced from the provider. Only one of kind and provider must be set.
 
           name: The runner name for humans
 
-          provider: RunnerProvider identifies the specific implementation type of a runner. Each
-              provider maps to a specific kind of runner (local or remote), as specified below
-              for each provider.
+          provider: The specific implementation type of the runner This field is optional for
+              backwards compatibility but will be required in the future. When specified, kind
+              must not be specified (will be deduced from provider)
 
           extra_headers: Send extra headers
 
@@ -699,13 +701,15 @@ class AsyncRunnersResource(AsyncAPIResource):
           ```
 
         Args:
-          kind: RunnerKind represents the kind of a runner
+          kind: The runner's kind This field is optional and here for backwards-compatibility.
+              Use the provider field instead. If provider is set, the runner's kind will be
+              deduced from the provider. Only one of kind and provider must be set.
 
           name: The runner name for humans
 
-          provider: RunnerProvider identifies the specific implementation type of a runner. Each
-              provider maps to a specific kind of runner (local or remote), as specified below
-              for each provider.
+          provider: The specific implementation type of the runner This field is optional for
+              backwards compatibility but will be required in the future. When specified, kind
+              must not be specified (will be deduced from provider)
 
           extra_headers: Send extra headers
 

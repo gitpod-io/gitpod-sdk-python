@@ -342,7 +342,7 @@ class SSHPublicKey(BaseModel):
 
 class EnvironmentStatus(BaseModel):
     activity_signal: Optional[EnvironmentActivitySignal] = FieldInfo(alias="activitySignal", default=None)
-    """EnvironmentActivitySignal used to signal activity for an environment."""
+    """activity_signal is the last activity signal for the environment."""
 
     automations_file: Optional[AutomationsFile] = FieldInfo(alias="automationsFile", default=None)
     """automations_file contains the status of the automations file."""
@@ -377,7 +377,7 @@ class EnvironmentStatus(BaseModel):
 
     runner_ack: Optional[RunnerAck] = FieldInfo(alias="runnerAck", default=None)
     """
-    RunnerACK is the acknowledgement from the runner that is has received the
+    runner_ack contains the acknowledgement from the runner that is has received the
     environment spec.
     """
 
