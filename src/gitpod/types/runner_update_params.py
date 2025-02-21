@@ -37,4 +37,14 @@ class Spec(TypedDict, total=False):
     configuration: Optional[SpecConfiguration]
 
     desired_phase: Annotated[Optional[RunnerPhase], PropertyInfo(alias="desiredPhase")]
-    """RunnerPhase represents the phase a runner is in"""
+    """
+    desired_phase can currently only be updated on local-configuration runners, to
+    toggle whether local runners are allowed for running environments in the
+    organization. Set to:
+
+    - ACTIVE to enable local runners.
+    - INACTIVE to disable all local runners. Existing local runners and their
+      environments will stop, and cannot be started again until the desired_phase is
+      set to ACTIVE. Use this carefully, as it will affect all users in the
+      organization who use local runners.
+    """

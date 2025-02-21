@@ -63,11 +63,7 @@ class TestEnvironments:
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
-                    "dotfiles": {
-                        "repository": "https://example.com",
-                        "install_command": "installCommand",
-                        "target_path": "targetPath",
-                    },
+                    "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
                 },
                 "machine": {
@@ -365,11 +361,7 @@ class TestEnvironments:
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
-                    "dotfiles": {
-                        "repository": "https://example.com",
-                        "install_command": "installCommand",
-                        "target_path": "targetPath",
-                    },
+                    "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
                 },
                 "machine": {
@@ -619,11 +611,7 @@ class TestAsyncEnvironments:
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
-                    "dotfiles": {
-                        "repository": "https://example.com",
-                        "install_command": "installCommand",
-                        "target_path": "targetPath",
-                    },
+                    "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
                 },
                 "machine": {
@@ -921,11 +909,7 @@ class TestAsyncEnvironments:
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
-                    "dotfiles": {
-                        "repository": "https://example.com",
-                        "install_command": "installCommand",
-                        "target_path": "targetPath",
-                    },
+                    "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
                 },
                 "machine": {
