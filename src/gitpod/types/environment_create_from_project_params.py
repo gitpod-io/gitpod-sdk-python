@@ -15,6 +15,7 @@ class EnvironmentCreateFromProjectParams(TypedDict, total=False):
 
     spec: EnvironmentSpecParam
     """
-    EnvironmentSpec specifies the configuration of an environment for an environment
-    start
+    Spec is the configuration of the environment that's required for the runner to
+    start the environment Configuration already defined in the Project will override
+    parts of the spec, if set
     """

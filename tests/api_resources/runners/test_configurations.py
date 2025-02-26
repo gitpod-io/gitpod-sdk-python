@@ -40,15 +40,15 @@ class TestConfigurations:
                 "display_name": "xxx",
                 "enabled": True,
             },
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_integration={
-                "id": "id",
-                "host": "host",
-                "oauth_client_id": "oauthClientId",
+                "id": "integration-id",
+                "host": "github.com",
+                "oauth_client_id": "client_id",
                 "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
-                "oauth_plaintext_client_secret": "oauthPlaintextClientSecret",
+                "oauth_plaintext_client_secret": "client_secret",
                 "pat": True,
-                "scm_id": "scmId",
+                "scm_id": "github",
             },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
@@ -102,15 +102,15 @@ class TestAsyncConfigurations:
                 "display_name": "xxx",
                 "enabled": True,
             },
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_integration={
-                "id": "id",
-                "host": "host",
-                "oauth_client_id": "oauthClientId",
+                "id": "integration-id",
+                "host": "github.com",
+                "oauth_client_id": "client_id",
                 "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
-                "oauth_plaintext_client_secret": "oauthPlaintextClientSecret",
+                "oauth_plaintext_client_secret": "client_secret",
                 "pat": True,
-                "scm_id": "scmId",
+                "scm_id": "github",
             },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])

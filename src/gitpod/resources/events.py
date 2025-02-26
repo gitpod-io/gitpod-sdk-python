@@ -62,8 +62,32 @@ class EventsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncEntriesPage[EventListResponse]:
         """
-        ListAuditLogs retrieves a paginated list of audit logs for the specified
-        organization
+        Lists audit logs with filtering and pagination options.
+
+        Use this method to:
+
+        - View audit history
+        - Track user actions
+        - Monitor system changes
+
+        ### Examples
+
+        - List all logs:
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by actor:
+
+          ```yaml
+          filter:
+            actorIds: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+            actorPrincipals: ["PRINCIPAL_USER"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing environments
@@ -116,7 +140,23 @@ class EventsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> JSONLDecoder[EventWatchResponse]:
         """
-        WatchEvents streams all requests events to the client
+        Streams events for all projects, runners, environments, tasks, and services
+        based on the specified scope.
+
+        Use this method to:
+
+        - Monitor resource changes in real-time
+        - Track system events
+        - Receive notifications
+
+        The scope parameter determines which events to watch:
+
+        - Organization scope (default): Watch all organization-wide events including
+          projects, runners and environments. Task and service events are not included.
+          Use by setting organization=true or omitting the scope.
+        - Environment scope: Watch events for a specific environment, including its
+          tasks, task executions, and services. Use by setting environment_id to the
+          UUID of the environment to watch.
 
         Args:
           environment_id: Environment scope produces events for the environment itself, all tasks, task
@@ -187,8 +227,32 @@ class AsyncEventsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[EventListResponse, AsyncEntriesPage[EventListResponse]]:
         """
-        ListAuditLogs retrieves a paginated list of audit logs for the specified
-        organization
+        Lists audit logs with filtering and pagination options.
+
+        Use this method to:
+
+        - View audit history
+        - Track user actions
+        - Monitor system changes
+
+        ### Examples
+
+        - List all logs:
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by actor:
+
+          ```yaml
+          filter:
+            actorIds: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+            actorPrincipals: ["PRINCIPAL_USER"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing environments
@@ -241,7 +305,23 @@ class AsyncEventsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncJSONLDecoder[EventWatchResponse]:
         """
-        WatchEvents streams all requests events to the client
+        Streams events for all projects, runners, environments, tasks, and services
+        based on the specified scope.
+
+        Use this method to:
+
+        - Monitor resource changes in real-time
+        - Track system events
+        - Receive notifications
+
+        The scope parameter determines which events to watch:
+
+        - Organization scope (default): Watch all organization-wide events including
+          projects, runners and environments. Task and service events are not included.
+          Use by setting organization=true or omitting the scope.
+        - Environment scope: Watch events for a specific environment, including its
+          tasks, task executions, and services. Use by setting environment_id to the
+          UUID of the environment to watch.
 
         Args:
           environment_id: Environment scope produces events for the environment itself, all tasks, task

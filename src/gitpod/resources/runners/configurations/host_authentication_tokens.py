@@ -80,7 +80,29 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> HostAuthenticationTokenCreateResponse:
         """
-        CreateHostAuthenticationToken
+        Creates a new authentication token for accessing remote hosts.
+
+        Use this method to:
+
+        - Set up SCM authentication
+        - Configure OAuth credentials
+        - Manage PAT tokens
+
+        ### Examples
+
+        - Create OAuth token:
+
+          Creates a new OAuth-based authentication token.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          host: "github.com"
+          token: "gho_xxxxxxxxxxxx"
+          source: HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH
+          expiresAt: "2024-12-31T23:59:59Z"
+          refreshToken: "ghr_xxxxxxxxxxxx"
+          ```
 
         Args:
           expires_at: A Timestamp represents a point in time independent of any time zone or local
@@ -212,7 +234,23 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> HostAuthenticationTokenRetrieveResponse:
         """
-        GetHostAuthenticationToken
+        Gets details about a specific host authentication token.
+
+        Use this method to:
+
+        - View token information
+        - Check token expiration
+        - Verify token validity
+
+        ### Examples
+
+        - Get token details:
+
+          Retrieves information about a specific token.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -249,7 +287,26 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateHostAuthenticationToken
+        Updates an existing host authentication token.
+
+        Use this method to:
+
+        - Refresh token values
+        - Update expiration
+        - Modify token settings
+
+        ### Examples
+
+        - Update token:
+
+          Updates token value and expiration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          token: "gho_xxxxxxxxxxxx"
+          expiresAt: "2024-12-31T23:59:59Z"
+          refreshToken: "ghr_xxxxxxxxxxxx"
+          ```
 
         Args:
           expires_at: A Timestamp represents a point in time independent of any time zone or local
@@ -381,7 +438,35 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncTokensPage[HostAuthenticationToken]:
         """
-        ListHostAuthenticationTokens
+        Lists host authentication tokens with optional filtering.
+
+        Use this method to:
+
+        - View all tokens
+        - Filter by runner or user
+        - Monitor token status
+
+        ### Examples
+
+        - List all tokens:
+
+          Shows all tokens with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by runner:
+
+          Lists tokens for a specific runner.
+
+          ```yaml
+          filter:
+            runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -431,7 +516,23 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteHostAuthenticationToken
+        Deletes a host authentication token.
+
+        Use this method to:
+
+        - Remove unused tokens
+        - Revoke access
+        - Clean up expired tokens
+
+        ### Examples
+
+        - Delete token:
+
+          Permanently removes a token.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -492,7 +593,29 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> HostAuthenticationTokenCreateResponse:
         """
-        CreateHostAuthenticationToken
+        Creates a new authentication token for accessing remote hosts.
+
+        Use this method to:
+
+        - Set up SCM authentication
+        - Configure OAuth credentials
+        - Manage PAT tokens
+
+        ### Examples
+
+        - Create OAuth token:
+
+          Creates a new OAuth-based authentication token.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          host: "github.com"
+          token: "gho_xxxxxxxxxxxx"
+          source: HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH
+          expiresAt: "2024-12-31T23:59:59Z"
+          refreshToken: "ghr_xxxxxxxxxxxx"
+          ```
 
         Args:
           expires_at: A Timestamp represents a point in time independent of any time zone or local
@@ -624,7 +747,23 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> HostAuthenticationTokenRetrieveResponse:
         """
-        GetHostAuthenticationToken
+        Gets details about a specific host authentication token.
+
+        Use this method to:
+
+        - View token information
+        - Check token expiration
+        - Verify token validity
+
+        ### Examples
+
+        - Get token details:
+
+          Retrieves information about a specific token.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -661,7 +800,26 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateHostAuthenticationToken
+        Updates an existing host authentication token.
+
+        Use this method to:
+
+        - Refresh token values
+        - Update expiration
+        - Modify token settings
+
+        ### Examples
+
+        - Update token:
+
+          Updates token value and expiration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          token: "gho_xxxxxxxxxxxx"
+          expiresAt: "2024-12-31T23:59:59Z"
+          refreshToken: "ghr_xxxxxxxxxxxx"
+          ```
 
         Args:
           expires_at: A Timestamp represents a point in time independent of any time zone or local
@@ -793,7 +951,35 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[HostAuthenticationToken, AsyncTokensPage[HostAuthenticationToken]]:
         """
-        ListHostAuthenticationTokens
+        Lists host authentication tokens with optional filtering.
+
+        Use this method to:
+
+        - View all tokens
+        - Filter by runner or user
+        - Monitor token status
+
+        ### Examples
+
+        - List all tokens:
+
+          Shows all tokens with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by runner:
+
+          Lists tokens for a specific runner.
+
+          ```yaml
+          filter:
+            runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -843,7 +1029,23 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteHostAuthenticationToken
+        Deletes a host authentication token.
+
+        Use this method to:
+
+        - Remove unused tokens
+        - Revoke access
+        - Clean up expired tokens
+
+        ### Examples
+
+        - Delete token:
+
+          Permanently removes a token.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers

@@ -20,15 +20,15 @@ class Environment(BaseModel):
 
     metadata: Optional[EnvironmentMetadata] = None
     """
-    EnvironmentMetadata is data associated with an environment that's required for
-    other parts of the system to function
+    Metadata is data associated with this environment that's required for other
+    parts of Gitpod to function
     """
 
     spec: Optional[EnvironmentSpec] = None
     """
-    EnvironmentSpec specifies the configuration of an environment for an environment
-    start
+    Spec is the configuration of the environment that's required for the runner to
+    start the environment
     """
 
     status: Optional[EnvironmentStatus] = None
-    """EnvironmentStatus describes an environment status"""
+    """Status is the current status of the environment"""

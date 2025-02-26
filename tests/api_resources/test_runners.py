@@ -36,12 +36,12 @@ class TestRunners:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
-            name="xxx",
+            name="Production Runner",
             provider="RUNNER_PROVIDER_UNSPECIFIED",
             spec={
                 "configuration": {
                     "auto_update": True,
-                    "region": "region",
+                    "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
@@ -81,7 +81,7 @@ class TestRunners:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.retrieve(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
@@ -117,8 +117,8 @@ class TestRunners:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.update(
-            name="xxx",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            name="Updated Runner Name",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             spec={
                 "configuration": {
                     "auto_update": True,
@@ -170,7 +170,7 @@ class TestRunners:
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncRunnersPage[Runner], runner, path=["response"])
@@ -208,7 +208,7 @@ class TestRunners:
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.delete(
             force=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, runner, path=["response"])
 
@@ -244,7 +244,7 @@ class TestRunners:
     @parametrize
     def test_method_check_authentication_for_host_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.check_authentication_for_host(
-            host="host",
+            host="github.com",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
@@ -281,7 +281,7 @@ class TestRunners:
     @parametrize
     def test_method_create_runner_token_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.create_runner_token(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
@@ -317,7 +317,7 @@ class TestRunners:
     @parametrize
     def test_method_parse_context_url_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.parse_context_url(
-            context_url="https://example.com",
+            context_url="https://github.com/org/repo/tree/main",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
@@ -359,12 +359,12 @@ class TestAsyncRunners:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
-            name="xxx",
+            name="Production Runner",
             provider="RUNNER_PROVIDER_UNSPECIFIED",
             spec={
                 "configuration": {
                     "auto_update": True,
-                    "region": "region",
+                    "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
@@ -404,7 +404,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.retrieve(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(RunnerRetrieveResponse, runner, path=["response"])
 
@@ -440,8 +440,8 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.update(
-            name="xxx",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            name="Updated Runner Name",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             spec={
                 "configuration": {
                     "auto_update": True,
@@ -493,7 +493,7 @@ class TestAsyncRunners:
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncRunnersPage[Runner], runner, path=["response"])
@@ -531,7 +531,7 @@ class TestAsyncRunners:
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.delete(
             force=True,
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, runner, path=["response"])
 
@@ -567,7 +567,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_check_authentication_for_host_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.check_authentication_for_host(
-            host="host",
+            host="github.com",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
@@ -604,7 +604,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_create_runner_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create_runner_token(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
 
@@ -640,7 +640,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_parse_context_url_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.parse_context_url(
-            context_url="https://example.com",
+            context_url="https://github.com/org/repo/tree/main",
             runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])

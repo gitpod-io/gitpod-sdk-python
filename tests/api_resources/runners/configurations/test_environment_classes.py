@@ -34,13 +34,17 @@ class TestEnvironmentClasses:
         environment_class = client.runners.configurations.environment_classes.create(
             configuration=[
                 {
-                    "key": "key",
-                    "value": "value",
-                }
+                    "key": "cpu",
+                    "value": "8",
+                },
+                {
+                    "key": "memory",
+                    "value": "16384",
+                },
             ],
-            description="xxx",
-            display_name="xxx",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="8 CPU, 16GB RAM",
+            display_name="Large Instance",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EnvironmentClassCreateResponse, environment_class, path=["response"])
 
@@ -76,7 +80,7 @@ class TestEnvironmentClasses:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         environment_class = client.runners.configurations.environment_classes.retrieve(
-            environment_class_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EnvironmentClassRetrieveResponse, environment_class, path=["response"])
 
@@ -112,10 +116,10 @@ class TestEnvironmentClasses:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         environment_class = client.runners.configurations.environment_classes.update(
-            description="xxx",
-            display_name="xxx",
+            description="16 CPU, 32GB RAM",
+            display_name="Updated Large Instance",
             enabled=True,
-            environment_class_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -162,7 +166,7 @@ class TestEnvironmentClasses:
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncEnvironmentClassesPage[EnvironmentClass], environment_class, path=["response"])
@@ -205,13 +209,17 @@ class TestAsyncEnvironmentClasses:
         environment_class = await async_client.runners.configurations.environment_classes.create(
             configuration=[
                 {
-                    "key": "key",
-                    "value": "value",
-                }
+                    "key": "cpu",
+                    "value": "8",
+                },
+                {
+                    "key": "memory",
+                    "value": "16384",
+                },
             ],
-            description="xxx",
-            display_name="xxx",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            description="8 CPU, 16GB RAM",
+            display_name="Large Instance",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EnvironmentClassCreateResponse, environment_class, path=["response"])
 
@@ -247,7 +255,7 @@ class TestAsyncEnvironmentClasses:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runners.configurations.environment_classes.retrieve(
-            environment_class_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(EnvironmentClassRetrieveResponse, environment_class, path=["response"])
 
@@ -285,10 +293,10 @@ class TestAsyncEnvironmentClasses:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_class = await async_client.runners.configurations.environment_classes.update(
-            description="xxx",
-            display_name="xxx",
+            description="16 CPU, 32GB RAM",
+            display_name="Updated Large Instance",
             enabled=True,
-            environment_class_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, environment_class, path=["response"])
 
@@ -335,7 +343,7 @@ class TestAsyncEnvironmentClasses:
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncEnvironmentClassesPage[EnvironmentClass], environment_class, path=["response"])

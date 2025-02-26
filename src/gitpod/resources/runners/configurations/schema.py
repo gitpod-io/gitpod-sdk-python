@@ -56,7 +56,23 @@ class SchemaResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SchemaRetrieveResponse:
         """
-        GetRunnerConfigurationSchema retrieves the latest Runner configuration schema
+        Gets the latest runner configuration schema.
+
+        Use this method to:
+
+        - View available settings
+        - Check configuration options
+        - Validate configurations
+
+        ### Examples
+
+        - Get schema:
+
+          Retrieves configuration schema for a runner.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -109,7 +125,23 @@ class AsyncSchemaResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SchemaRetrieveResponse:
         """
-        GetRunnerConfigurationSchema retrieves the latest Runner configuration schema
+        Gets the latest runner configuration schema.
+
+        Use this method to:
+
+        - View available settings
+        - Check configuration options
+        - Validate configurations
+
+        ### Examples
+
+        - Get schema:
+
+          Retrieves configuration schema for a runner.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
