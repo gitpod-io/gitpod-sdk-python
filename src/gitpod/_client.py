@@ -82,7 +82,7 @@ class Gitpod(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous gitpod client instance.
+        """Construct a new synchronous Gitpod client instance.
 
         This automatically infers the `bearer_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
         """
@@ -270,7 +270,7 @@ class AsyncGitpod(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async gitpod client instance.
+        """Construct a new async AsyncGitpod client instance.
 
         This automatically infers the `bearer_token` argument from the `GITPOD_API_KEY` environment variable if it is not provided.
         """
