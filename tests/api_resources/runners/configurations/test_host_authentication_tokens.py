@@ -33,13 +33,13 @@ class TestHostAuthenticationTokens:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.create(
-            token="x",
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-            host="x",
-            refresh_token="refreshToken",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="gho_xxxxxxxxxxxx",
+            expires_at=parse_datetime("2024-12-31T23:59:59Z"),
+            host="github.com",
+            refresh_token="ghr_xxxxxxxxxxxx",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             source="HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
-            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
@@ -75,7 +75,7 @@ class TestHostAuthenticationTokens:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
@@ -111,10 +111,10 @@ class TestHostAuthenticationTokens:
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            token="x",
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-            refresh_token="refreshToken",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            token="gho_xxxxxxxxxxxx",
+            expires_at=parse_datetime("2024-12-31T23:59:59Z"),
+            refresh_token="ghr_xxxxxxxxxxxx",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
@@ -153,12 +153,12 @@ class TestHostAuthenticationTokens:
             token="token",
             page_size=0,
             filter={
-                "runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "runner_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
@@ -195,7 +195,7 @@ class TestHostAuthenticationTokens:
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         host_authentication_token = client.runners.configurations.host_authentication_tokens.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
@@ -235,13 +235,13 @@ class TestAsyncHostAuthenticationTokens:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.create(
-            token="x",
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-            host="x",
-            refresh_token="refreshToken",
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            token="gho_xxxxxxxxxxxx",
+            expires_at=parse_datetime("2024-12-31T23:59:59Z"),
+            host="github.com",
+            refresh_token="ghr_xxxxxxxxxxxx",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             source="HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
-            user_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
 
@@ -279,7 +279,7 @@ class TestAsyncHostAuthenticationTokens:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.retrieve(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(HostAuthenticationTokenRetrieveResponse, host_authentication_token, path=["response"])
 
@@ -317,10 +317,10 @@ class TestAsyncHostAuthenticationTokens:
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.update(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            token="x",
-            expires_at=parse_datetime("2019-12-27T18:11:19.117Z"),
-            refresh_token="refreshToken",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            token="gho_xxxxxxxxxxxx",
+            expires_at=parse_datetime("2024-12-31T23:59:59Z"),
+            refresh_token="ghr_xxxxxxxxxxxx",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
@@ -361,12 +361,12 @@ class TestAsyncHostAuthenticationTokens:
             token="token",
             page_size=0,
             filter={
-                "runner_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "runner_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncTokensPage[HostAuthenticationToken], host_authentication_token, path=["response"])
@@ -405,7 +405,7 @@ class TestAsyncHostAuthenticationTokens:
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         host_authentication_token = await async_client.runners.configurations.host_authentication_tokens.delete(
-            id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 

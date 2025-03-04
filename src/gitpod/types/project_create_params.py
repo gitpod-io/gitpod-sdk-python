@@ -15,7 +15,7 @@ class ProjectCreateParams(TypedDict, total=False):
     environment_class: Required[Annotated[ProjectEnvironmentClassParam, PropertyInfo(alias="environmentClass")]]
 
     initializer: Required[EnvironmentInitializerParam]
-    """EnvironmentInitializer specifies how an environment is to be initialized"""
+    """initializer is the content initializer"""
 
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """

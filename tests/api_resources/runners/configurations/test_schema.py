@@ -27,7 +27,7 @@ class TestSchema:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         schema = client.runners.configurations.schema.retrieve(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(SchemaRetrieveResponse, schema, path=["response"])
 
@@ -67,7 +67,7 @@ class TestAsyncSchema:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         schema = await async_client.runners.configurations.schema.retrieve(
-            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
         )
         assert_matches_type(SchemaRetrieveResponse, schema, path=["response"])
 

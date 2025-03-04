@@ -72,7 +72,27 @@ class ScmIntegrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationCreateResponse:
         """
-        CreateSCMIntegration creates a new SCM integration on a runner.
+        Creates a new SCM integration for a runner.
+
+        Use this method to:
+
+        - Configure source control access
+        - Set up repository integrations
+        - Enable code synchronization
+
+        ### Examples
+
+        - Create GitHub integration:
+
+          Sets up GitHub SCM integration.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmId: "github"
+          host: "github.com"
+          oauthClientId: "client_id"
+          oauthPlaintextClientSecret: "client_secret"
+          ```
 
         Args:
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
@@ -123,7 +143,23 @@ class ScmIntegrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationRetrieveResponse:
         """
-        GetSCMIntegration returns a single SCM integration configured for a runner.
+        Gets details about a specific SCM integration.
+
+        Use this method to:
+
+        - View integration settings
+        - Check integration status
+        - Verify configuration
+
+        ### Examples
+
+        - Get integration details:
+
+          Retrieves information about a specific integration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -158,7 +194,25 @@ class ScmIntegrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateSCMIntegration updates an existing SCM integration on a runner.
+        Updates an existing SCM integration.
+
+        Use this method to:
+
+        - Modify integration settings
+        - Update credentials
+        - Change configuration
+
+        ### Examples
+
+        - Update integration:
+
+          Updates OAuth credentials.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          oauthClientId: "new_client_id"
+          oauthPlaintextClientSecret: "new_client_secret"
+          ```
 
         Args:
           oauth_client_id: oauth_client_id can be set to update the OAuth app's client ID. If an empty
@@ -218,7 +272,26 @@ class ScmIntegrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncIntegrationsPage[ScmIntegration]:
         """
-        ListSCMIntegrations returns all SCM integrations configured for a runner.
+        Lists SCM integrations for a runner.
+
+        Use this method to:
+
+        - View all integrations
+        - Monitor integration status
+        - Check available SCMs
+
+        ### Examples
+
+        - List integrations:
+
+          Shows all SCM integrations.
+
+          ```yaml
+          filter:
+            runnerIds: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing scm integrations
@@ -270,7 +343,23 @@ class ScmIntegrationsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSCMIntegration deletes an existing SCM integration on a runner.
+        Deletes an SCM integration.
+
+        Use this method to:
+
+        - Remove unused integrations
+        - Clean up configurations
+        - Revoke SCM access
+
+        ### Examples
+
+        - Delete integration:
+
+          Removes an SCM integration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -328,7 +417,27 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationCreateResponse:
         """
-        CreateSCMIntegration creates a new SCM integration on a runner.
+        Creates a new SCM integration for a runner.
+
+        Use this method to:
+
+        - Configure source control access
+        - Set up repository integrations
+        - Enable code synchronization
+
+        ### Examples
+
+        - Create GitHub integration:
+
+          Sets up GitHub SCM integration.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmId: "github"
+          host: "github.com"
+          oauthClientId: "client_id"
+          oauthPlaintextClientSecret: "client_secret"
+          ```
 
         Args:
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
@@ -379,7 +488,23 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScmIntegrationRetrieveResponse:
         """
-        GetSCMIntegration returns a single SCM integration configured for a runner.
+        Gets details about a specific SCM integration.
+
+        Use this method to:
+
+        - View integration settings
+        - Check integration status
+        - Verify configuration
+
+        ### Examples
+
+        - Get integration details:
+
+          Retrieves information about a specific integration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
@@ -414,7 +539,25 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        UpdateSCMIntegration updates an existing SCM integration on a runner.
+        Updates an existing SCM integration.
+
+        Use this method to:
+
+        - Modify integration settings
+        - Update credentials
+        - Change configuration
+
+        ### Examples
+
+        - Update integration:
+
+          Updates OAuth credentials.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          oauthClientId: "new_client_id"
+          oauthPlaintextClientSecret: "new_client_secret"
+          ```
 
         Args:
           oauth_client_id: oauth_client_id can be set to update the OAuth app's client ID. If an empty
@@ -474,7 +617,26 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[ScmIntegration, AsyncIntegrationsPage[ScmIntegration]]:
         """
-        ListSCMIntegrations returns all SCM integrations configured for a runner.
+        Lists SCM integrations for a runner.
+
+        Use this method to:
+
+        - View all integrations
+        - Monitor integration status
+        - Check available SCMs
+
+        ### Examples
+
+        - List integrations:
+
+          Shows all SCM integrations.
+
+          ```yaml
+          filter:
+            runnerIds: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
+          pagination:
+            pageSize: 20
+          ```
 
         Args:
           pagination: pagination contains the pagination options for listing scm integrations
@@ -526,7 +688,23 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> object:
         """
-        DeleteSCMIntegration deletes an existing SCM integration on a runner.
+        Deletes an SCM integration.
+
+        Use this method to:
+
+        - Remove unused integrations
+        - Clean up configurations
+        - Revoke SCM access
+
+        ### Examples
+
+        - Delete integration:
+
+          Removes an SCM integration.
+
+          ```yaml
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
 
         Args:
           extra_headers: Send extra headers
