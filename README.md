@@ -136,6 +136,21 @@ for environment in first_page.environments:
 # Remove `await` for non-async usage.
 ```
 
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from gitpod import Gitpod
+
+client = Gitpod()
+
+page = client.accounts.list_login_providers(
+    filter={"invite_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+)
+print(page.login_providers)
+```
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `gitpod.APIConnectionError` is raised.
