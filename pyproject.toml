@@ -38,7 +38,6 @@ Homepage = "https://github.com/gitpod-io/gitpod-sdk-python"
 Repository = "https://github.com/gitpod-io/gitpod-sdk-python"
 
 
-
 [tool.rye]
 managed = true
 # version pins are in requirements-dev.lock
@@ -154,7 +153,6 @@ reportImplicitOverride = true
 
 reportImportCycles = false
 reportPrivateUsage = false
-
 
 [tool.ruff]
 line-length = 120
