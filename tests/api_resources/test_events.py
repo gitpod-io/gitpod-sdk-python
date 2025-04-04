@@ -69,27 +69,26 @@ class TestEvents:
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch(self, client: Gitpod) -> None:
-        event = client.events.watch()
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
+        event_stream = client.events.watch()
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_method_watch_with_all_params(self, client: Gitpod) -> None:
-        event = client.events.watch(
+        event_stream = client.events.watch(
             environment_id="environmentId",
             organization=True,
         )
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
+        assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     def test_raw_response_watch(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch()
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        event = response.parse()
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
+        stream = response.parse()
+        stream.close()
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
@@ -98,8 +97,8 @@ class TestEvents:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            event = response.parse()
-            assert_matches_type(JSONLDecoder[EventWatchResponse], event, path=["response"])
+            stream = response.parse()
+            stream.close()
 
         assert cast(Any, response.is_closed) is True
 
@@ -157,27 +156,26 @@ class TestAsyncEvents:
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch(self, async_client: AsyncGitpod) -> None:
-        event = await async_client.events.watch()
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
+        event_stream = await async_client.events.watch()
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_method_watch_with_all_params(self, async_client: AsyncGitpod) -> None:
-        event = await async_client.events.watch(
+        event_stream = await async_client.events.watch(
             environment_id="environmentId",
             organization=True,
         )
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
+        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
     async def test_raw_response_watch(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch()
 
-        assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        event = await response.parse()
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
+        stream = await response.parse()
+        await stream.close()
 
     @pytest.mark.skip(reason="Prism doesn't support JSONL responses yet")
     @parametrize
@@ -186,7 +184,7 @@ class TestAsyncEvents:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            event = await response.parse()
-            assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event, path=["response"])
+            stream = await response.parse()
+            await stream.close()
 
         assert cast(Any, response.is_closed) is True
