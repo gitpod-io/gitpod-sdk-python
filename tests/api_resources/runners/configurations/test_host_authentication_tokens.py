@@ -38,7 +38,7 @@ class TestHostAuthenticationTokens:
             host="github.com",
             refresh_token="ghr_xxxxxxxxxxxx",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
-            source="HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
+            source="HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
@@ -240,7 +240,7 @@ class TestAsyncHostAuthenticationTokens:
             host="github.com",
             refresh_token="ghr_xxxxxxxxxxxx",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
-            source="HOST_AUTHENTICATION_TOKEN_SOURCE_UNSPECIFIED",
+            source="HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])

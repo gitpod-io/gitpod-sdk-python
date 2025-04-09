@@ -71,7 +71,7 @@ class TestExecutions:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED", "TASK_EXECUTION_PHASE_PENDING"],
+                "phases": ["TASK_EXECUTION_PHASE_RUNNING", "TASK_EXECUTION_PHASE_FAILED"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "task_references": ["string"],
             },
@@ -196,7 +196,7 @@ class TestAsyncExecutions:
             page_size=0,
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "phases": ["TASK_EXECUTION_PHASE_UNSPECIFIED", "TASK_EXECUTION_PHASE_PENDING"],
+                "phases": ["TASK_EXECUTION_PHASE_RUNNING", "TASK_EXECUTION_PHASE_FAILED"],
                 "task_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "task_references": ["string"],
             },
