@@ -37,14 +37,14 @@ class TestRunners:
         runner = client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
             name="Production Runner",
-            provider="RUNNER_PROVIDER_UNSPECIFIED",
+            provider="RUNNER_PROVIDER_AWS_EC2",
             spec={
                 "configuration": {
                     "auto_update": True,
                     "region": "us-west",
-                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
-                "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
+                "desired_phase": "RUNNER_PHASE_ACTIVE",
             },
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
@@ -122,7 +122,7 @@ class TestRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
-                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
             },
@@ -166,7 +166,7 @@ class TestRunners:
             filter={
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "kinds": ["RUNNER_KIND_UNSPECIFIED"],
-                "providers": ["RUNNER_PROVIDER_UNSPECIFIED"],
+                "providers": ["RUNNER_PROVIDER_AWS_EC2"],
             },
             pagination={
                 "token": "token",
@@ -360,14 +360,14 @@ class TestAsyncRunners:
         runner = await async_client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
             name="Production Runner",
-            provider="RUNNER_PROVIDER_UNSPECIFIED",
+            provider="RUNNER_PROVIDER_AWS_EC2",
             spec={
                 "configuration": {
                     "auto_update": True,
                     "region": "us-west",
-                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
-                "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
+                "desired_phase": "RUNNER_PHASE_ACTIVE",
             },
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
@@ -445,7 +445,7 @@ class TestAsyncRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
-                    "release_channel": "RUNNER_RELEASE_CHANNEL_UNSPECIFIED",
+                    "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
             },
@@ -489,7 +489,7 @@ class TestAsyncRunners:
             filter={
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "kinds": ["RUNNER_KIND_UNSPECIFIED"],
-                "providers": ["RUNNER_PROVIDER_UNSPECIFIED"],
+                "providers": ["RUNNER_PROVIDER_AWS_EC2"],
             },
             pagination={
                 "token": "token",

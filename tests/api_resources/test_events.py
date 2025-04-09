@@ -33,7 +33,7 @@ class TestEvents:
             page_size=0,
             filter={
                 "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
-                "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
+                "actor_principals": ["PRINCIPAL_USER"],
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
             },
@@ -120,7 +120,7 @@ class TestAsyncEvents:
             page_size=0,
             filter={
                 "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
-                "actor_principals": ["PRINCIPAL_UNSPECIFIED"],
+                "actor_principals": ["PRINCIPAL_USER"],
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
             },

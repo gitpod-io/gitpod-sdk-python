@@ -34,7 +34,7 @@ class TestPolicies:
         policy = client.projects.policies.create(
             group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
-            role="PROJECT_ROLE_UNSPECIFIED",
+            role="PROJECT_ROLE_ADMIN",
         )
         assert_matches_type(PolicyCreateResponse, policy, path=["response"])
 
@@ -72,7 +72,7 @@ class TestPolicies:
         policy = client.projects.policies.update(
             group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
-            role="PROJECT_ROLE_UNSPECIFIED",
+            role="PROJECT_ROLE_EDITOR",
         )
         assert_matches_type(PolicyUpdateResponse, policy, path=["response"])
 
@@ -193,7 +193,7 @@ class TestAsyncPolicies:
         policy = await async_client.projects.policies.create(
             group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
-            role="PROJECT_ROLE_UNSPECIFIED",
+            role="PROJECT_ROLE_ADMIN",
         )
         assert_matches_type(PolicyCreateResponse, policy, path=["response"])
 
@@ -231,7 +231,7 @@ class TestAsyncPolicies:
         policy = await async_client.projects.policies.update(
             group_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
-            role="PROJECT_ROLE_UNSPECIFIED",
+            role="PROJECT_ROLE_EDITOR",
         )
         assert_matches_type(PolicyUpdateResponse, policy, path=["response"])
 
