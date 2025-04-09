@@ -163,7 +163,7 @@ class TestOrganizations:
                 "token": "token",
                 "page_size": 50,
             },
-            scope="SCOPE_UNSPECIFIED",
+            scope="SCOPE_ALL",
         )
         assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
@@ -357,7 +357,7 @@ class TestOrganizations:
         organization = client.organizations.set_role(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
-            role="ORGANIZATION_ROLE_UNSPECIFIED",
+            role="ORGANIZATION_ROLE_MEMBER",
         )
         assert_matches_type(object, organization, path=["response"])
 
@@ -531,7 +531,7 @@ class TestAsyncOrganizations:
                 "token": "token",
                 "page_size": 50,
             },
-            scope="SCOPE_UNSPECIFIED",
+            scope="SCOPE_ALL",
         )
         assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
@@ -725,7 +725,7 @@ class TestAsyncOrganizations:
         organization = await async_client.organizations.set_role(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
-            role="ORGANIZATION_ROLE_UNSPECIFIED",
+            role="ORGANIZATION_ROLE_MEMBER",
         )
         assert_matches_type(object, organization, path=["response"])
 

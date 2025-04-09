@@ -43,7 +43,7 @@ class TestAutomations:
                                 "image": "x",
                             }
                         },
-                        "triggered_by": ["manual"],
+                        "triggered_by": ["postDevcontainerStart"],
                     }
                 },
                 "tasks": {
@@ -58,7 +58,7 @@ class TestAutomations:
                                 "image": "x",
                             }
                         },
-                        "triggered_by": ["manual"],
+                        "triggered_by": ["postEnvironmentStart"],
                     }
                 },
             },
@@ -118,7 +118,7 @@ class TestAsyncAutomations:
                                 "image": "x",
                             }
                         },
-                        "triggered_by": ["manual"],
+                        "triggered_by": ["postDevcontainerStart"],
                     }
                 },
                 "tasks": {
@@ -133,7 +133,7 @@ class TestAsyncAutomations:
                                 "image": "x",
                             }
                         },
-                        "triggered_by": ["manual"],
+                        "triggered_by": ["postEnvironmentStart"],
                     }
                 },
             },
