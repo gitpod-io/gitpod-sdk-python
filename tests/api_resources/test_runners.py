@@ -41,6 +41,13 @@ class TestRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "log_level": "LOG_LEVEL_UNSPECIFIED",
+                    "metrics": {
+                        "enabled": True,
+                        "password": "password",
+                        "url": "url",
+                        "username": "username",
+                    },
                     "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
@@ -122,6 +129,13 @@ class TestRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "log_level": "LOG_LEVEL_UNSPECIFIED",
+                    "metrics": {
+                        "enabled": True,
+                        "password": "password",
+                        "url": "url",
+                        "username": "username",
+                    },
                     "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
@@ -364,6 +378,13 @@ class TestAsyncRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "log_level": "LOG_LEVEL_UNSPECIFIED",
+                    "metrics": {
+                        "enabled": True,
+                        "password": "password",
+                        "url": "url",
+                        "username": "username",
+                    },
                     "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
@@ -445,6 +466,13 @@ class TestAsyncRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "log_level": "LOG_LEVEL_UNSPECIFIED",
+                    "metrics": {
+                        "enabled": True,
+                        "password": "password",
+                        "url": "url",
+                        "username": "username",
+                    },
                     "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",

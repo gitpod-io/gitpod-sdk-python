@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import Dict, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -20,6 +20,12 @@ class ServiceStatus(BaseModel):
 
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
     """log_url contains the URL at which the service logs can be accessed."""
+
+    output: Optional[Dict[str, str]] = None
+    """
+    output contains the output of the service. setting an output field to empty
+    string will unset it.
+    """
 
     phase: Optional[ServicePhase] = None
     """phase is the current phase of the service."""

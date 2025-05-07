@@ -57,6 +57,12 @@ class DevcontainerDotfiles(BaseModel):
 
 
 class Devcontainer(BaseModel):
+    default_devcontainer_image: Optional[str] = FieldInfo(alias="defaultDevcontainerImage", default=None)
+    """
+    default_devcontainer_image is the default image that is used to start the
+    devcontainer if no devcontainer config file is found
+    """
+
     devcontainer_file_path: Optional[str] = FieldInfo(alias="devcontainerFilePath", default=None)
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
@@ -92,6 +98,9 @@ class Port(BaseModel):
 
 
 class Secret(BaseModel):
+    id: Optional[str] = None
+    """id is the unique identifier of the secret."""
+
     container_registry_basic_auth_host: Optional[str] = FieldInfo(alias="containerRegistryBasicAuthHost", default=None)
     """
     container_registry_basic_auth_host is the hostname of the container registry

@@ -7,6 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .invite_domains import InviteDomains
+from .organization_tier import OrganizationTier
 
 __all__ = ["Organization"]
 
@@ -107,6 +108,9 @@ class Organization(BaseModel):
     """
 
     name: str
+
+    tier: OrganizationTier
+    """The tier of the organization - free or enterprise"""
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """

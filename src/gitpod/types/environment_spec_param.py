@@ -58,6 +58,12 @@ class DevcontainerDotfiles(TypedDict, total=False):
 
 
 class Devcontainer(TypedDict, total=False):
+    default_devcontainer_image: Annotated[str, PropertyInfo(alias="defaultDevcontainerImage")]
+    """
+    default_devcontainer_image is the default image that is used to start the
+    devcontainer if no devcontainer config file is found
+    """
+
     devcontainer_file_path: Annotated[str, PropertyInfo(alias="devcontainerFilePath")]
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
@@ -99,6 +105,9 @@ class Port(TypedDict, total=False):
 
 
 class Secret(TypedDict, total=False):
+    id: str
+    """id is the unique identifier of the secret."""
+
     container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
     """
     container_registry_basic_auth_host is the hostname of the container registry

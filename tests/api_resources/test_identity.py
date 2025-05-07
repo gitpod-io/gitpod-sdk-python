@@ -104,6 +104,7 @@ class TestIdentity:
     def test_method_get_id_token_with_all_params(self, client: Gitpod) -> None:
         identity = client.identity.get_id_token(
             audience=["https://api.gitpod.io", "https://ws.gitpod.io"],
+            version="ID_TOKEN_VERSION_UNSPECIFIED",
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 
@@ -216,6 +217,7 @@ class TestAsyncIdentity:
     async def test_method_get_id_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         identity = await async_client.identity.get_id_token(
             audience=["https://api.gitpod.io", "https://ws.gitpod.io"],
+            version="ID_TOKEN_VERSION_UNSPECIFIED",
         )
         assert_matches_type(IdentityGetIDTokenResponse, identity, path=["response"])
 

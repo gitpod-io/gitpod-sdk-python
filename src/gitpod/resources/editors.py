@@ -98,6 +98,7 @@ class EditorsResource(SyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        filter: editor_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -107,7 +108,8 @@ class EditorsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncEditorsPage[Editor]:
         """
-        Lists all available code editors.
+        Lists all available code editors, optionally filtered to those allowed in an
+        organization.
 
         Use this method to:
 
@@ -127,7 +129,21 @@ class EditorsResource(SyncAPIResource):
             pageSize: 20
           ```
 
+        - List editors available to the organization:
+
+          Shows all available editors that are allowed by the policies enforced in the
+          organization with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          filter:
+            allowedByPolicy: true
+          ```
+
         Args:
+          filter: filter contains the filter options for listing editors
+
           pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
@@ -141,7 +157,13 @@ class EditorsResource(SyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
             page=SyncEditorsPage[Editor],
-            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                editor_list_params.EditorListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -300,6 +322,7 @@ class AsyncEditorsResource(AsyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        filter: editor_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: editor_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -309,7 +332,8 @@ class AsyncEditorsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Editor, AsyncEditorsPage[Editor]]:
         """
-        Lists all available code editors.
+        Lists all available code editors, optionally filtered to those allowed in an
+        organization.
 
         Use this method to:
 
@@ -329,7 +353,21 @@ class AsyncEditorsResource(AsyncAPIResource):
             pageSize: 20
           ```
 
+        - List editors available to the organization:
+
+          Shows all available editors that are allowed by the policies enforced in the
+          organization with pagination.
+
+          ```yaml
+          pagination:
+            pageSize: 20
+          filter:
+            allowedByPolicy: true
+          ```
+
         Args:
+          filter: filter contains the filter options for listing editors
+
           pagination: pagination contains the pagination options for listing environments
 
           extra_headers: Send extra headers
@@ -343,7 +381,13 @@ class AsyncEditorsResource(AsyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.EditorService/ListEditors",
             page=AsyncEditorsPage[Editor],
-            body=maybe_transform({"pagination": pagination}, editor_list_params.EditorListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                editor_list_params.EditorListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

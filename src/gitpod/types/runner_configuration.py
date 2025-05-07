@@ -5,6 +5,8 @@ from typing import Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .log_level import LogLevel
+from .metrics_configuration import MetricsConfiguration
 from .runner_release_channel import RunnerReleaseChannel
 
 __all__ = ["RunnerConfiguration"]
@@ -13,6 +15,12 @@ __all__ = ["RunnerConfiguration"]
 class RunnerConfiguration(BaseModel):
     auto_update: Optional[bool] = FieldInfo(alias="autoUpdate", default=None)
     """auto_update indicates whether the runner should automatically update itself."""
+
+    log_level: Optional[LogLevel] = FieldInfo(alias="logLevel", default=None)
+    """log_level is the log level for the runner"""
+
+    metrics: Optional[MetricsConfiguration] = None
+    """metrics contains configuration for the runner's metrics collection"""
 
     region: Optional[str] = None
     """

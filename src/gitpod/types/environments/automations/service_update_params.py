@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
+from typing import Dict, Iterable, Optional
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
@@ -63,6 +63,9 @@ class Status(TypedDict, total=False):
     failure_message: Annotated[Optional[str], PropertyInfo(alias="failureMessage")]
 
     log_url: Annotated[Optional[str], PropertyInfo(alias="logUrl")]
+
+    output: Dict[str, str]
+    """setting an output field to empty string will unset it."""
 
     phase: Optional[ServicePhase]
 

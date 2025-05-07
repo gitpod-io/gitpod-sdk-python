@@ -38,3 +38,9 @@ class ProjectCreateParams(TypedDict, total=False):
     """
 
     name: str
+
+    technical_description: Annotated[str, PropertyInfo(alias="technicalDescription")]
+    """
+    technical_description is a detailed technical description of the project This
+    field is not returned by default in GetProject or ListProjects responses 8KB max
+    """
