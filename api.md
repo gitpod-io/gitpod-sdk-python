@@ -76,6 +76,7 @@ from gitpod.types import (
     EnvironmentRetrieveResponse,
     EnvironmentUpdateResponse,
     EnvironmentDeleteResponse,
+    EnvironmentCreateEnvironmentTokenResponse,
     EnvironmentCreateFromProjectResponse,
     EnvironmentCreateLogsTokenResponse,
     EnvironmentMarkActiveResponse,
@@ -91,6 +92,7 @@ Methods:
 - <code title="post /gitpod.v1.EnvironmentService/UpdateEnvironment">client.environments.<a href="./src/gitpod/resources/environments/environments.py">update</a>(\*\*<a href="src/gitpod/types/environment_update_params.py">params</a>) -> <a href="./src/gitpod/types/environment_update_response.py">object</a></code>
 - <code title="post /gitpod.v1.EnvironmentService/ListEnvironments">client.environments.<a href="./src/gitpod/resources/environments/environments.py">list</a>(\*\*<a href="src/gitpod/types/environment_list_params.py">params</a>) -> <a href="./src/gitpod/types/environment.py">SyncEnvironmentsPage[Environment]</a></code>
 - <code title="post /gitpod.v1.EnvironmentService/DeleteEnvironment">client.environments.<a href="./src/gitpod/resources/environments/environments.py">delete</a>(\*\*<a href="src/gitpod/types/environment_delete_params.py">params</a>) -> <a href="./src/gitpod/types/environment_delete_response.py">object</a></code>
+- <code title="post /gitpod.v1.EnvironmentService/CreateEnvironmentAccessToken">client.environments.<a href="./src/gitpod/resources/environments/environments.py">create_environment_token</a>(\*\*<a href="src/gitpod/types/environment_create_environment_token_params.py">params</a>) -> <a href="./src/gitpod/types/environment_create_environment_token_response.py">EnvironmentCreateEnvironmentTokenResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentService/CreateEnvironmentFromProject">client.environments.<a href="./src/gitpod/resources/environments/environments.py">create_from_project</a>(\*\*<a href="src/gitpod/types/environment_create_from_project_params.py">params</a>) -> <a href="./src/gitpod/types/environment_create_from_project_response.py">EnvironmentCreateFromProjectResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentService/CreateEnvironmentLogsToken">client.environments.<a href="./src/gitpod/resources/environments/environments.py">create_logs_token</a>(\*\*<a href="src/gitpod/types/environment_create_logs_token_params.py">params</a>) -> <a href="./src/gitpod/types/environment_create_logs_token_response.py">EnvironmentCreateLogsTokenResponse</a></code>
 - <code title="post /gitpod.v1.EnvironmentService/MarkEnvironmentActive">client.environments.<a href="./src/gitpod/resources/environments/environments.py">mark_active</a>(\*\*<a href="src/gitpod/types/environment_mark_active_params.py">params</a>) -> <a href="./src/gitpod/types/environment_mark_active_response.py">object</a></code>
@@ -216,6 +218,7 @@ Types:
 
 ```python
 from gitpod.types import (
+    IDTokenVersion,
     IdentityExchangeTokenResponse,
     IdentityGetAuthenticatedIdentityResponse,
     IdentityGetIDTokenResponse,
@@ -237,7 +240,7 @@ from gitpod.types import (
     InviteDomains,
     Organization,
     OrganizationMember,
-    Scope,
+    OrganizationTier,
     OrganizationCreateResponse,
     OrganizationRetrieveResponse,
     OrganizationUpdateResponse,
@@ -253,7 +256,6 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/CreateOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">create</a>(\*\*<a href="src/gitpod/types/organization_create_params.py">params</a>) -> <a href="./src/gitpod/types/organization_create_response.py">OrganizationCreateResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/GetOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">retrieve</a>(\*\*<a href="src/gitpod/types/organization_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organization_retrieve_response.py">OrganizationRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/UpdateOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">update</a>(\*\*<a href="src/gitpod/types/organization_update_params.py">params</a>) -> <a href="./src/gitpod/types/organization_update_response.py">OrganizationUpdateResponse</a></code>
-- <code title="post /gitpod.v1.OrganizationService/ListOrganizations">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">list</a>(\*\*<a href="src/gitpod/types/organization_list_params.py">params</a>) -> <a href="./src/gitpod/types/organization.py">SyncOrganizationsPage[Organization]</a></code>
 - <code title="post /gitpod.v1.OrganizationService/DeleteOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">delete</a>(\*\*<a href="src/gitpod/types/organization_delete_params.py">params</a>) -> <a href="./src/gitpod/types/organization_delete_response.py">object</a></code>
 - <code title="post /gitpod.v1.OrganizationService/JoinOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">join</a>(\*\*<a href="src/gitpod/types/organization_join_params.py">params</a>) -> <a href="./src/gitpod/types/organization_join_response.py">OrganizationJoinResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/LeaveOrganization">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">leave</a>(\*\*<a href="src/gitpod/types/organization_leave_params.py">params</a>) -> <a href="./src/gitpod/types/organization_leave_response.py">object</a></code>
@@ -301,6 +303,23 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/CreateOrganizationInvite">client.organizations.invites.<a href="./src/gitpod/resources/organizations/invites.py">create</a>(\*\*<a href="src/gitpod/types/organizations/invite_create_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/invite_create_response.py">InviteCreateResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/GetOrganizationInvite">client.organizations.invites.<a href="./src/gitpod/resources/organizations/invites.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/invite_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/invite_retrieve_response.py">InviteRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/GetOrganizationInviteSummary">client.organizations.invites.<a href="./src/gitpod/resources/organizations/invites.py">get_summary</a>(\*\*<a href="src/gitpod/types/organizations/invite_get_summary_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/invite_get_summary_response.py">InviteGetSummaryResponse</a></code>
+
+## Policies
+
+Types:
+
+```python
+from gitpod.types.organizations import (
+    OrganizationPolicies,
+    PolicyRetrieveResponse,
+    PolicyUpdateResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.OrganizationService/GetOrganizationPolicies">client.organizations.policies.<a href="./src/gitpod/resources/organizations/policies.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/policy_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/policy_retrieve_response.py">PolicyRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/UpdateOrganizationPolicies">client.organizations.policies.<a href="./src/gitpod/resources/organizations/policies.py">update</a>(\*\*<a href="src/gitpod/types/organizations/policy_update_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/policy_update_response.py">object</a></code>
 
 ## SSOConfigurations
 
@@ -380,6 +399,8 @@ Types:
 
 ```python
 from gitpod.types import (
+    LogLevel,
+    MetricsConfiguration,
     Runner,
     RunnerCapability,
     RunnerConfiguration,
@@ -532,6 +553,7 @@ Types:
 ```python
 from gitpod.types import (
     Secret,
+    SecretScope,
     SecretCreateResponse,
     SecretDeleteResponse,
     SecretGetValueResponse,
@@ -559,6 +581,19 @@ Methods:
 
 - <code title="post /gitpod.v1.UserService/GetAuthenticatedUser">client.users.<a href="./src/gitpod/resources/users/users.py">get_authenticated_user</a>(\*\*<a href="src/gitpod/types/user_get_authenticated_user_params.py">params</a>) -> <a href="./src/gitpod/types/user_get_authenticated_user_response.py">UserGetAuthenticatedUserResponse</a></code>
 - <code title="post /gitpod.v1.UserService/SetSuspended">client.users.<a href="./src/gitpod/resources/users/users.py">set_suspended</a>(\*\*<a href="src/gitpod/types/user_set_suspended_params.py">params</a>) -> <a href="./src/gitpod/types/user_set_suspended_response.py">object</a></code>
+
+## Dotfiles
+
+Types:
+
+```python
+from gitpod.types.users import DotfilesConfiguration, DotfileGetResponse, DotfileSetResponse
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.UserService/GetDotfilesConfiguration">client.users.dotfiles.<a href="./src/gitpod/resources/users/dotfiles.py">get</a>(\*\*<a href="src/gitpod/types/users/dotfile_get_params.py">params</a>) -> <a href="./src/gitpod/types/users/dotfile_get_response.py">DotfileGetResponse</a></code>
+- <code title="post /gitpod.v1.UserService/SetDotfilesConfiguration">client.users.dotfiles.<a href="./src/gitpod/resources/users/dotfiles.py">set</a>(\*\*<a href="src/gitpod/types/users/dotfile_set_params.py">params</a>) -> <a href="./src/gitpod/types/users/dotfile_set_response.py">object</a></code>
 
 ## Pats
 

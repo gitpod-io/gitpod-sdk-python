@@ -68,6 +68,7 @@ class TestEditors:
         editor = client.editors.list(
             token="token",
             page_size=0,
+            filter={"allowed_by_policy": True},
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -187,6 +188,7 @@ class TestAsyncEditors:
         editor = await async_client.editors.list(
             token="token",
             page_size=0,
+            filter={"allowed_by_policy": True},
             pagination={
                 "token": "token",
                 "page_size": 20,

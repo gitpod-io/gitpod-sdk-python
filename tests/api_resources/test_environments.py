@@ -15,6 +15,7 @@ from gitpod.types import (
     EnvironmentRetrieveResponse,
     EnvironmentCreateLogsTokenResponse,
     EnvironmentCreateFromProjectResponse,
+    EnvironmentCreateEnvironmentTokenResponse,
 )
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncEnvironmentsPage, AsyncEnvironmentsPage
@@ -62,6 +63,7 @@ class TestEnvironments:
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
+                    "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
@@ -79,6 +81,7 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "id": "id",
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -324,6 +327,40 @@ class TestEnvironments:
 
     @pytest.mark.skip()
     @parametrize
+    def test_method_create_environment_token(self, client: Gitpod) -> None:
+        environment = client.environments.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+        assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_create_environment_token(self, client: Gitpod) -> None:
+        response = client.environments.with_raw_response.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        environment = response.parse()
+        assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_create_environment_token(self, client: Gitpod) -> None:
+        with client.environments.with_streaming_response.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            environment = response.parse()
+            assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     def test_method_create_from_project(self, client: Gitpod) -> None:
         environment = client.environments.create_from_project()
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])
@@ -360,6 +397,7 @@ class TestEnvironments:
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
+                    "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
@@ -377,6 +415,7 @@ class TestEnvironments:
                 ],
                 "secrets": [
                     {
+                        "id": "id",
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -610,6 +649,7 @@ class TestAsyncEnvironments:
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
+                    "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
@@ -627,6 +667,7 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "id": "id",
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -872,6 +913,40 @@ class TestAsyncEnvironments:
 
     @pytest.mark.skip()
     @parametrize
+    async def test_method_create_environment_token(self, async_client: AsyncGitpod) -> None:
+        environment = await async_client.environments.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+        assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_create_environment_token(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.environments.with_raw_response.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        environment = await response.parse()
+        assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_create_environment_token(self, async_client: AsyncGitpod) -> None:
+        async with async_client.environments.with_streaming_response.create_environment_token(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            environment = await response.parse()
+            assert_matches_type(EnvironmentCreateEnvironmentTokenResponse, environment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
     async def test_method_create_from_project(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create_from_project()
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])
@@ -908,6 +983,7 @@ class TestAsyncEnvironments:
                 },
                 "desired_phase": "ENVIRONMENT_PHASE_UNSPECIFIED",
                 "devcontainer": {
+                    "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
                     "session": "session",
@@ -925,6 +1001,7 @@ class TestAsyncEnvironments:
                 ],
                 "secrets": [
                     {
+                        "id": "id",
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",

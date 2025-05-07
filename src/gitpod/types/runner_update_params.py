@@ -6,10 +6,11 @@ from typing import Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .log_level import LogLevel
 from .runner_phase import RunnerPhase
 from .runner_release_channel import RunnerReleaseChannel
 
-__all__ = ["RunnerUpdateParams", "Spec", "SpecConfiguration"]
+__all__ = ["RunnerUpdateParams", "Spec", "SpecConfiguration", "SpecConfigurationMetrics"]
 
 
 class RunnerUpdateParams(TypedDict, total=False):
@@ -25,9 +26,29 @@ class RunnerUpdateParams(TypedDict, total=False):
     spec: Optional[Spec]
 
 
+class SpecConfigurationMetrics(TypedDict, total=False):
+    enabled: Optional[bool]
+    """enabled indicates whether the runner should collect metrics"""
+
+    password: Optional[str]
+    """password is the password to use for the metrics collector"""
+
+    url: Optional[str]
+    """url is the URL of the metrics collector"""
+
+    username: Optional[str]
+    """username is the username to use for the metrics collector"""
+
+
 class SpecConfiguration(TypedDict, total=False):
     auto_update: Annotated[Optional[bool], PropertyInfo(alias="autoUpdate")]
     """auto_update indicates whether the runner should automatically update itself."""
+
+    log_level: Annotated[Optional[LogLevel], PropertyInfo(alias="logLevel")]
+    """log_level is the log level for the runner"""
+
+    metrics: Optional[SpecConfigurationMetrics]
+    """metrics contains configuration for the runner's metrics collection"""
 
     release_channel: Annotated[Optional[RunnerReleaseChannel], PropertyInfo(alias="releaseChannel")]
     """The release channel the runner is on"""

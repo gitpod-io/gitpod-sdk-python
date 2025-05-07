@@ -17,6 +17,7 @@ from ...types import (
     environment_mark_active_params,
     environment_create_logs_token_params,
     environment_create_from_project_params,
+    environment_create_environment_token_params,
 )
 from .classes import (
     ClassesResource,
@@ -53,6 +54,7 @@ from ...types.environment_retrieve_response import EnvironmentRetrieveResponse
 from ...types.environment_activity_signal_param import EnvironmentActivitySignalParam
 from ...types.environment_create_logs_token_response import EnvironmentCreateLogsTokenResponse
 from ...types.environment_create_from_project_response import EnvironmentCreateFromProjectResponse
+from ...types.environment_create_environment_token_response import EnvironmentCreateEnvironmentTokenResponse
 
 __all__ = ["EnvironmentsResource", "AsyncEnvironmentsResource"]
 
@@ -490,6 +492,57 @@ class EnvironmentsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
+        )
+
+    def create_environment_token(
+        self,
+        *,
+        environment_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EnvironmentCreateEnvironmentTokenResponse:
+        """
+        Creates an access token for the environment.
+
+        Generated tokens are valid for one hour and provide environment-specific access
+        permissions. The token is scoped to a specific environment.
+
+        ### Examples
+
+        - Generate environment token:
+
+          Creates a temporary access token for accessing an environment.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
+
+        Args:
+          environment_id: environment_id specifies the environment for which the access token should be
+              created.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.EnvironmentService/CreateEnvironmentAccessToken",
+            body=maybe_transform(
+                {"environment_id": environment_id},
+                environment_create_environment_token_params.EnvironmentCreateEnvironmentTokenParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EnvironmentCreateEnvironmentTokenResponse,
         )
 
     def create_from_project(
@@ -1209,6 +1262,57 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def create_environment_token(
+        self,
+        *,
+        environment_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> EnvironmentCreateEnvironmentTokenResponse:
+        """
+        Creates an access token for the environment.
+
+        Generated tokens are valid for one hour and provide environment-specific access
+        permissions. The token is scoped to a specific environment.
+
+        ### Examples
+
+        - Generate environment token:
+
+          Creates a temporary access token for accessing an environment.
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
+
+        Args:
+          environment_id: environment_id specifies the environment for which the access token should be
+              created.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.EnvironmentService/CreateEnvironmentAccessToken",
+            body=await async_maybe_transform(
+                {"environment_id": environment_id},
+                environment_create_environment_token_params.EnvironmentCreateEnvironmentTokenParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EnvironmentCreateEnvironmentTokenResponse,
+        )
+
     async def create_from_project(
         self,
         *,
@@ -1514,6 +1618,9 @@ class EnvironmentsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             environments.delete,
         )
+        self.create_environment_token = to_raw_response_wrapper(
+            environments.create_environment_token,
+        )
         self.create_from_project = to_raw_response_wrapper(
             environments.create_from_project,
         )
@@ -1557,6 +1664,9 @@ class AsyncEnvironmentsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             environments.delete,
+        )
+        self.create_environment_token = async_to_raw_response_wrapper(
+            environments.create_environment_token,
         )
         self.create_from_project = async_to_raw_response_wrapper(
             environments.create_from_project,
@@ -1602,6 +1712,9 @@ class EnvironmentsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             environments.delete,
         )
+        self.create_environment_token = to_streamed_response_wrapper(
+            environments.create_environment_token,
+        )
         self.create_from_project = to_streamed_response_wrapper(
             environments.create_from_project,
         )
@@ -1645,6 +1758,9 @@ class AsyncEnvironmentsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             environments.delete,
+        )
+        self.create_environment_token = async_to_streamed_response_wrapper(
+            environments.create_environment_token,
         )
         self.create_from_project = async_to_streamed_response_wrapper(
             environments.create_from_project,

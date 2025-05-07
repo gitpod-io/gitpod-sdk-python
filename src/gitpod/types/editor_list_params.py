@@ -6,7 +6,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["EditorListParams", "Pagination"]
+__all__ = ["EditorListParams", "Filter", "Pagination"]
 
 
 class EditorListParams(TypedDict, total=False):
@@ -14,8 +14,19 @@ class EditorListParams(TypedDict, total=False):
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
+    filter: Filter
+    """filter contains the filter options for listing editors"""
+
     pagination: Pagination
     """pagination contains the pagination options for listing environments"""
+
+
+class Filter(TypedDict, total=False):
+    allowed_by_policy: Annotated[bool, PropertyInfo(alias="allowedByPolicy")]
+    """
+    allowed_by_policy filters the response to only editors that are allowed by the
+    policies enforced in the organization
+    """
 
 
 class Pagination(TypedDict, total=False):

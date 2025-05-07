@@ -5,7 +5,9 @@ from __future__ import annotations
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .log_level import LogLevel
 from .runner_release_channel import RunnerReleaseChannel
+from .metrics_configuration_param import MetricsConfigurationParam
 
 __all__ = ["RunnerConfigurationParam"]
 
@@ -13,6 +15,12 @@ __all__ = ["RunnerConfigurationParam"]
 class RunnerConfigurationParam(TypedDict, total=False):
     auto_update: Annotated[bool, PropertyInfo(alias="autoUpdate")]
     """auto_update indicates whether the runner should automatically update itself."""
+
+    log_level: Annotated[LogLevel, PropertyInfo(alias="logLevel")]
+    """log_level is the log level for the runner"""
+
+    metrics: MetricsConfigurationParam
+    """metrics contains configuration for the runner's metrics collection"""
 
     region: str
     """

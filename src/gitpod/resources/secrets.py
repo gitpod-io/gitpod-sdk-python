@@ -24,6 +24,7 @@ from .._response import (
 from ..pagination import SyncSecretsPage, AsyncSecretsPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.secret import Secret
+from ..types.secret_scope_param import SecretScopeParam
 from ..types.secret_create_response import SecretCreateResponse
 from ..types.secret_get_value_response import SecretGetValueResponse
 
@@ -58,6 +59,7 @@ class SecretsResource(SyncAPIResource):
         file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
+        scope: SecretScopeParam | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -113,12 +115,7 @@ class SecretsResource(SyncAPIResource):
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker registry host value must be a valid registry host (e.g.
-              registry.docker.com, https://registry.docker.com, ghcr.io:5050):
-
-              ```
-              this.matches("^[a-zA-Z0-9.-/:]+(:[0-9]+)?$")
-              ```
+              the docker registry host
 
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
@@ -130,7 +127,9 @@ class SecretsResource(SyncAPIResource):
               this.matches("^/(?:[^/]*/)*.*$")
               ```
 
-          project_id: project_id is the ProjectID this Secret belongs to
+          project_id: project_id is the ProjectID this Secret belongs to Deprecated: use scope instead
+
+          scope: scope is the scope of the secret
 
           value: value is the plaintext value of the secret
 
@@ -151,6 +150,7 @@ class SecretsResource(SyncAPIResource):
                     "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
+                    "scope": scope,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,
@@ -176,25 +176,7 @@ class SecretsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncSecretsPage[Secret]:
         """
-        Lists secrets with optional filtering.
-
-        Use this method to:
-
-        - View all project secrets
-        - Filter secrets by project
-
-        ### Examples
-
-        - List project secrets:
-
-          Shows all secrets for a project.
-
-          ```yaml
-          filter:
-            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
-          pagination:
-            pageSize: 20
-          ```
+        ListSecrets
 
         Args:
           pagination: pagination contains the pagination options for listing environments
@@ -416,6 +398,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
+        scope: SecretScopeParam | NotGiven = NOT_GIVEN,
         value: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -471,12 +454,7 @@ class AsyncSecretsResource(AsyncAPIResource):
 
         Args:
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
-              the docker registry host value must be a valid registry host (e.g.
-              registry.docker.com, https://registry.docker.com, ghcr.io:5050):
-
-              ```
-              this.matches("^[a-zA-Z0-9.-/:]+(:[0-9]+)?$")
-              ```
+              the docker registry host
 
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
@@ -488,7 +466,9 @@ class AsyncSecretsResource(AsyncAPIResource):
               this.matches("^/(?:[^/]*/)*.*$")
               ```
 
-          project_id: project_id is the ProjectID this Secret belongs to
+          project_id: project_id is the ProjectID this Secret belongs to Deprecated: use scope instead
+
+          scope: scope is the scope of the secret
 
           value: value is the plaintext value of the secret
 
@@ -509,6 +489,7 @@ class AsyncSecretsResource(AsyncAPIResource):
                     "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
+                    "scope": scope,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,
@@ -534,25 +515,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[Secret, AsyncSecretsPage[Secret]]:
         """
-        Lists secrets with optional filtering.
-
-        Use this method to:
-
-        - View all project secrets
-        - Filter secrets by project
-
-        ### Examples
-
-        - List project secrets:
-
-          Shows all secrets for a project.
-
-          ```yaml
-          filter:
-            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
-          pagination:
-            pageSize: 20
-          ```
+        ListSecrets
 
         Args:
           pagination: pagination contains the pagination options for listing environments

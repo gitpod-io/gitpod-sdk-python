@@ -6,6 +6,7 @@ from typing import List
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .secret_scope_param import SecretScopeParam
 
 __all__ = ["SecretListParams", "Filter", "Pagination"]
 
@@ -23,7 +24,13 @@ class SecretListParams(TypedDict, total=False):
 
 class Filter(TypedDict, total=False):
     project_ids: Annotated[List[str], PropertyInfo(alias="projectIds")]
-    """project_ids filters the response to only Secrets used by these Project IDs"""
+    """
+    project_ids filters the response to only Secrets used by these Project IDs
+    Deprecated: use scope instead. Values in project_ids will be ignored.
+    """
+
+    scope: SecretScopeParam
+    """scope is the scope of the secrets to list"""
 
 
 class Pagination(TypedDict, total=False):

@@ -66,6 +66,12 @@ class AutomationsFile(BaseModel):
     environment.
     """
 
+    warning_message: Optional[str] = FieldInfo(alias="warningMessage", default=None)
+    """warning_message contains warnings, e.g.
+
+    when no triggers are defined in the automations file.
+    """
+
 
 class ContentGitChangedFile(BaseModel):
     change_type: Optional[
@@ -297,6 +303,9 @@ class RunnerAck(BaseModel):
 
 
 class Secret(BaseModel):
+    id: Optional[str] = None
+    """id is the unique identifier of the secret."""
+
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains the reason the secret failed to be materialize."""
 

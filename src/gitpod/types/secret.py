@@ -6,6 +6,7 @@ from datetime import datetime
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .secret_scope import SecretScope
 from .shared.subject import Subject
 
 __all__ = ["Secret"]
@@ -125,7 +126,9 @@ class Secret(BaseModel):
     """Name of the secret for humans."""
 
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
-    """The Project ID this Secret belongs to"""
+    """The Project ID this Secret belongs to Deprecated: use scope instead"""
+
+    scope: Optional[SecretScope] = None
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
     """

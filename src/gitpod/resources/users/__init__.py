@@ -16,8 +16,22 @@ from .users import (
     UsersResourceWithStreamingResponse,
     AsyncUsersResourceWithStreamingResponse,
 )
+from .dotfiles import (
+    DotfilesResource,
+    AsyncDotfilesResource,
+    DotfilesResourceWithRawResponse,
+    AsyncDotfilesResourceWithRawResponse,
+    DotfilesResourceWithStreamingResponse,
+    AsyncDotfilesResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "DotfilesResource",
+    "AsyncDotfilesResource",
+    "DotfilesResourceWithRawResponse",
+    "AsyncDotfilesResourceWithRawResponse",
+    "DotfilesResourceWithStreamingResponse",
+    "AsyncDotfilesResourceWithStreamingResponse",
     "PatsResource",
     "AsyncPatsResource",
     "PatsResourceWithRawResponse",

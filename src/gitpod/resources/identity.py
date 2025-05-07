@@ -7,6 +7,7 @@ from typing import List
 import httpx
 
 from ..types import (
+    IDTokenVersion,
     identity_get_id_token_params,
     identity_exchange_token_params,
     identity_get_authenticated_identity_params,
@@ -22,6 +23,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.id_token_version import IDTokenVersion
 from ..types.identity_get_id_token_response import IdentityGetIDTokenResponse
 from ..types.identity_exchange_token_response import IdentityExchangeTokenResponse
 from ..types.identity_get_authenticated_identity_response import IdentityGetAuthenticatedIdentityResponse
@@ -156,6 +158,7 @@ class IdentityResource(SyncAPIResource):
         self,
         *,
         audience: List[str] | NotGiven = NOT_GIVEN,
+        version: IDTokenVersion | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -194,6 +197,8 @@ class IdentityResource(SyncAPIResource):
           ```
 
         Args:
+          version: version is the version of the ID token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -204,7 +209,13 @@ class IdentityResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.IdentityService/GetIDToken",
-            body=maybe_transform({"audience": audience}, identity_get_id_token_params.IdentityGetIDTokenParams),
+            body=maybe_transform(
+                {
+                    "audience": audience,
+                    "version": version,
+                },
+                identity_get_id_token_params.IdentityGetIDTokenParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -339,6 +350,7 @@ class AsyncIdentityResource(AsyncAPIResource):
         self,
         *,
         audience: List[str] | NotGiven = NOT_GIVEN,
+        version: IDTokenVersion | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -377,6 +389,8 @@ class AsyncIdentityResource(AsyncAPIResource):
           ```
 
         Args:
+          version: version is the version of the ID token.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -388,7 +402,11 @@ class AsyncIdentityResource(AsyncAPIResource):
         return await self._post(
             "/gitpod.v1.IdentityService/GetIDToken",
             body=await async_maybe_transform(
-                {"audience": audience}, identity_get_id_token_params.IdentityGetIDTokenParams
+                {
+                    "audience": audience,
+                    "version": version,
+                },
+                identity_get_id_token_params.IdentityGetIDTokenParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

@@ -10,14 +10,13 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import (
-    Organization,
     OrganizationMember,
     OrganizationJoinResponse,
     OrganizationCreateResponse,
     OrganizationUpdateResponse,
     OrganizationRetrieveResponse,
 )
-from gitpod.pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
+from gitpod.pagination import SyncMembersPage, AsyncMembersPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -144,48 +143,6 @@ class TestOrganizations:
 
             organization = response.parse()
             assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_list(self, client: Gitpod) -> None:
-        organization = client.organizations.list()
-        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_method_list_with_all_params(self, client: Gitpod) -> None:
-        organization = client.organizations.list(
-            token="token",
-            page_size=0,
-            pagination={
-                "token": "token",
-                "page_size": 50,
-            },
-            scope="SCOPE_ALL",
-        )
-        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_raw_response_list(self, client: Gitpod) -> None:
-        response = client.organizations.with_raw_response.list()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = response.parse()
-        assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    def test_streaming_response_list(self, client: Gitpod) -> None:
-        with client.organizations.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = response.parse()
-            assert_matches_type(SyncOrganizationsPage[Organization], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -512,48 +469,6 @@ class TestAsyncOrganizations:
 
             organization = await response.parse()
             assert_matches_type(OrganizationUpdateResponse, organization, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_list(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.list()
-        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
-        organization = await async_client.organizations.list(
-            token="token",
-            page_size=0,
-            pagination={
-                "token": "token",
-                "page_size": 50,
-            },
-            scope="SCOPE_ALL",
-        )
-        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
-        response = await async_client.organizations.with_raw_response.list()
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        organization = await response.parse()
-        assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
-
-    @pytest.mark.skip()
-    @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
-        async with async_client.organizations.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            organization = await response.parse()
-            assert_matches_type(AsyncOrganizationsPage[Organization], organization, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
