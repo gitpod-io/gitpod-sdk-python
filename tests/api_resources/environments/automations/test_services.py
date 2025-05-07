@@ -168,6 +168,7 @@ class TestServices:
             status={
                 "failure_message": "failureMessage",
                 "log_url": "logUrl",
+                "output": {"foo": "string"},
                 "phase": "SERVICE_PHASE_UNSPECIFIED",
                 "session": "session",
             },
@@ -500,6 +501,7 @@ class TestAsyncServices:
             status={
                 "failure_message": "failureMessage",
                 "log_url": "logUrl",
+                "output": {"foo": "string"},
                 "phase": "SERVICE_PHASE_UNSPECIFIED",
                 "session": "session",
             },

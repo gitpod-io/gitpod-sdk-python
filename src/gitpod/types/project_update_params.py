@@ -42,3 +42,9 @@ class ProjectUpdateParams(TypedDict, total=False):
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id specifies the project identifier"""
+
+    technical_description: Annotated[Optional[str], PropertyInfo(alias="technicalDescription")]
+    """
+    technical_description is a detailed technical description of the project This
+    field is not returned by default in GetProject or ListProjects responses 8KB max
+    """

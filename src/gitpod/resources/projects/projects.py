@@ -77,6 +77,7 @@ class ProjectsResource(SyncAPIResource):
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        technical_description: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -143,6 +144,9 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          technical_description: technical_description is a detailed technical description of the project This
+              field is not returned by default in GetProject or ListProjects responses 8KB max
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -160,6 +164,7 @@ class ProjectsResource(SyncAPIResource):
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
                     "name": name,
+                    "technical_description": technical_description,
                 },
                 project_create_params.ProjectCreateParams,
             ),
@@ -228,6 +233,7 @@ class ProjectsResource(SyncAPIResource):
         initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
+        technical_description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -285,6 +291,9 @@ class ProjectsResource(SyncAPIResource):
 
           project_id: project_id specifies the project identifier
 
+          technical_description: technical_description is a detailed technical description of the project This
+              field is not returned by default in GetProject or ListProjects responses 8KB max
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -303,6 +312,7 @@ class ProjectsResource(SyncAPIResource):
                     "initializer": initializer,
                     "name": name,
                     "project_id": project_id,
+                    "technical_description": technical_description,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
@@ -317,6 +327,7 @@ class ProjectsResource(SyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        filter: project_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: project_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -359,7 +370,13 @@ class ProjectsResource(SyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
             page=SyncProjectsPage[Project],
-            body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                project_list_params.ProjectListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -518,6 +535,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         automations_file_path: str | NotGiven = NOT_GIVEN,
         devcontainer_file_path: str | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
+        technical_description: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -584,6 +602,9 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          technical_description: technical_description is a detailed technical description of the project This
+              field is not returned by default in GetProject or ListProjects responses 8KB max
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -601,6 +622,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
                     "name": name,
+                    "technical_description": technical_description,
                 },
                 project_create_params.ProjectCreateParams,
             ),
@@ -669,6 +691,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
         name: Optional[str] | NotGiven = NOT_GIVEN,
         project_id: str | NotGiven = NOT_GIVEN,
+        technical_description: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -726,6 +749,9 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           project_id: project_id specifies the project identifier
 
+          technical_description: technical_description is a detailed technical description of the project This
+              field is not returned by default in GetProject or ListProjects responses 8KB max
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -744,6 +770,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "initializer": initializer,
                     "name": name,
                     "project_id": project_id,
+                    "technical_description": technical_description,
                 },
                 project_update_params.ProjectUpdateParams,
             ),
@@ -758,6 +785,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
+        filter: project_list_params.Filter | NotGiven = NOT_GIVEN,
         pagination: project_list_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -800,7 +828,13 @@ class AsyncProjectsResource(AsyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.ProjectService/ListProjects",
             page=AsyncProjectsPage[Project],
-            body=maybe_transform({"pagination": pagination}, project_list_params.ProjectListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                project_list_params.ProjectListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

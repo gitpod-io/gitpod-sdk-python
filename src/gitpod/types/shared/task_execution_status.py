@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -19,6 +19,12 @@ class Step(BaseModel):
 
     If this is non-empty the step has failed to operate and will likely transition
     to a failed state.
+    """
+
+    output: Optional[Dict[str, str]] = None
+    """
+    output contains the output of the task execution. setting an output field to
+    empty string will unset it.
     """
 
     phase: Optional[TaskExecutionPhase] = None

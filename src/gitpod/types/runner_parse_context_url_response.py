@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -29,3 +29,6 @@ class RunnerParseContextURLResponse(BaseModel):
     git: Optional[Git] = None
 
     original_context_url: Optional[str] = FieldInfo(alias="originalContextUrl", default=None)
+
+    project_ids: Optional[List[str]] = FieldInfo(alias="projectIds", default=None)
+    """project_ids is a list of projects to which the context URL belongs to."""

@@ -58,6 +58,7 @@ class TestProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             name="Web Application",
+            technical_description="technicalDescription",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
@@ -157,6 +158,7 @@ class TestProjects:
             },
             name="x",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            technical_description="technicalDescription",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
@@ -194,6 +196,7 @@ class TestProjects:
         project = client.projects.list(
             token="token",
             page_size=0,
+            filter={"project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -334,6 +337,7 @@ class TestAsyncProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             name="Web Application",
+            technical_description="technicalDescription",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
@@ -433,6 +437,7 @@ class TestAsyncProjects:
             },
             name="x",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            technical_description="technicalDescription",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
@@ -470,6 +475,7 @@ class TestAsyncProjects:
         project = await async_client.projects.list(
             token="token",
             page_size=0,
+            filter={"project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
             pagination={
                 "token": "token",
                 "page_size": 20,

@@ -36,9 +36,6 @@ __all__ = [
     "MembersPagePagination",
     "SyncMembersPage",
     "AsyncMembersPage",
-    "OrganizationsPagePagination",
-    "SyncOrganizationsPage",
-    "AsyncOrganizationsPage",
     "PersonalAccessTokensPagePagination",
     "SyncPersonalAccessTokensPage",
     "AsyncPersonalAccessTokensPage",
@@ -511,56 +508,6 @@ class AsyncMembersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not members:
             return []
         return members
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = None
-        if self.pagination is not None:
-            if self.pagination.next_token is not None:
-                next_token = self.pagination.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
-class OrganizationsPagePagination(BaseModel):
-    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
-
-
-class SyncOrganizationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    organizations: List[_T]
-    pagination: Optional[OrganizationsPagePagination] = None
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        organizations = self.organizations
-        if not organizations:
-            return []
-        return organizations
-
-    @override
-    def next_page_info(self) -> Optional[PageInfo]:
-        next_token = None
-        if self.pagination is not None:
-            if self.pagination.next_token is not None:
-                next_token = self.pagination.next_token
-        if not next_token:
-            return None
-
-        return PageInfo(params={"token": next_token})
-
-
-class AsyncOrganizationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    organizations: List[_T]
-    pagination: Optional[OrganizationsPagePagination] = None
-
-    @override
-    def _get_page_items(self) -> List[_T]:
-        organizations = self.organizations
-        if not organizations:
-            return []
-        return organizations
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:

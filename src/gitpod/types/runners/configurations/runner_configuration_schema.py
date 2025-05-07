@@ -13,12 +13,16 @@ __all__ = [
     "EnvironmentClassBool",
     "EnvironmentClassDisplay",
     "EnvironmentClassEnum",
+    "EnvironmentClassEnumDefaultValue",
+    "EnvironmentClassEnumPossibleValue",
     "EnvironmentClassInt",
     "EnvironmentClassString",
     "RunnerConfig",
     "RunnerConfigBool",
     "RunnerConfigDisplay",
     "RunnerConfigEnum",
+    "RunnerConfigEnumDefaultValue",
+    "RunnerConfigEnumPossibleValue",
     "RunnerConfigInt",
     "RunnerConfigString",
     "Scm",
@@ -35,10 +39,32 @@ class EnvironmentClassDisplay(BaseModel):
     default: Optional[str] = None
 
 
+class EnvironmentClassEnumDefaultValue(BaseModel):
+    detail: Optional[str] = None
+
+    subtitle: Optional[str] = None
+
+    title: Optional[str] = None
+
+
+class EnvironmentClassEnumPossibleValue(BaseModel):
+    detail: Optional[str] = None
+
+    subtitle: Optional[str] = None
+
+    title: Optional[str] = None
+
+
 class EnvironmentClassEnum(BaseModel):
     default: Optional[str] = None
+    """deprecated, will be removed, use default_value instead"""
+
+    default_value: Optional[EnvironmentClassEnumDefaultValue] = FieldInfo(alias="defaultValue", default=None)
+
+    possible_values: Optional[List[EnvironmentClassEnumPossibleValue]] = FieldInfo(alias="possibleValues", default=None)
 
     values: Optional[List[str]] = None
+    """deprecated, will be removed, use possible_values instead"""
 
 
 class EnvironmentClassInt(BaseModel):
@@ -85,10 +111,32 @@ class RunnerConfigDisplay(BaseModel):
     default: Optional[str] = None
 
 
+class RunnerConfigEnumDefaultValue(BaseModel):
+    detail: Optional[str] = None
+
+    subtitle: Optional[str] = None
+
+    title: Optional[str] = None
+
+
+class RunnerConfigEnumPossibleValue(BaseModel):
+    detail: Optional[str] = None
+
+    subtitle: Optional[str] = None
+
+    title: Optional[str] = None
+
+
 class RunnerConfigEnum(BaseModel):
     default: Optional[str] = None
+    """deprecated, will be removed, use default_value instead"""
+
+    default_value: Optional[RunnerConfigEnumDefaultValue] = FieldInfo(alias="defaultValue", default=None)
+
+    possible_values: Optional[List[RunnerConfigEnumPossibleValue]] = FieldInfo(alias="possibleValues", default=None)
 
     values: Optional[List[str]] = None
+    """deprecated, will be removed, use possible_values instead"""
 
 
 class RunnerConfigInt(BaseModel):

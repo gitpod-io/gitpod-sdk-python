@@ -37,6 +37,10 @@ class TestSecrets:
             file_path="filePath",
             name="DATABASE_URL",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            scope={
+                "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             value="postgresql://user:pass@localhost:5432/db",
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
@@ -75,10 +79,16 @@ class TestSecrets:
         secret = client.secrets.list(
             token="token",
             page_size=0,
-            filter={"project_ids": ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]},
+            filter={
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "scope": {
+                    "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+            },
             pagination={
                 "token": "token",
-                "page_size": 20,
+                "page_size": 100,
             },
         )
         assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
@@ -233,6 +243,10 @@ class TestAsyncSecrets:
             file_path="filePath",
             name="DATABASE_URL",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            scope={
+                "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
             value="postgresql://user:pass@localhost:5432/db",
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
@@ -271,10 +285,16 @@ class TestAsyncSecrets:
         secret = await async_client.secrets.list(
             token="token",
             page_size=0,
-            filter={"project_ids": ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]},
+            filter={
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "scope": {
+                    "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                },
+            },
             pagination={
                 "token": "token",
-                "page_size": 20,
+                "page_size": 100,
             },
         )
         assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])

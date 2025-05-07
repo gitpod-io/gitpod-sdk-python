@@ -15,6 +15,14 @@ from .pats import (
 from ...types import user_set_suspended_params, user_get_authenticated_user_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, async_maybe_transform
+from .dotfiles import (
+    DotfilesResource,
+    AsyncDotfilesResource,
+    DotfilesResourceWithRawResponse,
+    AsyncDotfilesResourceWithRawResponse,
+    DotfilesResourceWithStreamingResponse,
+    AsyncDotfilesResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -30,6 +38,10 @@ __all__ = ["UsersResource", "AsyncUsersResource"]
 
 
 class UsersResource(SyncAPIResource):
+    @cached_property
+    def dotfiles(self) -> DotfilesResource:
+        return DotfilesResource(self._client)
+
     @cached_property
     def pats(self) -> PatsResource:
         return PatsResource(self._client)
@@ -169,6 +181,10 @@ class UsersResource(SyncAPIResource):
 
 
 class AsyncUsersResource(AsyncAPIResource):
+    @cached_property
+    def dotfiles(self) -> AsyncDotfilesResource:
+        return AsyncDotfilesResource(self._client)
+
     @cached_property
     def pats(self) -> AsyncPatsResource:
         return AsyncPatsResource(self._client)
@@ -321,6 +337,10 @@ class UsersResourceWithRawResponse:
         )
 
     @cached_property
+    def dotfiles(self) -> DotfilesResourceWithRawResponse:
+        return DotfilesResourceWithRawResponse(self._users.dotfiles)
+
+    @cached_property
     def pats(self) -> PatsResourceWithRawResponse:
         return PatsResourceWithRawResponse(self._users.pats)
 
@@ -335,6 +355,10 @@ class AsyncUsersResourceWithRawResponse:
         self.set_suspended = async_to_raw_response_wrapper(
             users.set_suspended,
         )
+
+    @cached_property
+    def dotfiles(self) -> AsyncDotfilesResourceWithRawResponse:
+        return AsyncDotfilesResourceWithRawResponse(self._users.dotfiles)
 
     @cached_property
     def pats(self) -> AsyncPatsResourceWithRawResponse:
@@ -353,6 +377,10 @@ class UsersResourceWithStreamingResponse:
         )
 
     @cached_property
+    def dotfiles(self) -> DotfilesResourceWithStreamingResponse:
+        return DotfilesResourceWithStreamingResponse(self._users.dotfiles)
+
+    @cached_property
     def pats(self) -> PatsResourceWithStreamingResponse:
         return PatsResourceWithStreamingResponse(self._users.pats)
 
@@ -367,6 +395,10 @@ class AsyncUsersResourceWithStreamingResponse:
         self.set_suspended = async_to_streamed_response_wrapper(
             users.set_suspended,
         )
+
+    @cached_property
+    def dotfiles(self) -> AsyncDotfilesResourceWithStreamingResponse:
+        return AsyncDotfilesResourceWithStreamingResponse(self._users.dotfiles)
 
     @cached_property
     def pats(self) -> AsyncPatsResourceWithStreamingResponse:

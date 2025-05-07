@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .secret_scope_param import SecretScopeParam
 
 __all__ = ["SecretCreateParams"]
 
@@ -13,12 +14,7 @@ class SecretCreateParams(TypedDict, total=False):
     container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
     """
     secret will be mounted as a docker config in the environment VM, mount will have
-    the docker registry host value must be a valid registry host (e.g.
-    registry.docker.com, https://registry.docker.com, ghcr.io:5050):
-
-    ```
-    this.matches('^[a-zA-Z0-9.-/:]+(:[0-9]+)?$')
-    ```
+    the docker registry host
     """
 
     environment_variable: Annotated[bool, PropertyInfo(alias="environmentVariable")]
@@ -40,7 +36,12 @@ class SecretCreateParams(TypedDict, total=False):
     name: str
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
-    """project_id is the ProjectID this Secret belongs to"""
+    """
+    project_id is the ProjectID this Secret belongs to Deprecated: use scope instead
+    """
+
+    scope: SecretScopeParam
+    """scope is the scope of the secret"""
 
     value: str
     """value is the plaintext value of the secret"""

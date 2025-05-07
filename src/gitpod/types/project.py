@@ -47,4 +47,10 @@ class Project(BaseModel):
 
     metadata: Optional[ProjectMetadata] = None
 
+    technical_description: Optional[str] = FieldInfo(alias="technicalDescription", default=None)
+    """
+    technical_description is a detailed technical description of the project This
+    field is not returned by default in GetProject or ListProjects responses
+    """
+
     used_by: Optional[UsedBy] = FieldInfo(alias="usedBy", default=None)

@@ -7,9 +7,7 @@ from typing import Optional
 import httpx
 
 from ...types import (
-    Scope,
     organization_join_params,
-    organization_list_params,
     organization_leave_params,
     organization_create_params,
     organization_delete_params,
@@ -28,6 +26,14 @@ from .invites import (
 )
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from ..._utils import maybe_transform, async_maybe_transform
+from .policies import (
+    PoliciesResource,
+    AsyncPoliciesResource,
+    PoliciesResourceWithRawResponse,
+    AsyncPoliciesResourceWithRawResponse,
+    PoliciesResourceWithStreamingResponse,
+    AsyncPoliciesResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -36,8 +42,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncMembersPage, AsyncMembersPage, SyncOrganizationsPage, AsyncOrganizationsPage
-from ...types.scope import Scope
+from ...pagination import SyncMembersPage, AsyncMembersPage
 from ..._base_client import AsyncPaginator, make_request_options
 from .sso_configurations import (
     SSOConfigurationsResource,
@@ -47,7 +52,6 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
-from ...types.organization import Organization
 from .domain_verifications import (
     DomainVerificationsResource,
     AsyncDomainVerificationsResource,
@@ -75,6 +79,10 @@ class OrganizationsResource(SyncAPIResource):
     @cached_property
     def invites(self) -> InvitesResource:
         return InvitesResource(self._client)
+
+    @cached_property
+    def policies(self) -> PoliciesResource:
+        return PoliciesResource(self._client)
 
     @cached_property
     def sso_configurations(self) -> SSOConfigurationsResource:
@@ -306,91 +314,6 @@ class OrganizationsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=OrganizationUpdateResponse,
-        )
-
-    def list(
-        self,
-        *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: organization_list_params.Pagination | NotGiven = NOT_GIVEN,
-        scope: Scope | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncOrganizationsPage[Organization]:
-        """
-        Lists all organizations the caller has access to with optional filtering.
-
-        Use this method to:
-
-        - View organizations you're a member of
-        - Browse all available organizations
-        - Paginate through organization results
-
-        ### Examples
-
-        - List member organizations:
-
-          Shows organizations where the caller is a member.
-
-          ```yaml
-          pagination:
-            pageSize: 20
-          scope: SCOPE_MEMBER
-          ```
-
-        - List all organizations:
-
-          Shows all organizations visible to the caller.
-
-          ```yaml
-          pagination:
-            pageSize: 50
-          scope: SCOPE_ALL
-          ```
-
-        Args:
-          pagination: pagination contains the pagination options for listing organizations
-
-          scope: scope is the scope of the organizations to list
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get_api_list(
-            "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=SyncOrganizationsPage[Organization],
-            body=maybe_transform(
-                {
-                    "pagination": pagination,
-                    "scope": scope,
-                },
-                organization_list_params.OrganizationListParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "token": token,
-                        "page_size": page_size,
-                    },
-                    organization_list_params.OrganizationListParams,
-                ),
-            ),
-            model=Organization,
-            method="post",
         )
 
     def delete(
@@ -731,6 +654,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         return AsyncInvitesResource(self._client)
 
     @cached_property
+    def policies(self) -> AsyncPoliciesResource:
+        return AsyncPoliciesResource(self._client)
+
+    @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResource:
         return AsyncSSOConfigurationsResource(self._client)
 
@@ -960,91 +887,6 @@ class AsyncOrganizationsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=OrganizationUpdateResponse,
-        )
-
-    def list(
-        self,
-        *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: organization_list_params.Pagination | NotGiven = NOT_GIVEN,
-        scope: Scope | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Organization, AsyncOrganizationsPage[Organization]]:
-        """
-        Lists all organizations the caller has access to with optional filtering.
-
-        Use this method to:
-
-        - View organizations you're a member of
-        - Browse all available organizations
-        - Paginate through organization results
-
-        ### Examples
-
-        - List member organizations:
-
-          Shows organizations where the caller is a member.
-
-          ```yaml
-          pagination:
-            pageSize: 20
-          scope: SCOPE_MEMBER
-          ```
-
-        - List all organizations:
-
-          Shows all organizations visible to the caller.
-
-          ```yaml
-          pagination:
-            pageSize: 50
-          scope: SCOPE_ALL
-          ```
-
-        Args:
-          pagination: pagination contains the pagination options for listing organizations
-
-          scope: scope is the scope of the organizations to list
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get_api_list(
-            "/gitpod.v1.OrganizationService/ListOrganizations",
-            page=AsyncOrganizationsPage[Organization],
-            body=maybe_transform(
-                {
-                    "pagination": pagination,
-                    "scope": scope,
-                },
-                organization_list_params.OrganizationListParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "token": token,
-                        "page_size": page_size,
-                    },
-                    organization_list_params.OrganizationListParams,
-                ),
-            ),
-            model=Organization,
-            method="post",
         )
 
     async def delete(
@@ -1388,9 +1230,6 @@ class OrganizationsResourceWithRawResponse:
         self.update = to_raw_response_wrapper(
             organizations.update,
         )
-        self.list = to_raw_response_wrapper(
-            organizations.list,
-        )
         self.delete = to_raw_response_wrapper(
             organizations.delete,
         )
@@ -1416,6 +1255,10 @@ class OrganizationsResourceWithRawResponse:
         return InvitesResourceWithRawResponse(self._organizations.invites)
 
     @cached_property
+    def policies(self) -> PoliciesResourceWithRawResponse:
+        return PoliciesResourceWithRawResponse(self._organizations.policies)
+
+    @cached_property
     def sso_configurations(self) -> SSOConfigurationsResourceWithRawResponse:
         return SSOConfigurationsResourceWithRawResponse(self._organizations.sso_configurations)
 
@@ -1432,9 +1275,6 @@ class AsyncOrganizationsResourceWithRawResponse:
         )
         self.update = async_to_raw_response_wrapper(
             organizations.update,
-        )
-        self.list = async_to_raw_response_wrapper(
-            organizations.list,
         )
         self.delete = async_to_raw_response_wrapper(
             organizations.delete,
@@ -1461,6 +1301,10 @@ class AsyncOrganizationsResourceWithRawResponse:
         return AsyncInvitesResourceWithRawResponse(self._organizations.invites)
 
     @cached_property
+    def policies(self) -> AsyncPoliciesResourceWithRawResponse:
+        return AsyncPoliciesResourceWithRawResponse(self._organizations.policies)
+
+    @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResourceWithRawResponse:
         return AsyncSSOConfigurationsResourceWithRawResponse(self._organizations.sso_configurations)
 
@@ -1477,9 +1321,6 @@ class OrganizationsResourceWithStreamingResponse:
         )
         self.update = to_streamed_response_wrapper(
             organizations.update,
-        )
-        self.list = to_streamed_response_wrapper(
-            organizations.list,
         )
         self.delete = to_streamed_response_wrapper(
             organizations.delete,
@@ -1506,6 +1347,10 @@ class OrganizationsResourceWithStreamingResponse:
         return InvitesResourceWithStreamingResponse(self._organizations.invites)
 
     @cached_property
+    def policies(self) -> PoliciesResourceWithStreamingResponse:
+        return PoliciesResourceWithStreamingResponse(self._organizations.policies)
+
+    @cached_property
     def sso_configurations(self) -> SSOConfigurationsResourceWithStreamingResponse:
         return SSOConfigurationsResourceWithStreamingResponse(self._organizations.sso_configurations)
 
@@ -1522,9 +1367,6 @@ class AsyncOrganizationsResourceWithStreamingResponse:
         )
         self.update = async_to_streamed_response_wrapper(
             organizations.update,
-        )
-        self.list = async_to_streamed_response_wrapper(
-            organizations.list,
         )
         self.delete = async_to_streamed_response_wrapper(
             organizations.delete,
@@ -1549,6 +1391,10 @@ class AsyncOrganizationsResourceWithStreamingResponse:
     @cached_property
     def invites(self) -> AsyncInvitesResourceWithStreamingResponse:
         return AsyncInvitesResourceWithStreamingResponse(self._organizations.invites)
+
+    @cached_property
+    def policies(self) -> AsyncPoliciesResourceWithStreamingResponse:
+        return AsyncPoliciesResourceWithStreamingResponse(self._organizations.policies)
 
     @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResourceWithStreamingResponse:
