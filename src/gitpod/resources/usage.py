@@ -57,10 +57,29 @@ class UsageResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncSessionsPage[EnvironmentSession]:
         """
-        Lists environment sessions within a specified date range.
+        Lists completed environment sessions within a specified date range.
 
-        Returns a list of environment sessions that were active within the specified
-        date range.
+        Returns a list of environment sessions that were completed within the specified
+        date range. Currently running sessions are not included.
+
+        Use this method to:
+
+        - View environment sessions
+        - Filter by project
+        - Monitor session activity
+        - Create custom usage reports
+
+        ### Example
+
+        ```yaml
+        filter:
+          projectId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          dateRange:
+            startTime: "2024-01-01T00:00:00Z"
+            endTime: "2024-01-02T00:00:00Z"
+        pagination:
+          pageSize: 100
+        ```
 
         Args:
           filter: Filter options.
@@ -138,10 +157,29 @@ class AsyncUsageResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[EnvironmentSession, AsyncSessionsPage[EnvironmentSession]]:
         """
-        Lists environment sessions within a specified date range.
+        Lists completed environment sessions within a specified date range.
 
-        Returns a list of environment sessions that were active within the specified
-        date range.
+        Returns a list of environment sessions that were completed within the specified
+        date range. Currently running sessions are not included.
+
+        Use this method to:
+
+        - View environment sessions
+        - Filter by project
+        - Monitor session activity
+        - Create custom usage reports
+
+        ### Example
+
+        ```yaml
+        filter:
+          projectId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          dateRange:
+            startTime: "2024-01-01T00:00:00Z"
+            endTime: "2024-01-02T00:00:00Z"
+        pagination:
+          pageSize: 100
+        ```
 
         Args:
           filter: Filter options.
