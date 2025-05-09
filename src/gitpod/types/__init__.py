@@ -58,6 +58,7 @@ from .resource_operation import ResourceOperation as ResourceOperation
 from .runner_list_params import RunnerListParams as RunnerListParams
 from .secret_list_params import SecretListParams as SecretListParams
 from .secret_scope_param import SecretScopeParam as SecretScopeParam
+from .environment_session import EnvironmentSession as EnvironmentSession
 from .event_list_response import EventListResponse as EventListResponse
 from .organization_member import OrganizationMember as OrganizationMember
 from .project_list_params import ProjectListParams as ProjectListParams
@@ -148,6 +149,9 @@ from .environment_create_logs_token_response import (
 )
 from .project_create_from_environment_params import (
     ProjectCreateFromEnvironmentParams as ProjectCreateFromEnvironmentParams,
+)
+from .usage_list_environment_sessions_params import (
+    UsageListEnvironmentSessionsParams as UsageListEnvironmentSessionsParams,
 )
 from .environment_create_from_project_response import (
     EnvironmentCreateFromProjectResponse as EnvironmentCreateFromProjectResponse,

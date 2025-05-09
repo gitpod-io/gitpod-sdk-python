@@ -54,6 +54,9 @@ __all__ = [
     "ServicesPagePagination",
     "SyncServicesPage",
     "AsyncServicesPage",
+    "SessionsPagePagination",
+    "SyncSessionsPage",
+    "AsyncSessionsPage",
     "SSOConfigurationsPagePagination",
     "SyncSSOConfigurationsPage",
     "AsyncSSOConfigurationsPage",
@@ -808,6 +811,56 @@ class AsyncServicesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not services:
             return []
         return services
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class SessionsPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncSessionsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[SessionsPagePagination] = None
+    sessions: List[_T]
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        sessions = self.sessions
+        if not sessions:
+            return []
+        return sessions
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncSessionsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[SessionsPagePagination] = None
+    sessions: List[_T]
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        sessions = self.sessions
+        if not sessions:
+            return []
+        return sessions
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
