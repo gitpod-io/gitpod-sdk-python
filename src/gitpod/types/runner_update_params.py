@@ -44,6 +44,12 @@ class SpecConfiguration(TypedDict, total=False):
     auto_update: Annotated[Optional[bool], PropertyInfo(alias="autoUpdate")]
     """auto_update indicates whether the runner should automatically update itself."""
 
+    devcontainer_image_cache_enabled: Annotated[Optional[bool], PropertyInfo(alias="devcontainerImageCacheEnabled")]
+    """
+    devcontainer_image_cache_enabled controls whether the shared devcontainer build
+    cache is enabled for this runner.
+    """
+
     log_level: Annotated[Optional[LogLevel], PropertyInfo(alias="logLevel")]
     """log_level is the log level for the runner"""
 

@@ -16,6 +16,13 @@ class RunnerConfiguration(BaseModel):
     auto_update: Optional[bool] = FieldInfo(alias="autoUpdate", default=None)
     """auto_update indicates whether the runner should automatically update itself."""
 
+    devcontainer_image_cache_enabled: Optional[bool] = FieldInfo(alias="devcontainerImageCacheEnabled", default=None)
+    """
+    devcontainer_image_cache_enabled controls whether the devcontainer build cache
+    is enabled for this runner. Only takes effect on supported runners, currently
+    only AWS EC2 runners.
+    """
+
     log_level: Optional[LogLevel] = FieldInfo(alias="logLevel", default=None)
     """log_level is the log level for the runner"""
 

@@ -16,6 +16,13 @@ class RunnerConfigurationParam(TypedDict, total=False):
     auto_update: Annotated[bool, PropertyInfo(alias="autoUpdate")]
     """auto_update indicates whether the runner should automatically update itself."""
 
+    devcontainer_image_cache_enabled: Annotated[bool, PropertyInfo(alias="devcontainerImageCacheEnabled")]
+    """
+    devcontainer_image_cache_enabled controls whether the devcontainer build cache
+    is enabled for this runner. Only takes effect on supported runners, currently
+    only AWS EC2 runners.
+    """
+
     log_level: Annotated[LogLevel, PropertyInfo(alias="logLevel")]
     """log_level is the log level for the runner"""
 

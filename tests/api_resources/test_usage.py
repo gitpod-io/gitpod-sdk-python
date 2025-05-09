@@ -33,10 +33,10 @@ class TestUsage:
             page_size=0,
             filter={
                 "date_range": {
-                    "end_time": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "start_time": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "end_time": parse_datetime("2024-01-02T00:00:00Z"),
+                    "start_time": parse_datetime("2024-01-01T00:00:00Z"),
                 },
-                "project_id": "projectId",
+                "project_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
             },
             pagination={
                 "token": "token",
@@ -85,10 +85,10 @@ class TestAsyncUsage:
             page_size=0,
             filter={
                 "date_range": {
-                    "end_time": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "start_time": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "end_time": parse_datetime("2024-01-02T00:00:00Z"),
+                    "start_time": parse_datetime("2024-01-01T00:00:00Z"),
                 },
-                "project_id": "projectId",
+                "project_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
             },
             pagination={
                 "token": "token",

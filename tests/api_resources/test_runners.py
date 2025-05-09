@@ -41,6 +41,7 @@ class TestRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "devcontainer_image_cache_enabled": True,
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
@@ -129,6 +130,7 @@ class TestRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "devcontainer_image_cache_enabled": True,
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
@@ -378,6 +380,7 @@ class TestAsyncRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "devcontainer_image_cache_enabled": True,
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
@@ -466,6 +469,7 @@ class TestAsyncRunners:
             spec={
                 "configuration": {
                     "auto_update": True,
+                    "devcontainer_image_cache_enabled": True,
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
