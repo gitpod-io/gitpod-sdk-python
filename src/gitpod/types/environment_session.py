@@ -24,7 +24,7 @@ class EnvironmentSession(BaseModel):
     """Environment ID associated with the session."""
 
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
-    """Project ID associated with the session."""
+    """Project ID associated with the session (if available)."""
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
     """Runner ID associated with the session."""
@@ -33,4 +33,4 @@ class EnvironmentSession(BaseModel):
     """Time when the session was stopped."""
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
-    """User ID who created the session."""
+    """User ID that created the session."""

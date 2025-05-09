@@ -82,13 +82,13 @@ class TestSecrets:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "scope": {
-                    "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(SyncSecretsPage[Secret], secret, path=["response"])
@@ -288,13 +288,13 @@ class TestAsyncSecrets:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "scope": {
-                    "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             },
             pagination={
                 "token": "token",
-                "page_size": 100,
+                "page_size": 20,
             },
         )
         assert_matches_type(AsyncSecretsPage[Secret], secret, path=["response"])
