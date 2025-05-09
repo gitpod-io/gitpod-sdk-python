@@ -569,6 +569,18 @@ Methods:
 - <code title="post /gitpod.v1.SecretService/GetSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">get_value</a>(\*\*<a href="src/gitpod/types/secret_get_value_params.py">params</a>) -> <a href="./src/gitpod/types/secret_get_value_response.py">SecretGetValueResponse</a></code>
 - <code title="post /gitpod.v1.SecretService/UpdateSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">update_value</a>(\*\*<a href="src/gitpod/types/secret_update_value_params.py">params</a>) -> <a href="./src/gitpod/types/secret_update_value_response.py">object</a></code>
 
+# Usage
+
+Types:
+
+```python
+from gitpod.types import EnvironmentSession
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.UsageService/ListEnvironmentSessions">client.usage.<a href="./src/gitpod/resources/usage.py">list_environment_sessions</a>(\*\*<a href="src/gitpod/types/usage_list_environment_sessions_params.py">params</a>) -> <a href="./src/gitpod/types/environment_session.py">SyncSessionsPage[EnvironmentSession]</a></code>
+
 # Users
 
 Types:

@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import events, groups, editors, secrets, accounts, identity
+from .resources import usage, events, groups, editors, secrets, accounts, identity
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -49,6 +49,7 @@ class Gitpod(SyncAPIClient):
     projects: projects.ProjectsResource
     runners: runners.RunnersResource
     secrets: secrets.SecretsResource
+    usage: usage.UsageResource
     users: users.UsersResource
     with_raw_response: GitpodWithRawResponse
     with_streaming_response: GitpodWithStreamedResponse
@@ -117,6 +118,7 @@ class Gitpod(SyncAPIClient):
         self.projects = projects.ProjectsResource(self)
         self.runners = runners.RunnersResource(self)
         self.secrets = secrets.SecretsResource(self)
+        self.usage = usage.UsageResource(self)
         self.users = users.UsersResource(self)
         self.with_raw_response = GitpodWithRawResponse(self)
         self.with_streaming_response = GitpodWithStreamedResponse(self)
@@ -237,6 +239,7 @@ class AsyncGitpod(AsyncAPIClient):
     projects: projects.AsyncProjectsResource
     runners: runners.AsyncRunnersResource
     secrets: secrets.AsyncSecretsResource
+    usage: usage.AsyncUsageResource
     users: users.AsyncUsersResource
     with_raw_response: AsyncGitpodWithRawResponse
     with_streaming_response: AsyncGitpodWithStreamedResponse
@@ -305,6 +308,7 @@ class AsyncGitpod(AsyncAPIClient):
         self.projects = projects.AsyncProjectsResource(self)
         self.runners = runners.AsyncRunnersResource(self)
         self.secrets = secrets.AsyncSecretsResource(self)
+        self.usage = usage.AsyncUsageResource(self)
         self.users = users.AsyncUsersResource(self)
         self.with_raw_response = AsyncGitpodWithRawResponse(self)
         self.with_streaming_response = AsyncGitpodWithStreamedResponse(self)
@@ -426,6 +430,7 @@ class GitpodWithRawResponse:
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
         self.runners = runners.RunnersResourceWithRawResponse(client.runners)
         self.secrets = secrets.SecretsResourceWithRawResponse(client.secrets)
+        self.usage = usage.UsageResourceWithRawResponse(client.usage)
         self.users = users.UsersResourceWithRawResponse(client.users)
 
 
@@ -441,6 +446,7 @@ class AsyncGitpodWithRawResponse:
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
         self.runners = runners.AsyncRunnersResourceWithRawResponse(client.runners)
         self.secrets = secrets.AsyncSecretsResourceWithRawResponse(client.secrets)
+        self.usage = usage.AsyncUsageResourceWithRawResponse(client.usage)
         self.users = users.AsyncUsersResourceWithRawResponse(client.users)
 
 
@@ -456,6 +462,7 @@ class GitpodWithStreamedResponse:
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
         self.runners = runners.RunnersResourceWithStreamingResponse(client.runners)
         self.secrets = secrets.SecretsResourceWithStreamingResponse(client.secrets)
+        self.usage = usage.UsageResourceWithStreamingResponse(client.usage)
         self.users = users.UsersResourceWithStreamingResponse(client.users)
 
 
@@ -471,6 +478,7 @@ class AsyncGitpodWithStreamedResponse:
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
         self.runners = runners.AsyncRunnersResourceWithStreamingResponse(client.runners)
         self.secrets = secrets.AsyncSecretsResourceWithStreamingResponse(client.secrets)
+        self.usage = usage.AsyncUsageResourceWithStreamingResponse(client.usage)
         self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
 
 
