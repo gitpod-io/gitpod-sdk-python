@@ -13,6 +13,7 @@ from gitpod.types import (
     LoginProvider,
     AccountRetrieveResponse,
     AccountGetSSOLoginURLResponse,
+    AccountListJoinableOrganizationsResponse,
 )
 from gitpod.pagination import SyncLoginProvidersPage, AsyncLoginProvidersPage
 
@@ -132,6 +133,44 @@ class TestAccounts:
 
             account = response.parse()
             assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_joinable_organizations(self, client: Gitpod) -> None:
+        account = client.accounts.list_joinable_organizations()
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_list_joinable_organizations_with_all_params(self, client: Gitpod) -> None:
+        account = client.accounts.list_joinable_organizations(
+            token="token",
+            page_size=0,
+            empty=True,
+        )
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_list_joinable_organizations(self, client: Gitpod) -> None:
+        response = client.accounts.with_raw_response.list_joinable_organizations()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_list_joinable_organizations(self, client: Gitpod) -> None:
+        with client.accounts.with_streaming_response.list_joinable_organizations() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -291,6 +330,44 @@ class TestAsyncAccounts:
 
             account = await response.parse()
             assert_matches_type(AccountGetSSOLoginURLResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_joinable_organizations(self, async_client: AsyncGitpod) -> None:
+        account = await async_client.accounts.list_joinable_organizations()
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_list_joinable_organizations_with_all_params(self, async_client: AsyncGitpod) -> None:
+        account = await async_client.accounts.list_joinable_organizations(
+            token="token",
+            page_size=0,
+            empty=True,
+        )
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_list_joinable_organizations(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.accounts.with_raw_response.list_joinable_organizations()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = await response.parse()
+        assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_list_joinable_organizations(self, async_client: AsyncGitpod) -> None:
+        async with async_client.accounts.with_streaming_response.list_joinable_organizations() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(AccountListJoinableOrganizationsResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

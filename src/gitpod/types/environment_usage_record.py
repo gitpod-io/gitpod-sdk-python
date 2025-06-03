@@ -7,30 +7,33 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["EnvironmentSession"]
+__all__ = ["EnvironmentUsageRecord"]
 
 
-class EnvironmentSession(BaseModel):
+class EnvironmentUsageRecord(BaseModel):
     id: Optional[str] = None
-    """Environment session ID."""
+    """Environment usage record ID."""
 
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
-    """Time when the session was created."""
+    """Time when the environment was created."""
 
     environment_class_id: Optional[str] = FieldInfo(alias="environmentClassId", default=None)
-    """Environment class ID associated with the session."""
+    """Environment class ID associated with the record."""
 
     environment_id: Optional[str] = FieldInfo(alias="environmentId", default=None)
-    """Environment ID associated with the session."""
+    """Environment ID associated with the record."""
 
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
-    """Project ID associated with the session (if available)."""
+    """Project ID associated with the environment (if available)."""
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
-    """Runner ID associated with the session."""
+    """Runner ID associated with the environment."""
 
     stopped_at: Optional[datetime] = FieldInfo(alias="stoppedAt", default=None)
-    """Time when the session was stopped."""
+    """Time when the environment was stopped."""
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
-    """User ID that created the session."""
+    """
+    User ID is the ID of the user who created the environment associated with the
+    record.
+    """

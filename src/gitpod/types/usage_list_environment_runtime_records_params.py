@@ -8,10 +8,10 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["UsageListEnvironmentSessionsParams", "Filter", "FilterDateRange", "Pagination"]
+__all__ = ["UsageListEnvironmentRuntimeRecordsParams", "Filter", "FilterDateRange", "Pagination"]
 
 
-class UsageListEnvironmentSessionsParams(TypedDict, total=False):
+class UsageListEnvironmentRuntimeRecordsParams(TypedDict, total=False):
     token: str
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
@@ -33,10 +33,10 @@ class FilterDateRange(TypedDict, total=False):
 
 class Filter(TypedDict, total=False):
     date_range: Required[Annotated[FilterDateRange, PropertyInfo(alias="dateRange")]]
-    """Date range to query sessions within."""
+    """Date range to query runtime records within."""
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
-    """Optional project ID to filter sessions by."""
+    """Optional project ID to filter runtime records by."""
 
 
 class Pagination(TypedDict, total=False):

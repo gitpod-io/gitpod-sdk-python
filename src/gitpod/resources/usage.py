@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..types import usage_list_environment_sessions_params
+from ..types import usage_list_environment_runtime_records_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
@@ -15,9 +15,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncSessionsPage, AsyncSessionsPage
+from ..pagination import SyncRecordsPage, AsyncRecordsPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.environment_session import EnvironmentSession
+from ..types.environment_usage_record import EnvironmentUsageRecord
 
 __all__ = ["UsageResource", "AsyncUsageResource"]
 
@@ -42,31 +42,31 @@ class UsageResource(SyncAPIResource):
         """
         return UsageResourceWithStreamingResponse(self)
 
-    def list_environment_sessions(
+    def list_environment_runtime_records(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        filter: usage_list_environment_sessions_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: usage_list_environment_sessions_params.Pagination | NotGiven = NOT_GIVEN,
+        filter: usage_list_environment_runtime_records_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: usage_list_environment_runtime_records_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncSessionsPage[EnvironmentSession]:
+    ) -> SyncRecordsPage[EnvironmentUsageRecord]:
         """
-        Lists completed environment sessions within a specified date range.
+        Lists completed environment runtime records within a specified date range.
 
-        Returns a list of environment sessions that were completed within the specified
-        date range. Currently running sessions are not included.
+        Returns a list of environment runtime records that were completed within the
+        specified date range. Records of currently running environments are not
+        included.
 
         Use this method to:
 
-        - View environment sessions
+        - View environment runtime records
         - Filter by project
-        - Monitor session activity
         - Create custom usage reports
 
         ### Example
@@ -95,14 +95,14 @@ class UsageResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/gitpod.v1.UsageService/ListEnvironmentSessions",
-            page=SyncSessionsPage[EnvironmentSession],
+            "/gitpod.v1.UsageService/ListEnvironmentUsageRecords",
+            page=SyncRecordsPage[EnvironmentUsageRecord],
             body=maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
                 },
-                usage_list_environment_sessions_params.UsageListEnvironmentSessionsParams,
+                usage_list_environment_runtime_records_params.UsageListEnvironmentRuntimeRecordsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -114,10 +114,10 @@ class UsageResource(SyncAPIResource):
                         "token": token,
                         "page_size": page_size,
                     },
-                    usage_list_environment_sessions_params.UsageListEnvironmentSessionsParams,
+                    usage_list_environment_runtime_records_params.UsageListEnvironmentRuntimeRecordsParams,
                 ),
             ),
-            model=EnvironmentSession,
+            model=EnvironmentUsageRecord,
             method="post",
         )
 
@@ -142,31 +142,31 @@ class AsyncUsageResource(AsyncAPIResource):
         """
         return AsyncUsageResourceWithStreamingResponse(self)
 
-    def list_environment_sessions(
+    def list_environment_runtime_records(
         self,
         *,
         token: str | NotGiven = NOT_GIVEN,
         page_size: int | NotGiven = NOT_GIVEN,
-        filter: usage_list_environment_sessions_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: usage_list_environment_sessions_params.Pagination | NotGiven = NOT_GIVEN,
+        filter: usage_list_environment_runtime_records_params.Filter | NotGiven = NOT_GIVEN,
+        pagination: usage_list_environment_runtime_records_params.Pagination | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[EnvironmentSession, AsyncSessionsPage[EnvironmentSession]]:
+    ) -> AsyncPaginator[EnvironmentUsageRecord, AsyncRecordsPage[EnvironmentUsageRecord]]:
         """
-        Lists completed environment sessions within a specified date range.
+        Lists completed environment runtime records within a specified date range.
 
-        Returns a list of environment sessions that were completed within the specified
-        date range. Currently running sessions are not included.
+        Returns a list of environment runtime records that were completed within the
+        specified date range. Records of currently running environments are not
+        included.
 
         Use this method to:
 
-        - View environment sessions
+        - View environment runtime records
         - Filter by project
-        - Monitor session activity
         - Create custom usage reports
 
         ### Example
@@ -195,14 +195,14 @@ class AsyncUsageResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/gitpod.v1.UsageService/ListEnvironmentSessions",
-            page=AsyncSessionsPage[EnvironmentSession],
+            "/gitpod.v1.UsageService/ListEnvironmentUsageRecords",
+            page=AsyncRecordsPage[EnvironmentUsageRecord],
             body=maybe_transform(
                 {
                     "filter": filter,
                     "pagination": pagination,
                 },
-                usage_list_environment_sessions_params.UsageListEnvironmentSessionsParams,
+                usage_list_environment_runtime_records_params.UsageListEnvironmentRuntimeRecordsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -214,10 +214,10 @@ class AsyncUsageResource(AsyncAPIResource):
                         "token": token,
                         "page_size": page_size,
                     },
-                    usage_list_environment_sessions_params.UsageListEnvironmentSessionsParams,
+                    usage_list_environment_runtime_records_params.UsageListEnvironmentRuntimeRecordsParams,
                 ),
             ),
-            model=EnvironmentSession,
+            model=EnvironmentUsageRecord,
             method="post",
         )
 
@@ -226,8 +226,8 @@ class UsageResourceWithRawResponse:
     def __init__(self, usage: UsageResource) -> None:
         self._usage = usage
 
-        self.list_environment_sessions = to_raw_response_wrapper(
-            usage.list_environment_sessions,
+        self.list_environment_runtime_records = to_raw_response_wrapper(
+            usage.list_environment_runtime_records,
         )
 
 
@@ -235,8 +235,8 @@ class AsyncUsageResourceWithRawResponse:
     def __init__(self, usage: AsyncUsageResource) -> None:
         self._usage = usage
 
-        self.list_environment_sessions = async_to_raw_response_wrapper(
-            usage.list_environment_sessions,
+        self.list_environment_runtime_records = async_to_raw_response_wrapper(
+            usage.list_environment_runtime_records,
         )
 
 
@@ -244,8 +244,8 @@ class UsageResourceWithStreamingResponse:
     def __init__(self, usage: UsageResource) -> None:
         self._usage = usage
 
-        self.list_environment_sessions = to_streamed_response_wrapper(
-            usage.list_environment_sessions,
+        self.list_environment_runtime_records = to_streamed_response_wrapper(
+            usage.list_environment_runtime_records,
         )
 
 
@@ -253,6 +253,6 @@ class AsyncUsageResourceWithStreamingResponse:
     def __init__(self, usage: AsyncUsageResource) -> None:
         self._usage = usage
 
-        self.list_environment_sessions = async_to_streamed_response_wrapper(
-            usage.list_environment_sessions,
+        self.list_environment_runtime_records = async_to_streamed_response_wrapper(
+            usage.list_environment_runtime_records,
         )

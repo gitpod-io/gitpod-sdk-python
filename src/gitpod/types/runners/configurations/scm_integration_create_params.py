@@ -13,6 +13,12 @@ __all__ = ["ScmIntegrationCreateParams"]
 class ScmIntegrationCreateParams(TypedDict, total=False):
     host: str
 
+    issuer_url: Annotated[Optional[str], PropertyInfo(alias="issuerUrl")]
+    """
+    issuer_url can be set to override the authentication provider URL, if it doesn't
+    match the SCM host.
+    """
+
     oauth_client_id: Annotated[Optional[str], PropertyInfo(alias="oauthClientId")]
     """
     oauth_client_id is the OAuth app's client ID, if OAuth is configured. If

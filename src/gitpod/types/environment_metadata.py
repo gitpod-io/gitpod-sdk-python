@@ -18,6 +18,12 @@ class EnvironmentMetadata(BaseModel):
     +internal - not yet implemented
     """
 
+    archived_at: Optional[datetime] = FieldInfo(alias="archivedAt", default=None)
+    """Time when the Environment was archived.
+
+    If not set, the environment is not archived.
+    """
+
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """Time when the Environment was created."""
 

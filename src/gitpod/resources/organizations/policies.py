@@ -106,6 +106,7 @@ class PoliciesResource(SyncAPIResource):
         maximum_running_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
         members_create_projects: Optional[bool] | NotGiven = NOT_GIVEN,
         members_require_projects: Optional[bool] | NotGiven = NOT_GIVEN,
+        port_sharing_disabled: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,6 +179,9 @@ class PoliciesResource(SyncAPIResource):
           members_require_projects: members_require_projects controls whether environments can only be created from
               projects by non-admin users
 
+          port_sharing_disabled: port_sharing_disabled controls whether port sharing is disabled in the
+              organization
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -200,6 +204,7 @@ class PoliciesResource(SyncAPIResource):
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
+                    "port_sharing_disabled": port_sharing_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),
@@ -295,6 +300,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         maximum_running_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
         members_create_projects: Optional[bool] | NotGiven = NOT_GIVEN,
         members_require_projects: Optional[bool] | NotGiven = NOT_GIVEN,
+        port_sharing_disabled: Optional[bool] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -367,6 +373,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
           members_require_projects: members_require_projects controls whether environments can only be created from
               projects by non-admin users
 
+          port_sharing_disabled: port_sharing_disabled controls whether port sharing is disabled in the
+              organization
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -389,6 +398,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
+                    "port_sharing_disabled": port_sharing_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),

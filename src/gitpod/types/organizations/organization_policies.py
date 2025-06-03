@@ -58,6 +58,12 @@ class OrganizationPolicies(BaseModel):
     organization_id: str = FieldInfo(alias="organizationId")
     """organization_id is the ID of the organization"""
 
+    port_sharing_disabled: bool = FieldInfo(alias="portSharingDisabled")
+    """
+    port_sharing_disabled controls whether port sharing is disabled in the
+    organization
+    """
+
     maximum_environment_timeout: Optional[str] = FieldInfo(alias="maximumEnvironmentTimeout", default=None)
     """
     maximum_environment_timeout controls the maximum timeout allowed for
