@@ -67,3 +67,9 @@ class PolicyUpdateParams(TypedDict, total=False):
     members_require_projects controls whether environments can only be created from
     projects by non-admin users
     """
+
+    port_sharing_disabled: Annotated[Optional[bool], PropertyInfo(alias="portSharingDisabled")]
+    """
+    port_sharing_disabled controls whether port sharing is disabled in the
+    organization
+    """

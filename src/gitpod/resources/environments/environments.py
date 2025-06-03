@@ -14,6 +14,7 @@ from ...types import (
     environment_delete_params,
     environment_update_params,
     environment_retrieve_params,
+    environment_unarchive_params,
     environment_mark_active_params,
     environment_create_logs_token_params,
     environment_create_from_project_params,
@@ -826,6 +827,52 @@ class EnvironmentsResource(SyncAPIResource):
             cast_to=object,
         )
 
+    def unarchive(
+        self,
+        *,
+        environment_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Unarchives an environment.
+
+        ### Examples
+
+        - Unarchive an environment:
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
+
+        Args:
+          environment_id: environment_id specifies the environment to unarchive.
+
+              +required
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.EnvironmentService/UnarchiveEnvironment",
+            body=maybe_transform(
+                {"environment_id": environment_id}, environment_unarchive_params.EnvironmentUnarchiveParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class AsyncEnvironmentsResource(AsyncAPIResource):
     @cached_property
@@ -1598,6 +1645,52 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def unarchive(
+        self,
+        *,
+        environment_id: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> object:
+        """
+        Unarchives an environment.
+
+        ### Examples
+
+        - Unarchive an environment:
+
+          ```yaml
+          environmentId: "07e03a28-65a5-4d98-b532-8ea67b188048"
+          ```
+
+        Args:
+          environment_id: environment_id specifies the environment to unarchive.
+
+              +required
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.EnvironmentService/UnarchiveEnvironment",
+            body=await async_maybe_transform(
+                {"environment_id": environment_id}, environment_unarchive_params.EnvironmentUnarchiveParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
 
 class EnvironmentsResourceWithRawResponse:
     def __init__(self, environments: EnvironmentsResource) -> None:
@@ -1635,6 +1728,9 @@ class EnvironmentsResourceWithRawResponse:
         )
         self.stop = to_raw_response_wrapper(
             environments.stop,
+        )
+        self.unarchive = to_raw_response_wrapper(
+            environments.unarchive,
         )
 
     @cached_property
@@ -1683,6 +1779,9 @@ class AsyncEnvironmentsResourceWithRawResponse:
         self.stop = async_to_raw_response_wrapper(
             environments.stop,
         )
+        self.unarchive = async_to_raw_response_wrapper(
+            environments.unarchive,
+        )
 
     @cached_property
     def automations(self) -> AsyncAutomationsResourceWithRawResponse:
@@ -1730,6 +1829,9 @@ class EnvironmentsResourceWithStreamingResponse:
         self.stop = to_streamed_response_wrapper(
             environments.stop,
         )
+        self.unarchive = to_streamed_response_wrapper(
+            environments.unarchive,
+        )
 
     @cached_property
     def automations(self) -> AutomationsResourceWithStreamingResponse:
@@ -1776,6 +1878,9 @@ class AsyncEnvironmentsResourceWithStreamingResponse:
         )
         self.stop = async_to_streamed_response_wrapper(
             environments.stop,
+        )
+        self.unarchive = async_to_streamed_response_wrapper(
+            environments.unarchive,
         )
 
     @cached_property

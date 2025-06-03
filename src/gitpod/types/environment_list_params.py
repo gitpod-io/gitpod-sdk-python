@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Annotated, TypedDict
+from typing import List, Optional
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
@@ -24,6 +24,19 @@ class EnvironmentListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    archival_status: Annotated[
+        Optional[
+            Literal[
+                "ARCHIVAL_STATUS_UNSPECIFIED",
+                "ARCHIVAL_STATUS_ACTIVE",
+                "ARCHIVAL_STATUS_ARCHIVED",
+                "ARCHIVAL_STATUS_ALL",
+            ]
+        ],
+        PropertyInfo(alias="archivalStatus"),
+    ]
+    """archival_status filters the response based on environment archive status"""
+
     creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
     """
     creator_ids filters the response to only Environments created by specified

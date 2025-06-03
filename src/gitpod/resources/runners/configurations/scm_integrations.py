@@ -56,6 +56,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         self,
         *,
         host: str | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         pat: bool | NotGiven = NOT_GIVEN,
@@ -92,6 +93,9 @@ class ScmIntegrationsResource(SyncAPIResource):
           ```
 
         Args:
+          issuer_url: issuer_url can be set to override the authentication provider URL, if it doesn't
+              match the SCM host.
+
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
               configured, oauth_plaintext_client_secret must also be set.
 
@@ -114,6 +118,7 @@ class ScmIntegrationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "host": host,
+                    "issuer_url": issuer_url,
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,
@@ -180,6 +185,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         self,
         *,
         id: str | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         pat: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -212,6 +218,9 @@ class ScmIntegrationsResource(SyncAPIResource):
           ```
 
         Args:
+          issuer_url: issuer_url can be set to override the authentication provider URL, if it doesn't
+              match the SCM host.
+
           oauth_client_id: oauth_client_id can be set to update the OAuth app's client ID. If an empty
               string is set, the OAuth configuration will be removed (regardless of whether a
               client secret is set), and any existing Host Authentication Tokens for the SCM
@@ -242,6 +251,7 @@ class ScmIntegrationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "id": id,
+                    "issuer_url": issuer_url,
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,
@@ -401,6 +411,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         self,
         *,
         host: str | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         pat: bool | NotGiven = NOT_GIVEN,
@@ -437,6 +448,9 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
           ```
 
         Args:
+          issuer_url: issuer_url can be set to override the authentication provider URL, if it doesn't
+              match the SCM host.
+
           oauth_client_id: oauth_client_id is the OAuth app's client ID, if OAuth is configured. If
               configured, oauth_plaintext_client_secret must also be set.
 
@@ -459,6 +473,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "host": host,
+                    "issuer_url": issuer_url,
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,
@@ -525,6 +540,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         self,
         *,
         id: str | NotGiven = NOT_GIVEN,
+        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
         oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
         pat: Optional[bool] | NotGiven = NOT_GIVEN,
@@ -557,6 +573,9 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
           ```
 
         Args:
+          issuer_url: issuer_url can be set to override the authentication provider URL, if it doesn't
+              match the SCM host.
+
           oauth_client_id: oauth_client_id can be set to update the OAuth app's client ID. If an empty
               string is set, the OAuth configuration will be removed (regardless of whether a
               client secret is set), and any existing Host Authentication Tokens for the SCM
@@ -587,6 +606,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "id": id,
+                    "issuer_url": issuer_url,
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,

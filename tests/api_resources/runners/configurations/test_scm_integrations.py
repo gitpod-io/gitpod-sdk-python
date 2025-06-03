@@ -33,6 +33,7 @@ class TestScmIntegrations:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.create(
             host="github.com",
+            issuer_url="issuerUrl",
             oauth_client_id="client_id",
             oauth_plaintext_client_secret="client_secret",
             pat=True,
@@ -110,6 +111,7 @@ class TestScmIntegrations:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         scm_integration = client.runners.configurations.scm_integrations.update(
             id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            issuer_url="issuerUrl",
             oauth_client_id="new_client_id",
             oauth_plaintext_client_secret="new_client_secret",
             pat=True,
@@ -231,6 +233,7 @@ class TestAsyncScmIntegrations:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.create(
             host="github.com",
+            issuer_url="issuerUrl",
             oauth_client_id="client_id",
             oauth_plaintext_client_secret="client_secret",
             pat=True,
@@ -308,6 +311,7 @@ class TestAsyncScmIntegrations:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         scm_integration = await async_client.runners.configurations.scm_integrations.update(
             id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            issuer_url="issuerUrl",
             oauth_client_id="new_client_id",
             oauth_plaintext_client_secret="new_client_secret",
             pat=True,

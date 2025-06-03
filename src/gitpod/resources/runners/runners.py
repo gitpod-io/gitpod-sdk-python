@@ -93,6 +93,7 @@ class RunnersResource(SyncAPIResource):
         kind: RunnerKind | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         provider: RunnerProvider | NotGiven = NOT_GIVEN,
+        runner_manager_id: str | NotGiven = NOT_GIVEN,
         spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -155,6 +156,9 @@ class RunnersResource(SyncAPIResource):
               backwards compatibility but will be required in the future. When specified, kind
               must not be specified (will be deduced from provider)
 
+          runner_manager_id: The runner manager id specifies the runner manager for the managed runner. This
+              field is mandatory for managed runners, otheriwse should not be set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -170,6 +174,7 @@ class RunnersResource(SyncAPIResource):
                     "kind": kind,
                     "name": name,
                     "provider": provider,
+                    "runner_manager_id": runner_manager_id,
                     "spec": spec,
                 },
                 runner_create_params.RunnerCreateParams,
@@ -646,6 +651,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         kind: RunnerKind | NotGiven = NOT_GIVEN,
         name: str | NotGiven = NOT_GIVEN,
         provider: RunnerProvider | NotGiven = NOT_GIVEN,
+        runner_manager_id: str | NotGiven = NOT_GIVEN,
         spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -708,6 +714,9 @@ class AsyncRunnersResource(AsyncAPIResource):
               backwards compatibility but will be required in the future. When specified, kind
               must not be specified (will be deduced from provider)
 
+          runner_manager_id: The runner manager id specifies the runner manager for the managed runner. This
+              field is mandatory for managed runners, otheriwse should not be set.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -723,6 +732,7 @@ class AsyncRunnersResource(AsyncAPIResource):
                     "kind": kind,
                     "name": name,
                     "provider": provider,
+                    "runner_manager_id": runner_manager_id,
                     "spec": spec,
                 },
                 runner_create_params.RunnerCreateParams,

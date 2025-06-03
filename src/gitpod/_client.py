@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import usage, events, groups, editors, secrets, accounts, identity
+from .resources import usage, events, groups, editors, secrets, accounts, gateways, identity
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -43,6 +43,7 @@ class Gitpod(SyncAPIClient):
     editors: editors.EditorsResource
     environments: environments.EnvironmentsResource
     events: events.EventsResource
+    gateways: gateways.GatewaysResource
     groups: groups.GroupsResource
     identity: identity.IdentityResource
     organizations: organizations.OrganizationsResource
@@ -112,6 +113,7 @@ class Gitpod(SyncAPIClient):
         self.editors = editors.EditorsResource(self)
         self.environments = environments.EnvironmentsResource(self)
         self.events = events.EventsResource(self)
+        self.gateways = gateways.GatewaysResource(self)
         self.groups = groups.GroupsResource(self)
         self.identity = identity.IdentityResource(self)
         self.organizations = organizations.OrganizationsResource(self)
@@ -233,6 +235,7 @@ class AsyncGitpod(AsyncAPIClient):
     editors: editors.AsyncEditorsResource
     environments: environments.AsyncEnvironmentsResource
     events: events.AsyncEventsResource
+    gateways: gateways.AsyncGatewaysResource
     groups: groups.AsyncGroupsResource
     identity: identity.AsyncIdentityResource
     organizations: organizations.AsyncOrganizationsResource
@@ -302,6 +305,7 @@ class AsyncGitpod(AsyncAPIClient):
         self.editors = editors.AsyncEditorsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
         self.events = events.AsyncEventsResource(self)
+        self.gateways = gateways.AsyncGatewaysResource(self)
         self.groups = groups.AsyncGroupsResource(self)
         self.identity = identity.AsyncIdentityResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
@@ -424,6 +428,7 @@ class GitpodWithRawResponse:
         self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
         self.events = events.EventsResourceWithRawResponse(client.events)
+        self.gateways = gateways.GatewaysResourceWithRawResponse(client.gateways)
         self.groups = groups.GroupsResourceWithRawResponse(client.groups)
         self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
@@ -440,6 +445,7 @@ class AsyncGitpodWithRawResponse:
         self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
+        self.gateways = gateways.AsyncGatewaysResourceWithRawResponse(client.gateways)
         self.groups = groups.AsyncGroupsResourceWithRawResponse(client.groups)
         self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
@@ -456,6 +462,7 @@ class GitpodWithStreamedResponse:
         self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
+        self.gateways = gateways.GatewaysResourceWithStreamingResponse(client.gateways)
         self.groups = groups.GroupsResourceWithStreamingResponse(client.groups)
         self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
@@ -472,6 +479,7 @@ class AsyncGitpodWithStreamedResponse:
         self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
+        self.gateways = gateways.AsyncGatewaysResourceWithStreamingResponse(client.gateways)
         self.groups = groups.AsyncGroupsResourceWithStreamingResponse(client.groups)
         self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)

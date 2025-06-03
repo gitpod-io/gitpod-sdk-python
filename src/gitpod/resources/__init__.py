@@ -64,6 +64,14 @@ from .accounts import (
     AccountsResourceWithStreamingResponse,
     AsyncAccountsResourceWithStreamingResponse,
 )
+from .gateways import (
+    GatewaysResource,
+    AsyncGatewaysResource,
+    GatewaysResourceWithRawResponse,
+    AsyncGatewaysResourceWithRawResponse,
+    GatewaysResourceWithStreamingResponse,
+    AsyncGatewaysResourceWithStreamingResponse,
+)
 from .identity import (
     IdentityResource,
     AsyncIdentityResource,
@@ -122,6 +130,12 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
+    "GatewaysResource",
+    "AsyncGatewaysResource",
+    "GatewaysResourceWithRawResponse",
+    "AsyncGatewaysResourceWithRawResponse",
+    "GatewaysResourceWithStreamingResponse",
+    "AsyncGatewaysResourceWithStreamingResponse",
     "GroupsResource",
     "AsyncGroupsResource",
     "GroupsResourceWithRawResponse",

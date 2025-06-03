@@ -253,6 +253,7 @@ class TestEnvironments:
             token="token",
             page_size=0,
             filter={
+                "archival_status": "ARCHIVAL_STATUS_UNSPECIFIED",
                 "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
@@ -608,6 +609,42 @@ class TestEnvironments:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_unarchive(self, client: Gitpod) -> None:
+        environment = client.environments.unarchive()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_method_unarchive_with_all_params(self, client: Gitpod) -> None:
+        environment = client.environments.unarchive(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_raw_response_unarchive(self, client: Gitpod) -> None:
+        response = client.environments.with_raw_response.unarchive()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        environment = response.parse()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    def test_streaming_response_unarchive(self, client: Gitpod) -> None:
+        with client.environments.with_streaming_response.unarchive() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            environment = response.parse()
+            assert_matches_type(object, environment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncEnvironments:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
@@ -839,6 +876,7 @@ class TestAsyncEnvironments:
             token="token",
             page_size=0,
             filter={
+                "archival_status": "ARCHIVAL_STATUS_UNSPECIFIED",
                 "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
@@ -1186,6 +1224,42 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_streaming_response_stop(self, async_client: AsyncGitpod) -> None:
         async with async_client.environments.with_streaming_response.stop() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            environment = await response.parse()
+            assert_matches_type(object, environment, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_unarchive(self, async_client: AsyncGitpod) -> None:
+        environment = await async_client.environments.unarchive()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_method_unarchive_with_all_params(self, async_client: AsyncGitpod) -> None:
+        environment = await async_client.environments.unarchive(
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+        )
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_raw_response_unarchive(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.environments.with_raw_response.unarchive()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        environment = await response.parse()
+        assert_matches_type(object, environment, path=["response"])
+
+    @pytest.mark.skip()
+    @parametrize
+    async def test_streaming_response_unarchive(self, async_client: AsyncGitpod) -> None:
+        async with async_client.environments.with_streaming_response.unarchive() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
