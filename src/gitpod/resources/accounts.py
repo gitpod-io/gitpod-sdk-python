@@ -11,6 +11,7 @@ from ..types import (
     account_retrieve_params,
     account_get_sso_login_url_params,
     account_list_login_providers_params,
+    account_list_joinable_organizations_params,
 )
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform, async_maybe_transform
@@ -27,6 +28,7 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.login_provider import LoginProvider
 from ..types.account_retrieve_response import AccountRetrieveResponse
 from ..types.account_get_sso_login_url_response import AccountGetSSOLoginURLResponse
+from ..types.account_list_joinable_organizations_response import AccountListJoinableOrganizationsResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -216,6 +218,68 @@ class AccountsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=AccountGetSSOLoginURLResponse,
+        )
+
+    def list_joinable_organizations(
+        self,
+        *,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        empty: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountListJoinableOrganizationsResponse:
+        """
+        Lists organizations that the currently authenticated account can join.
+
+        Use this method to:
+
+        - Discover organizations associated with the account's email domain.
+        - Allow users to join existing organizations.
+        - Display potential organizations during onboarding.
+
+        ### Examples
+
+        - List joinable organizations:
+
+          Retrieves a list of organizations the account can join.
+
+          ```yaml
+          {}
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.AccountService/ListJoinableOrganizations",
+            body=maybe_transform(
+                {"empty": empty}, account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
+                ),
+            ),
+            cast_to=AccountListJoinableOrganizationsResponse,
         )
 
     def list_login_providers(
@@ -491,6 +555,68 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=AccountGetSSOLoginURLResponse,
         )
 
+    async def list_joinable_organizations(
+        self,
+        *,
+        token: str | NotGiven = NOT_GIVEN,
+        page_size: int | NotGiven = NOT_GIVEN,
+        empty: bool | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AccountListJoinableOrganizationsResponse:
+        """
+        Lists organizations that the currently authenticated account can join.
+
+        Use this method to:
+
+        - Discover organizations associated with the account's email domain.
+        - Allow users to join existing organizations.
+        - Display potential organizations during onboarding.
+
+        ### Examples
+
+        - List joinable organizations:
+
+          Retrieves a list of organizations the account can join.
+
+          ```yaml
+          {}
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.AccountService/ListJoinableOrganizations",
+            body=await async_maybe_transform(
+                {"empty": empty}, account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
+                ),
+            ),
+            cast_to=AccountListJoinableOrganizationsResponse,
+        )
+
     def list_login_providers(
         self,
         *,
@@ -590,6 +716,9 @@ class AccountsResourceWithRawResponse:
         self.get_sso_login_url = to_raw_response_wrapper(
             accounts.get_sso_login_url,
         )
+        self.list_joinable_organizations = to_raw_response_wrapper(
+            accounts.list_joinable_organizations,
+        )
         self.list_login_providers = to_raw_response_wrapper(
             accounts.list_login_providers,
         )
@@ -607,6 +736,9 @@ class AsyncAccountsResourceWithRawResponse:
         )
         self.get_sso_login_url = async_to_raw_response_wrapper(
             accounts.get_sso_login_url,
+        )
+        self.list_joinable_organizations = async_to_raw_response_wrapper(
+            accounts.list_joinable_organizations,
         )
         self.list_login_providers = async_to_raw_response_wrapper(
             accounts.list_login_providers,
@@ -626,6 +758,9 @@ class AccountsResourceWithStreamingResponse:
         self.get_sso_login_url = to_streamed_response_wrapper(
             accounts.get_sso_login_url,
         )
+        self.list_joinable_organizations = to_streamed_response_wrapper(
+            accounts.list_joinable_organizations,
+        )
         self.list_login_providers = to_streamed_response_wrapper(
             accounts.list_login_providers,
         )
@@ -643,6 +778,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.get_sso_login_url = async_to_streamed_response_wrapper(
             accounts.get_sso_login_url,
+        )
+        self.list_joinable_organizations = async_to_streamed_response_wrapper(
+            accounts.list_joinable_organizations,
         )
         self.list_login_providers = async_to_streamed_response_wrapper(
             accounts.list_login_providers,

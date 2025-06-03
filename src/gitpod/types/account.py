@@ -206,6 +206,7 @@ class Account(BaseModel):
     avatar_url: Optional[str] = FieldInfo(alias="avatarUrl", default=None)
 
     joinables: Optional[List[JoinableOrganization]] = None
+    """joinables is deprecated. Use ListJoinableOrganizations instead."""
 
     memberships: Optional[List[AccountMembership]] = None
 

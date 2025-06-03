@@ -6,6 +6,7 @@ from datetime import datetime
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .gateway_info import GatewayInfo
 from .runner_phase import RunnerPhase
 from .runner_capability import RunnerCapability
 from .shared.field_value import FieldValue
@@ -22,6 +23,9 @@ class RunnerStatus(BaseModel):
 
     capabilities: Optional[List[RunnerCapability]] = None
     """capabilities is a list of capabilities the runner supports."""
+
+    gateway_info: Optional[GatewayInfo] = FieldInfo(alias="gatewayInfo", default=None)
+    """gateway_info is information about the gateway to which the runner is connected."""
 
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
 
@@ -40,6 +44,6 @@ class RunnerStatus(BaseModel):
     system_details: Optional[str] = FieldInfo(alias="systemDetails", default=None)
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """Time when the status was last udpated."""
+    """Time when the status was last updated."""
 
     version: Optional[str] = None

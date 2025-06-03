@@ -73,6 +73,7 @@ class TestPolicies:
             maximum_running_environments_per_user="5",
             members_create_projects=True,
             members_require_projects=True,
+            port_sharing_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 
@@ -162,6 +163,7 @@ class TestAsyncPolicies:
             maximum_running_environments_per_user="5",
             members_create_projects=True,
             members_require_projects=True,
+            port_sharing_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 

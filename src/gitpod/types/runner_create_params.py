@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
 from .runner_provider import RunnerProvider
 from .runner_spec_param import RunnerSpecParam
@@ -27,6 +28,12 @@ class RunnerCreateParams(TypedDict, total=False):
     The specific implementation type of the runner This field is optional for
     backwards compatibility but will be required in the future. When specified, kind
     must not be specified (will be deduced from provider)
+    """
+
+    runner_manager_id: Annotated[str, PropertyInfo(alias="runnerManagerId")]
+    """
+    The runner manager id specifies the runner manager for the managed runner. This
+    field is mandatory for managed runners, otheriwse should not be set.
     """
 
     spec: RunnerSpecParam

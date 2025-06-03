@@ -10,6 +10,7 @@ from .secret import Secret as Secret
 from .shared import (
     Task as Task,
     RunsOn as RunsOn,
+    Gateway as Gateway,
     Subject as Subject,
     TaskSpec as TaskSpec,
     ErrorCode as ErrorCode,
@@ -32,6 +33,7 @@ from .log_level import LogLevel as LogLevel
 from .environment import Environment as Environment
 from .runner_kind import RunnerKind as RunnerKind
 from .runner_spec import RunnerSpec as RunnerSpec
+from .gateway_info import GatewayInfo as GatewayInfo
 from .organization import Organization as Organization
 from .runner_phase import RunnerPhase as RunnerPhase
 from .secret_scope import SecretScope as SecretScope
@@ -58,8 +60,8 @@ from .resource_operation import ResourceOperation as ResourceOperation
 from .runner_list_params import RunnerListParams as RunnerListParams
 from .secret_list_params import SecretListParams as SecretListParams
 from .secret_scope_param import SecretScopeParam as SecretScopeParam
-from .environment_session import EnvironmentSession as EnvironmentSession
 from .event_list_response import EventListResponse as EventListResponse
+from .gateway_list_params import GatewayListParams as GatewayListParams
 from .organization_member import OrganizationMember as OrganizationMember
 from .project_list_params import ProjectListParams as ProjectListParams
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
@@ -93,6 +95,7 @@ from .project_update_response import ProjectUpdateResponse as ProjectUpdateRespo
 from .secret_get_value_params import SecretGetValueParams as SecretGetValueParams
 from .editor_retrieve_response import EditorRetrieveResponse as EditorRetrieveResponse
 from .environment_start_params import EnvironmentStartParams as EnvironmentStartParams
+from .environment_usage_record import EnvironmentUsageRecord as EnvironmentUsageRecord
 from .organization_join_params import OrganizationJoinParams as OrganizationJoinParams
 from .runner_retrieve_response import RunnerRetrieveResponse as RunnerRetrieveResponse
 from .account_retrieve_response import AccountRetrieveResponse as AccountRetrieveResponse
@@ -116,6 +119,7 @@ from .environment_activity_signal import EnvironmentActivitySignal as Environmen
 from .environment_create_response import EnvironmentCreateResponse as EnvironmentCreateResponse
 from .environment_retrieve_params import EnvironmentRetrieveParams as EnvironmentRetrieveParams
 from .metrics_configuration_param import MetricsConfigurationParam as MetricsConfigurationParam
+from .environment_unarchive_params import EnvironmentUnarchiveParams as EnvironmentUnarchiveParams
 from .identity_get_id_token_params import IdentityGetIDTokenParams as IdentityGetIDTokenParams
 from .organization_create_response import OrganizationCreateResponse as OrganizationCreateResponse
 from .organization_retrieve_params import OrganizationRetrieveParams as OrganizationRetrieveParams
@@ -150,14 +154,14 @@ from .environment_create_logs_token_response import (
 from .project_create_from_environment_params import (
     ProjectCreateFromEnvironmentParams as ProjectCreateFromEnvironmentParams,
 )
-from .usage_list_environment_sessions_params import (
-    UsageListEnvironmentSessionsParams as UsageListEnvironmentSessionsParams,
-)
 from .environment_create_from_project_response import (
     EnvironmentCreateFromProjectResponse as EnvironmentCreateFromProjectResponse,
 )
 from .project_create_from_environment_response import (
     ProjectCreateFromEnvironmentResponse as ProjectCreateFromEnvironmentResponse,
+)
+from .account_list_joinable_organizations_params import (
+    AccountListJoinableOrganizationsParams as AccountListJoinableOrganizationsParams,
 )
 from .identity_get_authenticated_identity_params import (
     IdentityGetAuthenticatedIdentityParams as IdentityGetAuthenticatedIdentityParams,
@@ -168,6 +172,9 @@ from .environment_create_environment_token_params import (
 from .runner_check_authentication_for_host_params import (
     RunnerCheckAuthenticationForHostParams as RunnerCheckAuthenticationForHostParams,
 )
+from .account_list_joinable_organizations_response import (
+    AccountListJoinableOrganizationsResponse as AccountListJoinableOrganizationsResponse,
+)
 from .identity_get_authenticated_identity_response import (
     IdentityGetAuthenticatedIdentityResponse as IdentityGetAuthenticatedIdentityResponse,
 )
@@ -176,4 +183,7 @@ from .environment_create_environment_token_response import (
 )
 from .runner_check_authentication_for_host_response import (
     RunnerCheckAuthenticationForHostResponse as RunnerCheckAuthenticationForHostResponse,
+)
+from .usage_list_environment_runtime_records_params import (
+    UsageListEnvironmentRuntimeRecordsParams as UsageListEnvironmentRuntimeRecordsParams,
 )

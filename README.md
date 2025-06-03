@@ -146,7 +146,7 @@ from gitpod import Gitpod
 client = Gitpod()
 
 page = client.accounts.list_login_providers(
-    filter={"invite_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"},
+    filter={},
 )
 print(page.login_providers)
 ```

@@ -38,6 +38,7 @@ class TestRunners:
             kind="RUNNER_KIND_UNSPECIFIED",
             name="Production Runner",
             provider="RUNNER_PROVIDER_AWS_EC2",
+            runner_manager_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "configuration": {
                     "auto_update": True,
@@ -377,6 +378,7 @@ class TestAsyncRunners:
             kind="RUNNER_KIND_UNSPECIFIED",
             name="Production Runner",
             provider="RUNNER_PROVIDER_AWS_EC2",
+            runner_manager_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "configuration": {
                     "auto_update": True,

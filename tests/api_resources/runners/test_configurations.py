@@ -44,6 +44,7 @@ class TestConfigurations:
             scm_integration={
                 "id": "integration-id",
                 "host": "github.com",
+                "issuer_url": "issuerUrl",
                 "oauth_client_id": "client_id",
                 "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
                 "oauth_plaintext_client_secret": "client_secret",
@@ -106,6 +107,7 @@ class TestAsyncConfigurations:
             scm_integration={
                 "id": "integration-id",
                 "host": "github.com",
+                "issuer_url": "issuerUrl",
                 "oauth_client_id": "client_id",
                 "oauth_encrypted_client_secret": "U3RhaW5sZXNzIHJvY2tz",
                 "oauth_plaintext_client_secret": "client_secret",
