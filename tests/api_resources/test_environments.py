@@ -171,7 +171,7 @@ class TestEnvironments:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.update(
             environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
-            metadata={},
+            metadata={"name": "name"},
             spec={
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
@@ -794,7 +794,7 @@ class TestAsyncEnvironments:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.update(
             environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
-            metadata={},
+            metadata={"name": "name"},
             spec={
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
