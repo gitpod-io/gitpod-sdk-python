@@ -11,6 +11,7 @@ from .environment_initializer_param import EnvironmentInitializerParam
 
 __all__ = [
     "EnvironmentUpdateParams",
+    "Metadata",
     "Spec",
     "SpecAutomationsFile",
     "SpecContent",
@@ -28,9 +29,14 @@ class EnvironmentUpdateParams(TypedDict, total=False):
     +required
     """
 
-    metadata: Optional[object]
+    metadata: Optional[Metadata]
 
     spec: Optional[Spec]
+
+
+class Metadata(TypedDict, total=False):
+    name: Optional[str]
+    """name is the user-defined display name of the environment"""
 
 
 class SpecAutomationsFile(TypedDict, total=False):
