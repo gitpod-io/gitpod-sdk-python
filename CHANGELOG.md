@@ -1,5 +1,67 @@
 # Changelog
 
+## 0.3.0 (2025-06-06)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* **api:** manual updates ([640479a](https://github.com/gitpod-io/gitpod-sdk-python/commit/640479ad011cec5bc45b8036f92ec07008e48d76))
+* **api:** manual updates ([72320f5](https://github.com/gitpod-io/gitpod-sdk-python/commit/72320f5101905608aa1819520251813c28a498ab))
+* **api:** manual updates ([530d80c](https://github.com/gitpod-io/gitpod-sdk-python/commit/530d80c68524c0ff5adfdcc157fafdf44f69a2c8))
+* **api:** manual updates ([2717e93](https://github.com/gitpod-io/gitpod-sdk-python/commit/2717e930a0978b5c596d4486464e6faf5e3121b9))
+* **api:** manual updates ([416c2ef](https://github.com/gitpod-io/gitpod-sdk-python/commit/416c2ef62dd99f6b6690d9e1f311019244f2dc78))
+* **api:** manual updates ([#61](https://github.com/gitpod-io/gitpod-sdk-python/issues/61)) ([f8a2a44](https://github.com/gitpod-io/gitpod-sdk-python/commit/f8a2a44972841b5799dddf39cefb1e75a29e67be))
+* **api:** manual updates ([#64](https://github.com/gitpod-io/gitpod-sdk-python/issues/64)) ([f29b9ba](https://github.com/gitpod-io/gitpod-sdk-python/commit/f29b9ba65db6e3c1737c2d781e82ac3bcd457e3a))
+* **client:** allow passing `NotGiven` for body ([#63](https://github.com/gitpod-io/gitpod-sdk-python/issues/63)) ([a62be8a](https://github.com/gitpod-io/gitpod-sdk-python/commit/a62be8a6e5ce5af0aeaec008db7f0a214222515d))
+
+
+### Bug Fixes
+
+* **ci:** ensure pip is always available ([#75](https://github.com/gitpod-io/gitpod-sdk-python/issues/75)) ([2a3ae1d](https://github.com/gitpod-io/gitpod-sdk-python/commit/2a3ae1d9237518fbdc267f64dcca813ed6251192))
+* **ci:** remove publishing patch ([#76](https://github.com/gitpod-io/gitpod-sdk-python/issues/76)) ([fc6ffe9](https://github.com/gitpod-io/gitpod-sdk-python/commit/fc6ffe9aa684e00af4a44001a2617452df84f106))
+* **client:** mark some request bodies as optional ([a62be8a](https://github.com/gitpod-io/gitpod-sdk-python/commit/a62be8a6e5ce5af0aeaec008db7f0a214222515d))
+* **perf:** optimize some hot paths ([4a25116](https://github.com/gitpod-io/gitpod-sdk-python/commit/4a251160e74c27a9826fd9146ee630981423994f))
+* **perf:** skip traversing types for NotGiven values ([655645b](https://github.com/gitpod-io/gitpod-sdk-python/commit/655645b8376a92c4a15e985fdeb862a0837cdda2))
+* **pydantic v1:** more robust ModelField.annotation check ([6b28a69](https://github.com/gitpod-io/gitpod-sdk-python/commit/6b28a69cc3af92639a9e90f8c949ab55a16baeea))
+* **types:** handle more discriminated union shapes ([#74](https://github.com/gitpod-io/gitpod-sdk-python/issues/74)) ([e2efe2b](https://github.com/gitpod-io/gitpod-sdk-python/commit/e2efe2bf0a2547b937f8d459172c9b3fd172fd32))
+
+
+### Chores
+
+* broadly detect json family of content-type headers ([a4e4e7a](https://github.com/gitpod-io/gitpod-sdk-python/commit/a4e4e7a6c31a7109c129cd21ea86921c212af657))
+* **ci:** add timeout thresholds for CI jobs ([9112f34](https://github.com/gitpod-io/gitpod-sdk-python/commit/9112f34a032563f4805ff367ea46a7376560e4a3))
+* **ci:** only use depot for staging repos ([e00a169](https://github.com/gitpod-io/gitpod-sdk-python/commit/e00a1694e5677db460b8046c9b42b5916a737891))
+* **client:** minor internal fixes ([48341b1](https://github.com/gitpod-io/gitpod-sdk-python/commit/48341b1e44daa967e37e6a9b85429d8231177c81))
+* **docs:** update client docstring ([#68](https://github.com/gitpod-io/gitpod-sdk-python/issues/68)) ([65a92c5](https://github.com/gitpod-io/gitpod-sdk-python/commit/65a92c5c0cb39bf290d24567450a30eda21a7e5b))
+* fix typos ([#77](https://github.com/gitpod-io/gitpod-sdk-python/issues/77)) ([ad69954](https://github.com/gitpod-io/gitpod-sdk-python/commit/ad69954af16f51fb4f89a932d0bbc50501b40119))
+* **internal:** base client updates ([4615096](https://github.com/gitpod-io/gitpod-sdk-python/commit/4615096ade22d29d38d419d18a076ca020dc5563))
+* **internal:** bump pyright version ([9073aa6](https://github.com/gitpod-io/gitpod-sdk-python/commit/9073aa6de0e29f0fdf01e1463a4d513de695fcf3))
+* **internal:** bump rye to 0.44.0 ([#73](https://github.com/gitpod-io/gitpod-sdk-python/issues/73)) ([64be852](https://github.com/gitpod-io/gitpod-sdk-python/commit/64be85212587bec1388214453bd4d7f0ddff57a4))
+* **internal:** codegen related update ([0067daf](https://github.com/gitpod-io/gitpod-sdk-python/commit/0067daffa78169feae6f0c5b6c7d3c94e7fb0a9c))
+* **internal:** codegen related update ([#70](https://github.com/gitpod-io/gitpod-sdk-python/issues/70)) ([317e72c](https://github.com/gitpod-io/gitpod-sdk-python/commit/317e72c74e544cb15945bd610a2ddadebd76be1a))
+* **internal:** codegen related update ([#72](https://github.com/gitpod-io/gitpod-sdk-python/issues/72)) ([a8f27cc](https://github.com/gitpod-io/gitpod-sdk-python/commit/a8f27ccf962b45cc626331ee5ead0a0560235ee6))
+* **internal:** expand CI branch coverage ([c99fbf1](https://github.com/gitpod-io/gitpod-sdk-python/commit/c99fbf1293bfae482b24cfcdfdcff9508bea73f3))
+* **internal:** fix list file params ([4a852b4](https://github.com/gitpod-io/gitpod-sdk-python/commit/4a852b476184043f3508591751a6ccdadf0cc8e8))
+* **internal:** import reformatting ([702e260](https://github.com/gitpod-io/gitpod-sdk-python/commit/702e26060fcc0373063c0b1a873e7c53dbb11f8f))
+* **internal:** minor formatting changes ([759ff42](https://github.com/gitpod-io/gitpod-sdk-python/commit/759ff42ae1059b7697b94e5fa04dc861addd7439))
+* **internal:** properly set __pydantic_private__ ([#66](https://github.com/gitpod-io/gitpod-sdk-python/issues/66)) ([ce1db49](https://github.com/gitpod-io/gitpod-sdk-python/commit/ce1db49b85a64443a5a2143a5b00224d0e3192d1))
+* **internal:** reduce CI branch coverage ([f9fb625](https://github.com/gitpod-io/gitpod-sdk-python/commit/f9fb625d504b60d4374078e2be8320c2a9a3018a))
+* **internal:** refactor retries to not use recursion ([fba2a60](https://github.com/gitpod-io/gitpod-sdk-python/commit/fba2a601a842c7a7d1c211cbd8cc3dcdc5343492))
+* **internal:** remove extra empty newlines ([#71](https://github.com/gitpod-io/gitpod-sdk-python/issues/71)) ([5166c0c](https://github.com/gitpod-io/gitpod-sdk-python/commit/5166c0c48aaa8e59c90d1c23c1dd1bd3d93ba6d9))
+* **internal:** remove trailing character ([#78](https://github.com/gitpod-io/gitpod-sdk-python/issues/78)) ([140ac8b](https://github.com/gitpod-io/gitpod-sdk-python/commit/140ac8b28ddda23e63830cf6049d13498efd015d))
+* **internal:** remove unused http client options forwarding ([#69](https://github.com/gitpod-io/gitpod-sdk-python/issues/69)) ([69a6bde](https://github.com/gitpod-io/gitpod-sdk-python/commit/69a6bde0c2630357e6bcbb26d3848a1679e62bfe))
+* **internal:** slight transform perf improvement ([#80](https://github.com/gitpod-io/gitpod-sdk-python/issues/80)) ([62166e9](https://github.com/gitpod-io/gitpod-sdk-python/commit/62166e9543adfd3ab32fb403c9ab3a26b767f618))
+* **internal:** update models test ([55f3b64](https://github.com/gitpod-io/gitpod-sdk-python/commit/55f3b64a6d9a69cd0cf04b4c71b606ec96c99eab))
+* **internal:** update pyright settings ([d924d39](https://github.com/gitpod-io/gitpod-sdk-python/commit/d924d395581530e38250a0e1c906ce72939b9837))
+* **internal:** variable name and test updates ([#79](https://github.com/gitpod-io/gitpod-sdk-python/issues/79)) ([7de371c](https://github.com/gitpod-io/gitpod-sdk-python/commit/7de371cb2912224280342f8793b181feaed8129a))
+* **tests:** improve enum examples ([#81](https://github.com/gitpod-io/gitpod-sdk-python/issues/81)) ([7b5fc94](https://github.com/gitpod-io/gitpod-sdk-python/commit/7b5fc94fa15074885fde8cea674bd5ad0bbfb2a8))
+
+
+### Documentation
+
+* update URLs from stainlessapi.com to stainless.com ([#67](https://github.com/gitpod-io/gitpod-sdk-python/issues/67)) ([cfce519](https://github.com/gitpod-io/gitpod-sdk-python/commit/cfce51963c3e840969f7395d1fd448d3fe33871e))
+
 ## 0.2.1 (2025-02-18)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.2.0...v0.2.1)
