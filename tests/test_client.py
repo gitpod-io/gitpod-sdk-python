@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from gitpod import Gitpod, AsyncGitpod, APIResponseValidationError
 from gitpod._types import Omit
-from gitpod._utils import maybe_transform
 from gitpod._models import BaseModel, FinalRequestOptions
-from gitpod._constants import RAW_RESPONSE_HEADER
 from gitpod._exceptions import GitpodError, APIStatusError, APITimeoutError, APIResponseValidationError
 from gitpod._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from gitpod._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from gitpod.types.identity_get_authenticated_identity_params import IdentityGetAuthenticatedIdentityParams
 
 from .utils import update_env
 
@@ -743,34 +740,23 @@ class TestGitpod:
 
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Gitpod) -> None:
         respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(
             side_effect=httpx.TimeoutException("Test timeout error")
         )
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.identity.with_streaming_response.get_authenticated_identity().__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Gitpod) -> None:
         respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.identity.with_streaming_response.get_authenticated_identity().__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1592,34 +1578,23 @@ class TestAsyncGitpod:
 
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncGitpod) -> None:
         respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(
             side_effect=httpx.TimeoutException("Test timeout error")
         )
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.identity.with_streaming_response.get_authenticated_identity().__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("gitpod._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, async_client: AsyncGitpod) -> None:
         respx_mock.post("/gitpod.v1.IdentityService/GetAuthenticatedIdentity").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/gitpod.v1.IdentityService/GetAuthenticatedIdentity",
-                body=cast(object, maybe_transform({}, IdentityGetAuthenticatedIdentityParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.identity.with_streaming_response.get_authenticated_identity().__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
