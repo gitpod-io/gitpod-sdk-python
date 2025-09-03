@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
 from .runner_provider import RunnerProvider
@@ -24,7 +25,7 @@ class RunnerListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
+    creator_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="creatorIds")]
     """creator_ids filters the response to only runner created by specified users"""
 
     kinds: List[RunnerKind]

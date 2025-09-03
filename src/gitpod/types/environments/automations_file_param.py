@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, List
 from typing_extensions import Literal, Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared_params.runs_on import RunsOn
 
@@ -58,7 +59,7 @@ class Services(TypedDict, total=False):
 class Tasks(TypedDict, total=False):
     command: str
 
-    depends_on: Annotated[List[str], PropertyInfo(alias="dependsOn")]
+    depends_on: Annotated[SequenceNotStr[str], PropertyInfo(alias="dependsOn")]
 
     description: str
 

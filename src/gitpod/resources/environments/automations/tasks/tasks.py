@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
-
 import httpx
 
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ....._utils import maybe_transform, async_maybe_transform
 from .executions import (
     ExecutionsResource,
@@ -71,7 +69,7 @@ class TasksResource(SyncAPIResource):
     def create(
         self,
         *,
-        depends_on: List[str] | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         metadata: TaskMetadata | NotGiven = NOT_GIVEN,
         spec: TaskSpec | NotGiven = NOT_GIVEN,
@@ -203,7 +201,7 @@ class TasksResource(SyncAPIResource):
         self,
         *,
         id: str | NotGiven = NOT_GIVEN,
-        depends_on: List[str] | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
         spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -488,7 +486,7 @@ class AsyncTasksResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        depends_on: List[str] | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         environment_id: str | NotGiven = NOT_GIVEN,
         metadata: TaskMetadata | NotGiven = NOT_GIVEN,
         spec: TaskSpec | NotGiven = NOT_GIVEN,
@@ -620,7 +618,7 @@ class AsyncTasksResource(AsyncAPIResource):
         self,
         *,
         id: str | NotGiven = NOT_GIVEN,
-        depends_on: List[str] | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
         spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

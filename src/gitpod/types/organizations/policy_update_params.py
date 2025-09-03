@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Required, Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = ["PolicyUpdateParams"]
@@ -14,7 +15,7 @@ class PolicyUpdateParams(TypedDict, total=False):
     organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
     """organization_id is the ID of the organization to update policies for"""
 
-    allowed_editor_ids: Annotated[List[str], PropertyInfo(alias="allowedEditorIds")]
+    allowed_editor_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedEditorIds")]
     """
     allowed_editor_ids is the list of editor IDs that are allowed to be used in the
     organization

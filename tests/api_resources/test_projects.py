@@ -24,7 +24,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestProjects:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         project = client.projects.create(
@@ -33,7 +33,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
@@ -62,7 +62,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.create(
@@ -75,7 +75,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.create(
@@ -90,13 +90,13 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         project = client.projects.retrieve()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.retrieve(
@@ -104,7 +104,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.retrieve()
@@ -114,7 +114,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.retrieve() as response:
@@ -126,13 +126,13 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         project = client.projects.update()
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.update(
@@ -162,7 +162,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.update()
@@ -172,7 +172,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.update() as response:
@@ -184,13 +184,13 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         project = client.projects.list()
         assert_matches_type(SyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.list(
@@ -204,7 +204,7 @@ class TestProjects:
         )
         assert_matches_type(SyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.list()
@@ -214,7 +214,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(SyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.list() as response:
@@ -226,13 +226,13 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         project = client.projects.delete()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.delete(
@@ -240,7 +240,7 @@ class TestProjects:
         )
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.delete()
@@ -250,7 +250,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.delete() as response:
@@ -262,13 +262,13 @@ class TestProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_from_environment(self, client: Gitpod) -> None:
         project = client.projects.create_from_environment()
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create_from_environment_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create_from_environment(
@@ -277,7 +277,7 @@ class TestProjects:
         )
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create_from_environment(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.create_from_environment()
@@ -287,7 +287,7 @@ class TestProjects:
         project = response.parse()
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create_from_environment(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.create_from_environment() as response:
@@ -305,7 +305,7 @@ class TestAsyncProjects:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
@@ -314,7 +314,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
@@ -343,7 +343,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.create(
@@ -356,7 +356,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.create(
@@ -371,13 +371,13 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.retrieve()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.retrieve(
@@ -385,7 +385,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.retrieve()
@@ -395,7 +395,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectRetrieveResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.retrieve() as response:
@@ -407,13 +407,13 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.update()
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.update(
@@ -443,7 +443,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.update()
@@ -453,7 +453,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.update() as response:
@@ -465,13 +465,13 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.list()
         assert_matches_type(AsyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.list(
@@ -485,7 +485,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(AsyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.list()
@@ -495,7 +495,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(AsyncProjectsPage[Project], project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.list() as response:
@@ -507,13 +507,13 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.delete()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.delete(
@@ -521,7 +521,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.delete()
@@ -531,7 +531,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(object, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.delete() as response:
@@ -543,13 +543,13 @@ class TestAsyncProjects:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_from_environment(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create_from_environment()
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create_from_environment_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create_from_environment(
@@ -558,7 +558,7 @@ class TestAsyncProjects:
         )
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create_from_environment(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.create_from_environment()
@@ -568,7 +568,7 @@ class TestAsyncProjects:
         project = await response.parse()
         assert_matches_type(ProjectCreateFromEnvironmentResponse, project, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create_from_environment(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.create_from_environment() as response:

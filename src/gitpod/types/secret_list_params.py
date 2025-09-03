@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .secret_scope_param import SecretScopeParam
 
@@ -23,7 +23,7 @@ class SecretListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    project_ids: Annotated[List[str], PropertyInfo(alias="projectIds")]
+    project_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="projectIds")]
     """
     project_ids filters the response to only Secrets used by these Project IDs
     Deprecated: use scope instead. Values in project_ids will be ignored.
