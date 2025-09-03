@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["TaskListParams", "Filter", "Pagination"]
@@ -23,13 +23,13 @@ class TaskListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    environment_ids: Annotated[List[str], PropertyInfo(alias="environmentIds")]
+    environment_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="environmentIds")]
     """environment_ids filters the response to only tasks of these environments"""
 
-    references: List[str]
+    references: SequenceNotStr[str]
     """references filters the response to only services with these references"""
 
-    task_ids: Annotated[List[str], PropertyInfo(alias="taskIds")]
+    task_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="taskIds")]
     """task_ids filters the response to only tasks with these IDs"""
 
 

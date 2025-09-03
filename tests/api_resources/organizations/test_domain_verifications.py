@@ -23,7 +23,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDomainVerifications:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.create(
@@ -32,7 +32,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(DomainVerificationCreateResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.domain_verifications.with_raw_response.create(
@@ -45,7 +45,7 @@ class TestDomainVerifications:
         domain_verification = response.parse()
         assert_matches_type(DomainVerificationCreateResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.domain_verifications.with_streaming_response.create(
@@ -60,7 +60,7 @@ class TestDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.retrieve(
@@ -68,7 +68,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(DomainVerificationRetrieveResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.domain_verifications.with_raw_response.retrieve(
@@ -80,7 +80,7 @@ class TestDomainVerifications:
         domain_verification = response.parse()
         assert_matches_type(DomainVerificationRetrieveResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.domain_verifications.with_streaming_response.retrieve(
@@ -94,7 +94,7 @@ class TestDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.list(
@@ -102,7 +102,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(SyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.list(
@@ -116,7 +116,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(SyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.domain_verifications.with_raw_response.list(
@@ -128,7 +128,7 @@ class TestDomainVerifications:
         domain_verification = response.parse()
         assert_matches_type(SyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.domain_verifications.with_streaming_response.list(
@@ -142,7 +142,7 @@ class TestDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.delete(
@@ -150,7 +150,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(object, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.domain_verifications.with_raw_response.delete(
@@ -162,7 +162,7 @@ class TestDomainVerifications:
         domain_verification = response.parse()
         assert_matches_type(object, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.domain_verifications.with_streaming_response.delete(
@@ -176,7 +176,7 @@ class TestDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_method_verify(self, client: Gitpod) -> None:
         domain_verification = client.organizations.domain_verifications.verify(
@@ -184,7 +184,7 @@ class TestDomainVerifications:
         )
         assert_matches_type(DomainVerificationVerifyResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_raw_response_verify(self, client: Gitpod) -> None:
         response = client.organizations.domain_verifications.with_raw_response.verify(
@@ -196,7 +196,7 @@ class TestDomainVerifications:
         domain_verification = response.parse()
         assert_matches_type(DomainVerificationVerifyResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     def test_streaming_response_verify(self, client: Gitpod) -> None:
         with client.organizations.domain_verifications.with_streaming_response.verify(
@@ -216,7 +216,7 @@ class TestAsyncDomainVerifications:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.create(
@@ -225,7 +225,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(DomainVerificationCreateResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.domain_verifications.with_raw_response.create(
@@ -238,7 +238,7 @@ class TestAsyncDomainVerifications:
         domain_verification = await response.parse()
         assert_matches_type(DomainVerificationCreateResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.domain_verifications.with_streaming_response.create(
@@ -253,7 +253,7 @@ class TestAsyncDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.retrieve(
@@ -261,7 +261,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(DomainVerificationRetrieveResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.domain_verifications.with_raw_response.retrieve(
@@ -273,7 +273,7 @@ class TestAsyncDomainVerifications:
         domain_verification = await response.parse()
         assert_matches_type(DomainVerificationRetrieveResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.domain_verifications.with_streaming_response.retrieve(
@@ -287,7 +287,7 @@ class TestAsyncDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.list(
@@ -295,7 +295,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(AsyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.list(
@@ -309,7 +309,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(AsyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.domain_verifications.with_raw_response.list(
@@ -321,7 +321,7 @@ class TestAsyncDomainVerifications:
         domain_verification = await response.parse()
         assert_matches_type(AsyncDomainVerificationsPage[DomainVerification], domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.domain_verifications.with_streaming_response.list(
@@ -337,7 +337,7 @@ class TestAsyncDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.delete(
@@ -345,7 +345,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(object, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.domain_verifications.with_raw_response.delete(
@@ -357,7 +357,7 @@ class TestAsyncDomainVerifications:
         domain_verification = await response.parse()
         assert_matches_type(object, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.domain_verifications.with_streaming_response.delete(
@@ -371,7 +371,7 @@ class TestAsyncDomainVerifications:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_method_verify(self, async_client: AsyncGitpod) -> None:
         domain_verification = await async_client.organizations.domain_verifications.verify(
@@ -379,7 +379,7 @@ class TestAsyncDomainVerifications:
         )
         assert_matches_type(DomainVerificationVerifyResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_raw_response_verify(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.domain_verifications.with_raw_response.verify(
@@ -391,7 +391,7 @@ class TestAsyncDomainVerifications:
         domain_verification = await response.parse()
         assert_matches_type(DomainVerificationVerifyResponse, domain_verification, path=["response"])
 
-    @pytest.mark.skip()
+    @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
     async def test_streaming_response_verify(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.domain_verifications.with_streaming_response.verify(
