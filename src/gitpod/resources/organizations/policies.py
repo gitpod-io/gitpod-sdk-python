@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -97,7 +97,7 @@ class PoliciesResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
-        allowed_editor_ids: List[str] | NotGiven = NOT_GIVEN,
+        allowed_editor_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         allow_local_runners: Optional[bool] | NotGiven = NOT_GIVEN,
         default_editor_id: Optional[str] | NotGiven = NOT_GIVEN,
         default_environment_image: Optional[str] | NotGiven = NOT_GIVEN,
@@ -291,7 +291,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
-        allowed_editor_ids: List[str] | NotGiven = NOT_GIVEN,
+        allowed_editor_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
         allow_local_runners: Optional[bool] | NotGiven = NOT_GIVEN,
         default_editor_id: Optional[str] | NotGiven = NOT_GIVEN,
         default_environment_image: Optional[str] | NotGiven = NOT_GIVEN,

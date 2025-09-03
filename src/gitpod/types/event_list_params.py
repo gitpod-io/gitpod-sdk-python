@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .resource_type import ResourceType
 from .shared.principal import Principal
@@ -24,11 +25,11 @@ class EventListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    actor_ids: Annotated[List[str], PropertyInfo(alias="actorIds")]
+    actor_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="actorIds")]
 
     actor_principals: Annotated[List[Principal], PropertyInfo(alias="actorPrincipals")]
 
-    subject_ids: Annotated[List[str], PropertyInfo(alias="subjectIds")]
+    subject_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="subjectIds")]
 
     subject_types: Annotated[List[ResourceType], PropertyInfo(alias="subjectTypes")]
 

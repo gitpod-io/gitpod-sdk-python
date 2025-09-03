@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 
 __all__ = ["PatListParams", "Filter", "Pagination"]
@@ -21,7 +21,7 @@ class PatListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    user_ids: Annotated[List[str], PropertyInfo(alias="userIds")]
+    user_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="userIds")]
     """
     creator_ids filters the response to only Environments created by specified
     members

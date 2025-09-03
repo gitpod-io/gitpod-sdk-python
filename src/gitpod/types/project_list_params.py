@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["ProjectListParams", "Filter", "Pagination"]
@@ -22,7 +22,7 @@ class ProjectListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    project_ids: Annotated[List[str], PropertyInfo(alias="projectIds")]
+    project_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="projectIds")]
     """project_ids filters the response to only projects with these IDs"""
 
 

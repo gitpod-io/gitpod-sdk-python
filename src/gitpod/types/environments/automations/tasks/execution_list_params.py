@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from ....._types import SequenceNotStr
 from ....._utils import PropertyInfo
 from ....shared.task_execution_phase import TaskExecutionPhase
 
@@ -24,16 +25,16 @@ class ExecutionListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    environment_ids: Annotated[List[str], PropertyInfo(alias="environmentIds")]
+    environment_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="environmentIds")]
     """environment_ids filters the response to only task runs of these environments"""
 
     phases: List[TaskExecutionPhase]
     """phases filters the response to only task runs in these phases"""
 
-    task_ids: Annotated[List[str], PropertyInfo(alias="taskIds")]
+    task_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="taskIds")]
     """task_ids filters the response to only task runs of these tasks"""
 
-    task_references: Annotated[List[str], PropertyInfo(alias="taskReferences")]
+    task_references: Annotated[SequenceNotStr[str], PropertyInfo(alias="taskReferences")]
     """task_references filters the response to only task runs with this reference"""
 
 

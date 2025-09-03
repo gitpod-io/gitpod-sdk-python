@@ -5,7 +5,7 @@ description = "The official Python library for the gitpod API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Gitpod", email = "dev-feedback@gitpod.com" },
+{ name = "Gitpod", email = "dev-feedback@ona.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",
@@ -148,6 +148,7 @@ exclude = [
     "_dev",
     ".venv",
     ".nox",
+    ".git",
 ]
 
 reportImplicitOverride = true

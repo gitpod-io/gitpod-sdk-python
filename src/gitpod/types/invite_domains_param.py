@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["InviteDomainsParam"]
 
 
 class InviteDomainsParam(TypedDict, total=False):
-    domains: List[str]
+    domains: SequenceNotStr[str]
     """domains is the list of domains that are allowed to join the organization"""

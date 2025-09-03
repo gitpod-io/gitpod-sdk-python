@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["ScmIntegrationListParams", "Filter", "Pagination"]
@@ -22,7 +22,7 @@ class ScmIntegrationListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    runner_ids: Annotated[List[str], PropertyInfo(alias="runnerIds")]
+    runner_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="runnerIds")]
     """runner_ids filters the response to only SCM integrations of these Runner IDs"""
 
 

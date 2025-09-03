@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Literal, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
 from .environment_phase import EnvironmentPhase
@@ -37,19 +38,19 @@ class Filter(TypedDict, total=False):
     ]
     """archival_status filters the response based on environment archive status"""
 
-    creator_ids: Annotated[List[str], PropertyInfo(alias="creatorIds")]
+    creator_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="creatorIds")]
     """
     creator_ids filters the response to only Environments created by specified
     members
     """
 
-    project_ids: Annotated[List[str], PropertyInfo(alias="projectIds")]
+    project_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="projectIds")]
     """
     project_ids filters the response to only Environments associated with the
     specified projects
     """
 
-    runner_ids: Annotated[List[str], PropertyInfo(alias="runnerIds")]
+    runner_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="runnerIds")]
     """
     runner_ids filters the response to only Environments running on these Runner IDs
     """

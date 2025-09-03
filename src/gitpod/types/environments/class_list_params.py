@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..runner_kind import RunnerKind
 from ..runner_provider import RunnerProvider
@@ -38,7 +39,7 @@ class Filter(TypedDict, total=False):
     not set, all environment classes are returned.
     """
 
-    runner_ids: Annotated[List[str], PropertyInfo(alias="runnerIds")]
+    runner_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="runnerIds")]
     """runner_ids filters the response to only EnvironmentClasses of these Runner IDs"""
 
     runner_kinds: Annotated[List[RunnerKind], PropertyInfo(alias="runnerKinds")]
