@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -62,19 +62,19 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def create(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        host: str | NotGiven = NOT_GIVEN,
-        refresh_token: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        source: HostAuthenticationTokenSource | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        expires_at: Union[str, datetime] | Omit = omit,
+        host: str | Omit = omit,
+        refresh_token: str | Omit = omit,
+        runner_id: str | Omit = omit,
+        source: HostAuthenticationTokenSource | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> HostAuthenticationTokenCreateResponse:
         """
         Creates a new authentication token for accessing remote hosts.
@@ -222,13 +222,13 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> HostAuthenticationTokenRetrieveResponse:
         """
         Gets details about a specific host authentication token.
@@ -272,16 +272,16 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        token: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        refresh_token: Optional[str] | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        token: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
+        refresh_token: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an existing host authentication token.
@@ -423,16 +423,16 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: host_authentication_token_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: host_authentication_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: host_authentication_token_list_params.Filter | Omit = omit,
+        pagination: host_authentication_token_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncTokensPage[HostAuthenticationToken]:
         """
         Lists host authentication tokens with optional filtering.
@@ -504,13 +504,13 @@ class HostAuthenticationTokensResource(SyncAPIResource):
     def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a host authentication token.
@@ -575,19 +575,19 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        host: str | NotGiven = NOT_GIVEN,
-        refresh_token: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        source: HostAuthenticationTokenSource | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        expires_at: Union[str, datetime] | Omit = omit,
+        host: str | Omit = omit,
+        refresh_token: str | Omit = omit,
+        runner_id: str | Omit = omit,
+        source: HostAuthenticationTokenSource | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> HostAuthenticationTokenCreateResponse:
         """
         Creates a new authentication token for accessing remote hosts.
@@ -735,13 +735,13 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> HostAuthenticationTokenRetrieveResponse:
         """
         Gets details about a specific host authentication token.
@@ -785,16 +785,16 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        token: Optional[str] | NotGiven = NOT_GIVEN,
-        expires_at: Union[str, datetime, None] | NotGiven = NOT_GIVEN,
-        refresh_token: Optional[str] | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        token: Optional[str] | Omit = omit,
+        expires_at: Union[str, datetime, None] | Omit = omit,
+        refresh_token: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an existing host authentication token.
@@ -936,16 +936,16 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: host_authentication_token_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: host_authentication_token_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: host_authentication_token_list_params.Filter | Omit = omit,
+        pagination: host_authentication_token_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[HostAuthenticationToken, AsyncTokensPage[HostAuthenticationToken]]:
         """
         Lists host authentication tokens with optional filtering.
@@ -1017,13 +1017,13 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a host authentication token.

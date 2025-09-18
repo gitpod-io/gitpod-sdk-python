@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -52,7 +52,7 @@ class PoliciesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PolicyRetrieveResponse:
         """
         Gets organization policy settings by organization ID.
@@ -97,22 +97,22 @@ class PoliciesResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
-        allowed_editor_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        allow_local_runners: Optional[bool] | NotGiven = NOT_GIVEN,
-        default_editor_id: Optional[str] | NotGiven = NOT_GIVEN,
-        default_environment_image: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_environment_timeout: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_running_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
-        members_create_projects: Optional[bool] | NotGiven = NOT_GIVEN,
-        members_require_projects: Optional[bool] | NotGiven = NOT_GIVEN,
-        port_sharing_disabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        allowed_editor_ids: SequenceNotStr[str] | Omit = omit,
+        allow_local_runners: Optional[bool] | Omit = omit,
+        default_editor_id: Optional[str] | Omit = omit,
+        default_environment_image: Optional[str] | Omit = omit,
+        maximum_environments_per_user: Optional[str] | Omit = omit,
+        maximum_environment_timeout: Optional[str] | Omit = omit,
+        maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        members_create_projects: Optional[bool] | Omit = omit,
+        members_require_projects: Optional[bool] | Omit = omit,
+        port_sharing_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates organization policy settings.
@@ -244,7 +244,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PolicyRetrieveResponse:
         """
         Gets organization policy settings by organization ID.
@@ -291,22 +291,22 @@ class AsyncPoliciesResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
-        allowed_editor_ids: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        allow_local_runners: Optional[bool] | NotGiven = NOT_GIVEN,
-        default_editor_id: Optional[str] | NotGiven = NOT_GIVEN,
-        default_environment_image: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_environment_timeout: Optional[str] | NotGiven = NOT_GIVEN,
-        maximum_running_environments_per_user: Optional[str] | NotGiven = NOT_GIVEN,
-        members_create_projects: Optional[bool] | NotGiven = NOT_GIVEN,
-        members_require_projects: Optional[bool] | NotGiven = NOT_GIVEN,
-        port_sharing_disabled: Optional[bool] | NotGiven = NOT_GIVEN,
+        allowed_editor_ids: SequenceNotStr[str] | Omit = omit,
+        allow_local_runners: Optional[bool] | Omit = omit,
+        default_editor_id: Optional[str] | Omit = omit,
+        default_environment_image: Optional[str] | Omit = omit,
+        maximum_environments_per_user: Optional[str] | Omit = omit,
+        maximum_environment_timeout: Optional[str] | Omit = omit,
+        maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        members_create_projects: Optional[bool] | Omit = omit,
+        members_require_projects: Optional[bool] | Omit = omit,
+        port_sharing_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates organization policy settings.
