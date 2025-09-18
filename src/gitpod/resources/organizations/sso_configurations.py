@@ -6,7 +6,7 @@ from typing import Dict, Optional
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -67,7 +67,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SSOConfigurationCreateResponse:
         """
         Creates or updates SSO configuration for organizational authentication.
@@ -149,7 +149,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SSOConfigurationRetrieveResponse:
         """
         Retrieves a specific SSO configuration.
@@ -197,18 +197,18 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         sso_configuration_id: str,
-        claims: Dict[str, str] | NotGiven = NOT_GIVEN,
-        client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        email_domain: Optional[str] | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
+        claims: Dict[str, str] | Omit = omit,
+        client_id: Optional[str] | Omit = omit,
+        client_secret: Optional[str] | Omit = omit,
+        email_domain: Optional[str] | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        state: Optional[SSOConfigurationState] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates SSO provider settings and authentication rules.
@@ -287,15 +287,15 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: sso_configuration_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSSOConfigurationsPage[SSOConfiguration]:
         """
         Lists and filters SSO configurations for an organization.
@@ -377,7 +377,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Removes an SSO configuration from an organization.
@@ -453,7 +453,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SSOConfigurationCreateResponse:
         """
         Creates or updates SSO configuration for organizational authentication.
@@ -535,7 +535,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SSOConfigurationRetrieveResponse:
         """
         Retrieves a specific SSO configuration.
@@ -583,18 +583,18 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         sso_configuration_id: str,
-        claims: Dict[str, str] | NotGiven = NOT_GIVEN,
-        client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        email_domain: Optional[str] | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        state: Optional[SSOConfigurationState] | NotGiven = NOT_GIVEN,
+        claims: Dict[str, str] | Omit = omit,
+        client_id: Optional[str] | Omit = omit,
+        client_secret: Optional[str] | Omit = omit,
+        email_domain: Optional[str] | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        state: Optional[SSOConfigurationState] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates SSO provider settings and authentication rules.
@@ -673,15 +673,15 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: sso_configuration_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: sso_configuration_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[SSOConfiguration, AsyncSSOConfigurationsPage[SSOConfiguration]]:
         """
         Lists and filters SSO configurations for an organization.
@@ -763,7 +763,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Removes an SSO configuration from an organization.

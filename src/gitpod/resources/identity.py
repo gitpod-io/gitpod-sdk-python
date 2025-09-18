@@ -10,7 +10,7 @@ from ..types import (
     identity_exchange_token_params,
     identity_get_authenticated_identity_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from .._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -52,13 +52,13 @@ class IdentityResource(SyncAPIResource):
     def exchange_token(
         self,
         *,
-        exchange_token: str | NotGiven = NOT_GIVEN,
+        exchange_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityExchangeTokenResponse:
         """
         Exchanges an exchange token for a new access token.
@@ -104,13 +104,13 @@ class IdentityResource(SyncAPIResource):
     def get_authenticated_identity(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityGetAuthenticatedIdentityResponse:
         """
         Retrieves information about the currently authenticated identity.
@@ -155,14 +155,14 @@ class IdentityResource(SyncAPIResource):
     def get_id_token(
         self,
         *,
-        audience: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        version: IDTokenVersion | NotGiven = NOT_GIVEN,
+        audience: SequenceNotStr[str] | Omit = omit,
+        version: IDTokenVersion | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityGetIDTokenResponse:
         """
         Gets an ID token for authenticating with other services.
@@ -244,13 +244,13 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def exchange_token(
         self,
         *,
-        exchange_token: str | NotGiven = NOT_GIVEN,
+        exchange_token: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityExchangeTokenResponse:
         """
         Exchanges an exchange token for a new access token.
@@ -296,13 +296,13 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def get_authenticated_identity(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityGetAuthenticatedIdentityResponse:
         """
         Retrieves information about the currently authenticated identity.
@@ -347,14 +347,14 @@ class AsyncIdentityResource(AsyncAPIResource):
     async def get_id_token(
         self,
         *,
-        audience: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        version: IDTokenVersion | NotGiven = NOT_GIVEN,
+        audience: SequenceNotStr[str] | Omit = omit,
+        version: IDTokenVersion | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> IdentityGetIDTokenResponse:
         """
         Gets an ID token for authenticating with other services.

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ....._types import NOT_GIVEN, Body, Query, Headers, NotGiven, SequenceNotStr
+from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from .executions import (
     ExecutionsResource,
@@ -69,16 +69,16 @@ class TasksResource(SyncAPIResource):
     def create(
         self,
         *,
-        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: TaskMetadata | NotGiven = NOT_GIVEN,
-        spec: TaskSpec | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | Omit = omit,
+        environment_id: str | Omit = omit,
+        metadata: TaskMetadata | Omit = omit,
+        spec: TaskSpec | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskCreateResponse:
         """
         Creates a new automation task.
@@ -152,13 +152,13 @@ class TasksResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskRetrieveResponse:
         """
         Gets details about a specific automation task.
@@ -200,16 +200,16 @@ class TasksResource(SyncAPIResource):
     def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        depends_on: SequenceNotStr[str] | Omit = omit,
+        metadata: task_update_params.Metadata | Omit = omit,
+        spec: task_update_params.Spec | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an automation task configuration.
@@ -276,16 +276,16 @@ class TasksResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: task_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: task_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: task_list_params.Filter | Omit = omit,
+        pagination: task_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncTasksPage[Task]:
         """
         Lists automation tasks with optional filtering.
@@ -363,13 +363,13 @@ class TasksResource(SyncAPIResource):
     def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an automation task.
@@ -411,13 +411,13 @@ class TasksResource(SyncAPIResource):
     def start(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskStartResponse:
         """Starts a task by creating a new task execution.
 
@@ -486,16 +486,16 @@ class AsyncTasksResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: TaskMetadata | NotGiven = NOT_GIVEN,
-        spec: TaskSpec | NotGiven = NOT_GIVEN,
+        depends_on: SequenceNotStr[str] | Omit = omit,
+        environment_id: str | Omit = omit,
+        metadata: TaskMetadata | Omit = omit,
+        spec: TaskSpec | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskCreateResponse:
         """
         Creates a new automation task.
@@ -569,13 +569,13 @@ class AsyncTasksResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskRetrieveResponse:
         """
         Gets details about a specific automation task.
@@ -617,16 +617,16 @@ class AsyncTasksResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        depends_on: SequenceNotStr[str] | NotGiven = NOT_GIVEN,
-        metadata: task_update_params.Metadata | NotGiven = NOT_GIVEN,
-        spec: task_update_params.Spec | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        depends_on: SequenceNotStr[str] | Omit = omit,
+        metadata: task_update_params.Metadata | Omit = omit,
+        spec: task_update_params.Spec | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an automation task configuration.
@@ -693,16 +693,16 @@ class AsyncTasksResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: task_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: task_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: task_list_params.Filter | Omit = omit,
+        pagination: task_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Task, AsyncTasksPage[Task]]:
         """
         Lists automation tasks with optional filtering.
@@ -780,13 +780,13 @@ class AsyncTasksResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an automation task.
@@ -828,13 +828,13 @@ class AsyncTasksResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TaskStartResponse:
         """Starts a task by creating a new task execution.
 

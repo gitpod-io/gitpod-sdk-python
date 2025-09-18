@@ -24,7 +24,7 @@ from .invites import (
     InvitesResourceWithStreamingResponse,
     AsyncInvitesResourceWithStreamingResponse,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .policies import (
     PoliciesResource,
@@ -111,14 +111,14 @@ class OrganizationsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        invite_accounts_with_matching_domain: bool | NotGiven = NOT_GIVEN,
-        join_organization: bool | NotGiven = NOT_GIVEN,
+        invite_accounts_with_matching_domain: bool | Omit = omit,
+        join_organization: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationCreateResponse:
         """
         Creates a new organization with the specified name and settings.
@@ -193,7 +193,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationRetrieveResponse:
         """
         Gets details about a specific organization.
@@ -240,14 +240,14 @@ class OrganizationsResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
-        invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        invite_domains: Optional[InviteDomainsParam] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationUpdateResponse:
         """
         Updates an organization's settings including name, invite domains, and member
@@ -325,7 +325,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Permanently deletes an organization.
@@ -371,14 +371,14 @@ class OrganizationsResource(SyncAPIResource):
     def join(
         self,
         *,
-        invite_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        invite_id: str | Omit = omit,
+        organization_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationJoinResponse:
         """
         Allows users to join an organization through direct ID, invite link, or
@@ -445,7 +445,7 @@ class OrganizationsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Removes a user from an organization while preserving organization data.
@@ -491,15 +491,15 @@ class OrganizationsResource(SyncAPIResource):
         self,
         *,
         organization_id: str,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: organization_list_members_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncMembersPage[OrganizationMember]:
         """
         Lists and filters organization members with optional pagination.
@@ -578,13 +578,13 @@ class OrganizationsResource(SyncAPIResource):
         *,
         organization_id: str,
         user_id: str,
-        role: OrganizationRole | NotGiven = NOT_GIVEN,
+        role: OrganizationRole | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Manages organization membership and roles by setting a user's role within the
@@ -684,14 +684,14 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        invite_accounts_with_matching_domain: bool | NotGiven = NOT_GIVEN,
-        join_organization: bool | NotGiven = NOT_GIVEN,
+        invite_accounts_with_matching_domain: bool | Omit = omit,
+        join_organization: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationCreateResponse:
         """
         Creates a new organization with the specified name and settings.
@@ -766,7 +766,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationRetrieveResponse:
         """
         Gets details about a specific organization.
@@ -813,14 +813,14 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
-        invite_domains: Optional[InviteDomainsParam] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
+        invite_domains: Optional[InviteDomainsParam] | Omit = omit,
+        name: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationUpdateResponse:
         """
         Updates an organization's settings including name, invite domains, and member
@@ -898,7 +898,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Permanently deletes an organization.
@@ -944,14 +944,14 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     async def join(
         self,
         *,
-        invite_id: str | NotGiven = NOT_GIVEN,
-        organization_id: str | NotGiven = NOT_GIVEN,
+        invite_id: str | Omit = omit,
+        organization_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrganizationJoinResponse:
         """
         Allows users to join an organization through direct ID, invite link, or
@@ -1018,7 +1018,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Removes a user from an organization while preserving organization data.
@@ -1064,15 +1064,15 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         self,
         *,
         organization_id: str,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: organization_list_members_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: organization_list_members_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[OrganizationMember, AsyncMembersPage[OrganizationMember]]:
         """
         Lists and filters organization members with optional pagination.
@@ -1151,13 +1151,13 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         *,
         organization_id: str,
         user_id: str,
-        role: OrganizationRole | NotGiven = NOT_GIVEN,
+        role: OrganizationRole | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Manages organization membership and roles by setting a user's role within the

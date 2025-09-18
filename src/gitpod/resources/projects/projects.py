@@ -14,7 +14,7 @@ from ...types import (
     project_retrieve_params,
     project_create_from_environment_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .policies import (
     PoliciesResource,
@@ -74,16 +74,16 @@ class ProjectsResource(SyncAPIResource):
         *,
         environment_class: ProjectEnvironmentClassParam,
         initializer: EnvironmentInitializerParam,
-        automations_file_path: str | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        technical_description: str | NotGiven = NOT_GIVEN,
+        automations_file_path: str | Omit = omit,
+        devcontainer_file_path: str | Omit = omit,
+        name: str | Omit = omit,
+        technical_description: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectCreateResponse:
         """
         Creates a new project with specified configuration.
@@ -177,13 +177,13 @@ class ProjectsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveResponse:
         """
         Gets details about a specific project.
@@ -227,19 +227,19 @@ class ProjectsResource(SyncAPIResource):
     def update(
         self,
         *,
-        automations_file_path: Optional[str] | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: Optional[str] | NotGiven = NOT_GIVEN,
-        environment_class: Optional[ProjectEnvironmentClassParam] | NotGiven = NOT_GIVEN,
-        initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        technical_description: Optional[str] | NotGiven = NOT_GIVEN,
+        automations_file_path: Optional[str] | Omit = omit,
+        devcontainer_file_path: Optional[str] | Omit = omit,
+        environment_class: Optional[ProjectEnvironmentClassParam] | Omit = omit,
+        initializer: Optional[EnvironmentInitializerParam] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        project_id: str | Omit = omit,
+        technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectUpdateResponse:
         """
         Updates a project's configuration.
@@ -325,16 +325,16 @@ class ProjectsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: project_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: project_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: project_list_params.Filter | Omit = omit,
+        pagination: project_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncProjectsPage[Project]:
         """
         Lists projects with optional filtering.
@@ -397,13 +397,13 @@ class ProjectsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a project permanently.
@@ -447,14 +447,14 @@ class ProjectsResource(SyncAPIResource):
     def create_from_environment(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectCreateFromEnvironmentResponse:
         """
         Creates a new project using an existing environment as a template.
@@ -532,16 +532,16 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         environment_class: ProjectEnvironmentClassParam,
         initializer: EnvironmentInitializerParam,
-        automations_file_path: str | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        technical_description: str | NotGiven = NOT_GIVEN,
+        automations_file_path: str | Omit = omit,
+        devcontainer_file_path: str | Omit = omit,
+        name: str | Omit = omit,
+        technical_description: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectCreateResponse:
         """
         Creates a new project with specified configuration.
@@ -635,13 +635,13 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectRetrieveResponse:
         """
         Gets details about a specific project.
@@ -685,19 +685,19 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        automations_file_path: Optional[str] | NotGiven = NOT_GIVEN,
-        devcontainer_file_path: Optional[str] | NotGiven = NOT_GIVEN,
-        environment_class: Optional[ProjectEnvironmentClassParam] | NotGiven = NOT_GIVEN,
-        initializer: Optional[EnvironmentInitializerParam] | NotGiven = NOT_GIVEN,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        technical_description: Optional[str] | NotGiven = NOT_GIVEN,
+        automations_file_path: Optional[str] | Omit = omit,
+        devcontainer_file_path: Optional[str] | Omit = omit,
+        environment_class: Optional[ProjectEnvironmentClassParam] | Omit = omit,
+        initializer: Optional[EnvironmentInitializerParam] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        project_id: str | Omit = omit,
+        technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectUpdateResponse:
         """
         Updates a project's configuration.
@@ -783,16 +783,16 @@ class AsyncProjectsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: project_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: project_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: project_list_params.Filter | Omit = omit,
+        pagination: project_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Project, AsyncProjectsPage[Project]]:
         """
         Lists projects with optional filtering.
@@ -855,13 +855,13 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a project permanently.
@@ -905,14 +905,14 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create_from_environment(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ProjectCreateFromEnvironmentResponse:
         """
         Creates a new project using an existing environment as a template.

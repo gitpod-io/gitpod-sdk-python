@@ -11,7 +11,7 @@ from ..types import (
     secret_get_value_params,
     secret_update_value_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -54,19 +54,19 @@ class SecretsResource(SyncAPIResource):
     def create(
         self,
         *,
-        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        scope: SecretScopeParam | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        container_registry_basic_auth_host: str | Omit = omit,
+        environment_variable: bool | Omit = omit,
+        file_path: str | Omit = omit,
+        name: str | Omit = omit,
+        project_id: str | Omit = omit,
+        scope: SecretScopeParam | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretCreateResponse:
         """
         Creates a new secret for a project.
@@ -164,16 +164,16 @@ class SecretsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: secret_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: secret_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: secret_list_params.Filter | Omit = omit,
+        pagination: secret_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncSecretsPage[Secret]:
         """
         Lists secrets
@@ -250,13 +250,13 @@ class SecretsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a secret permanently.
@@ -297,13 +297,13 @@ class SecretsResource(SyncAPIResource):
     def get_value(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretGetValueResponse:
         """Gets the value of a secret.
 
@@ -346,14 +346,14 @@ class SecretsResource(SyncAPIResource):
     def update_value(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates the value of an existing secret.
@@ -424,19 +424,19 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        container_registry_basic_auth_host: str | NotGiven = NOT_GIVEN,
-        environment_variable: bool | NotGiven = NOT_GIVEN,
-        file_path: str | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        project_id: str | NotGiven = NOT_GIVEN,
-        scope: SecretScopeParam | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        container_registry_basic_auth_host: str | Omit = omit,
+        environment_variable: bool | Omit = omit,
+        file_path: str | Omit = omit,
+        name: str | Omit = omit,
+        project_id: str | Omit = omit,
+        scope: SecretScopeParam | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretCreateResponse:
         """
         Creates a new secret for a project.
@@ -534,16 +534,16 @@ class AsyncSecretsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: secret_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: secret_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: secret_list_params.Filter | Omit = omit,
+        pagination: secret_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Secret, AsyncSecretsPage[Secret]]:
         """
         Lists secrets
@@ -620,13 +620,13 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a secret permanently.
@@ -667,13 +667,13 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def get_value(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SecretGetValueResponse:
         """Gets the value of a secret.
 
@@ -716,14 +716,14 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def update_value(
         self,
         *,
-        secret_id: str | NotGiven = NOT_GIVEN,
-        value: str | NotGiven = NOT_GIVEN,
+        secret_id: str | Omit = omit,
+        value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates the value of an existing secret.

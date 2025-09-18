@@ -13,7 +13,7 @@ from ..types import (
     account_list_login_providers_params,
     account_list_joinable_organizations_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -56,13 +56,13 @@ class AccountsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountRetrieveResponse:
         """
         Gets information about the currently authenticated account.
@@ -111,7 +111,7 @@ class AccountsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an account permanently.
@@ -156,13 +156,13 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         email: str,
-        return_to: Optional[str] | NotGiven = NOT_GIVEN,
+        return_to: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetSSOLoginURLResponse:
         """
         Gets the SSO login URL for a specific email domain.
@@ -223,15 +223,15 @@ class AccountsResource(SyncAPIResource):
     def list_joinable_organizations(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        empty: bool | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountListJoinableOrganizationsResponse:
         """
         Lists organizations that the currently authenticated account can join.
@@ -285,16 +285,16 @@ class AccountsResource(SyncAPIResource):
     def list_login_providers(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: account_list_login_providers_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: account_list_login_providers_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: account_list_login_providers_params.Filter | Omit = omit,
+        pagination: account_list_login_providers_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncLoginProvidersPage[LoginProvider]:
         """
         Lists available login providers with optional filtering.
@@ -391,13 +391,13 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountRetrieveResponse:
         """
         Gets information about the currently authenticated account.
@@ -446,7 +446,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an account permanently.
@@ -491,13 +491,13 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         email: str,
-        return_to: Optional[str] | NotGiven = NOT_GIVEN,
+        return_to: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetSSOLoginURLResponse:
         """
         Gets the SSO login URL for a specific email domain.
@@ -558,15 +558,15 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def list_joinable_organizations(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        empty: bool | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountListJoinableOrganizationsResponse:
         """
         Lists organizations that the currently authenticated account can join.
@@ -620,16 +620,16 @@ class AsyncAccountsResource(AsyncAPIResource):
     def list_login_providers(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: account_list_login_providers_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: account_list_login_providers_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: account_list_login_providers_params.Filter | Omit = omit,
+        pagination: account_list_login_providers_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[LoginProvider, AsyncLoginProvidersPage[LoginProvider]]:
         """
         Lists available login providers with optional filtering.
