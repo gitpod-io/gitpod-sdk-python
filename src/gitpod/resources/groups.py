@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ..types import group_list_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -45,15 +45,15 @@ class GroupsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: group_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: group_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncGroupsPage[Group]:
         """
         Lists groups with optional pagination.
@@ -142,15 +142,15 @@ class AsyncGroupsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        pagination: group_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: group_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Group, AsyncGroupsPage[Group]]:
         """
         Lists groups with optional pagination.

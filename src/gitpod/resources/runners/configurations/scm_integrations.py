@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -55,19 +55,19 @@ class ScmIntegrationsResource(SyncAPIResource):
     def create(
         self,
         *,
-        host: str | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        pat: bool | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        scm_id: str | NotGiven = NOT_GIVEN,
+        host: str | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        oauth_client_id: Optional[str] | Omit = omit,
+        oauth_plaintext_client_secret: Optional[str] | Omit = omit,
+        pat: bool | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScmIntegrationCreateResponse:
         """
         Creates a new SCM integration for a runner.
@@ -136,13 +136,13 @@ class ScmIntegrationsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScmIntegrationRetrieveResponse:
         """
         Gets details about a specific SCM integration.
@@ -184,17 +184,17 @@ class ScmIntegrationsResource(SyncAPIResource):
     def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        pat: Optional[bool] | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        oauth_client_id: Optional[str] | Omit = omit,
+        oauth_plaintext_client_secret: Optional[str] | Omit = omit,
+        pat: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an existing SCM integration.
@@ -267,16 +267,16 @@ class ScmIntegrationsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: scm_integration_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: scm_integration_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: scm_integration_list_params.Filter | Omit = omit,
+        pagination: scm_integration_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncIntegrationsPage[ScmIntegration]:
         """
         Lists SCM integrations for a runner.
@@ -341,13 +341,13 @@ class ScmIntegrationsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an SCM integration.
@@ -410,19 +410,19 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        host: str | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        pat: bool | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        scm_id: str | NotGiven = NOT_GIVEN,
+        host: str | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        oauth_client_id: Optional[str] | Omit = omit,
+        oauth_plaintext_client_secret: Optional[str] | Omit = omit,
+        pat: bool | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScmIntegrationCreateResponse:
         """
         Creates a new SCM integration for a runner.
@@ -491,13 +491,13 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScmIntegrationRetrieveResponse:
         """
         Gets details about a specific SCM integration.
@@ -539,17 +539,17 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
-        issuer_url: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_client_id: Optional[str] | NotGiven = NOT_GIVEN,
-        oauth_plaintext_client_secret: Optional[str] | NotGiven = NOT_GIVEN,
-        pat: Optional[bool] | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
+        issuer_url: Optional[str] | Omit = omit,
+        oauth_client_id: Optional[str] | Omit = omit,
+        oauth_plaintext_client_secret: Optional[str] | Omit = omit,
+        pat: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an existing SCM integration.
@@ -622,16 +622,16 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: scm_integration_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: scm_integration_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: scm_integration_list_params.Filter | Omit = omit,
+        pagination: scm_integration_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[ScmIntegration, AsyncIntegrationsPage[ScmIntegration]]:
         """
         Lists SCM integrations for a runner.
@@ -696,13 +696,13 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        id: str | NotGiven = NOT_GIVEN,
+        id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes an SCM integration.

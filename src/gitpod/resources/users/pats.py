@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -46,16 +46,16 @@ class PatsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: pat_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: pat_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: pat_list_params.Filter | Omit = omit,
+        pagination: pat_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncPersonalAccessTokensPage[PersonalAccessToken]:
         """
         Lists personal access tokens with optional filtering.
@@ -118,13 +118,13 @@ class PatsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        personal_access_token_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a personal access token.
@@ -168,13 +168,13 @@ class PatsResource(SyncAPIResource):
     def get(
         self,
         *,
-        personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        personal_access_token_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PatGetResponse:
         """
         Gets details about a specific personal access token.
@@ -237,16 +237,16 @@ class AsyncPatsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: pat_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: pat_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: pat_list_params.Filter | Omit = omit,
+        pagination: pat_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[PersonalAccessToken, AsyncPersonalAccessTokensPage[PersonalAccessToken]]:
         """
         Lists personal access tokens with optional filtering.
@@ -309,13 +309,13 @@ class AsyncPatsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        personal_access_token_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a personal access token.
@@ -359,13 +359,13 @@ class AsyncPatsResource(AsyncAPIResource):
     async def get(
         self,
         *,
-        personal_access_token_id: str | NotGiven = NOT_GIVEN,
+        personal_access_token_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PatGetResponse:
         """
         Gets details about a specific personal access token.

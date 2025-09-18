@@ -6,7 +6,7 @@ from typing import Iterable, Optional
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -55,16 +55,16 @@ class EnvironmentClassesResource(SyncAPIResource):
     def create(
         self,
         *,
-        configuration: Iterable[FieldValue] | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        display_name: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        configuration: Iterable[FieldValue] | Omit = omit,
+        description: str | Omit = omit,
+        display_name: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentClassCreateResponse:
         """
         Creates a new environment class for a runner.
@@ -121,13 +121,13 @@ class EnvironmentClassesResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        environment_class_id: str | NotGiven = NOT_GIVEN,
+        environment_class_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentClassRetrieveResponse:
         """
         Gets details about a specific environment class.
@@ -172,16 +172,16 @@ class EnvironmentClassesResource(SyncAPIResource):
     def update(
         self,
         *,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        display_name: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        environment_class_id: str | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        display_name: Optional[str] | Omit = omit,
+        enabled: Optional[bool] | Omit = omit,
+        environment_class_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an environment class.
@@ -234,16 +234,16 @@ class EnvironmentClassesResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: environment_class_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: environment_class_list_params.Filter | Omit = omit,
+        pagination: environment_class_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncEnvironmentClassesPage[EnvironmentClass]:
         """
         Lists environment classes with optional filtering.
@@ -340,16 +340,16 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        configuration: Iterable[FieldValue] | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        display_name: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        configuration: Iterable[FieldValue] | Omit = omit,
+        description: str | Omit = omit,
+        display_name: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentClassCreateResponse:
         """
         Creates a new environment class for a runner.
@@ -406,13 +406,13 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        environment_class_id: str | NotGiven = NOT_GIVEN,
+        environment_class_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentClassRetrieveResponse:
         """
         Gets details about a specific environment class.
@@ -457,16 +457,16 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        description: Optional[str] | NotGiven = NOT_GIVEN,
-        display_name: Optional[str] | NotGiven = NOT_GIVEN,
-        enabled: Optional[bool] | NotGiven = NOT_GIVEN,
-        environment_class_id: str | NotGiven = NOT_GIVEN,
+        description: Optional[str] | Omit = omit,
+        display_name: Optional[str] | Omit = omit,
+        enabled: Optional[bool] | Omit = omit,
+        environment_class_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an environment class.
@@ -519,16 +519,16 @@ class AsyncEnvironmentClassesResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: environment_class_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: environment_class_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: environment_class_list_params.Filter | Omit = omit,
+        pagination: environment_class_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[EnvironmentClass, AsyncEnvironmentClassesPage[EnvironmentClass]]:
         """
         Lists environment classes with optional filtering.

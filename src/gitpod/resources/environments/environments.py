@@ -28,7 +28,7 @@ from .classes import (
     ClassesResourceWithStreamingResponse,
     AsyncClassesResourceWithStreamingResponse,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -91,13 +91,13 @@ class EnvironmentsResource(SyncAPIResource):
     def create(
         self,
         *,
-        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateResponse:
         """Creates a development environment from a context URL (e.g.
 
@@ -193,7 +193,7 @@ class EnvironmentsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentRetrieveResponse:
         """
         Gets details about a specific environment including its status, configuration,
@@ -242,15 +242,15 @@ class EnvironmentsResource(SyncAPIResource):
     def update(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: Optional[environment_update_params.Metadata] | NotGiven = NOT_GIVEN,
-        spec: Optional[environment_update_params.Spec] | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        metadata: Optional[environment_update_params.Metadata] | Omit = omit,
+        spec: Optional[environment_update_params.Spec] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an environment's configuration while it is running.
@@ -336,16 +336,16 @@ class EnvironmentsResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: environment_list_params.Filter | Omit = omit,
+        pagination: environment_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncEnvironmentsPage[Environment]:
         """
         Lists all environments matching the specified criteria.
@@ -427,14 +427,14 @@ class EnvironmentsResource(SyncAPIResource):
     def delete(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        force: bool | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        force: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Permanently deletes an environment.
@@ -504,7 +504,7 @@ class EnvironmentsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateEnvironmentTokenResponse:
         """
         Creates an access token for the environment.
@@ -549,14 +549,14 @@ class EnvironmentsResource(SyncAPIResource):
     def create_from_project(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
-        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
+        spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateFromProjectResponse:
         """
         Creates an environment from an existing project configuration and starts it.
@@ -621,13 +621,13 @@ class EnvironmentsResource(SyncAPIResource):
     def create_logs_token(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateLogsTokenResponse:
         """
         Creates an access token for retrieving environment logs.
@@ -674,14 +674,14 @@ class EnvironmentsResource(SyncAPIResource):
     def mark_active(
         self,
         *,
-        activity_signal: EnvironmentActivitySignalParam | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        activity_signal: EnvironmentActivitySignalParam | Omit = omit,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Records environment activity to prevent automatic shutdown.
@@ -733,13 +733,13 @@ class EnvironmentsResource(SyncAPIResource):
     def start(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Starts a stopped environment.
@@ -781,13 +781,13 @@ class EnvironmentsResource(SyncAPIResource):
     def stop(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Stops a running environment.
@@ -830,13 +830,13 @@ class EnvironmentsResource(SyncAPIResource):
     def unarchive(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Unarchives an environment.
@@ -905,13 +905,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
+        spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateResponse:
         """Creates a development environment from a context URL (e.g.
 
@@ -1007,7 +1007,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentRetrieveResponse:
         """
         Gets details about a specific environment including its status, configuration,
@@ -1056,15 +1056,15 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        metadata: Optional[environment_update_params.Metadata] | NotGiven = NOT_GIVEN,
-        spec: Optional[environment_update_params.Spec] | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        metadata: Optional[environment_update_params.Metadata] | Omit = omit,
+        spec: Optional[environment_update_params.Spec] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates an environment's configuration while it is running.
@@ -1150,16 +1150,16 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: environment_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: environment_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: environment_list_params.Filter | Omit = omit,
+        pagination: environment_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Environment, AsyncEnvironmentsPage[Environment]]:
         """
         Lists all environments matching the specified criteria.
@@ -1241,14 +1241,14 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
-        force: bool | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
+        force: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Permanently deletes an environment.
@@ -1318,7 +1318,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateEnvironmentTokenResponse:
         """
         Creates an access token for the environment.
@@ -1363,14 +1363,14 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create_from_project(
         self,
         *,
-        project_id: str | NotGiven = NOT_GIVEN,
-        spec: EnvironmentSpecParam | NotGiven = NOT_GIVEN,
+        project_id: str | Omit = omit,
+        spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateFromProjectResponse:
         """
         Creates an environment from an existing project configuration and starts it.
@@ -1435,13 +1435,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create_logs_token(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EnvironmentCreateLogsTokenResponse:
         """
         Creates an access token for retrieving environment logs.
@@ -1488,14 +1488,14 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def mark_active(
         self,
         *,
-        activity_signal: EnvironmentActivitySignalParam | NotGiven = NOT_GIVEN,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        activity_signal: EnvironmentActivitySignalParam | Omit = omit,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Records environment activity to prevent automatic shutdown.
@@ -1547,13 +1547,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Starts a stopped environment.
@@ -1597,13 +1597,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def stop(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Stops a running environment.
@@ -1648,13 +1648,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def unarchive(
         self,
         *,
-        environment_id: str | NotGiven = NOT_GIVEN,
+        environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Unarchives an environment.

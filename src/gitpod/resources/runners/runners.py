@@ -18,7 +18,7 @@ from ...types import (
     runner_create_runner_token_params,
     runner_check_authentication_for_host_params,
 )
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .policies import (
     PoliciesResource,
@@ -90,17 +90,17 @@ class RunnersResource(SyncAPIResource):
     def create(
         self,
         *,
-        kind: RunnerKind | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        provider: RunnerProvider | NotGiven = NOT_GIVEN,
-        runner_manager_id: str | NotGiven = NOT_GIVEN,
-        spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
+        kind: RunnerKind | Omit = omit,
+        name: str | Omit = omit,
+        provider: RunnerProvider | Omit = omit,
+        runner_manager_id: str | Omit = omit,
+        spec: RunnerSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCreateResponse:
         """Creates a new runner registration with the server.
 
@@ -188,13 +188,13 @@ class RunnersResource(SyncAPIResource):
     def retrieve(
         self,
         *,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerRetrieveResponse:
         """
         Gets details about a specific runner.
@@ -237,15 +237,15 @@ class RunnersResource(SyncAPIResource):
     def update(
         self,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        spec: Optional[runner_update_params.Spec] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        runner_id: str | Omit = omit,
+        spec: Optional[runner_update_params.Spec] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates a runner's configuration.
@@ -306,16 +306,16 @@ class RunnersResource(SyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: runner_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: runner_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: runner_list_params.Filter | Omit = omit,
+        pagination: runner_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncRunnersPage[Runner]:
         """
         Lists all registered runners with optional filtering.
@@ -390,14 +390,14 @@ class RunnersResource(SyncAPIResource):
     def delete(
         self,
         *,
-        force: bool | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        force: bool | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a runner permanently.
@@ -450,14 +450,14 @@ class RunnersResource(SyncAPIResource):
     def check_authentication_for_host(
         self,
         *,
-        host: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        host: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         Checks if a user is authenticated for a specific host.
@@ -505,13 +505,13 @@ class RunnersResource(SyncAPIResource):
     def create_runner_token(
         self,
         *,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCreateRunnerTokenResponse:
         """
         Creates a new authentication token for a runner.
@@ -557,14 +557,14 @@ class RunnersResource(SyncAPIResource):
     def parse_context_url(
         self,
         *,
-        context_url: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        context_url: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerParseContextURLResponse:
         """
         Parses a context URL and returns the parsed result.
@@ -648,17 +648,17 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        kind: RunnerKind | NotGiven = NOT_GIVEN,
-        name: str | NotGiven = NOT_GIVEN,
-        provider: RunnerProvider | NotGiven = NOT_GIVEN,
-        runner_manager_id: str | NotGiven = NOT_GIVEN,
-        spec: RunnerSpecParam | NotGiven = NOT_GIVEN,
+        kind: RunnerKind | Omit = omit,
+        name: str | Omit = omit,
+        provider: RunnerProvider | Omit = omit,
+        runner_manager_id: str | Omit = omit,
+        spec: RunnerSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCreateResponse:
         """Creates a new runner registration with the server.
 
@@ -746,13 +746,13 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerRetrieveResponse:
         """
         Gets details about a specific runner.
@@ -795,15 +795,15 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def update(
         self,
         *,
-        name: Optional[str] | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
-        spec: Optional[runner_update_params.Spec] | NotGiven = NOT_GIVEN,
+        name: Optional[str] | Omit = omit,
+        runner_id: str | Omit = omit,
+        spec: Optional[runner_update_params.Spec] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Updates a runner's configuration.
@@ -864,16 +864,16 @@ class AsyncRunnersResource(AsyncAPIResource):
     def list(
         self,
         *,
-        token: str | NotGiven = NOT_GIVEN,
-        page_size: int | NotGiven = NOT_GIVEN,
-        filter: runner_list_params.Filter | NotGiven = NOT_GIVEN,
-        pagination: runner_list_params.Pagination | NotGiven = NOT_GIVEN,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: runner_list_params.Filter | Omit = omit,
+        pagination: runner_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Runner, AsyncRunnersPage[Runner]]:
         """
         Lists all registered runners with optional filtering.
@@ -948,14 +948,14 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def delete(
         self,
         *,
-        force: bool | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        force: bool | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Deletes a runner permanently.
@@ -1008,14 +1008,14 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def check_authentication_for_host(
         self,
         *,
-        host: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        host: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCheckAuthenticationForHostResponse:
         """
         Checks if a user is authenticated for a specific host.
@@ -1063,13 +1063,13 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def create_runner_token(
         self,
         *,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerCreateRunnerTokenResponse:
         """
         Creates a new authentication token for a runner.
@@ -1115,14 +1115,14 @@ class AsyncRunnersResource(AsyncAPIResource):
     async def parse_context_url(
         self,
         *,
-        context_url: str | NotGiven = NOT_GIVEN,
-        runner_id: str | NotGiven = NOT_GIVEN,
+        context_url: str | Omit = omit,
+        runner_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunnerParseContextURLResponse:
         """
         Parses a context URL and returns the parsed result.

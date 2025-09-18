@@ -13,7 +13,7 @@ from .pats import (
     AsyncPatsResourceWithStreamingResponse,
 )
 from ...types import user_set_suspended_params, user_get_authenticated_user_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .dotfiles import (
     DotfilesResource,
@@ -68,13 +68,13 @@ class UsersResource(SyncAPIResource):
     def get_authenticated_user(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> UserGetAuthenticatedUserResponse:
         """
         Gets information about the currently authenticated user.
@@ -117,14 +117,14 @@ class UsersResource(SyncAPIResource):
     def set_suspended(
         self,
         *,
-        suspended: bool | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        suspended: bool | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Sets whether a user account is suspended.
@@ -211,13 +211,13 @@ class AsyncUsersResource(AsyncAPIResource):
     async def get_authenticated_user(
         self,
         *,
-        empty: bool | NotGiven = NOT_GIVEN,
+        empty: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> UserGetAuthenticatedUserResponse:
         """
         Gets information about the currently authenticated user.
@@ -262,14 +262,14 @@ class AsyncUsersResource(AsyncAPIResource):
     async def set_suspended(
         self,
         *,
-        suspended: bool | NotGiven = NOT_GIVEN,
-        user_id: str | NotGiven = NOT_GIVEN,
+        suspended: bool | Omit = omit,
+        user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> object:
         """
         Sets whether a user account is suspended.
