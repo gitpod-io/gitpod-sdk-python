@@ -3,7 +3,7 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/gitpod-sdk.svg?label=pypi%20(stable))](https://pypi.org/project/gitpod-sdk/)
 
-The Gitpod Python library provides convenient access to the Gitpod REST API from any Python 3.8+
+The Gitpod Python library provides convenient access to the Gitpod REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -434,7 +434,7 @@ print(gitpod.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 
