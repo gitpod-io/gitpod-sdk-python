@@ -40,6 +40,26 @@ we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
 to add `GITPOD_API_KEY="My Bearer Token"` to your `.env` file
 so that your Bearer Token is not stored in source control.
 
+## Custom Domains
+
+By default, the SDK connects to `https://app.gitpod.io/api`. To connect to a custom Gitpod domain, set the `GITPOD_BASE_URL` environment variable:
+
+```sh
+export GITPOD_BASE_URL="https://custom.domain.com/api"
+```
+
+Or provide it directly when creating the client:
+
+```python
+from gitpod import Gitpod
+
+client = Gitpod(
+    base_url="https://custom.domain.com/api",
+)
+```
+
+The SDK will automatically use the custom domain for all API requests.
+
 ## Async usage
 
 Simply import `AsyncGitpod` instead of `Gitpod` and use `await` with each API call:
