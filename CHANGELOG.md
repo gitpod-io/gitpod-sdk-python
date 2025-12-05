@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.4.1 (2025-12-05)
+
+Full Changelog: [v0.4.0...v0.4.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.0...v0.4.1)
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([597eb34](https://github.com/gitpod-io/gitpod-sdk-python/commit/597eb34a2f9f94a0ac4b6a8efd626ee253c7266f))
+* compat with Python 3.14 ([11cab3b](https://github.com/gitpod-io/gitpod-sdk-python/commit/11cab3b8afc2dcd7c64b38fead6ffbad805a6f1c))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([d878bc6](https://github.com/gitpod-io/gitpod-sdk-python/commit/d878bc6a71bb2ac8e074019bee3db915d98a2312))
+* ensure streams are always closed ([8e1d967](https://github.com/gitpod-io/gitpod-sdk-python/commit/8e1d96725dd7a77bd1abe0625824537eedc5b387))
+
+
+### Chores
+
+* bump `httpx-aiohttp` version to 0.1.9 ([0581279](https://github.com/gitpod-io/gitpod-sdk-python/commit/0581279f1c20a01fd1b741fc56a5d66b724a8f66))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([620927e](https://github.com/gitpod-io/gitpod-sdk-python/commit/620927e38e8e968a7ee25cc4696be83b71b63dcc))
+* do not install brew dependencies in ./scripts/bootstrap by default ([3fd8de4](https://github.com/gitpod-io/gitpod-sdk-python/commit/3fd8de42107e3941274833b72c4d17d3829dc6b9))
+* **docs:** use environment variables for authentication in code snippets ([6435a45](https://github.com/gitpod-io/gitpod-sdk-python/commit/6435a4573f2c72303e813a55f6d30fc041afd80b))
+* **internal/tests:** avoid race condition with implicit client cleanup ([2316010](https://github.com/gitpod-io/gitpod-sdk-python/commit/23160102a1df2cbcc7c9b4ab60f64860fca75af5))
+* **internal:** codegen related update ([3487a7b](https://github.com/gitpod-io/gitpod-sdk-python/commit/3487a7b28a7fd3949d9cb898fc67939ec6ef8c1a))
+* **internal:** detect missing future annotations with ruff ([98e718f](https://github.com/gitpod-io/gitpod-sdk-python/commit/98e718fd584a66b1cf64cf37baf4904935833b6c))
+* **internal:** grammar fix (it's -&gt; its) ([ca7ec34](https://github.com/gitpod-io/gitpod-sdk-python/commit/ca7ec34adc07a3f66da8ca64398a218bf2fed68c))
+* **internal:** update pydantic dependency ([986fdba](https://github.com/gitpod-io/gitpod-sdk-python/commit/986fdbaf9c668a21f87ab6b1368fb1f9b4dca9fc))
+* **package:** drop Python 3.8 support ([86cbb78](https://github.com/gitpod-io/gitpod-sdk-python/commit/86cbb785d19b2286fdb0dc4c92d621b395a1c94b))
+* **types:** change optional parameter type from NotGiven to Omit ([efa6bd7](https://github.com/gitpod-io/gitpod-sdk-python/commit/efa6bd70aed63ff891300fc1529575c76a18f104))
+* update lockfile ([545bd86](https://github.com/gitpod-io/gitpod-sdk-python/commit/545bd8611860dc3a554ac238fbb8cae1fc471d6f))
+
 ## 0.4.0 (2025-12-05)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.3.0...v0.4.0)
