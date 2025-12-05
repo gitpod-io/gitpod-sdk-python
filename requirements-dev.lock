@@ -103,12 +103,11 @@ pluggy==1.5.0
 propcache==0.3.1
     # via aiohttp
     # via yarl
+pydantic==2.11.9
+    # via anthropic
 pycparser==2.22
     # via cffi
-pydantic==2.10.3
-    # via anthropic
-    # via gitpod-sdk
-pydantic-core==2.27.1
+pydantic-core==2.33.2
     # via pydantic
 pygments==2.18.0
     # via rich
@@ -149,6 +148,9 @@ typing-extensions==4.12.2
     # via pydantic
     # via pydantic-core
     # via pyright
+    # via typing-inspection
+typing-inspection==0.4.1
+    # via pydantic
 virtualenv==20.24.5
     # via nox
 yarl==1.20.0
