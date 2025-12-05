@@ -1,5 +1,56 @@
 # Changelog
 
+## 0.4.0 (2025-12-05)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** gitpod -&gt; ona ([5ddf83b](https://github.com/gitpod-io/gitpod-sdk-python/commit/5ddf83b265d51f812b239afd3d9255f7fa8d2b6b))
+* clean up environment call outs ([213fcdc](https://github.com/gitpod-io/gitpod-sdk-python/commit/213fcdc66361c6d258cb899f5ddbf56a1ebdaa62))
+* **client:** add support for aiohttp ([9eeac4b](https://github.com/gitpod-io/gitpod-sdk-python/commit/9eeac4b8aa2066f8bd5a3720d13560ea0c031041))
+* **client:** support file upload requests ([f986b23](https://github.com/gitpod-io/gitpod-sdk-python/commit/f986b231a55b031c7e6823d7ffc23e73c33afc72))
+* improve future compat with pydantic v3 ([a52c037](https://github.com/gitpod-io/gitpod-sdk-python/commit/a52c03745925595327a938a16be5715d9675c9b6))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([ee5b628](https://github.com/gitpod-io/gitpod-sdk-python/commit/ee5b628bf87cbb5844c4f1cc69e10f5a2bb1338f))
+* **ci:** release-doctor — report correct token name ([0961324](https://github.com/gitpod-io/gitpod-sdk-python/commit/096132446b6f5672966ccdfce6d4eb007ee45773))
+* **client:** correctly parse binary response | stream ([133ddee](https://github.com/gitpod-io/gitpod-sdk-python/commit/133ddeed84282ff4c41b9800cfa4e97951f7d207))
+* **client:** don't send Content-Type header on GET requests ([92025c1](https://github.com/gitpod-io/gitpod-sdk-python/commit/92025c1f3b8d41d4c14b1217c6bfdd866ad89520))
+* **parsing:** correctly handle nested discriminated unions ([f95762d](https://github.com/gitpod-io/gitpod-sdk-python/commit/f95762d56e17f372a2610c9dbbf7228401e18889))
+* **parsing:** ignore empty metadata ([3901ec7](https://github.com/gitpod-io/gitpod-sdk-python/commit/3901ec7e4d11d8b3d2848cd3c28f1a64a203a5a3))
+* **parsing:** parse extra field types ([e10d4fb](https://github.com/gitpod-io/gitpod-sdk-python/commit/e10d4fbc40758f2e00d81c52e269142de7ecf7d6))
+* **tests:** fix: tests which call HTTP endpoints directly with the example parameters ([8a35255](https://github.com/gitpod-io/gitpod-sdk-python/commit/8a35255e8a9a579a5a2d014810d017dbcdeea87f))
+
+
+### Chores
+
+* **ci:** change upload type ([7801ba9](https://github.com/gitpod-io/gitpod-sdk-python/commit/7801ba9fe808fd6cd3088e1269f9dc4a00f169eb))
+* **ci:** enable for pull requests ([615015e](https://github.com/gitpod-io/gitpod-sdk-python/commit/615015ecefc10a68d421f7f18eb8466e4afcfa10))
+* **ci:** only run for pushes and fork pull requests ([8e3cd30](https://github.com/gitpod-io/gitpod-sdk-python/commit/8e3cd300ad4d0ff35b073c0aa98e46e537a299f6))
+* **internal:** bump pinned h11 dep ([c55a48c](https://github.com/gitpod-io/gitpod-sdk-python/commit/c55a48c67150a3580a6dad3ff80996c6e4ae2847))
+* **internal:** codegen related update ([e2efcf5](https://github.com/gitpod-io/gitpod-sdk-python/commit/e2efcf5c5289ada60c32c36d59987d933e40a6c6))
+* **internal:** fix ruff target version ([d6156d2](https://github.com/gitpod-io/gitpod-sdk-python/commit/d6156d2ab264178dda14f8eed4496c3ff420fa94))
+* **internal:** move mypy configurations to `pyproject.toml` file ([20ff2fd](https://github.com/gitpod-io/gitpod-sdk-python/commit/20ff2fdec396b41c230fd6f7ab6ffee8054e7b46))
+* **internal:** update comment in script ([1aeeb0f](https://github.com/gitpod-io/gitpod-sdk-python/commit/1aeeb0fe71f4f10a76875770061da7e87c0bd000))
+* **internal:** update conftest.py ([e1f69f3](https://github.com/gitpod-io/gitpod-sdk-python/commit/e1f69f382a1d5f99e71aa2e2ae559644f71b4352))
+* **package:** mark python 3.13 as supported ([e580a61](https://github.com/gitpod-io/gitpod-sdk-python/commit/e580a61a67bba85d36aa04e99090a482de6a85a2))
+* **project:** add settings file for vscode ([8ec9f41](https://github.com/gitpod-io/gitpod-sdk-python/commit/8ec9f413960970c9c46272d775e85b7cd2159a4c))
+* **readme:** fix version rendering on pypi ([de1172d](https://github.com/gitpod-io/gitpod-sdk-python/commit/de1172d8dd3411f9ff5bf3e87c42c2c57ad1e602))
+* **readme:** update badges ([2417444](https://github.com/gitpod-io/gitpod-sdk-python/commit/24174444a9b9ce67f5ef4590633f0380f2f7efee))
+* **tests:** add tests for httpx client instantiation & proxies ([c03af6e](https://github.com/gitpod-io/gitpod-sdk-python/commit/c03af6ee2abc77132eda9ffad9e31a49e2dd59fb))
+* **tests:** run tests in parallel ([6e0ed60](https://github.com/gitpod-io/gitpod-sdk-python/commit/6e0ed6062d5db6d5565b953c9991c0e8598775e1))
+* **tests:** simplify `get_platform` test ([4726cc5](https://github.com/gitpod-io/gitpod-sdk-python/commit/4726cc56e22ec7883d51d433fda688679fe9d957))
+* **tests:** skip some failing tests on the latest python versions ([4735291](https://github.com/gitpod-io/gitpod-sdk-python/commit/473529172a90e9ca731e0f9fc3ab881e4957d946))
+* update @stainless-api/prism-cli to v5.15.0 ([3918e98](https://github.com/gitpod-io/gitpod-sdk-python/commit/3918e98029a9a2e1381f1488c75c14d8e3e16bbd))
+
+
+### Documentation
+
+* **client:** fix httpx.Timeout documentation reference ([28e4f0d](https://github.com/gitpod-io/gitpod-sdk-python/commit/28e4f0da8237a7823e79b9beea870e9689261d57))
+
 ## 0.3.0 (2025-06-06)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.2.1...v0.3.0)
