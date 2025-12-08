@@ -27,6 +27,8 @@ class RunnerUpdateParams(TypedDict, total=False):
 
 
 class SpecConfigurationMetrics(TypedDict, total=False):
+    """metrics contains configuration for the runner's metrics collection"""
+
     enabled: Optional[bool]
     """enabled indicates whether the runner should collect metrics"""
 

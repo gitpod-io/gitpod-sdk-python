@@ -54,12 +54,26 @@ class SpecCommands(TypedDict, total=False):
 
 
 class Spec(TypedDict, total=False):
+    """Changing the spec of a service is a complex operation.
+
+    The spec of a service
+     can only be updated if the service is in a stopped state. If the service is
+     running, it must be stopped first.
+    """
+
     commands: Optional[SpecCommands]
 
     runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]
 
 
 class Status(TypedDict, total=False):
+    """Service status updates are only expected from the executing environment.
+
+    As a client
+     of this API you are not expected to provide this field. Updating this field requires
+     the `environmentservice:update_status` permission.
+    """
+
     failure_message: Annotated[Optional[str], PropertyInfo(alias="failureMessage")]
 
     log_url: Annotated[Optional[str], PropertyInfo(alias="logUrl")]

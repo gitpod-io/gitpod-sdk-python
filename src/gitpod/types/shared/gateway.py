@@ -8,6 +8,8 @@ __all__ = ["Gateway"]
 
 
 class Gateway(BaseModel):
+    """Gateway represents a system gateway that provides access to services"""
+
     name: str
     """name is the human-readable name of the gateway.
 

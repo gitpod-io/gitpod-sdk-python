@@ -40,6 +40,8 @@ class Metadata(TypedDict, total=False):
 
 
 class SpecAutomationsFile(TypedDict, total=False):
+    """automations_file is the automations file spec of the environment"""
+
     automations_file_path: Annotated[Optional[str], PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
@@ -106,6 +108,8 @@ class SpecSSHPublicKey(TypedDict, total=False):
 
 
 class SpecTimeout(TypedDict, total=False):
+    """Timeout configures the environment timeout"""
+
     disconnected: Optional[str]
     """
     inacitivity is the maximum time of disconnection before the environment is

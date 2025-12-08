@@ -22,11 +22,15 @@ class AccountListLoginProvidersParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    """filter contains the filter options for listing login methods"""
+
     invite_id: Annotated[str, PropertyInfo(alias="inviteId")]
     """invite_id is the ID of the invite URL the user wants to login with"""
 
 
 class Pagination(TypedDict, total=False):
+    """pagination contains the pagination options for listing login methods"""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

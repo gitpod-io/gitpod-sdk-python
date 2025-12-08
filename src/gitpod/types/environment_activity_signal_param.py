@@ -12,6 +12,8 @@ __all__ = ["EnvironmentActivitySignalParam"]
 
 
 class EnvironmentActivitySignalParam(TypedDict, total=False):
+    """EnvironmentActivitySignal used to signal activity for an environment."""
+
     source: str
     """
     source of the activity signal, such as "VS Code", "SSH", or "Automations". It

@@ -15,6 +15,8 @@ __all__ = ["RunnerStatus"]
 
 
 class RunnerStatus(BaseModel):
+    """RunnerStatus represents the status of a runner"""
+
     additional_info: Optional[List[FieldValue]] = FieldInfo(alias="additionalInfo", default=None)
     """additional_info contains additional information about the runner, e.g.
 

@@ -24,6 +24,8 @@ class UsageListEnvironmentRuntimeRecordsParams(TypedDict, total=False):
 
 
 class FilterDateRange(TypedDict, total=False):
+    """Date range to query runtime records within."""
+
     end_time: Required[Annotated[Union[str, datetime], PropertyInfo(alias="endTime", format="iso8601")]]
     """End time of the date range (exclusive)."""
 
@@ -32,6 +34,8 @@ class FilterDateRange(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    """Filter options."""
+
     date_range: Required[Annotated[FilterDateRange, PropertyInfo(alias="dateRange")]]
     """Date range to query runtime records within."""
 
@@ -40,6 +44,8 @@ class Filter(TypedDict, total=False):
 
 
 class Pagination(TypedDict, total=False):
+    """Pagination options."""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

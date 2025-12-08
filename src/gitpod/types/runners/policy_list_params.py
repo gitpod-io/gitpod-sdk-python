@@ -22,6 +22,8 @@ class PolicyListParams(TypedDict, total=False):
 
 
 class Pagination(TypedDict, total=False):
+    """pagination contains the pagination options for listing project policies"""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

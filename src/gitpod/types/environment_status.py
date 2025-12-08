@@ -28,6 +28,8 @@ __all__ = [
 
 
 class AutomationsFile(BaseModel):
+    """automations_file contains the status of the automations file."""
+
     automations_file_path: Optional[str] = FieldInfo(alias="automationsFilePath", default=None)
     """
     automations_file_path is the path to the automations file relative to the repo
@@ -93,6 +95,12 @@ class ContentGitChangedFile(BaseModel):
 
 
 class ContentGit(BaseModel):
+    """
+    git is the Git working copy status of the environment.
+     Note: this is a best-effort field and more often than not will not be
+     present. Its absence does not indicate the absence of a working copy.
+    """
+
     branch: Optional[str] = None
     """branch is branch we're currently on"""
 
@@ -124,6 +132,8 @@ class ContentGit(BaseModel):
 
 
 class Content(BaseModel):
+    """content contains the status of the environment content."""
+
     content_location_in_machine: Optional[str] = FieldInfo(alias="contentLocationInMachine", default=None)
     """content_location_in_machine is the location of the content in the machine"""
 
@@ -160,6 +170,8 @@ class Content(BaseModel):
 
 
 class Devcontainer(BaseModel):
+    """devcontainer contains the status of the devcontainer."""
+
     container_id: Optional[str] = FieldInfo(alias="containerId", default=None)
     """container_id is the ID of the container."""
 
@@ -231,10 +243,17 @@ class EnvironmentURLsPort(BaseModel):
 
 
 class EnvironmentURLsSSH(BaseModel):
+    """SSH is the URL at which the environment can be accessed via SSH."""
+
     url: Optional[str] = None
 
 
 class EnvironmentURLs(BaseModel):
+    """
+    environment_url contains the URL at which the environment can be accessed.
+     This field is only set if the environment is running.
+    """
+
     logs: Optional[str] = None
     """logs is the URL at which the environment logs can be accessed."""
 
@@ -245,12 +264,16 @@ class EnvironmentURLs(BaseModel):
 
 
 class MachineVersions(BaseModel):
+    """versions contains the versions of components in the machine."""
+
     supervisor_commit: Optional[str] = FieldInfo(alias="supervisorCommit", default=None)
 
     supervisor_version: Optional[str] = FieldInfo(alias="supervisorVersion", default=None)
 
 
 class Machine(BaseModel):
+    """machine contains the status of the environment machine"""
+
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains the reason the machine failed to operate."""
 
@@ -288,6 +311,11 @@ class Machine(BaseModel):
 
 
 class RunnerAck(BaseModel):
+    """
+    runner_ack contains the acknowledgement from the runner that is has
+     received the environment spec.
+    """
+
     message: Optional[str] = None
 
     spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
@@ -350,6 +378,8 @@ class SSHPublicKey(BaseModel):
 
 
 class EnvironmentStatus(BaseModel):
+    """EnvironmentStatus describes an environment status"""
+
     activity_signal: Optional[EnvironmentActivitySignal] = FieldInfo(alias="activitySignal", default=None)
     """activity_signal is the last activity signal for the environment."""
 

@@ -24,6 +24,8 @@ __all__ = [
 
 
 class AutomationsFile(BaseModel):
+    """automations_file is the automations file spec of the environment"""
+
     automations_file_path: Optional[str] = FieldInfo(alias="automationsFilePath", default=None)
     """
     automations_file_path is the path to the automations file that is applied in the
@@ -39,6 +41,8 @@ class AutomationsFile(BaseModel):
 
 
 class Content(BaseModel):
+    """content is the content spec of the environment"""
+
     git_email: Optional[str] = FieldInfo(alias="gitEmail", default=None)
     """The Git email address"""
 
@@ -52,11 +56,15 @@ class Content(BaseModel):
 
 
 class DevcontainerDotfiles(BaseModel):
+    """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
+
     repository: str
     """URL of a dotfiles Git repository (e.g. https://github.com/owner/repository)"""
 
 
 class Devcontainer(BaseModel):
+    """devcontainer is the devcontainer spec of the environment"""
+
     default_devcontainer_image: Optional[str] = FieldInfo(alias="defaultDevcontainerImage", default=None)
     """
     default_devcontainer_image is the default image that is used to start the
@@ -80,6 +88,8 @@ class Devcontainer(BaseModel):
 
 
 class Machine(BaseModel):
+    """machine is the machine spec of the environment"""
+
     class_: Optional[str] = FieldInfo(alias="class", default=None)
     """Class denotes the class of the environment we ought to start"""
 
@@ -139,6 +149,8 @@ class SSHPublicKey(BaseModel):
 
 
 class Timeout(BaseModel):
+    """Timeout configures the environment timeout"""
+
     disconnected: Optional[str] = None
     """
     inacitivity is the maximum time of disconnection before the environment is
@@ -147,6 +159,11 @@ class Timeout(BaseModel):
 
 
 class EnvironmentSpec(BaseModel):
+    """
+    EnvironmentSpec specifies the configuration of an environment for an environment
+     start
+    """
+
     admission: Optional[AdmissionLevel] = None
     """admission controlls who can access the environment and its ports."""
 

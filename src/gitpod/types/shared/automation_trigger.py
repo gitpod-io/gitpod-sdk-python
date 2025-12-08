@@ -10,6 +10,12 @@ __all__ = ["AutomationTrigger"]
 
 
 class AutomationTrigger(BaseModel):
+    """
+    An AutomationTrigger represents a trigger for an automation action.
+     The `post_environment_start` field indicates that the automation should be triggered after the environment has started.
+     The `post_devcontainer_start` field indicates that the automation should be triggered after the dev container has started.
+    """
+
     manual: Optional[bool] = None
 
     post_devcontainer_start: Optional[bool] = FieldInfo(alias="postDevcontainerStart", default=None)
