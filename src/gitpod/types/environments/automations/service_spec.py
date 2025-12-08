@@ -12,6 +12,10 @@ __all__ = ["ServiceSpec", "Commands"]
 
 
 class Commands(BaseModel):
+    """
+    commands contains the commands to start, stop and check the readiness of the service
+    """
+
     ready: Optional[str] = None
     """
     ready is an optional command that is run repeatedly until it exits with a zero

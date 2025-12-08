@@ -56,6 +56,8 @@ class Filter(TypedDict, total=False):
 
 
 class Pagination(TypedDict, total=False):
+    """pagination contains the pagination options for listing environment classes"""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

@@ -12,6 +12,11 @@ __all__ = ["EnvironmentMetadata"]
 
 
 class EnvironmentMetadata(BaseModel):
+    """
+    EnvironmentMetadata is data associated with an environment that's required for
+     other parts of the system to function
+    """
+
     annotations: Optional[Dict[str, str]] = None
     """
     annotations are key/value pairs that gets attached to the environment.

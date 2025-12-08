@@ -50,4 +50,6 @@ class Spec(TypedDict, total=False):
 
 
 class EnvironmentInitializerParam(TypedDict, total=False):
+    """EnvironmentInitializer specifies how an environment is to be initialized"""
+
     specs: Iterable[Spec]

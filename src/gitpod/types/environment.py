@@ -11,6 +11,8 @@ __all__ = ["Environment"]
 
 
 class Environment(BaseModel):
+    """+resource get environment"""
+
     id: str
     """ID is a unique identifier of this environment.
 

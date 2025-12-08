@@ -11,6 +11,10 @@ __all__ = ["EnvironmentUsageRecord"]
 
 
 class EnvironmentUsageRecord(BaseModel):
+    """
+    EnvironmentUsageRecord represents a record of an environment from start to stop.
+    """
+
     id: Optional[str] = None
     """Environment usage record ID."""
 

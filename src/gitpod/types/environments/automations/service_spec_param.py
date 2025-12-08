@@ -12,6 +12,10 @@ __all__ = ["ServiceSpecParam", "Commands"]
 
 
 class Commands(TypedDict, total=False):
+    """
+    commands contains the commands to start, stop and check the readiness of the service
+    """
+
     ready: str
     """
     ready is an optional command that is run repeatedly until it exits with a zero

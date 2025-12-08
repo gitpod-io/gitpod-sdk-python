@@ -36,6 +36,8 @@ class Filter(TypedDict, total=False):
 
 
 class Pagination(TypedDict, total=False):
+    """pagination contains the pagination options for listing runners"""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

@@ -9,6 +9,8 @@ __all__ = ["EnvironmentActivitySignal"]
 
 
 class EnvironmentActivitySignal(BaseModel):
+    """EnvironmentActivitySignal used to signal activity for an environment."""
+
     source: Optional[str] = None
     """
     source of the activity signal, such as "VS Code", "SSH", or "Automations". It
