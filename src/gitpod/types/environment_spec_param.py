@@ -25,6 +25,8 @@ __all__ = [
 
 
 class AutomationsFile(TypedDict, total=False):
+    """automations_file is the automations file spec of the environment"""
+
     automations_file_path: Annotated[str, PropertyInfo(alias="automationsFilePath")]
     """
     automations_file_path is the path to the automations file that is applied in the
@@ -40,6 +42,8 @@ class AutomationsFile(TypedDict, total=False):
 
 
 class Content(TypedDict, total=False):
+    """content is the content spec of the environment"""
+
     git_email: Annotated[str, PropertyInfo(alias="gitEmail")]
     """The Git email address"""
 
@@ -53,11 +57,15 @@ class Content(TypedDict, total=False):
 
 
 class DevcontainerDotfiles(TypedDict, total=False):
+    """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
+
     repository: Required[str]
     """URL of a dotfiles Git repository (e.g. https://github.com/owner/repository)"""
 
 
 class Devcontainer(TypedDict, total=False):
+    """devcontainer is the devcontainer spec of the environment"""
+
     default_devcontainer_image: Annotated[str, PropertyInfo(alias="defaultDevcontainerImage")]
     """
     default_devcontainer_image is the default image that is used to start the
@@ -90,6 +98,8 @@ _MachineReservedKeywords = TypedDict(
 
 
 class Machine(_MachineReservedKeywords, total=False):
+    """machine is the machine spec of the environment"""
+
     session: str
 
 
@@ -146,6 +156,8 @@ class SSHPublicKey(TypedDict, total=False):
 
 
 class Timeout(TypedDict, total=False):
+    """Timeout configures the environment timeout"""
+
     disconnected: str
     """
     inacitivity is the maximum time of disconnection before the environment is
@@ -154,6 +166,11 @@ class Timeout(TypedDict, total=False):
 
 
 class EnvironmentSpecParam(TypedDict, total=False):
+    """
+    EnvironmentSpec specifies the configuration of an environment for an environment
+     start
+    """
+
     admission: AdmissionLevel
     """admission controlls who can access the environment and its ports."""
 

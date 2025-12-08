@@ -73,6 +73,12 @@ class Tasks(TypedDict, total=False):
 
 
 class AutomationsFileParam(TypedDict, total=False):
+    """
+    WARN: Do not remove any field here, as it will break reading automation yaml files. We error if there are any
+     unknown fields in the yaml (to ensure the yaml is correct), but would break if we removed any fields.
+     This includes marking a field as "reserved" in the proto file, this will also break reading the yaml.
+    """
+
     services: Dict[str, Services]
 
     tasks: Dict[str, Tasks]

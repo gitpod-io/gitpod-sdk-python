@@ -25,6 +25,8 @@ class ExecutionListParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    """filter contains the filter options for listing task runs"""
+
     environment_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="environmentIds")]
     """environment_ids filters the response to only task runs of these environments"""
 
@@ -39,6 +41,8 @@ class Filter(TypedDict, total=False):
 
 
 class Pagination(TypedDict, total=False):
+    """pagination contains the pagination options for listing task runs"""
+
     token: str
     """
     Token for the next set of results that was returned as next_token of a

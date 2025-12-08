@@ -10,6 +10,8 @@ __all__ = ["RunnerCheckAuthenticationForHostResponse", "SupportsOauth2", "Suppor
 
 
 class SupportsOauth2(BaseModel):
+    """supports_oauth2 indicates that the host supports OAuth2 authentication"""
+
     auth_url: Optional[str] = FieldInfo(alias="authUrl", default=None)
     """auth_url is the URL where users can authenticate"""
 
@@ -18,6 +20,10 @@ class SupportsOauth2(BaseModel):
 
 
 class SupportsPat(BaseModel):
+    """
+    supports_pat indicates that the host supports Personal Access Token authentication
+    """
+
     create_url: Optional[str] = FieldInfo(alias="createUrl", default=None)
     """create_url is the URL where users can create a new Personal Access Token"""
 

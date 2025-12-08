@@ -49,4 +49,6 @@ class Spec(BaseModel):
 
 
 class EnvironmentInitializer(BaseModel):
+    """EnvironmentInitializer specifies how an environment is to be initialized"""
+
     specs: Optional[List[Spec]] = None
