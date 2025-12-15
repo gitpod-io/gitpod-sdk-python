@@ -7,6 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .shared.subject import Subject
+from .environment_role import EnvironmentRole
 
 __all__ = ["EnvironmentMetadata"]
 
@@ -53,11 +54,20 @@ class EnvironmentMetadata(BaseModel):
     created
     """
 
+    prebuild_id: Optional[str] = FieldInfo(alias="prebuildId", default=None)
+    """
+    prebuild_id is the ID of the prebuild this environment was created from. Only
+    set if the environment was created from a prebuild.
+    """
+
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
     """
     If the Environment was started from a project, the project_id will reference the
     project.
     """
+
+    role: Optional[EnvironmentRole] = None
+    """role is the role of the environment"""
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
     """Runner is the ID of the runner that runs this environment."""

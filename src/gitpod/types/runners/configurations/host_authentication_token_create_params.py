@@ -6,7 +6,9 @@ from typing import Union
 from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
+from ...shared_params.subject import Subject
 from .host_authentication_token_source import HostAuthenticationTokenSource
 
 __all__ = ["HostAuthenticationTokenCreateParams"]
@@ -14,6 +16,7 @@ __all__ = ["HostAuthenticationTokenCreateParams"]
 
 class HostAuthenticationTokenCreateParams(TypedDict, total=False):
     token: str
+    """stored encrypted, retrieved via GetHostAuthenticationTokenValue"""
 
     expires_at: Annotated[Union[str, datetime], PropertyInfo(alias="expiresAt", format="iso8601")]
     """
@@ -109,10 +112,20 @@ class HostAuthenticationTokenCreateParams(TypedDict, total=False):
 
     host: str
 
+    integration_id: Annotated[str, PropertyInfo(alias="integrationId")]
+
     refresh_token: Annotated[str, PropertyInfo(alias="refreshToken")]
+    """stored encrypted, retrieved via GetHostAuthenticationTokenValue"""
 
     runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
 
+    scopes: SequenceNotStr[str]
+    """Maximum 100 scopes allowed (101 for validation purposes)"""
+
     source: HostAuthenticationTokenSource
 
+    subject: Subject
+    """Subject identifies the principal (user or service account) for the token"""
+
     user_id: Annotated[str, PropertyInfo(alias="userId")]
+    """Deprecated: Use principal_id and principal_type instead"""

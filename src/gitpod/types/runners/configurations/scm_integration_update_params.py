@@ -44,3 +44,11 @@ class ScmIntegrationUpdateParams(TypedDict, total=False):
     This might lead to users being unable to access their repositories until they
     re-authenticate.
     """
+
+    virtual_directory: Annotated[Optional[str], PropertyInfo(alias="virtualDirectory")]
+    """
+    virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+    "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+    should be empty for other SCM types. Azure DevOps Server APIs work without
+    collection when PAT scope is 'All accessible organizations'.
+    """

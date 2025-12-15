@@ -37,11 +37,13 @@ class TestAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "role": "",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
-                            }
+                            },
+                            "machine": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -56,7 +58,8 @@ class TestAutomations:
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
-                            }
+                            },
+                            "machine": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }
@@ -114,11 +117,13 @@ class TestAsyncAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "role": "",
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
-                            }
+                            },
+                            "machine": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -133,7 +138,8 @@ class TestAsyncAutomations:
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
-                            }
+                            },
+                            "machine": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }

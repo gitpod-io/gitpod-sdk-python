@@ -25,6 +25,18 @@ class Filter(TypedDict, total=False):
     project_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="projectIds")]
     """project_ids filters the response to only projects with these IDs"""
 
+    runner_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="runnerIds")]
+    """
+    runner_ids filters the response to only projects that use environment classes
+    from these runners
+    """
+
+    search: str
+    """
+    search performs case-insensitive search across project name, project ID, and
+    repository name
+    """
+
 
 class Pagination(TypedDict, total=False):
     """pagination contains the pagination options for listing organizations"""

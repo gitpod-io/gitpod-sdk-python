@@ -16,8 +16,22 @@ from .projects import (
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
 )
+from .environment_clases import (
+    EnvironmentClasesResource,
+    AsyncEnvironmentClasesResource,
+    EnvironmentClasesResourceWithRawResponse,
+    AsyncEnvironmentClasesResourceWithRawResponse,
+    EnvironmentClasesResourceWithStreamingResponse,
+    AsyncEnvironmentClasesResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "EnvironmentClasesResource",
+    "AsyncEnvironmentClasesResource",
+    "EnvironmentClasesResourceWithRawResponse",
+    "AsyncEnvironmentClasesResourceWithRawResponse",
+    "EnvironmentClasesResourceWithStreamingResponse",
+    "AsyncEnvironmentClasesResourceWithStreamingResponse",
     "PoliciesResource",
     "AsyncPoliciesResource",
     "PoliciesResourceWithRawResponse",

@@ -5,10 +5,12 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .project_phase import ProjectPhase
 from .shared.subject import Subject
 from .project_metadata import ProjectMetadata
 from .environment_initializer import EnvironmentInitializer
-from .project_environment_class import ProjectEnvironmentClass
+from .project_prebuild_configuration import ProjectPrebuildConfiguration
+from .shared.project_environment_class import ProjectEnvironmentClass
 
 __all__ = ["Project", "UsedBy"]
 
@@ -26,6 +28,7 @@ class UsedBy(BaseModel):
 
 class Project(BaseModel):
     environment_class: ProjectEnvironmentClass = FieldInfo(alias="environmentClass")
+    """Use `environment_classes` instead."""
 
     id: Optional[str] = None
     """id is the unique identifier for the project"""
@@ -36,16 +39,30 @@ class Project(BaseModel):
     root
     """
 
+    desired_phase: Optional[ProjectPhase] = FieldInfo(alias="desiredPhase", default=None)
+    """
+    desired_phase is the desired phase of the project When set to DELETED, the
+    project is pending deletion
+    """
+
     devcontainer_file_path: Optional[str] = FieldInfo(alias="devcontainerFilePath", default=None)
     """
     devcontainer_file_path is the path to the devcontainer file relative to the repo
     root
     """
 
+    environment_classes: Optional[List[ProjectEnvironmentClass]] = FieldInfo(alias="environmentClasses", default=None)
+    """environment_classes is the list of environment classes for the project"""
+
     initializer: Optional[EnvironmentInitializer] = None
     """initializer is the content initializer"""
 
     metadata: Optional[ProjectMetadata] = None
+
+    prebuild_configuration: Optional[ProjectPrebuildConfiguration] = FieldInfo(
+        alias="prebuildConfiguration", default=None
+    )
+    """prebuild_configuration defines how prebuilds are created for this project."""
 
     technical_description: Optional[str] = FieldInfo(alias="technicalDescription", default=None)
     """

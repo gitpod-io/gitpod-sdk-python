@@ -50,6 +50,7 @@ class TestConfigurations:
                 "oauth_plaintext_client_secret": "client_secret",
                 "pat": True,
                 "scm_id": "github",
+                "virtual_directory": "virtualDirectory",
             },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])
@@ -115,6 +116,7 @@ class TestAsyncConfigurations:
                 "oauth_plaintext_client_secret": "client_secret",
                 "pat": True,
                 "scm_id": "github",
+                "virtual_directory": "virtualDirectory",
             },
         )
         assert_matches_type(ConfigurationValidateResponse, configuration, path=["response"])

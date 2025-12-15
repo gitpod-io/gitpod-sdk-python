@@ -6,9 +6,11 @@ from typing import Dict, Iterable, Optional
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .service_role import ServiceRole
 from .service_phase import ServicePhase
 from ...shared_params.runs_on import RunsOn
 from ...shared_params.automation_trigger import AutomationTrigger
+from ...shared_params.environment_variable_item import EnvironmentVariableItem
 
 __all__ = ["ServiceUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec", "SpecCommands", "Status"]
 
@@ -42,6 +44,8 @@ class Metadata(TypedDict, total=False):
 
     name: Optional[str]
 
+    role: Optional[ServiceRole]
+
     triggered_by: Annotated[Optional[MetadataTriggeredBy], PropertyInfo(alias="triggeredBy")]
 
 
@@ -62,6 +66,8 @@ class Spec(TypedDict, total=False):
     """
 
     commands: Optional[SpecCommands]
+
+    env: Iterable[EnvironmentVariableItem]
 
     runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]
 

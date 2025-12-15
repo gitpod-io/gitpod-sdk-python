@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
@@ -94,6 +94,13 @@ class SpecPort(TypedDict, total=False):
 
     port: int
     """port number"""
+
+    protocol: Literal["PROTOCOL_UNSPECIFIED", "PROTOCOL_HTTP", "PROTOCOL_HTTPS"]
+    """
+    protocol for communication (Gateway proxy → user environment service). this
+    setting only affects the protocol used between Gateway and user environment
+    services.
+    """
 
 
 class SpecSSHPublicKey(TypedDict, total=False):

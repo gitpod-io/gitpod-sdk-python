@@ -6,8 +6,8 @@ from datetime import datetime
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
-from .resource_type import ResourceType
 from .shared.principal import Principal
+from .shared.resource_type import ResourceType
 
 __all__ = ["EventListResponse"]
 

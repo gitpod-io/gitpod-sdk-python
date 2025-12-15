@@ -34,6 +34,7 @@ class SpecGit(TypedDict, total=False):
             "CLONE_TARGET_MODE_REMOTE_COMMIT",
             "CLONE_TARGET_MODE_REMOTE_BRANCH",
             "CLONE_TARGET_MODE_LOCAL_BRANCH",
+            "CLONE_TARGET_MODE_REMOTE_TAG",
         ],
         PropertyInfo(alias="targetMode"),
     ]

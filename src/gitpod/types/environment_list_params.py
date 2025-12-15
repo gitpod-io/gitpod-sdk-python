@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List, Union, Optional
+from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
+from .environment_role import EnvironmentRole
 from .environment_phase import EnvironmentPhase
 
 __all__ = ["EnvironmentListParams", "Filter", "Pagination"]
@@ -38,6 +40,9 @@ class Filter(TypedDict, total=False):
     ]
     """archival_status filters the response based on environment archive status"""
 
+    created_before: Annotated[Union[str, datetime, None], PropertyInfo(alias="createdBefore", format="iso8601")]
+    """created_before filters environments created before this timestamp"""
+
     creator_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="creatorIds")]
     """
     creator_ids filters the response to only Environments created by specified
@@ -49,6 +54,9 @@ class Filter(TypedDict, total=False):
     project_ids filters the response to only Environments associated with the
     specified projects
     """
+
+    roles: List[EnvironmentRole]
+    """roles filters the response to only Environments with the specified roles"""
 
     runner_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="runnerIds")]
     """

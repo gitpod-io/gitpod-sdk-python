@@ -34,6 +34,7 @@ class SpecGit(BaseModel):
             "CLONE_TARGET_MODE_REMOTE_COMMIT",
             "CLONE_TARGET_MODE_REMOTE_BRANCH",
             "CLONE_TARGET_MODE_LOCAL_BRANCH",
+            "CLONE_TARGET_MODE_REMOTE_TAG",
         ]
     ] = FieldInfo(alias="targetMode", default=None)
     """the target mode determines what gets checked out"""

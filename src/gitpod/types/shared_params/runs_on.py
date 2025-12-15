@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 from ..._types import SequenceNotStr
 
@@ -16,4 +16,7 @@ class Docker(TypedDict, total=False):
 
 
 class RunsOn(TypedDict, total=False):
-    docker: Required[Docker]
+    docker: Docker
+
+    machine: object
+    """Machine runs the service/task directly on the VM/machine level."""

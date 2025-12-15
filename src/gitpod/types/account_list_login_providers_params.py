@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -24,7 +25,10 @@ class AccountListLoginProvidersParams(TypedDict, total=False):
 class Filter(TypedDict, total=False):
     """filter contains the filter options for listing login methods"""
 
-    invite_id: Annotated[str, PropertyInfo(alias="inviteId")]
+    email: Optional[str]
+    """email is the email address to filter SSO providers by"""
+
+    invite_id: Annotated[Optional[str], PropertyInfo(alias="inviteId")]
     """invite_id is the ID of the invite URL the user wants to login with"""
 
 

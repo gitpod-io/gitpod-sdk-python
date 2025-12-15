@@ -6,14 +6,12 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .environment_initializer_param import EnvironmentInitializerParam
-from .project_environment_class_param import ProjectEnvironmentClassParam
+from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 
 __all__ = ["ProjectCreateParams"]
 
 
 class ProjectCreateParams(TypedDict, total=False):
-    environment_class: Required[Annotated[ProjectEnvironmentClassParam, PropertyInfo(alias="environmentClass")]]
-
     initializer: Required[EnvironmentInitializerParam]
     """initializer is the content initializer"""
 
@@ -38,6 +36,12 @@ class ProjectCreateParams(TypedDict, total=False):
     """
 
     name: str
+
+    prebuild_configuration: Annotated[ProjectPrebuildConfigurationParam, PropertyInfo(alias="prebuildConfiguration")]
+    """
+    prebuild_configuration defines how prebuilds are created for this project. If
+    not set, prebuilds are disabled for the project.
+    """
 
     technical_description: Annotated[str, PropertyInfo(alias="technicalDescription")]
     """

@@ -187,6 +187,7 @@ class EditorsResource(SyncAPIResource):
         editor_id: str,
         environment_id: str,
         organization_id: str,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -223,6 +224,11 @@ class EditorsResource(SyncAPIResource):
 
           organization_id: organizationId is the ID of the organization to resolve the URL for
 
+          version: version is the editor version to use If not provided, the latest version will be
+              installed
+
+              Examples for JetBrains: 2025.2
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -238,6 +244,7 @@ class EditorsResource(SyncAPIResource):
                     "editor_id": editor_id,
                     "environment_id": environment_id,
                     "organization_id": organization_id,
+                    "version": version,
                 },
                 editor_resolve_url_params.EditorResolveURLParams,
             ),
@@ -411,6 +418,7 @@ class AsyncEditorsResource(AsyncAPIResource):
         editor_id: str,
         environment_id: str,
         organization_id: str,
+        version: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -447,6 +455,11 @@ class AsyncEditorsResource(AsyncAPIResource):
 
           organization_id: organizationId is the ID of the organization to resolve the URL for
 
+          version: version is the editor version to use If not provided, the latest version will be
+              installed
+
+              Examples for JetBrains: 2025.2
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -462,6 +475,7 @@ class AsyncEditorsResource(AsyncAPIResource):
                     "editor_id": editor_id,
                     "environment_id": environment_id,
                     "organization_id": organization_id,
+                    "version": version,
                 },
                 editor_resolve_url_params.EditorResolveURLParams,
             ),

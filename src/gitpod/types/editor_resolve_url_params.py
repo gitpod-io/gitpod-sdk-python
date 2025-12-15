@@ -18,3 +18,11 @@ class EditorResolveURLParams(TypedDict, total=False):
 
     organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
     """organizationId is the ID of the organization to resolve the URL for"""
+
+    version: str
+    """
+    version is the editor version to use If not provided, the latest version will be
+    installed
+
+    Examples for JetBrains: 2025.2
+    """

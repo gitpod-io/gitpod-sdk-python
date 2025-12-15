@@ -54,6 +54,7 @@ class SecretsResource(SyncAPIResource):
     def create(
         self,
         *,
+        api_only: bool | Omit = omit,
         container_registry_basic_auth_host: str | Omit = omit,
         environment_variable: bool | Omit = omit,
         file_path: str | Omit = omit,
@@ -114,6 +115,10 @@ class SecretsResource(SyncAPIResource):
           ```
 
         Args:
+          api_only: api_only indicates the secret is only available via API/CLI. These secrets are
+              NOT automatically injected into services or devcontainers. Useful for secrets
+              that should only be consumed programmatically (e.g., by security agents).
+
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
               the docker registry host
 
@@ -145,6 +150,7 @@ class SecretsResource(SyncAPIResource):
             "/gitpod.v1.SecretService/CreateSecret",
             body=maybe_transform(
                 {
+                    "api_only": api_only,
                     "container_registry_basic_auth_host": container_registry_basic_auth_host,
                     "environment_variable": environment_variable,
                     "file_path": file_path,
@@ -424,6 +430,7 @@ class AsyncSecretsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        api_only: bool | Omit = omit,
         container_registry_basic_auth_host: str | Omit = omit,
         environment_variable: bool | Omit = omit,
         file_path: str | Omit = omit,
@@ -484,6 +491,10 @@ class AsyncSecretsResource(AsyncAPIResource):
           ```
 
         Args:
+          api_only: api_only indicates the secret is only available via API/CLI. These secrets are
+              NOT automatically injected into services or devcontainers. Useful for secrets
+              that should only be consumed programmatically (e.g., by security agents).
+
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
               the docker registry host
 
@@ -515,6 +526,7 @@ class AsyncSecretsResource(AsyncAPIResource):
             "/gitpod.v1.SecretService/CreateSecret",
             body=await async_maybe_transform(
                 {
+                    "api_only": api_only,
                     "container_registry_basic_auth_host": container_registry_basic_auth_host,
                     "environment_variable": environment_variable,
                     "file_path": file_path,

@@ -29,6 +29,9 @@ class RunnerStatus(BaseModel):
     gateway_info: Optional[GatewayInfo] = FieldInfo(alias="gatewayInfo", default=None)
     """gateway_info is information about the gateway to which the runner is connected."""
 
+    llm_url: Optional[str] = FieldInfo(alias="llmUrl", default=None)
+    """llm_url is the URL of the LLM service to which the runner is connected."""
+
     log_url: Optional[str] = FieldInfo(alias="logUrl", default=None)
 
     message: Optional[str] = None
@@ -40,8 +43,18 @@ class RunnerStatus(BaseModel):
     phase: Optional[RunnerPhase] = None
     """The runner's reported phase"""
 
+    public_key: Optional[str] = FieldInfo(alias="publicKey", default=None)
+    """public_key is the runner's public key used for encryption (32 bytes)"""
+
     region: Optional[str] = None
     """region is the region the runner is running in, if applicable."""
+
+    support_bundle_url: Optional[str] = FieldInfo(alias="supportBundleUrl", default=None)
+    """
+    support_bundle_url is the URL at which the runner support bundle can be
+    accessed. This URL provides access to pprof profiles and other debug
+    information. Only available for standalone runners.
+    """
 
     system_details: Optional[str] = FieldInfo(alias="systemDetails", default=None)
 

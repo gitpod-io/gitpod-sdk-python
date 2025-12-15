@@ -28,7 +28,6 @@ class TestProjects:
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         project = client.projects.create(
-            environment_class={},
             initializer={},
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
@@ -37,10 +36,6 @@ class TestProjects:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         project = client.projects.create(
-            environment_class={
-                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
-                "local_runner": True,
-            },
             initializer={
                 "specs": [
                     {
@@ -58,6 +53,17 @@ class TestProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             name="Web Application",
+            prebuild_configuration={
+                "enabled": True,
+                "enable_jetbrains_warmup": True,
+                "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "executor": {
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "principal": "PRINCIPAL_UNSPECIFIED",
+                },
+                "timeout": "+9125115.360s",
+                "trigger": {"daily_schedule": {"hour_utc": 23}},
+            },
             technical_description="technicalDescription",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
@@ -66,7 +72,6 @@ class TestProjects:
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.projects.with_raw_response.create(
-            environment_class={},
             initializer={},
         )
 
@@ -79,7 +84,6 @@ class TestProjects:
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.projects.with_streaming_response.create(
-            environment_class={},
             initializer={},
         ) as response:
             assert not response.is_closed
@@ -138,10 +142,6 @@ class TestProjects:
         project = client.projects.update(
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
-            environment_class={
-                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
-                "local_runner": True,
-            },
             initializer={
                 "specs": [
                     {
@@ -157,6 +157,17 @@ class TestProjects:
                 ]
             },
             name="x",
+            prebuild_configuration={
+                "enabled": True,
+                "enable_jetbrains_warmup": True,
+                "environment_class_ids": ["b0e12f6c-4c67-429d-a4a6-d9838b5da041"],
+                "executor": {
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "principal": "PRINCIPAL_UNSPECIFIED",
+                },
+                "timeout": "3600s",
+                "trigger": {"daily_schedule": {"hour_utc": 2}},
+            },
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             technical_description="technicalDescription",
         )
@@ -196,7 +207,11 @@ class TestProjects:
         project = client.projects.list(
             token="token",
             page_size=0,
-            filter={"project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -309,7 +324,6 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
-            environment_class={},
             initializer={},
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
@@ -318,10 +332,6 @@ class TestAsyncProjects:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         project = await async_client.projects.create(
-            environment_class={
-                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
-                "local_runner": True,
-            },
             initializer={
                 "specs": [
                     {
@@ -339,6 +349,17 @@ class TestAsyncProjects:
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
             name="Web Application",
+            prebuild_configuration={
+                "enabled": True,
+                "enable_jetbrains_warmup": True,
+                "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "executor": {
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "principal": "PRINCIPAL_UNSPECIFIED",
+                },
+                "timeout": "+9125115.360s",
+                "trigger": {"daily_schedule": {"hour_utc": 23}},
+            },
             technical_description="technicalDescription",
         )
         assert_matches_type(ProjectCreateResponse, project, path=["response"])
@@ -347,7 +368,6 @@ class TestAsyncProjects:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.with_raw_response.create(
-            environment_class={},
             initializer={},
         )
 
@@ -360,7 +380,6 @@ class TestAsyncProjects:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.with_streaming_response.create(
-            environment_class={},
             initializer={},
         ) as response:
             assert not response.is_closed
@@ -419,10 +438,6 @@ class TestAsyncProjects:
         project = await async_client.projects.update(
             automations_file_path="automationsFilePath",
             devcontainer_file_path="devcontainerFilePath",
-            environment_class={
-                "environment_class_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
-                "local_runner": True,
-            },
             initializer={
                 "specs": [
                     {
@@ -438,6 +453,17 @@ class TestAsyncProjects:
                 ]
             },
             name="x",
+            prebuild_configuration={
+                "enabled": True,
+                "enable_jetbrains_warmup": True,
+                "environment_class_ids": ["b0e12f6c-4c67-429d-a4a6-d9838b5da041"],
+                "executor": {
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "principal": "PRINCIPAL_UNSPECIFIED",
+                },
+                "timeout": "3600s",
+                "trigger": {"daily_schedule": {"hour_utc": 2}},
+            },
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             technical_description="technicalDescription",
         )
@@ -477,7 +503,11 @@ class TestAsyncProjects:
         project = await async_client.projects.list(
             token="token",
             page_size=0,
-            filter={"project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"]},
+            filter={
+                "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,

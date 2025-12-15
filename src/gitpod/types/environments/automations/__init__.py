@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .service import Service as Service
+from .service_role import ServiceRole as ServiceRole
 from .service_spec import ServiceSpec as ServiceSpec
 from .service_phase import ServicePhase as ServicePhase
 from .service_status import ServiceStatus as ServiceStatus

@@ -33,6 +33,12 @@ class Runner(BaseModel):
 
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
 
+    runner_manager_id: Optional[str] = FieldInfo(alias="runnerManagerId", default=None)
+    """
+    The runner manager id specifies the runner manager for the managed runner. This
+    field is only set for managed runners.
+    """
+
     spec: Optional[RunnerSpec] = None
     """The runner's specification"""
 

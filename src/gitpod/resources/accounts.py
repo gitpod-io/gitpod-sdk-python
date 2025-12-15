@@ -9,6 +9,7 @@ import httpx
 from ..types import (
     account_delete_params,
     account_retrieve_params,
+    account_list_sso_logins_params,
     account_get_sso_login_url_params,
     account_list_login_providers_params,
     account_list_joinable_organizations_params,
@@ -23,12 +24,20 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncLoginProvidersPage, AsyncLoginProvidersPage
+from ..pagination import (
+    SyncLoginsPage,
+    AsyncLoginsPage,
+    SyncLoginProvidersPage,
+    AsyncLoginProvidersPage,
+    SyncJoinableOrganizationsPage,
+    AsyncJoinableOrganizationsPage,
+)
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.login_provider import LoginProvider
+from ..types.joinable_organization import JoinableOrganization
 from ..types.account_retrieve_response import AccountRetrieveResponse
+from ..types.account_list_sso_logins_response import AccountListSSOLoginsResponse
 from ..types.account_get_sso_login_url_response import AccountGetSSOLoginURLResponse
-from ..types.account_list_joinable_organizations_response import AccountListJoinableOrganizationsResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -106,6 +115,7 @@ class AccountsResource(SyncAPIResource):
         self,
         *,
         account_id: str,
+        reason: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -135,6 +145,8 @@ class AccountsResource(SyncAPIResource):
           ```
 
         Args:
+          reason: reason is an optional field for the reason for account deletion
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -145,7 +157,13 @@ class AccountsResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.AccountService/DeleteAccount",
-            body=maybe_transform({"account_id": account_id}, account_delete_params.AccountDeleteParams),
+            body=maybe_transform(
+                {
+                    "account_id": account_id,
+                    "reason": reason,
+                },
+                account_delete_params.AccountDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -225,14 +243,14 @@ class AccountsResource(SyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
-        empty: bool | Omit = omit,
+        pagination: account_list_joinable_organizations_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountListJoinableOrganizationsResponse:
+    ) -> SyncJoinableOrganizationsPage[JoinableOrganization]:
         """
         Lists organizations that the currently authenticated account can join.
 
@@ -253,6 +271,8 @@ class AccountsResource(SyncAPIResource):
           ```
 
         Args:
+          pagination: pagination contains the pagination options for listing joinable organizations
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -261,10 +281,12 @@ class AccountsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/gitpod.v1.AccountService/ListJoinableOrganizations",
+            page=SyncJoinableOrganizationsPage[JoinableOrganization],
             body=maybe_transform(
-                {"empty": empty}, account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams
+                {"pagination": pagination},
+                account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -279,7 +301,8 @@ class AccountsResource(SyncAPIResource):
                     account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
                 ),
             ),
-            cast_to=AccountListJoinableOrganizationsResponse,
+            model=JoinableOrganization,
+            method="post",
         )
 
     def list_login_providers(
@@ -367,6 +390,67 @@ class AccountsResource(SyncAPIResource):
             method="post",
         )
 
+    def list_sso_logins(
+        self,
+        *,
+        email: str,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: account_list_sso_logins_params.Pagination | Omit = omit,
+        return_to: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncLoginsPage[AccountListSSOLoginsResponse]:
+        """
+        ListSSOLogins
+
+        Args:
+          email: email is the email the user wants to login with
+
+          pagination: pagination contains the pagination options for listing SSO logins
+
+          return_to: return_to is the URL the user will be redirected to after login
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/gitpod.v1.AccountService/ListSSOLogins",
+            page=SyncLoginsPage[AccountListSSOLoginsResponse],
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "pagination": pagination,
+                    "return_to": return_to,
+                },
+                account_list_sso_logins_params.AccountListSSOLoginsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    account_list_sso_logins_params.AccountListSSOLoginsParams,
+                ),
+            ),
+            model=AccountListSSOLoginsResponse,
+            method="post",
+        )
+
 
 class AsyncAccountsResource(AsyncAPIResource):
     @cached_property
@@ -441,6 +525,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         *,
         account_id: str,
+        reason: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,6 +555,8 @@ class AsyncAccountsResource(AsyncAPIResource):
           ```
 
         Args:
+          reason: reason is an optional field for the reason for account deletion
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -480,7 +567,13 @@ class AsyncAccountsResource(AsyncAPIResource):
         """
         return await self._post(
             "/gitpod.v1.AccountService/DeleteAccount",
-            body=await async_maybe_transform({"account_id": account_id}, account_delete_params.AccountDeleteParams),
+            body=await async_maybe_transform(
+                {
+                    "account_id": account_id,
+                    "reason": reason,
+                },
+                account_delete_params.AccountDeleteParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -555,19 +648,19 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=AccountGetSSOLoginURLResponse,
         )
 
-    async def list_joinable_organizations(
+    def list_joinable_organizations(
         self,
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
-        empty: bool | Omit = omit,
+        pagination: account_list_joinable_organizations_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AccountListJoinableOrganizationsResponse:
+    ) -> AsyncPaginator[JoinableOrganization, AsyncJoinableOrganizationsPage[JoinableOrganization]]:
         """
         Lists organizations that the currently authenticated account can join.
 
@@ -588,6 +681,8 @@ class AsyncAccountsResource(AsyncAPIResource):
           ```
 
         Args:
+          pagination: pagination contains the pagination options for listing joinable organizations
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -596,17 +691,19 @@ class AsyncAccountsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/gitpod.v1.AccountService/ListJoinableOrganizations",
-            body=await async_maybe_transform(
-                {"empty": empty}, account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams
+            page=AsyncJoinableOrganizationsPage[JoinableOrganization],
+            body=maybe_transform(
+                {"pagination": pagination},
+                account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -614,7 +711,8 @@ class AsyncAccountsResource(AsyncAPIResource):
                     account_list_joinable_organizations_params.AccountListJoinableOrganizationsParams,
                 ),
             ),
-            cast_to=AccountListJoinableOrganizationsResponse,
+            model=JoinableOrganization,
+            method="post",
         )
 
     def list_login_providers(
@@ -702,6 +800,67 @@ class AsyncAccountsResource(AsyncAPIResource):
             method="post",
         )
 
+    def list_sso_logins(
+        self,
+        *,
+        email: str,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        pagination: account_list_sso_logins_params.Pagination | Omit = omit,
+        return_to: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[AccountListSSOLoginsResponse, AsyncLoginsPage[AccountListSSOLoginsResponse]]:
+        """
+        ListSSOLogins
+
+        Args:
+          email: email is the email the user wants to login with
+
+          pagination: pagination contains the pagination options for listing SSO logins
+
+          return_to: return_to is the URL the user will be redirected to after login
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/gitpod.v1.AccountService/ListSSOLogins",
+            page=AsyncLoginsPage[AccountListSSOLoginsResponse],
+            body=maybe_transform(
+                {
+                    "email": email,
+                    "pagination": pagination,
+                    "return_to": return_to,
+                },
+                account_list_sso_logins_params.AccountListSSOLoginsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    account_list_sso_logins_params.AccountListSSOLoginsParams,
+                ),
+            ),
+            model=AccountListSSOLoginsResponse,
+            method="post",
+        )
+
 
 class AccountsResourceWithRawResponse:
     def __init__(self, accounts: AccountsResource) -> None:
@@ -721,6 +880,9 @@ class AccountsResourceWithRawResponse:
         )
         self.list_login_providers = to_raw_response_wrapper(
             accounts.list_login_providers,
+        )
+        self.list_sso_logins = to_raw_response_wrapper(
+            accounts.list_sso_logins,
         )
 
 
@@ -743,6 +905,9 @@ class AsyncAccountsResourceWithRawResponse:
         self.list_login_providers = async_to_raw_response_wrapper(
             accounts.list_login_providers,
         )
+        self.list_sso_logins = async_to_raw_response_wrapper(
+            accounts.list_sso_logins,
+        )
 
 
 class AccountsResourceWithStreamingResponse:
@@ -764,6 +929,9 @@ class AccountsResourceWithStreamingResponse:
         self.list_login_providers = to_streamed_response_wrapper(
             accounts.list_login_providers,
         )
+        self.list_sso_logins = to_streamed_response_wrapper(
+            accounts.list_sso_logins,
+        )
 
 
 class AsyncAccountsResourceWithStreamingResponse:
@@ -784,4 +952,7 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.list_login_providers = async_to_streamed_response_wrapper(
             accounts.list_login_providers,
+        )
+        self.list_sso_logins = async_to_streamed_response_wrapper(
+            accounts.list_sso_logins,
         )

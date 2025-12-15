@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -32,4 +32,8 @@ class SSOConfiguration(BaseModel):
     client_id: Optional[str] = FieldInfo(alias="clientId", default=None)
     """client_id is the client ID of the OIDC application set on the IdP"""
 
+    display_name: Optional[str] = FieldInfo(alias="displayName", default=None)
+
     email_domain: Optional[str] = FieldInfo(alias="emailDomain", default=None)
+
+    email_domains: Optional[List[str]] = FieldInfo(alias="emailDomains", default=None)
