@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2025-12-15)
+
+Full Changelog: [v0.4.4...v0.5.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.4...v0.5.0)
+
+### Features
+
+* **api:** RBAC APIs ([615e517](https://github.com/gitpod-io/gitpod-sdk-python/commit/615e517ec8e2b0f3e6816696dc3fe66e1f2ae99e))
+
 ## 0.4.4 (2025-12-15)
 
 Full Changelog: [v0.4.3...v0.4.4](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.3...v0.4.4)
