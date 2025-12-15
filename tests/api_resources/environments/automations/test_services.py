@@ -37,17 +37,20 @@ class TestServices:
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
-                    "id": "id",
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
                 "description": "Runs the development web server",
                 "name": "Web Server",
                 "reference": "web-server",
+                "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": [
                     {
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
+                        "post_machine_start": True,
+                        "prebuild": True,
                     }
                 ],
             },
@@ -58,11 +61,19 @@ class TestServices:
                     "stop": "stop",
                 },
                 "desired_phase": "SERVICE_PHASE_UNSPECIFIED",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -142,12 +153,15 @@ class TestServices:
             metadata={
                 "description": "description",
                 "name": "x",
+                "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": {
                     "trigger": [
                         {
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
                         }
                     ]
                 },
@@ -158,11 +172,19 @@ class TestServices:
                     "start": "npm run start:dev",
                     "stop": "stop",
                 },
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
             status={
@@ -212,6 +234,7 @@ class TestServices:
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "references": ["web-server", "database"],
+                "roles": ["SERVICE_ROLE_UNSPECIFIED"],
                 "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={
@@ -372,17 +395,20 @@ class TestAsyncServices:
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
-                    "id": "id",
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
                 "description": "Runs the development web server",
                 "name": "Web Server",
                 "reference": "web-server",
+                "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": [
                     {
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
+                        "post_machine_start": True,
+                        "prebuild": True,
                     }
                 ],
             },
@@ -393,11 +419,19 @@ class TestAsyncServices:
                     "stop": "stop",
                 },
                 "desired_phase": "SERVICE_PHASE_UNSPECIFIED",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -477,12 +511,15 @@ class TestAsyncServices:
             metadata={
                 "description": "description",
                 "name": "x",
+                "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": {
                     "trigger": [
                         {
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
                         }
                     ]
                 },
@@ -493,11 +530,19 @@ class TestAsyncServices:
                     "start": "npm run start:dev",
                     "stop": "stop",
                 },
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
             status={
@@ -547,6 +592,7 @@ class TestAsyncServices:
             filter={
                 "environment_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "references": ["web-server", "database"],
+                "roles": ["SERVICE_ROLE_UNSPECIFIED"],
                 "service_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             },
             pagination={

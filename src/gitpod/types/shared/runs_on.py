@@ -14,4 +14,7 @@ class Docker(BaseModel):
 
 
 class RunsOn(BaseModel):
-    docker: Docker
+    docker: Optional[Docker] = None
+
+    machine: Optional[object] = None
+    """Machine runs the service/task directly on the VM/machine level."""

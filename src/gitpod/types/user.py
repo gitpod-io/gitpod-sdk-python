@@ -21,6 +21,9 @@ class User(BaseModel):
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """created_at is the creation time"""
 
+    email: Optional[str] = None
+    """email is the user's email address"""
+
     name: Optional[str] = None
     """name is the full name of the user"""
 

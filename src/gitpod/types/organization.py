@@ -110,7 +110,7 @@ class Organization(BaseModel):
     name: str
 
     tier: OrganizationTier
-    """The tier of the organization - free or enterprise"""
+    """The tier of the organization - free, enterprise or core"""
 
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """

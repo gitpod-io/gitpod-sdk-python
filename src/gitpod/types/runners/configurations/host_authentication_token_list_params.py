@@ -23,7 +23,11 @@ class HostAuthenticationTokenListParams(TypedDict, total=False):
 class Filter(TypedDict, total=False):
     runner_id: Annotated[Optional[str], PropertyInfo(alias="runnerId")]
 
+    subject_id: Annotated[Optional[str], PropertyInfo(alias="subjectId")]
+    """Filter by subject (user or service account)"""
+
     user_id: Annotated[Optional[str], PropertyInfo(alias="userId")]
+    """Deprecated: Use principal_id instead"""
 
 
 class Pagination(TypedDict, total=False):

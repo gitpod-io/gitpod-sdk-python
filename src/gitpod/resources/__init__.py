@@ -16,6 +16,22 @@ from .users import (
     UsersResourceWithStreamingResponse,
     AsyncUsersResourceWithStreamingResponse,
 )
+from .agents import (
+    AgentsResource,
+    AsyncAgentsResource,
+    AgentsResourceWithRawResponse,
+    AsyncAgentsResourceWithRawResponse,
+    AgentsResourceWithStreamingResponse,
+    AsyncAgentsResourceWithStreamingResponse,
+)
+from .errors import (
+    ErrorsResource,
+    AsyncErrorsResource,
+    ErrorsResourceWithRawResponse,
+    AsyncErrorsResourceWithRawResponse,
+    ErrorsResourceWithStreamingResponse,
+    AsyncErrorsResourceWithStreamingResponse,
+)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -88,6 +104,14 @@ from .projects import (
     ProjectsResourceWithStreamingResponse,
     AsyncProjectsResourceWithStreamingResponse,
 )
+from .prebuilds import (
+    PrebuildsResource,
+    AsyncPrebuildsResource,
+    PrebuildsResourceWithRawResponse,
+    AsyncPrebuildsResourceWithRawResponse,
+    PrebuildsResourceWithStreamingResponse,
+    AsyncPrebuildsResourceWithStreamingResponse,
+)
 from .environments import (
     EnvironmentsResource,
     AsyncEnvironmentsResource,
@@ -112,6 +136,12 @@ __all__ = [
     "AsyncAccountsResourceWithRawResponse",
     "AccountsResourceWithStreamingResponse",
     "AsyncAccountsResourceWithStreamingResponse",
+    "AgentsResource",
+    "AsyncAgentsResource",
+    "AgentsResourceWithRawResponse",
+    "AsyncAgentsResourceWithRawResponse",
+    "AgentsResourceWithStreamingResponse",
+    "AsyncAgentsResourceWithStreamingResponse",
     "EditorsResource",
     "AsyncEditorsResource",
     "EditorsResourceWithRawResponse",
@@ -124,6 +154,12 @@ __all__ = [
     "AsyncEnvironmentsResourceWithRawResponse",
     "EnvironmentsResourceWithStreamingResponse",
     "AsyncEnvironmentsResourceWithStreamingResponse",
+    "ErrorsResource",
+    "AsyncErrorsResource",
+    "ErrorsResourceWithRawResponse",
+    "AsyncErrorsResourceWithRawResponse",
+    "ErrorsResourceWithStreamingResponse",
+    "AsyncErrorsResourceWithStreamingResponse",
     "EventsResource",
     "AsyncEventsResource",
     "EventsResourceWithRawResponse",
@@ -154,6 +190,12 @@ __all__ = [
     "AsyncOrganizationsResourceWithRawResponse",
     "OrganizationsResourceWithStreamingResponse",
     "AsyncOrganizationsResourceWithStreamingResponse",
+    "PrebuildsResource",
+    "AsyncPrebuildsResource",
+    "PrebuildsResourceWithRawResponse",
+    "AsyncPrebuildsResourceWithRawResponse",
+    "PrebuildsResourceWithStreamingResponse",
+    "AsyncPrebuildsResourceWithStreamingResponse",
     "ProjectsResource",
     "AsyncProjectsResource",
     "ProjectsResourceWithRawResponse",

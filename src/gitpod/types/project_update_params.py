@@ -7,7 +7,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .environment_initializer_param import EnvironmentInitializerParam
-from .project_environment_class_param import ProjectEnvironmentClassParam
+from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 
 __all__ = ["ProjectUpdateParams"]
 
@@ -33,12 +33,19 @@ class ProjectUpdateParams(TypedDict, total=False):
     ```
     """
 
-    environment_class: Annotated[Optional[ProjectEnvironmentClassParam], PropertyInfo(alias="environmentClass")]
-
     initializer: Optional[EnvironmentInitializerParam]
     """initializer is the content initializer"""
 
     name: Optional[str]
+
+    prebuild_configuration: Annotated[
+        Optional[ProjectPrebuildConfigurationParam], PropertyInfo(alias="prebuildConfiguration")
+    ]
+    """
+    prebuild_configuration defines how prebuilds are created for this project. If
+    not provided, the existing prebuild configuration is not modified. To disable
+    prebuilds, set enabled to false.
+    """
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id specifies the project identifier"""

@@ -1,11 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from ...shared.subject import Subject
 from .host_authentication_token_source import HostAuthenticationTokenSource
 
 __all__ = ["HostAuthenticationToken"]
@@ -108,8 +109,23 @@ class HostAuthenticationToken(BaseModel):
 
     host: Optional[str] = None
 
+    integration_id: Optional[str] = FieldInfo(alias="integrationId", default=None)
+    """links to integration instance"""
+
     runner_id: Optional[str] = FieldInfo(alias="runnerId", default=None)
 
+    scopes: Optional[List[str]] = None
+    """token permissions"""
+
     source: Optional[HostAuthenticationTokenSource] = None
+    """auth_type"""
+
+    subject: Optional[Subject] = None
+    """
+    Subject identifies the principal (user or service account) for the token Note:
+    actual token and refresh_token values are retrieved via
+    GetHostAuthenticationTokenValue API
+    """
 
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
+    """Deprecated: Use principal_id and principal_type instead principal (user)"""

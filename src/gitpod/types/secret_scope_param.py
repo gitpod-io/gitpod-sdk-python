@@ -10,6 +10,9 @@ __all__ = ["SecretScopeParam"]
 
 
 class SecretScopeParam(TypedDict, total=False):
+    organization_id: Annotated[str, PropertyInfo(alias="organizationId")]
+    """organization_id is the Organization ID this Secret belongs to"""
+
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id is the Project ID this Secret belongs to"""
 

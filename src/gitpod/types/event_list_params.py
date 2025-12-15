@@ -7,8 +7,8 @@ from typing_extensions import Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .resource_type import ResourceType
 from .shared.principal import Principal
+from .shared.resource_type import ResourceType
 
 __all__ = ["EventListParams", "Filter", "Pagination"]
 

@@ -6,6 +6,7 @@ from typing import Union, Optional
 from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
+from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 
 __all__ = ["HostAuthenticationTokenUpdateParams"]
@@ -109,3 +110,5 @@ class HostAuthenticationTokenUpdateParams(TypedDict, total=False):
     """
 
     refresh_token: Annotated[Optional[str], PropertyInfo(alias="refreshToken")]
+
+    scopes: SequenceNotStr[str]

@@ -9,6 +9,7 @@ from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
 from ...shared_params.runs_on import RunsOn
 from ...shared_params.automation_trigger import AutomationTrigger
+from ...shared_params.environment_variable_item import EnvironmentVariableItem
 
 __all__ = ["TaskUpdateParams", "Metadata", "MetadataTriggeredBy", "Spec"]
 
@@ -38,5 +39,7 @@ class Metadata(TypedDict, total=False):
 
 class Spec(TypedDict, total=False):
     command: Optional[str]
+
+    env: Iterable[EnvironmentVariableItem]
 
     runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]

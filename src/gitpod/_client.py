@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import usage, events, groups, editors, secrets, accounts, gateways, identity
+from .resources import usage, agents, errors, events, editors, secrets, accounts, gateways, identity, prebuilds
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -30,6 +30,7 @@ from ._base_client import (
     AsyncAPIClient,
 )
 from .resources.users import users
+from .resources.groups import groups
 from .resources.runners import runners
 from .resources.projects import projects
 from .resources.environments import environments
@@ -40,13 +41,16 @@ __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Gitpod", "
 
 class Gitpod(SyncAPIClient):
     accounts: accounts.AccountsResource
+    agents: agents.AgentsResource
     editors: editors.EditorsResource
     environments: environments.EnvironmentsResource
+    errors: errors.ErrorsResource
     events: events.EventsResource
     gateways: gateways.GatewaysResource
     groups: groups.GroupsResource
     identity: identity.IdentityResource
     organizations: organizations.OrganizationsResource
+    prebuilds: prebuilds.PrebuildsResource
     projects: projects.ProjectsResource
     runners: runners.RunnersResource
     secrets: secrets.SecretsResource
@@ -110,13 +114,16 @@ class Gitpod(SyncAPIClient):
         )
 
         self.accounts = accounts.AccountsResource(self)
+        self.agents = agents.AgentsResource(self)
         self.editors = editors.EditorsResource(self)
         self.environments = environments.EnvironmentsResource(self)
+        self.errors = errors.ErrorsResource(self)
         self.events = events.EventsResource(self)
         self.gateways = gateways.GatewaysResource(self)
         self.groups = groups.GroupsResource(self)
         self.identity = identity.IdentityResource(self)
         self.organizations = organizations.OrganizationsResource(self)
+        self.prebuilds = prebuilds.PrebuildsResource(self)
         self.projects = projects.ProjectsResource(self)
         self.runners = runners.RunnersResource(self)
         self.secrets = secrets.SecretsResource(self)
@@ -232,13 +239,16 @@ class Gitpod(SyncAPIClient):
 
 class AsyncGitpod(AsyncAPIClient):
     accounts: accounts.AsyncAccountsResource
+    agents: agents.AsyncAgentsResource
     editors: editors.AsyncEditorsResource
     environments: environments.AsyncEnvironmentsResource
+    errors: errors.AsyncErrorsResource
     events: events.AsyncEventsResource
     gateways: gateways.AsyncGatewaysResource
     groups: groups.AsyncGroupsResource
     identity: identity.AsyncIdentityResource
     organizations: organizations.AsyncOrganizationsResource
+    prebuilds: prebuilds.AsyncPrebuildsResource
     projects: projects.AsyncProjectsResource
     runners: runners.AsyncRunnersResource
     secrets: secrets.AsyncSecretsResource
@@ -302,13 +312,16 @@ class AsyncGitpod(AsyncAPIClient):
         )
 
         self.accounts = accounts.AsyncAccountsResource(self)
+        self.agents = agents.AsyncAgentsResource(self)
         self.editors = editors.AsyncEditorsResource(self)
         self.environments = environments.AsyncEnvironmentsResource(self)
+        self.errors = errors.AsyncErrorsResource(self)
         self.events = events.AsyncEventsResource(self)
         self.gateways = gateways.AsyncGatewaysResource(self)
         self.groups = groups.AsyncGroupsResource(self)
         self.identity = identity.AsyncIdentityResource(self)
         self.organizations = organizations.AsyncOrganizationsResource(self)
+        self.prebuilds = prebuilds.AsyncPrebuildsResource(self)
         self.projects = projects.AsyncProjectsResource(self)
         self.runners = runners.AsyncRunnersResource(self)
         self.secrets = secrets.AsyncSecretsResource(self)
@@ -425,13 +438,16 @@ class AsyncGitpod(AsyncAPIClient):
 class GitpodWithRawResponse:
     def __init__(self, client: Gitpod) -> None:
         self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
+        self.agents = agents.AgentsResourceWithRawResponse(client.agents)
         self.editors = editors.EditorsResourceWithRawResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
+        self.errors = errors.ErrorsResourceWithRawResponse(client.errors)
         self.events = events.EventsResourceWithRawResponse(client.events)
         self.gateways = gateways.GatewaysResourceWithRawResponse(client.gateways)
         self.groups = groups.GroupsResourceWithRawResponse(client.groups)
         self.identity = identity.IdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
+        self.prebuilds = prebuilds.PrebuildsResourceWithRawResponse(client.prebuilds)
         self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
         self.runners = runners.RunnersResourceWithRawResponse(client.runners)
         self.secrets = secrets.SecretsResourceWithRawResponse(client.secrets)
@@ -442,13 +458,16 @@ class GitpodWithRawResponse:
 class AsyncGitpodWithRawResponse:
     def __init__(self, client: AsyncGitpod) -> None:
         self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
+        self.agents = agents.AsyncAgentsResourceWithRawResponse(client.agents)
         self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
+        self.errors = errors.AsyncErrorsResourceWithRawResponse(client.errors)
         self.events = events.AsyncEventsResourceWithRawResponse(client.events)
         self.gateways = gateways.AsyncGatewaysResourceWithRawResponse(client.gateways)
         self.groups = groups.AsyncGroupsResourceWithRawResponse(client.groups)
         self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
+        self.prebuilds = prebuilds.AsyncPrebuildsResourceWithRawResponse(client.prebuilds)
         self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
         self.runners = runners.AsyncRunnersResourceWithRawResponse(client.runners)
         self.secrets = secrets.AsyncSecretsResourceWithRawResponse(client.secrets)
@@ -459,13 +478,16 @@ class AsyncGitpodWithRawResponse:
 class GitpodWithStreamedResponse:
     def __init__(self, client: Gitpod) -> None:
         self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
+        self.agents = agents.AgentsResourceWithStreamingResponse(client.agents)
         self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
+        self.errors = errors.ErrorsResourceWithStreamingResponse(client.errors)
         self.events = events.EventsResourceWithStreamingResponse(client.events)
         self.gateways = gateways.GatewaysResourceWithStreamingResponse(client.gateways)
         self.groups = groups.GroupsResourceWithStreamingResponse(client.groups)
         self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
+        self.prebuilds = prebuilds.PrebuildsResourceWithStreamingResponse(client.prebuilds)
         self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
         self.runners = runners.RunnersResourceWithStreamingResponse(client.runners)
         self.secrets = secrets.SecretsResourceWithStreamingResponse(client.secrets)
@@ -476,13 +498,16 @@ class GitpodWithStreamedResponse:
 class AsyncGitpodWithStreamedResponse:
     def __init__(self, client: AsyncGitpod) -> None:
         self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
+        self.agents = agents.AsyncAgentsResourceWithStreamingResponse(client.agents)
         self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
         self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
+        self.errors = errors.AsyncErrorsResourceWithStreamingResponse(client.errors)
         self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
         self.gateways = gateways.AsyncGatewaysResourceWithStreamingResponse(client.gateways)
         self.groups = groups.AsyncGroupsResourceWithStreamingResponse(client.groups)
         self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
         self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
+        self.prebuilds = prebuilds.AsyncPrebuildsResourceWithStreamingResponse(client.prebuilds)
         self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
         self.runners = runners.AsyncRunnersResourceWithStreamingResponse(client.runners)
         self.secrets = secrets.AsyncSecretsResourceWithStreamingResponse(client.secrets)

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Dict, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from .sso_configuration_state import SSOConfigurationState
 
@@ -24,7 +25,11 @@ class SSOConfigurationUpdateParams(TypedDict, total=False):
     client_secret: Annotated[Optional[str], PropertyInfo(alias="clientSecret")]
     """client_secret is the client secret of the SSO provider"""
 
+    display_name: Annotated[Optional[str], PropertyInfo(alias="displayName")]
+
     email_domain: Annotated[Optional[str], PropertyInfo(alias="emailDomain")]
+
+    email_domains: Annotated[SequenceNotStr[str], PropertyInfo(alias="emailDomains")]
 
     issuer_url: Annotated[Optional[str], PropertyInfo(alias="issuerUrl")]
     """issuer_url is the URL of the IdP issuer"""

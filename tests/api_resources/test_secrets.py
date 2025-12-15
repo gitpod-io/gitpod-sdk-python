@@ -32,12 +32,14 @@ class TestSecrets:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         secret = client.secrets.create(
+            api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             scope={
+                "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
@@ -82,6 +84,7 @@ class TestSecrets:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "scope": {
+                    "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
@@ -240,12 +243,14 @@ class TestAsyncSecrets:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         secret = await async_client.secrets.create(
+            api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             scope={
+                "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
@@ -290,6 +295,7 @@ class TestAsyncSecrets:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "scope": {
+                    "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },

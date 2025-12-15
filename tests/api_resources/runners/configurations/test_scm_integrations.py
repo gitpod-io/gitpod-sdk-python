@@ -39,6 +39,7 @@ class TestScmIntegrations:
             pat=True,
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_id="github",
+            virtual_directory="virtualDirectory",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -115,6 +116,7 @@ class TestScmIntegrations:
             oauth_client_id="new_client_id",
             oauth_plaintext_client_secret="new_client_secret",
             pat=True,
+            virtual_directory="virtualDirectory",
         )
         assert_matches_type(object, scm_integration, path=["response"])
 
@@ -241,6 +243,7 @@ class TestAsyncScmIntegrations:
             pat=True,
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_id="github",
+            virtual_directory="virtualDirectory",
         )
         assert_matches_type(ScmIntegrationCreateResponse, scm_integration, path=["response"])
 
@@ -317,6 +320,7 @@ class TestAsyncScmIntegrations:
             oauth_client_id="new_client_id",
             oauth_plaintext_client_secret="new_client_secret",
             pat=True,
+            virtual_directory="virtualDirectory",
         )
         assert_matches_type(object, scm_integration, path=["response"])
 

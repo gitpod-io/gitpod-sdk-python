@@ -6,6 +6,7 @@ from datetime import datetime
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
+from .service_role import ServiceRole
 from ...shared.subject import Subject
 from ...shared.automation_trigger import AutomationTrigger
 
@@ -38,6 +39,9 @@ class ServiceMetadata(BaseModel):
     the environment. It is used to express dependencies between services, and to
     identify the service in user interactions (e.g. the CLI).
     """
+
+    role: Optional[ServiceRole] = None
+    """role specifies the intended role or purpose of the service."""
 
     triggered_by: Optional[List[AutomationTrigger]] = FieldInfo(alias="triggeredBy", default=None)
     """triggered_by is a list of trigger that start the service."""

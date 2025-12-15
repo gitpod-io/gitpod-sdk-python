@@ -44,6 +44,14 @@ from ..._response import (
 )
 from ...pagination import SyncMembersPage, AsyncMembersPage
 from ..._base_client import AsyncPaginator, make_request_options
+from .custom_domains import (
+    CustomDomainsResource,
+    AsyncCustomDomainsResource,
+    CustomDomainsResourceWithRawResponse,
+    AsyncCustomDomainsResourceWithRawResponse,
+    CustomDomainsResourceWithStreamingResponse,
+    AsyncCustomDomainsResourceWithStreamingResponse,
+)
 from .sso_configurations import (
     SSOConfigurationsResource,
     AsyncSSOConfigurationsResource,
@@ -72,6 +80,10 @@ __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
 
 class OrganizationsResource(SyncAPIResource):
+    @cached_property
+    def custom_domains(self) -> CustomDomainsResource:
+        return CustomDomainsResource(self._client)
+
     @cached_property
     def domain_verifications(self) -> DomainVerificationsResource:
         return DomainVerificationsResource(self._client)
@@ -493,6 +505,7 @@ class OrganizationsResource(SyncAPIResource):
         organization_id: str,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: organization_list_members_params.Filter | Omit = omit,
         pagination: organization_list_members_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -552,6 +565,7 @@ class OrganizationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
+                    "filter": filter,
                     "pagination": pagination,
                 },
                 organization_list_members_params.OrganizationListMembersParams,
@@ -645,6 +659,10 @@ class OrganizationsResource(SyncAPIResource):
 
 
 class AsyncOrganizationsResource(AsyncAPIResource):
+    @cached_property
+    def custom_domains(self) -> AsyncCustomDomainsResource:
+        return AsyncCustomDomainsResource(self._client)
+
     @cached_property
     def domain_verifications(self) -> AsyncDomainVerificationsResource:
         return AsyncDomainVerificationsResource(self._client)
@@ -1066,6 +1084,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         organization_id: str,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: organization_list_members_params.Filter | Omit = omit,
         pagination: organization_list_members_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1125,6 +1144,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
             body=maybe_transform(
                 {
                     "organization_id": organization_id,
+                    "filter": filter,
                     "pagination": pagination,
                 },
                 organization_list_members_params.OrganizationListMembersParams,
@@ -1247,6 +1267,10 @@ class OrganizationsResourceWithRawResponse:
         )
 
     @cached_property
+    def custom_domains(self) -> CustomDomainsResourceWithRawResponse:
+        return CustomDomainsResourceWithRawResponse(self._organizations.custom_domains)
+
+    @cached_property
     def domain_verifications(self) -> DomainVerificationsResourceWithRawResponse:
         return DomainVerificationsResourceWithRawResponse(self._organizations.domain_verifications)
 
@@ -1291,6 +1315,10 @@ class AsyncOrganizationsResourceWithRawResponse:
         self.set_role = async_to_raw_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def custom_domains(self) -> AsyncCustomDomainsResourceWithRawResponse:
+        return AsyncCustomDomainsResourceWithRawResponse(self._organizations.custom_domains)
 
     @cached_property
     def domain_verifications(self) -> AsyncDomainVerificationsResourceWithRawResponse:
@@ -1339,6 +1367,10 @@ class OrganizationsResourceWithStreamingResponse:
         )
 
     @cached_property
+    def custom_domains(self) -> CustomDomainsResourceWithStreamingResponse:
+        return CustomDomainsResourceWithStreamingResponse(self._organizations.custom_domains)
+
+    @cached_property
     def domain_verifications(self) -> DomainVerificationsResourceWithStreamingResponse:
         return DomainVerificationsResourceWithStreamingResponse(self._organizations.domain_verifications)
 
@@ -1383,6 +1415,10 @@ class AsyncOrganizationsResourceWithStreamingResponse:
         self.set_role = async_to_streamed_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def custom_domains(self) -> AsyncCustomDomainsResourceWithStreamingResponse:
+        return AsyncCustomDomainsResourceWithStreamingResponse(self._organizations.custom_domains)
 
     @cached_property
     def domain_verifications(self) -> AsyncDomainVerificationsResourceWithStreamingResponse:

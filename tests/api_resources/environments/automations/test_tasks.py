@@ -39,7 +39,7 @@ class TestTasks:
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
-                    "id": "id",
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
                 "description": "Builds the project artifacts",
@@ -50,16 +50,26 @@ class TestTasks:
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
+                        "post_machine_start": True,
+                        "prebuild": True,
                     }
                 ],
             },
             spec={
                 "command": "npm run build",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
         )
@@ -144,17 +154,27 @@ class TestTasks:
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
                         }
                     ]
                 },
             },
             spec={
                 "command": "npm run test:coverage",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
         )
@@ -321,7 +341,7 @@ class TestAsyncTasks:
             metadata={
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator": {
-                    "id": "id",
+                    "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "principal": "PRINCIPAL_UNSPECIFIED",
                 },
                 "description": "Builds the project artifacts",
@@ -332,16 +352,26 @@ class TestAsyncTasks:
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
+                        "post_machine_start": True,
+                        "prebuild": True,
                     }
                 ],
             },
             spec={
                 "command": "npm run build",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
         )
@@ -426,17 +456,27 @@ class TestAsyncTasks:
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
                         }
                     ]
                 },
             },
             spec={
                 "command": "npm run test:coverage",
+                "env": [
+                    {
+                        "name": "x",
+                        "value": "value",
+                        "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
+                    }
+                ],
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
-                    }
+                    },
+                    "machine": {},
                 },
             },
         )

@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
 from .environment_phase import EnvironmentPhase
 from .environment_initializer_param import EnvironmentInitializerParam
+from .shared_params.automation_trigger import AutomationTrigger
 
 __all__ = [
     "EnvironmentSpecParam",
@@ -39,6 +40,13 @@ class AutomationsFile(TypedDict, total=False):
     """
 
     session: str
+
+    trigger_filter: Annotated[Iterable[AutomationTrigger], PropertyInfo(alias="triggerFilter")]
+    """
+    trigger_filter specifies which automation triggers should execute. When set,
+    only automations matching these triggers will run. If empty/unset, all triggers
+    are evaluated normally.
+    """
 
 
 class Content(TypedDict, total=False):
@@ -85,6 +93,15 @@ class Devcontainer(TypedDict, total=False):
     dotfiles: DevcontainerDotfiles
     """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
 
+    lifecycle_stage: Annotated[
+        Literal["LIFECYCLE_STAGE_UNSPECIFIED", "LIFECYCLE_STAGE_FULL", "LIFECYCLE_STAGE_PREBUILD"],
+        PropertyInfo(alias="lifecycleStage"),
+    ]
+    """
+    lifecycle_stage controls which devcontainer lifecycle commands are executed.
+    Defaults to FULL if not specified.
+    """
+
     session: str
 
 
@@ -113,10 +130,23 @@ class Port(TypedDict, total=False):
     port: int
     """port number"""
 
+    protocol: Literal["PROTOCOL_UNSPECIFIED", "PROTOCOL_HTTP", "PROTOCOL_HTTPS"]
+    """
+    protocol for communication (Gateway proxy → user environment service). this
+    setting only affects the protocol used between Gateway and user environment
+    services.
+    """
+
 
 class Secret(TypedDict, total=False):
     id: str
     """id is the unique identifier of the secret."""
+
+    api_only: Annotated[bool, PropertyInfo(alias="apiOnly")]
+    """
+    api_only indicates the secret is only available via API/CLI. These secrets are
+    resolved but NOT automatically injected into services or devcontainers.
+    """
 
     container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
     """
@@ -190,7 +220,7 @@ class EnvironmentSpecParam(TypedDict, total=False):
     """machine is the machine spec of the environment"""
 
     ports: Iterable[Port]
-    """ports is the set of ports which ought to be exposed to the internet"""
+    """ports is the set of ports which ought to be exposed to your network"""
 
     secrets: Iterable[Secret]
     """secrets are confidential data that is mounted into the environment"""
@@ -208,3 +238,9 @@ class EnvironmentSpecParam(TypedDict, total=False):
 
     timeout: Timeout
     """Timeout configures the environment timeout"""
+
+    workflow_action_id: Annotated[Optional[str], PropertyInfo(alias="workflowActionId")]
+    """
+    workflow_action_id is an optional reference to the workflow execution action
+    that created this environment. Used for tracking and event correlation.
+    """

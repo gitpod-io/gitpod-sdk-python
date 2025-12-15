@@ -105,6 +105,11 @@ class Group(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
+    description: Optional[str] = None
+
+    member_count: Optional[int] = FieldInfo(alias="memberCount", default=None)
+    """member_count is the total number of members in this group"""
+
     name: Optional[str] = None
 
     organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)

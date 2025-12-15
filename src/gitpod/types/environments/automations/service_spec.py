@@ -1,12 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
 from ...._models import BaseModel
 from .service_phase import ServicePhase
 from ...shared.runs_on import RunsOn
+from ...shared.environment_variable_item import EnvironmentVariableItem
 
 __all__ = ["ServiceSpec", "Commands"]
 
@@ -57,6 +58,9 @@ class ServiceSpec(BaseModel):
 
     Used to start or stop the service.
     """
+
+    env: Optional[List[EnvironmentVariableItem]] = None
+    """env specifies environment variables for the service."""
 
     runs_on: Optional[RunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the service should run on."""

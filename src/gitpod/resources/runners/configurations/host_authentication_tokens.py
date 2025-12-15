@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -19,6 +19,7 @@ from ...._response import (
 )
 from ....pagination import SyncTokensPage, AsyncTokensPage
 from ...._base_client import AsyncPaginator, make_request_options
+from ....types.shared_params.subject import Subject
 from ....types.runners.configurations import (
     HostAuthenticationTokenSource,
     host_authentication_token_list_params,
@@ -65,9 +66,12 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         token: str | Omit = omit,
         expires_at: Union[str, datetime] | Omit = omit,
         host: str | Omit = omit,
+        integration_id: str | Omit = omit,
         refresh_token: str | Omit = omit,
         runner_id: str | Omit = omit,
+        scopes: SequenceNotStr[str] | Omit = omit,
         source: HostAuthenticationTokenSource | Omit = omit,
+        subject: Subject | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -102,6 +106,8 @@ class HostAuthenticationTokensResource(SyncAPIResource):
           ```
 
         Args:
+          token: stored encrypted, retrieved via GetHostAuthenticationTokenValue
+
           expires_at: A Timestamp represents a point in time independent of any time zone or local
               calendar, encoded as a count of seconds and fractions of seconds at nanosecond
               resolution. The count is relative to an epoch at UTC midnight on January 1,
@@ -191,6 +197,14 @@ class HostAuthenticationTokensResource(SyncAPIResource):
               [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
               to obtain a formatter capable of generating timestamps in this format.
 
+          refresh_token: stored encrypted, retrieved via GetHostAuthenticationTokenValue
+
+          scopes: Maximum 100 scopes allowed (101 for validation purposes)
+
+          subject: Subject identifies the principal (user or service account) for the token
+
+          user_id: Deprecated: Use principal_id and principal_type instead
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -206,9 +220,12 @@ class HostAuthenticationTokensResource(SyncAPIResource):
                     "token": token,
                     "expires_at": expires_at,
                     "host": host,
+                    "integration_id": integration_id,
                     "refresh_token": refresh_token,
                     "runner_id": runner_id,
+                    "scopes": scopes,
                     "source": source,
+                    "subject": subject,
                     "user_id": user_id,
                 },
                 host_authentication_token_create_params.HostAuthenticationTokenCreateParams,
@@ -276,6 +293,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
         token: Optional[str] | Omit = omit,
         expires_at: Union[str, datetime, None] | Omit = omit,
         refresh_token: Optional[str] | Omit = omit,
+        scopes: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -411,6 +429,7 @@ class HostAuthenticationTokensResource(SyncAPIResource):
                     "token": token,
                     "expires_at": expires_at,
                     "refresh_token": refresh_token,
+                    "scopes": scopes,
                 },
                 host_authentication_token_update_params.HostAuthenticationTokenUpdateParams,
             ),
@@ -578,9 +597,12 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         token: str | Omit = omit,
         expires_at: Union[str, datetime] | Omit = omit,
         host: str | Omit = omit,
+        integration_id: str | Omit = omit,
         refresh_token: str | Omit = omit,
         runner_id: str | Omit = omit,
+        scopes: SequenceNotStr[str] | Omit = omit,
         source: HostAuthenticationTokenSource | Omit = omit,
+        subject: Subject | Omit = omit,
         user_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -615,6 +637,8 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
           ```
 
         Args:
+          token: stored encrypted, retrieved via GetHostAuthenticationTokenValue
+
           expires_at: A Timestamp represents a point in time independent of any time zone or local
               calendar, encoded as a count of seconds and fractions of seconds at nanosecond
               resolution. The count is relative to an epoch at UTC midnight on January 1,
@@ -704,6 +728,14 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
               [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
               to obtain a formatter capable of generating timestamps in this format.
 
+          refresh_token: stored encrypted, retrieved via GetHostAuthenticationTokenValue
+
+          scopes: Maximum 100 scopes allowed (101 for validation purposes)
+
+          subject: Subject identifies the principal (user or service account) for the token
+
+          user_id: Deprecated: Use principal_id and principal_type instead
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -719,9 +751,12 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
                     "token": token,
                     "expires_at": expires_at,
                     "host": host,
+                    "integration_id": integration_id,
                     "refresh_token": refresh_token,
                     "runner_id": runner_id,
+                    "scopes": scopes,
                     "source": source,
+                    "subject": subject,
                     "user_id": user_id,
                 },
                 host_authentication_token_create_params.HostAuthenticationTokenCreateParams,
@@ -789,6 +824,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
         token: Optional[str] | Omit = omit,
         expires_at: Union[str, datetime, None] | Omit = omit,
         refresh_token: Optional[str] | Omit = omit,
+        scopes: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -924,6 +960,7 @@ class AsyncHostAuthenticationTokensResource(AsyncAPIResource):
                     "token": token,
                     "expires_at": expires_at,
                     "refresh_token": refresh_token,
+                    "scopes": scopes,
                 },
                 host_authentication_token_update_params.HostAuthenticationTokenUpdateParams,
             ),

@@ -64,16 +64,34 @@ class TestPolicies:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         policy = client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            agent_policy={
+                "command_deny_list": ["string"],
+                "mcp_disabled": True,
+                "scm_tools_disabled": True,
+            },
             allowed_editor_ids=["string"],
             allow_local_runners=True,
             default_editor_id="defaultEditorId",
             default_environment_image="defaultEnvironmentImage",
+            delete_archived_environments_after="+9125115.360s",
+            editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
+            maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",
             maximum_running_environments_per_user="5",
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
+            require_custom_domain_access=True,
+            security_agent_policy={
+                "crowdstrike": {
+                    "additional_options": {"foo": "string"},
+                    "cid_secret_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "enabled": True,
+                    "image": "image",
+                    "tags": "tags",
+                }
+            },
         )
         assert_matches_type(object, policy, path=["response"])
 
@@ -156,16 +174,34 @@ class TestAsyncPolicies:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         policy = await async_client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            agent_policy={
+                "command_deny_list": ["string"],
+                "mcp_disabled": True,
+                "scm_tools_disabled": True,
+            },
             allowed_editor_ids=["string"],
             allow_local_runners=True,
             default_editor_id="defaultEditorId",
             default_environment_image="defaultEnvironmentImage",
+            delete_archived_environments_after="+9125115.360s",
+            editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
+            maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",
             maximum_running_environments_per_user="5",
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
+            require_custom_domain_access=True,
+            security_agent_policy={
+                "crowdstrike": {
+                    "additional_options": {"foo": "string"},
+                    "cid_secret_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    "enabled": True,
+                    "image": "image",
+                    "tags": "tags",
+                }
+            },
         )
         assert_matches_type(object, policy, path=["response"])
 

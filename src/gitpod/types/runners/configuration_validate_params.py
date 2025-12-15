@@ -64,5 +64,13 @@ class ScmIntegration(TypedDict, total=False):
     integration is for
     """
 
+    virtual_directory: Annotated[Optional[str], PropertyInfo(alias="virtualDirectory")]
+    """
+    virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+    "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+    should be empty for other SCM types. Azure DevOps Server APIs work without
+    collection when PAT scope is 'All accessible organizations'.
+    """
+
 
 set_pydantic_config(ScmIntegration, {"arbitrary_types_allowed": True})
