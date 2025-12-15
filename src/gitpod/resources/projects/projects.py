@@ -35,17 +35,29 @@ from ..._response import (
 from ...pagination import SyncProjectsPage, AsyncProjectsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.project import Project
+from .environment_clases import (
+    EnvironmentClasesResource,
+    AsyncEnvironmentClasesResource,
+    EnvironmentClasesResourceWithRawResponse,
+    AsyncEnvironmentClasesResourceWithRawResponse,
+    EnvironmentClasesResourceWithStreamingResponse,
+    AsyncEnvironmentClasesResourceWithStreamingResponse,
+)
 from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
 from ...types.environment_initializer_param import EnvironmentInitializerParam
-from ...types.project_environment_class_param import ProjectEnvironmentClassParam
+from ...types.project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 from ...types.project_create_from_environment_response import ProjectCreateFromEnvironmentResponse
 
 __all__ = ["ProjectsResource", "AsyncProjectsResource"]
 
 
 class ProjectsResource(SyncAPIResource):
+    @cached_property
+    def environment_clases(self) -> EnvironmentClasesResource:
+        return EnvironmentClasesResource(self._client)
+
     @cached_property
     def policies(self) -> PoliciesResource:
         return PoliciesResource(self._client)
@@ -72,11 +84,11 @@ class ProjectsResource(SyncAPIResource):
     def create(
         self,
         *,
-        environment_class: ProjectEnvironmentClassParam,
         initializer: EnvironmentInitializerParam,
         automations_file_path: str | Omit = omit,
         devcontainer_file_path: str | Omit = omit,
         name: str | Omit = omit,
+        prebuild_configuration: ProjectPrebuildConfigurationParam | Omit = omit,
         technical_description: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -103,8 +115,6 @@ class ProjectsResource(SyncAPIResource):
 
           ```yaml
           name: "Web Application"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           initializer:
             specs:
               - git:
@@ -117,8 +127,6 @@ class ProjectsResource(SyncAPIResource):
 
           ```yaml
           name: "Backend Service"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           initializer:
             specs:
               - git:
@@ -144,6 +152,9 @@ class ProjectsResource(SyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          prebuild_configuration: prebuild_configuration defines how prebuilds are created for this project. If
+              not set, prebuilds are disabled for the project.
+
           technical_description: technical_description is a detailed technical description of the project This
               field is not returned by default in GetProject or ListProjects responses 8KB max
 
@@ -159,11 +170,11 @@ class ProjectsResource(SyncAPIResource):
             "/gitpod.v1.ProjectService/CreateProject",
             body=maybe_transform(
                 {
-                    "environment_class": environment_class,
                     "initializer": initializer,
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
                     "name": name,
+                    "prebuild_configuration": prebuild_configuration,
                     "technical_description": technical_description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -229,9 +240,9 @@ class ProjectsResource(SyncAPIResource):
         *,
         automations_file_path: Optional[str] | Omit = omit,
         devcontainer_file_path: Optional[str] | Omit = omit,
-        environment_class: Optional[ProjectEnvironmentClassParam] | Omit = omit,
         initializer: Optional[EnvironmentInitializerParam] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        prebuild_configuration: Optional[ProjectPrebuildConfigurationParam] | Omit = omit,
         project_id: str | Omit = omit,
         technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -250,6 +261,7 @@ class ProjectsResource(SyncAPIResource):
         - Update environment class
         - Change project name
         - Configure initializers
+        - Configure prebuild settings
 
         ### Examples
 
@@ -262,14 +274,20 @@ class ProjectsResource(SyncAPIResource):
           name: "New Project Name"
           ```
 
-        - Update environment class:
+        - Enable prebuilds with daily schedule:
 
-          Changes the project's environment class.
+          Configures prebuilds to run daily at 2 AM UTC.
 
           ```yaml
           projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          prebuildConfiguration:
+            enabled: true
+            environmentClassIds:
+              - "b0e12f6c-4c67-429d-a4a6-d9838b5da041"
+            timeout: "3600s"
+            trigger:
+              dailySchedule:
+                hourUtc: 2
           ```
 
         Args:
@@ -288,6 +306,10 @@ class ProjectsResource(SyncAPIResource):
               ```
 
           initializer: initializer is the content initializer
+
+          prebuild_configuration: prebuild_configuration defines how prebuilds are created for this project. If
+              not provided, the existing prebuild configuration is not modified. To disable
+              prebuilds, set enabled to false.
 
           project_id: project_id specifies the project identifier
 
@@ -308,9 +330,9 @@ class ProjectsResource(SyncAPIResource):
                 {
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
-                    "environment_class": environment_class,
                     "initializer": initializer,
                     "name": name,
+                    "prebuild_configuration": prebuild_configuration,
                     "project_id": project_id,
                     "technical_description": technical_description,
                 },
@@ -505,6 +527,10 @@ class ProjectsResource(SyncAPIResource):
 
 class AsyncProjectsResource(AsyncAPIResource):
     @cached_property
+    def environment_clases(self) -> AsyncEnvironmentClasesResource:
+        return AsyncEnvironmentClasesResource(self._client)
+
+    @cached_property
     def policies(self) -> AsyncPoliciesResource:
         return AsyncPoliciesResource(self._client)
 
@@ -530,11 +556,11 @@ class AsyncProjectsResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        environment_class: ProjectEnvironmentClassParam,
         initializer: EnvironmentInitializerParam,
         automations_file_path: str | Omit = omit,
         devcontainer_file_path: str | Omit = omit,
         name: str | Omit = omit,
+        prebuild_configuration: ProjectPrebuildConfigurationParam | Omit = omit,
         technical_description: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -561,8 +587,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           ```yaml
           name: "Web Application"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           initializer:
             specs:
               - git:
@@ -575,8 +599,6 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           ```yaml
           name: "Backend Service"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           initializer:
             specs:
               - git:
@@ -602,6 +624,9 @@ class AsyncProjectsResource(AsyncAPIResource):
               this.matches("^$|^[^/].*")
               ```
 
+          prebuild_configuration: prebuild_configuration defines how prebuilds are created for this project. If
+              not set, prebuilds are disabled for the project.
+
           technical_description: technical_description is a detailed technical description of the project This
               field is not returned by default in GetProject or ListProjects responses 8KB max
 
@@ -617,11 +642,11 @@ class AsyncProjectsResource(AsyncAPIResource):
             "/gitpod.v1.ProjectService/CreateProject",
             body=await async_maybe_transform(
                 {
-                    "environment_class": environment_class,
                     "initializer": initializer,
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
                     "name": name,
+                    "prebuild_configuration": prebuild_configuration,
                     "technical_description": technical_description,
                 },
                 project_create_params.ProjectCreateParams,
@@ -687,9 +712,9 @@ class AsyncProjectsResource(AsyncAPIResource):
         *,
         automations_file_path: Optional[str] | Omit = omit,
         devcontainer_file_path: Optional[str] | Omit = omit,
-        environment_class: Optional[ProjectEnvironmentClassParam] | Omit = omit,
         initializer: Optional[EnvironmentInitializerParam] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        prebuild_configuration: Optional[ProjectPrebuildConfigurationParam] | Omit = omit,
         project_id: str | Omit = omit,
         technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -708,6 +733,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         - Update environment class
         - Change project name
         - Configure initializers
+        - Configure prebuild settings
 
         ### Examples
 
@@ -720,14 +746,20 @@ class AsyncProjectsResource(AsyncAPIResource):
           name: "New Project Name"
           ```
 
-        - Update environment class:
+        - Enable prebuilds with daily schedule:
 
-          Changes the project's environment class.
+          Configures prebuilds to run daily at 2 AM UTC.
 
           ```yaml
           projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
-          environmentClass:
-            environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          prebuildConfiguration:
+            enabled: true
+            environmentClassIds:
+              - "b0e12f6c-4c67-429d-a4a6-d9838b5da041"
+            timeout: "3600s"
+            trigger:
+              dailySchedule:
+                hourUtc: 2
           ```
 
         Args:
@@ -746,6 +778,10 @@ class AsyncProjectsResource(AsyncAPIResource):
               ```
 
           initializer: initializer is the content initializer
+
+          prebuild_configuration: prebuild_configuration defines how prebuilds are created for this project. If
+              not provided, the existing prebuild configuration is not modified. To disable
+              prebuilds, set enabled to false.
 
           project_id: project_id specifies the project identifier
 
@@ -766,9 +802,9 @@ class AsyncProjectsResource(AsyncAPIResource):
                 {
                     "automations_file_path": automations_file_path,
                     "devcontainer_file_path": devcontainer_file_path,
-                    "environment_class": environment_class,
                     "initializer": initializer,
                     "name": name,
+                    "prebuild_configuration": prebuild_configuration,
                     "project_id": project_id,
                     "technical_description": technical_description,
                 },
@@ -985,6 +1021,10 @@ class ProjectsResourceWithRawResponse:
         )
 
     @cached_property
+    def environment_clases(self) -> EnvironmentClasesResourceWithRawResponse:
+        return EnvironmentClasesResourceWithRawResponse(self._projects.environment_clases)
+
+    @cached_property
     def policies(self) -> PoliciesResourceWithRawResponse:
         return PoliciesResourceWithRawResponse(self._projects.policies)
 
@@ -1011,6 +1051,10 @@ class AsyncProjectsResourceWithRawResponse:
         self.create_from_environment = async_to_raw_response_wrapper(
             projects.create_from_environment,
         )
+
+    @cached_property
+    def environment_clases(self) -> AsyncEnvironmentClasesResourceWithRawResponse:
+        return AsyncEnvironmentClasesResourceWithRawResponse(self._projects.environment_clases)
 
     @cached_property
     def policies(self) -> AsyncPoliciesResourceWithRawResponse:
@@ -1041,6 +1085,10 @@ class ProjectsResourceWithStreamingResponse:
         )
 
     @cached_property
+    def environment_clases(self) -> EnvironmentClasesResourceWithStreamingResponse:
+        return EnvironmentClasesResourceWithStreamingResponse(self._projects.environment_clases)
+
+    @cached_property
     def policies(self) -> PoliciesResourceWithStreamingResponse:
         return PoliciesResourceWithStreamingResponse(self._projects.policies)
 
@@ -1067,6 +1115,10 @@ class AsyncProjectsResourceWithStreamingResponse:
         self.create_from_environment = async_to_streamed_response_wrapper(
             projects.create_from_environment,
         )
+
+    @cached_property
+    def environment_clases(self) -> AsyncEnvironmentClasesResourceWithStreamingResponse:
+        return AsyncEnvironmentClasesResourceWithStreamingResponse(self._projects.environment_clases)
 
     @cached_property
     def policies(self) -> AsyncPoliciesResourceWithStreamingResponse:

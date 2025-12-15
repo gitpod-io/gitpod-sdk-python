@@ -58,6 +58,7 @@ class AutomationsFile(BaseModel):
             "CONTENT_PHASE_READY",
             "CONTENT_PHASE_UPDATING",
             "CONTENT_PHASE_FAILED",
+            "CONTENT_PHASE_UNAVAILABLE",
         ]
     ] = None
     """phase is the current phase of the automations file."""
@@ -155,6 +156,7 @@ class Content(BaseModel):
             "CONTENT_PHASE_READY",
             "CONTENT_PHASE_UPDATING",
             "CONTENT_PHASE_FAILED",
+            "CONTENT_PHASE_UNAVAILABLE",
         ]
     ] = None
     """phase is the current phase of the environment content"""
@@ -257,14 +259,25 @@ class EnvironmentURLs(BaseModel):
     logs: Optional[str] = None
     """logs is the URL at which the environment logs can be accessed."""
 
+    ops: Optional[str] = None
+    """ops is the URL at which the environment ops service can be accessed."""
+
     ports: Optional[List[EnvironmentURLsPort]] = None
 
     ssh: Optional[EnvironmentURLsSSH] = None
     """SSH is the URL at which the environment can be accessed via SSH."""
 
+    support_bundle: Optional[str] = FieldInfo(alias="supportBundle", default=None)
+    """
+    support_bundle is the URL at which the environment support bundle can be
+    accessed.
+    """
+
 
 class MachineVersions(BaseModel):
     """versions contains the versions of components in the machine."""
+
+    ami_id: Optional[str] = FieldInfo(alias="amiId", default=None)
 
     supervisor_commit: Optional[str] = FieldInfo(alias="supervisorCommit", default=None)
 
@@ -345,6 +358,7 @@ class Secret(BaseModel):
             "CONTENT_PHASE_READY",
             "CONTENT_PHASE_UPDATING",
             "CONTENT_PHASE_FAILED",
+            "CONTENT_PHASE_UNAVAILABLE",
         ]
     ] = None
 
@@ -372,6 +386,7 @@ class SSHPublicKey(BaseModel):
             "CONTENT_PHASE_READY",
             "CONTENT_PHASE_UPDATING",
             "CONTENT_PHASE_FAILED",
+            "CONTENT_PHASE_UNAVAILABLE",
         ]
     ] = None
     """phase is the current phase of the public key"""

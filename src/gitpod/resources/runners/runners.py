@@ -8,14 +8,17 @@ import httpx
 
 from ...types import (
     RunnerKind,
+    SearchMode,
     RunnerProvider,
     runner_list_params,
     runner_create_params,
     runner_delete_params,
     runner_update_params,
     runner_retrieve_params,
+    runner_create_logs_token_params,
     runner_parse_context_url_params,
     runner_create_runner_token_params,
+    runner_search_repositories_params,
     runner_check_authentication_for_host_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -40,6 +43,7 @@ from ...pagination import SyncRunnersPage, AsyncRunnersPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.runner import Runner
 from ...types.runner_kind import RunnerKind
+from ...types.search_mode import SearchMode
 from ...types.runner_provider import RunnerProvider
 from ...types.runner_spec_param import RunnerSpecParam
 from .configurations.configurations import (
@@ -52,8 +56,10 @@ from .configurations.configurations import (
 )
 from ...types.runner_create_response import RunnerCreateResponse
 from ...types.runner_retrieve_response import RunnerRetrieveResponse
+from ...types.runner_create_logs_token_response import RunnerCreateLogsTokenResponse
 from ...types.runner_parse_context_url_response import RunnerParseContextURLResponse
 from ...types.runner_create_runner_token_response import RunnerCreateRunnerTokenResponse
+from ...types.runner_search_repositories_response import RunnerSearchRepositoriesResponse
 from ...types.runner_check_authentication_for_host_response import RunnerCheckAuthenticationForHostResponse
 
 __all__ = ["RunnersResource", "AsyncRunnersResource"]
@@ -502,6 +508,54 @@ class RunnersResource(SyncAPIResource):
             cast_to=RunnerCheckAuthenticationForHostResponse,
         )
 
+    def create_logs_token(
+        self,
+        *,
+        runner_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerCreateLogsTokenResponse:
+        """
+        Creates an access token for runner logs and debug information.
+
+        Generated tokens are valid for one hour and provide runner-specific access
+        permissions. The token is scoped to a specific runner and can be used to access
+        support bundles.
+
+        ### Examples
+
+        - Generate runner logs token:
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        Args:
+          runner_id: runner_id specifies the runner for which the logs token should be created.
+
+              +required
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.RunnerService/CreateRunnerLogsToken",
+            body=maybe_transform({"runner_id": runner_id}, runner_create_logs_token_params.RunnerCreateLogsTokenParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerCreateLogsTokenResponse,
+        )
+
     def create_runner_token(
         self,
         *,
@@ -614,6 +668,94 @@ class RunnersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunnerParseContextURLResponse,
+        )
+
+    def search_repositories(
+        self,
+        *,
+        limit: int | Omit = omit,
+        pagination: runner_search_repositories_params.Pagination | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_host: str | Omit = omit,
+        search_mode: SearchMode | Omit = omit,
+        search_string: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerSearchRepositoriesResponse:
+        """
+        Searches for repositories across all authenticated SCM hosts.
+
+        Use this method to:
+
+        - List available repositories
+        - Search repositories by name or content
+        - Discover repositories for environment creation
+
+        Returns repositories from all authenticated SCM hosts in natural sort order. If
+        no repositories are found, returns an empty list.
+
+        ### Examples
+
+        - List all repositories:
+
+          Returns up to 25 repositories from all authenticated hosts.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        - Search repositories:
+
+          Searches for repositories matching the query across all hosts.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          searchString: "my-project"
+          limit: 10
+          ```
+
+        Args:
+          limit:
+              Maximum number of repositories to return. Default: 25, Maximum: 100 Deprecated:
+              Use pagination.page_size instead
+
+          pagination: Pagination parameters for repository search
+
+          scm_host: The SCM's host to retrieve repositories from
+
+          search_mode: Search mode determines how search_string is interpreted
+
+          search_string: Search query - interpretation depends on search_mode
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.RunnerService/SearchRepositories",
+            body=maybe_transform(
+                {
+                    "limit": limit,
+                    "pagination": pagination,
+                    "runner_id": runner_id,
+                    "scm_host": scm_host,
+                    "search_mode": search_mode,
+                    "search_string": search_string,
+                },
+                runner_search_repositories_params.RunnerSearchRepositoriesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerSearchRepositoriesResponse,
         )
 
 
@@ -1060,6 +1202,56 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerCheckAuthenticationForHostResponse,
         )
 
+    async def create_logs_token(
+        self,
+        *,
+        runner_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerCreateLogsTokenResponse:
+        """
+        Creates an access token for runner logs and debug information.
+
+        Generated tokens are valid for one hour and provide runner-specific access
+        permissions. The token is scoped to a specific runner and can be used to access
+        support bundles.
+
+        ### Examples
+
+        - Generate runner logs token:
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        Args:
+          runner_id: runner_id specifies the runner for which the logs token should be created.
+
+              +required
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.RunnerService/CreateRunnerLogsToken",
+            body=await async_maybe_transform(
+                {"runner_id": runner_id}, runner_create_logs_token_params.RunnerCreateLogsTokenParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerCreateLogsTokenResponse,
+        )
+
     async def create_runner_token(
         self,
         *,
@@ -1174,6 +1366,94 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerParseContextURLResponse,
         )
 
+    async def search_repositories(
+        self,
+        *,
+        limit: int | Omit = omit,
+        pagination: runner_search_repositories_params.Pagination | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_host: str | Omit = omit,
+        search_mode: SearchMode | Omit = omit,
+        search_string: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerSearchRepositoriesResponse:
+        """
+        Searches for repositories across all authenticated SCM hosts.
+
+        Use this method to:
+
+        - List available repositories
+        - Search repositories by name or content
+        - Discover repositories for environment creation
+
+        Returns repositories from all authenticated SCM hosts in natural sort order. If
+        no repositories are found, returns an empty list.
+
+        ### Examples
+
+        - List all repositories:
+
+          Returns up to 25 repositories from all authenticated hosts.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        - Search repositories:
+
+          Searches for repositories matching the query across all hosts.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          searchString: "my-project"
+          limit: 10
+          ```
+
+        Args:
+          limit:
+              Maximum number of repositories to return. Default: 25, Maximum: 100 Deprecated:
+              Use pagination.page_size instead
+
+          pagination: Pagination parameters for repository search
+
+          scm_host: The SCM's host to retrieve repositories from
+
+          search_mode: Search mode determines how search_string is interpreted
+
+          search_string: Search query - interpretation depends on search_mode
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.RunnerService/SearchRepositories",
+            body=await async_maybe_transform(
+                {
+                    "limit": limit,
+                    "pagination": pagination,
+                    "runner_id": runner_id,
+                    "scm_host": scm_host,
+                    "search_mode": search_mode,
+                    "search_string": search_string,
+                },
+                runner_search_repositories_params.RunnerSearchRepositoriesParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerSearchRepositoriesResponse,
+        )
+
 
 class RunnersResourceWithRawResponse:
     def __init__(self, runners: RunnersResource) -> None:
@@ -1197,11 +1477,17 @@ class RunnersResourceWithRawResponse:
         self.check_authentication_for_host = to_raw_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.create_logs_token = to_raw_response_wrapper(
+            runners.create_logs_token,
+        )
         self.create_runner_token = to_raw_response_wrapper(
             runners.create_runner_token,
         )
         self.parse_context_url = to_raw_response_wrapper(
             runners.parse_context_url,
+        )
+        self.search_repositories = to_raw_response_wrapper(
+            runners.search_repositories,
         )
 
     @cached_property
@@ -1235,11 +1521,17 @@ class AsyncRunnersResourceWithRawResponse:
         self.check_authentication_for_host = async_to_raw_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.create_logs_token = async_to_raw_response_wrapper(
+            runners.create_logs_token,
+        )
         self.create_runner_token = async_to_raw_response_wrapper(
             runners.create_runner_token,
         )
         self.parse_context_url = async_to_raw_response_wrapper(
             runners.parse_context_url,
+        )
+        self.search_repositories = async_to_raw_response_wrapper(
+            runners.search_repositories,
         )
 
     @cached_property
@@ -1273,11 +1565,17 @@ class RunnersResourceWithStreamingResponse:
         self.check_authentication_for_host = to_streamed_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.create_logs_token = to_streamed_response_wrapper(
+            runners.create_logs_token,
+        )
         self.create_runner_token = to_streamed_response_wrapper(
             runners.create_runner_token,
         )
         self.parse_context_url = to_streamed_response_wrapper(
             runners.parse_context_url,
+        )
+        self.search_repositories = to_streamed_response_wrapper(
+            runners.search_repositories,
         )
 
     @cached_property
@@ -1311,11 +1609,17 @@ class AsyncRunnersResourceWithStreamingResponse:
         self.check_authentication_for_host = async_to_streamed_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.create_logs_token = async_to_streamed_response_wrapper(
+            runners.create_logs_token,
+        )
         self.create_runner_token = async_to_streamed_response_wrapper(
             runners.create_runner_token,
         )
         self.parse_context_url = async_to_streamed_response_wrapper(
             runners.parse_context_url,
+        )
+        self.search_repositories = async_to_streamed_response_wrapper(
+            runners.search_repositories,
         )
 
     @cached_property

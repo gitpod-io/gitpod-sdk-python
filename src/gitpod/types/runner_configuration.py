@@ -20,7 +20,7 @@ class RunnerConfiguration(BaseModel):
     """
     devcontainer_image_cache_enabled controls whether the devcontainer build cache
     is enabled for this runner. Only takes effect on supported runners, currently
-    only AWS EC2 runners.
+    only AWS EC2 and Gitpod-managed runners.
     """
 
     log_level: Optional[LogLevel] = FieldInfo(alias="logLevel", default=None)

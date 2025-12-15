@@ -10,6 +10,9 @@ __all__ = ["SecretScope"]
 
 
 class SecretScope(BaseModel):
+    organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)
+    """organization_id is the Organization ID this Secret belongs to"""
+
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
     """project_id is the Project ID this Secret belongs to"""
 

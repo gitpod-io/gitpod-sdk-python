@@ -24,6 +24,14 @@ from .organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .custom_domains import (
+    CustomDomainsResource,
+    AsyncCustomDomainsResource,
+    CustomDomainsResourceWithRawResponse,
+    AsyncCustomDomainsResourceWithRawResponse,
+    CustomDomainsResourceWithStreamingResponse,
+    AsyncCustomDomainsResourceWithStreamingResponse,
+)
 from .sso_configurations import (
     SSOConfigurationsResource,
     AsyncSSOConfigurationsResource,
@@ -42,6 +50,12 @@ from .domain_verifications import (
 )
 
 __all__ = [
+    "CustomDomainsResource",
+    "AsyncCustomDomainsResource",
+    "CustomDomainsResourceWithRawResponse",
+    "AsyncCustomDomainsResourceWithRawResponse",
+    "CustomDomainsResourceWithStreamingResponse",
+    "AsyncCustomDomainsResourceWithStreamingResponse",
     "DomainVerificationsResource",
     "AsyncDomainVerificationsResource",
     "DomainVerificationsResourceWithRawResponse",

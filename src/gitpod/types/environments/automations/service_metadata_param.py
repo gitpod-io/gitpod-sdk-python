@@ -7,6 +7,7 @@ from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
+from .service_role import ServiceRole
 from ...shared_params.subject import Subject
 from ...shared_params.automation_trigger import AutomationTrigger
 
@@ -39,6 +40,9 @@ class ServiceMetadataParam(TypedDict, total=False):
     the environment. It is used to express dependencies between services, and to
     identify the service in user interactions (e.g. the CLI).
     """
+
+    role: ServiceRole
+    """role specifies the intended role or purpose of the service."""
 
     triggered_by: Annotated[Iterable[AutomationTrigger], PropertyInfo(alias="triggeredBy")]
     """triggered_by is a list of trigger that start the service."""

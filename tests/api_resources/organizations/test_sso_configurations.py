@@ -28,9 +28,22 @@ class TestSSOConfigurations:
         sso_configuration = client.organizations.sso_configurations.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+        )
+        assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_with_all_params(self, client: Gitpod) -> None:
+        sso_configuration = client.organizations.sso_configurations.create(
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            display_name="displayName",
+            email_domain="acme-corp.com",
+            email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
@@ -40,7 +53,6 @@ class TestSSOConfigurations:
         response = client.organizations.sso_configurations.with_raw_response.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
@@ -56,7 +68,6 @@ class TestSSOConfigurations:
         with client.organizations.sso_configurations.with_streaming_response.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
@@ -118,7 +129,9 @@ class TestSSOConfigurations:
             claims={"foo": "string"},
             client_id="new-client-id",
             client_secret="new-client-secret",
+            display_name="displayName",
             email_domain="xxxx",
+            email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
             issuer_url="https://example.com",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )
@@ -244,9 +257,22 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await async_client.organizations.sso_configurations.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+        )
+        assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
+        sso_configuration = await async_client.organizations.sso_configurations.create(
+            client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+            client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
+            issuer_url="https://accounts.google.com",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            display_name="displayName",
+            email_domain="acme-corp.com",
+            email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
@@ -256,7 +282,6 @@ class TestAsyncSSOConfigurations:
         response = await async_client.organizations.sso_configurations.with_raw_response.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         )
@@ -272,7 +297,6 @@ class TestAsyncSSOConfigurations:
         async with async_client.organizations.sso_configurations.with_streaming_response.create(
             client_id="012345678-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
-            email_domain="acme-corp.com",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
         ) as response:
@@ -334,7 +358,9 @@ class TestAsyncSSOConfigurations:
             claims={"foo": "string"},
             client_id="new-client-id",
             client_secret="new-client-secret",
+            display_name="displayName",
             email_domain="xxxx",
+            email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
             issuer_url="https://example.com",
             state="SSO_CONFIGURATION_STATE_UNSPECIFIED",
         )

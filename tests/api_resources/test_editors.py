@@ -110,6 +110,17 @@ class TestEditors:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_resolve_url_with_all_params(self, client: Gitpod) -> None:
+        editor = client.editors.resolve_url(
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            version="version",
+        )
+        assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_resolve_url(self, client: Gitpod) -> None:
         response = client.editors.with_raw_response.resolve_url(
             editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
@@ -227,6 +238,17 @@ class TestAsyncEditors:
             editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+        )
+        assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_resolve_url_with_all_params(self, async_client: AsyncGitpod) -> None:
+        editor = await async_client.editors.resolve_url(
+            editor_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
+            organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            version="version",
         )
         assert_matches_type(EditorResolveURLResponse, editor, path=["response"])
 

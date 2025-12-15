@@ -36,9 +36,15 @@ class TestHostAuthenticationTokens:
             token="gho_xxxxxxxxxxxx",
             expires_at=parse_datetime("2024-12-31T23:59:59Z"),
             host="github.com",
+            integration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             refresh_token="ghr_xxxxxxxxxxxx",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scopes=["string"],
             source="HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
+            subject={
+                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "principal": "PRINCIPAL_UNSPECIFIED",
+            },
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
@@ -115,6 +121,7 @@ class TestHostAuthenticationTokens:
             token="gho_xxxxxxxxxxxx",
             expires_at=parse_datetime("2024-12-31T23:59:59Z"),
             refresh_token="ghr_xxxxxxxxxxxx",
+            scopes=["string"],
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
@@ -154,6 +161,7 @@ class TestHostAuthenticationTokens:
             page_size=0,
             filter={
                 "runner_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
+                "subject_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             pagination={
@@ -240,9 +248,15 @@ class TestAsyncHostAuthenticationTokens:
             token="gho_xxxxxxxxxxxx",
             expires_at=parse_datetime("2024-12-31T23:59:59Z"),
             host="github.com",
+            integration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             refresh_token="ghr_xxxxxxxxxxxx",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scopes=["string"],
             source="HOST_AUTHENTICATION_TOKEN_SOURCE_OAUTH",
+            subject={
+                "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "principal": "PRINCIPAL_UNSPECIFIED",
+            },
             user_id="f53d2330-3795-4c5d-a1f3-453121af9c60",
         )
         assert_matches_type(HostAuthenticationTokenCreateResponse, host_authentication_token, path=["response"])
@@ -323,6 +337,7 @@ class TestAsyncHostAuthenticationTokens:
             token="gho_xxxxxxxxxxxx",
             expires_at=parse_datetime("2024-12-31T23:59:59Z"),
             refresh_token="ghr_xxxxxxxxxxxx",
+            scopes=["string"],
         )
         assert_matches_type(object, host_authentication_token, path=["response"])
 
@@ -364,6 +379,7 @@ class TestAsyncHostAuthenticationTokens:
             page_size=0,
             filter={
                 "runner_id": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
+                "subject_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             pagination={

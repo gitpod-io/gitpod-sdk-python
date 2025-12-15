@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Iterable
 from typing_extensions import Annotated, TypedDict
 
 from ...._utils import PropertyInfo
 from .service_phase import ServicePhase
 from ...shared_params.runs_on import RunsOn
+from ...shared_params.environment_variable_item import EnvironmentVariableItem
 
 __all__ = ["ServiceSpecParam", "Commands"]
 
@@ -57,6 +59,9 @@ class ServiceSpecParam(TypedDict, total=False):
 
     Used to start or stop the service.
     """
+
+    env: Iterable[EnvironmentVariableItem]
+    """env specifies environment variables for the service."""
 
     runs_on: Annotated[RunsOn, PropertyInfo(alias="runsOn")]
     """runs_on specifies the environment the service should run on."""

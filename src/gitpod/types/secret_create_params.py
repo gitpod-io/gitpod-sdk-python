@@ -11,6 +11,13 @@ __all__ = ["SecretCreateParams"]
 
 
 class SecretCreateParams(TypedDict, total=False):
+    api_only: Annotated[bool, PropertyInfo(alias="apiOnly")]
+    """
+    api_only indicates the secret is only available via API/CLI. These secrets are
+    NOT automatically injected into services or devcontainers. Useful for secrets
+    that should only be consumed programmatically (e.g., by security agents).
+    """
+
     container_registry_basic_auth_host: Annotated[str, PropertyInfo(alias="containerRegistryBasicAuthHost")]
     """
     secret will be mounted as a docker config in the environment VM, mount will have

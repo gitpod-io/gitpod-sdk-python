@@ -6,7 +6,7 @@ from typing import Dict, Optional
 
 import httpx
 
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -59,9 +59,11 @@ class SSOConfigurationsResource(SyncAPIResource):
         *,
         client_id: str,
         client_secret: str,
-        email_domain: str,
         issuer_url: str,
         organization_id: str,
+        display_name: str | Omit = omit,
+        email_domain: Optional[str] | Omit = omit,
+        email_domains: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -110,9 +112,9 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           client_secret: client_secret is the client secret of the OIDC application set on the IdP
 
-          email_domain: email_domain is the domain that is allowed to sign in to the organization
-
           issuer_url: issuer_url is the URL of the IdP issuer
+
+          email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
 
@@ -128,9 +130,11 @@ class SSOConfigurationsResource(SyncAPIResource):
                 {
                     "client_id": client_id,
                     "client_secret": client_secret,
-                    "email_domain": email_domain,
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
+                    "display_name": display_name,
+                    "email_domain": email_domain,
+                    "email_domains": email_domains,
                 },
                 sso_configuration_create_params.SSOConfigurationCreateParams,
             ),
@@ -200,7 +204,9 @@ class SSOConfigurationsResource(SyncAPIResource):
         claims: Dict[str, str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
+        display_name: Optional[str] | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
+        email_domains: SequenceNotStr[str] | Omit = omit,
         issuer_url: Optional[str] | Omit = omit,
         state: Optional[SSOConfigurationState] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -271,7 +277,9 @@ class SSOConfigurationsResource(SyncAPIResource):
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
+                    "display_name": display_name,
                     "email_domain": email_domain,
+                    "email_domains": email_domains,
                     "issuer_url": issuer_url,
                     "state": state,
                 },
@@ -445,9 +453,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         *,
         client_id: str,
         client_secret: str,
-        email_domain: str,
         issuer_url: str,
         organization_id: str,
+        display_name: str | Omit = omit,
+        email_domain: Optional[str] | Omit = omit,
+        email_domains: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -496,9 +506,9 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           client_secret: client_secret is the client secret of the OIDC application set on the IdP
 
-          email_domain: email_domain is the domain that is allowed to sign in to the organization
-
           issuer_url: issuer_url is the URL of the IdP issuer
+
+          email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
 
@@ -514,9 +524,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                 {
                     "client_id": client_id,
                     "client_secret": client_secret,
-                    "email_domain": email_domain,
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
+                    "display_name": display_name,
+                    "email_domain": email_domain,
+                    "email_domains": email_domains,
                 },
                 sso_configuration_create_params.SSOConfigurationCreateParams,
             ),
@@ -586,7 +598,9 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         claims: Dict[str, str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
+        display_name: Optional[str] | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
+        email_domains: SequenceNotStr[str] | Omit = omit,
         issuer_url: Optional[str] | Omit = omit,
         state: Optional[SSOConfigurationState] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -657,7 +671,9 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
+                    "display_name": display_name,
                     "email_domain": email_domain,
+                    "email_domains": email_domains,
                     "issuer_url": issuer_url,
                     "state": state,
                 },

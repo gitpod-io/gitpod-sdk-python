@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Annotated, TypedDict
 
 from ...._types import SequenceNotStr
 from ...._utils import PropertyInfo
+from .service_role import ServiceRole
 
 __all__ = ["ServiceListParams", "Filter", "Pagination"]
 
@@ -30,6 +32,9 @@ class Filter(TypedDict, total=False):
 
     references: SequenceNotStr[str]
     """references filters the response to only services with these references"""
+
+    roles: List[ServiceRole]
+    """roles filters the response to only services with these roles"""
 
     service_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="serviceIds")]
     """service_ids filters the response to only services with these IDs"""

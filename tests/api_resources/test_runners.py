@@ -13,8 +13,10 @@ from gitpod.types import (
     Runner,
     RunnerCreateResponse,
     RunnerRetrieveResponse,
+    RunnerCreateLogsTokenResponse,
     RunnerParseContextURLResponse,
     RunnerCreateRunnerTokenResponse,
+    RunnerSearchRepositoriesResponse,
     RunnerCheckAuthenticationForHostResponse,
 )
 from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage
@@ -54,6 +56,7 @@ class TestRunners:
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
                 "desired_phase": "RUNNER_PHASE_ACTIVE",
+                "variant": "RUNNER_VARIANT_UNSPECIFIED",
             },
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
@@ -290,6 +293,42 @@ class TestRunners:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_create_logs_token(self, client: Gitpod) -> None:
+        runner = client.runners.create_logs_token()
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_create_logs_token_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.create_logs_token(
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_create_logs_token(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.create_logs_token()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_create_logs_token(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.create_logs_token() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_method_create_runner_token(self, client: Gitpod) -> None:
         runner = client.runners.create_runner_token()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
@@ -361,6 +400,50 @@ class TestRunners:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_search_repositories(self, client: Gitpod) -> None:
+        runner = client.runners.search_repositories()
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_search_repositories_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.search_repositories(
+            limit=1,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_host="scmHost",
+            search_mode="SEARCH_MODE_UNSPECIFIED",
+            search_string="searchString",
+        )
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_search_repositories(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.search_repositories()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_search_repositories(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.search_repositories() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncRunners:
     parametrize = pytest.mark.parametrize(
@@ -396,6 +479,7 @@ class TestAsyncRunners:
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                 },
                 "desired_phase": "RUNNER_PHASE_ACTIVE",
+                "variant": "RUNNER_VARIANT_UNSPECIFIED",
             },
         )
         assert_matches_type(RunnerCreateResponse, runner, path=["response"])
@@ -632,6 +716,42 @@ class TestAsyncRunners:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    async def test_method_create_logs_token(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.create_logs_token()
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_create_logs_token_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.create_logs_token(
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_create_logs_token(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.create_logs_token()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_logs_token(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.create_logs_token() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(RunnerCreateLogsTokenResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     async def test_method_create_runner_token(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create_runner_token()
         assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
@@ -700,5 +820,49 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerParseContextURLResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_search_repositories(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.search_repositories()
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_search_repositories_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.search_repositories(
+            limit=1,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_host="scmHost",
+            search_mode="SEARCH_MODE_UNSPECIFIED",
+            search_string="searchString",
+        )
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_search_repositories(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.search_repositories()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_search_repositories(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.search_repositories() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(RunnerSearchRepositoriesResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True

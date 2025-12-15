@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List, Optional
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -8,6 +9,7 @@ from .._models import BaseModel
 from .admission_level import AdmissionLevel
 from .environment_phase import EnvironmentPhase
 from .environment_initializer import EnvironmentInitializer
+from .shared.automation_trigger import AutomationTrigger
 
 __all__ = [
     "EnvironmentSpec",
@@ -38,6 +40,13 @@ class AutomationsFile(BaseModel):
     """
 
     session: Optional[str] = None
+
+    trigger_filter: Optional[List[AutomationTrigger]] = FieldInfo(alias="triggerFilter", default=None)
+    """
+    trigger_filter specifies which automation triggers should execute. When set,
+    only automations matching these triggers will run. If empty/unset, all triggers
+    are evaluated normally.
+    """
 
 
 class Content(BaseModel):
@@ -84,6 +93,14 @@ class Devcontainer(BaseModel):
     dotfiles: Optional[DevcontainerDotfiles] = None
     """Experimental: dotfiles is the dotfiles configuration of the devcontainer"""
 
+    lifecycle_stage: Optional[
+        Literal["LIFECYCLE_STAGE_UNSPECIFIED", "LIFECYCLE_STAGE_FULL", "LIFECYCLE_STAGE_PREBUILD"]
+    ] = FieldInfo(alias="lifecycleStage", default=None)
+    """
+    lifecycle_stage controls which devcontainer lifecycle commands are executed.
+    Defaults to FULL if not specified.
+    """
+
     session: Optional[str] = None
 
 
@@ -106,10 +123,23 @@ class Port(BaseModel):
     port: Optional[int] = None
     """port number"""
 
+    protocol: Optional[Literal["PROTOCOL_UNSPECIFIED", "PROTOCOL_HTTP", "PROTOCOL_HTTPS"]] = None
+    """
+    protocol for communication (Gateway proxy → user environment service). this
+    setting only affects the protocol used between Gateway and user environment
+    services.
+    """
+
 
 class Secret(BaseModel):
     id: Optional[str] = None
     """id is the unique identifier of the secret."""
+
+    api_only: Optional[bool] = FieldInfo(alias="apiOnly", default=None)
+    """
+    api_only indicates the secret is only available via API/CLI. These secrets are
+    resolved but NOT automatically injected into services or devcontainers.
+    """
 
     container_registry_basic_auth_host: Optional[str] = FieldInfo(alias="containerRegistryBasicAuthHost", default=None)
     """
@@ -183,7 +213,7 @@ class EnvironmentSpec(BaseModel):
     """machine is the machine spec of the environment"""
 
     ports: Optional[List[Port]] = None
-    """ports is the set of ports which ought to be exposed to the internet"""
+    """ports is the set of ports which ought to be exposed to your network"""
 
     secrets: Optional[List[Secret]] = None
     """secrets are confidential data that is mounted into the environment"""
@@ -201,3 +231,9 @@ class EnvironmentSpec(BaseModel):
 
     timeout: Optional[Timeout] = None
     """Timeout configures the environment timeout"""
+
+    workflow_action_id: Optional[str] = FieldInfo(alias="workflowActionId", default=None)
+    """
+    workflow_action_id is an optional reference to the workflow execution action
+    that created this environment. Used for tracking and event correlation.
+    """

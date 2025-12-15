@@ -41,6 +41,15 @@ class TestEnvironments:
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "session": "session",
+                    "trigger_filter": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
+                        }
+                    ],
                 },
                 "content": {
                     "git_email": "gitEmail",
@@ -66,6 +75,7 @@ class TestEnvironments:
                     "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
+                    "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
                 "machine": {
@@ -76,12 +86,14 @@ class TestEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "secrets": [
                     {
                         "id": "id",
+                        "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -100,6 +112,7 @@ class TestEnvironments:
                     }
                 ],
                 "timeout": {"disconnected": "+9125115.360s"},
+                "workflow_action_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
         )
         assert_matches_type(EnvironmentCreateResponse, environment, path=["response"])
@@ -204,7 +217,8 @@ class TestEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "ssh_public_keys": [
@@ -254,8 +268,10 @@ class TestEnvironments:
             page_size=0,
             filter={
                 "archival_status": "ARCHIVAL_STATUS_UNSPECIFIED",
+                "created_before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "roles": ["ENVIRONMENT_ROLE_UNSPECIFIED"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
@@ -376,6 +392,15 @@ class TestEnvironments:
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "session": "session",
+                    "trigger_filter": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
+                        }
+                    ],
                 },
                 "content": {
                     "git_email": "gitEmail",
@@ -401,6 +426,7 @@ class TestEnvironments:
                     "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
+                    "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
                 "machine": {
@@ -411,12 +437,14 @@ class TestEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "secrets": [
                     {
                         "id": "id",
+                        "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -435,6 +463,7 @@ class TestEnvironments:
                     }
                 ],
                 "timeout": {"disconnected": "14400s"},
+                "workflow_action_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
         )
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])
@@ -666,6 +695,15 @@ class TestAsyncEnvironments:
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "session": "session",
+                    "trigger_filter": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
+                        }
+                    ],
                 },
                 "content": {
                     "git_email": "gitEmail",
@@ -691,6 +729,7 @@ class TestAsyncEnvironments:
                     "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
+                    "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
                 "machine": {
@@ -701,12 +740,14 @@ class TestAsyncEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "secrets": [
                     {
                         "id": "id",
+                        "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -725,6 +766,7 @@ class TestAsyncEnvironments:
                     }
                 ],
                 "timeout": {"disconnected": "+9125115.360s"},
+                "workflow_action_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
         )
         assert_matches_type(EnvironmentCreateResponse, environment, path=["response"])
@@ -829,7 +871,8 @@ class TestAsyncEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "ssh_public_keys": [
@@ -879,8 +922,10 @@ class TestAsyncEnvironments:
             page_size=0,
             filter={
                 "archival_status": "ARCHIVAL_STATUS_UNSPECIFIED",
+                "created_before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "creator_ids": ["f53d2330-3795-4c5d-a1f3-453121af9c60"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "roles": ["ENVIRONMENT_ROLE_UNSPECIFIED"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
@@ -1001,6 +1046,15 @@ class TestAsyncEnvironments:
                 "automations_file": {
                     "automations_file_path": "automationsFilePath",
                     "session": "session",
+                    "trigger_filter": [
+                        {
+                            "manual": True,
+                            "post_devcontainer_start": True,
+                            "post_environment_start": True,
+                            "post_machine_start": True,
+                            "prebuild": True,
+                        }
+                    ],
                 },
                 "content": {
                     "git_email": "gitEmail",
@@ -1026,6 +1080,7 @@ class TestAsyncEnvironments:
                     "default_devcontainer_image": "defaultDevcontainerImage",
                     "devcontainer_file_path": "devcontainerFilePath",
                     "dotfiles": {"repository": "https://example.com"},
+                    "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
                 "machine": {
@@ -1036,12 +1091,14 @@ class TestAsyncEnvironments:
                     {
                         "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                         "name": "x",
-                        "port": 1,
+                        "port": 1024,
+                        "protocol": "PROTOCOL_UNSPECIFIED",
                     }
                 ],
                 "secrets": [
                     {
                         "id": "id",
+                        "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "environment_variable": "environmentVariable",
                         "file_path": "filePath",
@@ -1060,6 +1117,7 @@ class TestAsyncEnvironments:
                     }
                 ],
                 "timeout": {"disconnected": "14400s"},
+                "workflow_action_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
         )
         assert_matches_type(EnvironmentCreateFromProjectResponse, environment, path=["response"])

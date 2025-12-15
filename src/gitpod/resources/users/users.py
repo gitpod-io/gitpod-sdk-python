@@ -12,7 +12,12 @@ from .pats import (
     PatsResourceWithStreamingResponse,
     AsyncPatsResourceWithStreamingResponse,
 )
-from ...types import user_set_suspended_params, user_get_authenticated_user_params
+from ...types import (
+    user_get_user_params,
+    user_delete_user_params,
+    user_set_suspended_params,
+    user_get_authenticated_user_params,
+)
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .dotfiles import (
@@ -32,6 +37,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.user_get_user_response import UserGetUserResponse
 from ...types.user_get_authenticated_user_response import UserGetAuthenticatedUserResponse
 
 __all__ = ["UsersResource", "AsyncUsersResource"]
@@ -64,6 +70,40 @@ class UsersResource(SyncAPIResource):
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
         return UsersResourceWithStreamingResponse(self)
+
+    def delete_user(
+        self,
+        *,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Deletes a user.
+
+        If the User comes from an organization's SSO provider, the
+        Account will also be deleted.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.UserService/DeleteUser",
+            body=maybe_transform({"user_id": user_id}, user_delete_user_params.UserDeleteUserParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
 
     def get_authenticated_user(
         self,
@@ -112,6 +152,54 @@ class UsersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=UserGetAuthenticatedUserResponse,
+        )
+
+    def get_user(
+        self,
+        *,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> UserGetUserResponse:
+        """
+        Gets basic information about a specific user by their ID.
+
+        Use this method to:
+
+        - Retrieve user profile information
+        - Get user details for display purposes
+        - Fetch user metadata for administrative tasks
+
+        ### Examples
+
+        - Get user by ID:
+
+          Retrieves basic user information by user ID.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.UserService/GetUser",
+            body=maybe_transform({"user_id": user_id}, user_get_user_params.UserGetUserParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserGetUserResponse,
         )
 
     def set_suspended(
@@ -208,6 +296,40 @@ class AsyncUsersResource(AsyncAPIResource):
         """
         return AsyncUsersResourceWithStreamingResponse(self)
 
+    async def delete_user(
+        self,
+        *,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Deletes a user.
+
+        If the User comes from an organization's SSO provider, the
+        Account will also be deleted.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.UserService/DeleteUser",
+            body=await async_maybe_transform({"user_id": user_id}, user_delete_user_params.UserDeleteUserParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
     async def get_authenticated_user(
         self,
         *,
@@ -257,6 +379,54 @@ class AsyncUsersResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=UserGetAuthenticatedUserResponse,
+        )
+
+    async def get_user(
+        self,
+        *,
+        user_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> UserGetUserResponse:
+        """
+        Gets basic information about a specific user by their ID.
+
+        Use this method to:
+
+        - Retrieve user profile information
+        - Get user details for display purposes
+        - Fetch user metadata for administrative tasks
+
+        ### Examples
+
+        - Get user by ID:
+
+          Retrieves basic user information by user ID.
+
+          ```yaml
+          userId: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.UserService/GetUser",
+            body=await async_maybe_transform({"user_id": user_id}, user_get_user_params.UserGetUserParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=UserGetUserResponse,
         )
 
     async def set_suspended(
@@ -329,8 +499,14 @@ class UsersResourceWithRawResponse:
     def __init__(self, users: UsersResource) -> None:
         self._users = users
 
+        self.delete_user = to_raw_response_wrapper(
+            users.delete_user,
+        )
         self.get_authenticated_user = to_raw_response_wrapper(
             users.get_authenticated_user,
+        )
+        self.get_user = to_raw_response_wrapper(
+            users.get_user,
         )
         self.set_suspended = to_raw_response_wrapper(
             users.set_suspended,
@@ -349,8 +525,14 @@ class AsyncUsersResourceWithRawResponse:
     def __init__(self, users: AsyncUsersResource) -> None:
         self._users = users
 
+        self.delete_user = async_to_raw_response_wrapper(
+            users.delete_user,
+        )
         self.get_authenticated_user = async_to_raw_response_wrapper(
             users.get_authenticated_user,
+        )
+        self.get_user = async_to_raw_response_wrapper(
+            users.get_user,
         )
         self.set_suspended = async_to_raw_response_wrapper(
             users.set_suspended,
@@ -369,8 +551,14 @@ class UsersResourceWithStreamingResponse:
     def __init__(self, users: UsersResource) -> None:
         self._users = users
 
+        self.delete_user = to_streamed_response_wrapper(
+            users.delete_user,
+        )
         self.get_authenticated_user = to_streamed_response_wrapper(
             users.get_authenticated_user,
+        )
+        self.get_user = to_streamed_response_wrapper(
+            users.get_user,
         )
         self.set_suspended = to_streamed_response_wrapper(
             users.set_suspended,
@@ -389,8 +577,14 @@ class AsyncUsersResourceWithStreamingResponse:
     def __init__(self, users: AsyncUsersResource) -> None:
         self._users = users
 
+        self.delete_user = async_to_streamed_response_wrapper(
+            users.delete_user,
+        )
         self.get_authenticated_user = async_to_streamed_response_wrapper(
             users.get_authenticated_user,
+        )
+        self.get_user = async_to_streamed_response_wrapper(
+            users.get_user,
         )
         self.set_suspended = async_to_streamed_response_wrapper(
             users.set_suspended,

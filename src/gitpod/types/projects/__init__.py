@@ -10,3 +10,5 @@ from .policy_delete_params import PolicyDeleteParams as PolicyDeleteParams
 from .policy_update_params import PolicyUpdateParams as PolicyUpdateParams
 from .policy_create_response import PolicyCreateResponse as PolicyCreateResponse
 from .policy_update_response import PolicyUpdateResponse as PolicyUpdateResponse
+from .environment_clase_list_params import EnvironmentClaseListParams as EnvironmentClaseListParams
+from .environment_clase_update_params import EnvironmentClaseUpdateParams as EnvironmentClaseUpdateParams

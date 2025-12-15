@@ -15,6 +15,9 @@ __all__ = ["Secret"]
 class Secret(BaseModel):
     id: Optional[str] = None
 
+    api_only: Optional[bool] = FieldInfo(alias="apiOnly", default=None)
+    """api_only indicates the secret is only available via API/CLI"""
+
     container_registry_basic_auth_host: Optional[str] = FieldInfo(alias="containerRegistryBasicAuthHost", default=None)
     """secret will be mounted as a registry secret"""
 

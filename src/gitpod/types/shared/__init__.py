@@ -7,8 +7,10 @@ from .subject import Subject as Subject
 from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
 from .error_code import ErrorCode as ErrorCode
+from .secret_ref import SecretRef as SecretRef
 from .field_value import FieldValue as FieldValue
 from .user_status import UserStatus as UserStatus
+from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
 from .task_execution import TaskExecution as TaskExecution
 from .environment_class import EnvironmentClass as EnvironmentClass
@@ -18,3 +20,6 @@ from .task_execution_spec import TaskExecutionSpec as TaskExecutionSpec
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
 from .task_execution_status import TaskExecutionStatus as TaskExecutionStatus
 from .task_execution_metadata import TaskExecutionMetadata as TaskExecutionMetadata
+from .environment_variable_item import EnvironmentVariableItem as EnvironmentVariableItem
+from .project_environment_class import ProjectEnvironmentClass as ProjectEnvironmentClass
+from .environment_variable_source import EnvironmentVariableSource as EnvironmentVariableSource

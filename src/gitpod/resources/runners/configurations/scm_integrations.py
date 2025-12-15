@@ -62,6 +62,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         pat: bool | Omit = omit,
         runner_id: str | Omit = omit,
         scm_id: str | Omit = omit,
+        virtual_directory: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,6 +106,11 @@ class ScmIntegrationsResource(SyncAPIResource):
           scm_id: scm_id references the scm_id in the runner's configuration schema that this
               integration is for
 
+          virtual_directory: virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+              "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+              should be empty for other SCM types. Azure DevOps Server APIs work without
+              collection when PAT scope is 'All accessible organizations'.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -124,6 +130,7 @@ class ScmIntegrationsResource(SyncAPIResource):
                     "pat": pat,
                     "runner_id": runner_id,
                     "scm_id": scm_id,
+                    "virtual_directory": virtual_directory,
                 },
                 scm_integration_create_params.ScmIntegrationCreateParams,
             ),
@@ -189,6 +196,7 @@ class ScmIntegrationsResource(SyncAPIResource):
         oauth_client_id: Optional[str] | Omit = omit,
         oauth_plaintext_client_secret: Optional[str] | Omit = omit,
         pat: Optional[bool] | Omit = omit,
+        virtual_directory: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -238,6 +246,11 @@ class ScmIntegrationsResource(SyncAPIResource):
               This might lead to users being unable to access their repositories until they
               re-authenticate.
 
+          virtual_directory: virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+              "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+              should be empty for other SCM types. Azure DevOps Server APIs work without
+              collection when PAT scope is 'All accessible organizations'.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -255,6 +268,7 @@ class ScmIntegrationsResource(SyncAPIResource):
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,
+                    "virtual_directory": virtual_directory,
                 },
                 scm_integration_update_params.ScmIntegrationUpdateParams,
             ),
@@ -417,6 +431,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         pat: bool | Omit = omit,
         runner_id: str | Omit = omit,
         scm_id: str | Omit = omit,
+        virtual_directory: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -460,6 +475,11 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
           scm_id: scm_id references the scm_id in the runner's configuration schema that this
               integration is for
 
+          virtual_directory: virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+              "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+              should be empty for other SCM types. Azure DevOps Server APIs work without
+              collection when PAT scope is 'All accessible organizations'.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -479,6 +499,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
                     "pat": pat,
                     "runner_id": runner_id,
                     "scm_id": scm_id,
+                    "virtual_directory": virtual_directory,
                 },
                 scm_integration_create_params.ScmIntegrationCreateParams,
             ),
@@ -544,6 +565,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
         oauth_client_id: Optional[str] | Omit = omit,
         oauth_plaintext_client_secret: Optional[str] | Omit = omit,
         pat: Optional[bool] | Omit = omit,
+        virtual_directory: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -593,6 +615,11 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
               This might lead to users being unable to access their repositories until they
               re-authenticate.
 
+          virtual_directory: virtual_directory is the virtual directory path for Azure DevOps Server (e.g.,
+              "/tfs"). This field is only used for Azure DevOps Server SCM integrations and
+              should be empty for other SCM types. Azure DevOps Server APIs work without
+              collection when PAT scope is 'All accessible organizations'.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -610,6 +637,7 @@ class AsyncScmIntegrationsResource(AsyncAPIResource):
                     "oauth_client_id": oauth_client_id,
                     "oauth_plaintext_client_secret": oauth_plaintext_client_secret,
                     "pat": pat,
+                    "virtual_directory": virtual_directory,
                 },
                 scm_integration_update_params.ScmIntegrationUpdateParams,
             ),
