@@ -12,6 +12,8 @@ jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +27,6 @@ jobs:
           RYE_INSTALL_OPTION: '--yes'
 
       - name: Publish to PyPI
+        
         run: |
           bash ./bin/publish-pypi
-        env:
-          PYPI_TOKEN: ${{ secrets.GITPOD_PYPI_TOKEN || secrets.PYPI_TOKEN }}
