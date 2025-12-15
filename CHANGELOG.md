@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2025-12-15)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* **internal:** add missing files argument to base client ([9d132f3](https://github.com/gitpod-io/gitpod-sdk-python/commit/9d132f33484aef2ab419052111d0d374ca7ce473))
+
 ## 0.5.0 (2025-12-15)
 
 Full Changelog: [v0.4.4...v0.5.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.4...v0.5.0)
