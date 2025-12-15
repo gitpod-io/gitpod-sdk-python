@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 (2025-12-15)
+
+Full Changelog: [v0.4.2...v0.4.3](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.2...v0.4.3)
+
 ## 0.4.2 (2025-12-15)
 
 Full Changelog: [v0.4.1...v0.4.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.1...v0.4.2)
