@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.2 (2025-12-15)
+
+Full Changelog: [v0.4.1...v0.4.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.1...v0.4.2)
+
+### Bug Fixes
+
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([cea547d](https://github.com/gitpod-io/gitpod-sdk-python/commit/cea547dff0e77fd9f3d913790e5bb85f7c566209))
+
+
+### Chores
+
+* add missing docstrings ([00778fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/00778fe498f509982a2cee08c43ac9c9a4377e3e))
+
 ## 0.4.1 (2025-12-05)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.4.0...v0.4.1)
