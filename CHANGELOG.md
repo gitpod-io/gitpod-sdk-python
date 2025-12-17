@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.2 (2025-12-16)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.1...v0.5.2)
+
+### Chores
+
+* speedup initial import ([0cfe207](https://github.com/gitpod-io/gitpod-sdk-python/commit/0cfe207c87e568a6ca9ee6a5ff2251910b064444))
+
 ## 0.5.1 (2025-12-15)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.0...v0.5.1)

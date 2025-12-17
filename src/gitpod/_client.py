@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import usage, agents, errors, events, editors, secrets, accounts, gateways, identity, prebuilds
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import GitpodError, APIStatusError
 from ._base_client import (
@@ -29,36 +29,47 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.users import users
-from .resources.groups import groups
-from .resources.runners import runners
-from .resources.projects import projects
-from .resources.environments import environments
-from .resources.organizations import organizations
+
+if TYPE_CHECKING:
+    from .resources import (
+        usage,
+        users,
+        agents,
+        errors,
+        events,
+        groups,
+        editors,
+        runners,
+        secrets,
+        accounts,
+        gateways,
+        identity,
+        projects,
+        prebuilds,
+        environments,
+        organizations,
+    )
+    from .resources.usage import UsageResource, AsyncUsageResource
+    from .resources.agents import AgentsResource, AsyncAgentsResource
+    from .resources.errors import ErrorsResource, AsyncErrorsResource
+    from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.editors import EditorsResource, AsyncEditorsResource
+    from .resources.secrets import SecretsResource, AsyncSecretsResource
+    from .resources.accounts import AccountsResource, AsyncAccountsResource
+    from .resources.gateways import GatewaysResource, AsyncGatewaysResource
+    from .resources.identity import IdentityResource, AsyncIdentityResource
+    from .resources.prebuilds import PrebuildsResource, AsyncPrebuildsResource
+    from .resources.users.users import UsersResource, AsyncUsersResource
+    from .resources.groups.groups import GroupsResource, AsyncGroupsResource
+    from .resources.runners.runners import RunnersResource, AsyncRunnersResource
+    from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.environments.environments import EnvironmentsResource, AsyncEnvironmentsResource
+    from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
 __all__ = ["Timeout", "Transport", "ProxiesTypes", "RequestOptions", "Gitpod", "AsyncGitpod", "Client", "AsyncClient"]
 
 
 class Gitpod(SyncAPIClient):
-    accounts: accounts.AccountsResource
-    agents: agents.AgentsResource
-    editors: editors.EditorsResource
-    environments: environments.EnvironmentsResource
-    errors: errors.ErrorsResource
-    events: events.EventsResource
-    gateways: gateways.GatewaysResource
-    groups: groups.GroupsResource
-    identity: identity.IdentityResource
-    organizations: organizations.OrganizationsResource
-    prebuilds: prebuilds.PrebuildsResource
-    projects: projects.ProjectsResource
-    runners: runners.RunnersResource
-    secrets: secrets.SecretsResource
-    usage: usage.UsageResource
-    users: users.UsersResource
-    with_raw_response: GitpodWithRawResponse
-    with_streaming_response: GitpodWithStreamedResponse
-
     # client options
     bearer_token: str
 
@@ -113,24 +124,109 @@ class Gitpod(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.AccountsResource(self)
-        self.agents = agents.AgentsResource(self)
-        self.editors = editors.EditorsResource(self)
-        self.environments = environments.EnvironmentsResource(self)
-        self.errors = errors.ErrorsResource(self)
-        self.events = events.EventsResource(self)
-        self.gateways = gateways.GatewaysResource(self)
-        self.groups = groups.GroupsResource(self)
-        self.identity = identity.IdentityResource(self)
-        self.organizations = organizations.OrganizationsResource(self)
-        self.prebuilds = prebuilds.PrebuildsResource(self)
-        self.projects = projects.ProjectsResource(self)
-        self.runners = runners.RunnersResource(self)
-        self.secrets = secrets.SecretsResource(self)
-        self.usage = usage.UsageResource(self)
-        self.users = users.UsersResource(self)
-        self.with_raw_response = GitpodWithRawResponse(self)
-        self.with_streaming_response = GitpodWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> AccountsResource:
+        from .resources.accounts import AccountsResource
+
+        return AccountsResource(self)
+
+    @cached_property
+    def agents(self) -> AgentsResource:
+        from .resources.agents import AgentsResource
+
+        return AgentsResource(self)
+
+    @cached_property
+    def editors(self) -> EditorsResource:
+        from .resources.editors import EditorsResource
+
+        return EditorsResource(self)
+
+    @cached_property
+    def environments(self) -> EnvironmentsResource:
+        from .resources.environments import EnvironmentsResource
+
+        return EnvironmentsResource(self)
+
+    @cached_property
+    def errors(self) -> ErrorsResource:
+        from .resources.errors import ErrorsResource
+
+        return ErrorsResource(self)
+
+    @cached_property
+    def events(self) -> EventsResource:
+        from .resources.events import EventsResource
+
+        return EventsResource(self)
+
+    @cached_property
+    def gateways(self) -> GatewaysResource:
+        from .resources.gateways import GatewaysResource
+
+        return GatewaysResource(self)
+
+    @cached_property
+    def groups(self) -> GroupsResource:
+        from .resources.groups import GroupsResource
+
+        return GroupsResource(self)
+
+    @cached_property
+    def identity(self) -> IdentityResource:
+        from .resources.identity import IdentityResource
+
+        return IdentityResource(self)
+
+    @cached_property
+    def organizations(self) -> OrganizationsResource:
+        from .resources.organizations import OrganizationsResource
+
+        return OrganizationsResource(self)
+
+    @cached_property
+    def prebuilds(self) -> PrebuildsResource:
+        from .resources.prebuilds import PrebuildsResource
+
+        return PrebuildsResource(self)
+
+    @cached_property
+    def projects(self) -> ProjectsResource:
+        from .resources.projects import ProjectsResource
+
+        return ProjectsResource(self)
+
+    @cached_property
+    def runners(self) -> RunnersResource:
+        from .resources.runners import RunnersResource
+
+        return RunnersResource(self)
+
+    @cached_property
+    def secrets(self) -> SecretsResource:
+        from .resources.secrets import SecretsResource
+
+        return SecretsResource(self)
+
+    @cached_property
+    def usage(self) -> UsageResource:
+        from .resources.usage import UsageResource
+
+        return UsageResource(self)
+
+    @cached_property
+    def users(self) -> UsersResource:
+        from .resources.users import UsersResource
+
+        return UsersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> GitpodWithRawResponse:
+        return GitpodWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> GitpodWithStreamedResponse:
+        return GitpodWithStreamedResponse(self)
 
     @property
     @override
@@ -238,25 +334,6 @@ class Gitpod(SyncAPIClient):
 
 
 class AsyncGitpod(AsyncAPIClient):
-    accounts: accounts.AsyncAccountsResource
-    agents: agents.AsyncAgentsResource
-    editors: editors.AsyncEditorsResource
-    environments: environments.AsyncEnvironmentsResource
-    errors: errors.AsyncErrorsResource
-    events: events.AsyncEventsResource
-    gateways: gateways.AsyncGatewaysResource
-    groups: groups.AsyncGroupsResource
-    identity: identity.AsyncIdentityResource
-    organizations: organizations.AsyncOrganizationsResource
-    prebuilds: prebuilds.AsyncPrebuildsResource
-    projects: projects.AsyncProjectsResource
-    runners: runners.AsyncRunnersResource
-    secrets: secrets.AsyncSecretsResource
-    usage: usage.AsyncUsageResource
-    users: users.AsyncUsersResource
-    with_raw_response: AsyncGitpodWithRawResponse
-    with_streaming_response: AsyncGitpodWithStreamedResponse
-
     # client options
     bearer_token: str
 
@@ -311,24 +388,109 @@ class AsyncGitpod(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.accounts = accounts.AsyncAccountsResource(self)
-        self.agents = agents.AsyncAgentsResource(self)
-        self.editors = editors.AsyncEditorsResource(self)
-        self.environments = environments.AsyncEnvironmentsResource(self)
-        self.errors = errors.AsyncErrorsResource(self)
-        self.events = events.AsyncEventsResource(self)
-        self.gateways = gateways.AsyncGatewaysResource(self)
-        self.groups = groups.AsyncGroupsResource(self)
-        self.identity = identity.AsyncIdentityResource(self)
-        self.organizations = organizations.AsyncOrganizationsResource(self)
-        self.prebuilds = prebuilds.AsyncPrebuildsResource(self)
-        self.projects = projects.AsyncProjectsResource(self)
-        self.runners = runners.AsyncRunnersResource(self)
-        self.secrets = secrets.AsyncSecretsResource(self)
-        self.usage = usage.AsyncUsageResource(self)
-        self.users = users.AsyncUsersResource(self)
-        self.with_raw_response = AsyncGitpodWithRawResponse(self)
-        self.with_streaming_response = AsyncGitpodWithStreamedResponse(self)
+    @cached_property
+    def accounts(self) -> AsyncAccountsResource:
+        from .resources.accounts import AsyncAccountsResource
+
+        return AsyncAccountsResource(self)
+
+    @cached_property
+    def agents(self) -> AsyncAgentsResource:
+        from .resources.agents import AsyncAgentsResource
+
+        return AsyncAgentsResource(self)
+
+    @cached_property
+    def editors(self) -> AsyncEditorsResource:
+        from .resources.editors import AsyncEditorsResource
+
+        return AsyncEditorsResource(self)
+
+    @cached_property
+    def environments(self) -> AsyncEnvironmentsResource:
+        from .resources.environments import AsyncEnvironmentsResource
+
+        return AsyncEnvironmentsResource(self)
+
+    @cached_property
+    def errors(self) -> AsyncErrorsResource:
+        from .resources.errors import AsyncErrorsResource
+
+        return AsyncErrorsResource(self)
+
+    @cached_property
+    def events(self) -> AsyncEventsResource:
+        from .resources.events import AsyncEventsResource
+
+        return AsyncEventsResource(self)
+
+    @cached_property
+    def gateways(self) -> AsyncGatewaysResource:
+        from .resources.gateways import AsyncGatewaysResource
+
+        return AsyncGatewaysResource(self)
+
+    @cached_property
+    def groups(self) -> AsyncGroupsResource:
+        from .resources.groups import AsyncGroupsResource
+
+        return AsyncGroupsResource(self)
+
+    @cached_property
+    def identity(self) -> AsyncIdentityResource:
+        from .resources.identity import AsyncIdentityResource
+
+        return AsyncIdentityResource(self)
+
+    @cached_property
+    def organizations(self) -> AsyncOrganizationsResource:
+        from .resources.organizations import AsyncOrganizationsResource
+
+        return AsyncOrganizationsResource(self)
+
+    @cached_property
+    def prebuilds(self) -> AsyncPrebuildsResource:
+        from .resources.prebuilds import AsyncPrebuildsResource
+
+        return AsyncPrebuildsResource(self)
+
+    @cached_property
+    def projects(self) -> AsyncProjectsResource:
+        from .resources.projects import AsyncProjectsResource
+
+        return AsyncProjectsResource(self)
+
+    @cached_property
+    def runners(self) -> AsyncRunnersResource:
+        from .resources.runners import AsyncRunnersResource
+
+        return AsyncRunnersResource(self)
+
+    @cached_property
+    def secrets(self) -> AsyncSecretsResource:
+        from .resources.secrets import AsyncSecretsResource
+
+        return AsyncSecretsResource(self)
+
+    @cached_property
+    def usage(self) -> AsyncUsageResource:
+        from .resources.usage import AsyncUsageResource
+
+        return AsyncUsageResource(self)
+
+    @cached_property
+    def users(self) -> AsyncUsersResource:
+        from .resources.users import AsyncUsersResource
+
+        return AsyncUsersResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncGitpodWithRawResponse:
+        return AsyncGitpodWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncGitpodWithStreamedResponse:
+        return AsyncGitpodWithStreamedResponse(self)
 
     @property
     @override
@@ -436,83 +598,415 @@ class AsyncGitpod(AsyncAPIClient):
 
 
 class GitpodWithRawResponse:
+    _client: Gitpod
+
     def __init__(self, client: Gitpod) -> None:
-        self.accounts = accounts.AccountsResourceWithRawResponse(client.accounts)
-        self.agents = agents.AgentsResourceWithRawResponse(client.agents)
-        self.editors = editors.EditorsResourceWithRawResponse(client.editors)
-        self.environments = environments.EnvironmentsResourceWithRawResponse(client.environments)
-        self.errors = errors.ErrorsResourceWithRawResponse(client.errors)
-        self.events = events.EventsResourceWithRawResponse(client.events)
-        self.gateways = gateways.GatewaysResourceWithRawResponse(client.gateways)
-        self.groups = groups.GroupsResourceWithRawResponse(client.groups)
-        self.identity = identity.IdentityResourceWithRawResponse(client.identity)
-        self.organizations = organizations.OrganizationsResourceWithRawResponse(client.organizations)
-        self.prebuilds = prebuilds.PrebuildsResourceWithRawResponse(client.prebuilds)
-        self.projects = projects.ProjectsResourceWithRawResponse(client.projects)
-        self.runners = runners.RunnersResourceWithRawResponse(client.runners)
-        self.secrets = secrets.SecretsResourceWithRawResponse(client.secrets)
-        self.usage = usage.UsageResourceWithRawResponse(client.usage)
-        self.users = users.UsersResourceWithRawResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithRawResponse:
+        from .resources.accounts import AccountsResourceWithRawResponse
+
+        return AccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithRawResponse:
+        from .resources.agents import AgentsResourceWithRawResponse
+
+        return AgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def editors(self) -> editors.EditorsResourceWithRawResponse:
+        from .resources.editors import EditorsResourceWithRawResponse
+
+        return EditorsResourceWithRawResponse(self._client.editors)
+
+    @cached_property
+    def environments(self) -> environments.EnvironmentsResourceWithRawResponse:
+        from .resources.environments import EnvironmentsResourceWithRawResponse
+
+        return EnvironmentsResourceWithRawResponse(self._client.environments)
+
+    @cached_property
+    def errors(self) -> errors.ErrorsResourceWithRawResponse:
+        from .resources.errors import ErrorsResourceWithRawResponse
+
+        return ErrorsResourceWithRawResponse(self._client.errors)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithRawResponse:
+        from .resources.events import EventsResourceWithRawResponse
+
+        return EventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def gateways(self) -> gateways.GatewaysResourceWithRawResponse:
+        from .resources.gateways import GatewaysResourceWithRawResponse
+
+        return GatewaysResourceWithRawResponse(self._client.gateways)
+
+    @cached_property
+    def groups(self) -> groups.GroupsResourceWithRawResponse:
+        from .resources.groups import GroupsResourceWithRawResponse
+
+        return GroupsResourceWithRawResponse(self._client.groups)
+
+    @cached_property
+    def identity(self) -> identity.IdentityResourceWithRawResponse:
+        from .resources.identity import IdentityResourceWithRawResponse
+
+        return IdentityResourceWithRawResponse(self._client.identity)
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithRawResponse:
+        from .resources.organizations import OrganizationsResourceWithRawResponse
+
+        return OrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def prebuilds(self) -> prebuilds.PrebuildsResourceWithRawResponse:
+        from .resources.prebuilds import PrebuildsResourceWithRawResponse
+
+        return PrebuildsResourceWithRawResponse(self._client.prebuilds)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithRawResponse:
+        from .resources.projects import ProjectsResourceWithRawResponse
+
+        return ProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def runners(self) -> runners.RunnersResourceWithRawResponse:
+        from .resources.runners import RunnersResourceWithRawResponse
+
+        return RunnersResourceWithRawResponse(self._client.runners)
+
+    @cached_property
+    def secrets(self) -> secrets.SecretsResourceWithRawResponse:
+        from .resources.secrets import SecretsResourceWithRawResponse
+
+        return SecretsResourceWithRawResponse(self._client.secrets)
+
+    @cached_property
+    def usage(self) -> usage.UsageResourceWithRawResponse:
+        from .resources.usage import UsageResourceWithRawResponse
+
+        return UsageResourceWithRawResponse(self._client.usage)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithRawResponse:
+        from .resources.users import UsersResourceWithRawResponse
+
+        return UsersResourceWithRawResponse(self._client.users)
 
 
 class AsyncGitpodWithRawResponse:
+    _client: AsyncGitpod
+
     def __init__(self, client: AsyncGitpod) -> None:
-        self.accounts = accounts.AsyncAccountsResourceWithRawResponse(client.accounts)
-        self.agents = agents.AsyncAgentsResourceWithRawResponse(client.agents)
-        self.editors = editors.AsyncEditorsResourceWithRawResponse(client.editors)
-        self.environments = environments.AsyncEnvironmentsResourceWithRawResponse(client.environments)
-        self.errors = errors.AsyncErrorsResourceWithRawResponse(client.errors)
-        self.events = events.AsyncEventsResourceWithRawResponse(client.events)
-        self.gateways = gateways.AsyncGatewaysResourceWithRawResponse(client.gateways)
-        self.groups = groups.AsyncGroupsResourceWithRawResponse(client.groups)
-        self.identity = identity.AsyncIdentityResourceWithRawResponse(client.identity)
-        self.organizations = organizations.AsyncOrganizationsResourceWithRawResponse(client.organizations)
-        self.prebuilds = prebuilds.AsyncPrebuildsResourceWithRawResponse(client.prebuilds)
-        self.projects = projects.AsyncProjectsResourceWithRawResponse(client.projects)
-        self.runners = runners.AsyncRunnersResourceWithRawResponse(client.runners)
-        self.secrets = secrets.AsyncSecretsResourceWithRawResponse(client.secrets)
-        self.usage = usage.AsyncUsageResourceWithRawResponse(client.usage)
-        self.users = users.AsyncUsersResourceWithRawResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithRawResponse:
+        from .resources.accounts import AsyncAccountsResourceWithRawResponse
+
+        return AsyncAccountsResourceWithRawResponse(self._client.accounts)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithRawResponse:
+        from .resources.agents import AsyncAgentsResourceWithRawResponse
+
+        return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def editors(self) -> editors.AsyncEditorsResourceWithRawResponse:
+        from .resources.editors import AsyncEditorsResourceWithRawResponse
+
+        return AsyncEditorsResourceWithRawResponse(self._client.editors)
+
+    @cached_property
+    def environments(self) -> environments.AsyncEnvironmentsResourceWithRawResponse:
+        from .resources.environments import AsyncEnvironmentsResourceWithRawResponse
+
+        return AsyncEnvironmentsResourceWithRawResponse(self._client.environments)
+
+    @cached_property
+    def errors(self) -> errors.AsyncErrorsResourceWithRawResponse:
+        from .resources.errors import AsyncErrorsResourceWithRawResponse
+
+        return AsyncErrorsResourceWithRawResponse(self._client.errors)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithRawResponse:
+        from .resources.events import AsyncEventsResourceWithRawResponse
+
+        return AsyncEventsResourceWithRawResponse(self._client.events)
+
+    @cached_property
+    def gateways(self) -> gateways.AsyncGatewaysResourceWithRawResponse:
+        from .resources.gateways import AsyncGatewaysResourceWithRawResponse
+
+        return AsyncGatewaysResourceWithRawResponse(self._client.gateways)
+
+    @cached_property
+    def groups(self) -> groups.AsyncGroupsResourceWithRawResponse:
+        from .resources.groups import AsyncGroupsResourceWithRawResponse
+
+        return AsyncGroupsResourceWithRawResponse(self._client.groups)
+
+    @cached_property
+    def identity(self) -> identity.AsyncIdentityResourceWithRawResponse:
+        from .resources.identity import AsyncIdentityResourceWithRawResponse
+
+        return AsyncIdentityResourceWithRawResponse(self._client.identity)
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithRawResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithRawResponse
+
+        return AsyncOrganizationsResourceWithRawResponse(self._client.organizations)
+
+    @cached_property
+    def prebuilds(self) -> prebuilds.AsyncPrebuildsResourceWithRawResponse:
+        from .resources.prebuilds import AsyncPrebuildsResourceWithRawResponse
+
+        return AsyncPrebuildsResourceWithRawResponse(self._client.prebuilds)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithRawResponse:
+        from .resources.projects import AsyncProjectsResourceWithRawResponse
+
+        return AsyncProjectsResourceWithRawResponse(self._client.projects)
+
+    @cached_property
+    def runners(self) -> runners.AsyncRunnersResourceWithRawResponse:
+        from .resources.runners import AsyncRunnersResourceWithRawResponse
+
+        return AsyncRunnersResourceWithRawResponse(self._client.runners)
+
+    @cached_property
+    def secrets(self) -> secrets.AsyncSecretsResourceWithRawResponse:
+        from .resources.secrets import AsyncSecretsResourceWithRawResponse
+
+        return AsyncSecretsResourceWithRawResponse(self._client.secrets)
+
+    @cached_property
+    def usage(self) -> usage.AsyncUsageResourceWithRawResponse:
+        from .resources.usage import AsyncUsageResourceWithRawResponse
+
+        return AsyncUsageResourceWithRawResponse(self._client.usage)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithRawResponse:
+        from .resources.users import AsyncUsersResourceWithRawResponse
+
+        return AsyncUsersResourceWithRawResponse(self._client.users)
 
 
 class GitpodWithStreamedResponse:
+    _client: Gitpod
+
     def __init__(self, client: Gitpod) -> None:
-        self.accounts = accounts.AccountsResourceWithStreamingResponse(client.accounts)
-        self.agents = agents.AgentsResourceWithStreamingResponse(client.agents)
-        self.editors = editors.EditorsResourceWithStreamingResponse(client.editors)
-        self.environments = environments.EnvironmentsResourceWithStreamingResponse(client.environments)
-        self.errors = errors.ErrorsResourceWithStreamingResponse(client.errors)
-        self.events = events.EventsResourceWithStreamingResponse(client.events)
-        self.gateways = gateways.GatewaysResourceWithStreamingResponse(client.gateways)
-        self.groups = groups.GroupsResourceWithStreamingResponse(client.groups)
-        self.identity = identity.IdentityResourceWithStreamingResponse(client.identity)
-        self.organizations = organizations.OrganizationsResourceWithStreamingResponse(client.organizations)
-        self.prebuilds = prebuilds.PrebuildsResourceWithStreamingResponse(client.prebuilds)
-        self.projects = projects.ProjectsResourceWithStreamingResponse(client.projects)
-        self.runners = runners.RunnersResourceWithStreamingResponse(client.runners)
-        self.secrets = secrets.SecretsResourceWithStreamingResponse(client.secrets)
-        self.usage = usage.UsageResourceWithStreamingResponse(client.usage)
-        self.users = users.UsersResourceWithStreamingResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AccountsResourceWithStreamingResponse:
+        from .resources.accounts import AccountsResourceWithStreamingResponse
+
+        return AccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def agents(self) -> agents.AgentsResourceWithStreamingResponse:
+        from .resources.agents import AgentsResourceWithStreamingResponse
+
+        return AgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def editors(self) -> editors.EditorsResourceWithStreamingResponse:
+        from .resources.editors import EditorsResourceWithStreamingResponse
+
+        return EditorsResourceWithStreamingResponse(self._client.editors)
+
+    @cached_property
+    def environments(self) -> environments.EnvironmentsResourceWithStreamingResponse:
+        from .resources.environments import EnvironmentsResourceWithStreamingResponse
+
+        return EnvironmentsResourceWithStreamingResponse(self._client.environments)
+
+    @cached_property
+    def errors(self) -> errors.ErrorsResourceWithStreamingResponse:
+        from .resources.errors import ErrorsResourceWithStreamingResponse
+
+        return ErrorsResourceWithStreamingResponse(self._client.errors)
+
+    @cached_property
+    def events(self) -> events.EventsResourceWithStreamingResponse:
+        from .resources.events import EventsResourceWithStreamingResponse
+
+        return EventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def gateways(self) -> gateways.GatewaysResourceWithStreamingResponse:
+        from .resources.gateways import GatewaysResourceWithStreamingResponse
+
+        return GatewaysResourceWithStreamingResponse(self._client.gateways)
+
+    @cached_property
+    def groups(self) -> groups.GroupsResourceWithStreamingResponse:
+        from .resources.groups import GroupsResourceWithStreamingResponse
+
+        return GroupsResourceWithStreamingResponse(self._client.groups)
+
+    @cached_property
+    def identity(self) -> identity.IdentityResourceWithStreamingResponse:
+        from .resources.identity import IdentityResourceWithStreamingResponse
+
+        return IdentityResourceWithStreamingResponse(self._client.identity)
+
+    @cached_property
+    def organizations(self) -> organizations.OrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import OrganizationsResourceWithStreamingResponse
+
+        return OrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def prebuilds(self) -> prebuilds.PrebuildsResourceWithStreamingResponse:
+        from .resources.prebuilds import PrebuildsResourceWithStreamingResponse
+
+        return PrebuildsResourceWithStreamingResponse(self._client.prebuilds)
+
+    @cached_property
+    def projects(self) -> projects.ProjectsResourceWithStreamingResponse:
+        from .resources.projects import ProjectsResourceWithStreamingResponse
+
+        return ProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def runners(self) -> runners.RunnersResourceWithStreamingResponse:
+        from .resources.runners import RunnersResourceWithStreamingResponse
+
+        return RunnersResourceWithStreamingResponse(self._client.runners)
+
+    @cached_property
+    def secrets(self) -> secrets.SecretsResourceWithStreamingResponse:
+        from .resources.secrets import SecretsResourceWithStreamingResponse
+
+        return SecretsResourceWithStreamingResponse(self._client.secrets)
+
+    @cached_property
+    def usage(self) -> usage.UsageResourceWithStreamingResponse:
+        from .resources.usage import UsageResourceWithStreamingResponse
+
+        return UsageResourceWithStreamingResponse(self._client.usage)
+
+    @cached_property
+    def users(self) -> users.UsersResourceWithStreamingResponse:
+        from .resources.users import UsersResourceWithStreamingResponse
+
+        return UsersResourceWithStreamingResponse(self._client.users)
 
 
 class AsyncGitpodWithStreamedResponse:
+    _client: AsyncGitpod
+
     def __init__(self, client: AsyncGitpod) -> None:
-        self.accounts = accounts.AsyncAccountsResourceWithStreamingResponse(client.accounts)
-        self.agents = agents.AsyncAgentsResourceWithStreamingResponse(client.agents)
-        self.editors = editors.AsyncEditorsResourceWithStreamingResponse(client.editors)
-        self.environments = environments.AsyncEnvironmentsResourceWithStreamingResponse(client.environments)
-        self.errors = errors.AsyncErrorsResourceWithStreamingResponse(client.errors)
-        self.events = events.AsyncEventsResourceWithStreamingResponse(client.events)
-        self.gateways = gateways.AsyncGatewaysResourceWithStreamingResponse(client.gateways)
-        self.groups = groups.AsyncGroupsResourceWithStreamingResponse(client.groups)
-        self.identity = identity.AsyncIdentityResourceWithStreamingResponse(client.identity)
-        self.organizations = organizations.AsyncOrganizationsResourceWithStreamingResponse(client.organizations)
-        self.prebuilds = prebuilds.AsyncPrebuildsResourceWithStreamingResponse(client.prebuilds)
-        self.projects = projects.AsyncProjectsResourceWithStreamingResponse(client.projects)
-        self.runners = runners.AsyncRunnersResourceWithStreamingResponse(client.runners)
-        self.secrets = secrets.AsyncSecretsResourceWithStreamingResponse(client.secrets)
-        self.usage = usage.AsyncUsageResourceWithStreamingResponse(client.usage)
-        self.users = users.AsyncUsersResourceWithStreamingResponse(client.users)
+        self._client = client
+
+    @cached_property
+    def accounts(self) -> accounts.AsyncAccountsResourceWithStreamingResponse:
+        from .resources.accounts import AsyncAccountsResourceWithStreamingResponse
+
+        return AsyncAccountsResourceWithStreamingResponse(self._client.accounts)
+
+    @cached_property
+    def agents(self) -> agents.AsyncAgentsResourceWithStreamingResponse:
+        from .resources.agents import AsyncAgentsResourceWithStreamingResponse
+
+        return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def editors(self) -> editors.AsyncEditorsResourceWithStreamingResponse:
+        from .resources.editors import AsyncEditorsResourceWithStreamingResponse
+
+        return AsyncEditorsResourceWithStreamingResponse(self._client.editors)
+
+    @cached_property
+    def environments(self) -> environments.AsyncEnvironmentsResourceWithStreamingResponse:
+        from .resources.environments import AsyncEnvironmentsResourceWithStreamingResponse
+
+        return AsyncEnvironmentsResourceWithStreamingResponse(self._client.environments)
+
+    @cached_property
+    def errors(self) -> errors.AsyncErrorsResourceWithStreamingResponse:
+        from .resources.errors import AsyncErrorsResourceWithStreamingResponse
+
+        return AsyncErrorsResourceWithStreamingResponse(self._client.errors)
+
+    @cached_property
+    def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
+        from .resources.events import AsyncEventsResourceWithStreamingResponse
+
+        return AsyncEventsResourceWithStreamingResponse(self._client.events)
+
+    @cached_property
+    def gateways(self) -> gateways.AsyncGatewaysResourceWithStreamingResponse:
+        from .resources.gateways import AsyncGatewaysResourceWithStreamingResponse
+
+        return AsyncGatewaysResourceWithStreamingResponse(self._client.gateways)
+
+    @cached_property
+    def groups(self) -> groups.AsyncGroupsResourceWithStreamingResponse:
+        from .resources.groups import AsyncGroupsResourceWithStreamingResponse
+
+        return AsyncGroupsResourceWithStreamingResponse(self._client.groups)
+
+    @cached_property
+    def identity(self) -> identity.AsyncIdentityResourceWithStreamingResponse:
+        from .resources.identity import AsyncIdentityResourceWithStreamingResponse
+
+        return AsyncIdentityResourceWithStreamingResponse(self._client.identity)
+
+    @cached_property
+    def organizations(self) -> organizations.AsyncOrganizationsResourceWithStreamingResponse:
+        from .resources.organizations import AsyncOrganizationsResourceWithStreamingResponse
+
+        return AsyncOrganizationsResourceWithStreamingResponse(self._client.organizations)
+
+    @cached_property
+    def prebuilds(self) -> prebuilds.AsyncPrebuildsResourceWithStreamingResponse:
+        from .resources.prebuilds import AsyncPrebuildsResourceWithStreamingResponse
+
+        return AsyncPrebuildsResourceWithStreamingResponse(self._client.prebuilds)
+
+    @cached_property
+    def projects(self) -> projects.AsyncProjectsResourceWithStreamingResponse:
+        from .resources.projects import AsyncProjectsResourceWithStreamingResponse
+
+        return AsyncProjectsResourceWithStreamingResponse(self._client.projects)
+
+    @cached_property
+    def runners(self) -> runners.AsyncRunnersResourceWithStreamingResponse:
+        from .resources.runners import AsyncRunnersResourceWithStreamingResponse
+
+        return AsyncRunnersResourceWithStreamingResponse(self._client.runners)
+
+    @cached_property
+    def secrets(self) -> secrets.AsyncSecretsResourceWithStreamingResponse:
+        from .resources.secrets import AsyncSecretsResourceWithStreamingResponse
+
+        return AsyncSecretsResourceWithStreamingResponse(self._client.secrets)
+
+    @cached_property
+    def usage(self) -> usage.AsyncUsageResourceWithStreamingResponse:
+        from .resources.usage import AsyncUsageResourceWithStreamingResponse
+
+        return AsyncUsageResourceWithStreamingResponse(self._client.usage)
+
+    @cached_property
+    def users(self) -> users.AsyncUsersResourceWithStreamingResponse:
+        from .resources.users import AsyncUsersResourceWithStreamingResponse
+
+        return AsyncUsersResourceWithStreamingResponse(self._client.users)
 
 
 Client = Gitpod
