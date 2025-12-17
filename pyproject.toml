@@ -1,6 +1,6 @@
 [project]
 name = "gitpod-sdk"
-version = "0.5.1"
+version = "0.5.2"
 description = "The official Python library for the gitpod API"
 dynamic = ["readme"]
 license = "Apache-2.0"
