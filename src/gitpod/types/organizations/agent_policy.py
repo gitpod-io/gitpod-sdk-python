@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import Field as FieldInfo
 
@@ -28,4 +28,10 @@ class AgentPolicy(BaseModel):
     """
     scm_tools_disabled controls whether SCM (Source Control Management) tools are
     disabled for agents
+    """
+
+    scm_tools_allowed_group_id: Optional[str] = FieldInfo(alias="scmToolsAllowedGroupId", default=None)
+    """
+    scm_tools_allowed_group_id restricts SCM tools access to members of this group.
+    Empty means no restriction (all users can use SCM tools if not disabled).
     """
