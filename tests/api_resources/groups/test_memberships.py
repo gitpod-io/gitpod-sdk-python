@@ -13,6 +13,7 @@ from gitpod.pagination import SyncMembersPage, AsyncMembersPage
 from gitpod.types.groups import (
     GroupMembership,
     MembershipCreateResponse,
+    MembershipRetrieveResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -58,6 +59,52 @@ class TestMemberships:
 
             membership = response.parse()
             assert_matches_type(MembershipCreateResponse, membership, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve(self, client: Gitpod) -> None:
+        membership = client.groups.memberships.retrieve(
+            subject={},
+        )
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
+        membership = client.groups.memberships.retrieve(
+            subject={
+                "id": "f53d2330-3795-4c5d-a1f3-453121af9c60",
+                "principal": "PRINCIPAL_USER",
+            },
+            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_retrieve(self, client: Gitpod) -> None:
+        response = client.groups.memberships.with_raw_response.retrieve(
+            subject={},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        membership = response.parse()
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_retrieve(self, client: Gitpod) -> None:
+        with client.groups.memberships.with_streaming_response.retrieve(
+            subject={},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            membership = response.parse()
+            assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -182,6 +229,52 @@ class TestAsyncMemberships:
 
             membership = await response.parse()
             assert_matches_type(MembershipCreateResponse, membership, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
+        membership = await async_client.groups.memberships.retrieve(
+            subject={},
+        )
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
+        membership = await async_client.groups.memberships.retrieve(
+            subject={
+                "id": "f53d2330-3795-4c5d-a1f3-453121af9c60",
+                "principal": "PRINCIPAL_USER",
+            },
+            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.groups.memberships.with_raw_response.retrieve(
+            subject={},
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        membership = await response.parse()
+        assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
+        async with async_client.groups.memberships.with_streaming_response.retrieve(
+            subject={},
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            membership = await response.parse()
+            assert_matches_type(MembershipRetrieveResponse, membership, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

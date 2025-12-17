@@ -131,6 +131,12 @@ class AgentPolicy(TypedDict, total=False):
     agents
     """
 
+    scm_tools_allowed_group_id: Annotated[Optional[str], PropertyInfo(alias="scmToolsAllowedGroupId")]
+    """
+    scm_tools_allowed_group_id restricts SCM tools access to members of this group.
+    Empty means no restriction (all users can use SCM tools if not disabled).
+    """
+
     scm_tools_disabled: Annotated[Optional[bool], PropertyInfo(alias="scmToolsDisabled")]
     """
     scm_tools_disabled controls whether SCM (Source Control Management) tools are
