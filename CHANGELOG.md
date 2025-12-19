@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.6.0 (2025-12-19)
+
+Full Changelog: [v0.5.2...v0.6.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.2...v0.6.0)
+
+### Features
+
+* **agent:** add group-based SCM tools access control ([9e23e57](https://github.com/gitpod-io/gitpod-sdk-python/commit/9e23e576ea787296c10f7edbb2a20bd9c47f5a4b))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([af8d708](https://github.com/gitpod-io/gitpod-sdk-python/commit/af8d70859c29a43ffd66f949bb70712491458c3d))
+
+
+### Chores
+
+* **internal:** codegen related update ([34dd0fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/34dd0fe4f13576840288a518b7c7c70f8d39d8f4))
+* pin GitHub Actions to SHA ([36acefc](https://github.com/gitpod-io/gitpod-sdk-python/commit/36acefc6f9ab2cbbde739b885e0734a9f476115b))
+
 ## 0.5.2 (2025-12-16)
 
 Full Changelog: [v0.5.1...v0.5.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.1...v0.5.2)
