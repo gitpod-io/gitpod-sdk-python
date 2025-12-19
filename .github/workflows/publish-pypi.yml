@@ -17,10 +17,10 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Install Rye
-        uses: eifinger/setup-rye@v4
+        uses: eifinger/setup-rye@c694239a43768373e87d0103d7f547027a23f3c8 # v4
         with:
           version: '0.44.0'
           
@@ -31,7 +31,7 @@ jobs:
         run: rye build --clean
       
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # release/v1
         with:
           # No token needed! Trusted publishing handles authentication
           packages-dir: dist/
