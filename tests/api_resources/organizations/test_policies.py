@@ -67,6 +67,7 @@ class TestPolicies:
             agent_policy={
                 "command_deny_list": ["string"],
                 "mcp_disabled": True,
+                "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,
             },
             allowed_editor_ids=["string"],
@@ -177,6 +178,7 @@ class TestAsyncPolicies:
             agent_policy={
                 "command_deny_list": ["string"],
                 "mcp_disabled": True,
+                "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,
             },
             allowed_editor_ids=["string"],

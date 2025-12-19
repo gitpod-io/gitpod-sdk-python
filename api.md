@@ -281,12 +281,17 @@ Methods:
 Types:
 
 ```python
-from gitpod.types.groups import GroupMembership, MembershipCreateResponse
+from gitpod.types.groups import (
+    GroupMembership,
+    MembershipCreateResponse,
+    MembershipRetrieveResponse,
+)
 ```
 
 Methods:
 
 - <code title="post /gitpod.v1.GroupService/CreateMembership">client.groups.memberships.<a href="./src/gitpod/resources/groups/memberships.py">create</a>(\*\*<a href="src/gitpod/types/groups/membership_create_params.py">params</a>) -> <a href="./src/gitpod/types/groups/membership_create_response.py">MembershipCreateResponse</a></code>
+- <code title="post /gitpod.v1.GroupService/GetMembership">client.groups.memberships.<a href="./src/gitpod/resources/groups/memberships.py">retrieve</a>(\*\*<a href="src/gitpod/types/groups/membership_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/groups/membership_retrieve_response.py">MembershipRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.GroupService/ListMemberships">client.groups.memberships.<a href="./src/gitpod/resources/groups/memberships.py">list</a>(\*\*<a href="src/gitpod/types/groups/membership_list_params.py">params</a>) -> <a href="./src/gitpod/types/groups/group_membership.py">SyncMembersPage[GroupMembership]</a></code>
 - <code title="post /gitpod.v1.GroupService/DeleteMembership">client.groups.memberships.<a href="./src/gitpod/resources/groups/memberships.py">delete</a>(\*\*<a href="src/gitpod/types/groups/membership_delete_params.py">params</a>) -> object</code>
 

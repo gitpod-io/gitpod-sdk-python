@@ -16,10 +16,16 @@ from ..._response import (
 )
 from ...pagination import SyncMembersPage, AsyncMembersPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.groups import membership_list_params, membership_create_params, membership_delete_params
+from ...types.groups import (
+    membership_list_params,
+    membership_create_params,
+    membership_delete_params,
+    membership_retrieve_params,
+)
 from ...types.shared_params.subject import Subject
 from ...types.groups.group_membership import GroupMembership
 from ...types.groups.membership_create_response import MembershipCreateResponse
+from ...types.groups.membership_retrieve_response import MembershipRetrieveResponse
 
 __all__ = ["MembershipsResource", "AsyncMembershipsResource"]
 
@@ -106,6 +112,69 @@ class MembershipsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MembershipCreateResponse,
+        )
+
+    def retrieve(
+        self,
+        *,
+        subject: Subject,
+        group_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MembershipRetrieveResponse:
+        """
+        Gets a specific membership by group ID and subject.
+
+        Use this method to:
+
+        - Check if a user or service account is a member of a group
+        - Verify group membership for access control
+
+        ### Examples
+
+        - Check user membership:
+
+          Checks if a user is a member of a specific group.
+
+          ```yaml
+          groupId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          subject:
+            id: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+            principal: PRINCIPAL_USER
+          ```
+
+        ### Authorization
+
+        All organization members can check group membership (transparency model).
+
+        Args:
+          subject: Subject to check membership for
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.GroupService/GetMembership",
+            body=maybe_transform(
+                {
+                    "subject": subject,
+                    "group_id": group_id,
+                },
+                membership_retrieve_params.MembershipRetrieveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MembershipRetrieveResponse,
         )
 
     def list(
@@ -323,6 +392,69 @@ class AsyncMembershipsResource(AsyncAPIResource):
             cast_to=MembershipCreateResponse,
         )
 
+    async def retrieve(
+        self,
+        *,
+        subject: Subject,
+        group_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MembershipRetrieveResponse:
+        """
+        Gets a specific membership by group ID and subject.
+
+        Use this method to:
+
+        - Check if a user or service account is a member of a group
+        - Verify group membership for access control
+
+        ### Examples
+
+        - Check user membership:
+
+          Checks if a user is a member of a specific group.
+
+          ```yaml
+          groupId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          subject:
+            id: "f53d2330-3795-4c5d-a1f3-453121af9c60"
+            principal: PRINCIPAL_USER
+          ```
+
+        ### Authorization
+
+        All organization members can check group membership (transparency model).
+
+        Args:
+          subject: Subject to check membership for
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.GroupService/GetMembership",
+            body=await async_maybe_transform(
+                {
+                    "subject": subject,
+                    "group_id": group_id,
+                },
+                membership_retrieve_params.MembershipRetrieveParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MembershipRetrieveResponse,
+        )
+
     def list(
         self,
         *,
@@ -463,6 +595,9 @@ class MembershipsResourceWithRawResponse:
         self.create = to_raw_response_wrapper(
             memberships.create,
         )
+        self.retrieve = to_raw_response_wrapper(
+            memberships.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             memberships.list,
         )
@@ -477,6 +612,9 @@ class AsyncMembershipsResourceWithRawResponse:
 
         self.create = async_to_raw_response_wrapper(
             memberships.create,
+        )
+        self.retrieve = async_to_raw_response_wrapper(
+            memberships.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
             memberships.list,
@@ -493,6 +631,9 @@ class MembershipsResourceWithStreamingResponse:
         self.create = to_streamed_response_wrapper(
             memberships.create,
         )
+        self.retrieve = to_streamed_response_wrapper(
+            memberships.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             memberships.list,
         )
@@ -507,6 +648,9 @@ class AsyncMembershipsResourceWithStreamingResponse:
 
         self.create = async_to_streamed_response_wrapper(
             memberships.create,
+        )
+        self.retrieve = async_to_streamed_response_wrapper(
+            memberships.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
             memberships.list,

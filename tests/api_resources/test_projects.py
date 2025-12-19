@@ -210,6 +210,7 @@ class TestProjects:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "search": "search",
             },
             pagination={
@@ -506,6 +507,7 @@ class TestAsyncProjects:
             filter={
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "runner_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
                 "search": "search",
             },
             pagination={

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .runner_kind import RunnerKind
 
 __all__ = ["ProjectListParams", "Filter", "Pagination"]
 
@@ -29,6 +31,12 @@ class Filter(TypedDict, total=False):
     """
     runner_ids filters the response to only projects that use environment classes
     from these runners
+    """
+
+    runner_kinds: Annotated[List[RunnerKind], PropertyInfo(alias="runnerKinds")]
+    """
+    runner_kinds filters the response to only projects that use environment classes
+    from runners of these kinds
     """
 
     search: str
