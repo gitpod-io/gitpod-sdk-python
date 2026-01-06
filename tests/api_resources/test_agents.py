@@ -77,6 +77,7 @@ class TestAgents:
             command="command",
             description="x",
             is_command=True,
+            is_skill=True,
             is_template=True,
             name="x",
             prompt="x",
@@ -242,6 +243,7 @@ class TestAgents:
                 "command": "command",
                 "command_prefix": "commandPrefix",
                 "is_command": True,
+                "is_skill": True,
                 "is_template": True,
             },
             pagination={
@@ -501,6 +503,7 @@ class TestAgents:
             spec={
                 "command": "command",
                 "is_command": True,
+                "is_skill": True,
                 "is_template": True,
                 "prompt": "prompt",
             },
@@ -584,6 +587,7 @@ class TestAsyncAgents:
             command="command",
             description="x",
             is_command=True,
+            is_skill=True,
             is_template=True,
             name="x",
             prompt="x",
@@ -749,6 +753,7 @@ class TestAsyncAgents:
                 "command": "command",
                 "command_prefix": "commandPrefix",
                 "is_command": True,
+                "is_skill": True,
                 "is_template": True,
             },
             pagination={
@@ -1008,6 +1013,7 @@ class TestAsyncAgents:
             spec={
                 "command": "command",
                 "is_command": True,
+                "is_skill": True,
                 "is_template": True,
                 "prompt": "prompt",
             },
