@@ -16,6 +16,8 @@ class AgentCreatePromptParams(TypedDict, total=False):
 
     is_command: Annotated[bool, PropertyInfo(alias="isCommand")]
 
+    is_skill: Annotated[bool, PropertyInfo(alias="isSkill")]
+
     is_template: Annotated[bool, PropertyInfo(alias="isTemplate")]
 
     name: str
