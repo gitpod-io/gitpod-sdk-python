@@ -16,6 +16,9 @@ class PromptSpec(BaseModel):
     is_command: Optional[bool] = FieldInfo(alias="isCommand", default=None)
     """is_command indicates if this prompt is a command"""
 
+    is_skill: Optional[bool] = FieldInfo(alias="isSkill", default=None)
+    """is_skill indicates if this prompt is a skill (workflow instructions for agents)"""
+
     is_template: Optional[bool] = FieldInfo(alias="isTemplate", default=None)
     """is_template indicates if this prompt is a template"""
 

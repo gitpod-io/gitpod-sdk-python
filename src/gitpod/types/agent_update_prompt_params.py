@@ -40,6 +40,9 @@ class Spec(TypedDict, total=False):
     is_command: Annotated[Optional[bool], PropertyInfo(alias="isCommand")]
     """Whether this prompt is a command"""
 
+    is_skill: Annotated[Optional[bool], PropertyInfo(alias="isSkill")]
+    """Whether this prompt is a skill"""
+
     is_template: Annotated[Optional[bool], PropertyInfo(alias="isTemplate")]
     """Whether this prompt is a template"""
 
