@@ -36,6 +36,14 @@ class PrebuildStatus(BaseModel):
     logs.
     """
 
+    snapshot_completion_percentage: Optional[int] = FieldInfo(alias="snapshotCompletionPercentage", default=None)
+    """
+    snapshot_completion_percentage is the progress of snapshot creation (0-100).
+    Only populated when phase is SNAPSHOTTING and progress is available from the
+    cloud provider. This value may update infrequently or remain at 0 depending on
+    the provider.
+    """
+
     status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
     """
     status_version is incremented each time the status is updated. Used for
