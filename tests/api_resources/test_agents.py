@@ -359,9 +359,10 @@ class TestAgents:
         agent = client.agents.send_to_execution(
             agent_execution_id="6fa1a3c7-fbb7-49d1-ba56-1890dc7c4c35",
             user_input={
-                "text": {"content": "Generate a report based on the latest logs."},
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "image": {"data": "U3RhaW5sZXNzIHJvY2tz"},
+                "text": {"content": "Generate a report based on the latest logs."},
             },
         )
         assert_matches_type(object, agent, path=["response"])
@@ -869,9 +870,10 @@ class TestAsyncAgents:
         agent = await async_client.agents.send_to_execution(
             agent_execution_id="6fa1a3c7-fbb7-49d1-ba56-1890dc7c4c35",
             user_input={
-                "text": {"content": "Generate a report based on the latest logs."},
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "image": {"data": "U3RhaW5sZXNzIHJvY2tz"},
+                "text": {"content": "Generate a report based on the latest logs."},
             },
         )
         assert_matches_type(object, agent, path=["response"])
