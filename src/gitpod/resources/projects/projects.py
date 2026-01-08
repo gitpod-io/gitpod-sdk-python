@@ -46,6 +46,7 @@ from .environment_clases import (
 from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
+from ...types.recommended_editors_param import RecommendedEditorsParam
 from ...types.environment_initializer_param import EnvironmentInitializerParam
 from ...types.project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 from ...types.project_create_from_environment_response import ProjectCreateFromEnvironmentResponse
@@ -244,6 +245,7 @@ class ProjectsResource(SyncAPIResource):
         name: Optional[str] | Omit = omit,
         prebuild_configuration: Optional[ProjectPrebuildConfigurationParam] | Omit = omit,
         project_id: str | Omit = omit,
+        recommended_editors: Optional[RecommendedEditorsParam] | Omit = omit,
         technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -313,6 +315,10 @@ class ProjectsResource(SyncAPIResource):
 
           project_id: project_id specifies the project identifier
 
+          recommended_editors: recommended_editors specifies the editors recommended for this project. If not
+              provided, the existing recommended editors are not modified. To clear all
+              recommended editors, set to an empty RecommendedEditors message.
+
           technical_description: technical_description is a detailed technical description of the project This
               field is not returned by default in GetProject or ListProjects responses 8KB max
 
@@ -334,6 +340,7 @@ class ProjectsResource(SyncAPIResource):
                     "name": name,
                     "prebuild_configuration": prebuild_configuration,
                     "project_id": project_id,
+                    "recommended_editors": recommended_editors,
                     "technical_description": technical_description,
                 },
                 project_update_params.ProjectUpdateParams,
@@ -716,6 +723,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         name: Optional[str] | Omit = omit,
         prebuild_configuration: Optional[ProjectPrebuildConfigurationParam] | Omit = omit,
         project_id: str | Omit = omit,
+        recommended_editors: Optional[RecommendedEditorsParam] | Omit = omit,
         technical_description: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -785,6 +793,10 @@ class AsyncProjectsResource(AsyncAPIResource):
 
           project_id: project_id specifies the project identifier
 
+          recommended_editors: recommended_editors specifies the editors recommended for this project. If not
+              provided, the existing recommended editors are not modified. To clear all
+              recommended editors, set to an empty RecommendedEditors message.
+
           technical_description: technical_description is a detailed technical description of the project This
               field is not returned by default in GetProject or ListProjects responses 8KB max
 
@@ -806,6 +818,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                     "name": name,
                     "prebuild_configuration": prebuild_configuration,
                     "project_id": project_id,
+                    "recommended_editors": recommended_editors,
                     "technical_description": technical_description,
                 },
                 project_update_params.ProjectUpdateParams,

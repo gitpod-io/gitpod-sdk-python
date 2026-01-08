@@ -498,6 +498,7 @@ from gitpod.types import (
     ProjectMetadata,
     ProjectPhase,
     ProjectPrebuildConfiguration,
+    RecommendedEditors,
     ProjectCreateResponse,
     ProjectRetrieveResponse,
     ProjectUpdateResponse,

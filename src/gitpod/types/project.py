@@ -8,6 +8,7 @@ from .._models import BaseModel
 from .project_phase import ProjectPhase
 from .shared.subject import Subject
 from .project_metadata import ProjectMetadata
+from .recommended_editors import RecommendedEditors
 from .environment_initializer import EnvironmentInitializer
 from .project_prebuild_configuration import ProjectPrebuildConfiguration
 from .shared.project_environment_class import ProjectEnvironmentClass
@@ -63,6 +64,9 @@ class Project(BaseModel):
         alias="prebuildConfiguration", default=None
     )
     """prebuild_configuration defines how prebuilds are created for this project."""
+
+    recommended_editors: Optional[RecommendedEditors] = FieldInfo(alias="recommendedEditors", default=None)
+    """recommended_editors specifies the editors recommended for this project."""
 
     technical_description: Optional[str] = FieldInfo(alias="technicalDescription", default=None)
     """
