@@ -169,6 +169,7 @@ class TestProjects:
                 "trigger": {"daily_schedule": {"hour_utc": 2}},
             },
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            recommended_editors={"editors": {"foo": {"versions": ["string"]}}},
             technical_description="technicalDescription",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])
@@ -466,6 +467,7 @@ class TestAsyncProjects:
                 "trigger": {"daily_schedule": {"hour_utc": 2}},
             },
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            recommended_editors={"editors": {"foo": {"versions": ["string"]}}},
             technical_description="technicalDescription",
         )
         assert_matches_type(ProjectUpdateResponse, project, path=["response"])

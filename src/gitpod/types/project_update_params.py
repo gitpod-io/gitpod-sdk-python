@@ -6,6 +6,7 @@ from typing import Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .recommended_editors_param import RecommendedEditorsParam
 from .environment_initializer_param import EnvironmentInitializerParam
 from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 
@@ -49,6 +50,13 @@ class ProjectUpdateParams(TypedDict, total=False):
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id specifies the project identifier"""
+
+    recommended_editors: Annotated[Optional[RecommendedEditorsParam], PropertyInfo(alias="recommendedEditors")]
+    """
+    recommended_editors specifies the editors recommended for this project. If not
+    provided, the existing recommended editors are not modified. To clear all
+    recommended editors, set to an empty RecommendedEditors message.
+    """
 
     technical_description: Annotated[Optional[str], PropertyInfo(alias="technicalDescription")]
     """
