@@ -94,6 +94,7 @@ from .group_update_params import GroupUpdateParams as GroupUpdateParams
 from .organization_member import OrganizationMember as OrganizationMember
 from .prebuild_spec_param import PrebuildSpecParam as PrebuildSpecParam
 from .project_list_params import ProjectListParams as ProjectListParams
+from .recommended_editors import RecommendedEditors as RecommendedEditors
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
 from .event_watch_response import EventWatchResponse as EventWatchResponse
 from .exception_info_param import ExceptionInfoParam as ExceptionInfoParam
@@ -154,6 +155,7 @@ from .environment_update_params import EnvironmentUpdateParams as EnvironmentUpd
 from .exception_mechanism_param import ExceptionMechanismParam as ExceptionMechanismParam
 from .organization_leave_params import OrganizationLeaveParams as OrganizationLeaveParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
+from .recommended_editors_param import RecommendedEditorsParam as RecommendedEditorsParam
 from .secret_get_value_response import SecretGetValueResponse as SecretGetValueResponse
 from .user_set_suspended_params import UserSetSuspendedParams as UserSetSuspendedParams
 from .agent_create_prompt_params import AgentCreatePromptParams as AgentCreatePromptParams
