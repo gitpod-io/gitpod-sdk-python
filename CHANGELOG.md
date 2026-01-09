@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.6.0 (2026-01-09)
+
+Full Changelog: [v0.5.2...v0.6.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.2...v0.6.0)
+
+### Features
+
+* **agent:** add group-based SCM tools access control ([9e23e57](https://github.com/gitpod-io/gitpod-sdk-python/commit/9e23e576ea787296c10f7edbb2a20bd9c47f5a4b))
+* **api:** add ImageInput to UserInputBlock proto ([c1223c3](https://github.com/gitpod-io/gitpod-sdk-python/commit/c1223c3b9ae3ba1e2c088e0c740abc26648517c2))
+* **api:** add recommended editors configuration to project settings ([5a4e222](https://github.com/gitpod-io/gitpod-sdk-python/commit/5a4e22212bb973211caf4cffa1dc40ec2a428ae1))
+* **db:** add webhooks table with trigger reference ([d0bf7fa](https://github.com/gitpod-io/gitpod-sdk-python/commit/d0bf7faa87bcfd60d81cba84c50bd59ad0614c2f))
+* **prebuild:** expose snapshot completion percentage in prebuild status ([05569c0](https://github.com/gitpod-io/gitpod-sdk-python/commit/05569c0e75fbd8fe107edb2119650030a1c21eed))
+* **skills:** add organization-level skills support ([052b48a](https://github.com/gitpod-io/gitpod-sdk-python/commit/052b48ad57f64a7c09d05c898ea6638da0c886db))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([af8d708](https://github.com/gitpod-io/gitpod-sdk-python/commit/af8d70859c29a43ffd66f949bb70712491458c3d))
+
+
+### Chores
+
+* **internal:** codegen related update ([c0e59ad](https://github.com/gitpod-io/gitpod-sdk-python/commit/c0e59ade25f1d13024bb78d5f525c8f55e52676c))
+* **internal:** codegen related update ([34dd0fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/34dd0fe4f13576840288a518b7c7c70f8d39d8f4))
+* pin GitHub Actions to SHA ([36acefc](https://github.com/gitpod-io/gitpod-sdk-python/commit/36acefc6f9ab2cbbde739b885e0734a9f476115b))
+
 ## 0.5.2 (2025-12-16)
 
 Full Changelog: [v0.5.1...v0.5.2](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.1...v0.5.2)
