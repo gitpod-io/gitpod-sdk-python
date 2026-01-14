@@ -507,6 +507,7 @@ class OrganizationsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: organization_list_members_params.Filter | Omit = omit,
         pagination: organization_list_members_params.Pagination | Omit = omit,
+        sort: organization_list_members_params.Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -551,6 +552,11 @@ class OrganizationsResource(SyncAPIResource):
 
           pagination: pagination contains the pagination options for listing members
 
+          sort: sort specifies the order of results. When unspecified, the authenticated user is
+              returned first, followed by other members sorted by name ascending. When an
+              explicit sort is specified, results are sorted purely by the requested field
+              without any special handling for the authenticated user.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -567,6 +573,7 @@ class OrganizationsResource(SyncAPIResource):
                     "organization_id": organization_id,
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 organization_list_members_params.OrganizationListMembersParams,
             ),
@@ -1086,6 +1093,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: organization_list_members_params.Filter | Omit = omit,
         pagination: organization_list_members_params.Pagination | Omit = omit,
+        sort: organization_list_members_params.Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1130,6 +1138,11 @@ class AsyncOrganizationsResource(AsyncAPIResource):
 
           pagination: pagination contains the pagination options for listing members
 
+          sort: sort specifies the order of results. When unspecified, the authenticated user is
+              returned first, followed by other members sorted by name ascending. When an
+              explicit sort is specified, results are sorted purely by the requested field
+              without any special handling for the authenticated user.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1146,6 +1159,7 @@ class AsyncOrganizationsResource(AsyncAPIResource):
                     "organization_id": organization_id,
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 organization_list_members_params.OrganizationListMembersParams,
             ),
