@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["OrganizationListMembersParams", "Filter", "Pagination"]
+__all__ = ["OrganizationListMembersParams", "Filter", "Pagination", "Sort"]
 
 
 class OrganizationListMembersParams(TypedDict, total=False):
@@ -21,6 +21,15 @@ class OrganizationListMembersParams(TypedDict, total=False):
 
     pagination: Pagination
     """pagination contains the pagination options for listing members"""
+
+    sort: Sort
+    """sort specifies the order of results.
+
+    When unspecified, the authenticated user is returned first, followed by other
+    members sorted by name ascending. When an explicit sort is specified, results
+    are sorted purely by the requested field without any special handling for the
+    authenticated user.
+    """
 
 
 class Filter(TypedDict, total=False):
@@ -42,3 +51,17 @@ class Pagination(TypedDict, total=False):
 
     Maximum 100.
     """
+
+
+class Sort(TypedDict, total=False):
+    """sort specifies the order of results.
+
+    When unspecified, the authenticated user is
+     returned first, followed by other members sorted by name ascending. When an explicit
+     sort is specified, results are sorted purely by the requested field without any
+     special handling for the authenticated user.
+    """
+
+    field: Literal["SORT_FIELD_UNSPECIFIED", "SORT_FIELD_NAME", "SORT_FIELD_DATE_JOINED"]
+
+    order: Literal["SORT_ORDER_UNSPECIFIED", "SORT_ORDER_ASC", "SORT_ORDER_DESC"]
