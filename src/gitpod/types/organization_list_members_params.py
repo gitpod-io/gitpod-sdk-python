@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .shared.user_status import UserStatus
+from .shared.organization_role import OrganizationRole
 
 __all__ = ["OrganizationListMembersParams", "Filter", "Pagination", "Sort"]
 
@@ -33,8 +36,14 @@ class OrganizationListMembersParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    roles: List[OrganizationRole]
+    """roles filters members by their organization role"""
+
     search: str
     """search performs case-insensitive search across member name and email"""
+
+    statuses: List[UserStatus]
+    """status filters members by their user status"""
 
 
 class Pagination(TypedDict, total=False):
