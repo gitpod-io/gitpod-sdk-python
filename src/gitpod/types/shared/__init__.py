@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .task import Task as Task
+from .state import State as State
 from .gateway import Gateway as Gateway
 from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject

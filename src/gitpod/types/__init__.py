@@ -10,6 +10,7 @@ from .runner import Runner as Runner
 from .secret import Secret as Secret
 from .shared import (
     Task as Task,
+    State as State,
     RunsOn as RunsOn,
     Gateway as Gateway,
     Subject as Subject,
