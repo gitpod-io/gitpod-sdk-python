@@ -259,9 +259,6 @@ class Spec(BaseModel):
 
     limits: Optional[SpecLimits] = None
 
-    mode: Optional[AgentMode] = None
-    """mode is the operational mode for this agent execution"""
-
     session: Optional[str] = None
 
     spec_version: Optional[str] = FieldInfo(alias="specVersion", default=None)
@@ -354,6 +351,12 @@ class Status(BaseModel):
 
     judgement: Optional[str] = None
     """judgement is the judgement of the agent run produced by the judgement prompt."""
+
+    mode: Optional[AgentMode] = None
+    """
+    mode is the current operational mode of the agent execution. This is set by the
+    agent when entering different modes (e.g., Ralph mode via /ona:ralph command).
+    """
 
     outputs: Optional[Dict[str, StatusOutputs]] = None
     """
