@@ -15,6 +15,7 @@ from gitpod.types import (
     ResourceType,
     RunsOn,
     SecretRef,
+    State,
     Subject,
     Task,
     TaskExecution,
