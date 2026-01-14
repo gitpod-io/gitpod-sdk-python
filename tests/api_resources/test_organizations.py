@@ -271,6 +271,10 @@ class TestOrganizations:
                 "token": "token",
                 "page_size": 20,
             },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
+            },
         )
         assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
 
@@ -599,6 +603,10 @@ class TestAsyncOrganizations:
             pagination={
                 "token": "token",
                 "page_size": 20,
+            },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])
