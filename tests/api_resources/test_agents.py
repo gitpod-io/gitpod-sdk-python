@@ -410,6 +410,7 @@ class TestAgents:
                 "pull_request": {
                     "id": "id",
                     "author": "author",
+                    "draft": True,
                     "from_branch": "fromBranch",
                     "repository": {
                         "clone_url": "cloneUrl",
@@ -417,6 +418,7 @@ class TestAgents:
                         "name": "name",
                         "owner": "owner",
                     },
+                    "state": "STATE_UNSPECIFIED",
                     "title": "title",
                     "to_branch": "toBranch",
                     "url": "url",
@@ -921,6 +923,7 @@ class TestAsyncAgents:
                 "pull_request": {
                     "id": "id",
                     "author": "author",
+                    "draft": True,
                     "from_branch": "fromBranch",
                     "repository": {
                         "clone_url": "cloneUrl",
@@ -928,6 +931,7 @@ class TestAsyncAgents:
                         "name": "name",
                         "owner": "owner",
                     },
+                    "state": "STATE_UNSPECIFIED",
                     "title": "title",
                     "to_branch": "toBranch",
                     "url": "url",

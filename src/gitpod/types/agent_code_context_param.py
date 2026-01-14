@@ -6,6 +6,7 @@ from typing import Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .shared.state import State
 
 __all__ = ["AgentCodeContextParam", "ContextURL", "PullRequest", "PullRequestRepository"]
 
@@ -41,11 +42,17 @@ class PullRequest(TypedDict, total=False):
     author: str
     """Author name as provided by the SCM system"""
 
+    draft: bool
+    """Whether this is a draft pull request"""
+
     from_branch: Annotated[str, PropertyInfo(alias="fromBranch")]
     """Source branch name (the branch being merged from)"""
 
     repository: PullRequestRepository
     """Repository information"""
+
+    state: State
+    """Current state of the pull request"""
 
     title: str
     """Pull request title"""

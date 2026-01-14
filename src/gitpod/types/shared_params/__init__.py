@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .state import State as State
 from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject
 from .principal import Principal as Principal
