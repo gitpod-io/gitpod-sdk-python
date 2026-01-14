@@ -7,6 +7,7 @@ from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
 from .secret_ref import SecretRef as SecretRef
 from .field_value import FieldValue as FieldValue
+from .user_status import UserStatus as UserStatus
 from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
 from .environment_class import EnvironmentClass as EnvironmentClass
