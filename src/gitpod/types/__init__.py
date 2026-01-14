@@ -25,6 +25,7 @@ from .shared import (
     TaskExecution as TaskExecution,
     EnvironmentClass as EnvironmentClass,
     OrganizationRole as OrganizationRole,
+    OrganizationTier as OrganizationTier,
     AutomationTrigger as AutomationTrigger,
     TaskExecutionSpec as TaskExecutionSpec,
     TaskExecutionPhase as TaskExecutionPhase,
@@ -72,7 +73,6 @@ from .environment_phase import EnvironmentPhase as EnvironmentPhase
 from .error_event_param import ErrorEventParam as ErrorEventParam
 from .event_list_params import EventListParams as EventListParams
 from .group_list_params import GroupListParams as GroupListParams
-from .organization_tier import OrganizationTier as OrganizationTier
 from .prebuild_metadata import PrebuildMetadata as PrebuildMetadata
 from .runner_capability import RunnerCapability as RunnerCapability
 from .runner_spec_param import RunnerSpecParam as RunnerSpecParam

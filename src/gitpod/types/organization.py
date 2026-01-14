@@ -7,7 +7,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .invite_domains import InviteDomains
-from .organization_tier import OrganizationTier
+from .shared.organization_tier import OrganizationTier
 
 __all__ = ["Organization"]
 
