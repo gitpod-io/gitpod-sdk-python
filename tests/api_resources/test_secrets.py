@@ -41,6 +41,7 @@ class TestSecrets:
             scope={
                 "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             value="postgresql://user:pass@localhost:5432/db",
@@ -86,6 +87,7 @@ class TestSecrets:
                 "scope": {
                     "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+                    "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             },
@@ -252,6 +254,7 @@ class TestAsyncSecrets:
             scope={
                 "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
             value="postgresql://user:pass@localhost:5432/db",
@@ -297,6 +300,7 @@ class TestAsyncSecrets:
                 "scope": {
                     "organization_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+                    "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 },
             },
