@@ -40,6 +40,14 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from .scim_configurations import (
+    ScimConfigurationsResource,
+    AsyncScimConfigurationsResource,
+    ScimConfigurationsResourceWithRawResponse,
+    AsyncScimConfigurationsResourceWithRawResponse,
+    ScimConfigurationsResourceWithStreamingResponse,
+    AsyncScimConfigurationsResourceWithStreamingResponse,
+)
 from .domain_verifications import (
     DomainVerificationsResource,
     AsyncDomainVerificationsResource,
@@ -74,6 +82,12 @@ __all__ = [
     "AsyncPoliciesResourceWithRawResponse",
     "PoliciesResourceWithStreamingResponse",
     "AsyncPoliciesResourceWithStreamingResponse",
+    "ScimConfigurationsResource",
+    "AsyncScimConfigurationsResource",
+    "ScimConfigurationsResourceWithRawResponse",
+    "AsyncScimConfigurationsResourceWithRawResponse",
+    "ScimConfigurationsResourceWithStreamingResponse",
+    "AsyncScimConfigurationsResourceWithStreamingResponse",
     "SSOConfigurationsResource",
     "AsyncSSOConfigurationsResource",
     "SSOConfigurationsResourceWithRawResponse",
