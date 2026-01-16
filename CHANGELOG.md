@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.7.0 (2026-01-16)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* [api] sorting for `ListMembers` ([838e74c](https://github.com/gitpod-io/gitpod-sdk-python/commit/838e74c4da4b57590a6dd0af19bdd20faf7d2805))
+* [backend] Introduce role and member status filtering for `ListMembers` ([34fb372](https://github.com/gitpod-io/gitpod-sdk-python/commit/34fb372aef655ae57fc99d5b37e152c75d831af5))
+* **api:** add draft and state fields to PullRequest proto ([e0023da](https://github.com/gitpod-io/gitpod-sdk-python/commit/e0023da5a30344c2fc87ebce55e26101c4ad40b5))
+* **api:** add ListSCMOrganizations endpoint ([9c8f7ea](https://github.com/gitpod-io/gitpod-sdk-python/commit/9c8f7eadd38bc0326ecf1be48706003fa258257c))
+* **api:** add search, creator, and status filters to ListWorkflows ([ddd18c0](https://github.com/gitpod-io/gitpod-sdk-python/commit/ddd18c09beb0f24e076818783d2dae09ca9b9f8b))
+* **api:** improve SearchRepositories pagination with next_page and total_count ([2847a10](https://github.com/gitpod-io/gitpod-sdk-python/commit/2847a10e6cbb09be83b012e8a6fcabd32f49e019))
+* **client:** add support for binary request streaming ([be5a823](https://github.com/gitpod-io/gitpod-sdk-python/commit/be5a8235224ff1ecf25464e716191fbf3c7c7fb1))
+* **dashboard:** show tier badge in org selector ([89fd8fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/89fd8fef7f9de200e4aecd563c965d4209427052))
+* Define SCIMConfiguration database schema ([03bd185](https://github.com/gitpod-io/gitpod-sdk-python/commit/03bd1858ec2aefbd4c20a71c206135c441afa99c))
+* move agent mode from Spec to Status, add AgentModeChange signals ([a55115b](https://github.com/gitpod-io/gitpod-sdk-python/commit/a55115ba054078dcb689222cc150b2b1f56077bf))
+* **secrets:** add ServiceAccountSecret entity with full support ([30e17c5](https://github.com/gitpod-io/gitpod-sdk-python/commit/30e17c55b991286527f64c8857b04dd9b5a2ba7b))
+
 ## 0.6.0 (2026-01-09)
 
 Full Changelog: [v0.5.2...v0.6.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.2...v0.6.0)

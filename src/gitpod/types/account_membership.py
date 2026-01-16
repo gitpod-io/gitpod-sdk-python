@@ -6,6 +6,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .shared.organization_role import OrganizationRole
+from .shared.organization_tier import OrganizationTier
 
 __all__ = ["AccountMembership"]
 
@@ -25,6 +26,9 @@ class AccountMembership(BaseModel):
 
     organization_member_count: Optional[int] = FieldInfo(alias="organizationMemberCount", default=None)
     """
-    organization_name is the member count of the organization the user is a member
-    of
+    organization_member_count is the member count of the organization the user is a
+    member of
     """
+
+    organization_tier: Optional[OrganizationTier] = FieldInfo(alias="organizationTier", default=None)
+    """organization_tier is the tier of the organization (Free, Core, Enterprise)"""

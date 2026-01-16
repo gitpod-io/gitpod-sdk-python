@@ -16,5 +16,8 @@ class SecretScopeParam(TypedDict, total=False):
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
     """project_id is the Project ID this Secret belongs to"""
 
+    service_account_id: Annotated[str, PropertyInfo(alias="serviceAccountId")]
+    """service_account_id is the Service Account ID this Secret belongs to"""
+
     user_id: Annotated[str, PropertyInfo(alias="userId")]
     """user_id is the User ID this Secret belongs to"""

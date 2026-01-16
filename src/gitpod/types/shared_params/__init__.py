@@ -1,11 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .state import State as State
 from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject
 from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
 from .secret_ref import SecretRef as SecretRef
 from .field_value import FieldValue as FieldValue
+from .user_status import UserStatus as UserStatus
 from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
 from .environment_class import EnvironmentClass as EnvironmentClass

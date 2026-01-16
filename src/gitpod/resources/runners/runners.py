@@ -19,6 +19,7 @@ from ...types import (
     runner_parse_context_url_params,
     runner_create_runner_token_params,
     runner_search_repositories_params,
+    runner_list_scm_organizations_params,
     runner_check_authentication_for_host_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -60,6 +61,7 @@ from ...types.runner_create_logs_token_response import RunnerCreateLogsTokenResp
 from ...types.runner_parse_context_url_response import RunnerParseContextURLResponse
 from ...types.runner_create_runner_token_response import RunnerCreateRunnerTokenResponse
 from ...types.runner_search_repositories_response import RunnerSearchRepositoriesResponse
+from ...types.runner_list_scm_organizations_response import RunnerListScmOrganizationsResponse
 from ...types.runner_check_authentication_for_host_response import RunnerCheckAuthenticationForHostResponse
 
 __all__ = ["RunnersResource", "AsyncRunnersResource"]
@@ -606,6 +608,75 @@ class RunnersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunnerCreateRunnerTokenResponse,
+        )
+
+    def list_scm_organizations(
+        self,
+        *,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_host: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerListScmOrganizationsResponse:
+        """
+        Lists SCM organizations the user belongs to.
+
+        Use this method to:
+
+        - Get all organizations for a user on a specific SCM host
+        - Check organization admin permissions for webhook creation
+
+        ### Examples
+
+        - List GitHub organizations:
+
+          Lists all organizations the user belongs to on GitHub.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmHost: "github.com"
+          ```
+
+        Args:
+          scm_host: The SCM host to list organizations from (e.g., "github.com", "gitlab.com")
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.RunnerService/ListSCMOrganizations",
+            body=maybe_transform(
+                {
+                    "runner_id": runner_id,
+                    "scm_host": scm_host,
+                },
+                runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
+                ),
+            ),
+            cast_to=RunnerListScmOrganizationsResponse,
         )
 
     def parse_context_url(
@@ -1304,6 +1375,75 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerCreateRunnerTokenResponse,
         )
 
+    async def list_scm_organizations(
+        self,
+        *,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        runner_id: str | Omit = omit,
+        scm_host: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerListScmOrganizationsResponse:
+        """
+        Lists SCM organizations the user belongs to.
+
+        Use this method to:
+
+        - Get all organizations for a user on a specific SCM host
+        - Check organization admin permissions for webhook creation
+
+        ### Examples
+
+        - List GitHub organizations:
+
+          Lists all organizations the user belongs to on GitHub.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmHost: "github.com"
+          ```
+
+        Args:
+          scm_host: The SCM host to list organizations from (e.g., "github.com", "gitlab.com")
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.RunnerService/ListSCMOrganizations",
+            body=await async_maybe_transform(
+                {
+                    "runner_id": runner_id,
+                    "scm_host": scm_host,
+                },
+                runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
+                ),
+            ),
+            cast_to=RunnerListScmOrganizationsResponse,
+        )
+
     async def parse_context_url(
         self,
         *,
@@ -1483,6 +1623,9 @@ class RunnersResourceWithRawResponse:
         self.create_runner_token = to_raw_response_wrapper(
             runners.create_runner_token,
         )
+        self.list_scm_organizations = to_raw_response_wrapper(
+            runners.list_scm_organizations,
+        )
         self.parse_context_url = to_raw_response_wrapper(
             runners.parse_context_url,
         )
@@ -1526,6 +1669,9 @@ class AsyncRunnersResourceWithRawResponse:
         )
         self.create_runner_token = async_to_raw_response_wrapper(
             runners.create_runner_token,
+        )
+        self.list_scm_organizations = async_to_raw_response_wrapper(
+            runners.list_scm_organizations,
         )
         self.parse_context_url = async_to_raw_response_wrapper(
             runners.parse_context_url,
@@ -1571,6 +1717,9 @@ class RunnersResourceWithStreamingResponse:
         self.create_runner_token = to_streamed_response_wrapper(
             runners.create_runner_token,
         )
+        self.list_scm_organizations = to_streamed_response_wrapper(
+            runners.list_scm_organizations,
+        )
         self.parse_context_url = to_streamed_response_wrapper(
             runners.parse_context_url,
         )
@@ -1614,6 +1763,9 @@ class AsyncRunnersResourceWithStreamingResponse:
         )
         self.create_runner_token = async_to_streamed_response_wrapper(
             runners.create_runner_token,
+        )
+        self.list_scm_organizations = async_to_streamed_response_wrapper(
+            runners.list_scm_organizations,
         )
         self.parse_context_url = async_to_streamed_response_wrapper(
             runners.parse_context_url,

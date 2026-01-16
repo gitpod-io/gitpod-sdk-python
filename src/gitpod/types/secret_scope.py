@@ -16,5 +16,8 @@ class SecretScope(BaseModel):
     project_id: Optional[str] = FieldInfo(alias="projectId", default=None)
     """project_id is the Project ID this Secret belongs to"""
 
+    service_account_id: Optional[str] = FieldInfo(alias="serviceAccountId", default=None)
+    """service_account_id is the Service Account ID this Secret belongs to"""
+
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
     """user_id is the User ID this Secret belongs to"""

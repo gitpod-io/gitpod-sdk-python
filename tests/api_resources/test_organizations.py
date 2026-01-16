@@ -266,10 +266,18 @@ class TestOrganizations:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             token="token",
             page_size=0,
-            filter={"search": "search"},
+            filter={
+                "roles": ["ORGANIZATION_ROLE_UNSPECIFIED"],
+                "search": "search",
+                "statuses": ["USER_STATUS_UNSPECIFIED"],
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
+            },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(SyncMembersPage[OrganizationMember], organization, path=["response"])
@@ -595,10 +603,18 @@ class TestAsyncOrganizations:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             token="token",
             page_size=0,
-            filter={"search": "search"},
+            filter={
+                "roles": ["ORGANIZATION_ROLE_UNSPECIFIED"],
+                "search": "search",
+                "statuses": ["USER_STATUS_UNSPECIFIED"],
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
+            },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(AsyncMembersPage[OrganizationMember], organization, path=["response"])

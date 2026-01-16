@@ -10,7 +10,12 @@ __all__ = ["RunnerSearchRepositoriesResponse", "Pagination", "Repository"]
 
 
 class Pagination(BaseModel):
-    """Pagination information for the response"""
+    """
+    Pagination information for the response.
+     Token format: "NEXT_PAGE/TOTAL_PAGES/TOTAL_COUNT" (e.g., "2/40/1000").
+     Use -1 for unknown values (e.g., "2/-1/-1" when totals unavailable).
+     Empty token means no more pages.
+    """
 
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
     """Token passed for retrieving the next set of results.
@@ -29,10 +34,18 @@ class Repository(BaseModel):
 
 class RunnerSearchRepositoriesResponse(BaseModel):
     last_page: Optional[int] = FieldInfo(alias="lastPage", default=None)
-    """Last page in the responses"""
+    """Deprecated: Use pagination token instead.
+
+    Total pages can be extracted from token.
+    """
 
     pagination: Optional[Pagination] = None
-    """Pagination information for the response"""
+    """
+    Pagination information for the response. Token format:
+    "NEXT_PAGE/TOTAL_PAGES/TOTAL_COUNT" (e.g., "2/40/1000"). Use -1 for unknown
+    values (e.g., "2/-1/-1" when totals unavailable). Empty token means no more
+    pages.
+    """
 
     repositories: Optional[List[Repository]] = None
     """List of repositories matching the search criteria"""

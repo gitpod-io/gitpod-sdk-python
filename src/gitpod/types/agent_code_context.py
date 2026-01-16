@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
+from .shared.state import State
 
 __all__ = ["AgentCodeContext", "ContextURL", "PullRequest", "PullRequestRepository"]
 
@@ -40,11 +41,17 @@ class PullRequest(BaseModel):
     author: Optional[str] = None
     """Author name as provided by the SCM system"""
 
+    draft: Optional[bool] = None
+    """Whether this is a draft pull request"""
+
     from_branch: Optional[str] = FieldInfo(alias="fromBranch", default=None)
     """Source branch name (the branch being merged from)"""
 
     repository: Optional[PullRequestRepository] = None
     """Repository information"""
+
+    state: Optional[State] = None
+    """Current state of the pull request"""
 
     title: Optional[str] = None
     """Pull request title"""

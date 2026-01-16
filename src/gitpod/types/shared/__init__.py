@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .task import Task as Task
+from .state import State as State
 from .gateway import Gateway as Gateway
 from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject
@@ -15,6 +16,7 @@ from .task_metadata import TaskMetadata as TaskMetadata
 from .task_execution import TaskExecution as TaskExecution
 from .environment_class import EnvironmentClass as EnvironmentClass
 from .organization_role import OrganizationRole as OrganizationRole
+from .organization_tier import OrganizationTier as OrganizationTier
 from .automation_trigger import AutomationTrigger as AutomationTrigger
 from .task_execution_spec import TaskExecutionSpec as TaskExecutionSpec
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
