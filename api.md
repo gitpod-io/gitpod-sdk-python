@@ -568,6 +568,7 @@ from gitpod.types import (
     RunnerCheckAuthenticationForHostResponse,
     RunnerCreateLogsTokenResponse,
     RunnerCreateRunnerTokenResponse,
+    RunnerListScmOrganizationsResponse,
     RunnerParseContextURLResponse,
     RunnerSearchRepositoriesResponse,
 )
@@ -583,6 +584,7 @@ Methods:
 - <code title="post /gitpod.v1.RunnerService/CheckAuthenticationForHost">client.runners.<a href="./src/gitpod/resources/runners/runners.py">check_authentication_for_host</a>(\*\*<a href="src/gitpod/types/runner_check_authentication_for_host_params.py">params</a>) -> <a href="./src/gitpod/types/runner_check_authentication_for_host_response.py">RunnerCheckAuthenticationForHostResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CreateRunnerLogsToken">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create_logs_token</a>(\*\*<a href="src/gitpod/types/runner_create_logs_token_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_logs_token_response.py">RunnerCreateLogsTokenResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CreateRunnerToken">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create_runner_token</a>(\*\*<a href="src/gitpod/types/runner_create_runner_token_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_runner_token_response.py">RunnerCreateRunnerTokenResponse</a></code>
+- <code title="post /gitpod.v1.RunnerService/ListSCMOrganizations">client.runners.<a href="./src/gitpod/resources/runners/runners.py">list_scm_organizations</a>(\*\*<a href="src/gitpod/types/runner_list_scm_organizations_params.py">params</a>) -> <a href="./src/gitpod/types/runner_list_scm_organizations_response.py">RunnerListScmOrganizationsResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/ParseContextURL">client.runners.<a href="./src/gitpod/resources/runners/runners.py">parse_context_url</a>(\*\*<a href="src/gitpod/types/runner_parse_context_url_params.py">params</a>) -> <a href="./src/gitpod/types/runner_parse_context_url_response.py">RunnerParseContextURLResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/SearchRepositories">client.runners.<a href="./src/gitpod/resources/runners/runners.py">search_repositories</a>(\*\*<a href="src/gitpod/types/runner_search_repositories_params.py">params</a>) -> <a href="./src/gitpod/types/runner_search_repositories_response.py">RunnerSearchRepositoriesResponse</a></code>
 
