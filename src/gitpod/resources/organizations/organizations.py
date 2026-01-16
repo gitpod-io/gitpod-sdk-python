@@ -60,6 +60,14 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from .scim_configurations import (
+    ScimConfigurationsResource,
+    AsyncScimConfigurationsResource,
+    ScimConfigurationsResourceWithRawResponse,
+    AsyncScimConfigurationsResourceWithRawResponse,
+    ScimConfigurationsResourceWithStreamingResponse,
+    AsyncScimConfigurationsResourceWithStreamingResponse,
+)
 from .domain_verifications import (
     DomainVerificationsResource,
     AsyncDomainVerificationsResource,
@@ -95,6 +103,10 @@ class OrganizationsResource(SyncAPIResource):
     @cached_property
     def policies(self) -> PoliciesResource:
         return PoliciesResource(self._client)
+
+    @cached_property
+    def scim_configurations(self) -> ScimConfigurationsResource:
+        return ScimConfigurationsResource(self._client)
 
     @cached_property
     def sso_configurations(self) -> SSOConfigurationsResource:
@@ -681,6 +693,10 @@ class AsyncOrganizationsResource(AsyncAPIResource):
     @cached_property
     def policies(self) -> AsyncPoliciesResource:
         return AsyncPoliciesResource(self._client)
+
+    @cached_property
+    def scim_configurations(self) -> AsyncScimConfigurationsResource:
+        return AsyncScimConfigurationsResource(self._client)
 
     @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResource:
@@ -1297,6 +1313,10 @@ class OrganizationsResourceWithRawResponse:
         return PoliciesResourceWithRawResponse(self._organizations.policies)
 
     @cached_property
+    def scim_configurations(self) -> ScimConfigurationsResourceWithRawResponse:
+        return ScimConfigurationsResourceWithRawResponse(self._organizations.scim_configurations)
+
+    @cached_property
     def sso_configurations(self) -> SSOConfigurationsResourceWithRawResponse:
         return SSOConfigurationsResourceWithRawResponse(self._organizations.sso_configurations)
 
@@ -1345,6 +1365,10 @@ class AsyncOrganizationsResourceWithRawResponse:
     @cached_property
     def policies(self) -> AsyncPoliciesResourceWithRawResponse:
         return AsyncPoliciesResourceWithRawResponse(self._organizations.policies)
+
+    @cached_property
+    def scim_configurations(self) -> AsyncScimConfigurationsResourceWithRawResponse:
+        return AsyncScimConfigurationsResourceWithRawResponse(self._organizations.scim_configurations)
 
     @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResourceWithRawResponse:
@@ -1397,6 +1421,10 @@ class OrganizationsResourceWithStreamingResponse:
         return PoliciesResourceWithStreamingResponse(self._organizations.policies)
 
     @cached_property
+    def scim_configurations(self) -> ScimConfigurationsResourceWithStreamingResponse:
+        return ScimConfigurationsResourceWithStreamingResponse(self._organizations.scim_configurations)
+
+    @cached_property
     def sso_configurations(self) -> SSOConfigurationsResourceWithStreamingResponse:
         return SSOConfigurationsResourceWithStreamingResponse(self._organizations.sso_configurations)
 
@@ -1445,6 +1473,10 @@ class AsyncOrganizationsResourceWithStreamingResponse:
     @cached_property
     def policies(self) -> AsyncPoliciesResourceWithStreamingResponse:
         return AsyncPoliciesResourceWithStreamingResponse(self._organizations.policies)
+
+    @cached_property
+    def scim_configurations(self) -> AsyncScimConfigurationsResourceWithStreamingResponse:
+        return AsyncScimConfigurationsResourceWithStreamingResponse(self._organizations.scim_configurations)
 
     @cached_property
     def sso_configurations(self) -> AsyncSSOConfigurationsResourceWithStreamingResponse:
