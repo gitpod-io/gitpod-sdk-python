@@ -17,6 +17,7 @@ from gitpod.types import (
     RunnerParseContextURLResponse,
     RunnerCreateRunnerTokenResponse,
     RunnerSearchRepositoriesResponse,
+    RunnerListScmOrganizationsResponse,
     RunnerCheckAuthenticationForHostResponse,
 )
 from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage
@@ -360,6 +361,45 @@ class TestRunners:
 
             runner = response.parse()
             assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_scm_organizations(self, client: Gitpod) -> None:
+        runner = client.runners.list_scm_organizations()
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_list_scm_organizations_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.list_scm_organizations(
+            token="token",
+            page_size=0,
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_host="github.com",
+        )
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_list_scm_organizations(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.list_scm_organizations()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_list_scm_organizations(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.list_scm_organizations() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -783,6 +823,45 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerCreateRunnerTokenResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_scm_organizations(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.list_scm_organizations()
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_list_scm_organizations_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.list_scm_organizations(
+            token="token",
+            page_size=0,
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            scm_host="github.com",
+        )
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_list_scm_organizations(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.list_scm_organizations()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_list_scm_organizations(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.list_scm_organizations() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
