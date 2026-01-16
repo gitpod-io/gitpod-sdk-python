@@ -78,6 +78,9 @@ __all__ = [
     "RunnersPagePagination",
     "SyncRunnersPage",
     "AsyncRunnersPage",
+    "ScimConfigurationsPagePagination",
+    "SyncScimConfigurationsPage",
+    "AsyncScimConfigurationsPage",
     "SecretsPagePagination",
     "SyncSecretsPage",
     "AsyncSecretsPage",
@@ -1238,6 +1241,56 @@ class AsyncRunnersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not runners:
             return []
         return runners
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class ScimConfigurationsPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncScimConfigurationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[ScimConfigurationsPagePagination] = None
+    scim_configurations: List[_T] = FieldInfo(alias="scimConfigurations")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        scim_configurations = self.scim_configurations
+        if not scim_configurations:
+            return []
+        return scim_configurations
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncScimConfigurationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[ScimConfigurationsPagePagination] = None
+    scim_configurations: List[_T] = FieldInfo(alias="scimConfigurations")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        scim_configurations = self.scim_configurations
+        if not scim_configurations:
+            return []
+        return scim_configurations
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:

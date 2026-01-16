@@ -438,6 +438,29 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/GetOrganizationPolicies">client.organizations.policies.<a href="./src/gitpod/resources/organizations/policies.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/policy_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/policy_retrieve_response.py">PolicyRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.OrganizationService/UpdateOrganizationPolicies">client.organizations.policies.<a href="./src/gitpod/resources/organizations/policies.py">update</a>(\*\*<a href="src/gitpod/types/organizations/policy_update_params.py">params</a>) -> object</code>
 
+## ScimConfigurations
+
+Types:
+
+```python
+from gitpod.types.organizations import (
+    ScimConfiguration,
+    ScimConfigurationCreateResponse,
+    ScimConfigurationRetrieveResponse,
+    ScimConfigurationUpdateResponse,
+    ScimConfigurationRegenerateTokenResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.OrganizationService/CreateSCIMConfiguration">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">create</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_create_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/scim_configuration_create_response.py">ScimConfigurationCreateResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/GetSCIMConfiguration">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">retrieve</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/scim_configuration_retrieve_response.py">ScimConfigurationRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/UpdateSCIMConfiguration">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">update</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_update_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/scim_configuration_update_response.py">ScimConfigurationUpdateResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/ListSCIMConfigurations">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">list</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_list_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/scim_configuration.py">SyncScimConfigurationsPage[ScimConfiguration]</a></code>
+- <code title="post /gitpod.v1.OrganizationService/DeleteSCIMConfiguration">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">delete</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_delete_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.OrganizationService/RegenerateSCIMToken">client.organizations.scim_configurations.<a href="./src/gitpod/resources/organizations/scim_configurations.py">regenerate_token</a>(\*\*<a href="src/gitpod/types/organizations/scim_configuration_regenerate_token_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/scim_configuration_regenerate_token_response.py">ScimConfigurationRegenerateTokenResponse</a></code>
+
 ## SSOConfigurations
 
 Types:
