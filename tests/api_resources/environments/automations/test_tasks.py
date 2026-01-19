@@ -47,6 +47,7 @@ class TestTasks:
                 "reference": "build",
                 "triggered_by": [
                     {
+                        "before_snapshot": True,
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
@@ -151,6 +152,7 @@ class TestTasks:
                 "triggered_by": {
                     "trigger": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
@@ -349,6 +351,7 @@ class TestAsyncTasks:
                 "reference": "build",
                 "triggered_by": [
                     {
+                        "before_snapshot": True,
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
@@ -453,6 +456,7 @@ class TestAsyncTasks:
                 "triggered_by": {
                     "trigger": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,

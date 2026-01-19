@@ -43,6 +43,7 @@ class TestEnvironments:
                     "session": "session",
                     "trigger_filter": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
@@ -394,6 +395,7 @@ class TestEnvironments:
                     "session": "session",
                     "trigger_filter": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
@@ -697,6 +699,7 @@ class TestAsyncEnvironments:
                     "session": "session",
                     "trigger_filter": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
@@ -1048,6 +1051,7 @@ class TestAsyncEnvironments:
                     "session": "session",
                     "trigger_filter": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
