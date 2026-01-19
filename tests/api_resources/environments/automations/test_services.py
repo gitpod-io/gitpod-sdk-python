@@ -46,6 +46,7 @@ class TestServices:
                 "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": [
                     {
+                        "before_snapshot": True,
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
@@ -157,6 +158,7 @@ class TestServices:
                 "triggered_by": {
                     "trigger": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
@@ -404,6 +406,7 @@ class TestAsyncServices:
                 "role": "SERVICE_ROLE_UNSPECIFIED",
                 "triggered_by": [
                     {
+                        "before_snapshot": True,
                         "manual": True,
                         "post_devcontainer_start": True,
                         "post_environment_start": True,
@@ -515,6 +518,7 @@ class TestAsyncServices:
                 "triggered_by": {
                     "trigger": [
                         {
+                            "before_snapshot": True,
                             "manual": True,
                             "post_devcontainer_start": True,
                             "post_environment_start": True,
