@@ -16,13 +16,8 @@ from ..._response import (
 )
 from ...pagination import SyncAssignmentsPage, AsyncAssignmentsPage
 from ..._base_client import AsyncPaginator, make_request_options
-from ...types.groups import (
-    ResourceRole,
-    role_assignment_list_params,
-    role_assignment_create_params,
-    role_assignment_delete_params,
-)
-from ...types.groups.resource_role import ResourceRole
+from ...types.groups import role_assignment_list_params, role_assignment_create_params, role_assignment_delete_params
+from ...types.shared.resource_role import ResourceRole
 from ...types.shared.resource_type import ResourceType
 from ...types.groups.role_assignment import RoleAssignment
 from ...types.groups.role_assignment_create_response import RoleAssignmentCreateResponse
