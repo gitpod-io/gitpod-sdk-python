@@ -20,6 +20,7 @@ from ...types import (
     runner_create_runner_token_params,
     runner_search_repositories_params,
     runner_list_scm_organizations_params,
+    runner_check_repository_access_params,
     runner_check_authentication_for_host_params,
 )
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -62,6 +63,7 @@ from ...types.runner_parse_context_url_response import RunnerParseContextURLResp
 from ...types.runner_create_runner_token_response import RunnerCreateRunnerTokenResponse
 from ...types.runner_search_repositories_response import RunnerSearchRepositoriesResponse
 from ...types.runner_list_scm_organizations_response import RunnerListScmOrganizationsResponse
+from ...types.runner_check_repository_access_response import RunnerCheckRepositoryAccessResponse
 from ...types.runner_check_authentication_for_host_response import RunnerCheckAuthenticationForHostResponse
 
 __all__ = ["RunnersResource", "AsyncRunnersResource"]
@@ -508,6 +510,70 @@ class RunnersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=RunnerCheckAuthenticationForHostResponse,
+        )
+
+    def check_repository_access(
+        self,
+        *,
+        repository_url: str | Omit = omit,
+        runner_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerCheckRepositoryAccessResponse:
+        """
+        Checks if a principal has read access to a repository.
+
+        Use this method to:
+
+        - Validate repository access before workflow execution
+        - Verify executor credentials for automation bindings
+
+        Returns:
+
+        - has_access: true if the principal can read the repository
+        - FAILED_PRECONDITION if authentication is required
+        - INVALID_ARGUMENT if the repository URL is invalid
+
+        ### Examples
+
+        - Check access:
+
+          Verifies read access to a repository.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          repositoryUrl: "https://github.com/org/repo"
+          ```
+
+        Args:
+          repository_url: repository_url is the URL of the repository to check access for. Can be a clone
+              URL (https://github.com/org/repo.git) or web URL (https://github.com/org/repo).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.RunnerService/CheckRepositoryAccess",
+            body=maybe_transform(
+                {
+                    "repository_url": repository_url,
+                    "runner_id": runner_id,
+                },
+                runner_check_repository_access_params.RunnerCheckRepositoryAccessParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerCheckRepositoryAccessResponse,
         )
 
     def create_logs_token(
@@ -1273,6 +1339,70 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerCheckAuthenticationForHostResponse,
         )
 
+    async def check_repository_access(
+        self,
+        *,
+        repository_url: str | Omit = omit,
+        runner_id: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> RunnerCheckRepositoryAccessResponse:
+        """
+        Checks if a principal has read access to a repository.
+
+        Use this method to:
+
+        - Validate repository access before workflow execution
+        - Verify executor credentials for automation bindings
+
+        Returns:
+
+        - has_access: true if the principal can read the repository
+        - FAILED_PRECONDITION if authentication is required
+        - INVALID_ARGUMENT if the repository URL is invalid
+
+        ### Examples
+
+        - Check access:
+
+          Verifies read access to a repository.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          repositoryUrl: "https://github.com/org/repo"
+          ```
+
+        Args:
+          repository_url: repository_url is the URL of the repository to check access for. Can be a clone
+              URL (https://github.com/org/repo.git) or web URL (https://github.com/org/repo).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.RunnerService/CheckRepositoryAccess",
+            body=await async_maybe_transform(
+                {
+                    "repository_url": repository_url,
+                    "runner_id": runner_id,
+                },
+                runner_check_repository_access_params.RunnerCheckRepositoryAccessParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=RunnerCheckRepositoryAccessResponse,
+        )
+
     async def create_logs_token(
         self,
         *,
@@ -1617,6 +1747,9 @@ class RunnersResourceWithRawResponse:
         self.check_authentication_for_host = to_raw_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.check_repository_access = to_raw_response_wrapper(
+            runners.check_repository_access,
+        )
         self.create_logs_token = to_raw_response_wrapper(
             runners.create_logs_token,
         )
@@ -1663,6 +1796,9 @@ class AsyncRunnersResourceWithRawResponse:
         )
         self.check_authentication_for_host = async_to_raw_response_wrapper(
             runners.check_authentication_for_host,
+        )
+        self.check_repository_access = async_to_raw_response_wrapper(
+            runners.check_repository_access,
         )
         self.create_logs_token = async_to_raw_response_wrapper(
             runners.create_logs_token,
@@ -1711,6 +1847,9 @@ class RunnersResourceWithStreamingResponse:
         self.check_authentication_for_host = to_streamed_response_wrapper(
             runners.check_authentication_for_host,
         )
+        self.check_repository_access = to_streamed_response_wrapper(
+            runners.check_repository_access,
+        )
         self.create_logs_token = to_streamed_response_wrapper(
             runners.create_logs_token,
         )
@@ -1757,6 +1896,9 @@ class AsyncRunnersResourceWithStreamingResponse:
         )
         self.check_authentication_for_host = async_to_streamed_response_wrapper(
             runners.check_authentication_for_host,
+        )
+        self.check_repository_access = async_to_streamed_response_wrapper(
+            runners.check_repository_access,
         )
         self.create_logs_token = async_to_streamed_response_wrapper(
             runners.create_logs_token,
