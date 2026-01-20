@@ -4,6 +4,14 @@ from __future__ import annotations
 
 import httpx
 
+from .shares import (
+    SharesResource,
+    AsyncSharesResource,
+    SharesResourceWithRawResponse,
+    AsyncSharesResourceWithRawResponse,
+    SharesResourceWithStreamingResponse,
+    AsyncSharesResourceWithStreamingResponse,
+)
 from ...types import (
     group_list_params,
     group_create_params,
@@ -55,6 +63,10 @@ class GroupsResource(SyncAPIResource):
     @cached_property
     def role_assignments(self) -> RoleAssignmentsResource:
         return RoleAssignmentsResource(self._client)
+
+    @cached_property
+    def shares(self) -> SharesResource:
+        return SharesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> GroupsResourceWithRawResponse:
@@ -395,6 +407,10 @@ class AsyncGroupsResource(AsyncAPIResource):
     @cached_property
     def role_assignments(self) -> AsyncRoleAssignmentsResource:
         return AsyncRoleAssignmentsResource(self._client)
+
+    @cached_property
+    def shares(self) -> AsyncSharesResource:
+        return AsyncSharesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncGroupsResourceWithRawResponse:
@@ -755,6 +771,10 @@ class GroupsResourceWithRawResponse:
     def role_assignments(self) -> RoleAssignmentsResourceWithRawResponse:
         return RoleAssignmentsResourceWithRawResponse(self._groups.role_assignments)
 
+    @cached_property
+    def shares(self) -> SharesResourceWithRawResponse:
+        return SharesResourceWithRawResponse(self._groups.shares)
+
 
 class AsyncGroupsResourceWithRawResponse:
     def __init__(self, groups: AsyncGroupsResource) -> None:
@@ -783,6 +803,10 @@ class AsyncGroupsResourceWithRawResponse:
     @cached_property
     def role_assignments(self) -> AsyncRoleAssignmentsResourceWithRawResponse:
         return AsyncRoleAssignmentsResourceWithRawResponse(self._groups.role_assignments)
+
+    @cached_property
+    def shares(self) -> AsyncSharesResourceWithRawResponse:
+        return AsyncSharesResourceWithRawResponse(self._groups.shares)
 
 
 class GroupsResourceWithStreamingResponse:
@@ -813,6 +837,10 @@ class GroupsResourceWithStreamingResponse:
     def role_assignments(self) -> RoleAssignmentsResourceWithStreamingResponse:
         return RoleAssignmentsResourceWithStreamingResponse(self._groups.role_assignments)
 
+    @cached_property
+    def shares(self) -> SharesResourceWithStreamingResponse:
+        return SharesResourceWithStreamingResponse(self._groups.shares)
+
 
 class AsyncGroupsResourceWithStreamingResponse:
     def __init__(self, groups: AsyncGroupsResource) -> None:
@@ -841,3 +869,7 @@ class AsyncGroupsResourceWithStreamingResponse:
     @cached_property
     def role_assignments(self) -> AsyncRoleAssignmentsResourceWithStreamingResponse:
         return AsyncRoleAssignmentsResourceWithStreamingResponse(self._groups.role_assignments)
+
+    @cached_property
+    def shares(self) -> AsyncSharesResourceWithStreamingResponse:
+        return AsyncSharesResourceWithStreamingResponse(self._groups.shares)

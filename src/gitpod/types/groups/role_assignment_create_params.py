@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
-from .resource_role import ResourceRole
+from ..shared.resource_role import ResourceRole
 from ..shared.resource_type import ResourceType
 
 __all__ = ["RoleAssignmentCreateParams"]

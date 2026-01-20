@@ -5,7 +5,7 @@ from typing import Optional
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
-from .resource_role import ResourceRole
+from ..shared.resource_role import ResourceRole
 from ..shared.resource_type import ResourceType
 
 __all__ = ["RoleAssignment"]
