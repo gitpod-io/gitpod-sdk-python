@@ -361,7 +361,19 @@ class TestAgents:
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "image": {"data": "U3RhaW5sZXNzIHJvY2tz"},
+                "image": {
+                    "data": "U3RhaW5sZXNzIHJvY2tz",
+                    "mime_type": "image/png",
+                },
+                "inputs": [
+                    {
+                        "image": {
+                            "data": "U3RhaW5sZXNzIHJvY2tz",
+                            "mime_type": "image/png",
+                        },
+                        "text": {"content": "x"},
+                    }
+                ],
                 "text": {"content": "Generate a report based on the latest logs."},
             },
         )
@@ -874,7 +886,19 @@ class TestAsyncAgents:
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "image": {"data": "U3RhaW5sZXNzIHJvY2tz"},
+                "image": {
+                    "data": "U3RhaW5sZXNzIHJvY2tz",
+                    "mime_type": "image/png",
+                },
+                "inputs": [
+                    {
+                        "image": {
+                            "data": "U3RhaW5sZXNzIHJvY2tz",
+                            "mime_type": "image/png",
+                        },
+                        "text": {"content": "x"},
+                    }
+                ],
                 "text": {"content": "Generate a report based on the latest logs."},
             },
         )
