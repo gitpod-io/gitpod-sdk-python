@@ -11,6 +11,7 @@ from .error_code import ErrorCode as ErrorCode
 from .secret_ref import SecretRef as SecretRef
 from .field_value import FieldValue as FieldValue
 from .user_status import UserStatus as UserStatus
+from .resource_role import ResourceRole as ResourceRole
 from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
 from .task_execution import TaskExecution as TaskExecution

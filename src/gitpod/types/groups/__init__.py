@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from .resource_role import ResourceRole as ResourceRole
 from .role_assignment import RoleAssignment as RoleAssignment
 from .group_membership import GroupMembership as GroupMembership
+from .share_create_params import ShareCreateParams as ShareCreateParams
+from .share_delete_params import ShareDeleteParams as ShareDeleteParams
 from .membership_list_params import MembershipListParams as MembershipListParams
 from .membership_create_params import MembershipCreateParams as MembershipCreateParams
 from .membership_delete_params import MembershipDeleteParams as MembershipDeleteParams

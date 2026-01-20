@@ -8,6 +8,14 @@ from .groups import (
     GroupsResourceWithStreamingResponse,
     AsyncGroupsResourceWithStreamingResponse,
 )
+from .shares import (
+    SharesResource,
+    AsyncSharesResource,
+    SharesResourceWithRawResponse,
+    AsyncSharesResourceWithRawResponse,
+    SharesResourceWithStreamingResponse,
+    AsyncSharesResourceWithStreamingResponse,
+)
 from .memberships import (
     MembershipsResource,
     AsyncMembershipsResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncRoleAssignmentsResourceWithRawResponse",
     "RoleAssignmentsResourceWithStreamingResponse",
     "AsyncRoleAssignmentsResourceWithStreamingResponse",
+    "SharesResource",
+    "AsyncSharesResource",
+    "SharesResourceWithRawResponse",
+    "AsyncSharesResourceWithRawResponse",
+    "SharesResourceWithStreamingResponse",
+    "AsyncSharesResourceWithStreamingResponse",
     "GroupsResource",
     "AsyncGroupsResource",
     "GroupsResourceWithRawResponse",

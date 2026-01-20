@@ -13,6 +13,7 @@ from gitpod.types import (
     OrganizationTier,
     Principal,
     ProjectEnvironmentClass,
+    ResourceRole,
     ResourceType,
     RunsOn,
     SecretRef,
@@ -302,7 +303,7 @@ Methods:
 Types:
 
 ```python
-from gitpod.types.groups import ResourceRole, RoleAssignment, RoleAssignmentCreateResponse
+from gitpod.types.groups import RoleAssignment, RoleAssignmentCreateResponse
 ```
 
 Methods:
@@ -310,6 +311,13 @@ Methods:
 - <code title="post /gitpod.v1.GroupService/CreateRoleAssignment">client.groups.role_assignments.<a href="./src/gitpod/resources/groups/role_assignments.py">create</a>(\*\*<a href="src/gitpod/types/groups/role_assignment_create_params.py">params</a>) -> <a href="./src/gitpod/types/groups/role_assignment_create_response.py">RoleAssignmentCreateResponse</a></code>
 - <code title="post /gitpod.v1.GroupService/ListRoleAssignments">client.groups.role_assignments.<a href="./src/gitpod/resources/groups/role_assignments.py">list</a>(\*\*<a href="src/gitpod/types/groups/role_assignment_list_params.py">params</a>) -> <a href="./src/gitpod/types/groups/role_assignment.py">SyncAssignmentsPage[RoleAssignment]</a></code>
 - <code title="post /gitpod.v1.GroupService/DeleteRoleAssignment">client.groups.role_assignments.<a href="./src/gitpod/resources/groups/role_assignments.py">delete</a>(\*\*<a href="src/gitpod/types/groups/role_assignment_delete_params.py">params</a>) -> object</code>
+
+## Shares
+
+Methods:
+
+- <code title="post /gitpod.v1.GroupService/ShareResourceWithPrincipal">client.groups.shares.<a href="./src/gitpod/resources/groups/shares.py">create</a>(\*\*<a href="src/gitpod/types/groups/share_create_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.GroupService/UnshareResourceWithPrincipal">client.groups.shares.<a href="./src/gitpod/resources/groups/shares.py">delete</a>(\*\*<a href="src/gitpod/types/groups/share_delete_params.py">params</a>) -> object</code>
 
 # Identity
 

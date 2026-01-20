@@ -20,6 +20,7 @@ from .shared import (
     SecretRef as SecretRef,
     FieldValue as FieldValue,
     UserStatus as UserStatus,
+    ResourceRole as ResourceRole,
     ResourceType as ResourceType,
     TaskMetadata as TaskMetadata,
     TaskExecution as TaskExecution,
