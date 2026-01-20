@@ -597,6 +597,7 @@ from gitpod.types import (
     RunnerCreateResponse,
     RunnerRetrieveResponse,
     RunnerCheckAuthenticationForHostResponse,
+    RunnerCheckRepositoryAccessResponse,
     RunnerCreateLogsTokenResponse,
     RunnerCreateRunnerTokenResponse,
     RunnerListScmOrganizationsResponse,
@@ -613,6 +614,7 @@ Methods:
 - <code title="post /gitpod.v1.RunnerService/ListRunners">client.runners.<a href="./src/gitpod/resources/runners/runners.py">list</a>(\*\*<a href="src/gitpod/types/runner_list_params.py">params</a>) -> <a href="./src/gitpod/types/runner.py">SyncRunnersPage[Runner]</a></code>
 - <code title="post /gitpod.v1.RunnerService/DeleteRunner">client.runners.<a href="./src/gitpod/resources/runners/runners.py">delete</a>(\*\*<a href="src/gitpod/types/runner_delete_params.py">params</a>) -> object</code>
 - <code title="post /gitpod.v1.RunnerService/CheckAuthenticationForHost">client.runners.<a href="./src/gitpod/resources/runners/runners.py">check_authentication_for_host</a>(\*\*<a href="src/gitpod/types/runner_check_authentication_for_host_params.py">params</a>) -> <a href="./src/gitpod/types/runner_check_authentication_for_host_response.py">RunnerCheckAuthenticationForHostResponse</a></code>
+- <code title="post /gitpod.v1.RunnerService/CheckRepositoryAccess">client.runners.<a href="./src/gitpod/resources/runners/runners.py">check_repository_access</a>(\*\*<a href="src/gitpod/types/runner_check_repository_access_params.py">params</a>) -> <a href="./src/gitpod/types/runner_check_repository_access_response.py">RunnerCheckRepositoryAccessResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CreateRunnerLogsToken">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create_logs_token</a>(\*\*<a href="src/gitpod/types/runner_create_logs_token_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_logs_token_response.py">RunnerCreateLogsTokenResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/CreateRunnerToken">client.runners.<a href="./src/gitpod/resources/runners/runners.py">create_runner_token</a>(\*\*<a href="src/gitpod/types/runner_create_runner_token_params.py">params</a>) -> <a href="./src/gitpod/types/runner_create_runner_token_response.py">RunnerCreateRunnerTokenResponse</a></code>
 - <code title="post /gitpod.v1.RunnerService/ListSCMOrganizations">client.runners.<a href="./src/gitpod/resources/runners/runners.py">list_scm_organizations</a>(\*\*<a href="src/gitpod/types/runner_list_scm_organizations_params.py">params</a>) -> <a href="./src/gitpod/types/runner_list_scm_organizations_response.py">RunnerListScmOrganizationsResponse</a></code>

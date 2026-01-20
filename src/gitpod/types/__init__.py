@@ -224,6 +224,9 @@ from .environment_create_logs_token_params import EnvironmentCreateLogsTokenPara
 from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam as ProjectPrebuildConfigurationParam
 from .runner_list_scm_organizations_params import RunnerListScmOrganizationsParams as RunnerListScmOrganizationsParams
 from .user_get_authenticated_user_response import UserGetAuthenticatedUserResponse as UserGetAuthenticatedUserResponse
+from .runner_check_repository_access_params import (
+    RunnerCheckRepositoryAccessParams as RunnerCheckRepositoryAccessParams,
+)
 from .environment_create_from_project_params import (
     EnvironmentCreateFromProjectParams as EnvironmentCreateFromProjectParams,
 )
@@ -235,6 +238,9 @@ from .project_create_from_environment_params import (
 )
 from .runner_list_scm_organizations_response import (
     RunnerListScmOrganizationsResponse as RunnerListScmOrganizationsResponse,
+)
+from .runner_check_repository_access_response import (
+    RunnerCheckRepositoryAccessResponse as RunnerCheckRepositoryAccessResponse,
 )
 from .environment_create_from_project_response import (
     EnvironmentCreateFromProjectResponse as EnvironmentCreateFromProjectResponse,

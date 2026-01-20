@@ -18,6 +18,7 @@ from gitpod.types import (
     RunnerCreateRunnerTokenResponse,
     RunnerSearchRepositoriesResponse,
     RunnerListScmOrganizationsResponse,
+    RunnerCheckRepositoryAccessResponse,
     RunnerCheckAuthenticationForHostResponse,
 )
 from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage
@@ -289,6 +290,43 @@ class TestRunners:
 
             runner = response.parse()
             assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_check_repository_access(self, client: Gitpod) -> None:
+        runner = client.runners.check_repository_access()
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_check_repository_access_with_all_params(self, client: Gitpod) -> None:
+        runner = client.runners.check_repository_access(
+            repository_url="https://github.com/org/repo",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_check_repository_access(self, client: Gitpod) -> None:
+        response = client.runners.with_raw_response.check_repository_access()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = response.parse()
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_check_repository_access(self, client: Gitpod) -> None:
+        with client.runners.with_streaming_response.check_repository_access() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = response.parse()
+            assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -751,6 +789,43 @@ class TestAsyncRunners:
 
             runner = await response.parse()
             assert_matches_type(RunnerCheckAuthenticationForHostResponse, runner, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_check_repository_access(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.check_repository_access()
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_check_repository_access_with_all_params(self, async_client: AsyncGitpod) -> None:
+        runner = await async_client.runners.check_repository_access(
+            repository_url="https://github.com/org/repo",
+            runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_check_repository_access(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.runners.with_raw_response.check_repository_access()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        runner = await response.parse()
+        assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_check_repository_access(self, async_client: AsyncGitpod) -> None:
+        async with async_client.runners.with_streaming_response.check_repository_access() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            runner = await response.parse()
+            assert_matches_type(RunnerCheckRepositoryAccessResponse, runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
