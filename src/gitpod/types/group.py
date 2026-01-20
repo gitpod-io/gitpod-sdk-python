@@ -107,6 +107,12 @@ class Group(BaseModel):
 
     description: Optional[str] = None
 
+    direct_share: Optional[bool] = FieldInfo(alias="directShare", default=None)
+    """
+    direct_share indicates that this group is used for direct user sharing on
+    resources. These groups are hidden from regular group listings.
+    """
+
     member_count: Optional[int] = FieldInfo(alias="memberCount", default=None)
     """member_count is the total number of members in this group"""
 
