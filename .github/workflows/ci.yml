@@ -2,15 +2,15 @@ name: CI
 on:
   push:
     branches-ignore:
-      - "generated"
-      - "codegen/**"
-      - "integrated/**"
-      - "stl-preview-head/**"
-      - "stl-preview-base/**"
+      - 'generated'
+      - 'codegen/**'
+      - 'integrated/**'
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
   pull_request:
     branches-ignore:
-      - "stl-preview-head/**"
-      - "stl-preview-base/**"
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
 
 jobs:
   lint:
@@ -19,15 +19,15 @@ jobs:
     runs-on: ${{ github.repository == 'stainless-sdks/gitpod-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Install Rye
         run: |
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Install dependencies
         run: rye sync --all-features
@@ -44,15 +44,15 @@ jobs:
       id-token: write
     runs-on: ${{ github.repository == 'stainless-sdks/gitpod-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Install Rye
         run: |
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Install dependencies
         run: rye sync --all-features
@@ -81,15 +81,15 @@ jobs:
     runs-on: ${{ github.repository == 'stainless-sdks/gitpod-python' && 'depot-ubuntu-24.04' || 'ubuntu-latest' }}
     if: github.event_name == 'push' || github.event.pull_request.head.repo.fork
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Install Rye
         run: |
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
