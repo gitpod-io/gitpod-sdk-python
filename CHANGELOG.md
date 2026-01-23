@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.0 (2026-01-23)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** add announcement banner fields to organization proto ([74b9fa3](https://github.com/gitpod-io/gitpod-sdk-python/commit/74b9fa326458881e9fe5de9c9f55494a6231412d))
+* **api:** add filters to ListPrebuilds for inventory page ([b5d43cc](https://github.com/gitpod-io/gitpod-sdk-python/commit/b5d43cc6183fcc67cea81ae9d78c4cf6e7f2db4d))
+* **api:** implement GetAnnouncementBanner and UpdateAnnouncementBanner handlers ([2cf3454](https://github.com/gitpod-io/gitpod-sdk-python/commit/2cf3454764ec630da000fd38b1b4d1ef74ed5308))
+
 ## 0.6.0 (2026-01-09)
 
 Full Changelog: [v0.5.2...v0.6.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.2...v0.6.0)
