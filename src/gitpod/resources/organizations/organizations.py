@@ -60,6 +60,14 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from .announcement_banner import (
+    AnnouncementBannerResource,
+    AsyncAnnouncementBannerResource,
+    AnnouncementBannerResourceWithRawResponse,
+    AsyncAnnouncementBannerResourceWithRawResponse,
+    AnnouncementBannerResourceWithStreamingResponse,
+    AsyncAnnouncementBannerResourceWithStreamingResponse,
+)
 from .scim_configurations import (
     ScimConfigurationsResource,
     AsyncScimConfigurationsResource,
@@ -88,6 +96,10 @@ __all__ = ["OrganizationsResource", "AsyncOrganizationsResource"]
 
 
 class OrganizationsResource(SyncAPIResource):
+    @cached_property
+    def announcement_banner(self) -> AnnouncementBannerResource:
+        return AnnouncementBannerResource(self._client)
+
     @cached_property
     def custom_domains(self) -> CustomDomainsResource:
         return CustomDomainsResource(self._client)
@@ -678,6 +690,10 @@ class OrganizationsResource(SyncAPIResource):
 
 
 class AsyncOrganizationsResource(AsyncAPIResource):
+    @cached_property
+    def announcement_banner(self) -> AsyncAnnouncementBannerResource:
+        return AsyncAnnouncementBannerResource(self._client)
+
     @cached_property
     def custom_domains(self) -> AsyncCustomDomainsResource:
         return AsyncCustomDomainsResource(self._client)
@@ -1297,6 +1313,10 @@ class OrganizationsResourceWithRawResponse:
         )
 
     @cached_property
+    def announcement_banner(self) -> AnnouncementBannerResourceWithRawResponse:
+        return AnnouncementBannerResourceWithRawResponse(self._organizations.announcement_banner)
+
+    @cached_property
     def custom_domains(self) -> CustomDomainsResourceWithRawResponse:
         return CustomDomainsResourceWithRawResponse(self._organizations.custom_domains)
 
@@ -1349,6 +1369,10 @@ class AsyncOrganizationsResourceWithRawResponse:
         self.set_role = async_to_raw_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def announcement_banner(self) -> AsyncAnnouncementBannerResourceWithRawResponse:
+        return AsyncAnnouncementBannerResourceWithRawResponse(self._organizations.announcement_banner)
 
     @cached_property
     def custom_domains(self) -> AsyncCustomDomainsResourceWithRawResponse:
@@ -1405,6 +1429,10 @@ class OrganizationsResourceWithStreamingResponse:
         )
 
     @cached_property
+    def announcement_banner(self) -> AnnouncementBannerResourceWithStreamingResponse:
+        return AnnouncementBannerResourceWithStreamingResponse(self._organizations.announcement_banner)
+
+    @cached_property
     def custom_domains(self) -> CustomDomainsResourceWithStreamingResponse:
         return CustomDomainsResourceWithStreamingResponse(self._organizations.custom_domains)
 
@@ -1457,6 +1485,10 @@ class AsyncOrganizationsResourceWithStreamingResponse:
         self.set_role = async_to_streamed_response_wrapper(
             organizations.set_role,
         )
+
+    @cached_property
+    def announcement_banner(self) -> AsyncAnnouncementBannerResourceWithStreamingResponse:
+        return AsyncAnnouncementBannerResourceWithStreamingResponse(self._organizations.announcement_banner)
 
     @cached_property
     def custom_domains(self) -> AsyncCustomDomainsResourceWithStreamingResponse:

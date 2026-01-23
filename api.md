@@ -365,6 +365,23 @@ Methods:
 - <code title="post /gitpod.v1.OrganizationService/ListMembers">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">list_members</a>(\*\*<a href="src/gitpod/types/organization_list_members_params.py">params</a>) -> <a href="./src/gitpod/types/organization_member.py">SyncMembersPage[OrganizationMember]</a></code>
 - <code title="post /gitpod.v1.OrganizationService/SetRole">client.organizations.<a href="./src/gitpod/resources/organizations/organizations.py">set_role</a>(\*\*<a href="src/gitpod/types/organization_set_role_params.py">params</a>) -> object</code>
 
+## AnnouncementBanner
+
+Types:
+
+```python
+from gitpod.types.organizations import (
+    AnnouncementBanner,
+    AnnouncementBannerUpdateResponse,
+    AnnouncementBannerGetResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.OrganizationService/UpdateAnnouncementBanner">client.organizations.announcement_banner.<a href="./src/gitpod/resources/organizations/announcement_banner.py">update</a>(\*\*<a href="src/gitpod/types/organizations/announcement_banner_update_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/announcement_banner_update_response.py">AnnouncementBannerUpdateResponse</a></code>
+- <code title="post /gitpod.v1.OrganizationService/GetAnnouncementBanner">client.organizations.announcement_banner.<a href="./src/gitpod/resources/organizations/announcement_banner.py">get</a>(\*\*<a href="src/gitpod/types/organizations/announcement_banner_get_params.py">params</a>) -> <a href="./src/gitpod/types/organizations/announcement_banner_get_response.py">AnnouncementBannerGetResponse</a></code>
+
 ## CustomDomains
 
 Types:
