@@ -122,11 +122,8 @@ class TestPrebuilds:
             token="token",
             page_size=0,
             filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "executor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "phases": ["PREBUILD_PHASE_UNSPECIFIED"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "triggered_by": ["PREBUILD_TRIGGER_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",
@@ -363,11 +360,8 @@ class TestAsyncPrebuilds:
             token="token",
             page_size=0,
             filter={
-                "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "executor_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "phases": ["PREBUILD_PHASE_UNSPECIFIED"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
-                "triggered_by": ["PREBUILD_TRIGGER_UNSPECIFIED"],
             },
             pagination={
                 "token": "token",

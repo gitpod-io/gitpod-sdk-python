@@ -2,59 +2,28 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable
+from typing import Union
 from datetime import datetime
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._types import Base64FileInput
 from .._utils import PropertyInfo
 from .._models import set_pydantic_config
 
-__all__ = ["UserInputBlockParam", "Image", "Input", "InputImage", "InputText", "Text"]
+__all__ = ["UserInputBlockParam", "Image", "Text"]
 
 
 class Image(TypedDict, total=False):
     """
     ImageInput allows sending images to the agent.
-     Client must provide the MIME type; backend validates against magic bytes.
+     Media type is inferred from magic bytes by the backend.
     """
 
     data: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
-    """Raw image data (max 4MB). Supported formats: PNG, JPEG."""
-
-    mime_type: Annotated[Literal["image/png", "image/jpeg"], PropertyInfo(alias="mimeType")]
+    """Raw image data (max 4MB). Supported formats: PNG, JPEG, WebP."""
 
 
 set_pydantic_config(Image, {"arbitrary_types_allowed": True})
-
-
-class InputImage(TypedDict, total=False):
-    """
-    ImageInput allows sending images to the agent.
-     Client must provide the MIME type; backend validates against magic bytes.
-    """
-
-    data: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
-    """Raw image data (max 4MB). Supported formats: PNG, JPEG."""
-
-    mime_type: Annotated[Literal["image/png", "image/jpeg"], PropertyInfo(alias="mimeType")]
-
-
-set_pydantic_config(InputImage, {"arbitrary_types_allowed": True})
-
-
-class InputText(TypedDict, total=False):
-    content: str
-
-
-class Input(TypedDict, total=False):
-    image: InputImage
-    """
-    ImageInput allows sending images to the agent. Client must provide the MIME
-    type; backend validates against magic bytes.
-    """
-
-    text: InputText
 
 
 class Text(TypedDict, total=False):
@@ -69,10 +38,8 @@ class UserInputBlockParam(TypedDict, total=False):
 
     image: Image
     """
-    ImageInput allows sending images to the agent. Client must provide the MIME
-    type; backend validates against magic bytes.
+    ImageInput allows sending images to the agent. Media type is inferred from magic
+    bytes by the backend.
     """
-
-    inputs: Iterable[Input]
 
     text: Text

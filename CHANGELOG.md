@@ -1,35 +1,5 @@
 # Changelog
 
-## 0.7.0 (2026-01-21)
-
-Full Changelog: [v0.6.0...v0.7.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.6.0...v0.7.0)
-
-### Features
-
-* [api] Introduce RPCs to share resources with individual users ([df1cf39](https://github.com/gitpod-io/gitpod-sdk-python/commit/df1cf39a9c1b387c9e9313bfec68a97759762e0b))
-* [api] sorting for `ListMembers` ([838e74c](https://github.com/gitpod-io/gitpod-sdk-python/commit/838e74c4da4b57590a6dd0af19bdd20faf7d2805))
-* [backend] Adding direct_share field to groups ([78c0bdd](https://github.com/gitpod-io/gitpod-sdk-python/commit/78c0bddc838e217007729d723283f9e9cd04d9a2))
-* [backend] Introduce role and member status filtering for `ListMembers` ([34fb372](https://github.com/gitpod-io/gitpod-sdk-python/commit/34fb372aef655ae57fc99d5b37e152c75d831af5))
-* **agent:** add spec mode for planning before interactive implementation ([de6bee5](https://github.com/gitpod-io/gitpod-sdk-python/commit/de6bee5d7d337456f1a19de0659cd6957c7c1a9b))
-* API for SCIM configuration management ([70becd4](https://github.com/gitpod-io/gitpod-sdk-python/commit/70becd4cd142fac4fc839018d52fb4cb93e17834))
-* **api:** add CheckRepositoryAccess API for repository access validation ([b34ed1b](https://github.com/gitpod-io/gitpod-sdk-python/commit/b34ed1b8ecd39343ed02c5f376e9495775912140))
-* **api:** add draft and state fields to PullRequest proto ([e0023da](https://github.com/gitpod-io/gitpod-sdk-python/commit/e0023da5a30344c2fc87ebce55e26101c4ad40b5))
-* **api:** add inputs array to UserInputBlock proto ([8262825](https://github.com/gitpod-io/gitpod-sdk-python/commit/8262825c21be1de663b9a3aad29e9f9fe1cf219d))
-* **api:** add ListSCMOrganizations endpoint ([9c8f7ea](https://github.com/gitpod-io/gitpod-sdk-python/commit/9c8f7eadd38bc0326ecf1be48706003fa258257c))
-* **api:** add search, creator, and status filters to ListWorkflows ([ddd18c0](https://github.com/gitpod-io/gitpod-sdk-python/commit/ddd18c09beb0f24e076818783d2dae09ca9b9f8b))
-* **api:** improve SearchRepositories pagination with next_page and total_count ([2847a10](https://github.com/gitpod-io/gitpod-sdk-python/commit/2847a10e6cbb09be83b012e8a6fcabd32f49e019))
-* **automations:** add before_snapshot trigger type ([9cd272f](https://github.com/gitpod-io/gitpod-sdk-python/commit/9cd272f98f2215b834a841ca34c52ce04fd2898e))
-* **client:** add support for binary request streaming ([be5a823](https://github.com/gitpod-io/gitpod-sdk-python/commit/be5a8235224ff1ecf25464e716191fbf3c7c7fb1))
-* **dashboard:** show tier badge in org selector ([89fd8fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/89fd8fef7f9de200e4aecd563c965d4209427052))
-* Define SCIMConfiguration database schema ([03bd185](https://github.com/gitpod-io/gitpod-sdk-python/commit/03bd1858ec2aefbd4c20a71c206135c441afa99c))
-* move agent mode from Spec to Status, add AgentModeChange signals ([a55115b](https://github.com/gitpod-io/gitpod-sdk-python/commit/a55115ba054078dcb689222cc150b2b1f56077bf))
-* **secrets:** add ServiceAccountSecret entity with full support ([30e17c5](https://github.com/gitpod-io/gitpod-sdk-python/commit/30e17c55b991286527f64c8857b04dd9b5a2ba7b))
-
-
-### Chores
-
-* **internal:** update `actions/checkout` version ([53dcf30](https://github.com/gitpod-io/gitpod-sdk-python/commit/53dcf30cb41a6cbf30ce510b0b2d46cdd5895008))
-
 ## 0.6.0 (2026-01-09)
 
 Full Changelog: [v0.5.2...v0.6.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.5.2...v0.6.0)
