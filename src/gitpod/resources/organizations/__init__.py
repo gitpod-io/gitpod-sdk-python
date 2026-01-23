@@ -40,6 +40,14 @@ from .sso_configurations import (
     SSOConfigurationsResourceWithStreamingResponse,
     AsyncSSOConfigurationsResourceWithStreamingResponse,
 )
+from .announcement_banner import (
+    AnnouncementBannerResource,
+    AsyncAnnouncementBannerResource,
+    AnnouncementBannerResourceWithRawResponse,
+    AsyncAnnouncementBannerResourceWithRawResponse,
+    AnnouncementBannerResourceWithStreamingResponse,
+    AsyncAnnouncementBannerResourceWithStreamingResponse,
+)
 from .scim_configurations import (
     ScimConfigurationsResource,
     AsyncScimConfigurationsResource,
@@ -58,6 +66,12 @@ from .domain_verifications import (
 )
 
 __all__ = [
+    "AnnouncementBannerResource",
+    "AsyncAnnouncementBannerResource",
+    "AnnouncementBannerResourceWithRawResponse",
+    "AsyncAnnouncementBannerResourceWithRawResponse",
+    "AnnouncementBannerResourceWithStreamingResponse",
+    "AsyncAnnouncementBannerResourceWithStreamingResponse",
     "CustomDomainsResource",
     "AsyncCustomDomainsResource",
     "CustomDomainsResourceWithRawResponse",
