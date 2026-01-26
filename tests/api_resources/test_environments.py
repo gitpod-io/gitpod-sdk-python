@@ -36,6 +36,7 @@ class TestEnvironments:
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.create(
+            name="name",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -387,6 +388,7 @@ class TestEnvironments:
     @parametrize
     def test_method_create_from_project_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.create_from_project(
+            name="name",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
@@ -692,6 +694,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create(
+            name="name",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -1043,6 +1046,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_create_from_project_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create_from_project(
+            name="name",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
