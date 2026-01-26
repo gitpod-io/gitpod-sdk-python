@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -11,6 +12,12 @@ __all__ = ["EnvironmentCreateFromProjectParams"]
 
 
 class EnvironmentCreateFromProjectParams(TypedDict, total=False):
+    name: Optional[str]
+    """
+    name is a user-defined identifier for the environment. If not specified, the
+    system will generate a name.
+    """
+
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
 
     spec: EnvironmentSpecParam
