@@ -91,6 +91,7 @@ class EnvironmentsResource(SyncAPIResource):
     def create(
         self,
         *,
+        name: Optional[str] | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -164,6 +165,9 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
+          name: name is a user-defined identifier for the environment. If not specified, the
+              system will generate a name.
+
           spec: spec is the configuration of the environment that's required for the to start
               the environment
 
@@ -177,7 +181,13 @@ class EnvironmentsResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironment",
-            body=maybe_transform({"spec": spec}, environment_create_params.EnvironmentCreateParams),
+            body=maybe_transform(
+                {
+                    "name": name,
+                    "spec": spec,
+                },
+                environment_create_params.EnvironmentCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -549,6 +559,7 @@ class EnvironmentsResource(SyncAPIResource):
     def create_from_project(
         self,
         *,
+        name: Optional[str] | Omit = omit,
         project_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -591,6 +602,9 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
+          name: name is a user-defined identifier for the environment. If not specified, the
+              system will generate a name.
+
           spec: Spec is the configuration of the environment that's required for the runner to
               start the environment Configuration already defined in the Project will override
               parts of the spec, if set
@@ -607,6 +621,7 @@ class EnvironmentsResource(SyncAPIResource):
             "/gitpod.v1.EnvironmentService/CreateEnvironmentFromProject",
             body=maybe_transform(
                 {
+                    "name": name,
                     "project_id": project_id,
                     "spec": spec,
                 },
@@ -905,6 +920,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create(
         self,
         *,
+        name: Optional[str] | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -978,6 +994,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
+          name: name is a user-defined identifier for the environment. If not specified, the
+              system will generate a name.
+
           spec: spec is the configuration of the environment that's required for the to start
               the environment
 
@@ -991,7 +1010,13 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         """
         return await self._post(
             "/gitpod.v1.EnvironmentService/CreateEnvironment",
-            body=await async_maybe_transform({"spec": spec}, environment_create_params.EnvironmentCreateParams),
+            body=await async_maybe_transform(
+                {
+                    "name": name,
+                    "spec": spec,
+                },
+                environment_create_params.EnvironmentCreateParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1363,6 +1388,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def create_from_project(
         self,
         *,
+        name: Optional[str] | Omit = omit,
         project_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1405,6 +1431,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
+          name: name is a user-defined identifier for the environment. If not specified, the
+              system will generate a name.
+
           spec: Spec is the configuration of the environment that's required for the runner to
               start the environment Configuration already defined in the Project will override
               parts of the spec, if set
@@ -1421,6 +1450,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             "/gitpod.v1.EnvironmentService/CreateEnvironmentFromProject",
             body=await async_maybe_transform(
                 {
+                    "name": name,
                     "project_id": project_id,
                     "spec": spec,
                 },
