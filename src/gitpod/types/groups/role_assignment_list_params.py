@@ -33,6 +33,14 @@ class Filter(TypedDict, total=False):
     Empty string is allowed and means no filtering by group
     """
 
+    resource_id: Annotated[str, PropertyInfo(alias="resourceId")]
+    """
+    resource_id filters the response to only role assignments for this specific
+    resource When provided, users with :grant permission on the resource can see its
+    role assignments even if they don't belong to the assigned groups Empty string
+    is allowed and means no filtering by resource
+    """
+
     resource_roles: Annotated[List[ResourceRole], PropertyInfo(alias="resourceRoles")]
     """
     resource_roles filters the response to only role assignments with these specific
