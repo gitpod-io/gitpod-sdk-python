@@ -74,6 +74,7 @@ class TestRoleAssignments:
             page_size=0,
             filter={
                 "group_id": "groupId",
+                "resource_id": "resourceId",
                 "resource_roles": ["RESOURCE_ROLE_UNSPECIFIED"],
                 "resource_types": ["RESOURCE_TYPE_RUNNER"],
                 "user_id": "userId",
@@ -202,6 +203,7 @@ class TestAsyncRoleAssignments:
             page_size=0,
             filter={
                 "group_id": "groupId",
+                "resource_id": "resourceId",
                 "resource_roles": ["RESOURCE_ROLE_UNSPECIFIED"],
                 "resource_types": ["RESOURCE_TYPE_RUNNER"],
                 "user_id": "userId",
