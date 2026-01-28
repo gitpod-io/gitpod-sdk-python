@@ -15,6 +15,7 @@ from gitpod.types import (
     AccountRetrieveResponse,
     AccountListSSOLoginsResponse,
     AccountGetSSOLoginURLResponse,
+    AccountGetChatIdentityTokenResponse,
 )
 from gitpod.pagination import (
     SyncLoginsPage,
@@ -107,6 +108,42 @@ class TestAccounts:
 
             account = response.parse()
             assert_matches_type(object, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_chat_identity_token(self, client: Gitpod) -> None:
+        account = client.accounts.get_chat_identity_token()
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_get_chat_identity_token_with_all_params(self, client: Gitpod) -> None:
+        account = client.accounts.get_chat_identity_token(
+            empty=True,
+        )
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_get_chat_identity_token(self, client: Gitpod) -> None:
+        response = client.accounts.with_raw_response.get_chat_identity_token()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_get_chat_identity_token(self, client: Gitpod) -> None:
+        with client.accounts.with_streaming_response.get_chat_identity_token() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -370,6 +407,42 @@ class TestAsyncAccounts:
 
             account = await response.parse()
             assert_matches_type(object, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_chat_identity_token(self, async_client: AsyncGitpod) -> None:
+        account = await async_client.accounts.get_chat_identity_token()
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_get_chat_identity_token_with_all_params(self, async_client: AsyncGitpod) -> None:
+        account = await async_client.accounts.get_chat_identity_token(
+            empty=True,
+        )
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_get_chat_identity_token(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.accounts.with_raw_response.get_chat_identity_token()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = await response.parse()
+        assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_chat_identity_token(self, async_client: AsyncGitpod) -> None:
+        async with async_client.accounts.with_streaming_response.get_chat_identity_token() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(AccountGetChatIdentityTokenResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
