@@ -61,6 +61,7 @@ class ScimConfigurationsResource(SyncAPIResource):
         organization_id: str,
         sso_configuration_id: str,
         name: Optional[str] | Omit = omit,
+        token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -81,11 +82,22 @@ class ScimConfigurationsResource(SyncAPIResource):
 
         - Create basic SCIM configuration:
 
-          Creates a SCIM configuration linked to an SSO provider.
+          Creates a SCIM configuration linked to an SSO provider with default 1 year
+          token expiration.
 
           ```yaml
           organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
           ssoConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        - Create SCIM configuration with custom token expiration:
+
+          Creates a SCIM configuration with a 90-day token expiration.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ssoConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          tokenExpiresIn: "7776000s"
           ```
 
         Args:
@@ -96,6 +108,9 @@ class ScimConfigurationsResource(SyncAPIResource):
               provisioning)
 
           name: name is a human-readable name for the SCIM configuration
+
+          token_expires_in: token_expires_in is the duration until the token expires. Defaults to 1 year.
+              Minimum 1 day, maximum 2 years.
 
           extra_headers: Send extra headers
 
@@ -112,6 +127,7 @@ class ScimConfigurationsResource(SyncAPIResource):
                     "organization_id": organization_id,
                     "sso_configuration_id": sso_configuration_id,
                     "name": name,
+                    "token_expires_in": token_expires_in,
                 },
                 scim_configuration_create_params.ScimConfigurationCreateParams,
             ),
@@ -373,6 +389,7 @@ class ScimConfigurationsResource(SyncAPIResource):
         self,
         *,
         scim_configuration_id: str,
+        token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -393,15 +410,28 @@ class ScimConfigurationsResource(SyncAPIResource):
 
         - Regenerate token:
 
-          Creates a new bearer token, invalidating the old one.
+          Creates a new bearer token with the same expiration duration as the previous
+          token.
 
           ```yaml
           scimConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           ```
 
+        - Regenerate token with new expiration:
+
+          Creates a new bearer token with a custom 180-day expiration.
+
+          ```yaml
+          scimConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          tokenExpiresIn: "15552000s"
+          ```
+
         Args:
           scim_configuration_id: scim_configuration_id is the ID of the SCIM configuration to regenerate token
               for
+
+          token_expires_in: token_expires_in is the duration until the new token expires. If not specified,
+              uses the same duration as the previous token.
 
           extra_headers: Send extra headers
 
@@ -414,7 +444,10 @@ class ScimConfigurationsResource(SyncAPIResource):
         return self._post(
             "/gitpod.v1.OrganizationService/RegenerateSCIMToken",
             body=maybe_transform(
-                {"scim_configuration_id": scim_configuration_id},
+                {
+                    "scim_configuration_id": scim_configuration_id,
+                    "token_expires_in": token_expires_in,
+                },
                 scim_configuration_regenerate_token_params.ScimConfigurationRegenerateTokenParams,
             ),
             options=make_request_options(
@@ -450,6 +483,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         organization_id: str,
         sso_configuration_id: str,
         name: Optional[str] | Omit = omit,
+        token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -470,11 +504,22 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
 
         - Create basic SCIM configuration:
 
-          Creates a SCIM configuration linked to an SSO provider.
+          Creates a SCIM configuration linked to an SSO provider with default 1 year
+          token expiration.
 
           ```yaml
           organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
           ssoConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        - Create SCIM configuration with custom token expiration:
+
+          Creates a SCIM configuration with a 90-day token expiration.
+
+          ```yaml
+          organizationId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          ssoConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          tokenExpiresIn: "7776000s"
           ```
 
         Args:
@@ -485,6 +530,9 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
               provisioning)
 
           name: name is a human-readable name for the SCIM configuration
+
+          token_expires_in: token_expires_in is the duration until the token expires. Defaults to 1 year.
+              Minimum 1 day, maximum 2 years.
 
           extra_headers: Send extra headers
 
@@ -501,6 +549,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
                     "organization_id": organization_id,
                     "sso_configuration_id": sso_configuration_id,
                     "name": name,
+                    "token_expires_in": token_expires_in,
                 },
                 scim_configuration_create_params.ScimConfigurationCreateParams,
             ),
@@ -762,6 +811,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         self,
         *,
         scim_configuration_id: str,
+        token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -782,15 +832,28 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
 
         - Regenerate token:
 
-          Creates a new bearer token, invalidating the old one.
+          Creates a new bearer token with the same expiration duration as the previous
+          token.
 
           ```yaml
           scimConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           ```
 
+        - Regenerate token with new expiration:
+
+          Creates a new bearer token with a custom 180-day expiration.
+
+          ```yaml
+          scimConfigurationId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          tokenExpiresIn: "15552000s"
+          ```
+
         Args:
           scim_configuration_id: scim_configuration_id is the ID of the SCIM configuration to regenerate token
               for
+
+          token_expires_in: token_expires_in is the duration until the new token expires. If not specified,
+              uses the same duration as the previous token.
 
           extra_headers: Send extra headers
 
@@ -803,7 +866,10 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         return await self._post(
             "/gitpod.v1.OrganizationService/RegenerateSCIMToken",
             body=await async_maybe_transform(
-                {"scim_configuration_id": scim_configuration_id},
+                {
+                    "scim_configuration_id": scim_configuration_id,
+                    "token_expires_in": token_expires_in,
+                },
                 scim_configuration_regenerate_token_params.ScimConfigurationRegenerateTokenParams,
             ),
             options=make_request_options(

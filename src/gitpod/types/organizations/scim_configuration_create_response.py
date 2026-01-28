@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from datetime import datetime
+
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
@@ -17,3 +19,6 @@ class ScimConfigurationCreateResponse(BaseModel):
 
     scim_configuration: ScimConfiguration = FieldInfo(alias="scimConfiguration")
     """scim_configuration is the created SCIM configuration"""
+
+    token_expires_at: datetime = FieldInfo(alias="tokenExpiresAt")
+    """token_expires_at is when the token will expire"""

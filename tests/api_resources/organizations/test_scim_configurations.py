@@ -40,6 +40,7 @@ class TestScimConfigurations:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             name="name",
+            token_expires_in="+9125115.360s",
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
@@ -235,6 +236,15 @@ class TestScimConfigurations:
 
     @pytest.mark.skip(reason="Prism tests are disabled")
     @parametrize
+    def test_method_regenerate_token_with_all_params(self, client: Gitpod) -> None:
+        scim_configuration = client.organizations.scim_configurations.regenerate_token(
+            scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            token_expires_in="+9125115.360s",
+        )
+        assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
     def test_raw_response_regenerate_token(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.regenerate_token(
             scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
@@ -281,6 +291,7 @@ class TestAsyncScimConfigurations:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             name="name",
+            token_expires_in="+9125115.360s",
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
@@ -471,6 +482,15 @@ class TestAsyncScimConfigurations:
     async def test_method_regenerate_token(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.regenerate_token(
             scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+        )
+        assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_regenerate_token_with_all_params(self, async_client: AsyncGitpod) -> None:
+        scim_configuration = await async_client.organizations.scim_configurations.regenerate_token(
+            scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            token_expires_in="+9125115.360s",
         )
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
