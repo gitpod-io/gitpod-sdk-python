@@ -12,6 +12,7 @@ from ..types import (
     account_list_sso_logins_params,
     account_get_sso_login_url_params,
     account_list_login_providers_params,
+    account_get_chat_identity_token_params,
     account_list_joinable_organizations_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
@@ -38,6 +39,7 @@ from ..types.joinable_organization import JoinableOrganization
 from ..types.account_retrieve_response import AccountRetrieveResponse
 from ..types.account_list_sso_logins_response import AccountListSSOLoginsResponse
 from ..types.account_get_sso_login_url_response import AccountGetSSOLoginURLResponse
+from ..types.account_get_chat_identity_token_response import AccountGetChatIdentityTokenResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -168,6 +170,58 @@ class AccountsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
+        )
+
+    def get_chat_identity_token(
+        self,
+        *,
+        empty: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AccountGetChatIdentityTokenResponse:
+        """
+        Gets the chat identity token for the currently authenticated account.
+
+        Use this method to:
+
+        - Obtain a verification hash for in-app chat identity verification
+        - Secure chat sessions against impersonation
+
+        The returned hash is an HMAC-SHA256 signature of the account's email, used by
+        the chat widget to verify user identity.
+
+        ### Examples
+
+        - Get chat identity token:
+
+          Retrieves the identity verification hash for the authenticated account.
+
+          ```yaml
+          {}
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.AccountService/GetChatIdentityToken",
+            body=maybe_transform(
+                {"empty": empty}, account_get_chat_identity_token_params.AccountGetChatIdentityTokenParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountGetChatIdentityTokenResponse,
         )
 
     def get_sso_login_url(
@@ -580,6 +634,58 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def get_chat_identity_token(
+        self,
+        *,
+        empty: bool | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AccountGetChatIdentityTokenResponse:
+        """
+        Gets the chat identity token for the currently authenticated account.
+
+        Use this method to:
+
+        - Obtain a verification hash for in-app chat identity verification
+        - Secure chat sessions against impersonation
+
+        The returned hash is an HMAC-SHA256 signature of the account's email, used by
+        the chat widget to verify user identity.
+
+        ### Examples
+
+        - Get chat identity token:
+
+          Retrieves the identity verification hash for the authenticated account.
+
+          ```yaml
+          {}
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.AccountService/GetChatIdentityToken",
+            body=await async_maybe_transform(
+                {"empty": empty}, account_get_chat_identity_token_params.AccountGetChatIdentityTokenParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AccountGetChatIdentityTokenResponse,
+        )
+
     async def get_sso_login_url(
         self,
         *,
@@ -872,6 +978,9 @@ class AccountsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             accounts.delete,
         )
+        self.get_chat_identity_token = to_raw_response_wrapper(
+            accounts.get_chat_identity_token,
+        )
         self.get_sso_login_url = to_raw_response_wrapper(
             accounts.get_sso_login_url,
         )
@@ -895,6 +1004,9 @@ class AsyncAccountsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             accounts.delete,
+        )
+        self.get_chat_identity_token = async_to_raw_response_wrapper(
+            accounts.get_chat_identity_token,
         )
         self.get_sso_login_url = async_to_raw_response_wrapper(
             accounts.get_sso_login_url,
@@ -920,6 +1032,9 @@ class AccountsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             accounts.delete,
         )
+        self.get_chat_identity_token = to_streamed_response_wrapper(
+            accounts.get_chat_identity_token,
+        )
         self.get_sso_login_url = to_streamed_response_wrapper(
             accounts.get_sso_login_url,
         )
@@ -943,6 +1058,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             accounts.delete,
+        )
+        self.get_chat_identity_token = async_to_streamed_response_wrapper(
+            accounts.get_chat_identity_token,
         )
         self.get_sso_login_url = async_to_streamed_response_wrapper(
             accounts.get_sso_login_url,
