@@ -42,7 +42,6 @@ from gitpod.types import (
     JoinableOrganization,
     LoginProvider,
     AccountRetrieveResponse,
-    AccountGetChatIdentityTokenResponse,
     AccountGetSSOLoginURLResponse,
     AccountListSSOLoginsResponse,
 )
@@ -52,7 +51,6 @@ Methods:
 
 - <code title="post /gitpod.v1.AccountService/GetAccount">client.accounts.<a href="./src/gitpod/resources/accounts.py">retrieve</a>(\*\*<a href="src/gitpod/types/account_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/account_retrieve_response.py">AccountRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.AccountService/DeleteAccount">client.accounts.<a href="./src/gitpod/resources/accounts.py">delete</a>(\*\*<a href="src/gitpod/types/account_delete_params.py">params</a>) -> object</code>
-- <code title="post /gitpod.v1.AccountService/GetChatIdentityToken">client.accounts.<a href="./src/gitpod/resources/accounts.py">get_chat_identity_token</a>(\*\*<a href="src/gitpod/types/account_get_chat_identity_token_params.py">params</a>) -> <a href="./src/gitpod/types/account_get_chat_identity_token_response.py">AccountGetChatIdentityTokenResponse</a></code>
 - <code title="post /gitpod.v1.AccountService/GetSSOLoginURL">client.accounts.<a href="./src/gitpod/resources/accounts.py">get_sso_login_url</a>(\*\*<a href="src/gitpod/types/account_get_sso_login_url_params.py">params</a>) -> <a href="./src/gitpod/types/account_get_sso_login_url_response.py">AccountGetSSOLoginURLResponse</a></code>
 - <code title="post /gitpod.v1.AccountService/ListJoinableOrganizations">client.accounts.<a href="./src/gitpod/resources/accounts.py">list_joinable_organizations</a>(\*\*<a href="src/gitpod/types/account_list_joinable_organizations_params.py">params</a>) -> <a href="./src/gitpod/types/joinable_organization.py">SyncJoinableOrganizationsPage[JoinableOrganization]</a></code>
 - <code title="post /gitpod.v1.AccountService/ListLoginProviders">client.accounts.<a href="./src/gitpod/resources/accounts.py">list_login_providers</a>(\*\*<a href="src/gitpod/types/account_list_login_providers_params.py">params</a>) -> <a href="./src/gitpod/types/login_provider.py">SyncLoginProvidersPage[LoginProvider]</a></code>
