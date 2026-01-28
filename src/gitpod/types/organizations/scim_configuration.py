@@ -24,6 +24,9 @@ class ScimConfiguration(BaseModel):
     organization_id is the ID of the organization this SCIM configuration belongs to
     """
 
+    token_expires_at: datetime = FieldInfo(alias="tokenExpiresAt")
+    """token_expires_at is when the current SCIM token expires"""
+
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """updated_at is when the SCIM configuration was last updated"""
 
