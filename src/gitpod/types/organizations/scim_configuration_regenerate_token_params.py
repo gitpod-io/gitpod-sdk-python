@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
@@ -14,4 +15,10 @@ class ScimConfigurationRegenerateTokenParams(TypedDict, total=False):
     """
     scim_configuration_id is the ID of the SCIM configuration to regenerate token
     for
+    """
+
+    token_expires_in: Annotated[Optional[str], PropertyInfo(alias="tokenExpiresIn")]
+    """
+    token_expires_in is the duration until the new token expires. If not specified,
+    uses the same duration as the previous token.
     """

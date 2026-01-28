@@ -25,3 +25,9 @@ class ScimConfigurationCreateParams(TypedDict, total=False):
 
     name: Optional[str]
     """name is a human-readable name for the SCIM configuration"""
+
+    token_expires_in: Annotated[Optional[str], PropertyInfo(alias="tokenExpiresIn")]
+    """token_expires_in is the duration until the token expires. Defaults to 1 year.
+
+    Minimum 1 day, maximum 2 years.
+    """
