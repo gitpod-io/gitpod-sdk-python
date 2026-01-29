@@ -438,6 +438,7 @@ class TestAgents:
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow_action_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
@@ -963,6 +964,7 @@ class TestAsyncAgents:
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
+            runner_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             workflow_action_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         )
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
