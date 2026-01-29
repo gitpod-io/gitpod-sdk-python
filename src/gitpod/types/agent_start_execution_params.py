@@ -25,6 +25,13 @@ class AgentStartExecutionParams(TypedDict, total=False):
 
     name: str
 
+    runner_id: Annotated[str, PropertyInfo(alias="runnerId")]
+    """
+    runner_id specifies a runner for this agent execution. When set, the agent
+    execution is routed to this runner instead of the runner associated with the
+    environment.
+    """
+
     workflow_action_id: Annotated[Optional[str], PropertyInfo(alias="workflowActionId")]
     """
     workflow_action_id is an optional reference to the workflow execution action
