@@ -31,6 +31,9 @@ class Metadata(BaseModel):
      parts of Gitpod to function
     """
 
+    annotations: Optional[Dict[str, str]] = None
+    """annotations are key-value pairs for tracking external context."""
+
     created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
     """
     A Timestamp represents a point in time independent of any time zone or local

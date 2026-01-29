@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import Dict, List
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -23,6 +23,13 @@ class AgentListExecutionsParams(TypedDict, total=False):
 
 class Filter(TypedDict, total=False):
     agent_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="agentIds")]
+
+    annotations: Dict[str, str]
+    """annotations filters by key-value pairs.
+
+    Only executions containing all specified annotations (with matching values) are
+    returned.
+    """
 
     creator_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="creatorIds")]
 
