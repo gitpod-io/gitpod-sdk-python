@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, Optional
 
 import httpx
 
@@ -537,6 +537,7 @@ class AgentsResource(SyncAPIResource):
         self,
         *,
         agent_id: str | Omit = omit,
+        annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
@@ -567,6 +568,10 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
+          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+              session IDs, GitHub issue references). Keys should follow domain/name convention
+              (e.g., "linear.app/session-id").
+
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
 
@@ -590,6 +595,7 @@ class AgentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "agent_id": agent_id,
+                    "annotations": annotations,
                     "code_context": code_context,
                     "mode": mode,
                     "name": name,
@@ -1197,6 +1203,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         *,
         agent_id: str | Omit = omit,
+        annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
@@ -1227,6 +1234,10 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
+          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+              session IDs, GitHub issue references). Keys should follow domain/name convention
+              (e.g., "linear.app/session-id").
+
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
 
@@ -1250,6 +1261,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "agent_id": agent_id,
+                    "annotations": annotations,
                     "code_context": code_context,
                     "mode": mode,
                     "name": name,

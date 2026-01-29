@@ -192,6 +192,7 @@ class TestAgents:
             page_size=0,
             filter={
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
+                "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
                 "environment_ids": ["string"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -412,6 +413,7 @@ class TestAgents:
     def test_method_start_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.start_execution(
             agent_id="b8a64cfa-43e2-4b9d-9fb3-07edc63f5971",
+            annotations={"foo": "string"},
             code_context={
                 "context_url": {
                     "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -718,6 +720,7 @@ class TestAsyncAgents:
             page_size=0,
             filter={
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
+                "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
                 "environment_ids": ["string"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -938,6 +941,7 @@ class TestAsyncAgents:
     async def test_method_start_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.start_execution(
             agent_id="b8a64cfa-43e2-4b9d-9fb3-07edc63f5971",
+            annotations={"foo": "string"},
             code_context={
                 "context_url": {
                     "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
