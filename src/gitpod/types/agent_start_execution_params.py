@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Dict, Optional
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
@@ -14,6 +14,13 @@ __all__ = ["AgentStartExecutionParams"]
 
 class AgentStartExecutionParams(TypedDict, total=False):
     agent_id: Annotated[str, PropertyInfo(alias="agentId")]
+
+    annotations: Dict[str, str]
+    """
+    annotations are key-value pairs for tracking external context (e.g., Linear
+    session IDs, GitHub issue references). Keys should follow domain/name convention
+    (e.g., "linear.app/session-id").
+    """
 
     code_context: Annotated[AgentCodeContextParam, PropertyInfo(alias="codeContext")]
 
