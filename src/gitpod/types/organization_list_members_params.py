@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared.user_status import UserStatus
 from .shared.organization_role import OrganizationRole
@@ -44,6 +45,9 @@ class Filter(TypedDict, total=False):
 
     statuses: List[UserStatus]
     """status filters members by their user status"""
+
+    user_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="userIds")]
+    """user_ids filters the response to only members with the specified user IDs"""
 
 
 class Pagination(TypedDict, total=False):
