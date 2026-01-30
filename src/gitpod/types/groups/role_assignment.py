@@ -17,6 +17,14 @@ class RoleAssignment(BaseModel):
     id: Optional[str] = None
     """Unique identifier for the role assignment"""
 
+    derived_from_org_role: Optional[ResourceRole] = FieldInfo(alias="derivedFromOrgRole", default=None)
+    """
+    The org-level role that created this assignment, if any.
+    RESOURCE_ROLE_UNSPECIFIED means this is a direct share (manually created).
+    Non-zero (e.g., ORG_PROJECTS_ADMIN, ORG_RUNNERS_ADMIN) means this assignment was
+    derived from an org-level role.
+    """
+
     group_id: Optional[str] = FieldInfo(alias="groupId", default=None)
     """Group identifier"""
 
