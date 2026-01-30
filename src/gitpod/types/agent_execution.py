@@ -20,6 +20,7 @@ __all__ = [
     "StatusCurrentOperation",
     "StatusCurrentOperationLlm",
     "StatusCurrentOperationToolUse",
+    "StatusMcpIntegrationStatus",
     "StatusOutputs",
     "StatusUsedEnvironment",
 ]
@@ -296,6 +297,39 @@ class StatusCurrentOperation(BaseModel):
     tool_use: Optional[StatusCurrentOperationToolUse] = FieldInfo(alias="toolUse", default=None)
 
 
+class StatusMcpIntegrationStatus(BaseModel):
+    """
+    MCPIntegrationStatus represents the status of a single MCP integration
+     within an agent execution context
+    """
+
+    id: Optional[str] = None
+    """id is the unique name of the MCP integration"""
+
+    failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
+    """
+    failure_message contains the reason the MCP integration failed to connect or
+    operate
+    """
+
+    name: Optional[str] = None
+    """name is the unique name of the MCP integration (e.g., "linear", "notion")"""
+
+    phase: Optional[
+        Literal[
+            "MCP_INTEGRATION_PHASE_UNSPECIFIED",
+            "MCP_INTEGRATION_PHASE_INITIALIZING",
+            "MCP_INTEGRATION_PHASE_READY",
+            "MCP_INTEGRATION_PHASE_FAILED",
+            "MCP_INTEGRATION_PHASE_UNAVAILABLE",
+        ]
+    ] = None
+    """phase is the current connection/health phase"""
+
+    warning_message: Optional[str] = FieldInfo(alias="warningMessage", default=None)
+    """warning_message contains warnings (e.g., rate limiting, degraded performance)"""
+
+
 class StatusOutputs(BaseModel):
     bool_value: Optional[bool] = FieldInfo(alias="boolValue", default=None)
 
@@ -354,6 +388,14 @@ class Status(BaseModel):
 
     judgement: Optional[str] = None
     """judgement is the judgement of the agent run produced by the judgement prompt."""
+
+    mcp_integration_statuses: Optional[List[StatusMcpIntegrationStatus]] = FieldInfo(
+        alias="mcpIntegrationStatuses", default=None
+    )
+    """
+    mcp_integration_statuses contains the status of all MCP integrations used by
+    this agent execution
+    """
 
     mode: Optional[AgentMode] = None
     """
