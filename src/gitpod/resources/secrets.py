@@ -126,10 +126,10 @@ class SecretsResource(SyncAPIResource):
               secret
 
           file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
+              path (e.g. /path/to/file):
 
               ```
-              this.matches("^/(?:[^/]*/)*.*$")
+              this.matches("^/[^/].*$")
               ```
 
           project_id: project_id is the ProjectID this Secret belongs to Deprecated: use scope instead
@@ -502,10 +502,10 @@ class AsyncSecretsResource(AsyncAPIResource):
               secret
 
           file_path: absolute path to the file where the secret is mounted value must be an absolute
-              path (start with a /):
+              path (e.g. /path/to/file):
 
               ```
-              this.matches("^/(?:[^/]*/)*.*$")
+              this.matches("^/[^/].*$")
               ```
 
           project_id: project_id is the ProjectID this Secret belongs to Deprecated: use scope instead

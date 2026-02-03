@@ -33,10 +33,10 @@ class SecretCreateParams(TypedDict, total=False):
     file_path: Annotated[str, PropertyInfo(alias="filePath")]
     """
     absolute path to the file where the secret is mounted value must be an absolute
-    path (start with a /):
+    path (e.g. /path/to/file):
 
     ```
-    this.matches('^/(?:[^/]*/)*.*$')
+    this.matches('^/[^/].*$')
     ```
     """
 
