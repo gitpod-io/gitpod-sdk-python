@@ -84,6 +84,7 @@ class TestPolicies:
             members_require_projects=True,
             port_sharing_disabled=True,
             require_custom_domain_access=True,
+            restrict_account_creation_to_scim=True,
             security_agent_policy={
                 "crowdstrike": {
                     "additional_options": {"foo": "string"},
@@ -195,6 +196,7 @@ class TestAsyncPolicies:
             members_require_projects=True,
             port_sharing_disabled=True,
             require_custom_domain_access=True,
+            restrict_account_creation_to_scim=True,
             security_agent_policy={
                 "crowdstrike": {
                     "additional_options": {"foo": "string"},
