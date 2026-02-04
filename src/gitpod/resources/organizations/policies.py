@@ -112,6 +112,7 @@ class PoliciesResource(SyncAPIResource):
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
+        restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -204,6 +205,10 @@ class PoliciesResource(SyncAPIResource):
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.
 
+          restrict_account_creation_to_scim: restrict_account_creation_to_scim controls whether account creation is
+              restricted to SCIM-provisioned users only. When true and SCIM is configured for
+              the organization, only users provisioned via SCIM can create accounts.
+
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
           extra_headers: Send extra headers
@@ -234,6 +239,7 @@ class PoliciesResource(SyncAPIResource):
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
                     "require_custom_domain_access": require_custom_domain_access,
+                    "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
                 },
                 policy_update_params.PolicyUpdateParams,
@@ -336,6 +342,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
+        restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -428,6 +435,10 @@ class AsyncPoliciesResource(AsyncAPIResource):
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.
 
+          restrict_account_creation_to_scim: restrict_account_creation_to_scim controls whether account creation is
+              restricted to SCIM-provisioned users only. When true and SCIM is configured for
+              the organization, only users provisioned via SCIM can create accounts.
+
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
           extra_headers: Send extra headers
@@ -458,6 +469,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
                     "require_custom_domain_access": require_custom_domain_access,
+                    "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
                 },
                 policy_update_params.PolicyUpdateParams,

@@ -112,6 +112,13 @@ class PolicyUpdateParams(TypedDict, total=False):
     domain when one is configured. When true, access via app.gitpod.io is blocked.
     """
 
+    restrict_account_creation_to_scim: Annotated[Optional[bool], PropertyInfo(alias="restrictAccountCreationToScim")]
+    """
+    restrict_account_creation_to_scim controls whether account creation is
+    restricted to SCIM-provisioned users only. When true and SCIM is configured for
+    the organization, only users provisioned via SCIM can create accounts.
+    """
+
     security_agent_policy: Annotated[Optional[SecurityAgentPolicy], PropertyInfo(alias="securityAgentPolicy")]
     """security_agent_policy contains security agent configuration updates"""
 
