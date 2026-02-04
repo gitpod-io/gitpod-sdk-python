@@ -87,6 +87,13 @@ class OrganizationPolicies(BaseModel):
     domain when one is configured. When true, access via app.gitpod.io is blocked.
     """
 
+    restrict_account_creation_to_scim: bool = FieldInfo(alias="restrictAccountCreationToScim")
+    """
+    restrict_account_creation_to_scim controls whether account creation is
+    restricted to SCIM-provisioned users only. When true and SCIM is configured for
+    the organization, only users provisioned via SCIM can create accounts.
+    """
+
     delete_archived_environments_after: Optional[str] = FieldInfo(alias="deleteArchivedEnvironmentsAfter", default=None)
     """
     delete_archived_environments_after controls how long archived environments are
