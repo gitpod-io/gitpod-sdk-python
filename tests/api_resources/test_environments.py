@@ -80,6 +80,14 @@ class TestEnvironments:
                     "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
+                },
                 "machine": {
                     "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
@@ -214,6 +222,14 @@ class TestEnvironments:
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
                     "session": "session",
+                },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
                 },
                 "ports": [
                     {
@@ -432,6 +448,14 @@ class TestEnvironments:
                     "dotfiles": {"repository": "https://example.com"},
                     "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
+                },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
                 },
                 "machine": {
                     "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
@@ -738,6 +762,14 @@ class TestAsyncEnvironments:
                     "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
                 },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
+                },
                 "machine": {
                     "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",
                     "session": "session",
@@ -872,6 +904,14 @@ class TestAsyncEnvironments:
                 "devcontainer": {
                     "devcontainer_file_path": "devcontainerFilePath",
                     "session": "session",
+                },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
                 },
                 "ports": [
                     {
@@ -1090,6 +1130,14 @@ class TestAsyncEnvironments:
                     "dotfiles": {"repository": "https://example.com"},
                     "lifecycle_stage": "LIFECYCLE_STAGE_UNSPECIFIED",
                     "session": "session",
+                },
+                "kernel_controls_config": {
+                    "veto": {
+                        "exec": {
+                            "denylist": ["string"],
+                            "enabled": True,
+                        }
+                    }
                 },
                 "machine": {
                     "class": "d2c94c27-3b76-4a42-b88c-95a85e392c68",

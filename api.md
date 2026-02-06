@@ -121,6 +121,8 @@ from gitpod.types import (
     EnvironmentRole,
     EnvironmentSpec,
     EnvironmentStatus,
+    KernelControlsConfig,
+    Veto,
     EnvironmentCreateResponse,
     EnvironmentRetrieveResponse,
     EnvironmentCreateEnvironmentTokenResponse,
@@ -452,6 +454,7 @@ Types:
 from gitpod.types.organizations import (
     AgentPolicy,
     CrowdStrikeConfig,
+    ExecutableDenyList,
     OrganizationPolicies,
     SecurityAgentPolicy,
     PolicyRetrieveResponse,

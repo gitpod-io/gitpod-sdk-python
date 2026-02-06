@@ -19,6 +19,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.organizations import policy_update_params, policy_retrieve_params
 from ...types.organizations.policy_retrieve_response import PolicyRetrieveResponse
+from ...types.organizations.executable_deny_list_param import ExecutableDenyListParam
 
 __all__ = ["PoliciesResource", "AsyncPoliciesResource"]
 
@@ -104,6 +105,7 @@ class PoliciesResource(SyncAPIResource):
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
+        executable_deny_list: Optional[ExecutableDenyListParam] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
@@ -180,6 +182,9 @@ class PoliciesResource(SyncAPIResource):
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
+          executable_deny_list: executable_deny_list contains executables that are blocked from execution in
+              environments.
+
           maximum_environment_lifetime: maximum_environment_lifetime controls for how long environments are allowed to
               be reused. 0 means no maximum lifetime. Maximum duration is 180 days (15552000
               seconds).
@@ -231,6 +236,7 @@ class PoliciesResource(SyncAPIResource):
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
                     "editor_version_restrictions": editor_version_restrictions,
+                    "executable_deny_list": executable_deny_list,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
@@ -334,6 +340,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
+        executable_deny_list: Optional[ExecutableDenyListParam] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
@@ -410,6 +417,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
+          executable_deny_list: executable_deny_list contains executables that are blocked from execution in
+              environments.
+
           maximum_environment_lifetime: maximum_environment_lifetime controls for how long environments are allowed to
               be reused. 0 means no maximum lifetime. Maximum duration is 180 days (15552000
               seconds).
@@ -461,6 +471,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
                     "editor_version_restrictions": editor_version_restrictions,
+                    "executable_deny_list": executable_deny_list,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,

@@ -8,6 +8,7 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 from .admission_level import AdmissionLevel
 from .environment_phase import EnvironmentPhase
+from .kernel_controls_config import KernelControlsConfig
 from .environment_initializer import EnvironmentInitializer
 from .shared.automation_trigger import AutomationTrigger
 
@@ -208,6 +209,9 @@ class EnvironmentSpec(BaseModel):
 
     devcontainer: Optional[Devcontainer] = None
     """devcontainer is the devcontainer spec of the environment"""
+
+    kernel_controls_config: Optional[KernelControlsConfig] = FieldInfo(alias="kernelControlsConfig", default=None)
+    """kernel_controls_config configures kernel-level controls for this environment"""
 
     machine: Optional[Machine] = None
     """machine is the machine spec of the environment"""
