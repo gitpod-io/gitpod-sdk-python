@@ -165,6 +165,19 @@ class Secret(TypedDict, total=False):
     name: str
     """name is the human readable description of the secret"""
 
+    scope: Literal[
+        "SCOPE_UNSPECIFIED",
+        "SCOPE_ORGANIZATION",
+        "SCOPE_PROJECT",
+        "SCOPE_USER",
+        "SCOPE_SERVICE_ACCOUNT",
+        "SCOPE_RUNNER",
+    ]
+    """
+    scope indicates where this secret originated from. Used to filter secrets during
+    build (only org and project secrets are injected).
+    """
+
     session: str
     """
     session indicated the current session of the secret. When the session does not

@@ -158,6 +158,21 @@ class Secret(BaseModel):
     name: Optional[str] = None
     """name is the human readable description of the secret"""
 
+    scope: Optional[
+        Literal[
+            "SCOPE_UNSPECIFIED",
+            "SCOPE_ORGANIZATION",
+            "SCOPE_PROJECT",
+            "SCOPE_USER",
+            "SCOPE_SERVICE_ACCOUNT",
+            "SCOPE_RUNNER",
+        ]
+    ] = None
+    """
+    scope indicates where this secret originated from. Used to filter secrets during
+    build (only org and project secrets are injected).
+    """
+
     session: Optional[str] = None
     """
     session indicated the current session of the secret. When the session does not
