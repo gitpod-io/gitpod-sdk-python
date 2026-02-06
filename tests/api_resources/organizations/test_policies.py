@@ -9,7 +9,9 @@ import pytest
 
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
-from gitpod.types.organizations import PolicyRetrieveResponse
+from gitpod.types.organizations import (
+    PolicyRetrieveResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -76,6 +78,10 @@ class TestPolicies:
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
+            executable_deny_list={
+                "enabled": True,
+                "executables": ["string"],
+            },
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",
@@ -188,6 +194,10 @@ class TestAsyncPolicies:
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
+            executable_deny_list={
+                "enabled": True,
+                "executables": ["string"],
+            },
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",

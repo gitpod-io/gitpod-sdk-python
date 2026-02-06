@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
 from .environment_phase import EnvironmentPhase
+from .kernel_controls_config_param import KernelControlsConfigParam
 from .environment_initializer_param import EnvironmentInitializerParam
 from .shared_params.automation_trigger import AutomationTrigger
 
@@ -215,6 +216,9 @@ class EnvironmentSpecParam(TypedDict, total=False):
 
     devcontainer: Devcontainer
     """devcontainer is the devcontainer spec of the environment"""
+
+    kernel_controls_config: Annotated[KernelControlsConfigParam, PropertyInfo(alias="kernelControlsConfig")]
+    """kernel_controls_config configures kernel-level controls for this environment"""
 
     machine: Machine
     """machine is the machine spec of the environment"""

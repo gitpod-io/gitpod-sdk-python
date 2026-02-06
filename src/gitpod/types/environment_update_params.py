@@ -7,6 +7,7 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
+from .kernel_controls_config_param import KernelControlsConfigParam
 from .environment_initializer_param import EnvironmentInitializerParam
 
 __all__ = [
@@ -131,6 +132,9 @@ class Spec(TypedDict, total=False):
     content: Optional[SpecContent]
 
     devcontainer: Optional[SpecDevcontainer]
+
+    kernel_controls_config: Annotated[Optional[KernelControlsConfigParam], PropertyInfo(alias="kernelControlsConfig")]
+    """kernel_controls_config configures kernel-level controls for this environment"""
 
     ports: Iterable[SpecPort]
     """ports controls port sharing"""
