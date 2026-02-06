@@ -11,6 +11,7 @@ from .announcement_banner import AnnouncementBanner as AnnouncementBanner
 from .crowd_strike_config import CrowdStrikeConfig as CrowdStrikeConfig
 from .domain_verification import DomainVerification as DomainVerification
 from .organization_invite import OrganizationInvite as OrganizationInvite
+from .executable_deny_list import ExecutableDenyList as ExecutableDenyList
 from .invite_create_params import InviteCreateParams as InviteCreateParams
 from .policy_update_params import PolicyUpdateParams as PolicyUpdateParams
 from .organization_policies import OrganizationPolicies as OrganizationPolicies
@@ -24,6 +25,7 @@ from .invite_retrieve_response import InviteRetrieveResponse as InviteRetrieveRe
 from .policy_retrieve_response import PolicyRetrieveResponse as PolicyRetrieveResponse
 from .domain_verification_state import DomainVerificationState as DomainVerificationState
 from .invite_get_summary_params import InviteGetSummaryParams as InviteGetSummaryParams
+from .executable_deny_list_param import ExecutableDenyListParam as ExecutableDenyListParam
 from .custom_domain_create_params import CustomDomainCreateParams as CustomDomainCreateParams
 from .custom_domain_delete_params import CustomDomainDeleteParams as CustomDomainDeleteParams
 from .custom_domain_update_params import CustomDomainUpdateParams as CustomDomainUpdateParams

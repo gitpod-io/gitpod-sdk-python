@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from .user import User as User
+from .veto import Veto as Veto
 from .group import Group as Group
 from .editor import Editor as Editor
 from .prompt import Prompt as Prompt
@@ -41,6 +42,7 @@ from .project import Project as Project
 from .prebuild import Prebuild as Prebuild
 from .log_level import LogLevel as LogLevel
 from .agent_mode import AgentMode as AgentMode
+from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel
 from .prompt_spec import PromptSpec as PromptSpec
@@ -120,6 +122,7 @@ from .project_delete_params import ProjectDeleteParams as ProjectDeleteParams
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
 from .editor_retrieve_params import EditorRetrieveParams as EditorRetrieveParams
 from .environment_spec_param import EnvironmentSpecParam as EnvironmentSpecParam
+from .kernel_controls_config import KernelControlsConfig as KernelControlsConfig
 from .prebuild_cancel_params import PrebuildCancelParams as PrebuildCancelParams
 from .prebuild_create_params import PrebuildCreateParams as PrebuildCreateParams
 from .prebuild_delete_params import PrebuildDeleteParams as PrebuildDeleteParams
@@ -184,6 +187,7 @@ from .agent_start_execution_params import AgentStartExecutionParams as AgentStar
 from .agent_update_prompt_response import AgentUpdatePromptResponse as AgentUpdatePromptResponse
 from .environment_unarchive_params import EnvironmentUnarchiveParams as EnvironmentUnarchiveParams
 from .identity_get_id_token_params import IdentityGetIDTokenParams as IdentityGetIDTokenParams
+from .kernel_controls_config_param import KernelControlsConfigParam as KernelControlsConfigParam
 from .organization_create_response import OrganizationCreateResponse as OrganizationCreateResponse
 from .organization_retrieve_params import OrganizationRetrieveParams as OrganizationRetrieveParams
 from .organization_set_role_params import OrganizationSetRoleParams as OrganizationSetRoleParams

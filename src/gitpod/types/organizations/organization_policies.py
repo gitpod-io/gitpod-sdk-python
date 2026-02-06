@@ -6,6 +6,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 from .agent_policy import AgentPolicy
+from .executable_deny_list import ExecutableDenyList
 from .security_agent_policy import SecurityAgentPolicy
 
 __all__ = ["OrganizationPolicies", "EditorVersionRestrictions"]
@@ -109,6 +110,12 @@ class OrganizationPolicies(BaseModel):
     editor ID to version policy, editor_version_restrictions not set means no
     restrictions. If empty or not set for an editor, we will use the latest version
     of the editor
+    """
+
+    executable_deny_list: Optional[ExecutableDenyList] = FieldInfo(alias="executableDenyList", default=None)
+    """
+    executable_deny_list contains executables that are blocked from execution in
+    environments.
     """
 
     maximum_environment_lifetime: Optional[str] = FieldInfo(alias="maximumEnvironmentLifetime", default=None)

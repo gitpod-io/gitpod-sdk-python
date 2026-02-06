@@ -7,6 +7,7 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
+from .executable_deny_list_param import ExecutableDenyListParam
 
 __all__ = [
     "PolicyUpdateParams",
@@ -61,6 +62,12 @@ class PolicyUpdateParams(TypedDict, total=False):
     """
     editor_version_restrictions restricts which editor versions can be used. Maps
     editor ID to version policy with allowed major versions.
+    """
+
+    executable_deny_list: Annotated[Optional[ExecutableDenyListParam], PropertyInfo(alias="executableDenyList")]
+    """
+    executable_deny_list contains executables that are blocked from execution in
+    environments.
     """
 
     maximum_environment_lifetime: Annotated[Optional[str], PropertyInfo(alias="maximumEnvironmentLifetime")]
