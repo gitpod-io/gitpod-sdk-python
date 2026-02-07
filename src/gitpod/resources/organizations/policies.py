@@ -204,8 +204,9 @@ class PoliciesResource(SyncAPIResource):
           members_require_projects: members_require_projects controls whether environments can only be created from
               projects by non-admin users
 
-          port_sharing_disabled: port_sharing_disabled controls whether port sharing is disabled in the
-              organization
+          port_sharing_disabled: port_sharing_disabled controls whether user-initiated port sharing is disabled
+              in the organization. System ports (VS Code Browser, agents) are always exempt
+              from this policy.
 
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.
@@ -439,8 +440,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
           members_require_projects: members_require_projects controls whether environments can only be created from
               projects by non-admin users
 
-          port_sharing_disabled: port_sharing_disabled controls whether port sharing is disabled in the
-              organization
+          port_sharing_disabled: port_sharing_disabled controls whether user-initiated port sharing is disabled
+              in the organization. System ports (VS Code Browser, agents) are always exempt
+              from this policy.
 
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.

@@ -109,8 +109,9 @@ class PolicyUpdateParams(TypedDict, total=False):
 
     port_sharing_disabled: Annotated[Optional[bool], PropertyInfo(alias="portSharingDisabled")]
     """
-    port_sharing_disabled controls whether port sharing is disabled in the
-    organization
+    port_sharing_disabled controls whether user-initiated port sharing is disabled
+    in the organization. System ports (VS Code Browser, agents) are always exempt
+    from this policy.
     """
 
     require_custom_domain_access: Annotated[Optional[bool], PropertyInfo(alias="requireCustomDomainAccess")]
