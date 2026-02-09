@@ -23,6 +23,13 @@ class SSOConfigurationCreateParams(TypedDict, total=False):
 
     organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
 
+    additional_scopes: Annotated[SequenceNotStr[str], PropertyInfo(alias="additionalScopes")]
+    """
+    additional_scopes are extra OIDC scopes to request from the identity provider
+    during sign-in. These are appended to the default scopes (openid, email,
+    profile).
+    """
+
     display_name: Annotated[str, PropertyInfo(alias="displayName")]
 
     email_domain: Annotated[Optional[str], PropertyInfo(alias="emailDomain")]
