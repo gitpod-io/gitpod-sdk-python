@@ -8,6 +8,7 @@ from typing_extensions import Required, Annotated, TypedDict
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from .sso_configuration_state import SSOConfigurationState
+from .additional_scopes_update_param import AdditionalScopesUpdateParam
 
 __all__ = ["SSOConfigurationUpdateParams"]
 
@@ -15,6 +16,13 @@ __all__ = ["SSOConfigurationUpdateParams"]
 class SSOConfigurationUpdateParams(TypedDict, total=False):
     sso_configuration_id: Required[Annotated[str, PropertyInfo(alias="ssoConfigurationId")]]
     """sso_configuration_id is the ID of the SSO configuration to update"""
+
+    additional_scopes: Annotated[Optional[AdditionalScopesUpdateParam], PropertyInfo(alias="additionalScopes")]
+    """
+    additional_scopes replaces the configured OIDC scopes when present. When absent
+    (nil), scopes are left unchanged. When present with an empty scopes list, all
+    additional scopes are cleared.
+    """
 
     claims: Dict[str, str]
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""

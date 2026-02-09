@@ -41,6 +41,7 @@ class TestSSOConfigurations:
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            additional_scopes=["x"],
             display_name="displayName",
             email_domain="acme-corp.com",
             email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
@@ -126,6 +127,7 @@ class TestSSOConfigurations:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            additional_scopes={"scopes": ["x"]},
             claims={"foo": "string"},
             client_id="new-client-id",
             client_secret="new-client-secret",
@@ -270,6 +272,7 @@ class TestAsyncSSOConfigurations:
             client_secret="GOCSPX-abcdefghijklmnopqrstuvwxyz123456",
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            additional_scopes=["x"],
             display_name="displayName",
             email_domain="acme-corp.com",
             email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
@@ -355,6 +358,7 @@ class TestAsyncSSOConfigurations:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            additional_scopes={"scopes": ["x"]},
             claims={"foo": "string"},
             client_id="new-client-id",
             client_secret="new-client-secret",
