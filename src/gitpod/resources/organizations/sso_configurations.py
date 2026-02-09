@@ -28,6 +28,7 @@ from ...types.organizations import (
 )
 from ...types.organizations.sso_configuration import SSOConfiguration
 from ...types.organizations.sso_configuration_state import SSOConfigurationState
+from ...types.organizations.additional_scopes_update_param import AdditionalScopesUpdateParam
 from ...types.organizations.sso_configuration_create_response import SSOConfigurationCreateResponse
 from ...types.organizations.sso_configuration_retrieve_response import SSOConfigurationRetrieveResponse
 
@@ -61,6 +62,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         client_secret: str,
         issuer_url: str,
         organization_id: str,
+        additional_scopes: SequenceNotStr[str] | Omit = omit,
         display_name: str | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
         email_domains: SequenceNotStr[str] | Omit = omit,
@@ -114,6 +116,10 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           issuer_url: issuer_url is the URL of the IdP issuer
 
+          additional_scopes: additional_scopes are extra OIDC scopes to request from the identity provider
+              during sign-in. These are appended to the default scopes (openid, email,
+              profile).
+
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
@@ -132,6 +138,7 @@ class SSOConfigurationsResource(SyncAPIResource):
                     "client_secret": client_secret,
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
+                    "additional_scopes": additional_scopes,
                     "display_name": display_name,
                     "email_domain": email_domain,
                     "email_domains": email_domains,
@@ -201,6 +208,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         self,
         *,
         sso_configuration_id: str,
+        additional_scopes: Optional[AdditionalScopesUpdateParam] | Omit = omit,
         claims: Dict[str, str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
@@ -251,6 +259,10 @@ class SSOConfigurationsResource(SyncAPIResource):
         Args:
           sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
+          additional_scopes: additional_scopes replaces the configured OIDC scopes when present. When absent
+              (nil), scopes are left unchanged. When present with an empty scopes list, all
+              additional scopes are cleared.
+
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
           client_id: client_id is the client ID of the SSO provider
@@ -274,6 +286,7 @@ class SSOConfigurationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "sso_configuration_id": sso_configuration_id,
+                    "additional_scopes": additional_scopes,
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,
@@ -455,6 +468,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         client_secret: str,
         issuer_url: str,
         organization_id: str,
+        additional_scopes: SequenceNotStr[str] | Omit = omit,
         display_name: str | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
         email_domains: SequenceNotStr[str] | Omit = omit,
@@ -508,6 +522,10 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           issuer_url: issuer_url is the URL of the IdP issuer
 
+          additional_scopes: additional_scopes are extra OIDC scopes to request from the identity provider
+              during sign-in. These are appended to the default scopes (openid, email,
+              profile).
+
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
@@ -526,6 +544,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     "client_secret": client_secret,
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
+                    "additional_scopes": additional_scopes,
                     "display_name": display_name,
                     "email_domain": email_domain,
                     "email_domains": email_domains,
@@ -595,6 +614,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         self,
         *,
         sso_configuration_id: str,
+        additional_scopes: Optional[AdditionalScopesUpdateParam] | Omit = omit,
         claims: Dict[str, str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
@@ -645,6 +665,10 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         Args:
           sso_configuration_id: sso_configuration_id is the ID of the SSO configuration to update
 
+          additional_scopes: additional_scopes replaces the configured OIDC scopes when present. When absent
+              (nil), scopes are left unchanged. When present with an empty scopes list, all
+              additional scopes are cleared.
+
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
           client_id: client_id is the client ID of the SSO provider
@@ -668,6 +692,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "sso_configuration_id": sso_configuration_id,
+                    "additional_scopes": additional_scopes,
                     "claims": claims,
                     "client_id": client_id,
                     "client_secret": client_secret,

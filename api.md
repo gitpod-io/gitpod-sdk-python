@@ -495,6 +495,7 @@ Types:
 
 ```python
 from gitpod.types.organizations import (
+    AdditionalScopesUpdate,
     ProviderType,
     SSOConfiguration,
     SSOConfigurationState,

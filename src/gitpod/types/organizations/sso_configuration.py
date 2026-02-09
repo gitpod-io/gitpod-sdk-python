@@ -26,6 +26,12 @@ class SSOConfiguration(BaseModel):
     state: SSOConfigurationState
     """state is the state of the SSO configuration"""
 
+    additional_scopes: Optional[List[str]] = FieldInfo(alias="additionalScopes", default=None)
+    """
+    additional_scopes are extra OIDC scopes requested from the identity provider
+    during sign-in.
+    """
+
     claims: Optional[Dict[str, str]] = None
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
 
