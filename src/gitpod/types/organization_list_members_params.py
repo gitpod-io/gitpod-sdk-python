@@ -37,6 +37,12 @@ class OrganizationListMembersParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    exclude_group_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="excludeGroupIds")]
+    """
+    exclude_group_ids excludes members who are already in any of the specified
+    groups
+    """
+
     roles: List[OrganizationRole]
     """roles filters members by their organization role"""
 
