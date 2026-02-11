@@ -1,5 +1,58 @@
 # Changelog
 
+## 0.8.0 (2026-02-11)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* [backend] Resource admin should be able to see all resource shares ([153d9ba](https://github.com/gitpod-io/gitpod-sdk-python/commit/153d9babce677adb9cda8b900b078ed7d16879b7))
+* [SCIM] Configurable token expiration duration ([71eb2b6](https://github.com/gitpod-io/gitpod-sdk-python/commit/71eb2b62d685a409abe4a27129e0408758bc735f))
+* [SCIM] Configurable token expiration duration ([16049ed](https://github.com/gitpod-io/gitpod-sdk-python/commit/16049ed4392e5551137a0bf7930b0a8ebcaa7b5e))
+* **agent:** add annotations field to AgentExecution ([09c2210](https://github.com/gitpod-io/gitpod-sdk-python/commit/09c2210f258504cbebaed878233e2d5e06f939ec))
+* **api:** add additional_scopes to organization SSO configuration ([07aa0cc](https://github.com/gitpod-io/gitpod-sdk-python/commit/07aa0cc02a4b65244104be04289c949bfb013c14))
+* **api:** add announcement banner fields to organization proto ([1cbdaaa](https://github.com/gitpod-io/gitpod-sdk-python/commit/1cbdaaa69c1077d7d354991621af88f7e71e4df0))
+* **api:** add derivedFromOrgRole field to RoleAssignment ([e1ed935](https://github.com/gitpod-io/gitpod-sdk-python/commit/e1ed9353e48590389e21fa38137280daeef56da9))
+* **api:** add dev_runner_id to agents, dev_environment_id and provider to runners ([c345871](https://github.com/gitpod-io/gitpod-sdk-python/commit/c3458714c345048e05c74b213bcf087f3b977313))
+* **api:** add exclude_group_id filter to organization list members ([008ae2b](https://github.com/gitpod-io/gitpod-sdk-python/commit/008ae2b90fef5c2f8eb5e1d624c9e5a2a6a1f83a))
+* **api:** add ExecutableDenyList to environment and organization policy ([110c2ef](https://github.com/gitpod-io/gitpod-sdk-python/commit/110c2efc4f4d5dac2fa1209b7c85554060110889))
+* **api:** add filters to ListPrebuilds for inventory page ([4bc3f9f](https://github.com/gitpod-io/gitpod-sdk-python/commit/4bc3f9f92f2de35c0cb1427df1af602014856000))
+* **api:** add mcp_integrations field and type to agent_execution ([911140b](https://github.com/gitpod-io/gitpod-sdk-python/commit/911140bc7050b5e02daec1f207bbced61db39e0b))
+* **api:** add opus 4.6 model variants to agent supported models ([71e660d](https://github.com/gitpod-io/gitpod-sdk-python/commit/71e660d25b7d164b2d37b09058aa3e74f445e5ca))
+* **api:** add port access methods and organization admission level to environments ([af512f5](https://github.com/gitpod-io/gitpod-sdk-python/commit/af512f54181bc7da478f5e47b949715bec0e8b03))
+* **api:** add ResourceRoleOrgAutomationsAdmin to ResourceRole enum ([320b285](https://github.com/gitpod-io/gitpod-sdk-python/commit/320b285f1fd8723e6c6fa0dc027812cff0891485))
+* **api:** add ResourceRoleOrgGroupsAdmin to ResourceRole enum ([c2fceff](https://github.com/gitpod-io/gitpod-sdk-python/commit/c2fceff932dc786e8fc66d1fb44021e25f59c07e))
+* **api:** add restrict_account_creation_to_scim field to organization policy ([c1272d1](https://github.com/gitpod-io/gitpod-sdk-python/commit/c1272d1a95dbcdb0366cff0c3158e3f9d4769f1a))
+* **api:** add scope field and enum to environment secrets ([371f8f7](https://github.com/gitpod-io/gitpod-sdk-python/commit/371f8f7fc5e3fc882205b852aa684d5626c34e11))
+* **api:** add user_ids filter to organization list members method ([5abdcae](https://github.com/gitpod-io/gitpod-sdk-python/commit/5abdcaecdc351d12e4715c1e4970d836173d6d9f))
+* **api:** add warm pools resource to prebuilds ([b997cfe](https://github.com/gitpod-io/gitpod-sdk-python/commit/b997cfe8e95a7e55a645e7fa54446555ed0108e4))
+* **api:** implement GetAnnouncementBanner and UpdateAnnouncementBanner handlers ([6482c1a](https://github.com/gitpod-io/gitpod-sdk-python/commit/6482c1a4b50742622a90815484c6b59020d196f6))
+* **chat:** add Pylon identity verification for chat widget ([f7b7cb3](https://github.com/gitpod-io/gitpod-sdk-python/commit/f7b7cb37e2349ef60d26890c1a4cc72db34b32f8))
+* **cli:** add --name flag to environment create command ([b292d8f](https://github.com/gitpod-io/gitpod-sdk-python/commit/b292d8f4fb2520ba65bb6701ac8507b16f56080e))
+* **client:** add custom JSON encoder for extended type support ([48e0b49](https://github.com/gitpod-io/gitpod-sdk-python/commit/48e0b4951e34166dba1c29cd4e6b15fb2314b54e))
+* **db:** add service_account_tokens table ([688cf2e](https://github.com/gitpod-io/gitpod-sdk-python/commit/688cf2e01a33ca12de9443d3857360d4223fa0f8))
+* Introduce projects admin org role ([2777780](https://github.com/gitpod-io/gitpod-sdk-python/commit/2777780d987da76ab00f131c243b1ee69e39c901))
+* **runner:** add capability check for ListSCMOrganizations ([4a87ef2](https://github.com/gitpod-io/gitpod-sdk-python/commit/4a87ef22bd88a83fb2eaa9255d9ae60bf8eee618))
+* **types:** add RoleAssignment value to ResourceType enum ([d59ab98](https://github.com/gitpod-io/gitpod-sdk-python/commit/d59ab9810266a68d5b4cd31dd6da669d2691436f))
+
+
+### Bug Fixes
+
+* **api:** reject double-slash prefix in secret file paths ([fb4f63f](https://github.com/gitpod-io/gitpod-sdk-python/commit/fb4f63f9369cdcdb2cbc729bcd0a4bc0aa7b7745))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([d6a1726](https://github.com/gitpod-io/gitpod-sdk-python/commit/d6a1726d9806c8433ba7bc1612018bc84309147e))
+* **internal:** bump dependencies ([330558d](https://github.com/gitpod-io/gitpod-sdk-python/commit/330558de3704863336c8b0bce5559237ef2d0e79))
+* **internal:** formatting ([ecb24f2](https://github.com/gitpod-io/gitpod-sdk-python/commit/ecb24f297e892aecf91c294594f062c0baf6f8f5))
+* update OpenAPI spec to e50946de8cddc549be7f7423903ad444632abce6 ([1176fce](https://github.com/gitpod-io/gitpod-sdk-python/commit/1176fce9b14b0bf657282228a20c222b2cb14ea5))
+
+
+### Documentation
+
+* **api:** clarify port_sharing_disabled behavior in organization policy ([2154cd8](https://github.com/gitpod-io/gitpod-sdk-python/commit/2154cd8abfa221c6c5aa4af9e85919fc927d888e))
+
 ## 0.7.0 (2026-01-21)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.6.0...v0.7.0)
