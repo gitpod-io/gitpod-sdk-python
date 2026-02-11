@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Iterable, Optional
 
 import httpx
 
@@ -12,9 +12,12 @@ from ...types import (
     project_delete_params,
     project_update_params,
     project_retrieve_params,
+    project_bulk_create_params,
+    project_bulk_delete_params,
+    project_bulk_update_params,
     project_create_from_environment_params,
 )
-from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from .policies import (
     PoliciesResource,
@@ -47,6 +50,9 @@ from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
 from ...types.recommended_editors_param import RecommendedEditorsParam
+from ...types.project_bulk_create_response import ProjectBulkCreateResponse
+from ...types.project_bulk_delete_response import ProjectBulkDeleteResponse
+from ...types.project_bulk_update_response import ProjectBulkUpdateResponse
 from ...types.environment_initializer_param import EnvironmentInitializerParam
 from ...types.project_prebuild_configuration_param import ProjectPrebuildConfigurationParam
 from ...types.project_create_from_environment_response import ProjectCreateFromEnvironmentResponse
@@ -471,6 +477,172 @@ class ProjectsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=object,
+        )
+
+    def bulk_create(
+        self,
+        *,
+        projects: Iterable[project_bulk_create_params.Project] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkCreateResponse:
+        """
+        Creates multiple projects in a single request.
+
+        Use this method to:
+
+        - Onboard multiple repositories at once
+        - Import a batch of projects during initial setup
+
+        Returns successfully created projects and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Create multiple projects:
+
+          Creates several projects in one request.
+
+          ```yaml
+          projects:
+            - name: "Frontend"
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/org/frontend"
+            - name: "Backend"
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/org/backend"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.ProjectService/CreateProjects",
+            body=maybe_transform({"projects": projects}, project_bulk_create_params.ProjectBulkCreateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkCreateResponse,
+        )
+
+    def bulk_delete(
+        self,
+        *,
+        project_ids: SequenceNotStr[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkDeleteResponse:
+        """
+        Deletes multiple projects in a single request.
+
+        Use this method to:
+
+        - Remove multiple unused projects at once
+        - Clean up projects in batch
+
+        Returns successfully deleted project IDs and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Delete multiple projects:
+
+          Permanently removes several projects in one request.
+
+          ```yaml
+          projectIds:
+            - "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+            - "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.ProjectService/DeleteProjects",
+            body=maybe_transform({"project_ids": project_ids}, project_bulk_delete_params.ProjectBulkDeleteParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkDeleteResponse,
+        )
+
+    def bulk_update(
+        self,
+        *,
+        projects: Iterable[project_bulk_update_params.Project] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkUpdateResponse:
+        """
+        Updates multiple projects in a single request.
+
+        Use this method to:
+
+        - Modify settings across multiple projects at once
+        - Apply configuration changes in batch
+
+        Returns successfully updated projects and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Update multiple projects:
+
+          Updates several projects in one request.
+
+          ```yaml
+          projects:
+            - projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+              name: "Updated Frontend"
+            - projectId: "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"
+              name: "Updated Backend"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.ProjectService/UpdateProjects",
+            body=maybe_transform({"projects": projects}, project_bulk_update_params.ProjectBulkUpdateParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkUpdateResponse,
         )
 
     def create_from_environment(
@@ -951,6 +1123,178 @@ class AsyncProjectsResource(AsyncAPIResource):
             cast_to=object,
         )
 
+    async def bulk_create(
+        self,
+        *,
+        projects: Iterable[project_bulk_create_params.Project] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkCreateResponse:
+        """
+        Creates multiple projects in a single request.
+
+        Use this method to:
+
+        - Onboard multiple repositories at once
+        - Import a batch of projects during initial setup
+
+        Returns successfully created projects and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Create multiple projects:
+
+          Creates several projects in one request.
+
+          ```yaml
+          projects:
+            - name: "Frontend"
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/org/frontend"
+            - name: "Backend"
+              initializer:
+                specs:
+                  - git:
+                      remoteUri: "https://github.com/org/backend"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.ProjectService/CreateProjects",
+            body=await async_maybe_transform(
+                {"projects": projects}, project_bulk_create_params.ProjectBulkCreateParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkCreateResponse,
+        )
+
+    async def bulk_delete(
+        self,
+        *,
+        project_ids: SequenceNotStr[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkDeleteResponse:
+        """
+        Deletes multiple projects in a single request.
+
+        Use this method to:
+
+        - Remove multiple unused projects at once
+        - Clean up projects in batch
+
+        Returns successfully deleted project IDs and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Delete multiple projects:
+
+          Permanently removes several projects in one request.
+
+          ```yaml
+          projectIds:
+            - "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+            - "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.ProjectService/DeleteProjects",
+            body=await async_maybe_transform(
+                {"project_ids": project_ids}, project_bulk_delete_params.ProjectBulkDeleteParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkDeleteResponse,
+        )
+
+    async def bulk_update(
+        self,
+        *,
+        projects: Iterable[project_bulk_update_params.Project] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ProjectBulkUpdateResponse:
+        """
+        Updates multiple projects in a single request.
+
+        Use this method to:
+
+        - Modify settings across multiple projects at once
+        - Apply configuration changes in batch
+
+        Returns successfully updated projects and details about any failures. Each
+        project in the request is processed independently — partial success is possible.
+
+        ### Examples
+
+        - Update multiple projects:
+
+          Updates several projects in one request.
+
+          ```yaml
+          projects:
+            - projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+              name: "Updated Frontend"
+            - projectId: "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"
+              name: "Updated Backend"
+          ```
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.ProjectService/UpdateProjects",
+            body=await async_maybe_transform(
+                {"projects": projects}, project_bulk_update_params.ProjectBulkUpdateParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ProjectBulkUpdateResponse,
+        )
+
     async def create_from_environment(
         self,
         *,
@@ -1029,6 +1373,15 @@ class ProjectsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             projects.delete,
         )
+        self.bulk_create = to_raw_response_wrapper(
+            projects.bulk_create,
+        )
+        self.bulk_delete = to_raw_response_wrapper(
+            projects.bulk_delete,
+        )
+        self.bulk_update = to_raw_response_wrapper(
+            projects.bulk_update,
+        )
         self.create_from_environment = to_raw_response_wrapper(
             projects.create_from_environment,
         )
@@ -1060,6 +1413,15 @@ class AsyncProjectsResourceWithRawResponse:
         )
         self.delete = async_to_raw_response_wrapper(
             projects.delete,
+        )
+        self.bulk_create = async_to_raw_response_wrapper(
+            projects.bulk_create,
+        )
+        self.bulk_delete = async_to_raw_response_wrapper(
+            projects.bulk_delete,
+        )
+        self.bulk_update = async_to_raw_response_wrapper(
+            projects.bulk_update,
         )
         self.create_from_environment = async_to_raw_response_wrapper(
             projects.create_from_environment,
@@ -1093,6 +1455,15 @@ class ProjectsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             projects.delete,
         )
+        self.bulk_create = to_streamed_response_wrapper(
+            projects.bulk_create,
+        )
+        self.bulk_delete = to_streamed_response_wrapper(
+            projects.bulk_delete,
+        )
+        self.bulk_update = to_streamed_response_wrapper(
+            projects.bulk_update,
+        )
         self.create_from_environment = to_streamed_response_wrapper(
             projects.create_from_environment,
         )
@@ -1124,6 +1495,15 @@ class AsyncProjectsResourceWithStreamingResponse:
         )
         self.delete = async_to_streamed_response_wrapper(
             projects.delete,
+        )
+        self.bulk_create = async_to_streamed_response_wrapper(
+            projects.bulk_create,
+        )
+        self.bulk_delete = async_to_streamed_response_wrapper(
+            projects.bulk_delete,
+        )
+        self.bulk_update = async_to_streamed_response_wrapper(
+            projects.bulk_update,
         )
         self.create_from_environment = async_to_streamed_response_wrapper(
             projects.create_from_environment,

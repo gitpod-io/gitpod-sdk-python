@@ -555,6 +555,9 @@ from gitpod.types import (
     ProjectCreateResponse,
     ProjectRetrieveResponse,
     ProjectUpdateResponse,
+    ProjectBulkCreateResponse,
+    ProjectBulkDeleteResponse,
+    ProjectBulkUpdateResponse,
     ProjectCreateFromEnvironmentResponse,
 )
 ```
@@ -566,6 +569,9 @@ Methods:
 - <code title="post /gitpod.v1.ProjectService/UpdateProject">client.projects.<a href="./src/gitpod/resources/projects/projects.py">update</a>(\*\*<a href="src/gitpod/types/project_update_params.py">params</a>) -> <a href="./src/gitpod/types/project_update_response.py">ProjectUpdateResponse</a></code>
 - <code title="post /gitpod.v1.ProjectService/ListProjects">client.projects.<a href="./src/gitpod/resources/projects/projects.py">list</a>(\*\*<a href="src/gitpod/types/project_list_params.py">params</a>) -> <a href="./src/gitpod/types/project.py">SyncProjectsPage[Project]</a></code>
 - <code title="post /gitpod.v1.ProjectService/DeleteProject">client.projects.<a href="./src/gitpod/resources/projects/projects.py">delete</a>(\*\*<a href="src/gitpod/types/project_delete_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.ProjectService/CreateProjects">client.projects.<a href="./src/gitpod/resources/projects/projects.py">bulk_create</a>(\*\*<a href="src/gitpod/types/project_bulk_create_params.py">params</a>) -> <a href="./src/gitpod/types/project_bulk_create_response.py">ProjectBulkCreateResponse</a></code>
+- <code title="post /gitpod.v1.ProjectService/DeleteProjects">client.projects.<a href="./src/gitpod/resources/projects/projects.py">bulk_delete</a>(\*\*<a href="src/gitpod/types/project_bulk_delete_params.py">params</a>) -> <a href="./src/gitpod/types/project_bulk_delete_response.py">ProjectBulkDeleteResponse</a></code>
+- <code title="post /gitpod.v1.ProjectService/UpdateProjects">client.projects.<a href="./src/gitpod/resources/projects/projects.py">bulk_update</a>(\*\*<a href="src/gitpod/types/project_bulk_update_params.py">params</a>) -> <a href="./src/gitpod/types/project_bulk_update_response.py">ProjectBulkUpdateResponse</a></code>
 - <code title="post /gitpod.v1.ProjectService/CreateProjectFromEnvironment">client.projects.<a href="./src/gitpod/resources/projects/projects.py">create_from_environment</a>(\*\*<a href="src/gitpod/types/project_create_from_environment_params.py">params</a>) -> <a href="./src/gitpod/types/project_create_from_environment_response.py">ProjectCreateFromEnvironmentResponse</a></code>
 
 ## EnvironmentClases

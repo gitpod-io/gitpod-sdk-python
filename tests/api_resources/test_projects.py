@@ -14,6 +14,9 @@ from gitpod.types import (
     ProjectCreateResponse,
     ProjectUpdateResponse,
     ProjectRetrieveResponse,
+    ProjectBulkCreateResponse,
+    ProjectBulkDeleteResponse,
+    ProjectBulkUpdateResponse,
     ProjectCreateFromEnvironmentResponse,
 )
 from gitpod.pagination import SyncProjectsPage, AsyncProjectsPage
@@ -276,6 +279,244 @@ class TestProjects:
 
             project = response.parse()
             assert_matches_type(object, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_create(self, client: Gitpod) -> None:
+        project = client.projects.bulk_create()
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_create_with_all_params(self, client: Gitpod) -> None:
+        project = client.projects.bulk_create(
+            projects=[
+                {
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "https://github.com/org/frontend",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "name": "Frontend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "technical_description": "technicalDescription",
+                },
+                {
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "https://github.com/org/backend",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "name": "Backend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "technical_description": "technicalDescription",
+                },
+            ],
+        )
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_bulk_create(self, client: Gitpod) -> None:
+        response = client.projects.with_raw_response.bulk_create()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_bulk_create(self, client: Gitpod) -> None:
+        with client.projects.with_streaming_response.bulk_create() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_delete(self, client: Gitpod) -> None:
+        project = client.projects.bulk_delete()
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_delete_with_all_params(self, client: Gitpod) -> None:
+        project = client.projects.bulk_delete(
+            project_ids=["b0e12f6c-4c67-429d-a4a6-d9838b5da047", "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"],
+        )
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_bulk_delete(self, client: Gitpod) -> None:
+        response = client.projects.with_raw_response.bulk_delete()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_bulk_delete(self, client: Gitpod) -> None:
+        with client.projects.with_streaming_response.bulk_delete() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_update(self, client: Gitpod) -> None:
+        project = client.projects.bulk_update()
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_method_bulk_update_with_all_params(self, client: Gitpod) -> None:
+        project = client.projects.bulk_update(
+            projects=[
+                {
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "name": "Updated Frontend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+                    "recommended_editors": {"editors": {"foo": {"versions": ["string"]}}},
+                    "technical_description": "technicalDescription",
+                },
+                {
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "name": "Updated Backend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "project_id": "c1f23g7d-5d78-430e-b5b7-e0949c6eb158",
+                    "recommended_editors": {"editors": {"foo": {"versions": ["string"]}}},
+                    "technical_description": "technicalDescription",
+                },
+            ],
+        )
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_raw_response_bulk_update(self, client: Gitpod) -> None:
+        response = client.projects.with_raw_response.bulk_update()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = response.parse()
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    def test_streaming_response_bulk_update(self, client: Gitpod) -> None:
+        with client.projects.with_streaming_response.bulk_update() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = response.parse()
+            assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -574,6 +815,244 @@ class TestAsyncProjects:
 
             project = await response.parse()
             assert_matches_type(object, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_create(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_create()
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_create_with_all_params(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_create(
+            projects=[
+                {
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "https://github.com/org/frontend",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "name": "Frontend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "technical_description": "technicalDescription",
+                },
+                {
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "https://github.com/org/backend",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "name": "Backend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "technical_description": "technicalDescription",
+                },
+            ],
+        )
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_bulk_create(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.projects.with_raw_response.bulk_create()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_bulk_create(self, async_client: AsyncGitpod) -> None:
+        async with async_client.projects.with_streaming_response.bulk_create() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectBulkCreateResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_delete(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_delete()
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_delete(
+            project_ids=["b0e12f6c-4c67-429d-a4a6-d9838b5da047", "c1f23g7d-5d78-430e-b5b7-e0949c6eb158"],
+        )
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_bulk_delete(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.projects.with_raw_response.bulk_delete()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_bulk_delete(self, async_client: AsyncGitpod) -> None:
+        async with async_client.projects.with_streaming_response.bulk_delete() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectBulkDeleteResponse, project, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_update(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_update()
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_method_bulk_update_with_all_params(self, async_client: AsyncGitpod) -> None:
+        project = await async_client.projects.bulk_update(
+            projects=[
+                {
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "name": "Updated Frontend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "project_id": "b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+                    "recommended_editors": {"editors": {"foo": {"versions": ["string"]}}},
+                    "technical_description": "technicalDescription",
+                },
+                {
+                    "automations_file_path": "automationsFilePath",
+                    "devcontainer_file_path": "devcontainerFilePath",
+                    "initializer": {
+                        "specs": [
+                            {
+                                "context_url": {"url": "https://example.com"},
+                                "git": {
+                                    "checkout_location": "checkoutLocation",
+                                    "clone_target": "cloneTarget",
+                                    "remote_uri": "remoteUri",
+                                    "target_mode": "CLONE_TARGET_MODE_UNSPECIFIED",
+                                    "upstream_remote_uri": "upstreamRemoteUri",
+                                },
+                            }
+                        ]
+                    },
+                    "name": "Updated Backend",
+                    "prebuild_configuration": {
+                        "enabled": True,
+                        "enable_jetbrains_warmup": True,
+                        "environment_class_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                        "executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
+                    },
+                    "project_id": "c1f23g7d-5d78-430e-b5b7-e0949c6eb158",
+                    "recommended_editors": {"editors": {"foo": {"versions": ["string"]}}},
+                    "technical_description": "technicalDescription",
+                },
+            ],
+        )
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_raw_response_bulk_update(self, async_client: AsyncGitpod) -> None:
+        response = await async_client.projects.with_raw_response.bulk_update()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        project = await response.parse()
+        assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
+
+    @pytest.mark.skip(reason="Prism tests are disabled")
+    @parametrize
+    async def test_streaming_response_bulk_update(self, async_client: AsyncGitpod) -> None:
+        async with async_client.projects.with_streaming_response.bulk_update() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            project = await response.parse()
+            assert_matches_type(ProjectBulkUpdateResponse, project, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
