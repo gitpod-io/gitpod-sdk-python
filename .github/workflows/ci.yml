@@ -2,15 +2,15 @@ name: CI
 on:
   push:
     branches-ignore:
-      - "generated"
-      - "codegen/**"
-      - "integrated/**"
-      - "stl-preview-head/**"
-      - "stl-preview-base/**"
+      - 'generated'
+      - 'codegen/**'
+      - 'integrated/**'
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
   pull_request:
     branches-ignore:
-      - "stl-preview-head/**"
-      - "stl-preview-base/**"
+      - 'stl-preview-head/**'
+      - 'stl-preview-base/**'
 
 jobs:
   lint:
@@ -26,8 +26,8 @@ jobs:
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Install dependencies
         run: rye sync --all-features
@@ -51,8 +51,8 @@ jobs:
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Install dependencies
         run: rye sync --all-features
@@ -88,8 +88,8 @@ jobs:
           curl -sSf https://rye.astral.sh/get | bash
           echo "$HOME/.rye/shims" >> $GITHUB_PATH
         env:
-          RYE_VERSION: "0.44.0"
-          RYE_INSTALL_OPTION: "--yes"
+          RYE_VERSION: '0.44.0'
+          RYE_INSTALL_OPTION: '--yes'
 
       - name: Bootstrap
         run: ./scripts/bootstrap
