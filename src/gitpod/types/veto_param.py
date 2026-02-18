@@ -5,12 +5,16 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from .._types import SequenceNotStr
+from .organizations.kernel_controls_action import KernelControlsAction
 
 __all__ = ["VetoParam", "Exec"]
 
 
 class Exec(TypedDict, total=False):
     """exec controls executable blocking"""
+
+    action: KernelControlsAction
+    """action specifies what action kernel-level controls take on policy violations"""
 
     denylist: SequenceNotStr[str]
     """denylist is the list of executable paths or names to block"""
