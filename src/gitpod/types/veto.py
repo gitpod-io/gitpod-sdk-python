@@ -3,12 +3,16 @@
 from typing import List, Optional
 
 from .._models import BaseModel
+from .organizations.kernel_controls_action import KernelControlsAction
 
 __all__ = ["Veto", "Exec"]
 
 
 class Exec(BaseModel):
     """exec controls executable blocking"""
+
+    action: Optional[KernelControlsAction] = None
+    """action specifies what action kernel-level controls take on policy violations"""
 
     denylist: Optional[List[str]] = None
     """denylist is the list of executable paths or names to block"""

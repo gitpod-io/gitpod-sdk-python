@@ -79,6 +79,7 @@ class TestPolicies:
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
             executable_deny_list={
+                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
                 "executables": ["string"],
             },
@@ -195,6 +196,7 @@ class TestAsyncPolicies:
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
             executable_deny_list={
+                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
                 "executables": ["string"],
             },

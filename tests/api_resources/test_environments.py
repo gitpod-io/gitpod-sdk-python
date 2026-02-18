@@ -83,6 +83,7 @@ class TestEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
@@ -227,6 +228,7 @@ class TestEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
@@ -453,6 +455,7 @@ class TestEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
@@ -767,6 +770,7 @@ class TestAsyncEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
@@ -911,6 +915,7 @@ class TestAsyncEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
@@ -1137,6 +1142,7 @@ class TestAsyncEnvironments:
                 "kernel_controls_config": {
                     "veto": {
                         "exec": {
+                            "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                             "denylist": ["string"],
                             "enabled": True,
                         }
