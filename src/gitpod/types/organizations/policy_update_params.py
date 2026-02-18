@@ -7,7 +7,7 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
-from .executable_deny_list_param import ExecutableDenyListParam
+from .veto_exec_policy_param import VetoExecPolicyParam
 
 __all__ = [
     "PolicyUpdateParams",
@@ -64,11 +64,8 @@ class PolicyUpdateParams(TypedDict, total=False):
     editor ID to version policy with allowed major versions.
     """
 
-    executable_deny_list: Annotated[Optional[ExecutableDenyListParam], PropertyInfo(alias="executableDenyList")]
-    """
-    executable_deny_list contains executables that are blocked from execution in
-    environments.
-    """
+    executable_deny_list: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="executableDenyList")]
+    """executable_deny_list contains the veto exec policy for environments."""
 
     maximum_environment_lifetime: Annotated[Optional[str], PropertyInfo(alias="maximumEnvironmentLifetime")]
     """

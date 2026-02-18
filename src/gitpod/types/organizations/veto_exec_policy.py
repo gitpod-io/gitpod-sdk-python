@@ -1,25 +1,23 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from __future__ import annotations
+from typing import List, Optional
 
-from typing_extensions import TypedDict
-
-from ..._types import SequenceNotStr
+from ..._models import BaseModel
 from .kernel_controls_action import KernelControlsAction
 
-__all__ = ["ExecutableDenyListParam"]
+__all__ = ["VetoExecPolicy"]
 
 
-class ExecutableDenyListParam(TypedDict, total=False):
+class VetoExecPolicy(BaseModel):
     """
-    ExecutableDenyList contains executables that are blocked from execution in environments.
+    VetoExecPolicy defines the policy for blocking or auditing executable execution in environments.
     """
 
-    action: KernelControlsAction
+    action: Optional[KernelControlsAction] = None
     """action specifies what action kernel-level controls take on policy violations"""
 
-    enabled: bool
+    enabled: Optional[bool] = None
     """enabled controls whether executable blocking is active"""
 
-    executables: SequenceNotStr[str]
+    executables: Optional[List[str]] = None
     """executables is the list of executable paths or names to block"""

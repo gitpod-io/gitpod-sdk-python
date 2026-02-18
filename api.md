@@ -454,10 +454,10 @@ Types:
 from gitpod.types.organizations import (
     AgentPolicy,
     CrowdStrikeConfig,
-    ExecutableDenyList,
     KernelControlsAction,
     OrganizationPolicies,
     SecurityAgentPolicy,
+    VetoExecPolicy,
     PolicyRetrieveResponse,
 )
 ```

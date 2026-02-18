@@ -6,7 +6,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 from .agent_policy import AgentPolicy
-from .executable_deny_list import ExecutableDenyList
+from .veto_exec_policy import VetoExecPolicy
 from .security_agent_policy import SecurityAgentPolicy
 
 __all__ = ["OrganizationPolicies", "EditorVersionRestrictions"]
@@ -113,11 +113,8 @@ class OrganizationPolicies(BaseModel):
     of the editor
     """
 
-    executable_deny_list: Optional[ExecutableDenyList] = FieldInfo(alias="executableDenyList", default=None)
-    """
-    executable_deny_list contains executables that are blocked from execution in
-    environments.
-    """
+    executable_deny_list: Optional[VetoExecPolicy] = FieldInfo(alias="executableDenyList", default=None)
+    """executable_deny_list contains the veto exec policy for environments."""
 
     maximum_environment_lifetime: Optional[str] = FieldInfo(alias="maximumEnvironmentLifetime", default=None)
     """
