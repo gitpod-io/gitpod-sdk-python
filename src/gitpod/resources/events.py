@@ -86,6 +86,16 @@ class EventsResource(SyncAPIResource):
             pageSize: 20
           ```
 
+        - Filter by time range:
+
+          ```yaml
+          filter:
+            from: "2024-01-01T00:00:00Z"
+            to: "2024-02-01T00:00:00Z"
+          pagination:
+            pageSize: 20
+          ```
+
         Args:
           pagination: pagination contains the pagination options for listing environments
 
@@ -247,6 +257,16 @@ class AsyncEventsResource(AsyncAPIResource):
           filter:
             actorIds: ["d2c94c27-3b76-4a42-b88c-95a85e392c68"]
             actorPrincipals: ["PRINCIPAL_USER"]
+          pagination:
+            pageSize: 20
+          ```
+
+        - Filter by time range:
+
+          ```yaml
+          filter:
+            from: "2024-01-01T00:00:00Z"
+            to: "2024-02-01T00:00:00Z"
           pagination:
             pageSize: 20
           ```
