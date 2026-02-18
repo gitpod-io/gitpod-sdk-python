@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.10.0 (2026-02-18)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** add audit_only field to executable_deny_list and veto ([82ede69](https://github.com/gitpod-io/gitpod-sdk-python/commit/82ede69962a1ae28dd47f881bf305dc6f457e794))
+* **api:** add RUNNER_SIDE_AGENT to RunnerCapability type ([9375f78](https://github.com/gitpod-io/gitpod-sdk-python/commit/9375f7880e2d9e5db4fc57f4ed86c8b6ca5021fa))
+* **api:** add WARMPOOL_ADMIN and WARMPOOL_VIEWER to ResourceRole ([5c316a6](https://github.com/gitpod-io/gitpod-sdk-python/commit/5c316a6cfc56e4ba44067ae33f33d0456474dae1))
+
+
+### Bug Fixes
+
+* **types:** rename ExecutableDenyList to VetoExecPolicy in organizations policies ([52f2760](https://github.com/gitpod-io/gitpod-sdk-python/commit/52f2760858e8e583cb0d5b68c2efffaf511193a8))
+
+
+### Chores
+
+* format all `api.md` files ([c52f954](https://github.com/gitpod-io/gitpod-sdk-python/commit/c52f954a3bda80d38af13cb8cc26a3d81831da76))
+* **internal:** fix lint error on Python 3.14 ([2342adf](https://github.com/gitpod-io/gitpod-sdk-python/commit/2342adf3281e4eb7aa0584a60ea8b709ff97656c))
+
 ## 0.9.0 (2026-02-11)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.8.0...v0.9.0)
