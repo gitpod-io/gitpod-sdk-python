@@ -10,6 +10,7 @@ import pytest
 from gitpod import Gitpod, AsyncGitpod
 from tests.utils import assert_matches_type
 from gitpod.types import EventListResponse, EventWatchResponse
+from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncEntriesPage, AsyncEntriesPage
 from gitpod._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 
@@ -34,8 +35,10 @@ class TestEvents:
             filter={
                 "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
                 "actor_principals": ["PRINCIPAL_USER"],
+                "from": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
+                "to": parse_datetime("2019-12-27T18:11:19.117Z"),
             },
             pagination={
                 "token": "token",
@@ -123,8 +126,10 @@ class TestAsyncEvents:
             filter={
                 "actor_ids": ["d2c94c27-3b76-4a42-b88c-95a85e392c68"],
                 "actor_principals": ["PRINCIPAL_USER"],
+                "from": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "subject_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "subject_types": ["RESOURCE_TYPE_UNSPECIFIED"],
+                "to": parse_datetime("2019-12-27T18:11:19.117Z"),
             },
             pagination={
                 "token": "token",

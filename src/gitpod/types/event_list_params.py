@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
+from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -24,7 +25,16 @@ class EventListParams(TypedDict, total=False):
     """pagination contains the pagination options for listing environments"""
 
 
-class Filter(TypedDict, total=False):
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "from": Union[str, datetime, None],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
     actor_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="actorIds")]
 
     actor_principals: Annotated[List[Principal], PropertyInfo(alias="actorPrincipals")]
@@ -32,6 +42,9 @@ class Filter(TypedDict, total=False):
     subject_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="subjectIds")]
 
     subject_types: Annotated[List[ResourceType], PropertyInfo(alias="subjectTypes")]
+
+    to: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    """to filters audit logs created before this timestamp (exclusive)."""
 
 
 class Pagination(TypedDict, total=False):
