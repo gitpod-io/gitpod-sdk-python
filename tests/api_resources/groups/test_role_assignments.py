@@ -21,13 +21,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestRoleAssignments:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.create()
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.create(
@@ -38,7 +38,7 @@ class TestRoleAssignments:
         )
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.groups.role_assignments.with_raw_response.create()
@@ -48,7 +48,7 @@ class TestRoleAssignments:
         role_assignment = response.parse()
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.groups.role_assignments.with_streaming_response.create() as response:
@@ -60,13 +60,13 @@ class TestRoleAssignments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.list()
         assert_matches_type(SyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.list(
@@ -86,7 +86,7 @@ class TestRoleAssignments:
         )
         assert_matches_type(SyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.groups.role_assignments.with_raw_response.list()
@@ -96,7 +96,7 @@ class TestRoleAssignments:
         role_assignment = response.parse()
         assert_matches_type(SyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.groups.role_assignments.with_streaming_response.list() as response:
@@ -108,13 +108,13 @@ class TestRoleAssignments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.delete()
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         role_assignment = client.groups.role_assignments.delete(
@@ -122,7 +122,7 @@ class TestRoleAssignments:
         )
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.groups.role_assignments.with_raw_response.delete()
@@ -132,7 +132,7 @@ class TestRoleAssignments:
         role_assignment = response.parse()
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.groups.role_assignments.with_streaming_response.delete() as response:
@@ -150,13 +150,13 @@ class TestAsyncRoleAssignments:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.create()
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.create(
@@ -167,7 +167,7 @@ class TestAsyncRoleAssignments:
         )
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.role_assignments.with_raw_response.create()
@@ -177,7 +177,7 @@ class TestAsyncRoleAssignments:
         role_assignment = await response.parse()
         assert_matches_type(RoleAssignmentCreateResponse, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.role_assignments.with_streaming_response.create() as response:
@@ -189,13 +189,13 @@ class TestAsyncRoleAssignments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.list()
         assert_matches_type(AsyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.list(
@@ -215,7 +215,7 @@ class TestAsyncRoleAssignments:
         )
         assert_matches_type(AsyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.role_assignments.with_raw_response.list()
@@ -225,7 +225,7 @@ class TestAsyncRoleAssignments:
         role_assignment = await response.parse()
         assert_matches_type(AsyncAssignmentsPage[RoleAssignment], role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.role_assignments.with_streaming_response.list() as response:
@@ -237,13 +237,13 @@ class TestAsyncRoleAssignments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.delete()
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         role_assignment = await async_client.groups.role_assignments.delete(
@@ -251,7 +251,7 @@ class TestAsyncRoleAssignments:
         )
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.role_assignments.with_raw_response.delete()
@@ -261,7 +261,7 @@ class TestAsyncRoleAssignments:
         role_assignment = await response.parse()
         assert_matches_type(object, role_assignment, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.role_assignments.with_streaming_response.delete() as response:
