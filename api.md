@@ -114,6 +114,7 @@ Types:
 ```python
 from gitpod.types import (
     AdmissionLevel,
+    BpfDebugLevel,
     Environment,
     EnvironmentActivitySignal,
     EnvironmentMetadata,
