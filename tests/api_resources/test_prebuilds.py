@@ -24,7 +24,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPrebuilds:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.create(
@@ -33,7 +33,7 @@ class TestPrebuilds:
         )
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.create(
@@ -47,7 +47,7 @@ class TestPrebuilds:
         )
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.create(
@@ -60,7 +60,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.create(
@@ -75,7 +75,7 @@ class TestPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.retrieve(
@@ -83,7 +83,7 @@ class TestPrebuilds:
         )
         assert_matches_type(PrebuildRetrieveResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.retrieve(
@@ -95,7 +95,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(PrebuildRetrieveResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.retrieve(
@@ -109,13 +109,13 @@ class TestPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.list()
         assert_matches_type(SyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.list(
@@ -135,7 +135,7 @@ class TestPrebuilds:
         )
         assert_matches_type(SyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.list()
@@ -145,7 +145,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(SyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.list() as response:
@@ -157,7 +157,7 @@ class TestPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.delete(
@@ -165,7 +165,7 @@ class TestPrebuilds:
         )
         assert_matches_type(object, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.delete(
@@ -177,7 +177,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(object, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.delete(
@@ -191,7 +191,7 @@ class TestPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.cancel(
@@ -199,7 +199,7 @@ class TestPrebuilds:
         )
         assert_matches_type(PrebuildCancelResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.cancel(
@@ -211,7 +211,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(PrebuildCancelResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.cancel(
@@ -225,7 +225,7 @@ class TestPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_logs_token(self, client: Gitpod) -> None:
         prebuild = client.prebuilds.create_logs_token(
@@ -233,7 +233,7 @@ class TestPrebuilds:
         )
         assert_matches_type(PrebuildCreateLogsTokenResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_logs_token(self, client: Gitpod) -> None:
         response = client.prebuilds.with_raw_response.create_logs_token(
@@ -245,7 +245,7 @@ class TestPrebuilds:
         prebuild = response.parse()
         assert_matches_type(PrebuildCreateLogsTokenResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_logs_token(self, client: Gitpod) -> None:
         with client.prebuilds.with_streaming_response.create_logs_token(
@@ -265,7 +265,7 @@ class TestAsyncPrebuilds:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.create(
@@ -274,7 +274,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.create(
@@ -288,7 +288,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.create(
@@ -301,7 +301,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(PrebuildCreateResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.create(
@@ -316,7 +316,7 @@ class TestAsyncPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.retrieve(
@@ -324,7 +324,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(PrebuildRetrieveResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.retrieve(
@@ -336,7 +336,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(PrebuildRetrieveResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.retrieve(
@@ -350,13 +350,13 @@ class TestAsyncPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.list()
         assert_matches_type(AsyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.list(
@@ -376,7 +376,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(AsyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.list()
@@ -386,7 +386,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(AsyncPrebuildsPage[Prebuild], prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.list() as response:
@@ -398,7 +398,7 @@ class TestAsyncPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.delete(
@@ -406,7 +406,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(object, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.delete(
@@ -418,7 +418,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(object, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.delete(
@@ -432,7 +432,7 @@ class TestAsyncPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.cancel(
@@ -440,7 +440,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(PrebuildCancelResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.cancel(
@@ -452,7 +452,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(PrebuildCancelResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.cancel(
@@ -466,7 +466,7 @@ class TestAsyncPrebuilds:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_logs_token(self, async_client: AsyncGitpod) -> None:
         prebuild = await async_client.prebuilds.create_logs_token(
@@ -474,7 +474,7 @@ class TestAsyncPrebuilds:
         )
         assert_matches_type(PrebuildCreateLogsTokenResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_logs_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.prebuilds.with_raw_response.create_logs_token(
@@ -486,7 +486,7 @@ class TestAsyncPrebuilds:
         prebuild = await response.parse()
         assert_matches_type(PrebuildCreateLogsTokenResponse, prebuild, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_logs_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.prebuilds.with_streaming_response.create_logs_token(

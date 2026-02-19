@@ -28,13 +28,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAgents:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_execution_conversation_token(self, client: Gitpod) -> None:
         agent = client.agents.create_execution_conversation_token()
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_execution_conversation_token_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.create_execution_conversation_token(
@@ -42,7 +42,7 @@ class TestAgents:
         )
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_execution_conversation_token(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.create_execution_conversation_token()
@@ -52,7 +52,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_execution_conversation_token(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.create_execution_conversation_token() as response:
@@ -64,13 +64,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_prompt(self, client: Gitpod) -> None:
         agent = client.agents.create_prompt()
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_prompt_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.create_prompt(
@@ -84,7 +84,7 @@ class TestAgents:
         )
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_prompt(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.create_prompt()
@@ -94,7 +94,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_prompt(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.create_prompt() as response:
@@ -106,13 +106,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_execution(self, client: Gitpod) -> None:
         agent = client.agents.delete_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.delete_execution(
@@ -120,7 +120,7 @@ class TestAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_execution(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.delete_execution()
@@ -130,7 +130,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_execution(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.delete_execution() as response:
@@ -142,13 +142,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_prompt(self, client: Gitpod) -> None:
         agent = client.agents.delete_prompt()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_prompt_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.delete_prompt(
@@ -156,7 +156,7 @@ class TestAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_prompt(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.delete_prompt()
@@ -166,7 +166,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_prompt(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.delete_prompt() as response:
@@ -178,13 +178,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_executions(self, client: Gitpod) -> None:
         agent = client.agents.list_executions()
         assert_matches_type(SyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_executions_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.list_executions(
@@ -206,7 +206,7 @@ class TestAgents:
         )
         assert_matches_type(SyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_executions(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.list_executions()
@@ -216,7 +216,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(SyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_executions(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.list_executions() as response:
@@ -228,13 +228,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_prompts(self, client: Gitpod) -> None:
         agent = client.agents.list_prompts()
         assert_matches_type(SyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_prompts_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.list_prompts(
@@ -254,7 +254,7 @@ class TestAgents:
         )
         assert_matches_type(SyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list_prompts(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.list_prompts()
@@ -264,7 +264,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(SyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list_prompts(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.list_prompts() as response:
@@ -276,13 +276,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_execution(self, client: Gitpod) -> None:
         agent = client.agents.retrieve_execution()
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.retrieve_execution(
@@ -290,7 +290,7 @@ class TestAgents:
         )
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_execution(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.retrieve_execution()
@@ -300,7 +300,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_execution(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.retrieve_execution() as response:
@@ -312,13 +312,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_prompt(self, client: Gitpod) -> None:
         agent = client.agents.retrieve_prompt()
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_prompt_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.retrieve_prompt(
@@ -326,7 +326,7 @@ class TestAgents:
         )
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve_prompt(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.retrieve_prompt()
@@ -336,7 +336,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve_prompt(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.retrieve_prompt() as response:
@@ -348,13 +348,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_send_to_execution(self, client: Gitpod) -> None:
         agent = client.agents.send_to_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_send_to_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.send_to_execution(
@@ -380,7 +380,7 @@ class TestAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_send_to_execution(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.send_to_execution()
@@ -390,7 +390,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_send_to_execution(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.send_to_execution() as response:
@@ -402,13 +402,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_start_execution(self, client: Gitpod) -> None:
         agent = client.agents.start_execution()
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_start_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.start_execution(
@@ -445,7 +445,7 @@ class TestAgents:
         )
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_start_execution(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.start_execution()
@@ -455,7 +455,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_start_execution(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.start_execution() as response:
@@ -467,13 +467,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stop_execution(self, client: Gitpod) -> None:
         agent = client.agents.stop_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_stop_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.stop_execution(
@@ -481,7 +481,7 @@ class TestAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_stop_execution(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.stop_execution()
@@ -491,7 +491,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_stop_execution(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.stop_execution() as response:
@@ -503,13 +503,13 @@ class TestAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_prompt(self, client: Gitpod) -> None:
         agent = client.agents.update_prompt()
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_prompt_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.update_prompt(
@@ -528,7 +528,7 @@ class TestAgents:
         )
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update_prompt(self, client: Gitpod) -> None:
         response = client.agents.with_raw_response.update_prompt()
@@ -538,7 +538,7 @@ class TestAgents:
         agent = response.parse()
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update_prompt(self, client: Gitpod) -> None:
         with client.agents.with_streaming_response.update_prompt() as response:
@@ -556,13 +556,13 @@ class TestAsyncAgents:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_execution_conversation_token(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.create_execution_conversation_token()
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_execution_conversation_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.create_execution_conversation_token(
@@ -570,7 +570,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_execution_conversation_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.create_execution_conversation_token()
@@ -580,7 +580,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentCreateExecutionConversationTokenResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_execution_conversation_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.create_execution_conversation_token() as response:
@@ -592,13 +592,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_prompt(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.create_prompt()
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_prompt_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.create_prompt(
@@ -612,7 +612,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_prompt(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.create_prompt()
@@ -622,7 +622,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentCreatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_prompt(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.create_prompt() as response:
@@ -634,13 +634,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_execution(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.delete_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.delete_execution(
@@ -648,7 +648,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_execution(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.delete_execution()
@@ -658,7 +658,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_execution(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.delete_execution() as response:
@@ -670,13 +670,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_prompt(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.delete_prompt()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_prompt_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.delete_prompt(
@@ -684,7 +684,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_prompt(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.delete_prompt()
@@ -694,7 +694,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_prompt(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.delete_prompt() as response:
@@ -706,13 +706,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_executions(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.list_executions()
         assert_matches_type(AsyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_executions_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.list_executions(
@@ -734,7 +734,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AsyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_executions(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.list_executions()
@@ -744,7 +744,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AsyncAgentExecutionsPage[AgentExecution], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_executions(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.list_executions() as response:
@@ -756,13 +756,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_prompts(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.list_prompts()
         assert_matches_type(AsyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_prompts_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.list_prompts(
@@ -782,7 +782,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AsyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list_prompts(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.list_prompts()
@@ -792,7 +792,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AsyncPromptsPage[Prompt], agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list_prompts(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.list_prompts() as response:
@@ -804,13 +804,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_execution(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.retrieve_execution()
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.retrieve_execution(
@@ -818,7 +818,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_execution(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.retrieve_execution()
@@ -828,7 +828,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentRetrieveExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_execution(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.retrieve_execution() as response:
@@ -840,13 +840,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_prompt(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.retrieve_prompt()
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_prompt_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.retrieve_prompt(
@@ -854,7 +854,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve_prompt(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.retrieve_prompt()
@@ -864,7 +864,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentRetrievePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve_prompt(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.retrieve_prompt() as response:
@@ -876,13 +876,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_send_to_execution(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.send_to_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_send_to_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.send_to_execution(
@@ -908,7 +908,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_send_to_execution(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.send_to_execution()
@@ -918,7 +918,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_send_to_execution(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.send_to_execution() as response:
@@ -930,13 +930,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_start_execution(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.start_execution()
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_start_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.start_execution(
@@ -973,7 +973,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_start_execution(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.start_execution()
@@ -983,7 +983,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentStartExecutionResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_start_execution(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.start_execution() as response:
@@ -995,13 +995,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stop_execution(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.stop_execution()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_stop_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.stop_execution(
@@ -1009,7 +1009,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_stop_execution(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.stop_execution()
@@ -1019,7 +1019,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(object, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_stop_execution(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.stop_execution() as response:
@@ -1031,13 +1031,13 @@ class TestAsyncAgents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_prompt(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.update_prompt()
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_prompt_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.update_prompt(
@@ -1056,7 +1056,7 @@ class TestAsyncAgents:
         )
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update_prompt(self, async_client: AsyncGitpod) -> None:
         response = await async_client.agents.with_raw_response.update_prompt()
@@ -1066,7 +1066,7 @@ class TestAsyncAgents:
         agent = await response.parse()
         assert_matches_type(AgentUpdatePromptResponse, agent, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update_prompt(self, async_client: AsyncGitpod) -> None:
         async with async_client.agents.with_streaming_response.update_prompt() as response:

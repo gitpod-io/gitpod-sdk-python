@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAnnouncementBanner:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         announcement_banner = client.organizations.announcement_banner.update(
@@ -28,7 +28,7 @@ class TestAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         announcement_banner = client.organizations.announcement_banner.update(
@@ -38,7 +38,7 @@ class TestAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.organizations.announcement_banner.with_raw_response.update(
@@ -50,7 +50,7 @@ class TestAnnouncementBanner:
         announcement_banner = response.parse()
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.organizations.announcement_banner.with_streaming_response.update(
@@ -64,7 +64,7 @@ class TestAnnouncementBanner:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get(self, client: Gitpod) -> None:
         announcement_banner = client.organizations.announcement_banner.get(
@@ -72,7 +72,7 @@ class TestAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerGetResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get(self, client: Gitpod) -> None:
         response = client.organizations.announcement_banner.with_raw_response.get(
@@ -84,7 +84,7 @@ class TestAnnouncementBanner:
         announcement_banner = response.parse()
         assert_matches_type(AnnouncementBannerGetResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get(self, client: Gitpod) -> None:
         with client.organizations.announcement_banner.with_streaming_response.get(
@@ -104,7 +104,7 @@ class TestAsyncAnnouncementBanner:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         announcement_banner = await async_client.organizations.announcement_banner.update(
@@ -112,7 +112,7 @@ class TestAsyncAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         announcement_banner = await async_client.organizations.announcement_banner.update(
@@ -122,7 +122,7 @@ class TestAsyncAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.announcement_banner.with_raw_response.update(
@@ -134,7 +134,7 @@ class TestAsyncAnnouncementBanner:
         announcement_banner = await response.parse()
         assert_matches_type(AnnouncementBannerUpdateResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.announcement_banner.with_streaming_response.update(
@@ -148,7 +148,7 @@ class TestAsyncAnnouncementBanner:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get(self, async_client: AsyncGitpod) -> None:
         announcement_banner = await async_client.organizations.announcement_banner.get(
@@ -156,7 +156,7 @@ class TestAsyncAnnouncementBanner:
         )
         assert_matches_type(AnnouncementBannerGetResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.announcement_banner.with_raw_response.get(
@@ -168,7 +168,7 @@ class TestAsyncAnnouncementBanner:
         announcement_banner = await response.parse()
         assert_matches_type(AnnouncementBannerGetResponse, announcement_banner, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.announcement_banner.with_streaming_response.get(

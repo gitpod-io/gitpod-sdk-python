@@ -24,7 +24,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestScimConfigurations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.create(
@@ -33,7 +33,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.create(
@@ -44,7 +44,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.create(
@@ -57,7 +57,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.create(
@@ -72,7 +72,7 @@ class TestScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.retrieve(
@@ -80,7 +80,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRetrieveResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.retrieve(
@@ -92,7 +92,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(ScimConfigurationRetrieveResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.retrieve(
@@ -106,7 +106,7 @@ class TestScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.update(
@@ -114,7 +114,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.update(
@@ -125,7 +125,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.update(
@@ -137,7 +137,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.update(
@@ -151,13 +151,13 @@ class TestScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.list()
         assert_matches_type(SyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.list(
@@ -170,7 +170,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(SyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.list()
@@ -180,7 +180,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(SyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.list() as response:
@@ -192,7 +192,7 @@ class TestScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.delete(
@@ -200,7 +200,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(object, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.delete(
@@ -212,7 +212,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(object, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.delete(
@@ -226,7 +226,7 @@ class TestScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_regenerate_token(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.regenerate_token(
@@ -234,7 +234,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_regenerate_token_with_all_params(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.regenerate_token(
@@ -243,7 +243,7 @@ class TestScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_regenerate_token(self, client: Gitpod) -> None:
         response = client.organizations.scim_configurations.with_raw_response.regenerate_token(
@@ -255,7 +255,7 @@ class TestScimConfigurations:
         scim_configuration = response.parse()
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_regenerate_token(self, client: Gitpod) -> None:
         with client.organizations.scim_configurations.with_streaming_response.regenerate_token(
@@ -275,7 +275,7 @@ class TestAsyncScimConfigurations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.create(
@@ -284,7 +284,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.create(
@@ -295,7 +295,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.create(
@@ -308,7 +308,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(ScimConfigurationCreateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.create(
@@ -323,7 +323,7 @@ class TestAsyncScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.retrieve(
@@ -331,7 +331,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRetrieveResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.retrieve(
@@ -343,7 +343,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(ScimConfigurationRetrieveResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.retrieve(
@@ -357,7 +357,7 @@ class TestAsyncScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.update(
@@ -365,7 +365,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.update(
@@ -376,7 +376,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.update(
@@ -388,7 +388,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(ScimConfigurationUpdateResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.update(
@@ -402,13 +402,13 @@ class TestAsyncScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.list()
         assert_matches_type(AsyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.list(
@@ -421,7 +421,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(AsyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.list()
@@ -431,7 +431,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(AsyncScimConfigurationsPage[ScimConfiguration], scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.list() as response:
@@ -443,7 +443,7 @@ class TestAsyncScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.delete(
@@ -451,7 +451,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(object, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.delete(
@@ -463,7 +463,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(object, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.delete(
@@ -477,7 +477,7 @@ class TestAsyncScimConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_regenerate_token(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.regenerate_token(
@@ -485,7 +485,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_regenerate_token_with_all_params(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.regenerate_token(
@@ -494,7 +494,7 @@ class TestAsyncScimConfigurations:
         )
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_regenerate_token(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.scim_configurations.with_raw_response.regenerate_token(
@@ -506,7 +506,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await response.parse()
         assert_matches_type(ScimConfigurationRegenerateTokenResponse, scim_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_regenerate_token(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.scim_configurations.with_streaming_response.regenerate_token(

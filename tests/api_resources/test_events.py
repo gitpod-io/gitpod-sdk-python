@@ -20,13 +20,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEvents:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         event = client.events.list()
         assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         event = client.events.list(
@@ -47,7 +47,7 @@ class TestEvents:
         )
         assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.list()
@@ -57,7 +57,7 @@ class TestEvents:
         event = response.parse()
         assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.list() as response:
@@ -69,13 +69,13 @@ class TestEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     def test_method_watch(self, client: Gitpod) -> None:
         event_stream = client.events.watch()
         assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     def test_method_watch_with_all_params(self, client: Gitpod) -> None:
         event_stream = client.events.watch(
@@ -84,7 +84,7 @@ class TestEvents:
         )
         assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     def test_raw_response_watch(self, client: Gitpod) -> None:
         response = client.events.with_raw_response.watch()
@@ -93,7 +93,7 @@ class TestEvents:
         stream = response.parse()
         stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     def test_streaming_response_watch(self, client: Gitpod) -> None:
         with client.events.with_streaming_response.watch() as response:
@@ -111,13 +111,13 @@ class TestAsyncEvents:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.list()
         assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         event = await async_client.events.list(
@@ -138,7 +138,7 @@ class TestAsyncEvents:
         )
         assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.list()
@@ -148,7 +148,7 @@ class TestAsyncEvents:
         event = await response.parse()
         assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.list() as response:
@@ -160,13 +160,13 @@ class TestAsyncEvents:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     async def test_method_watch(self, async_client: AsyncGitpod) -> None:
         event_stream = await async_client.events.watch()
         assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     async def test_method_watch_with_all_params(self, async_client: AsyncGitpod) -> None:
         event_stream = await async_client.events.watch(
@@ -175,7 +175,7 @@ class TestAsyncEvents:
         )
         assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     async def test_raw_response_watch(self, async_client: AsyncGitpod) -> None:
         response = await async_client.events.with_raw_response.watch()
@@ -184,7 +184,7 @@ class TestAsyncEvents:
         stream = await response.parse()
         await stream.close()
 
-    @pytest.mark.skip(reason="Prism doesn't support application/jsonl responses")
+    @pytest.mark.skip(reason="Mock server doesn't support application/jsonl responses")
     @parametrize
     async def test_streaming_response_watch(self, async_client: AsyncGitpod) -> None:
         async with async_client.events.with_streaming_response.watch() as response:
