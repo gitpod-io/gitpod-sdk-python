@@ -113,9 +113,6 @@ class OrganizationPolicies(BaseModel):
     of the editor
     """
 
-    executable_deny_list: Optional[VetoExecPolicy] = FieldInfo(alias="executableDenyList", default=None)
-    """executable_deny_list contains the veto exec policy for environments."""
-
     maximum_environment_lifetime: Optional[str] = FieldInfo(alias="maximumEnvironmentLifetime", default=None)
     """
     maximum_environment_lifetime controls for how long environments are allowed to
@@ -136,3 +133,6 @@ class OrganizationPolicies(BaseModel):
     organization. When configured, security agents are automatically deployed to all
     environments.
     """
+
+    veto_exec_policy: Optional[VetoExecPolicy] = FieldInfo(alias="vetoExecPolicy", default=None)
+    """veto_exec_policy contains the veto exec policy for environments."""
