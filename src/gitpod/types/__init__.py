@@ -63,6 +63,7 @@ from .prebuild_phase import PrebuildPhase as PrebuildPhase
 from .runner_variant import RunnerVariant as RunnerVariant
 from .admission_level import AdmissionLevel as AdmissionLevel
 from .agent_execution import AgentExecution as AgentExecution
+from .bpf_debug_level import BpfDebugLevel as BpfDebugLevel
 from .prebuild_status import PrebuildStatus as PrebuildStatus
 from .prompt_metadata import PromptMetadata as PromptMetadata
 from .runner_provider import RunnerProvider as RunnerProvider
