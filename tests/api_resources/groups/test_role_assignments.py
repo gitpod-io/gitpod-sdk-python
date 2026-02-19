@@ -75,6 +75,7 @@ class TestRoleAssignments:
             filter={
                 "group_id": "groupId",
                 "resource_id": "resourceId",
+                "resource_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "resource_roles": ["RESOURCE_ROLE_UNSPECIFIED"],
                 "resource_types": ["RESOURCE_TYPE_RUNNER"],
                 "user_id": "userId",
@@ -204,6 +205,7 @@ class TestAsyncRoleAssignments:
             filter={
                 "group_id": "groupId",
                 "resource_id": "resourceId",
+                "resource_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "resource_roles": ["RESOURCE_ROLE_UNSPECIFIED"],
                 "resource_types": ["RESOURCE_TYPE_RUNNER"],
                 "user_id": "userId",

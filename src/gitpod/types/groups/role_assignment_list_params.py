@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Annotated, TypedDict
 
+from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..shared.resource_role import ResourceRole
 from ..shared.resource_type import ResourceType
@@ -34,11 +35,20 @@ class Filter(TypedDict, total=False):
     """
 
     resource_id: Annotated[str, PropertyInfo(alias="resourceId")]
+    """Filters by a single resource.
+
+    Use this when listing all groups that have access to a specific resource (e.g.
+    share dialogs). Non-admin callers with :grant permission on the resource can see
+    role assignments from groups they don't belong to. Mutually exclusive with
+    resource_ids.
     """
-    resource_id filters the response to only role assignments for this specific
-    resource When provided, users with :grant permission on the resource can see its
-    role assignments even if they don't belong to the assigned groups Empty string
-    is allowed and means no filtering by resource
+
+    resource_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="resourceIds")]
+    """Filters by multiple resources in a single request.
+
+    Use this for batch permission lookups (e.g. checking the caller's own
+    permissions across several resources). Does not support the :grant permission
+    bypass. Mutually exclusive with resource_id.
     """
 
     resource_roles: Annotated[List[ResourceRole], PropertyInfo(alias="resourceRoles")]
