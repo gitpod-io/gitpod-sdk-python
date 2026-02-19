@@ -78,11 +78,6 @@ class TestPolicies:
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
-            executable_deny_list={
-                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
-                "enabled": True,
-                "executables": ["string"],
-            },
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",
@@ -100,6 +95,11 @@ class TestPolicies:
                     "image": "image",
                     "tags": "tags",
                 }
+            },
+            veto_exec_policy={
+                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
+                "enabled": True,
+                "executables": ["string"],
             },
         )
         assert_matches_type(object, policy, path=["response"])
@@ -195,11 +195,6 @@ class TestAsyncPolicies:
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
-            executable_deny_list={
-                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
-                "enabled": True,
-                "executables": ["string"],
-            },
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
             maximum_environment_timeout="3600s",
@@ -217,6 +212,11 @@ class TestAsyncPolicies:
                     "image": "image",
                     "tags": "tags",
                 }
+            },
+            veto_exec_policy={
+                "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
+                "enabled": True,
+                "executables": ["string"],
             },
         )
         assert_matches_type(object, policy, path=["response"])

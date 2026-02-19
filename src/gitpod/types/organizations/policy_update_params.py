@@ -64,9 +64,6 @@ class PolicyUpdateParams(TypedDict, total=False):
     editor ID to version policy with allowed major versions.
     """
 
-    executable_deny_list: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="executableDenyList")]
-    """executable_deny_list contains the veto exec policy for environments."""
-
     maximum_environment_lifetime: Annotated[Optional[str], PropertyInfo(alias="maximumEnvironmentLifetime")]
     """
     maximum_environment_lifetime controls for how long environments are allowed to
@@ -126,6 +123,9 @@ class PolicyUpdateParams(TypedDict, total=False):
 
     security_agent_policy: Annotated[Optional[SecurityAgentPolicy], PropertyInfo(alias="securityAgentPolicy")]
     """security_agent_policy contains security agent configuration updates"""
+
+    veto_exec_policy: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="vetoExecPolicy")]
+    """veto_exec_policy contains the veto exec policy for environments."""
 
 
 class AgentPolicy(TypedDict, total=False):
