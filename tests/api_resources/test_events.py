@@ -12,7 +12,6 @@ from tests.utils import assert_matches_type
 from gitpod.types import EventListResponse, EventWatchResponse
 from gitpod._utils import parse_datetime
 from gitpod.pagination import SyncEntriesPage, AsyncEntriesPage
-from gitpod._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -73,7 +72,8 @@ class TestEvents:
     @parametrize
     def test_method_watch(self, client: Gitpod) -> None:
         event_stream = client.events.watch()
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
+        for item in event_stream:
+            assert_matches_type(EventWatchResponse, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -82,7 +82,8 @@ class TestEvents:
             environment_id="environmentId",
             organization=True,
         )
-        assert_matches_type(JSONLDecoder[EventWatchResponse], event_stream, path=["response"])
+        for item in event_stream:
+            assert_matches_type(EventWatchResponse, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -91,7 +92,8 @@ class TestEvents:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = response.parse()
-        stream.close()
+        for item in stream:
+            assert_matches_type(EventWatchResponse, item, path=["line"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -101,7 +103,8 @@ class TestEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = response.parse()
-            stream.close()
+            for item in stream:
+                assert_matches_type(EventWatchResponse, item, path=["item"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -164,7 +167,8 @@ class TestAsyncEvents:
     @parametrize
     async def test_method_watch(self, async_client: AsyncGitpod) -> None:
         event_stream = await async_client.events.watch()
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
+        async for item in event_stream:
+            assert_matches_type(EventWatchResponse, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -173,7 +177,8 @@ class TestAsyncEvents:
             environment_id="environmentId",
             organization=True,
         )
-        assert_matches_type(AsyncJSONLDecoder[EventWatchResponse], event_stream, path=["response"])
+        async for item in event_stream:
+            assert_matches_type(EventWatchResponse, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -182,7 +187,8 @@ class TestAsyncEvents:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = await response.parse()
-        await stream.close()
+        async for item in stream:
+            assert_matches_type(EventWatchResponse, item, path=["line"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -192,6 +198,7 @@ class TestAsyncEvents:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = await response.parse()
-            await stream.close()
+            async for item in stream:
+                assert_matches_type(EventWatchResponse, item, path=["item"])
 
         assert cast(Any, response.is_closed) is True
