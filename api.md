@@ -555,6 +555,8 @@ from gitpod.types import (
     ProjectPhase,
     ProjectPrebuildConfiguration,
     RecommendedEditors,
+    Sort,
+    SortOrder,
     ProjectCreateResponse,
     ProjectRetrieveResponse,
     ProjectUpdateResponse,
