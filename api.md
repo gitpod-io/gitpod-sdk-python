@@ -347,6 +347,7 @@ Types:
 
 ```python
 from gitpod.types import (
+    CountResponseRelation,
     InviteDomains,
     Organization,
     OrganizationMember,
