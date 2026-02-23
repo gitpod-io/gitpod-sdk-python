@@ -42,6 +42,8 @@ from .project import Project as Project
 from .prebuild import Prebuild as Prebuild
 from .log_level import LogLevel as LogLevel
 from .agent_mode import AgentMode as AgentMode
+from .sort_order import SortOrder as SortOrder
+from .sort_param import SortParam as SortParam
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel

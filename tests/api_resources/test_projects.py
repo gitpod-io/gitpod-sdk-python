@@ -221,6 +221,10 @@ class TestProjects:
                 "token": "token",
                 "page_size": 20,
             },
+            sort={
+                "field": "field",
+                "order": "SORT_ORDER_UNSPECIFIED",
+            },
         )
         assert_matches_type(SyncProjectsPage[Project], project, path=["response"])
 
@@ -756,6 +760,10 @@ class TestAsyncProjects:
             pagination={
                 "token": "token",
                 "page_size": 20,
+            },
+            sort={
+                "field": "field",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(AsyncProjectsPage[Project], project, path=["response"])

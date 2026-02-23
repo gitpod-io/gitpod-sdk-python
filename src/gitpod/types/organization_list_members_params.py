@@ -7,6 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .sort_order import SortOrder
 from .shared.user_status import UserStatus
 from .shared.organization_role import OrganizationRole
 
@@ -83,4 +84,4 @@ class Sort(TypedDict, total=False):
 
     field: Literal["SORT_FIELD_UNSPECIFIED", "SORT_FIELD_NAME", "SORT_FIELD_DATE_JOINED"]
 
-    order: Literal["SORT_ORDER_UNSPECIFIED", "SORT_ORDER_ASC", "SORT_ORDER_DESC"]
+    order: SortOrder
