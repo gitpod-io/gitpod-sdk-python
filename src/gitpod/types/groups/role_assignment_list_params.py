@@ -37,18 +37,18 @@ class Filter(TypedDict, total=False):
     resource_id: Annotated[str, PropertyInfo(alias="resourceId")]
     """Filters by a single resource.
 
-    Use this when listing all groups that have access to a specific resource (e.g.
-    share dialogs). Non-admin callers with :grant permission on the resource can see
-    role assignments from groups they don't belong to. Mutually exclusive with
+    Non-admin callers with :grant permission on the resource can see role
+    assignments from groups they don't belong to. Mutually exclusive with
     resource_ids.
     """
 
     resource_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="resourceIds")]
     """Filters by multiple resources in a single request.
 
-    Use this for batch permission lookups (e.g. checking the caller's own
-    permissions across several resources). Does not support the :grant permission
-    bypass. Mutually exclusive with resource_id.
+    Non-admin callers with :grant permission on a resource can see all role
+    assignments for that resource, even from groups they don't belong to. The :grant
+    check is applied per-resource within the batch. Mutually exclusive with
+    resource_id.
     """
 
     resource_roles: Annotated[List[ResourceRole], PropertyInfo(alias="resourceRoles")]
