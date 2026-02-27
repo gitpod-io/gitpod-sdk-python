@@ -270,6 +270,7 @@ class GroupsResource(SyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: group_list_params.Filter | Omit = omit,
         pagination: group_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -314,6 +315,8 @@ class GroupsResource(SyncAPIResource):
         All organization members can list groups (transparency model).
 
         Args:
+          filter: filter contains options for filtering the list of groups.
+
           pagination: pagination contains the pagination options for listing groups
 
           extra_headers: Send extra headers
@@ -327,7 +330,13 @@ class GroupsResource(SyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.GroupService/ListGroups",
             page=SyncGroupsPage[Group],
-            body=maybe_transform({"pagination": pagination}, group_list_params.GroupListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                group_list_params.GroupListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -614,6 +623,7 @@ class AsyncGroupsResource(AsyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: group_list_params.Filter | Omit = omit,
         pagination: group_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -658,6 +668,8 @@ class AsyncGroupsResource(AsyncAPIResource):
         All organization members can list groups (transparency model).
 
         Args:
+          filter: filter contains options for filtering the list of groups.
+
           pagination: pagination contains the pagination options for listing groups
 
           extra_headers: Send extra headers
@@ -671,7 +683,13 @@ class AsyncGroupsResource(AsyncAPIResource):
         return self._get_api_list(
             "/gitpod.v1.GroupService/ListGroups",
             page=AsyncGroupsPage[Group],
-            body=maybe_transform({"pagination": pagination}, group_list_params.GroupListParams),
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                group_list_params.GroupListParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

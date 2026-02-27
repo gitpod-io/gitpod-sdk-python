@@ -147,6 +147,7 @@ class TestGroups:
         group = client.groups.list(
             token="token",
             page_size=0,
+            filter={"search": "search"},
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -342,6 +343,7 @@ class TestAsyncGroups:
         group = await async_client.groups.list(
             token="token",
             page_size=0,
+            filter={"search": "search"},
             pagination={
                 "token": "token",
                 "page_size": 20,
