@@ -37,6 +37,11 @@ __all__ = ["PrebuildsResource", "AsyncPrebuildsResource"]
 
 
 class PrebuildsResource(SyncAPIResource):
+    """
+    PrebuildService manages prebuilds for projects to enable faster environment startup times.
+     Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+    """
+
     @cached_property
     def with_raw_response(self) -> PrebuildsResourceWithRawResponse:
         """
@@ -400,6 +405,11 @@ class PrebuildsResource(SyncAPIResource):
 
 
 class AsyncPrebuildsResource(AsyncAPIResource):
+    """
+    PrebuildService manages prebuilds for projects to enable faster environment startup times.
+     Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPrebuildsResourceWithRawResponse:
         """

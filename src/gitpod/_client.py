@@ -150,6 +150,10 @@ class Gitpod(SyncAPIClient):
 
     @cached_property
     def errors(self) -> ErrorsResource:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import ErrorsResource
 
         return ErrorsResource(self)
@@ -186,6 +190,10 @@ class Gitpod(SyncAPIClient):
 
     @cached_property
     def prebuilds(self) -> PrebuildsResource:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import PrebuildsResource
 
         return PrebuildsResource(self)
@@ -210,6 +218,9 @@ class Gitpod(SyncAPIClient):
 
     @cached_property
     def usage(self) -> UsageResource:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import UsageResource
 
         return UsageResource(self)
@@ -414,6 +425,10 @@ class AsyncGitpod(AsyncAPIClient):
 
     @cached_property
     def errors(self) -> AsyncErrorsResource:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import AsyncErrorsResource
 
         return AsyncErrorsResource(self)
@@ -450,6 +465,10 @@ class AsyncGitpod(AsyncAPIClient):
 
     @cached_property
     def prebuilds(self) -> AsyncPrebuildsResource:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import AsyncPrebuildsResource
 
         return AsyncPrebuildsResource(self)
@@ -474,6 +493,9 @@ class AsyncGitpod(AsyncAPIClient):
 
     @cached_property
     def usage(self) -> AsyncUsageResource:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import AsyncUsageResource
 
         return AsyncUsageResource(self)
@@ -629,6 +651,10 @@ class GitpodWithRawResponse:
 
     @cached_property
     def errors(self) -> errors.ErrorsResourceWithRawResponse:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import ErrorsResourceWithRawResponse
 
         return ErrorsResourceWithRawResponse(self._client.errors)
@@ -665,6 +691,10 @@ class GitpodWithRawResponse:
 
     @cached_property
     def prebuilds(self) -> prebuilds.PrebuildsResourceWithRawResponse:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import PrebuildsResourceWithRawResponse
 
         return PrebuildsResourceWithRawResponse(self._client.prebuilds)
@@ -689,6 +719,9 @@ class GitpodWithRawResponse:
 
     @cached_property
     def usage(self) -> usage.UsageResourceWithRawResponse:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import UsageResourceWithRawResponse
 
         return UsageResourceWithRawResponse(self._client.usage)
@@ -732,6 +765,10 @@ class AsyncGitpodWithRawResponse:
 
     @cached_property
     def errors(self) -> errors.AsyncErrorsResourceWithRawResponse:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import AsyncErrorsResourceWithRawResponse
 
         return AsyncErrorsResourceWithRawResponse(self._client.errors)
@@ -768,6 +805,10 @@ class AsyncGitpodWithRawResponse:
 
     @cached_property
     def prebuilds(self) -> prebuilds.AsyncPrebuildsResourceWithRawResponse:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import AsyncPrebuildsResourceWithRawResponse
 
         return AsyncPrebuildsResourceWithRawResponse(self._client.prebuilds)
@@ -792,6 +833,9 @@ class AsyncGitpodWithRawResponse:
 
     @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithRawResponse:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import AsyncUsageResourceWithRawResponse
 
         return AsyncUsageResourceWithRawResponse(self._client.usage)
@@ -835,6 +879,10 @@ class GitpodWithStreamedResponse:
 
     @cached_property
     def errors(self) -> errors.ErrorsResourceWithStreamingResponse:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import ErrorsResourceWithStreamingResponse
 
         return ErrorsResourceWithStreamingResponse(self._client.errors)
@@ -871,6 +919,10 @@ class GitpodWithStreamedResponse:
 
     @cached_property
     def prebuilds(self) -> prebuilds.PrebuildsResourceWithStreamingResponse:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import PrebuildsResourceWithStreamingResponse
 
         return PrebuildsResourceWithStreamingResponse(self._client.prebuilds)
@@ -895,6 +947,9 @@ class GitpodWithStreamedResponse:
 
     @cached_property
     def usage(self) -> usage.UsageResourceWithStreamingResponse:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import UsageResourceWithStreamingResponse
 
         return UsageResourceWithStreamingResponse(self._client.usage)
@@ -938,6 +993,10 @@ class AsyncGitpodWithStreamedResponse:
 
     @cached_property
     def errors(self) -> errors.AsyncErrorsResourceWithStreamingResponse:
+        """
+        ErrorsService provides endpoints for clients to report errors
+         that will be sent to error reporting systems.
+        """
         from .resources.errors import AsyncErrorsResourceWithStreamingResponse
 
         return AsyncErrorsResourceWithStreamingResponse(self._client.errors)
@@ -974,6 +1033,10 @@ class AsyncGitpodWithStreamedResponse:
 
     @cached_property
     def prebuilds(self) -> prebuilds.AsyncPrebuildsResourceWithStreamingResponse:
+        """
+        PrebuildService manages prebuilds for projects to enable faster environment startup times.
+         Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+        """
         from .resources.prebuilds import AsyncPrebuildsResourceWithStreamingResponse
 
         return AsyncPrebuildsResourceWithStreamingResponse(self._client.prebuilds)
@@ -998,6 +1061,9 @@ class AsyncGitpodWithStreamedResponse:
 
     @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithStreamingResponse:
+        """
+        UsageService provides usage information about environments, users, and projects.
+        """
         from .resources.usage import AsyncUsageResourceWithStreamingResponse
 
         return AsyncUsageResourceWithStreamingResponse(self._client.usage)

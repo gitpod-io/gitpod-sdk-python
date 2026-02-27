@@ -23,6 +23,10 @@ __all__ = ["UsageResource", "AsyncUsageResource"]
 
 
 class UsageResource(SyncAPIResource):
+    """
+    UsageService provides usage information about environments, users, and projects.
+    """
+
     @cached_property
     def with_raw_response(self) -> UsageResourceWithRawResponse:
         """
@@ -123,6 +127,10 @@ class UsageResource(SyncAPIResource):
 
 
 class AsyncUsageResource(AsyncAPIResource):
+    """
+    UsageService provides usage information about environments, users, and projects.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncUsageResourceWithRawResponse:
         """
