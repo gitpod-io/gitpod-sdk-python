@@ -6,7 +6,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["GroupListParams", "Pagination"]
+__all__ = ["GroupListParams", "Filter", "Pagination"]
 
 
 class GroupListParams(TypedDict, total=False):
@@ -14,8 +14,18 @@ class GroupListParams(TypedDict, total=False):
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
+    filter: Filter
+    """filter contains options for filtering the list of groups."""
+
     pagination: Pagination
     """pagination contains the pagination options for listing groups"""
+
+
+class Filter(TypedDict, total=False):
+    """filter contains options for filtering the list of groups."""
+
+    search: str
+    """search performs case-insensitive search across group name, description, and ID"""
 
 
 class Pagination(TypedDict, total=False):
