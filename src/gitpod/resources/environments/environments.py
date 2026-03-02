@@ -748,7 +748,6 @@ class EnvironmentsResource(SyncAPIResource):
     def start(
         self,
         *,
-        acknowledge_token: str | Omit = omit,
         environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -775,10 +774,6 @@ class EnvironmentsResource(SyncAPIResource):
           ```
 
         Args:
-          acknowledge_token: acknowledge_token is the HMAC token from a previous
-              EnvironmentMaxLifetimeEnforcementDetails response, allowing the user to start an
-              environment past its max lifetime in warn mode.
-
           environment_id: environment_id specifies which environment should be started.
 
           extra_headers: Send extra headers
@@ -791,13 +786,7 @@ class EnvironmentsResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.EnvironmentService/StartEnvironment",
-            body=maybe_transform(
-                {
-                    "acknowledge_token": acknowledge_token,
-                    "environment_id": environment_id,
-                },
-                environment_start_params.EnvironmentStartParams,
-            ),
+            body=maybe_transform({"environment_id": environment_id}, environment_start_params.EnvironmentStartParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1588,7 +1577,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
     async def start(
         self,
         *,
-        acknowledge_token: str | Omit = omit,
         environment_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1615,10 +1603,6 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           ```
 
         Args:
-          acknowledge_token: acknowledge_token is the HMAC token from a previous
-              EnvironmentMaxLifetimeEnforcementDetails response, allowing the user to start an
-              environment past its max lifetime in warn mode.
-
           environment_id: environment_id specifies which environment should be started.
 
           extra_headers: Send extra headers
@@ -1632,11 +1616,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         return await self._post(
             "/gitpod.v1.EnvironmentService/StartEnvironment",
             body=await async_maybe_transform(
-                {
-                    "acknowledge_token": acknowledge_token,
-                    "environment_id": environment_id,
-                },
-                environment_start_params.EnvironmentStartParams,
+                {"environment_id": environment_id}, environment_start_params.EnvironmentStartParams
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
