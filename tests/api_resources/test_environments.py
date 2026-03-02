@@ -609,6 +609,7 @@ class TestEnvironments:
     @parametrize
     def test_method_start_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.start(
+            acknowledge_token="acknowledgeToken",
             environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
@@ -1296,6 +1297,7 @@ class TestAsyncEnvironments:
     @parametrize
     async def test_method_start_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.start(
+            acknowledge_token="acknowledgeToken",
             environment_id="07e03a28-65a5-4d98-b532-8ea67b188048",
         )
         assert_matches_type(object, environment, path=["response"])
