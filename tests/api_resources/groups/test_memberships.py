@@ -120,6 +120,7 @@ class TestMemberships:
         membership = client.groups.memberships.list(
             token="token",
             page_size=0,
+            filter={"search": "search"},
             group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             pagination={
                 "token": "token",
@@ -290,6 +291,7 @@ class TestAsyncMemberships:
         membership = await async_client.groups.memberships.list(
             token="token",
             page_size=0,
+            filter={"search": "search"},
             group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             pagination={
                 "token": "token",

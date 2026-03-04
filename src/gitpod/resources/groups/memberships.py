@@ -182,6 +182,7 @@ class MembershipsResource(SyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: membership_list_params.Filter | Omit = omit,
         group_id: str | Omit = omit,
         pagination: membership_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -216,6 +217,8 @@ class MembershipsResource(SyncAPIResource):
         All organization members can view group membership (transparency model).
 
         Args:
+          filter: filter contains options for filtering the list of memberships.
+
           pagination: pagination contains the pagination options for listing memberships
 
           extra_headers: Send extra headers
@@ -231,6 +234,7 @@ class MembershipsResource(SyncAPIResource):
             page=SyncMembersPage[GroupMembership],
             body=maybe_transform(
                 {
+                    "filter": filter,
                     "group_id": group_id,
                     "pagination": pagination,
                 },
@@ -460,6 +464,7 @@ class AsyncMembershipsResource(AsyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        filter: membership_list_params.Filter | Omit = omit,
         group_id: str | Omit = omit,
         pagination: membership_list_params.Pagination | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -494,6 +499,8 @@ class AsyncMembershipsResource(AsyncAPIResource):
         All organization members can view group membership (transparency model).
 
         Args:
+          filter: filter contains options for filtering the list of memberships.
+
           pagination: pagination contains the pagination options for listing memberships
 
           extra_headers: Send extra headers
@@ -509,6 +516,7 @@ class AsyncMembershipsResource(AsyncAPIResource):
             page=AsyncMembersPage[GroupMembership],
             body=maybe_transform(
                 {
+                    "filter": filter,
                     "group_id": group_id,
                     "pagination": pagination,
                 },
