@@ -13,5 +13,7 @@ __all__ = ["IdentityGetAuthenticatedIdentityResponse"]
 class IdentityGetAuthenticatedIdentityResponse(BaseModel):
     organization_id: Optional[str] = FieldInfo(alias="organizationId", default=None)
 
+    organization_tier: Optional[str] = FieldInfo(alias="organizationTier", default=None)
+
     subject: Optional[Subject] = None
     """subject is the identity of the current user"""
