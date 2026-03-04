@@ -81,6 +81,13 @@ class TestEvents:
         event_stream = client.events.watch(
             environment_id="environmentId",
             organization=True,
+            resource_type_filters=[
+                {
+                    "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                    "resource_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                    "resource_type": "RESOURCE_TYPE_UNSPECIFIED",
+                }
+            ],
         )
         for item in event_stream:
             assert_matches_type(EventWatchResponse, item, path=["response"])
@@ -176,6 +183,13 @@ class TestAsyncEvents:
         event_stream = await async_client.events.watch(
             environment_id="environmentId",
             organization=True,
+            resource_type_filters=[
+                {
+                    "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                    "resource_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                    "resource_type": "RESOURCE_TYPE_UNSPECIFIED",
+                }
+            ],
         )
         async for item in event_stream:
             assert_matches_type(EventWatchResponse, item, path=["response"])

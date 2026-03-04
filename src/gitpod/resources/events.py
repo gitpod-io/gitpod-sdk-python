@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+
 import httpx
 
 from ..types import event_list_params, event_watch_params
@@ -139,6 +141,7 @@ class EventsResource(SyncAPIResource):
         *,
         environment_id: str | Omit = omit,
         organization: bool | Omit = omit,
+        resource_type_filters: Iterable[event_watch_params.ResourceTypeFilter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -173,6 +176,11 @@ class EventsResource(SyncAPIResource):
               the caller can see within their organization. No task, task execution or service
               events are produed.
 
+          resource_type_filters: Filters to limit which events are delivered on organization-scoped streams. When
+              empty, all events for the scope are delivered. When populated, only events
+              matching at least one filter entry are forwarded. Not supported for
+              environment-scoped streams; setting this field returns an error.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -188,6 +196,7 @@ class EventsResource(SyncAPIResource):
                 {
                     "environment_id": environment_id,
                     "organization": organization,
+                    "resource_type_filters": resource_type_filters,
                 },
                 event_watch_params.EventWatchParams,
             ),
@@ -314,6 +323,7 @@ class AsyncEventsResource(AsyncAPIResource):
         *,
         environment_id: str | Omit = omit,
         organization: bool | Omit = omit,
+        resource_type_filters: Iterable[event_watch_params.ResourceTypeFilter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -348,6 +358,11 @@ class AsyncEventsResource(AsyncAPIResource):
               the caller can see within their organization. No task, task execution or service
               events are produed.
 
+          resource_type_filters: Filters to limit which events are delivered on organization-scoped streams. When
+              empty, all events for the scope are delivered. When populated, only events
+              matching at least one filter entry are forwarded. Not supported for
+              environment-scoped streams; setting this field returns an error.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -363,6 +378,7 @@ class AsyncEventsResource(AsyncAPIResource):
                 {
                     "environment_id": environment_id,
                     "organization": organization,
+                    "resource_type_filters": resource_type_filters,
                 },
                 event_watch_params.EventWatchParams,
             ),
