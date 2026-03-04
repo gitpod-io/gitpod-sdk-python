@@ -6,7 +6,7 @@ from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["MembershipListParams", "Pagination"]
+__all__ = ["MembershipListParams", "Filter", "Pagination"]
 
 
 class MembershipListParams(TypedDict, total=False):
@@ -14,10 +14,23 @@ class MembershipListParams(TypedDict, total=False):
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
+    filter: Filter
+    """filter contains options for filtering the list of memberships."""
+
     group_id: Annotated[str, PropertyInfo(alias="groupId")]
 
     pagination: Pagination
     """pagination contains the pagination options for listing memberships"""
+
+
+class Filter(TypedDict, total=False):
+    """filter contains options for filtering the list of memberships."""
+
+    search: str
+    """
+    search performs case-insensitive search across member name, email, ID, and
+    service account name and description
+    """
 
 
 class Pagination(TypedDict, total=False):
