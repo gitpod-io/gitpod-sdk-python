@@ -243,6 +243,7 @@ class TestAgents:
             filter={
                 "command": "command",
                 "command_prefix": "commandPrefix",
+                "exclude_prompt_content": True,
                 "is_command": True,
                 "is_skill": True,
                 "is_template": True,
@@ -771,6 +772,7 @@ class TestAsyncAgents:
             filter={
                 "command": "command",
                 "command_prefix": "commandPrefix",
+                "exclude_prompt_content": True,
                 "is_command": True,
                 "is_skill": True,
                 "is_template": True,
