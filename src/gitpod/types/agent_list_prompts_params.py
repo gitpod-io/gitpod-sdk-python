@@ -24,6 +24,13 @@ class Filter(TypedDict, total=False):
 
     command_prefix: Annotated[str, PropertyInfo(alias="commandPrefix")]
 
+    exclude_prompt_content: Annotated[bool, PropertyInfo(alias="excludePromptContent")]
+    """
+    exclude_prompt_content omits the large spec.prompt text from the response. Other
+    spec fields (is_template, is_command, command, is_skill) are still returned. Use
+    GetPrompt to retrieve the full prompt content when needed.
+    """
+
     is_command: Annotated[bool, PropertyInfo(alias="isCommand")]
 
     is_skill: Annotated[bool, PropertyInfo(alias="isSkill")]
