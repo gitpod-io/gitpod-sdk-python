@@ -22,6 +22,7 @@ from .automation_trigger import AutomationTrigger as AutomationTrigger
 from .task_execution_spec import TaskExecutionSpec as TaskExecutionSpec
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
 from .task_execution_status import TaskExecutionStatus as TaskExecutionStatus
+from .count_response_relation import CountResponseRelation as CountResponseRelation
 from .task_execution_metadata import TaskExecutionMetadata as TaskExecutionMetadata
 from .environment_variable_item import EnvironmentVariableItem as EnvironmentVariableItem
 from .project_environment_class import ProjectEnvironmentClass as ProjectEnvironmentClass

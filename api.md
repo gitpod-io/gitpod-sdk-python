@@ -3,6 +3,7 @@
 ```python
 from gitpod.types import (
     AutomationTrigger,
+    CountResponseRelation,
     EnvironmentClass,
     EnvironmentVariableItem,
     EnvironmentVariableSource,
@@ -347,7 +348,6 @@ Types:
 
 ```python
 from gitpod.types import (
-    CountResponseRelation,
     InviteDomains,
     Organization,
     OrganizationMember,
