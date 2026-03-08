@@ -37,6 +37,7 @@ class TestEnvironments:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         environment = client.environments.create(
             name="name",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -724,6 +725,7 @@ class TestAsyncEnvironments:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment = await async_client.environments.create(
             name="name",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {

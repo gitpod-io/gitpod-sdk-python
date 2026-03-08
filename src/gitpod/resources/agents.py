@@ -542,6 +542,7 @@ class AgentsResource(SyncAPIResource):
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         workflow_action_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -579,6 +580,9 @@ class AgentsResource(SyncAPIResource):
               execution is routed to this runner instead of the runner associated with the
               environment.
 
+          session_id: session_id is the ID of the session this agent execution belongs to. If empty, a
+              new session is created implicitly.
+
           workflow_action_id: workflow_action_id is an optional reference to the workflow execution action
               that created this agent execution. Used for tracking and event correlation.
 
@@ -600,6 +604,7 @@ class AgentsResource(SyncAPIResource):
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
+                    "session_id": session_id,
                     "workflow_action_id": workflow_action_id,
                 },
                 agent_start_execution_params.AgentStartExecutionParams,
@@ -1208,6 +1213,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         workflow_action_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1245,6 +1251,9 @@ class AsyncAgentsResource(AsyncAPIResource):
               execution is routed to this runner instead of the runner associated with the
               environment.
 
+          session_id: session_id is the ID of the session this agent execution belongs to. If empty, a
+              new session is created implicitly.
+
           workflow_action_id: workflow_action_id is an optional reference to the workflow execution action
               that created this agent execution. Used for tracking and event correlation.
 
@@ -1266,6 +1275,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
+                    "session_id": session_id,
                     "workflow_action_id": workflow_action_id,
                 },
                 agent_start_execution_params.AgentStartExecutionParams,
