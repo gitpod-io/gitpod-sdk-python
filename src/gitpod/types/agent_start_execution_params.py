@@ -39,6 +39,12 @@ class AgentStartExecutionParams(TypedDict, total=False):
     environment.
     """
 
+    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
+    """
+    session_id is the ID of the session this agent execution belongs to. If empty, a
+    new session is created implicitly.
+    """
+
     workflow_action_id: Annotated[Optional[str], PropertyInfo(alias="workflowActionId")]
     """
     workflow_action_id is an optional reference to the workflow execution action
