@@ -44,6 +44,12 @@ class PrebuildStatus(BaseModel):
     the provider.
     """
 
+    snapshot_size_bytes: Optional[str] = FieldInfo(alias="snapshotSizeBytes", default=None)
+    """
+    snapshot_size_bytes is the size of the snapshot in bytes. Only populated when
+    the snapshot is available (phase is COMPLETED).
+    """
+
     status_version: Optional[str] = FieldInfo(alias="statusVersion", default=None)
     """
     status_version is incremented each time the status is updated. Used for
