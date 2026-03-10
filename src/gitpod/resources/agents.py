@@ -36,6 +36,7 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.prompt import Prompt
 from ..types.agent_mode import AgentMode
 from ..types.agent_execution import AgentExecution
+from ..types.agent_message_param import AgentMessageParam
 from ..types.user_input_block_param import UserInputBlockParam
 from ..types.agent_code_context_param import AgentCodeContextParam
 from ..types.agent_create_prompt_response import AgentCreatePromptResponse
@@ -483,6 +484,7 @@ class AgentsResource(SyncAPIResource):
         self,
         *,
         agent_execution_id: str | Omit = omit,
+        agent_message: AgentMessageParam | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -510,6 +512,9 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
+          agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
+              child agent execution, or vice versa).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -523,6 +528,7 @@ class AgentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "agent_execution_id": agent_execution_id,
+                    "agent_message": agent_message,
                     "user_input": user_input,
                 },
                 agent_send_to_execution_params.AgentSendToExecutionParams,
@@ -1154,6 +1160,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         *,
         agent_execution_id: str | Omit = omit,
+        agent_message: AgentMessageParam | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1181,6 +1188,9 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
+          agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
+              child agent execution, or vice versa).
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1194,6 +1204,7 @@ class AsyncAgentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "agent_execution_id": agent_execution_id,
+                    "agent_message": agent_message,
                     "user_input": user_input,
                 },
                 agent_send_to_execution_params.AgentSendToExecutionParams,

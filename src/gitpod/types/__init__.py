@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .type import Type as Type
 from .user import User as User
 from .veto import Veto as Veto
 from .group import Group as Group
@@ -99,6 +100,7 @@ from .runner_list_params import RunnerListParams as RunnerListParams
 from .secret_list_params import SecretListParams as SecretListParams
 from .secret_scope_param import SecretScopeParam as SecretScopeParam
 from .warm_pool_metadata import WarmPoolMetadata as WarmPoolMetadata
+from .agent_message_param import AgentMessageParam as AgentMessageParam
 from .event_list_response import EventListResponse as EventListResponse
 from .gateway_list_params import GatewayListParams as GatewayListParams
 from .group_create_params import GroupCreateParams as GroupCreateParams

@@ -65,10 +65,12 @@ Types:
 from gitpod.types import (
     AgentCodeContext,
     AgentExecution,
+    AgentMessage,
     AgentMode,
     Prompt,
     PromptMetadata,
     PromptSpec,
+    Type,
     UserInputBlock,
     AgentCreateExecutionConversationTokenResponse,
     AgentCreatePromptResponse,
