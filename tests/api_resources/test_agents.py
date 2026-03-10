@@ -360,6 +360,10 @@ class TestAgents:
     def test_method_send_to_execution_with_all_params(self, client: Gitpod) -> None:
         agent = client.agents.send_to_execution(
             agent_execution_id="6fa1a3c7-fbb7-49d1-ba56-1890dc7c4c35",
+            agent_message={
+                "payload": "payload",
+                "type": "TYPE_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -890,6 +894,10 @@ class TestAsyncAgents:
     async def test_method_send_to_execution_with_all_params(self, async_client: AsyncGitpod) -> None:
         agent = await async_client.agents.send_to_execution(
             agent_execution_id="6fa1a3c7-fbb7-49d1-ba56-1890dc7c4c35",
+            agent_message={
+                "payload": "payload",
+                "type": "TYPE_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
