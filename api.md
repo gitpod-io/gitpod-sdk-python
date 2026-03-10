@@ -527,10 +527,18 @@ from gitpod.types import (
     PrebuildSpec,
     PrebuildStatus,
     PrebuildTrigger,
+    WarmPool,
+    WarmPoolMetadata,
+    WarmPoolPhase,
+    WarmPoolSpec,
+    WarmPoolStatus,
     PrebuildCreateResponse,
     PrebuildRetrieveResponse,
     PrebuildCancelResponse,
     PrebuildCreateLogsTokenResponse,
+    PrebuildCreateWarmPoolResponse,
+    PrebuildRetrieveWarmPoolResponse,
+    PrebuildUpdateWarmPoolResponse,
 )
 ```
 
@@ -542,6 +550,11 @@ Methods:
 - <code title="post /gitpod.v1.PrebuildService/DeletePrebuild">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">delete</a>(\*\*<a href="src/gitpod/types/prebuild_delete_params.py">params</a>) -> object</code>
 - <code title="post /gitpod.v1.PrebuildService/CancelPrebuild">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">cancel</a>(\*\*<a href="src/gitpod/types/prebuild_cancel_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_cancel_response.py">PrebuildCancelResponse</a></code>
 - <code title="post /gitpod.v1.PrebuildService/CreatePrebuildLogsToken">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">create_logs_token</a>(\*\*<a href="src/gitpod/types/prebuild_create_logs_token_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_create_logs_token_response.py">PrebuildCreateLogsTokenResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/CreateWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">create_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_create_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_create_warm_pool_response.py">PrebuildCreateWarmPoolResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/DeleteWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">delete_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_delete_warm_pool_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.PrebuildService/ListWarmPools">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">list_warm_pools</a>(\*\*<a href="src/gitpod/types/prebuild_list_warm_pools_params.py">params</a>) -> <a href="./src/gitpod/types/warm_pool.py">SyncWarmPoolsPage[WarmPool]</a></code>
+- <code title="post /gitpod.v1.PrebuildService/GetWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">retrieve_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_retrieve_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_retrieve_warm_pool_response.py">PrebuildRetrieveWarmPoolResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/UpdateWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">update_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_update_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_update_warm_pool_response.py">PrebuildUpdateWarmPoolResponse</a></code>
 
 # Projects
 

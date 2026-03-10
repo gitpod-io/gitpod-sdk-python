@@ -99,6 +99,9 @@ __all__ = [
     "TokensPagePagination",
     "SyncTokensPage",
     "AsyncTokensPage",
+    "WarmPoolsPagePagination",
+    "SyncWarmPoolsPage",
+    "AsyncWarmPoolsPage",
 ]
 
 _T = TypeVar("_T")
@@ -1591,6 +1594,56 @@ class AsyncTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not tokens:
             return []
         return tokens
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class WarmPoolsPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncWarmPoolsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[WarmPoolsPagePagination] = None
+    warm_pools: List[_T] = FieldInfo(alias="warmPools")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        warm_pools = self.warm_pools
+        if not warm_pools:
+            return []
+        return warm_pools
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncWarmPoolsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[WarmPoolsPagePagination] = None
+    warm_pools: List[_T] = FieldInfo(alias="warmPools")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        warm_pools = self.warm_pools
+        if not warm_pools:
+            return []
+        return warm_pools
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
