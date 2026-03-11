@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .wake_event_param import WakeEventParam
 from .agent_message_param import AgentMessageParam
 from .user_input_block_param import UserInputBlockParam
 
@@ -21,3 +22,9 @@ class AgentSendToExecutionParams(TypedDict, total=False):
     """
 
     user_input: Annotated[UserInputBlockParam, PropertyInfo(alias="userInput")]
+
+    wake_event: Annotated[WakeEventParam, PropertyInfo(alias="wakeEvent")]
+    """
+    WakeEvent is sent by the backend to wake an agent when a registered interest
+    fires. Delivered via SendToAgentExecution as a new oneof variant.
+    """

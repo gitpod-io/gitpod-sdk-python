@@ -382,6 +382,10 @@ class TestAgents:
                 ],
                 "text": {"content": "Generate a report based on the latest logs."},
             },
+            wake_event={
+                "timer": {"fired_at": parse_datetime("2019-12-27T18:11:19.117Z")},
+                "interest_id": "interestId",
+            },
         )
         assert_matches_type(object, agent, path=["response"])
 
@@ -915,6 +919,10 @@ class TestAsyncAgents:
                     }
                 ],
                 "text": {"content": "Generate a report based on the latest logs."},
+            },
+            wake_event={
+                "timer": {"fired_at": parse_datetime("2019-12-27T18:11:19.117Z")},
+                "interest_id": "interestId",
             },
         )
         assert_matches_type(object, agent, path=["response"])

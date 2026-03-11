@@ -81,6 +81,7 @@ from .environment_spec import EnvironmentSpec as EnvironmentSpec
 from .id_token_version import IDTokenVersion as IDTokenVersion
 from .prebuild_trigger import PrebuildTrigger as PrebuildTrigger
 from .project_metadata import ProjectMetadata as ProjectMetadata
+from .wake_event_param import WakeEventParam as WakeEventParam
 from .warm_pool_status import WarmPoolStatus as WarmPoolStatus
 from .environment_phase import EnvironmentPhase as EnvironmentPhase
 from .error_event_param import ErrorEventParam as ErrorEventParam
