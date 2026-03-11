@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .role import Role as Role
 from .type import Type as Type
 from .user import User as User
 from .veto import Veto as Veto
