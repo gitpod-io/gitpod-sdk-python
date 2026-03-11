@@ -70,6 +70,7 @@ from gitpod.types import (
     Prompt,
     PromptMetadata,
     PromptSpec,
+    Role,
     Type,
     UserInputBlock,
     AgentCreateExecutionConversationTokenResponse,
