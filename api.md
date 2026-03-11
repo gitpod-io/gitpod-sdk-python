@@ -73,6 +73,7 @@ from gitpod.types import (
     Role,
     Type,
     UserInputBlock,
+    WakeEvent,
     AgentCreateExecutionConversationTokenResponse,
     AgentCreatePromptResponse,
     AgentRetrieveExecutionResponse,
