@@ -444,6 +444,7 @@ class Status(BaseModel):
             "SUPPORTED_MODEL_OPUS_4_5_EXTENDED",
             "SUPPORTED_MODEL_OPUS_4_6",
             "SUPPORTED_MODEL_OPUS_4_6_EXTENDED",
+            "SUPPORTED_MODEL_HAIKU_4_5",
             "SUPPORTED_MODEL_OPENAI_4O",
             "SUPPORTED_MODEL_OPENAI_4O_MINI",
             "SUPPORTED_MODEL_OPENAI_O1",
