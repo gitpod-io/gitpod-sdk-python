@@ -191,7 +191,12 @@ class PoliciesResource(SyncAPIResource):
 
           maximum_environment_timeout: maximum_environment_timeout controls the maximum timeout allowed for
               environments in seconds. 0 means no limit (never). Minimum duration is 30
-              minutes (1800 seconds).
+              minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+              minutes):
+
+              ```
+              this == duration('0s') || this >= duration('1800s')
+              ```
 
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
@@ -426,7 +431,12 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           maximum_environment_timeout: maximum_environment_timeout controls the maximum timeout allowed for
               environments in seconds. 0 means no limit (never). Minimum duration is 30
-              minutes (1800 seconds).
+              minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+              minutes):
+
+              ```
+              this == duration('0s') || this >= duration('1800s')
+              ```
 
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
