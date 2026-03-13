@@ -43,6 +43,10 @@ class TestEvents:
                 "token": "token",
                 "page_size": 20,
             },
+            sort={
+                "field": "field",
+                "order": "SORT_ORDER_UNSPECIFIED",
+            },
         )
         assert_matches_type(SyncEntriesPage[EventListResponse], event, path=["response"])
 
@@ -144,6 +148,10 @@ class TestAsyncEvents:
             pagination={
                 "token": "token",
                 "page_size": 20,
+            },
+            sort={
+                "field": "field",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(AsyncEntriesPage[EventListResponse], event, path=["response"])

@@ -9,6 +9,7 @@ from typing_extensions import Annotated, TypedDict
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared.principal import Principal
+from .shared_params.sort import Sort
 from .shared.resource_type import ResourceType
 
 __all__ = ["EventListParams", "Filter", "Pagination"]
@@ -22,7 +23,14 @@ class EventListParams(TypedDict, total=False):
     filter: Filter
 
     pagination: Pagination
-    """pagination contains the pagination options for listing environments"""
+    """pagination contains the pagination options for listing audit logs"""
+
+    sort: Sort
+    """sort specifies the order of results.
+
+    When unspecified, results are sorted by creation time descending (newest first).
+    Supported sort fields: createdAt.
+    """
 
 
 _FilterReservedKeywords = TypedDict(
@@ -48,7 +56,7 @@ class Filter(_FilterReservedKeywords, total=False):
 
 
 class Pagination(TypedDict, total=False):
-    """pagination contains the pagination options for listing environments"""
+    """pagination contains the pagination options for listing audit logs"""
 
     token: str
     """

@@ -20,6 +20,7 @@ from .._response import (
 from ..pagination import SyncEntriesPage, AsyncEntriesPage
 from .._base_client import AsyncPaginator, make_request_options
 from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
+from ..types.shared_params.sort import Sort
 from ..types.event_list_response import EventListResponse
 from ..types.event_watch_response import EventWatchResponse
 
@@ -53,6 +54,7 @@ class EventsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: event_list_params.Filter | Omit = omit,
         pagination: event_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -99,7 +101,10 @@ class EventsResource(SyncAPIResource):
           ```
 
         Args:
-          pagination: pagination contains the pagination options for listing environments
+          pagination: pagination contains the pagination options for listing audit logs
+
+          sort: sort specifies the order of results. When unspecified, results are sorted by
+              creation time descending (newest first). Supported sort fields: createdAt.
 
           extra_headers: Send extra headers
 
@@ -116,6 +121,7 @@ class EventsResource(SyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 event_list_params.EventListParams,
             ),
@@ -235,6 +241,7 @@ class AsyncEventsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: event_list_params.Filter | Omit = omit,
         pagination: event_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -281,7 +288,10 @@ class AsyncEventsResource(AsyncAPIResource):
           ```
 
         Args:
-          pagination: pagination contains the pagination options for listing environments
+          pagination: pagination contains the pagination options for listing audit logs
+
+          sort: sort specifies the order of results. When unspecified, results are sorted by
+              creation time descending (newest first). Supported sort fields: createdAt.
 
           extra_headers: Send extra headers
 
@@ -298,6 +308,7 @@ class AsyncEventsResource(AsyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 event_list_params.EventListParams,
             ),

@@ -38,7 +38,6 @@ from ..._response import (
 from ...pagination import SyncProjectsPage, AsyncProjectsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.project import Project
-from ...types.sort_param import SortParam
 from .environment_clases import (
     EnvironmentClasesResource,
     AsyncEnvironmentClasesResource,
@@ -47,6 +46,7 @@ from .environment_clases import (
     EnvironmentClasesResourceWithStreamingResponse,
     AsyncEnvironmentClasesResourceWithStreamingResponse,
 )
+from ...types.shared_params.sort import Sort
 from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
@@ -365,7 +365,7 @@ class ProjectsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: project_list_params.Filter | Omit = omit,
         pagination: project_list_params.Pagination | Omit = omit,
-        sort: SortParam | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1020,7 +1020,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: project_list_params.Filter | Omit = omit,
         pagination: project_list_params.Pagination | Omit = omit,
-        sort: SortParam | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

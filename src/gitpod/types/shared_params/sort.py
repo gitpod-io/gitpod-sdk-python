@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-from .sort_order import SortOrder
+from ..shared.sort_order import SortOrder
 
-__all__ = ["SortParam"]
+__all__ = ["Sort"]
 
 
-class SortParam(TypedDict, total=False):
+class Sort(TypedDict, total=False):
     field: str
     """Field name to sort by, in camelCase."""
 
