@@ -205,7 +205,12 @@ class Timeout(TypedDict, total=False):
     disconnected: str
     """
     inacitivity is the maximum time of disconnection before the environment is
-    stopped or paused. Minimum duration is 30 minutes. Set to 0 to disable.
+    stopped or paused. Minimum duration is 30 minutes. Set to 0 to disable. value
+    must be 0s (disabled) or at least 1800s (30 minutes):
+
+    ```
+    this == duration('0s') || this >= duration('1800s')
+    ```
     """
 
 
