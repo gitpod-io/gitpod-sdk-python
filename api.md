@@ -100,6 +100,45 @@ Methods:
 - <code title="post /gitpod.v1.AgentService/StopAgentExecution">client.agents.<a href="./src/gitpod/resources/agents.py">stop_execution</a>(\*\*<a href="src/gitpod/types/agent_stop_execution_params.py">params</a>) -> object</code>
 - <code title="post /gitpod.v1.AgentService/UpdatePrompt">client.agents.<a href="./src/gitpod/resources/agents.py">update_prompt</a>(\*\*<a href="src/gitpod/types/agent_update_prompt_params.py">params</a>) -> <a href="./src/gitpod/types/agent_update_prompt_response.py">AgentUpdatePromptResponse</a></code>
 
+# Automations
+
+Types:
+
+```python
+from gitpod.types import (
+    Workflow,
+    WorkflowAction,
+    WorkflowExecution,
+    WorkflowExecutionAction,
+    WorkflowStep,
+    WorkflowTrigger,
+    WorkflowTriggerContext,
+    AutomationCreateResponse,
+    AutomationRetrieveResponse,
+    AutomationUpdateResponse,
+    AutomationListExecutionOutputsResponse,
+    AutomationRetrieveExecutionResponse,
+    AutomationRetrieveExecutionActionResponse,
+    AutomationStartExecutionResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.WorkflowService/CreateWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">create</a>(\*\*<a href="src/gitpod/types/automation_create_params.py">params</a>) -> <a href="./src/gitpod/types/automation_create_response.py">AutomationCreateResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve</a>(\*\*<a href="src/gitpod/types/automation_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_response.py">AutomationRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/UpdateWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">update</a>(\*\*<a href="src/gitpod/types/automation_update_params.py">params</a>) -> <a href="./src/gitpod/types/automation_update_response.py">AutomationUpdateResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflows">client.automations.<a href="./src/gitpod/resources/automations.py">list</a>(\*\*<a href="src/gitpod/types/automation_list_params.py">params</a>) -> <a href="./src/gitpod/types/workflow.py">SyncWorkflowsPage[Workflow]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/DeleteWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">delete</a>(\*\*<a href="src/gitpod/types/automation_delete_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/CancelWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">cancel_execution</a>(\*\*<a href="src/gitpod/types/automation_cancel_execution_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/CancelWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">cancel_execution_action</a>(\*\*<a href="src/gitpod/types/automation_cancel_execution_action_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutionActions">client.automations.<a href="./src/gitpod/resources/automations.py">list_execution_actions</a>(\*\*<a href="src/gitpod/types/automation_list_execution_actions_params.py">params</a>) -> <a href="./src/gitpod/types/workflow_execution_action.py">SyncWorkflowExecutionActionsPage[WorkflowExecutionAction]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutionOutputs">client.automations.<a href="./src/gitpod/resources/automations.py">list_execution_outputs</a>(\*\*<a href="src/gitpod/types/automation_list_execution_outputs_params.py">params</a>) -> <a href="./src/gitpod/types/automation_list_execution_outputs_response.py">SyncOutputsPage[AutomationListExecutionOutputsResponse]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutions">client.automations.<a href="./src/gitpod/resources/automations.py">list_executions</a>(\*\*<a href="src/gitpod/types/automation_list_executions_params.py">params</a>) -> <a href="./src/gitpod/types/workflow_execution.py">SyncWorkflowExecutionsPage[WorkflowExecution]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_response.py">AutomationRetrieveExecutionResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution_action</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_action_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_action_response.py">AutomationRetrieveExecutionActionResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/StartWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">start_execution</a>(\*\*<a href="src/gitpod/types/automation_start_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_start_execution_response.py">AutomationStartExecutionResponse</a></code>
+
 # Editors
 
 Types:

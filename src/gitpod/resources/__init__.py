@@ -112,6 +112,14 @@ from .prebuilds import (
     PrebuildsResourceWithStreamingResponse,
     AsyncPrebuildsResourceWithStreamingResponse,
 )
+from .automations import (
+    AutomationsResource,
+    AsyncAutomationsResource,
+    AutomationsResourceWithRawResponse,
+    AsyncAutomationsResourceWithRawResponse,
+    AutomationsResourceWithStreamingResponse,
+    AsyncAutomationsResourceWithStreamingResponse,
+)
 from .environments import (
     EnvironmentsResource,
     AsyncEnvironmentsResource,
@@ -142,6 +150,12 @@ __all__ = [
     "AsyncAgentsResourceWithRawResponse",
     "AgentsResourceWithStreamingResponse",
     "AsyncAgentsResourceWithStreamingResponse",
+    "AutomationsResource",
+    "AsyncAutomationsResource",
+    "AutomationsResourceWithRawResponse",
+    "AsyncAutomationsResourceWithRawResponse",
+    "AutomationsResourceWithStreamingResponse",
+    "AsyncAutomationsResourceWithStreamingResponse",
     "EditorsResource",
     "AsyncEditorsResource",
     "EditorsResourceWithRawResponse",
