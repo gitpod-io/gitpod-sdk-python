@@ -46,6 +46,7 @@ if TYPE_CHECKING:
         identity,
         projects,
         prebuilds,
+        automations,
         environments,
         organizations,
     )
@@ -59,6 +60,7 @@ if TYPE_CHECKING:
     from .resources.gateways import GatewaysResource, AsyncGatewaysResource
     from .resources.identity import IdentityResource, AsyncIdentityResource
     from .resources.prebuilds import PrebuildsResource, AsyncPrebuildsResource
+    from .resources.automations import AutomationsResource, AsyncAutomationsResource
     from .resources.users.users import UsersResource, AsyncUsersResource
     from .resources.groups.groups import GroupsResource, AsyncGroupsResource
     from .resources.runners.runners import RunnersResource, AsyncRunnersResource
@@ -135,6 +137,12 @@ class Gitpod(SyncAPIClient):
         from .resources.agents import AgentsResource
 
         return AgentsResource(self)
+
+    @cached_property
+    def automations(self) -> AutomationsResource:
+        from .resources.automations import AutomationsResource
+
+        return AutomationsResource(self)
 
     @cached_property
     def editors(self) -> EditorsResource:
@@ -412,6 +420,12 @@ class AsyncGitpod(AsyncAPIClient):
         return AsyncAgentsResource(self)
 
     @cached_property
+    def automations(self) -> AsyncAutomationsResource:
+        from .resources.automations import AsyncAutomationsResource
+
+        return AsyncAutomationsResource(self)
+
+    @cached_property
     def editors(self) -> AsyncEditorsResource:
         from .resources.editors import AsyncEditorsResource
 
@@ -638,6 +652,12 @@ class GitpodWithRawResponse:
         return AgentsResourceWithRawResponse(self._client.agents)
 
     @cached_property
+    def automations(self) -> automations.AutomationsResourceWithRawResponse:
+        from .resources.automations import AutomationsResourceWithRawResponse
+
+        return AutomationsResourceWithRawResponse(self._client.automations)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithRawResponse:
         from .resources.editors import EditorsResourceWithRawResponse
 
@@ -750,6 +770,12 @@ class AsyncGitpodWithRawResponse:
         from .resources.agents import AsyncAgentsResourceWithRawResponse
 
         return AsyncAgentsResourceWithRawResponse(self._client.agents)
+
+    @cached_property
+    def automations(self) -> automations.AsyncAutomationsResourceWithRawResponse:
+        from .resources.automations import AsyncAutomationsResourceWithRawResponse
+
+        return AsyncAutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithRawResponse:
@@ -866,6 +892,12 @@ class GitpodWithStreamedResponse:
         return AgentsResourceWithStreamingResponse(self._client.agents)
 
     @cached_property
+    def automations(self) -> automations.AutomationsResourceWithStreamingResponse:
+        from .resources.automations import AutomationsResourceWithStreamingResponse
+
+        return AutomationsResourceWithStreamingResponse(self._client.automations)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithStreamingResponse:
         from .resources.editors import EditorsResourceWithStreamingResponse
 
@@ -978,6 +1010,12 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.agents import AsyncAgentsResourceWithStreamingResponse
 
         return AsyncAgentsResourceWithStreamingResponse(self._client.agents)
+
+    @cached_property
+    def automations(self) -> automations.AsyncAutomationsResourceWithStreamingResponse:
+        from .resources.automations import AsyncAutomationsResourceWithStreamingResponse
+
+        return AsyncAutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithStreamingResponse:

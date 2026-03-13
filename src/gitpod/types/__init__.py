@@ -45,6 +45,7 @@ from .shared import (
 from .account import Account as Account
 from .project import Project as Project
 from .prebuild import Prebuild as Prebuild
+from .workflow import Workflow as Workflow
 from .log_level import LogLevel as LogLevel
 from .warm_pool import WarmPool as WarmPool
 from .agent_mode import AgentMode as AgentMode
@@ -62,6 +63,7 @@ from .secret_scope import SecretScope as SecretScope
 from .prebuild_spec import PrebuildSpec as PrebuildSpec
 from .project_phase import ProjectPhase as ProjectPhase
 from .runner_status import RunnerStatus as RunnerStatus
+from .workflow_step import WorkflowStep as WorkflowStep
 from .editor_version import EditorVersion as EditorVersion
 from .invite_domains import InviteDomains as InviteDomains
 from .login_provider import LoginProvider as LoginProvider
@@ -75,6 +77,7 @@ from .prebuild_status import PrebuildStatus as PrebuildStatus
 from .prompt_metadata import PromptMetadata as PromptMetadata
 from .runner_provider import RunnerProvider as RunnerProvider
 from .warm_pool_phase import WarmPoolPhase as WarmPoolPhase
+from .workflow_action import WorkflowAction as WorkflowAction
 from .breadcrumb_param import BreadcrumbParam as BreadcrumbParam
 from .environment_role import EnvironmentRole as EnvironmentRole
 from .environment_spec import EnvironmentSpec as EnvironmentSpec
@@ -83,6 +86,7 @@ from .prebuild_trigger import PrebuildTrigger as PrebuildTrigger
 from .project_metadata import ProjectMetadata as ProjectMetadata
 from .wake_event_param import WakeEventParam as WakeEventParam
 from .warm_pool_status import WarmPoolStatus as WarmPoolStatus
+from .workflow_trigger import WorkflowTrigger as WorkflowTrigger
 from .environment_phase import EnvironmentPhase as EnvironmentPhase
 from .error_event_param import ErrorEventParam as ErrorEventParam
 from .event_list_params import EventListParams as EventListParams
@@ -102,6 +106,7 @@ from .runner_list_params import RunnerListParams as RunnerListParams
 from .secret_list_params import SecretListParams as SecretListParams
 from .secret_scope_param import SecretScopeParam as SecretScopeParam
 from .warm_pool_metadata import WarmPoolMetadata as WarmPoolMetadata
+from .workflow_execution import WorkflowExecution as WorkflowExecution
 from .agent_message_param import AgentMessageParam as AgentMessageParam
 from .event_list_response import EventListResponse as EventListResponse
 from .gateway_list_params import GatewayListParams as GatewayListParams
@@ -112,6 +117,7 @@ from .organization_member import OrganizationMember as OrganizationMember
 from .prebuild_spec_param import PrebuildSpecParam as PrebuildSpecParam
 from .project_list_params import ProjectListParams as ProjectListParams
 from .recommended_editors import RecommendedEditors as RecommendedEditors
+from .workflow_step_param import WorkflowStepParam as WorkflowStepParam
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
 from .event_watch_response import EventWatchResponse as EventWatchResponse
 from .exception_info_param import ExceptionInfoParam as ExceptionInfoParam
@@ -133,6 +139,8 @@ from .metrics_configuration import MetricsConfiguration as MetricsConfiguration
 from .project_create_params import ProjectCreateParams as ProjectCreateParams
 from .project_delete_params import ProjectDeleteParams as ProjectDeleteParams
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
+from .workflow_action_param import WorkflowActionParam as WorkflowActionParam
+from .automation_list_params import AutomationListParams as AutomationListParams
 from .editor_retrieve_params import EditorRetrieveParams as EditorRetrieveParams
 from .environment_spec_param import EnvironmentSpecParam as EnvironmentSpecParam
 from .kernel_controls_config import KernelControlsConfig as KernelControlsConfig
@@ -145,6 +153,7 @@ from .runner_retrieve_params import RunnerRetrieveParams as RunnerRetrieveParams
 from .secret_create_response import SecretCreateResponse as SecretCreateResponse
 from .user_get_user_response import UserGetUserResponse as UserGetUserResponse
 from .user_input_block_param import UserInputBlockParam as UserInputBlockParam
+from .workflow_trigger_param import WorkflowTriggerParam as WorkflowTriggerParam
 from .account_retrieve_params import AccountRetrieveParams as AccountRetrieveParams
 from .environment_initializer import EnvironmentInitializer as EnvironmentInitializer
 from .environment_list_params import EnvironmentListParams as EnvironmentListParams
@@ -156,6 +165,9 @@ from .project_update_response import ProjectUpdateResponse as ProjectUpdateRespo
 from .secret_get_value_params import SecretGetValueParams as SecretGetValueParams
 from .user_delete_user_params import UserDeleteUserParams as UserDeleteUserParams
 from .agent_code_context_param import AgentCodeContextParam as AgentCodeContextParam
+from .automation_create_params import AutomationCreateParams as AutomationCreateParams
+from .automation_delete_params import AutomationDeleteParams as AutomationDeleteParams
+from .automation_update_params import AutomationUpdateParams as AutomationUpdateParams
 from .editor_retrieve_response import EditorRetrieveResponse as EditorRetrieveResponse
 from .environment_start_params import EnvironmentStartParams as EnvironmentStartParams
 from .environment_usage_record import EnvironmentUsageRecord as EnvironmentUsageRecord
@@ -164,6 +176,7 @@ from .prebuild_cancel_response import PrebuildCancelResponse as PrebuildCancelRe
 from .prebuild_create_response import PrebuildCreateResponse as PrebuildCreateResponse
 from .prebuild_retrieve_params import PrebuildRetrieveParams as PrebuildRetrieveParams
 from .runner_retrieve_response import RunnerRetrieveResponse as RunnerRetrieveResponse
+from .workflow_trigger_context import WorkflowTriggerContext as WorkflowTriggerContext
 from .account_retrieve_response import AccountRetrieveResponse as AccountRetrieveResponse
 from .agent_list_prompts_params import AgentListPromptsParams as AgentListPromptsParams
 from .editor_resolve_url_params import EditorResolveURLParams as EditorResolveURLParams
@@ -176,9 +189,13 @@ from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetriev
 from .recommended_editors_param import RecommendedEditorsParam as RecommendedEditorsParam
 from .secret_get_value_response import SecretGetValueResponse as SecretGetValueResponse
 from .user_set_suspended_params import UserSetSuspendedParams as UserSetSuspendedParams
+from .workflow_execution_action import WorkflowExecutionAction as WorkflowExecutionAction
 from .agent_create_prompt_params import AgentCreatePromptParams as AgentCreatePromptParams
 from .agent_delete_prompt_params import AgentDeletePromptParams as AgentDeletePromptParams
 from .agent_update_prompt_params import AgentUpdatePromptParams as AgentUpdatePromptParams
+from .automation_create_response import AutomationCreateResponse as AutomationCreateResponse
+from .automation_retrieve_params import AutomationRetrieveParams as AutomationRetrieveParams
+from .automation_update_response import AutomationUpdateResponse as AutomationUpdateResponse
 from .error_report_errors_params import ErrorReportErrorsParams as ErrorReportErrorsParams
 from .organization_create_params import OrganizationCreateParams as OrganizationCreateParams
 from .organization_delete_params import OrganizationDeleteParams as OrganizationDeleteParams
@@ -201,6 +218,7 @@ from .agent_list_executions_params import AgentListExecutionsParams as AgentList
 from .agent_retrieve_prompt_params import AgentRetrievePromptParams as AgentRetrievePromptParams
 from .agent_start_execution_params import AgentStartExecutionParams as AgentStartExecutionParams
 from .agent_update_prompt_response import AgentUpdatePromptResponse as AgentUpdatePromptResponse
+from .automation_retrieve_response import AutomationRetrieveResponse as AutomationRetrieveResponse
 from .environment_unarchive_params import EnvironmentUnarchiveParams as EnvironmentUnarchiveParams
 from .identity_get_id_token_params import IdentityGetIDTokenParams as IdentityGetIDTokenParams
 from .kernel_controls_config_param import KernelControlsConfigParam as KernelControlsConfigParam
@@ -223,6 +241,7 @@ from .identity_exchange_token_params import IdentityExchangeTokenParams as Ident
 from .identity_get_id_token_response import IdentityGetIDTokenResponse as IdentityGetIDTokenResponse
 from .organization_retrieve_response import OrganizationRetrieveResponse as OrganizationRetrieveResponse
 from .project_prebuild_configuration import ProjectPrebuildConfiguration as ProjectPrebuildConfiguration
+from .workflow_trigger_context_param import WorkflowTriggerContextParam as WorkflowTriggerContextParam
 from .agent_retrieve_execution_params import AgentRetrieveExecutionParams as AgentRetrieveExecutionParams
 from .prebuild_list_warm_pools_params import PrebuildListWarmPoolsParams as PrebuildListWarmPoolsParams
 from .runner_create_logs_token_params import RunnerCreateLogsTokenParams as RunnerCreateLogsTokenParams
@@ -235,6 +254,8 @@ from .prebuild_create_warm_pool_params import PrebuildCreateWarmPoolParams as Pr
 from .prebuild_delete_warm_pool_params import PrebuildDeleteWarmPoolParams as PrebuildDeleteWarmPoolParams
 from .prebuild_update_warm_pool_params import PrebuildUpdateWarmPoolParams as PrebuildUpdateWarmPoolParams
 from .agent_retrieve_execution_response import AgentRetrieveExecutionResponse as AgentRetrieveExecutionResponse
+from .automation_list_executions_params import AutomationListExecutionsParams as AutomationListExecutionsParams
+from .automation_start_execution_params import AutomationStartExecutionParams as AutomationStartExecutionParams
 from .environment_activity_signal_param import EnvironmentActivitySignalParam as EnvironmentActivitySignalParam
 from .prebuild_create_logs_token_params import PrebuildCreateLogsTokenParams as PrebuildCreateLogsTokenParams
 from .runner_create_logs_token_response import RunnerCreateLogsTokenResponse as RunnerCreateLogsTokenResponse
@@ -242,14 +263,17 @@ from .runner_create_runner_token_params import RunnerCreateRunnerTokenParams as 
 from .runner_parse_context_url_response import RunnerParseContextURLResponse as RunnerParseContextURLResponse
 from .runner_search_repositories_params import RunnerSearchRepositoriesParams as RunnerSearchRepositoriesParams
 from .account_get_sso_login_url_response import AccountGetSSOLoginURLResponse as AccountGetSSOLoginURLResponse
+from .automation_cancel_execution_params import AutomationCancelExecutionParams as AutomationCancelExecutionParams
 from .prebuild_create_warm_pool_response import PrebuildCreateWarmPoolResponse as PrebuildCreateWarmPoolResponse
 from .prebuild_retrieve_warm_pool_params import PrebuildRetrieveWarmPoolParams as PrebuildRetrieveWarmPoolParams
 from .prebuild_update_warm_pool_response import PrebuildUpdateWarmPoolResponse as PrebuildUpdateWarmPoolResponse
 from .user_get_authenticated_user_params import UserGetAuthenticatedUserParams as UserGetAuthenticatedUserParams
 from .account_list_login_providers_params import AccountListLoginProvidersParams as AccountListLoginProvidersParams
+from .automation_start_execution_response import AutomationStartExecutionResponse as AutomationStartExecutionResponse
 from .prebuild_create_logs_token_response import PrebuildCreateLogsTokenResponse as PrebuildCreateLogsTokenResponse
 from .runner_create_runner_token_response import RunnerCreateRunnerTokenResponse as RunnerCreateRunnerTokenResponse
 from .runner_search_repositories_response import RunnerSearchRepositoriesResponse as RunnerSearchRepositoriesResponse
+from .automation_retrieve_execution_params import AutomationRetrieveExecutionParams as AutomationRetrieveExecutionParams
 from .environment_create_logs_token_params import EnvironmentCreateLogsTokenParams as EnvironmentCreateLogsTokenParams
 from .prebuild_retrieve_warm_pool_response import PrebuildRetrieveWarmPoolResponse as PrebuildRetrieveWarmPoolResponse
 from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam as ProjectPrebuildConfigurationParam
@@ -257,6 +281,9 @@ from .runner_list_scm_organizations_params import RunnerListScmOrganizationsPara
 from .user_get_authenticated_user_response import UserGetAuthenticatedUserResponse as UserGetAuthenticatedUserResponse
 from .runner_check_repository_access_params import (
     RunnerCheckRepositoryAccessParams as RunnerCheckRepositoryAccessParams,
+)
+from .automation_retrieve_execution_response import (
+    AutomationRetrieveExecutionResponse as AutomationRetrieveExecutionResponse,
 )
 from .environment_create_from_project_params import (
     EnvironmentCreateFromProjectParams as EnvironmentCreateFromProjectParams,
@@ -273,17 +300,32 @@ from .runner_list_scm_organizations_response import (
 from .runner_check_repository_access_response import (
     RunnerCheckRepositoryAccessResponse as RunnerCheckRepositoryAccessResponse,
 )
+from .automation_list_execution_actions_params import (
+    AutomationListExecutionActionsParams as AutomationListExecutionActionsParams,
+)
+from .automation_list_execution_outputs_params import (
+    AutomationListExecutionOutputsParams as AutomationListExecutionOutputsParams,
+)
 from .environment_create_from_project_response import (
     EnvironmentCreateFromProjectResponse as EnvironmentCreateFromProjectResponse,
 )
 from .project_create_from_environment_response import (
     ProjectCreateFromEnvironmentResponse as ProjectCreateFromEnvironmentResponse,
 )
+from .automation_cancel_execution_action_params import (
+    AutomationCancelExecutionActionParams as AutomationCancelExecutionActionParams,
+)
 from .account_list_joinable_organizations_params import (
     AccountListJoinableOrganizationsParams as AccountListJoinableOrganizationsParams,
 )
+from .automation_list_execution_outputs_response import (
+    AutomationListExecutionOutputsResponse as AutomationListExecutionOutputsResponse,
+)
 from .identity_get_authenticated_identity_params import (
     IdentityGetAuthenticatedIdentityParams as IdentityGetAuthenticatedIdentityParams,
+)
+from .automation_retrieve_execution_action_params import (
+    AutomationRetrieveExecutionActionParams as AutomationRetrieveExecutionActionParams,
 )
 from .environment_create_environment_token_params import (
     EnvironmentCreateEnvironmentTokenParams as EnvironmentCreateEnvironmentTokenParams,
@@ -293,6 +335,9 @@ from .runner_check_authentication_for_host_params import (
 )
 from .identity_get_authenticated_identity_response import (
     IdentityGetAuthenticatedIdentityResponse as IdentityGetAuthenticatedIdentityResponse,
+)
+from .automation_retrieve_execution_action_response import (
+    AutomationRetrieveExecutionActionResponse as AutomationRetrieveExecutionActionResponse,
 )
 from .environment_create_environment_token_response import (
     EnvironmentCreateEnvironmentTokenResponse as EnvironmentCreateEnvironmentTokenResponse,
