@@ -12,6 +12,7 @@ from .prompt import Prompt as Prompt
 from .runner import Runner as Runner
 from .secret import Secret as Secret
 from .shared import (
+    Sort as Sort,
     Task as Task,
     State as State,
     RunsOn as RunsOn,
@@ -21,6 +22,7 @@ from .shared import (
     ErrorCode as ErrorCode,
     Principal as Principal,
     SecretRef as SecretRef,
+    SortOrder as SortOrder,
     FieldValue as FieldValue,
     UserStatus as UserStatus,
     ResourceRole as ResourceRole,
@@ -46,8 +48,6 @@ from .prebuild import Prebuild as Prebuild
 from .log_level import LogLevel as LogLevel
 from .warm_pool import WarmPool as WarmPool
 from .agent_mode import AgentMode as AgentMode
-from .sort_order import SortOrder as SortOrder
-from .sort_param import SortParam as SortParam
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel

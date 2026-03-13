@@ -7,7 +7,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
-from .sort_order import SortOrder
+from .shared.sort_order import SortOrder
 from .shared.user_status import UserStatus
 from .shared.organization_role import OrganizationRole
 
