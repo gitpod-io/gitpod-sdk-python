@@ -581,9 +581,9 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
-          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+          annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
-              (e.g., "linear.app/session-id").
+              (e.g., "agent-client-session/id").
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
@@ -1262,9 +1262,9 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
-          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+          annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
-              (e.g., "linear.app/session-id").
+              (e.g., "agent-client-session/id").
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
