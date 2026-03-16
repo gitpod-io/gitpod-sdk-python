@@ -411,6 +411,7 @@ class TestEnvironments:
         environment = client.environments.create_from_project(
             name="name",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
@@ -1100,6 +1101,7 @@ class TestAsyncEnvironments:
         environment = await async_client.environments.create_from_project(
             name="name",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
+            session_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "admission": "ADMISSION_LEVEL_UNSPECIFIED",
                 "automations_file": {
