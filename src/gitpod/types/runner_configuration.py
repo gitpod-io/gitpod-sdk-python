@@ -6,6 +6,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .log_level import LogLevel
+from .update_window import UpdateWindow
 from .metrics_configuration import MetricsConfiguration
 from .runner_release_channel import RunnerReleaseChannel
 
@@ -38,3 +39,9 @@ class RunnerConfiguration(BaseModel):
 
     release_channel: Optional[RunnerReleaseChannel] = FieldInfo(alias="releaseChannel", default=None)
     """The release channel the runner is on"""
+
+    update_window: Optional[UpdateWindow] = FieldInfo(alias="updateWindow", default=None)
+    """
+    update_window defines the daily time window (UTC) during which auto-updates are
+    allowed. If not set, updates are allowed at any time.
+    """

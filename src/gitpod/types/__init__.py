@@ -63,6 +63,7 @@ from .secret_scope import SecretScope as SecretScope
 from .prebuild_spec import PrebuildSpec as PrebuildSpec
 from .project_phase import ProjectPhase as ProjectPhase
 from .runner_status import RunnerStatus as RunnerStatus
+from .update_window import UpdateWindow as UpdateWindow
 from .workflow_step import WorkflowStep as WorkflowStep
 from .editor_version import EditorVersion as EditorVersion
 from .invite_domains import InviteDomains as InviteDomains
@@ -117,6 +118,7 @@ from .organization_member import OrganizationMember as OrganizationMember
 from .prebuild_spec_param import PrebuildSpecParam as PrebuildSpecParam
 from .project_list_params import ProjectListParams as ProjectListParams
 from .recommended_editors import RecommendedEditors as RecommendedEditors
+from .update_window_param import UpdateWindowParam as UpdateWindowParam
 from .workflow_step_param import WorkflowStepParam as WorkflowStepParam
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
 from .event_watch_response import EventWatchResponse as EventWatchResponse

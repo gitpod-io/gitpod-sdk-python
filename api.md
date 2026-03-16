@@ -682,6 +682,7 @@ from gitpod.types import (
     RunnerStatus,
     RunnerVariant,
     SearchMode,
+    UpdateWindow,
     RunnerCreateResponse,
     RunnerRetrieveResponse,
     RunnerCheckAuthenticationForHostResponse,
