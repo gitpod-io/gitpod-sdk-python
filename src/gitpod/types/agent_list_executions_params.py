@@ -41,6 +41,12 @@ class Filter(TypedDict, total=False):
         Literal["AGENT_EXECUTION_ROLE_UNSPECIFIED", "AGENT_EXECUTION_ROLE_DEFAULT", "AGENT_EXECUTION_ROLE_WORKFLOW"]
     ]
 
+    session_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="sessionIds")]
+    """
+    session_ids filters the response to only executions belonging to the specified
+    sessions
+    """
+
     status_phases: Annotated[
         List[
             Literal["PHASE_UNSPECIFIED", "PHASE_PENDING", "PHASE_RUNNING", "PHASE_WAITING_FOR_INPUT", "PHASE_STOPPED"]

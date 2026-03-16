@@ -197,6 +197,7 @@ class TestAgents:
                 "environment_ids": ["string"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "roles": ["AGENT_EXECUTION_ROLE_UNSPECIFIED"],
+                "session_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "status_phases": ["PHASE_UNSPECIFIED"],
             },
             pagination={
@@ -735,6 +736,7 @@ class TestAsyncAgents:
                 "environment_ids": ["string"],
                 "project_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "roles": ["AGENT_EXECUTION_ROLE_UNSPECIFIED"],
+                "session_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "status_phases": ["PHASE_UNSPECIFIED"],
             },
             pagination={
