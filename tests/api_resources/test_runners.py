@@ -56,6 +56,10 @@ class TestRunners:
                     },
                     "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
+                    "update_window": {
+                        "end_hour": 0,
+                        "start_hour": 0,
+                    },
                 },
                 "desired_phase": "RUNNER_PHASE_ACTIVE",
                 "variant": "RUNNER_VARIANT_UNSPECIFIED",
@@ -145,6 +149,10 @@ class TestRunners:
                         "username": "username",
                     },
                     "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
+                    "update_window": {
+                        "end_hour": 0,
+                        "start_hour": 0,
+                    },
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
             },
@@ -555,6 +563,10 @@ class TestAsyncRunners:
                     },
                     "region": "us-west",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
+                    "update_window": {
+                        "end_hour": 0,
+                        "start_hour": 0,
+                    },
                 },
                 "desired_phase": "RUNNER_PHASE_ACTIVE",
                 "variant": "RUNNER_VARIANT_UNSPECIFIED",
@@ -644,6 +656,10 @@ class TestAsyncRunners:
                         "username": "username",
                     },
                     "release_channel": "RUNNER_RELEASE_CHANNEL_LATEST",
+                    "update_window": {
+                        "end_hour": 0,
+                        "start_hour": 0,
+                    },
                 },
                 "desired_phase": "RUNNER_PHASE_UNSPECIFIED",
             },
