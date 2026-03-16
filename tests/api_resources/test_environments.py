@@ -296,6 +296,7 @@ class TestEnvironments:
                 "roles": ["ENVIRONMENT_ROLE_UNSPECIFIED"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
+                "session_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             pagination={
@@ -984,6 +985,7 @@ class TestAsyncEnvironments:
                 "roles": ["ENVIRONMENT_ROLE_UNSPECIFIED"],
                 "runner_ids": ["e6aa9c54-89d3-42c1-ac31-bd8d8f1concentrate"],
                 "runner_kinds": ["RUNNER_KIND_UNSPECIFIED"],
+                "session_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "status_phases": ["ENVIRONMENT_PHASE_UNSPECIFIED"],
             },
             pagination={
