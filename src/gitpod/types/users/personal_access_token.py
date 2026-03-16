@@ -294,4 +294,10 @@ class PersonalAccessToken(BaseModel):
     to obtain a formatter capable of generating timestamps in this format.
     """
 
+    read_only: Optional[bool] = FieldInfo(alias="readOnly", default=None)
+    """
+    When true, the token can only be used for read operations. Mutations will be
+    denied at the data layer.
+    """
+
     user_id: Optional[str] = FieldInfo(alias="userId", default=None)
