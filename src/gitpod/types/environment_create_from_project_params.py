@@ -20,6 +20,12 @@ class EnvironmentCreateFromProjectParams(TypedDict, total=False):
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]
 
+    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
+    """
+    session_id is the ID of the session this environment belongs to. If empty, a new
+    session is created implicitly.
+    """
+
     spec: EnvironmentSpecParam
     """
     Spec is the configuration of the environment that's required for the runner to
