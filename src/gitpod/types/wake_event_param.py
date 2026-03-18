@@ -2,13 +2,33 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Dict, Union, Iterable
 from datetime import datetime
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["WakeEventParam", "Timer"]
+__all__ = ["WakeEventParam", "LoopRetrigger", "LoopRetriggerUnmetCondition", "Timer"]
+
+
+class LoopRetriggerUnmetCondition(TypedDict, total=False):
+    id: str
+
+    description: str
+
+    expression: str
+
+    iteration: int
+
+    max_iterations: Annotated[int, PropertyInfo(alias="maxIterations")]
+
+    reason: str
+
+
+class LoopRetrigger(TypedDict, total=False):
+    outputs: Dict[str, str]
+
+    unmet_conditions: Annotated[Iterable[LoopRetriggerUnmetCondition], PropertyInfo(alias="unmetConditions")]
 
 
 class Timer(TypedDict, total=False):
@@ -22,7 +42,9 @@ class WakeEventParam(TypedDict, total=False):
      Delivered via SendToAgentExecution as a new oneof variant.
     """
 
-    timer: Required[Timer]
-
     interest_id: Annotated[str, PropertyInfo(alias="interestId")]
     """The interest ID that fired (from WaitingInfo.Interest.id)."""
+
+    loop_retrigger: Annotated[LoopRetrigger, PropertyInfo(alias="loopRetrigger")]
+
+    timer: Timer
