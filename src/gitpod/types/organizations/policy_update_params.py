@@ -8,6 +8,7 @@ from typing_extensions import Required, Annotated, TypedDict
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from .veto_exec_policy_param import VetoExecPolicyParam
+from .conversation_sharing_policy import ConversationSharingPolicy
 
 __all__ = [
     "PolicyUpdateParams",
@@ -141,6 +142,11 @@ class AgentPolicy(TypedDict, total=False):
     command_deny_list contains a list of commands that agents are not allowed to
     execute
     """
+
+    conversation_sharing_policy: Annotated[
+        Optional[ConversationSharingPolicy], PropertyInfo(alias="conversationSharingPolicy")
+    ]
+    """conversation_sharing_policy controls whether agent conversations can be shared"""
 
     mcp_disabled: Annotated[Optional[bool], PropertyInfo(alias="mcpDisabled")]
     """
