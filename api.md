@@ -500,6 +500,7 @@ Types:
 ```python
 from gitpod.types.organizations import (
     AgentPolicy,
+    ConversationSharingPolicy,
     CrowdStrikeConfig,
     KernelControlsAction,
     OrganizationPolicies,

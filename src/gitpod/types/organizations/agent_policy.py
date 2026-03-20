@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .conversation_sharing_policy import ConversationSharingPolicy
 
 __all__ = ["AgentPolicy"]
 
@@ -29,6 +30,11 @@ class AgentPolicy(BaseModel):
     scm_tools_disabled controls whether SCM (Source Control Management) tools are
     disabled for agents
     """
+
+    conversation_sharing_policy: Optional[ConversationSharingPolicy] = FieldInfo(
+        alias="conversationSharingPolicy", default=None
+    )
+    """conversation_sharing_policy controls whether agent conversations can be shared"""
 
     scm_tools_allowed_group_id: Optional[str] = FieldInfo(alias="scmToolsAllowedGroupId", default=None)
     """

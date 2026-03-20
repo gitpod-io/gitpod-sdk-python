@@ -68,6 +68,7 @@ class TestPolicies:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
                 "command_deny_list": ["string"],
+                "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "mcp_disabled": True,
                 "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,
@@ -185,6 +186,7 @@ class TestAsyncPolicies:
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
                 "command_deny_list": ["string"],
+                "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "mcp_disabled": True,
                 "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,
