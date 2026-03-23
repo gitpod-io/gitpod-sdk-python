@@ -21,6 +21,7 @@ from gitpod.types import (
     AutomationListExecutionOutputsResponse,
     AutomationRetrieveExecutionActionResponse,
 )
+from gitpod._utils import parse_datetime
 from gitpod.pagination import (
     SyncOutputsPage,
     AsyncOutputsPage,
@@ -383,6 +384,7 @@ class TestAutomations:
             page_size=0,
             filter={
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "has_failed_execution_since": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "search": "search",
                 "status_phases": ["WORKFLOW_EXECUTION_PHASE_UNSPECIFIED"],
                 "workflow_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
@@ -1141,6 +1143,7 @@ class TestAsyncAutomations:
             page_size=0,
             filter={
                 "creator_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "has_failed_execution_since": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "search": "search",
                 "status_phases": ["WORKFLOW_EXECUTION_PHASE_UNSPECIFIED"],
                 "workflow_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
