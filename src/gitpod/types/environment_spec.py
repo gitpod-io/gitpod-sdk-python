@@ -21,6 +21,7 @@ __all__ = [
     "Machine",
     "Port",
     "Secret",
+    "SecretCredentialProxy",
     "SSHPublicKey",
     "Timeout",
 ]
@@ -132,6 +133,33 @@ class Port(BaseModel):
     """
 
 
+class SecretCredentialProxy(BaseModel):
+    """
+    credential_proxy configures transparent credential injection via the
+     credential proxy. When set, the credential proxy intercepts HTTPS
+     traffic to the target hosts and replaces the dummy secret value with
+     the real value in the specified HTTP header. The real secret value is
+     never exposed in the environment.
+     This field is orthogonal to mount — a secret can be both mounted (e.g.
+     as a git credential) and proxied at the same time.
+    """
+
+    format: Optional[Literal["FORMAT_UNSPECIFIED", "FORMAT_PLAIN", "FORMAT_BASE64"]] = None
+    """format describes how the secret value is encoded.
+
+    The proxy uses this to decode the value before injecting it into the header.
+    """
+
+    header: Optional[str] = None
+    """header is the HTTP header name to inject (e.g. "Authorization")."""
+
+    target_hosts: Optional[List[str]] = FieldInfo(alias="targetHosts", default=None)
+    """
+    target_hosts lists the hostnames to intercept (for example "github.com" or
+    "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
+    """
+
+
 class Secret(BaseModel):
     id: Optional[str] = None
     """id is the unique identifier of the secret."""
@@ -146,6 +174,16 @@ class Secret(BaseModel):
     """
     container_registry_basic_auth_host is the hostname of the container registry
     that supports basic auth
+    """
+
+    credential_proxy: Optional[SecretCredentialProxy] = FieldInfo(alias="credentialProxy", default=None)
+    """
+    credential_proxy configures transparent credential injection via the credential
+    proxy. When set, the credential proxy intercepts HTTPS traffic to the target
+    hosts and replaces the dummy secret value with the real value in the specified
+    HTTP header. The real secret value is never exposed in the environment. This
+    field is orthogonal to mount — a secret can be both mounted (e.g. as a git
+    credential) and proxied at the same time.
     """
 
     environment_variable: Optional[str] = FieldInfo(alias="environmentVariable", default=None)
