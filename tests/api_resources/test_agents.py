@@ -248,6 +248,7 @@ class TestAgents:
                 "is_command": True,
                 "is_skill": True,
                 "is_template": True,
+                "search": "search",
             },
             pagination={
                 "token": "token",
@@ -800,6 +801,7 @@ class TestAsyncAgents:
                 "is_command": True,
                 "is_skill": True,
                 "is_template": True,
+                "search": "search",
             },
             pagination={
                 "token": "token",
