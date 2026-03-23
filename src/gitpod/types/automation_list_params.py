@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
+from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
@@ -24,6 +25,17 @@ class AutomationListParams(TypedDict, total=False):
 class Filter(TypedDict, total=False):
     creator_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="creatorIds")]
     """creator_ids filters workflows by creator user IDs"""
+
+    has_failed_execution_since: Annotated[
+        Union[str, datetime], PropertyInfo(alias="hasFailedExecutionSince", format="iso8601")
+    ]
+    """
+    has_failed_execution_since filters workflows that have at least one failed
+    execution with create_time >= the specified timestamp. A failed execution is one
+    that is COMPLETED with failed_action_count > 0, or STOPPED with
+    failed_action_count > 0 or a non-empty failure_message. This filter is mutually
+    exclusive with status_phases.
+    """
 
     search: str
     """
