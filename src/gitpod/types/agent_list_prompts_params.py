@@ -37,6 +37,12 @@ class Filter(TypedDict, total=False):
 
     is_template: Annotated[bool, PropertyInfo(alias="isTemplate")]
 
+    search: str
+    """
+    search performs case-insensitive search across prompt name, description, and
+    command.
+    """
+
 
 class Pagination(TypedDict, total=False):
     token: str
