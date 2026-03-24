@@ -418,6 +418,8 @@ class PrebuildsResource(SyncAPIResource):
         environment_class_id: str,
         project_id: str,
         desired_size: int | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -457,7 +459,14 @@ class PrebuildsResource(SyncAPIResource):
           project_id: project_id specifies the project this warm pool belongs to. The project must
               have prebuilds enabled.
 
-          desired_size: desired_size is the number of warm instances to maintain.
+          desired_size: desired_size is the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size is the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size is the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 1 and <= max_size.
 
           extra_headers: Send extra headers
 
@@ -474,6 +483,8 @@ class PrebuildsResource(SyncAPIResource):
                     "environment_class_id": environment_class_id,
                     "project_id": project_id,
                     "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
                 },
                 prebuild_create_warm_pool_params.PrebuildCreateWarmPoolParams,
             ),
@@ -660,6 +671,8 @@ class PrebuildsResource(SyncAPIResource):
         *,
         warm_pool_id: str,
         desired_size: Optional[int] | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -684,7 +697,14 @@ class PrebuildsResource(SyncAPIResource):
         Args:
           warm_pool_id: warm_pool_id specifies the warm pool to update
 
-          desired_size: desired_size updates the number of warm instances to maintain.
+          desired_size: desired_size updates the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size updates the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size updates the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 1 and <= max_size.
 
           extra_headers: Send extra headers
 
@@ -700,6 +720,8 @@ class PrebuildsResource(SyncAPIResource):
                 {
                     "warm_pool_id": warm_pool_id,
                     "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
                 },
                 prebuild_update_warm_pool_params.PrebuildUpdateWarmPoolParams,
             ),
@@ -1085,6 +1107,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
         environment_class_id: str,
         project_id: str,
         desired_size: int | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1124,7 +1148,14 @@ class AsyncPrebuildsResource(AsyncAPIResource):
           project_id: project_id specifies the project this warm pool belongs to. The project must
               have prebuilds enabled.
 
-          desired_size: desired_size is the number of warm instances to maintain.
+          desired_size: desired_size is the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size is the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size is the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 1 and <= max_size.
 
           extra_headers: Send extra headers
 
@@ -1141,6 +1172,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
                     "environment_class_id": environment_class_id,
                     "project_id": project_id,
                     "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
                 },
                 prebuild_create_warm_pool_params.PrebuildCreateWarmPoolParams,
             ),
@@ -1327,6 +1360,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
         *,
         warm_pool_id: str,
         desired_size: Optional[int] | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1351,7 +1386,14 @@ class AsyncPrebuildsResource(AsyncAPIResource):
         Args:
           warm_pool_id: warm_pool_id specifies the warm pool to update
 
-          desired_size: desired_size updates the number of warm instances to maintain.
+          desired_size: desired_size updates the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size updates the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size updates the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 1 and <= max_size.
 
           extra_headers: Send extra headers
 
@@ -1367,6 +1409,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
                 {
                     "warm_pool_id": warm_pool_id,
                     "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
                 },
                 prebuild_update_warm_pool_params.PrebuildUpdateWarmPoolParams,
             ),
