@@ -20,7 +20,23 @@ class WarmPoolSpec(BaseModel):
     """
 
     desired_size: Optional[int] = FieldInfo(alias="desiredSize", default=None)
-    """desired_size is the number of warm instances to maintain."""
+    """
+    desired_size is the number of warm instances to maintain. Deprecated: Use
+    min_size and max_size instead for dynamic scaling. Existing pools will be
+    migrated to min_size=max_size=desired_size.
+    """
+
+    max_size: Optional[int] = FieldInfo(alias="maxSize", default=None)
+    """
+    max_size is the maximum number of warm instances to maintain. The pool will
+    never scale above this value. Must be >= min_size and <= 20.
+    """
+
+    min_size: Optional[int] = FieldInfo(alias="minSize", default=None)
+    """
+    min_size is the minimum number of warm instances to maintain. The pool will
+    never scale below this value. Must be >= 1 and <= max_size.
+    """
 
     snapshot_id: Optional[str] = FieldInfo(alias="snapshotId", default=None)
     """
