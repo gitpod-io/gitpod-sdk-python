@@ -50,7 +50,6 @@ class TestRunners:
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
-                        "managed_metrics_enabled": True,
                         "password": "password",
                         "url": "url",
                         "username": "username",
@@ -145,7 +144,6 @@ class TestRunners:
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
-                        "managed_metrics_enabled": True,
                         "password": "password",
                         "url": "url",
                         "username": "username",
@@ -559,7 +557,6 @@ class TestAsyncRunners:
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
-                        "managed_metrics_enabled": True,
                         "password": "password",
                         "url": "url",
                         "username": "username",
@@ -654,7 +651,6 @@ class TestAsyncRunners:
                     "log_level": "LOG_LEVEL_UNSPECIFIED",
                     "metrics": {
                         "enabled": True,
-                        "managed_metrics_enabled": True,
                         "password": "password",
                         "url": "url",
                         "username": "username",

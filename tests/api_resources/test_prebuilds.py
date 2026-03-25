@@ -280,7 +280,7 @@ class TestPrebuilds:
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             desired_size=2,
             max_size=1,
-            min_size=20,
+            min_size=1,
         )
         assert_matches_type(PrebuildCreateWarmPoolResponse, prebuild, path=["response"])
 
@@ -440,7 +440,7 @@ class TestPrebuilds:
             warm_pool_id="a1b2c3d4-5678-9abc-def0-1234567890ab",
             desired_size=5,
             max_size=1,
-            min_size=20,
+            min_size=1,
         )
         assert_matches_type(PrebuildUpdateWarmPoolResponse, prebuild, path=["response"])
 
@@ -728,7 +728,7 @@ class TestAsyncPrebuilds:
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             desired_size=2,
             max_size=1,
-            min_size=20,
+            min_size=1,
         )
         assert_matches_type(PrebuildCreateWarmPoolResponse, prebuild, path=["response"])
 
@@ -888,7 +888,7 @@ class TestAsyncPrebuilds:
             warm_pool_id="a1b2c3d4-5678-9abc-def0-1234567890ab",
             desired_size=5,
             max_size=1,
-            min_size=20,
+            min_size=1,
         )
         assert_matches_type(PrebuildUpdateWarmPoolResponse, prebuild, path=["response"])
 
