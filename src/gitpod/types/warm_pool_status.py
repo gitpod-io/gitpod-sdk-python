@@ -18,6 +18,13 @@ class WarmPoolStatus(BaseModel):
     phase: WarmPoolPhase
     """phase is the current phase of the warm pool lifecycle"""
 
+    desired_size: Optional[int] = FieldInfo(alias="desiredSize", default=None)
+    """
+    desired_size is the current target number of instances the autoscaler has
+    decided on. Unlike running_instances, this value is stable and does not
+    fluctuate as instances are claimed and backfilled.
+    """
+
     failure_message: Optional[str] = FieldInfo(alias="failureMessage", default=None)
     """failure_message contains details about why the warm pool is degraded or failed"""
 
