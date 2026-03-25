@@ -279,6 +279,8 @@ class TestPrebuilds:
             environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             desired_size=2,
+            max_size=1,
+            min_size=1,
         )
         assert_matches_type(PrebuildCreateWarmPoolResponse, prebuild, path=["response"])
 
@@ -437,6 +439,8 @@ class TestPrebuilds:
         prebuild = client.prebuilds.update_warm_pool(
             warm_pool_id="a1b2c3d4-5678-9abc-def0-1234567890ab",
             desired_size=5,
+            max_size=1,
+            min_size=1,
         )
         assert_matches_type(PrebuildUpdateWarmPoolResponse, prebuild, path=["response"])
 
@@ -723,6 +727,8 @@ class TestAsyncPrebuilds:
             environment_class_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             project_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             desired_size=2,
+            max_size=1,
+            min_size=1,
         )
         assert_matches_type(PrebuildCreateWarmPoolResponse, prebuild, path=["response"])
 
@@ -881,6 +887,8 @@ class TestAsyncPrebuilds:
         prebuild = await async_client.prebuilds.update_warm_pool(
             warm_pool_id="a1b2c3d4-5678-9abc-def0-1234567890ab",
             desired_size=5,
+            max_size=1,
+            min_size=1,
         )
         assert_matches_type(PrebuildUpdateWarmPoolResponse, prebuild, path=["response"])
 
