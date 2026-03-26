@@ -36,6 +36,13 @@ class AgentPolicy(BaseModel):
     )
     """conversation_sharing_policy controls whether agent conversations can be shared"""
 
+    max_subagents_per_environment: Optional[int] = FieldInfo(alias="maxSubagentsPerEnvironment", default=None)
+    """
+    max_subagents_per_environment limits the number of non-terminal sub-agents a
+    parent can have running simultaneously in the same environment. Valid range:
+    0-10. Zero means use the default (5).
+    """
+
     scm_tools_allowed_group_id: Optional[str] = FieldInfo(alias="scmToolsAllowedGroupId", default=None)
     """
     scm_tools_allowed_group_id restricts SCM tools access to members of this group.
