@@ -69,6 +69,7 @@ class TestPolicies:
             agent_policy={
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
+                "max_subagents_per_environment": 10,
                 "mcp_disabled": True,
                 "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,
@@ -187,6 +188,7 @@ class TestAsyncPolicies:
             agent_policy={
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
+                "max_subagents_per_environment": 10,
                 "mcp_disabled": True,
                 "scm_tools_allowed_group_id": "scmToolsAllowedGroupId",
                 "scm_tools_disabled": True,

@@ -148,6 +148,13 @@ class AgentPolicy(TypedDict, total=False):
     ]
     """conversation_sharing_policy controls whether agent conversations can be shared"""
 
+    max_subagents_per_environment: Annotated[Optional[int], PropertyInfo(alias="maxSubagentsPerEnvironment")]
+    """
+    max_subagents_per_environment limits the number of non-terminal sub-agents a
+    parent can have running simultaneously in the same environment. Valid range:
+    0-10. Zero means use the default (5).
+    """
+
     mcp_disabled: Annotated[Optional[bool], PropertyInfo(alias="mcpDisabled")]
     """
     mcp_disabled controls whether MCP (Model Context Protocol) is disabled for
