@@ -38,5 +38,6 @@ class PrebuildCreateWarmPoolParams(TypedDict, total=False):
     min_size: Annotated[Optional[int], PropertyInfo(alias="minSize")]
     """
     min_size is the minimum number of warm instances to maintain. The pool will
-    never scale below this value. Must be >= 1 and <= max_size.
+    never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+    full scale-down.
     """

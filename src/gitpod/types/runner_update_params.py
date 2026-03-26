@@ -33,6 +33,12 @@ class SpecConfigurationMetrics(TypedDict, total=False):
     enabled: Optional[bool]
     """enabled indicates whether the runner should collect metrics"""
 
+    managed_metrics_enabled: Annotated[Optional[bool], PropertyInfo(alias="managedMetricsEnabled")]
+    """
+    When true, the runner pushes metrics to the management plane via
+    ReportRunnerMetrics instead of directly to the remote_write endpoint.
+    """
+
     password: Optional[str]
     """password is the password to use for the metrics collector"""
 

@@ -466,7 +466,8 @@ class PrebuildsResource(SyncAPIResource):
               never scale above this value. Must be >= min_size and <= 20.
 
           min_size: min_size is the minimum number of warm instances to maintain. The pool will
-              never scale below this value. Must be >= 1 and <= max_size.
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
 
           extra_headers: Send extra headers
 
@@ -704,7 +705,8 @@ class PrebuildsResource(SyncAPIResource):
               never scale above this value. Must be >= min_size and <= 20.
 
           min_size: min_size updates the minimum number of warm instances to maintain. The pool will
-              never scale below this value. Must be >= 1 and <= max_size.
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
 
           extra_headers: Send extra headers
 
@@ -1155,7 +1157,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
               never scale above this value. Must be >= min_size and <= 20.
 
           min_size: min_size is the minimum number of warm instances to maintain. The pool will
-              never scale below this value. Must be >= 1 and <= max_size.
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
 
           extra_headers: Send extra headers
 
@@ -1393,7 +1396,8 @@ class AsyncPrebuildsResource(AsyncAPIResource):
               never scale above this value. Must be >= min_size and <= 20.
 
           min_size: min_size updates the minimum number of warm instances to maintain. The pool will
-              never scale below this value. Must be >= 1 and <= max_size.
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
 
           extra_headers: Send extra headers
 
