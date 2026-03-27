@@ -153,7 +153,9 @@ class GroupsResource(SyncAPIResource):
     def retrieve(
         self,
         *,
+        id: str | Omit = omit,
         group_id: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -162,7 +164,7 @@ class GroupsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GroupRetrieveResponse:
         """
-        Gets information about a specific group.
+        Gets information about a specific group by ID or name.
 
         Use this method to:
 
@@ -172,12 +174,12 @@ class GroupsResource(SyncAPIResource):
 
         ### Examples
 
-        - Get group details:
+        - Get group by ID:
 
-          Retrieves information about a specific group.
+          Retrieves information about a specific group by its unique ID.
 
           ```yaml
-          groupId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           ```
 
         ### Authorization
@@ -185,6 +187,12 @@ class GroupsResource(SyncAPIResource):
         All organization members can view group information (transparency model).
 
         Args:
+          id: id looks up the group by its unique ID.
+
+          group_id: Deprecated: use the group oneof instead.
+
+          name: name looks up the group by its name within the caller's organization.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -195,7 +203,14 @@ class GroupsResource(SyncAPIResource):
         """
         return self._post(
             "/gitpod.v1.GroupService/GetGroup",
-            body=maybe_transform({"group_id": group_id}, group_retrieve_params.GroupRetrieveParams),
+            body=maybe_transform(
+                {
+                    "id": id,
+                    "group_id": group_id,
+                    "name": name,
+                },
+                group_retrieve_params.GroupRetrieveParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -506,7 +521,9 @@ class AsyncGroupsResource(AsyncAPIResource):
     async def retrieve(
         self,
         *,
+        id: str | Omit = omit,
         group_id: str | Omit = omit,
+        name: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -515,7 +532,7 @@ class AsyncGroupsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> GroupRetrieveResponse:
         """
-        Gets information about a specific group.
+        Gets information about a specific group by ID or name.
 
         Use this method to:
 
@@ -525,12 +542,12 @@ class AsyncGroupsResource(AsyncAPIResource):
 
         ### Examples
 
-        - Get group details:
+        - Get group by ID:
 
-          Retrieves information about a specific group.
+          Retrieves information about a specific group by its unique ID.
 
           ```yaml
-          groupId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          id: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
           ```
 
         ### Authorization
@@ -538,6 +555,12 @@ class AsyncGroupsResource(AsyncAPIResource):
         All organization members can view group information (transparency model).
 
         Args:
+          id: id looks up the group by its unique ID.
+
+          group_id: Deprecated: use the group oneof instead.
+
+          name: name looks up the group by its name within the caller's organization.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -548,7 +571,14 @@ class AsyncGroupsResource(AsyncAPIResource):
         """
         return await self._post(
             "/gitpod.v1.GroupService/GetGroup",
-            body=await async_maybe_transform({"group_id": group_id}, group_retrieve_params.GroupRetrieveParams),
+            body=await async_maybe_transform(
+                {
+                    "id": id,
+                    "group_id": group_id,
+                    "name": name,
+                },
+                group_retrieve_params.GroupRetrieveParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

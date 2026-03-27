@@ -71,7 +71,9 @@ class TestGroups:
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.retrieve(
-            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            group_id="groupId",
+            name="xxx",
         )
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
@@ -147,7 +149,12 @@ class TestGroups:
         group = client.groups.list(
             token="token",
             page_size=0,
-            filter={"search": "search"},
+            filter={
+                "direct_share": True,
+                "group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+                "system_managed": True,
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -267,7 +274,9 @@ class TestAsyncGroups:
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.retrieve(
-            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            group_id="groupId",
+            name="xxx",
         )
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
@@ -343,7 +352,12 @@ class TestAsyncGroups:
         group = await async_client.groups.list(
             token="token",
             page_size=0,
-            filter={"search": "search"},
+            filter={
+                "direct_share": True,
+                "group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+                "system_managed": True,
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
