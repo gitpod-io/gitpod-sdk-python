@@ -502,6 +502,8 @@ from gitpod.types.organizations import (
     AgentPolicy,
     ConversationSharingPolicy,
     CrowdStrikeConfig,
+    CustomAgentEnvMapping,
+    CustomSecurityAgent,
     KernelControlsAction,
     OrganizationPolicies,
     SecurityAgentPolicy,
