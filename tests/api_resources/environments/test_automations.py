@@ -44,6 +44,7 @@ class TestAutomations:
                                 "image": "x",
                             },
                             "machine": {},
+                            "terminal": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -60,6 +61,7 @@ class TestAutomations:
                                 "image": "x",
                             },
                             "machine": {},
+                            "terminal": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }
@@ -124,6 +126,7 @@ class TestAsyncAutomations:
                                 "image": "x",
                             },
                             "machine": {},
+                            "terminal": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -140,6 +143,7 @@ class TestAsyncAutomations:
                                 "image": "x",
                             },
                             "machine": {},
+                            "terminal": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }
