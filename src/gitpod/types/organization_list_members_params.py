@@ -44,6 +44,12 @@ class Filter(TypedDict, total=False):
     groups
     """
 
+    exclude_members_in_any_team: Annotated[bool, PropertyInfo(alias="excludeMembersInAnyTeam")]
+    """
+    exclude_members_in_any_team excludes members who belong to any team in the
+    organization
+    """
+
     roles: List[OrganizationRole]
     """roles filters members by their organization role"""
 

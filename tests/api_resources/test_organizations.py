@@ -268,6 +268,7 @@ class TestOrganizations:
             page_size=0,
             filter={
                 "exclude_group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "exclude_members_in_any_team": True,
                 "roles": ["ORGANIZATION_ROLE_UNSPECIFIED"],
                 "search": "search",
                 "statuses": ["USER_STATUS_UNSPECIFIED"],
@@ -607,6 +608,7 @@ class TestAsyncOrganizations:
             page_size=0,
             filter={
                 "exclude_group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "exclude_members_in_any_team": True,
                 "roles": ["ORGANIZATION_ROLE_UNSPECIFIED"],
                 "search": "search",
                 "statuses": ["USER_STATUS_UNSPECIFIED"],
