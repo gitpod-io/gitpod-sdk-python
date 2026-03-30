@@ -393,6 +393,10 @@ class TestAutomations:
                 "token": "token",
                 "page_size": 100,
             },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
+            },
         )
         assert_matches_type(SyncWorkflowsPage[Workflow], automation, path=["response"])
 
@@ -1151,6 +1155,10 @@ class TestAsyncAutomations:
             pagination={
                 "token": "token",
                 "page_size": 100,
+            },
+            sort={
+                "field": "SORT_FIELD_UNSPECIFIED",
+                "order": "SORT_ORDER_UNSPECIFIED",
             },
         )
         assert_matches_type(AsyncWorkflowsPage[Workflow], automation, path=["response"])

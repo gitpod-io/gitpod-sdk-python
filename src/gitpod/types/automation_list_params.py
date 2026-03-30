@@ -8,8 +8,9 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .shared.sort_order import SortOrder
 
-__all__ = ["AutomationListParams", "Filter", "Pagination"]
+__all__ = ["AutomationListParams", "Filter", "Pagination", "Sort"]
 
 
 class AutomationListParams(TypedDict, total=False):
@@ -20,6 +21,12 @@ class AutomationListParams(TypedDict, total=False):
     filter: Filter
 
     pagination: Pagination
+
+    sort: Sort
+    """sort specifies the order of results.
+
+    When unspecified, results are sorted alphabetically by name ascending.
+    """
 
 
 class Filter(TypedDict, total=False):
@@ -79,3 +86,15 @@ class Pagination(TypedDict, total=False):
 
     Maximum 100.
     """
+
+
+class Sort(TypedDict, total=False):
+    """sort specifies the order of results.
+
+    When unspecified, results are sorted
+     alphabetically by name ascending.
+    """
+
+    field: Literal["SORT_FIELD_UNSPECIFIED", "SORT_FIELD_NAME", "SORT_FIELD_RECENTLY_COMPLETED"]
+
+    order: SortOrder

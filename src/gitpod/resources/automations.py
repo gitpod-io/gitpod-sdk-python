@@ -345,6 +345,7 @@ class AutomationsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: automation_list_params.Filter | Omit = omit,
         pagination: automation_list_params.Pagination | Omit = omit,
+        sort: automation_list_params.Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -352,10 +353,14 @@ class AutomationsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncWorkflowsPage[Workflow]:
-        """
-        ListWorkflows
+        """ListWorkflows
 
         Args:
+          sort: sort specifies the order of results.
+
+        When unspecified, results are sorted
+              alphabetically by name ascending.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -371,6 +376,7 @@ class AutomationsResource(SyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 automation_list_params.AutomationListParams,
             ),
@@ -1238,6 +1244,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: automation_list_params.Filter | Omit = omit,
         pagination: automation_list_params.Pagination | Omit = omit,
+        sort: automation_list_params.Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1245,10 +1252,14 @@ class AsyncAutomationsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Workflow, AsyncWorkflowsPage[Workflow]]:
-        """
-        ListWorkflows
+        """ListWorkflows
 
         Args:
+          sort: sort specifies the order of results.
+
+        When unspecified, results are sorted
+              alphabetically by name ascending.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1264,6 +1275,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 automation_list_params.AutomationListParams,
             ),
