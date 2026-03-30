@@ -30,6 +30,14 @@ class SSOConfigurationCreateParams(TypedDict, total=False):
     profile).
     """
 
+    claims_expression: Annotated[Optional[str], PropertyInfo(alias="claimsExpression")]
+    """
+    claims_expression is an optional CEL expression evaluated against OIDC token
+    claims during login. When set, the expression must evaluate to true for the
+    login to succeed. Example:
+    `claims.email_verified && claims.email.endsWith("@example.com")`
+    """
+
     display_name: Annotated[str, PropertyInfo(alias="displayName")]
 
     email_domain: Annotated[Optional[str], PropertyInfo(alias="emailDomain")]

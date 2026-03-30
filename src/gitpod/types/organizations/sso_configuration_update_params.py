@@ -27,6 +27,13 @@ class SSOConfigurationUpdateParams(TypedDict, total=False):
     claims: Dict[str, str]
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
 
+    claims_expression: Annotated[Optional[str], PropertyInfo(alias="claimsExpression")]
+    """
+    claims_expression is a CEL expression evaluated against OIDC token claims during
+    login. When set, the expression must evaluate to true for the login to succeed.
+    When present with an empty string, the expression is cleared.
+    """
+
     client_id: Annotated[Optional[str], PropertyInfo(alias="clientId")]
     """client_id is the client ID of the SSO provider"""
 
