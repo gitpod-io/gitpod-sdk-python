@@ -276,6 +276,7 @@ class TestAutomations:
                 ],
             },
             description="description",
+            disabled=True,
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "principal": "PRINCIPAL_UNSPECIFIED",
@@ -1039,6 +1040,7 @@ class TestAsyncAutomations:
                 ],
             },
             description="description",
+            disabled=True,
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "principal": "PRINCIPAL_UNSPECIFIED",

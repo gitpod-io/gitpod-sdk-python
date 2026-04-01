@@ -25,6 +25,13 @@ class AutomationUpdateParams(TypedDict, total=False):
     ```
     """
 
+    disabled: Optional[bool]
+    """When set, enables or disables the workflow.
+
+    A disabled workflow will not be triggered by any automatic trigger and manual
+    starts are rejected.
+    """
+
     executor: Optional[Subject]
 
     name: Optional[str]

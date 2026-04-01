@@ -216,6 +216,7 @@ class AutomationsResource(SyncAPIResource):
         *,
         action: Optional[WorkflowActionParam] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        disabled: Optional[bool] | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
         name: Optional[str] | Omit = omit,
         report: Optional[WorkflowActionParam] | Omit = omit,
@@ -294,6 +295,9 @@ class AutomationsResource(SyncAPIResource):
               size(this) <= 500
               ```
 
+          disabled: When set, enables or disables the workflow. A disabled workflow will not be
+              triggered by any automatic trigger and manual starts are rejected.
+
           name:
               Name must be between 1 and 80 characters:
 
@@ -324,6 +328,7 @@ class AutomationsResource(SyncAPIResource):
                 {
                     "action": action,
                     "description": description,
+                    "disabled": disabled,
                     "executor": executor,
                     "name": name,
                     "report": report,
@@ -1115,6 +1120,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
         *,
         action: Optional[WorkflowActionParam] | Omit = omit,
         description: Optional[str] | Omit = omit,
+        disabled: Optional[bool] | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
         name: Optional[str] | Omit = omit,
         report: Optional[WorkflowActionParam] | Omit = omit,
@@ -1193,6 +1199,9 @@ class AsyncAutomationsResource(AsyncAPIResource):
               size(this) <= 500
               ```
 
+          disabled: When set, enables or disables the workflow. A disabled workflow will not be
+              triggered by any automatic trigger and manual starts are rejected.
+
           name:
               Name must be between 1 and 80 characters:
 
@@ -1223,6 +1232,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
                 {
                     "action": action,
                     "description": description,
+                    "disabled": disabled,
                     "executor": executor,
                     "name": name,
                     "report": report,
