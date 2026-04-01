@@ -6,9 +6,19 @@ from typing import Dict, Union, Iterable
 from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
-__all__ = ["WakeEventParam", "LoopRetrigger", "LoopRetriggerUnmetCondition", "Timer"]
+__all__ = ["WakeEventParam", "Environment", "LoopRetrigger", "LoopRetriggerUnmetCondition", "Timer"]
+
+
+class Environment(TypedDict, total=False):
+    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
+
+    failure_message: Annotated[SequenceNotStr[str], PropertyInfo(alias="failureMessage")]
+
+    phase: str
+    """The phase the environment reached (e.g. "running", "stopped", "deleted")."""
 
 
 class LoopRetriggerUnmetCondition(TypedDict, total=False):
@@ -41,6 +51,8 @@ class WakeEventParam(TypedDict, total=False):
     WakeEvent is sent by the backend to wake an agent when a registered interest fires.
      Delivered via SendToAgentExecution as a new oneof variant.
     """
+
+    environment: Environment
 
     interest_id: Annotated[str, PropertyInfo(alias="interestId")]
     """The interest ID that fired (from WaitingInfo.Interest.id)."""
