@@ -385,6 +385,11 @@ class TestAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "environment": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                },
                 "interest_id": "interestId",
                 "loop_retrigger": {
                     "outputs": {"foo": "string"},
@@ -938,6 +943,11 @@ class TestAsyncAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "environment": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                },
                 "interest_id": "interestId",
                 "loop_retrigger": {
                     "outputs": {"foo": "string"},
