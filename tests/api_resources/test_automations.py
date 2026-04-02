@@ -66,27 +66,6 @@ class TestAutomations:
                             "draft": True,
                             "title": "title",
                         },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
-                        },
                         "task": {"command": "command"},
                     }
                 ],
@@ -111,27 +90,6 @@ class TestAutomations:
                             "description": "description",
                             "draft": True,
                             "title": "title",
-                        },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
                         },
                         "task": {"command": "command"},
                     }
@@ -250,27 +208,6 @@ class TestAutomations:
                             "draft": True,
                             "title": "title",
                         },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
-                        },
                         "task": {"command": "command"},
                     }
                 ],
@@ -296,27 +233,6 @@ class TestAutomations:
                             "description": "description",
                             "draft": True,
                             "title": "title",
-                        },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
                         },
                         "task": {"command": "command"},
                     }
@@ -830,27 +746,6 @@ class TestAsyncAutomations:
                             "draft": True,
                             "title": "title",
                         },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
-                        },
                         "task": {"command": "command"},
                     }
                 ],
@@ -875,27 +770,6 @@ class TestAsyncAutomations:
                             "description": "description",
                             "draft": True,
                             "title": "title",
-                        },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
                         },
                         "task": {"command": "command"},
                     }
@@ -1014,27 +888,6 @@ class TestAsyncAutomations:
                             "draft": True,
                             "title": "title",
                         },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
-                        },
                         "task": {"command": "command"},
                     }
                 ],
@@ -1060,27 +913,6 @@ class TestAsyncAutomations:
                             "description": "description",
                             "draft": True,
                             "title": "title",
-                        },
-                        "report": {
-                            "outputs": [
-                                {
-                                    "acceptance_criteria": "acceptanceCriteria",
-                                    "boolean": {},
-                                    "command": "command",
-                                    "float": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "integer": {
-                                        "max": 0,
-                                        "min": 0,
-                                    },
-                                    "key": "key",
-                                    "prompt": "prompt",
-                                    "string": {"pattern": "pattern"},
-                                    "title": "title",
-                                }
-                            ]
                         },
                         "task": {"command": "command"},
                     }
