@@ -8,6 +8,7 @@ from typing_extensions import Annotated, TypedDict
 from .._utils import PropertyInfo
 from .log_level import LogLevel
 from .runner_phase import RunnerPhase
+from .update_window_param import UpdateWindowParam
 from .runner_release_channel import RunnerReleaseChannel
 
 __all__ = ["RunnerUpdateParams", "Spec", "SpecConfiguration", "SpecConfigurationMetrics"]
@@ -31,6 +32,12 @@ class SpecConfigurationMetrics(TypedDict, total=False):
 
     enabled: Optional[bool]
     """enabled indicates whether the runner should collect metrics"""
+
+    managed_metrics_enabled: Annotated[Optional[bool], PropertyInfo(alias="managedMetricsEnabled")]
+    """
+    When true, the runner pushes metrics to the management plane via
+    ReportRunnerMetrics instead of directly to the remote_write endpoint.
+    """
 
     password: Optional[str]
     """password is the password to use for the metrics collector"""
@@ -60,6 +67,14 @@ class SpecConfiguration(TypedDict, total=False):
 
     release_channel: Annotated[Optional[RunnerReleaseChannel], PropertyInfo(alias="releaseChannel")]
     """The release channel the runner is on"""
+
+    update_window: Annotated[Optional[UpdateWindowParam], PropertyInfo(alias="updateWindow")]
+    """
+    update_window defines the daily time window (UTC) during which auto-updates are
+    allowed. start_hour is required. If end_hour is omitted, it defaults to
+    start_hour + 2. Send an empty UpdateWindow (no start_hour or end_hour) to clear
+    a custom window and allow updates at any time.
+    """
 
 
 class Spec(TypedDict, total=False):

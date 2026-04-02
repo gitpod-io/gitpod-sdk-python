@@ -8,6 +8,7 @@ from typing_extensions import Annotated, TypedDict
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .runner_kind import RunnerKind
+from .shared_params.sort import Sort
 
 __all__ = ["ProjectListParams", "Filter", "Pagination"]
 
@@ -21,6 +22,17 @@ class ProjectListParams(TypedDict, total=False):
 
     pagination: Pagination
     """pagination contains the pagination options for listing organizations"""
+
+    sort: Sort
+    """sort specifies the order of results. Defaults to popularity descending.
+
+    Supported fields:
+
+    - "id": Sort by project ID (UUID v7, effectively creation order). Produces a
+      stable, deterministic result set suitable for consistent pagination.
+    - "popularity": Sort by popularity — a precomputed score based on recent
+      environment creation activity. Updated periodically by a background job.
+    """
 
 
 class Filter(TypedDict, total=False):

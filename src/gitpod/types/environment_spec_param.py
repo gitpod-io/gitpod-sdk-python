@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .admission_level import AdmissionLevel
 from .environment_phase import EnvironmentPhase
@@ -21,6 +22,7 @@ __all__ = [
     "Machine",
     "Port",
     "Secret",
+    "SecretCredentialProxy",
     "SSHPublicKey",
     "Timeout",
 ]
@@ -139,6 +141,33 @@ class Port(TypedDict, total=False):
     """
 
 
+class SecretCredentialProxy(TypedDict, total=False):
+    """
+    credential_proxy configures transparent credential injection via the
+     credential proxy. When set, the credential proxy intercepts HTTPS
+     traffic to the target hosts and replaces the dummy secret value with
+     the real value in the specified HTTP header. The real secret value is
+     never exposed in the environment.
+     This field is orthogonal to mount — a secret can be both mounted (e.g.
+     as a git credential) and proxied at the same time.
+    """
+
+    format: Literal["FORMAT_UNSPECIFIED", "FORMAT_PLAIN", "FORMAT_BASE64"]
+    """format describes how the secret value is encoded.
+
+    The proxy uses this to decode the value before injecting it into the header.
+    """
+
+    header: str
+    """header is the HTTP header name to inject (e.g. "Authorization")."""
+
+    target_hosts: Annotated[SequenceNotStr[str], PropertyInfo(alias="targetHosts")]
+    """
+    target_hosts lists the hostnames to intercept (for example "github.com" or
+    "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
+    """
+
+
 class Secret(TypedDict, total=False):
     id: str
     """id is the unique identifier of the secret."""
@@ -153,6 +182,16 @@ class Secret(TypedDict, total=False):
     """
     container_registry_basic_auth_host is the hostname of the container registry
     that supports basic auth
+    """
+
+    credential_proxy: Annotated[SecretCredentialProxy, PropertyInfo(alias="credentialProxy")]
+    """
+    credential_proxy configures transparent credential injection via the credential
+    proxy. When set, the credential proxy intercepts HTTPS traffic to the target
+    hosts and replaces the dummy secret value with the real value in the specified
+    HTTP header. The real secret value is never exposed in the environment. This
+    field is orthogonal to mount — a secret can be both mounted (e.g. as a git
+    credential) and proxied at the same time.
     """
 
     environment_variable: Annotated[str, PropertyInfo(alias="environmentVariable")]
@@ -205,7 +244,12 @@ class Timeout(TypedDict, total=False):
     disconnected: str
     """
     inacitivity is the maximum time of disconnection before the environment is
-    stopped or paused. Minimum duration is 30 minutes. Set to 0 to disable.
+    stopped or paused. Minimum duration is 30 minutes. Set to 0 to disable. value
+    must be 0s (disabled) or at least 1800s (30 minutes):
+
+    ```
+    this == duration('0s') || this >= duration('1800s')
+    ```
     """
 
 

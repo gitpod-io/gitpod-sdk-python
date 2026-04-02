@@ -113,9 +113,6 @@ class OrganizationPolicies(BaseModel):
     of the editor
     """
 
-    executable_deny_list: Optional[VetoExecPolicy] = FieldInfo(alias="executableDenyList", default=None)
-    """executable_deny_list contains the veto exec policy for environments."""
-
     maximum_environment_lifetime: Optional[str] = FieldInfo(alias="maximumEnvironmentLifetime", default=None)
     """
     maximum_environment_lifetime controls for how long environments are allowed to
@@ -127,7 +124,12 @@ class OrganizationPolicies(BaseModel):
     """
     maximum_environment_timeout controls the maximum timeout allowed for
     environments in seconds. 0 means no limit (never). Minimum duration is 30
-    minutes (1800 seconds).
+    minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+    minutes):
+
+    ```
+    this == duration('0s') || this >= duration('1800s')
+    ```
     """
 
     security_agent_policy: Optional[SecurityAgentPolicy] = FieldInfo(alias="securityAgentPolicy", default=None)
@@ -136,3 +138,6 @@ class OrganizationPolicies(BaseModel):
     organization. When configured, security agents are automatically deployed to all
     environments.
     """
+
+    veto_exec_policy: Optional[VetoExecPolicy] = FieldInfo(alias="vetoExecPolicy", default=None)
+    """veto_exec_policy contains the veto exec policy for environments."""

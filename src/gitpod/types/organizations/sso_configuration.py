@@ -35,6 +35,15 @@ class SSOConfiguration(BaseModel):
     claims: Optional[Dict[str, str]] = None
     """claims are key/value pairs that defines a mapping of claims issued by the IdP."""
 
+    claims_expression: Optional[str] = FieldInfo(alias="claimsExpression", default=None)
+    """
+    claims_expression is a CEL (Common Expression Language) expression evaluated
+    against the OIDC token claims during login. When set, the expression must
+    evaluate to true for the login to succeed. The expression has access to a
+    `claims` variable containing all token claims as a map. Example:
+    `claims.email_verified && claims.email.endsWith("@example.com")`
+    """
+
     client_id: Optional[str] = FieldInfo(alias="clientId", default=None)
     """client_id is the client ID of the OIDC application set on the IdP"""
 

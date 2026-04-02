@@ -1,5 +1,103 @@
 # Changelog
 
+## 0.11.0 (2026-04-02)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* [backend/api] add backend search for group members ([0eb24b8](https://github.com/gitpod-io/gitpod-sdk-python/commit/0eb24b80e8a7b32ad08fbdd6e40fc3862b6545dc))
+* **api:** add acknowledge_token param to environments.start method ([19ce45f](https://github.com/gitpod-io/gitpod-sdk-python/commit/19ce45ff07385a58858da61619c35291b4bd93aa))
+* **api:** add agent_message parameter to agents.send_to_execution ([f7b21f6](https://github.com/gitpod-io/gitpod-sdk-python/commit/f7b21f6d4b9c54a12e4820b4a8226b751af0e7da))
+* **api:** add automations resource with workflows/executions/actions ([7cdce62](https://github.com/gitpod-io/gitpod-sdk-python/commit/7cdce62ead18e8383b8e6119e08361a62d9b653e))
+* **api:** add bpf_debug_level field to KernelControlsConfig ([d0cf7a4](https://github.com/gitpod-io/gitpod-sdk-python/commit/d0cf7a47fc5e68b96a40152ba8f26476da9ded02))
+* **api:** add claims_expression parameter to sso_configurations create and update ([d484eb4](https://github.com/gitpod-io/gitpod-sdk-python/commit/d484eb4c984711813f1adc0558c43e27eb1b05f0))
+* **api:** add conversation_sharing_policy field to agent_policy ([9b72125](https://github.com/gitpod-io/gitpod-sdk-python/commit/9b721252171aef850f1bb94db07aa5891d58429f))
+* **api:** add credential_proxy field to environment_spec Secret ([d8b5e78](https://github.com/gitpod-io/gitpod-sdk-python/commit/d8b5e78f0edc26a0548c701d73a07a349bc01423))
+* **api:** add custom security agents to organizations policies ([dd01263](https://github.com/gitpod-io/gitpod-sdk-python/commit/dd012637ab566c8fffc871f131dada3543ed63ac))
+* **api:** add desired_size field to WarmPoolStatus ([3c0ca3c](https://github.com/gitpod-io/gitpod-sdk-python/commit/3c0ca3c63cd9057f721011ecb5d052e2f7661666))
+* **api:** add disabled parameter to automations update method ([79b5f69](https://github.com/gitpod-io/gitpod-sdk-python/commit/79b5f6953e39db8117c22f295fe936d8d75a8963))
+* **api:** add environment field to WakeEventParam ([ff7eab3](https://github.com/gitpod-io/gitpod-sdk-python/commit/ff7eab324a5c44025a30a4379124577d1a28d972))
+* **api:** add exclude_prompt_content parameter to agents list_prompts method ([1b78cec](https://github.com/gitpod-io/gitpod-sdk-python/commit/1b78cecf7a623ad29c4d5cdfc8fe3a04a8d024c7))
+* **api:** add exclude_team_ids parameter to organization list members ([9e0a178](https://github.com/gitpod-io/gitpod-sdk-python/commit/9e0a17869e19e07581e7d4ca132e7f650951ced0))
+* **api:** add filter parameter to groups list method ([c21fcff](https://github.com/gitpod-io/gitpod-sdk-python/commit/c21fcff4e84363a6c73d54516afea8ab40c8f218))
+* **api:** add has_failed_execution_since filter parameter to automation list method ([1f306a1](https://github.com/gitpod-io/gitpod-sdk-python/commit/1f306a1429270a2697706e8c83e415da2d5d24c4))
+* **api:** add lockdown_at field to environment status ([6317ac9](https://github.com/gitpod-io/gitpod-sdk-python/commit/6317ac97e4de079d158a0839eea63b8b4f11825f))
+* **api:** add loop_conditions to agent execution, loop_retrigger to wake event, make timer optional ([e67d5fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/e67d5fe4134e45109e6430d546c27fe5a2bcb51b))
+* **api:** add managed_metrics_enabled field to metrics configuration ([b390afb](https://github.com/gitpod-io/gitpod-sdk-python/commit/b390afb75f2500b05b9f43c3c4a2bf41738365a5))
+* **api:** add max_subagents_per_environment field to organizations agent policy ([bce5c4d](https://github.com/gitpod-io/gitpod-sdk-python/commit/bce5c4d30e3ae15c463b2808647f81475a08c152))
+* **api:** add min_size/max_size parameters to prebuilds warm pool methods ([aeba614](https://github.com/gitpod-io/gitpod-sdk-python/commit/aeba614dff3dcea43e05a803609f2a61fd4981f2))
+* **api:** add notification resource type ([e5a82b6](https://github.com/gitpod-io/gitpod-sdk-python/commit/e5a82b65e794c60c223f1eaed16a3fcf54b8a8bc))
+* **api:** add organization_tier field to identity get_authenticated_identity response ([fb627da](https://github.com/gitpod-io/gitpod-sdk-python/commit/fb627dad41802c02ae02ba1621968be8423dd726))
+* **api:** add read_only field to PersonalAccessToken proto messages ([5b99de2](https://github.com/gitpod-io/gitpod-sdk-python/commit/5b99de2713301a27b6362837ca0acf2b63406188))
+* **api:** add Report boolean/float/integer/string schema types ([467c68f](https://github.com/gitpod-io/gitpod-sdk-python/commit/467c68fbcfccf85ecbadb0cc9f845000687fcf86))
+* **api:** add resource_ids to role assignments, restructure executable deny list in policies ([b30fc23](https://github.com/gitpod-io/gitpod-sdk-python/commit/b30fc2332c0d2f4c8267c00d15a2e0a3f43446ec))
+* **api:** add RESOURCE_ROLE_AGENT_EXECUTION_VIEWER to ResourceRole enum ([88048fd](https://github.com/gitpod-io/gitpod-sdk-python/commit/88048fda6787010a8db49ff53d65a964ba576fb0))
+* **api:** add RESOURCE_ROLE_ORG_AUDIT_LOG_READER to ResourceRole enum ([55549e9](https://github.com/gitpod-io/gitpod-sdk-python/commit/55549e977284c115c1b10b507d2a8865fac6a184))
+* **api:** add resource_type_filters parameter to events watch method ([141bcd4](https://github.com/gitpod-io/gitpod-sdk-python/commit/141bcd4c6c1255dbb2ea37838ea87239efa62c81))
+* **api:** add role and sender_execution_id fields to agent messages ([8cbc1ca](https://github.com/gitpod-io/gitpod-sdk-python/commit/8cbc1ca652eb9e2806555ca965d056f63c36dbd8))
+* **api:** add RUNNER_CAPABILITY_ASG_WARM_POOL to RunnerCapability type ([28f6118](https://github.com/gitpod-io/gitpod-sdk-python/commit/28f6118559d32a814b5a76e30feaba36a5295a45))
+* **api:** add RUNNER_CAPABILITY_WARM_POOL to runner_capability ([b058adf](https://github.com/gitpod-io/gitpod-sdk-python/commit/b058adf259789bb14f556f2c67b6f002fb654046))
+* **api:** add search parameter to agent list prompts filter ([9b809fa](https://github.com/gitpod-io/gitpod-sdk-python/commit/9b809fae3ff472e26446e122e3347ebaf6111548))
+* **api:** add SESSION_ADMIN and SESSION_USER roles to ResourceRole ([1fa7909](https://github.com/gitpod-io/gitpod-sdk-python/commit/1fa7909bd79fbd5f0d89724dd1ae14ac4ca79250))
+* **api:** add session_id parameter to agents start_execution, environments create ([50cf2eb](https://github.com/gitpod-io/gitpod-sdk-python/commit/50cf2eb8b5a932328c7ded80332171ed28ca4e43))
+* **api:** add session_id parameter to environments.create_from_project ([3c95ecc](https://github.com/gitpod-io/gitpod-sdk-python/commit/3c95ecc227bdbdeeb4a401deb59a53e7a1c5034d))
+* **api:** add session_ids filter to agents/environments list methods ([bbf9719](https://github.com/gitpod-io/gitpod-sdk-python/commit/bbf9719b7c47ed7cbe57211ef1da14e8b11aecc3))
+* **api:** add snapshot_size_bytes field to PrebuildStatus ([c0764ca](https://github.com/gitpod-io/gitpod-sdk-python/commit/c0764ca0574ab440cad5fb732ca8076d11346e5e))
+* **api:** add SONNET_4_6 model variants to agent_execution Status ([e87f54b](https://github.com/gitpod-io/gitpod-sdk-python/commit/e87f54b36e2913913125398b6e36223c795b9562))
+* **api:** add sort option to ListAuditLogs ([19af3c6](https://github.com/gitpod-io/gitpod-sdk-python/commit/19af3c6ad9ba8ae3ca8605b26195fc27f8810d5f))
+* **api:** add sort parameter to projects list, SortOrder/SortParam types ([fada768](https://github.com/gitpod-io/gitpod-sdk-python/commit/fada768b6dbe0721d4e6d93dca8ff2d6dc44f648))
+* **api:** add SUPPORTED_MODEL_HAIKU_4_5 to agent_execution Status enum ([85c063b](https://github.com/gitpod-io/gitpod-sdk-python/commit/85c063b47e0cc8875f1b3c2a2d17c386fea76df4))
+* **api:** add team admin and viewer roles to ResourceRole ([85b0437](https://github.com/gitpod-io/gitpod-sdk-python/commit/85b043796677897ef9ea8f5d92c129b515107890))
+* **api:** add terminal field to RunsOn ([63ac31a](https://github.com/gitpod-io/gitpod-sdk-python/commit/63ac31aac183b0e174ef0d646ee8ccb8bf77f567))
+* **api:** add time range filters to event list method ([c89b37e](https://github.com/gitpod-io/gitpod-sdk-python/commit/c89b37ec3240396215fba5b77b19c29ae598da2e))
+* **api:** add update_window field to runner configuration ([97caa20](https://github.com/gitpod-io/gitpod-sdk-python/commit/97caa205330f086839652d16e76067d603058923))
+* **api:** add wake_event parameter to agents send_to_execution method ([893e4b3](https://github.com/gitpod-io/gitpod-sdk-python/commit/893e4b37b75000dee0b99a0e82fe5c62a2732dd5))
+* **api:** add warm pool methods to prebuilds ([68b693f](https://github.com/gitpod-io/gitpod-sdk-python/commit/68b693fe0134ac6df5aa06f7cc9409c15c9308a5))
+* **api:** remove acknowledge_token parameter from environments.start ([340b6f2](https://github.com/gitpod-io/gitpod-sdk-python/commit/340b6f28ae6fa15ea3955d10720dcd44a6e85651))
+* **backend/api,dashboard:** add server-side `recentlyCompleted` sort for `ListWorkflows` ([2d1ab67](https://github.com/gitpod-io/gitpod-sdk-python/commit/2d1ab675f63a20c402547a310de3cb77a19cb5a3))
+* **internal:** implement indices array format for query and form serialization ([0829d27](https://github.com/gitpod-io/gitpod-sdk-python/commit/0829d27d4928a9affd3cefb0431cd176d40e895b))
+* **types:** add CountResponseRelation enum type ([c5c6a3a](https://github.com/gitpod-io/gitpod-sdk-python/commit/c5c6a3a85b17dafe0bb879d42eb671f4601718b7))
+
+
+### Bug Fixes
+
+* **api:** rename executable_deny_list to veto_exec_policy in policies update ([8e6e434](https://github.com/gitpod-io/gitpod-sdk-python/commit/8e6e434949910725dcf3e0919e57f2f748acff15))
+* **deps:** bump minimum typing-extensions version ([b542172](https://github.com/gitpod-io/gitpod-sdk-python/commit/b5421722237c860dbdf5a3490d13a8107ebf7849))
+* **pydantic:** do not pass `by_alias` unless set ([f686038](https://github.com/gitpod-io/gitpod-sdk-python/commit/f6860389cff61faf455dc2a5ec96e85c88553ac3))
+* sanitize endpoint path params ([89ccb9f](https://github.com/gitpod-io/gitpod-sdk-python/commit/89ccb9fe65cfb3c88e0ec2910809cb44bbc9e905))
+* **types:** remove AGENT_EXECUTION values from Principal and ResourceRole enums ([36adf59](https://github.com/gitpod-io/gitpod-sdk-python/commit/36adf596f84d9ea0063185d7ade2ff5b4c723fb6))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([f958013](https://github.com/gitpod-io/gitpod-sdk-python/commit/f9580134a7bdbfbff1b67ee3d01f2868e839c502))
+* **ci:** skip uploading artifacts on stainless-internal branches ([6955303](https://github.com/gitpod-io/gitpod-sdk-python/commit/69553031de097820152f561c7e300eceb8756df1))
+* **docs:** add missing descriptions ([c10fa2e](https://github.com/gitpod-io/gitpod-sdk-python/commit/c10fa2e60f87bc25f37efa9923ebaac979abe6dd))
+* **internal:** add request options to SSE classes ([17c6632](https://github.com/gitpod-io/gitpod-sdk-python/commit/17c6632b21cdf3fb082f74a6a3823cb210aa1757))
+* **internal:** make `test_proxy_environment_variables` more resilient ([b5ee95d](https://github.com/gitpod-io/gitpod-sdk-python/commit/b5ee95d7dcc5a9da2ed73af7a7f896dd56c5b4a4))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([2520d14](https://github.com/gitpod-io/gitpod-sdk-python/commit/2520d14755b2be28dbb6b4335438482aca97a794))
+* **internal:** move CountResponseRelation type to shared module ([641a91c](https://github.com/gitpod-io/gitpod-sdk-python/commit/641a91ccea854113f3d9ccea80ba22c2f82cad76))
+* **internal:** regenerate SDK with no functional changes ([29406ce](https://github.com/gitpod-io/gitpod-sdk-python/commit/29406ce71a9aebfdc494ede23fa27b8023707288))
+* **internal:** regenerate SDK with no functional changes ([22a7994](https://github.com/gitpod-io/gitpod-sdk-python/commit/22a7994b31d182bcdf03b2536fb0ad4c37e083fe))
+* **internal:** regenerate SDK with no functional changes ([db63d58](https://github.com/gitpod-io/gitpod-sdk-python/commit/db63d58f926e9cb9c154c7d93720675c8876c653))
+* **internal:** regenerate SDK with no functional changes ([d2529cf](https://github.com/gitpod-io/gitpod-sdk-python/commit/d2529cf9d3459f75411c550c0ae80a8a45cd8b4a))
+* **internal:** regenerate SDK with no functional changes ([ca2f283](https://github.com/gitpod-io/gitpod-sdk-python/commit/ca2f283e1a7b4be40e7fe8da7c786b6270dc113e))
+* **internal:** remove mock server code ([3c5deb3](https://github.com/gitpod-io/gitpod-sdk-python/commit/3c5deb354f3c5059bac0bb2b50c288a7b40e2b7f))
+* **internal:** tweak CI branches ([a7682f4](https://github.com/gitpod-io/gitpod-sdk-python/commit/a7682f4adc078236c5f7dba3806f533f76aaa814))
+* **internal:** update gitignore ([43b2843](https://github.com/gitpod-io/gitpod-sdk-python/commit/43b28435b681f621d65390a3dc31e46db1a6ccb6))
+* **internal:** update jsonl tests ([6d2b499](https://github.com/gitpod-io/gitpod-sdk-python/commit/6d2b4990c73692b942ae02d99577c119bd6a8b18))
+* **test:** update skip reason message ([49175f9](https://github.com/gitpod-io/gitpod-sdk-python/commit/49175f922aa977681c528dc55920562433fcaaee))
+* update mock server docs ([cef4896](https://github.com/gitpod-io/gitpod-sdk-python/commit/cef48965ac676afcc1adde238fc0a59c85ed0dac))
+
+
+### Documentation
+
+* **api:** add validation examples to timeout fields in policies/environments ([8ae9d6c](https://github.com/gitpod-io/gitpod-sdk-python/commit/8ae9d6cc242c17a4e608c289c34bfe0a1814ffb2))
+* **api:** update annotations parameter examples in agents ([83d8cd3](https://github.com/gitpod-io/gitpod-sdk-python/commit/83d8cd363ceed43f1da66fe22ad6e766a987095a))
+* **api:** update filter descriptions in groups role_assignment_list_params ([daf1ad5](https://github.com/gitpod-io/gitpod-sdk-python/commit/daf1ad5c2b42f7851566d8c32f5dda6f9313dd53))
+* **api:** update min_size parameter docs in prebuilds warm pool methods ([ffe05fc](https://github.com/gitpod-io/gitpod-sdk-python/commit/ffe05fc8aeaab3a5128a5ebd469564b317777eca))
+
 ## 0.10.0 (2026-02-18)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.9.0...v0.10.0)

@@ -23,13 +23,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestGroups:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         group = client.groups.create()
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.create(
@@ -39,7 +39,7 @@ class TestGroups:
         )
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.create()
@@ -49,7 +49,7 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.create() as response:
@@ -61,21 +61,23 @@ class TestGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         group = client.groups.retrieve()
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.retrieve(
-            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            group_id="groupId",
+            name="xxx",
         )
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.retrieve()
@@ -85,7 +87,7 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.retrieve() as response:
@@ -97,13 +99,13 @@ class TestGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         group = client.groups.update()
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.update(
@@ -113,7 +115,7 @@ class TestGroups:
         )
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.update()
@@ -123,7 +125,7 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.update() as response:
@@ -135,18 +137,24 @@ class TestGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         group = client.groups.list()
         assert_matches_type(SyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.list(
             token="token",
             page_size=0,
+            filter={
+                "direct_share": True,
+                "group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+                "system_managed": True,
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -154,7 +162,7 @@ class TestGroups:
         )
         assert_matches_type(SyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.list()
@@ -164,7 +172,7 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(SyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.list() as response:
@@ -176,13 +184,13 @@ class TestGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         group = client.groups.delete()
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_with_all_params(self, client: Gitpod) -> None:
         group = client.groups.delete(
@@ -190,7 +198,7 @@ class TestGroups:
         )
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.groups.with_raw_response.delete()
@@ -200,7 +208,7 @@ class TestGroups:
         group = response.parse()
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.groups.with_streaming_response.delete() as response:
@@ -218,13 +226,13 @@ class TestAsyncGroups:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.create()
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.create(
@@ -234,7 +242,7 @@ class TestAsyncGroups:
         )
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.create()
@@ -244,7 +252,7 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(GroupCreateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.create() as response:
@@ -256,21 +264,23 @@ class TestAsyncGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.retrieve()
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.retrieve(
-            group_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            group_id="groupId",
+            name="xxx",
         )
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.retrieve()
@@ -280,7 +290,7 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(GroupRetrieveResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.retrieve() as response:
@@ -292,13 +302,13 @@ class TestAsyncGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.update()
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.update(
@@ -308,7 +318,7 @@ class TestAsyncGroups:
         )
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.update()
@@ -318,7 +328,7 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(GroupUpdateResponse, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.update() as response:
@@ -330,18 +340,24 @@ class TestAsyncGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.list()
         assert_matches_type(AsyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.list(
             token="token",
             page_size=0,
+            filter={
+                "direct_share": True,
+                "group_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+                "search": "search",
+                "system_managed": True,
+            },
             pagination={
                 "token": "token",
                 "page_size": 20,
@@ -349,7 +365,7 @@ class TestAsyncGroups:
         )
         assert_matches_type(AsyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.list()
@@ -359,7 +375,7 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(AsyncGroupsPage[Group], group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.list() as response:
@@ -371,13 +387,13 @@ class TestAsyncGroups:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.delete()
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_with_all_params(self, async_client: AsyncGitpod) -> None:
         group = await async_client.groups.delete(
@@ -385,7 +401,7 @@ class TestAsyncGroups:
         )
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.groups.with_raw_response.delete()
@@ -395,7 +411,7 @@ class TestAsyncGroups:
         group = await response.parse()
         assert_matches_type(object, group, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.groups.with_streaming_response.delete() as response:

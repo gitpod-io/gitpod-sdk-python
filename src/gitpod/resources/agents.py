@@ -36,6 +36,8 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.prompt import Prompt
 from ..types.agent_mode import AgentMode
 from ..types.agent_execution import AgentExecution
+from ..types.wake_event_param import WakeEventParam
+from ..types.agent_message_param import AgentMessageParam
 from ..types.user_input_block_param import UserInputBlockParam
 from ..types.agent_code_context_param import AgentCodeContextParam
 from ..types.agent_create_prompt_response import AgentCreatePromptResponse
@@ -483,7 +485,9 @@ class AgentsResource(SyncAPIResource):
         self,
         *,
         agent_execution_id: str | Omit = omit,
+        agent_message: AgentMessageParam | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
+        wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -510,6 +514,12 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
+          agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
+              child agent execution, or vice versa).
+
+          wake_event: WakeEvent is sent by the backend to wake an agent when a registered interest
+              fires. Delivered via SendToAgentExecution as a new oneof variant.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -523,7 +533,9 @@ class AgentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "agent_execution_id": agent_execution_id,
+                    "agent_message": agent_message,
                     "user_input": user_input,
+                    "wake_event": wake_event,
                 },
                 agent_send_to_execution_params.AgentSendToExecutionParams,
             ),
@@ -542,6 +554,7 @@ class AgentsResource(SyncAPIResource):
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         workflow_action_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -568,9 +581,9 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
-          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+          annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
-              (e.g., "linear.app/session-id").
+              (e.g., "agent-client-session/id").
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
@@ -578,6 +591,9 @@ class AgentsResource(SyncAPIResource):
           runner_id: runner_id specifies a runner for this agent execution. When set, the agent
               execution is routed to this runner instead of the runner associated with the
               environment.
+
+          session_id: session_id is the ID of the session this agent execution belongs to. If empty, a
+              new session is created implicitly.
 
           workflow_action_id: workflow_action_id is an optional reference to the workflow execution action
               that created this agent execution. Used for tracking and event correlation.
@@ -600,6 +616,7 @@ class AgentsResource(SyncAPIResource):
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
+                    "session_id": session_id,
                     "workflow_action_id": workflow_action_id,
                 },
                 agent_start_execution_params.AgentStartExecutionParams,
@@ -1149,7 +1166,9 @@ class AsyncAgentsResource(AsyncAPIResource):
         self,
         *,
         agent_execution_id: str | Omit = omit,
+        agent_message: AgentMessageParam | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
+        wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1176,6 +1195,12 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
+          agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
+              child agent execution, or vice versa).
+
+          wake_event: WakeEvent is sent by the backend to wake an agent when a registered interest
+              fires. Delivered via SendToAgentExecution as a new oneof variant.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1189,7 +1214,9 @@ class AsyncAgentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "agent_execution_id": agent_execution_id,
+                    "agent_message": agent_message,
                     "user_input": user_input,
+                    "wake_event": wake_event,
                 },
                 agent_send_to_execution_params.AgentSendToExecutionParams,
             ),
@@ -1208,6 +1235,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         workflow_action_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1234,9 +1262,9 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
-          annotations: annotations are key-value pairs for tracking external context (e.g., Linear
+          annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
-              (e.g., "linear.app/session-id").
+              (e.g., "agent-client-session/id").
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
@@ -1244,6 +1272,9 @@ class AsyncAgentsResource(AsyncAPIResource):
           runner_id: runner_id specifies a runner for this agent execution. When set, the agent
               execution is routed to this runner instead of the runner associated with the
               environment.
+
+          session_id: session_id is the ID of the session this agent execution belongs to. If empty, a
+              new session is created implicitly.
 
           workflow_action_id: workflow_action_id is an optional reference to the workflow execution action
               that created this agent execution. Used for tracking and event correlation.
@@ -1266,6 +1297,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
+                    "session_id": session_id,
                     "workflow_action_id": workflow_action_id,
                 },
                 agent_start_execution_params.AgentStartExecutionParams,

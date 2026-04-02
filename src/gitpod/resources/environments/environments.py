@@ -92,6 +92,7 @@ class EnvironmentsResource(SyncAPIResource):
         self,
         *,
         name: Optional[str] | Omit = omit,
+        session_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -168,6 +169,9 @@ class EnvironmentsResource(SyncAPIResource):
           name: name is a user-defined identifier for the environment. If not specified, the
               system will generate a name.
 
+          session_id: session_id is the ID of the session this environment belongs to. If empty, a new
+              session is created implicitly.
+
           spec: spec is the configuration of the environment that's required for the to start
               the environment
 
@@ -184,6 +188,7 @@ class EnvironmentsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "name": name,
+                    "session_id": session_id,
                     "spec": spec,
                 },
                 environment_create_params.EnvironmentCreateParams,
@@ -561,6 +566,7 @@ class EnvironmentsResource(SyncAPIResource):
         *,
         name: Optional[str] | Omit = omit,
         project_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -605,6 +611,9 @@ class EnvironmentsResource(SyncAPIResource):
           name: name is a user-defined identifier for the environment. If not specified, the
               system will generate a name.
 
+          session_id: session_id is the ID of the session this environment belongs to. If empty, a new
+              session is created implicitly.
+
           spec: Spec is the configuration of the environment that's required for the runner to
               start the environment Configuration already defined in the Project will override
               parts of the spec, if set
@@ -623,6 +632,7 @@ class EnvironmentsResource(SyncAPIResource):
                 {
                     "name": name,
                     "project_id": project_id,
+                    "session_id": session_id,
                     "spec": spec,
                 },
                 environment_create_from_project_params.EnvironmentCreateFromProjectParams,
@@ -921,6 +931,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         self,
         *,
         name: Optional[str] | Omit = omit,
+        session_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -997,6 +1008,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           name: name is a user-defined identifier for the environment. If not specified, the
               system will generate a name.
 
+          session_id: session_id is the ID of the session this environment belongs to. If empty, a new
+              session is created implicitly.
+
           spec: spec is the configuration of the environment that's required for the to start
               the environment
 
@@ -1013,6 +1027,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "name": name,
+                    "session_id": session_id,
                     "spec": spec,
                 },
                 environment_create_params.EnvironmentCreateParams,
@@ -1390,6 +1405,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
         *,
         name: Optional[str] | Omit = omit,
         project_id: str | Omit = omit,
+        session_id: str | Omit = omit,
         spec: EnvironmentSpecParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1434,6 +1450,9 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
           name: name is a user-defined identifier for the environment. If not specified, the
               system will generate a name.
 
+          session_id: session_id is the ID of the session this environment belongs to. If empty, a new
+              session is created implicitly.
+
           spec: Spec is the configuration of the environment that's required for the runner to
               start the environment Configuration already defined in the Project will override
               parts of the spec, if set
@@ -1452,6 +1471,7 @@ class AsyncEnvironmentsResource(AsyncAPIResource):
                 {
                     "name": name,
                     "project_id": project_id,
+                    "session_id": session_id,
                     "spec": spec,
                 },
                 environment_create_from_project_params.EnvironmentCreateFromProjectParams,

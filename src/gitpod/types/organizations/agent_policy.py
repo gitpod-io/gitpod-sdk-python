@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .conversation_sharing_policy import ConversationSharingPolicy
 
 __all__ = ["AgentPolicy"]
 
@@ -28,6 +29,18 @@ class AgentPolicy(BaseModel):
     """
     scm_tools_disabled controls whether SCM (Source Control Management) tools are
     disabled for agents
+    """
+
+    conversation_sharing_policy: Optional[ConversationSharingPolicy] = FieldInfo(
+        alias="conversationSharingPolicy", default=None
+    )
+    """conversation_sharing_policy controls whether agent conversations can be shared"""
+
+    max_subagents_per_environment: Optional[int] = FieldInfo(alias="maxSubagentsPerEnvironment", default=None)
+    """
+    max_subagents_per_environment limits the number of non-terminal sub-agents a
+    parent can have running simultaneously in the same environment. Valid range:
+    0-10. Zero means use the default (5).
     """
 
     scm_tools_allowed_group_id: Optional[str] = FieldInfo(alias="scmToolsAllowedGroupId", default=None)

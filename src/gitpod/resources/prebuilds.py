@@ -12,7 +12,12 @@ from ..types import (
     prebuild_create_params,
     prebuild_delete_params,
     prebuild_retrieve_params,
+    prebuild_list_warm_pools_params,
+    prebuild_create_warm_pool_params,
+    prebuild_delete_warm_pool_params,
+    prebuild_update_warm_pool_params,
     prebuild_create_logs_token_params,
+    prebuild_retrieve_warm_pool_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
@@ -24,19 +29,28 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncPrebuildsPage, AsyncPrebuildsPage
+from ..pagination import SyncPrebuildsPage, SyncWarmPoolsPage, AsyncPrebuildsPage, AsyncWarmPoolsPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.prebuild import Prebuild
+from ..types.warm_pool import WarmPool
 from ..types.prebuild_spec_param import PrebuildSpecParam
 from ..types.prebuild_cancel_response import PrebuildCancelResponse
 from ..types.prebuild_create_response import PrebuildCreateResponse
 from ..types.prebuild_retrieve_response import PrebuildRetrieveResponse
+from ..types.prebuild_create_warm_pool_response import PrebuildCreateWarmPoolResponse
+from ..types.prebuild_update_warm_pool_response import PrebuildUpdateWarmPoolResponse
 from ..types.prebuild_create_logs_token_response import PrebuildCreateLogsTokenResponse
+from ..types.prebuild_retrieve_warm_pool_response import PrebuildRetrieveWarmPoolResponse
 
 __all__ = ["PrebuildsResource", "AsyncPrebuildsResource"]
 
 
 class PrebuildsResource(SyncAPIResource):
+    """
+    PrebuildService manages prebuilds for projects to enable faster environment startup times.
+     Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+    """
+
     @cached_property
     def with_raw_response(self) -> PrebuildsResourceWithRawResponse:
         """
@@ -398,8 +412,334 @@ class PrebuildsResource(SyncAPIResource):
             cast_to=PrebuildCreateLogsTokenResponse,
         )
 
+    def create_warm_pool(
+        self,
+        *,
+        environment_class_id: str,
+        project_id: str,
+        desired_size: int | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildCreateWarmPoolResponse:
+        """
+        Creates a warm pool for a project and environment class.
+
+        A warm pool maintains pre-created environment instances from a prebuild snapshot
+        so that new environments can start near-instantly.
+
+        Only one warm pool is allowed per <project, environment_class> pair. The
+        environment class must have prebuilds enabled on the project.
+
+        The pool's snapshot is managed automatically: when a new prebuild completes for
+        the same project and environment class, the pool's snapshot is updated and the
+        runner rotates instances.
+
+        ### Examples
+
+        - Create warm pool:
+
+          Creates a warm pool with 2 instances for a project and environment class.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          desiredSize: 2
+          ```
+
+        Args:
+          environment_class_id: environment_class_id specifies which environment class to warm. Must be listed
+              in the project's prebuild configuration environment_class_ids.
+
+          project_id: project_id specifies the project this warm pool belongs to. The project must
+              have prebuilds enabled.
+
+          desired_size: desired_size is the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size is the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size is the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.PrebuildService/CreateWarmPool",
+            body=maybe_transform(
+                {
+                    "environment_class_id": environment_class_id,
+                    "project_id": project_id,
+                    "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
+                },
+                prebuild_create_warm_pool_params.PrebuildCreateWarmPoolParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildCreateWarmPoolResponse,
+        )
+
+    def delete_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Deletes a warm pool.
+
+        Deletion is processed asynchronously.
+
+        The pool is marked for deletion and the
+        runner drains instances in the background.
+
+        Warm pools are also automatically deleted when prebuilds are disabled on the
+        project or the environment class is removed from the prebuild configuration.
+
+        ### Examples
+
+        - Delete warm pool:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to delete
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.PrebuildService/DeleteWarmPool",
+            body=maybe_transform(
+                {"warm_pool_id": warm_pool_id}, prebuild_delete_warm_pool_params.PrebuildDeleteWarmPoolParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    def list_warm_pools(
+        self,
+        *,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: prebuild_list_warm_pools_params.Filter | Omit = omit,
+        pagination: prebuild_list_warm_pools_params.Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> SyncWarmPoolsPage[WarmPool]:
+        """
+        Lists warm pools with optional filtering.
+
+        Use this method to:
+
+        - View all warm pools for a project
+        - Monitor warm pool status across environment classes
+
+        ### Examples
+
+        - List warm pools for a project:
+
+          ```yaml
+          filter:
+            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
+          ```
+
+        Args:
+          filter: filter contains the filter options for listing warm pools
+
+          pagination: pagination contains the pagination options for listing warm pools
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/gitpod.v1.PrebuildService/ListWarmPools",
+            page=SyncWarmPoolsPage[WarmPool],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                prebuild_list_warm_pools_params.PrebuildListWarmPoolsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    prebuild_list_warm_pools_params.PrebuildListWarmPoolsParams,
+                ),
+            ),
+            model=WarmPool,
+            method="post",
+        )
+
+    def retrieve_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildRetrieveWarmPoolResponse:
+        """
+        Gets details about a specific warm pool.
+
+        Use this method to:
+
+        - Check warm pool status and phase
+        - View the current snapshot being warmed
+        - Monitor pool health
+
+        ### Examples
+
+        - Get warm pool:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to retrieve
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.PrebuildService/GetWarmPool",
+            body=maybe_transform(
+                {"warm_pool_id": warm_pool_id}, prebuild_retrieve_warm_pool_params.PrebuildRetrieveWarmPoolParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildRetrieveWarmPoolResponse,
+        )
+
+    def update_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        desired_size: Optional[int] | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildUpdateWarmPoolResponse:
+        """
+        Updates a warm pool's configuration.
+
+        Use this method to change the desired pool size.
+
+        ### Examples
+
+        - Update pool size:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          desiredSize: 5
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to update
+
+          desired_size: desired_size updates the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size updates the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size updates the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.PrebuildService/UpdateWarmPool",
+            body=maybe_transform(
+                {
+                    "warm_pool_id": warm_pool_id,
+                    "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
+                },
+                prebuild_update_warm_pool_params.PrebuildUpdateWarmPoolParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildUpdateWarmPoolResponse,
+        )
+
 
 class AsyncPrebuildsResource(AsyncAPIResource):
+    """
+    PrebuildService manages prebuilds for projects to enable faster environment startup times.
+     Prebuilds create snapshots of environments that can be used to provision new environments quickly.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncPrebuildsResourceWithRawResponse:
         """
@@ -763,6 +1103,327 @@ class AsyncPrebuildsResource(AsyncAPIResource):
             cast_to=PrebuildCreateLogsTokenResponse,
         )
 
+    async def create_warm_pool(
+        self,
+        *,
+        environment_class_id: str,
+        project_id: str,
+        desired_size: int | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildCreateWarmPoolResponse:
+        """
+        Creates a warm pool for a project and environment class.
+
+        A warm pool maintains pre-created environment instances from a prebuild snapshot
+        so that new environments can start near-instantly.
+
+        Only one warm pool is allowed per <project, environment_class> pair. The
+        environment class must have prebuilds enabled on the project.
+
+        The pool's snapshot is managed automatically: when a new prebuild completes for
+        the same project and environment class, the pool's snapshot is updated and the
+        runner rotates instances.
+
+        ### Examples
+
+        - Create warm pool:
+
+          Creates a warm pool with 2 instances for a project and environment class.
+
+          ```yaml
+          projectId: "b0e12f6c-4c67-429d-a4a6-d9838b5da047"
+          environmentClassId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          desiredSize: 2
+          ```
+
+        Args:
+          environment_class_id: environment_class_id specifies which environment class to warm. Must be listed
+              in the project's prebuild configuration environment_class_ids.
+
+          project_id: project_id specifies the project this warm pool belongs to. The project must
+              have prebuilds enabled.
+
+          desired_size: desired_size is the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size is the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size is the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.PrebuildService/CreateWarmPool",
+            body=await async_maybe_transform(
+                {
+                    "environment_class_id": environment_class_id,
+                    "project_id": project_id,
+                    "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
+                },
+                prebuild_create_warm_pool_params.PrebuildCreateWarmPoolParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildCreateWarmPoolResponse,
+        )
+
+    async def delete_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> object:
+        """Deletes a warm pool.
+
+        Deletion is processed asynchronously.
+
+        The pool is marked for deletion and the
+        runner drains instances in the background.
+
+        Warm pools are also automatically deleted when prebuilds are disabled on the
+        project or the environment class is removed from the prebuild configuration.
+
+        ### Examples
+
+        - Delete warm pool:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to delete
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.PrebuildService/DeleteWarmPool",
+            body=await async_maybe_transform(
+                {"warm_pool_id": warm_pool_id}, prebuild_delete_warm_pool_params.PrebuildDeleteWarmPoolParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=object,
+        )
+
+    def list_warm_pools(
+        self,
+        *,
+        token: str | Omit = omit,
+        page_size: int | Omit = omit,
+        filter: prebuild_list_warm_pools_params.Filter | Omit = omit,
+        pagination: prebuild_list_warm_pools_params.Pagination | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AsyncPaginator[WarmPool, AsyncWarmPoolsPage[WarmPool]]:
+        """
+        Lists warm pools with optional filtering.
+
+        Use this method to:
+
+        - View all warm pools for a project
+        - Monitor warm pool status across environment classes
+
+        ### Examples
+
+        - List warm pools for a project:
+
+          ```yaml
+          filter:
+            projectIds: ["b0e12f6c-4c67-429d-a4a6-d9838b5da047"]
+          ```
+
+        Args:
+          filter: filter contains the filter options for listing warm pools
+
+          pagination: pagination contains the pagination options for listing warm pools
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get_api_list(
+            "/gitpod.v1.PrebuildService/ListWarmPools",
+            page=AsyncWarmPoolsPage[WarmPool],
+            body=maybe_transform(
+                {
+                    "filter": filter,
+                    "pagination": pagination,
+                },
+                prebuild_list_warm_pools_params.PrebuildListWarmPoolsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "token": token,
+                        "page_size": page_size,
+                    },
+                    prebuild_list_warm_pools_params.PrebuildListWarmPoolsParams,
+                ),
+            ),
+            model=WarmPool,
+            method="post",
+        )
+
+    async def retrieve_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildRetrieveWarmPoolResponse:
+        """
+        Gets details about a specific warm pool.
+
+        Use this method to:
+
+        - Check warm pool status and phase
+        - View the current snapshot being warmed
+        - Monitor pool health
+
+        ### Examples
+
+        - Get warm pool:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to retrieve
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.PrebuildService/GetWarmPool",
+            body=await async_maybe_transform(
+                {"warm_pool_id": warm_pool_id}, prebuild_retrieve_warm_pool_params.PrebuildRetrieveWarmPoolParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildRetrieveWarmPoolResponse,
+        )
+
+    async def update_warm_pool(
+        self,
+        *,
+        warm_pool_id: str,
+        desired_size: Optional[int] | Omit = omit,
+        max_size: Optional[int] | Omit = omit,
+        min_size: Optional[int] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> PrebuildUpdateWarmPoolResponse:
+        """
+        Updates a warm pool's configuration.
+
+        Use this method to change the desired pool size.
+
+        ### Examples
+
+        - Update pool size:
+
+          ```yaml
+          warmPoolId: "a1b2c3d4-5678-9abc-def0-1234567890ab"
+          desiredSize: 5
+          ```
+
+        Args:
+          warm_pool_id: warm_pool_id specifies the warm pool to update
+
+          desired_size: desired_size updates the number of warm instances to maintain. Deprecated: Use
+              min_size and max_size instead for dynamic scaling.
+
+          max_size: max_size updates the maximum number of warm instances to maintain. The pool will
+              never scale above this value. Must be >= min_size and <= 20.
+
+          min_size: min_size updates the minimum number of warm instances to maintain. The pool will
+              never scale below this value. Must be >= 0 and <= max_size. Set to 0 to allow
+              full scale-down.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.PrebuildService/UpdateWarmPool",
+            body=await async_maybe_transform(
+                {
+                    "warm_pool_id": warm_pool_id,
+                    "desired_size": desired_size,
+                    "max_size": max_size,
+                    "min_size": min_size,
+                },
+                prebuild_update_warm_pool_params.PrebuildUpdateWarmPoolParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=PrebuildUpdateWarmPoolResponse,
+        )
+
 
 class PrebuildsResourceWithRawResponse:
     def __init__(self, prebuilds: PrebuildsResource) -> None:
@@ -785,6 +1446,21 @@ class PrebuildsResourceWithRawResponse:
         )
         self.create_logs_token = to_raw_response_wrapper(
             prebuilds.create_logs_token,
+        )
+        self.create_warm_pool = to_raw_response_wrapper(
+            prebuilds.create_warm_pool,
+        )
+        self.delete_warm_pool = to_raw_response_wrapper(
+            prebuilds.delete_warm_pool,
+        )
+        self.list_warm_pools = to_raw_response_wrapper(
+            prebuilds.list_warm_pools,
+        )
+        self.retrieve_warm_pool = to_raw_response_wrapper(
+            prebuilds.retrieve_warm_pool,
+        )
+        self.update_warm_pool = to_raw_response_wrapper(
+            prebuilds.update_warm_pool,
         )
 
 
@@ -810,6 +1486,21 @@ class AsyncPrebuildsResourceWithRawResponse:
         self.create_logs_token = async_to_raw_response_wrapper(
             prebuilds.create_logs_token,
         )
+        self.create_warm_pool = async_to_raw_response_wrapper(
+            prebuilds.create_warm_pool,
+        )
+        self.delete_warm_pool = async_to_raw_response_wrapper(
+            prebuilds.delete_warm_pool,
+        )
+        self.list_warm_pools = async_to_raw_response_wrapper(
+            prebuilds.list_warm_pools,
+        )
+        self.retrieve_warm_pool = async_to_raw_response_wrapper(
+            prebuilds.retrieve_warm_pool,
+        )
+        self.update_warm_pool = async_to_raw_response_wrapper(
+            prebuilds.update_warm_pool,
+        )
 
 
 class PrebuildsResourceWithStreamingResponse:
@@ -834,6 +1525,21 @@ class PrebuildsResourceWithStreamingResponse:
         self.create_logs_token = to_streamed_response_wrapper(
             prebuilds.create_logs_token,
         )
+        self.create_warm_pool = to_streamed_response_wrapper(
+            prebuilds.create_warm_pool,
+        )
+        self.delete_warm_pool = to_streamed_response_wrapper(
+            prebuilds.delete_warm_pool,
+        )
+        self.list_warm_pools = to_streamed_response_wrapper(
+            prebuilds.list_warm_pools,
+        )
+        self.retrieve_warm_pool = to_streamed_response_wrapper(
+            prebuilds.retrieve_warm_pool,
+        )
+        self.update_warm_pool = to_streamed_response_wrapper(
+            prebuilds.update_warm_pool,
+        )
 
 
 class AsyncPrebuildsResourceWithStreamingResponse:
@@ -857,4 +1563,19 @@ class AsyncPrebuildsResourceWithStreamingResponse:
         )
         self.create_logs_token = async_to_streamed_response_wrapper(
             prebuilds.create_logs_token,
+        )
+        self.create_warm_pool = async_to_streamed_response_wrapper(
+            prebuilds.create_warm_pool,
+        )
+        self.delete_warm_pool = async_to_streamed_response_wrapper(
+            prebuilds.delete_warm_pool,
+        )
+        self.list_warm_pools = async_to_streamed_response_wrapper(
+            prebuilds.list_warm_pools,
+        )
+        self.retrieve_warm_pool = async_to_streamed_response_wrapper(
+            prebuilds.retrieve_warm_pool,
+        )
+        self.update_warm_pool = async_to_streamed_response_wrapper(
+            prebuilds.update_warm_pool,
         )

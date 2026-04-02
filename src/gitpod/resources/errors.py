@@ -24,6 +24,11 @@ __all__ = ["ErrorsResource", "AsyncErrorsResource"]
 
 
 class ErrorsResource(SyncAPIResource):
+    """
+    ErrorsService provides endpoints for clients to report errors
+     that will be sent to error reporting systems.
+    """
+
     @cached_property
     def with_raw_response(self) -> ErrorsResourceWithRawResponse:
         """
@@ -94,6 +99,11 @@ class ErrorsResource(SyncAPIResource):
 
 
 class AsyncErrorsResource(AsyncAPIResource):
+    """
+    ErrorsService provides endpoints for clients to report errors
+     that will be sent to error reporting systems.
+    """
+
     @cached_property
     def with_raw_response(self) -> AsyncErrorsResourceWithRawResponse:
         """

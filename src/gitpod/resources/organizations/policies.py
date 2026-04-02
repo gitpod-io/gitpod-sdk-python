@@ -105,7 +105,6 @@ class PoliciesResource(SyncAPIResource):
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
-        executable_deny_list: Optional[VetoExecPolicyParam] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
@@ -116,6 +115,7 @@ class PoliciesResource(SyncAPIResource):
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -182,8 +182,6 @@ class PoliciesResource(SyncAPIResource):
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
-          executable_deny_list: executable_deny_list contains the veto exec policy for environments.
-
           maximum_environment_lifetime: maximum_environment_lifetime controls for how long environments are allowed to
               be reused. 0 means no maximum lifetime. Maximum duration is 180 days (15552000
               seconds).
@@ -193,7 +191,12 @@ class PoliciesResource(SyncAPIResource):
 
           maximum_environment_timeout: maximum_environment_timeout controls the maximum timeout allowed for
               environments in seconds. 0 means no limit (never). Minimum duration is 30
-              minutes (1800 seconds).
+              minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+              minutes):
+
+              ```
+              this == duration('0s') || this >= duration('1800s')
+              ```
 
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
@@ -216,6 +219,8 @@ class PoliciesResource(SyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -236,7 +241,6 @@ class PoliciesResource(SyncAPIResource):
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
                     "editor_version_restrictions": editor_version_restrictions,
-                    "executable_deny_list": executable_deny_list,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
@@ -247,6 +251,7 @@ class PoliciesResource(SyncAPIResource):
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "veto_exec_policy": veto_exec_policy,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),
@@ -340,7 +345,6 @@ class AsyncPoliciesResource(AsyncAPIResource):
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
-        executable_deny_list: Optional[VetoExecPolicyParam] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
@@ -351,6 +355,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -417,8 +422,6 @@ class AsyncPoliciesResource(AsyncAPIResource):
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
-          executable_deny_list: executable_deny_list contains the veto exec policy for environments.
-
           maximum_environment_lifetime: maximum_environment_lifetime controls for how long environments are allowed to
               be reused. 0 means no maximum lifetime. Maximum duration is 180 days (15552000
               seconds).
@@ -428,7 +431,12 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           maximum_environment_timeout: maximum_environment_timeout controls the maximum timeout allowed for
               environments in seconds. 0 means no limit (never). Minimum duration is 30
-              minutes (1800 seconds).
+              minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+              minutes):
+
+              ```
+              this == duration('0s') || this >= duration('1800s')
+              ```
 
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
@@ -451,6 +459,8 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -471,7 +481,6 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
                     "editor_version_restrictions": editor_version_restrictions,
-                    "executable_deny_list": executable_deny_list,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
@@ -482,6 +491,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "veto_exec_policy": veto_exec_policy,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),

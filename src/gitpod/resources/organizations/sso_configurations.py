@@ -63,6 +63,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         issuer_url: str,
         organization_id: str,
         additional_scopes: SequenceNotStr[str] | Omit = omit,
+        claims_expression: Optional[str] | Omit = omit,
         display_name: str | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
         email_domains: SequenceNotStr[str] | Omit = omit,
@@ -120,6 +121,11 @@ class SSOConfigurationsResource(SyncAPIResource):
               during sign-in. These are appended to the default scopes (openid, email,
               profile).
 
+          claims_expression: claims_expression is an optional CEL expression evaluated against OIDC token
+              claims during login. When set, the expression must evaluate to true for the
+              login to succeed. Example:
+              `claims.email_verified && claims.email.endsWith("@example.com")`
+
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
@@ -139,6 +145,7 @@ class SSOConfigurationsResource(SyncAPIResource):
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
                     "additional_scopes": additional_scopes,
+                    "claims_expression": claims_expression,
                     "display_name": display_name,
                     "email_domain": email_domain,
                     "email_domains": email_domains,
@@ -210,6 +217,7 @@ class SSOConfigurationsResource(SyncAPIResource):
         sso_configuration_id: str,
         additional_scopes: Optional[AdditionalScopesUpdateParam] | Omit = omit,
         claims: Dict[str, str] | Omit = omit,
+        claims_expression: Optional[str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
@@ -265,6 +273,10 @@ class SSOConfigurationsResource(SyncAPIResource):
 
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
+          claims_expression: claims_expression is a CEL expression evaluated against OIDC token claims during
+              login. When set, the expression must evaluate to true for the login to succeed.
+              When present with an empty string, the expression is cleared.
+
           client_id: client_id is the client ID of the SSO provider
 
           client_secret: client_secret is the client secret of the SSO provider
@@ -288,6 +300,7 @@ class SSOConfigurationsResource(SyncAPIResource):
                     "sso_configuration_id": sso_configuration_id,
                     "additional_scopes": additional_scopes,
                     "claims": claims,
+                    "claims_expression": claims_expression,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "display_name": display_name,
@@ -469,6 +482,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         issuer_url: str,
         organization_id: str,
         additional_scopes: SequenceNotStr[str] | Omit = omit,
+        claims_expression: Optional[str] | Omit = omit,
         display_name: str | Omit = omit,
         email_domain: Optional[str] | Omit = omit,
         email_domains: SequenceNotStr[str] | Omit = omit,
@@ -526,6 +540,11 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
               during sign-in. These are appended to the default scopes (openid, email,
               profile).
 
+          claims_expression: claims_expression is an optional CEL expression evaluated against OIDC token
+              claims during login. When set, the expression must evaluate to true for the
+              login to succeed. Example:
+              `claims.email_verified && claims.email.endsWith("@example.com")`
+
           email_domain: email_domain is the domain that is allowed to sign in to the organization
 
           extra_headers: Send extra headers
@@ -545,6 +564,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     "issuer_url": issuer_url,
                     "organization_id": organization_id,
                     "additional_scopes": additional_scopes,
+                    "claims_expression": claims_expression,
                     "display_name": display_name,
                     "email_domain": email_domain,
                     "email_domains": email_domains,
@@ -616,6 +636,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
         sso_configuration_id: str,
         additional_scopes: Optional[AdditionalScopesUpdateParam] | Omit = omit,
         claims: Dict[str, str] | Omit = omit,
+        claims_expression: Optional[str] | Omit = omit,
         client_id: Optional[str] | Omit = omit,
         client_secret: Optional[str] | Omit = omit,
         display_name: Optional[str] | Omit = omit,
@@ -671,6 +692,10 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
 
           claims: claims are key/value pairs that defines a mapping of claims issued by the IdP.
 
+          claims_expression: claims_expression is a CEL expression evaluated against OIDC token claims during
+              login. When set, the expression must evaluate to true for the login to succeed.
+              When present with an empty string, the expression is cleared.
+
           client_id: client_id is the client ID of the SSO provider
 
           client_secret: client_secret is the client secret of the SSO provider
@@ -694,6 +719,7 @@ class AsyncSSOConfigurationsResource(AsyncAPIResource):
                     "sso_configuration_id": sso_configuration_id,
                     "additional_scopes": additional_scopes,
                     "claims": claims,
+                    "claims_expression": claims_expression,
                     "client_id": client_id,
                     "client_secret": client_secret,
                     "display_name": display_name,

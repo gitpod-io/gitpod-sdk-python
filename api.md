@@ -3,6 +3,7 @@
 ```python
 from gitpod.types import (
     AutomationTrigger,
+    CountResponseRelation,
     EnvironmentClass,
     EnvironmentVariableItem,
     EnvironmentVariableSource,
@@ -17,6 +18,8 @@ from gitpod.types import (
     ResourceType,
     RunsOn,
     SecretRef,
+    Sort,
+    SortOrder,
     State,
     Subject,
     Task,
@@ -64,11 +67,15 @@ Types:
 from gitpod.types import (
     AgentCodeContext,
     AgentExecution,
+    AgentMessage,
     AgentMode,
     Prompt,
     PromptMetadata,
     PromptSpec,
+    Role,
+    Type,
     UserInputBlock,
+    WakeEvent,
     AgentCreateExecutionConversationTokenResponse,
     AgentCreatePromptResponse,
     AgentRetrieveExecutionResponse,
@@ -93,6 +100,45 @@ Methods:
 - <code title="post /gitpod.v1.AgentService/StopAgentExecution">client.agents.<a href="./src/gitpod/resources/agents.py">stop_execution</a>(\*\*<a href="src/gitpod/types/agent_stop_execution_params.py">params</a>) -> object</code>
 - <code title="post /gitpod.v1.AgentService/UpdatePrompt">client.agents.<a href="./src/gitpod/resources/agents.py">update_prompt</a>(\*\*<a href="src/gitpod/types/agent_update_prompt_params.py">params</a>) -> <a href="./src/gitpod/types/agent_update_prompt_response.py">AgentUpdatePromptResponse</a></code>
 
+# Automations
+
+Types:
+
+```python
+from gitpod.types import (
+    Workflow,
+    WorkflowAction,
+    WorkflowExecution,
+    WorkflowExecutionAction,
+    WorkflowStep,
+    WorkflowTrigger,
+    WorkflowTriggerContext,
+    AutomationCreateResponse,
+    AutomationRetrieveResponse,
+    AutomationUpdateResponse,
+    AutomationListExecutionOutputsResponse,
+    AutomationRetrieveExecutionResponse,
+    AutomationRetrieveExecutionActionResponse,
+    AutomationStartExecutionResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.WorkflowService/CreateWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">create</a>(\*\*<a href="src/gitpod/types/automation_create_params.py">params</a>) -> <a href="./src/gitpod/types/automation_create_response.py">AutomationCreateResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve</a>(\*\*<a href="src/gitpod/types/automation_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_response.py">AutomationRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/UpdateWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">update</a>(\*\*<a href="src/gitpod/types/automation_update_params.py">params</a>) -> <a href="./src/gitpod/types/automation_update_response.py">AutomationUpdateResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflows">client.automations.<a href="./src/gitpod/resources/automations.py">list</a>(\*\*<a href="src/gitpod/types/automation_list_params.py">params</a>) -> <a href="./src/gitpod/types/workflow.py">SyncWorkflowsPage[Workflow]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/DeleteWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">delete</a>(\*\*<a href="src/gitpod/types/automation_delete_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/CancelWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">cancel_execution</a>(\*\*<a href="src/gitpod/types/automation_cancel_execution_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/CancelWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">cancel_execution_action</a>(\*\*<a href="src/gitpod/types/automation_cancel_execution_action_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutionActions">client.automations.<a href="./src/gitpod/resources/automations.py">list_execution_actions</a>(\*\*<a href="src/gitpod/types/automation_list_execution_actions_params.py">params</a>) -> <a href="./src/gitpod/types/workflow_execution_action.py">SyncWorkflowExecutionActionsPage[WorkflowExecutionAction]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutionOutputs">client.automations.<a href="./src/gitpod/resources/automations.py">list_execution_outputs</a>(\*\*<a href="src/gitpod/types/automation_list_execution_outputs_params.py">params</a>) -> <a href="./src/gitpod/types/automation_list_execution_outputs_response.py">SyncOutputsPage[AutomationListExecutionOutputsResponse]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/ListWorkflowExecutions">client.automations.<a href="./src/gitpod/resources/automations.py">list_executions</a>(\*\*<a href="src/gitpod/types/automation_list_executions_params.py">params</a>) -> <a href="./src/gitpod/types/workflow_execution.py">SyncWorkflowExecutionsPage[WorkflowExecution]</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_response.py">AutomationRetrieveExecutionResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution_action</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_action_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_action_response.py">AutomationRetrieveExecutionActionResponse</a></code>
+- <code title="post /gitpod.v1.WorkflowService/StartWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">start_execution</a>(\*\*<a href="src/gitpod/types/automation_start_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_start_execution_response.py">AutomationStartExecutionResponse</a></code>
+
 # Editors
 
 Types:
@@ -114,6 +160,7 @@ Types:
 ```python
 from gitpod.types import (
     AdmissionLevel,
+    BpfDebugLevel,
     Environment,
     EnvironmentActivitySignal,
     EnvironmentMetadata,
@@ -453,7 +500,10 @@ Types:
 ```python
 from gitpod.types.organizations import (
     AgentPolicy,
+    ConversationSharingPolicy,
     CrowdStrikeConfig,
+    CustomAgentEnvMapping,
+    CustomSecurityAgent,
     KernelControlsAction,
     OrganizationPolicies,
     SecurityAgentPolicy,
@@ -525,10 +575,18 @@ from gitpod.types import (
     PrebuildSpec,
     PrebuildStatus,
     PrebuildTrigger,
+    WarmPool,
+    WarmPoolMetadata,
+    WarmPoolPhase,
+    WarmPoolSpec,
+    WarmPoolStatus,
     PrebuildCreateResponse,
     PrebuildRetrieveResponse,
     PrebuildCancelResponse,
     PrebuildCreateLogsTokenResponse,
+    PrebuildCreateWarmPoolResponse,
+    PrebuildRetrieveWarmPoolResponse,
+    PrebuildUpdateWarmPoolResponse,
 )
 ```
 
@@ -540,6 +598,11 @@ Methods:
 - <code title="post /gitpod.v1.PrebuildService/DeletePrebuild">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">delete</a>(\*\*<a href="src/gitpod/types/prebuild_delete_params.py">params</a>) -> object</code>
 - <code title="post /gitpod.v1.PrebuildService/CancelPrebuild">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">cancel</a>(\*\*<a href="src/gitpod/types/prebuild_cancel_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_cancel_response.py">PrebuildCancelResponse</a></code>
 - <code title="post /gitpod.v1.PrebuildService/CreatePrebuildLogsToken">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">create_logs_token</a>(\*\*<a href="src/gitpod/types/prebuild_create_logs_token_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_create_logs_token_response.py">PrebuildCreateLogsTokenResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/CreateWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">create_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_create_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_create_warm_pool_response.py">PrebuildCreateWarmPoolResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/DeleteWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">delete_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_delete_warm_pool_params.py">params</a>) -> object</code>
+- <code title="post /gitpod.v1.PrebuildService/ListWarmPools">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">list_warm_pools</a>(\*\*<a href="src/gitpod/types/prebuild_list_warm_pools_params.py">params</a>) -> <a href="./src/gitpod/types/warm_pool.py">SyncWarmPoolsPage[WarmPool]</a></code>
+- <code title="post /gitpod.v1.PrebuildService/GetWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">retrieve_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_retrieve_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_retrieve_warm_pool_response.py">PrebuildRetrieveWarmPoolResponse</a></code>
+- <code title="post /gitpod.v1.PrebuildService/UpdateWarmPool">client.prebuilds.<a href="./src/gitpod/resources/prebuilds.py">update_warm_pool</a>(\*\*<a href="src/gitpod/types/prebuild_update_warm_pool_params.py">params</a>) -> <a href="./src/gitpod/types/prebuild_update_warm_pool_response.py">PrebuildUpdateWarmPoolResponse</a></code>
 
 # Projects
 
@@ -622,6 +685,7 @@ from gitpod.types import (
     RunnerStatus,
     RunnerVariant,
     SearchMode,
+    UpdateWindow,
     RunnerCreateResponse,
     RunnerRetrieveResponse,
     RunnerCheckAuthenticationForHostResponse,

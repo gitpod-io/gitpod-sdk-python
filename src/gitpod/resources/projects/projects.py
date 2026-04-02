@@ -46,6 +46,7 @@ from .environment_clases import (
     EnvironmentClasesResourceWithStreamingResponse,
     AsyncEnvironmentClasesResourceWithStreamingResponse,
 )
+from ...types.shared_params.sort import Sort
 from ...types.project_create_response import ProjectCreateResponse
 from ...types.project_update_response import ProjectUpdateResponse
 from ...types.project_retrieve_response import ProjectRetrieveResponse
@@ -364,6 +365,7 @@ class ProjectsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: project_list_params.Filter | Omit = omit,
         pagination: project_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -394,6 +396,15 @@ class ProjectsResource(SyncAPIResource):
         Args:
           pagination: pagination contains the pagination options for listing organizations
 
+          sort: sort specifies the order of results. Defaults to popularity descending.
+
+              Supported fields:
+
+              - "id": Sort by project ID (UUID v7, effectively creation order). Produces a
+                stable, deterministic result set suitable for consistent pagination.
+              - "popularity": Sort by popularity — a precomputed score based on recent
+                environment creation activity. Updated periodically by a background job.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -409,6 +420,7 @@ class ProjectsResource(SyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 project_list_params.ProjectListParams,
             ),
@@ -1008,6 +1020,7 @@ class AsyncProjectsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: project_list_params.Filter | Omit = omit,
         pagination: project_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1038,6 +1051,15 @@ class AsyncProjectsResource(AsyncAPIResource):
         Args:
           pagination: pagination contains the pagination options for listing organizations
 
+          sort: sort specifies the order of results. Defaults to popularity descending.
+
+              Supported fields:
+
+              - "id": Sort by project ID (UUID v7, effectively creation order). Produces a
+                stable, deterministic result set suitable for consistent pagination.
+              - "popularity": Sort by popularity — a precomputed score based on recent
+                environment creation activity. Updated periodically by a background job.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1053,6 +1075,7 @@ class AsyncProjectsResource(AsyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 project_list_params.ProjectListParams,
             ),

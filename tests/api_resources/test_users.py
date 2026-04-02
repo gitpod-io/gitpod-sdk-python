@@ -20,13 +20,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestUsers:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_user(self, client: Gitpod) -> None:
         user = client.users.delete_user()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete_user_with_all_params(self, client: Gitpod) -> None:
         user = client.users.delete_user(
@@ -34,7 +34,7 @@ class TestUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete_user(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.delete_user()
@@ -44,7 +44,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete_user(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.delete_user() as response:
@@ -56,13 +56,13 @@ class TestUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_authenticated_user(self, client: Gitpod) -> None:
         user = client.users.get_authenticated_user()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_authenticated_user_with_all_params(self, client: Gitpod) -> None:
         user = client.users.get_authenticated_user(
@@ -70,7 +70,7 @@ class TestUsers:
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_authenticated_user(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.get_authenticated_user()
@@ -80,7 +80,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_authenticated_user(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.get_authenticated_user() as response:
@@ -92,13 +92,13 @@ class TestUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_user(self, client: Gitpod) -> None:
         user = client.users.get_user()
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_user_with_all_params(self, client: Gitpod) -> None:
         user = client.users.get_user(
@@ -106,7 +106,7 @@ class TestUsers:
         )
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_user(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.get_user()
@@ -116,7 +116,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_user(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.get_user() as response:
@@ -128,13 +128,13 @@ class TestUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_set_suspended(self, client: Gitpod) -> None:
         user = client.users.set_suspended()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_set_suspended_with_all_params(self, client: Gitpod) -> None:
         user = client.users.set_suspended(
@@ -143,7 +143,7 @@ class TestUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_set_suspended(self, client: Gitpod) -> None:
         response = client.users.with_raw_response.set_suspended()
@@ -153,7 +153,7 @@ class TestUsers:
         user = response.parse()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_set_suspended(self, client: Gitpod) -> None:
         with client.users.with_streaming_response.set_suspended() as response:
@@ -171,13 +171,13 @@ class TestAsyncUsers:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_user(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.delete_user()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete_user_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.delete_user(
@@ -185,7 +185,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete_user(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.delete_user()
@@ -195,7 +195,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete_user(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.delete_user() as response:
@@ -207,13 +207,13 @@ class TestAsyncUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_authenticated_user()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_authenticated_user_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_authenticated_user(
@@ -221,7 +221,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.get_authenticated_user()
@@ -231,7 +231,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(UserGetAuthenticatedUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_authenticated_user(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.get_authenticated_user() as response:
@@ -243,13 +243,13 @@ class TestAsyncUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_user(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_user()
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_user_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.get_user(
@@ -257,7 +257,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_user(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.get_user()
@@ -267,7 +267,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(UserGetUserResponse, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_user(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.get_user() as response:
@@ -279,13 +279,13 @@ class TestAsyncUsers:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_set_suspended(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.set_suspended()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_set_suspended_with_all_params(self, async_client: AsyncGitpod) -> None:
         user = await async_client.users.set_suspended(
@@ -294,7 +294,7 @@ class TestAsyncUsers:
         )
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_set_suspended(self, async_client: AsyncGitpod) -> None:
         response = await async_client.users.with_raw_response.set_suspended()
@@ -304,7 +304,7 @@ class TestAsyncUsers:
         user = await response.parse()
         assert_matches_type(object, user, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_set_suspended(self, async_client: AsyncGitpod) -> None:
         async with async_client.users.with_streaming_response.set_suspended() as response:

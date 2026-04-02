@@ -17,9 +17,9 @@ class AgentStartExecutionParams(TypedDict, total=False):
 
     annotations: Dict[str, str]
     """
-    annotations are key-value pairs for tracking external context (e.g., Linear
+    annotations are key-value pairs for tracking external context (e.g., integration
     session IDs, GitHub issue references). Keys should follow domain/name convention
-    (e.g., "linear.app/session-id").
+    (e.g., "agent-client-session/id").
     """
 
     code_context: Annotated[AgentCodeContextParam, PropertyInfo(alias="codeContext")]
@@ -37,6 +37,12 @@ class AgentStartExecutionParams(TypedDict, total=False):
     runner_id specifies a runner for this agent execution. When set, the agent
     execution is routed to this runner instead of the runner associated with the
     environment.
+    """
+
+    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
+    """
+    session_id is the ID of the session this agent execution belongs to. If empty, a
+    new session is created implicitly.
     """
 
     workflow_action_id: Annotated[Optional[str], PropertyInfo(alias="workflowActionId")]

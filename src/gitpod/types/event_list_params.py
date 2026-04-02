@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
+from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared.principal import Principal
+from .shared_params.sort import Sort
 from .shared.resource_type import ResourceType
 
 __all__ = ["EventListParams", "Filter", "Pagination"]
@@ -21,10 +23,26 @@ class EventListParams(TypedDict, total=False):
     filter: Filter
 
     pagination: Pagination
-    """pagination contains the pagination options for listing environments"""
+    """pagination contains the pagination options for listing audit logs"""
+
+    sort: Sort
+    """sort specifies the order of results.
+
+    When unspecified, results are sorted by creation time descending (newest first).
+    Supported sort fields: createdAt.
+    """
 
 
-class Filter(TypedDict, total=False):
+_FilterReservedKeywords = TypedDict(
+    "_FilterReservedKeywords",
+    {
+        "from": Union[str, datetime, None],
+    },
+    total=False,
+)
+
+
+class Filter(_FilterReservedKeywords, total=False):
     actor_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="actorIds")]
 
     actor_principals: Annotated[List[Principal], PropertyInfo(alias="actorPrincipals")]
@@ -33,9 +51,12 @@ class Filter(TypedDict, total=False):
 
     subject_types: Annotated[List[ResourceType], PropertyInfo(alias="subjectTypes")]
 
+    to: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    """to filters audit logs created before this timestamp (exclusive)."""
+
 
 class Pagination(TypedDict, total=False):
-    """pagination contains the pagination options for listing environments"""
+    """pagination contains the pagination options for listing audit logs"""
 
     token: str
     """

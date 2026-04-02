@@ -16,6 +16,7 @@ __all__ = [
     "Metadata",
     "Spec",
     "SpecLimits",
+    "SpecLoopCondition",
     "Status",
     "StatusCurrentOperation",
     "StatusCurrentOperationLlm",
@@ -246,6 +247,14 @@ class SpecLimits(BaseModel):
     max_output_tokens: Optional[str] = FieldInfo(alias="maxOutputTokens", default=None)
 
 
+class SpecLoopCondition(BaseModel):
+    id: Optional[str] = None
+
+    description: Optional[str] = None
+
+    expression: Optional[str] = None
+
+
 class Spec(BaseModel):
     """
     Spec is the configuration of the agent that's required for the
@@ -262,6 +271,8 @@ class Spec(BaseModel):
     """desired_phase is the desired phase of the agent run"""
 
     limits: Optional[SpecLimits] = None
+
+    loop_conditions: Optional[List[SpecLoopCondition]] = FieldInfo(alias="loopConditions", default=None)
 
     session: Optional[str] = None
 
@@ -436,12 +447,15 @@ class Status(BaseModel):
             "SUPPORTED_MODEL_SONNET_4_EXTENDED",
             "SUPPORTED_MODEL_SONNET_4_5",
             "SUPPORTED_MODEL_SONNET_4_5_EXTENDED",
+            "SUPPORTED_MODEL_SONNET_4_6",
+            "SUPPORTED_MODEL_SONNET_4_6_EXTENDED",
             "SUPPORTED_MODEL_OPUS_4",
             "SUPPORTED_MODEL_OPUS_4_EXTENDED",
             "SUPPORTED_MODEL_OPUS_4_5",
             "SUPPORTED_MODEL_OPUS_4_5_EXTENDED",
             "SUPPORTED_MODEL_OPUS_4_6",
             "SUPPORTED_MODEL_OPUS_4_6_EXTENDED",
+            "SUPPORTED_MODEL_HAIKU_4_5",
             "SUPPORTED_MODEL_OPENAI_4O",
             "SUPPORTED_MODEL_OPENAI_4O_MINI",
             "SUPPORTED_MODEL_OPENAI_O1",

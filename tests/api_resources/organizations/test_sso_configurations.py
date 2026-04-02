@@ -22,7 +22,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestSSOConfigurations:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create(
@@ -33,7 +33,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.create(
@@ -42,13 +42,14 @@ class TestSSOConfigurations:
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             additional_scopes=["x"],
+            claims_expression="claimsExpression",
             display_name="displayName",
             email_domain="acme-corp.com",
             email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.create(
@@ -63,7 +64,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.create(
@@ -80,7 +81,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_retrieve(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.retrieve(
@@ -88,7 +89,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_retrieve(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.retrieve(
@@ -100,7 +101,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_retrieve(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.retrieve(
@@ -114,7 +115,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
@@ -122,13 +123,14 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.update(
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             additional_scopes={"scopes": ["x"]},
             claims={"foo": "string"},
+            claims_expression="claimsExpression",
             client_id="new-client-id",
             client_secret="new-client-secret",
             display_name="displayName",
@@ -139,7 +141,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.update(
@@ -151,7 +153,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.update(
@@ -165,7 +167,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
@@ -173,7 +175,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.list(
@@ -187,7 +189,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.list(
@@ -199,7 +201,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(SyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.list(
@@ -213,7 +215,7 @@ class TestSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_delete(self, client: Gitpod) -> None:
         sso_configuration = client.organizations.sso_configurations.delete(
@@ -221,7 +223,7 @@ class TestSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_delete(self, client: Gitpod) -> None:
         response = client.organizations.sso_configurations.with_raw_response.delete(
@@ -233,7 +235,7 @@ class TestSSOConfigurations:
         sso_configuration = response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_delete(self, client: Gitpod) -> None:
         with client.organizations.sso_configurations.with_streaming_response.delete(
@@ -253,7 +255,7 @@ class TestAsyncSSOConfigurations:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create(
@@ -264,7 +266,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.create(
@@ -273,13 +275,14 @@ class TestAsyncSSOConfigurations:
             issuer_url="https://accounts.google.com",
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             additional_scopes=["x"],
+            claims_expression="claimsExpression",
             display_name="displayName",
             email_domain="acme-corp.com",
             email_domains=["sfN2.l.iJR-BU.u9JV9.a.m.o2D-4b-Jd.0Z-kX.L.n.S.f.UKbxB"],
         )
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.create(
@@ -294,7 +297,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(SSOConfigurationCreateResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.create(
@@ -311,7 +314,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.retrieve(
@@ -319,7 +322,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.retrieve(
@@ -331,7 +334,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(SSOConfigurationRetrieveResponse, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.retrieve(
@@ -345,7 +348,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
@@ -353,13 +356,14 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.update(
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             additional_scopes={"scopes": ["x"]},
             claims={"foo": "string"},
+            claims_expression="claimsExpression",
             client_id="new-client-id",
             client_secret="new-client-secret",
             display_name="displayName",
@@ -370,7 +374,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.update(
@@ -382,7 +386,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.update(
@@ -396,7 +400,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
@@ -404,7 +408,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.list(
@@ -418,7 +422,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.list(
@@ -430,7 +434,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(AsyncSSOConfigurationsPage[SSOConfiguration], sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.list(
@@ -444,7 +448,7 @@ class TestAsyncSSOConfigurations:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_delete(self, async_client: AsyncGitpod) -> None:
         sso_configuration = await async_client.organizations.sso_configurations.delete(
@@ -452,7 +456,7 @@ class TestAsyncSSOConfigurations:
         )
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_delete(self, async_client: AsyncGitpod) -> None:
         response = await async_client.organizations.sso_configurations.with_raw_response.delete(
@@ -464,7 +468,7 @@ class TestAsyncSSOConfigurations:
         sso_configuration = await response.parse()
         assert_matches_type(object, sso_configuration, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_delete(self, async_client: AsyncGitpod) -> None:
         async with async_client.organizations.sso_configurations.with_streaming_response.delete(

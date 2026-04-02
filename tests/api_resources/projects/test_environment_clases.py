@@ -18,13 +18,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestEnvironmentClases:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update(self, client: Gitpod) -> None:
         environment_clase = client.projects.environment_clases.update()
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         environment_clase = client.projects.environment_clases.update(
@@ -44,7 +44,7 @@ class TestEnvironmentClases:
         )
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update(self, client: Gitpod) -> None:
         response = client.projects.environment_clases.with_raw_response.update()
@@ -54,7 +54,7 @@ class TestEnvironmentClases:
         environment_clase = response.parse()
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update(self, client: Gitpod) -> None:
         with client.projects.environment_clases.with_streaming_response.update() as response:
@@ -66,7 +66,7 @@ class TestEnvironmentClases:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list(self, client: Gitpod) -> None:
         environment_clase = client.projects.environment_clases.list()
@@ -74,7 +74,7 @@ class TestEnvironmentClases:
             SyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_list_with_all_params(self, client: Gitpod) -> None:
         environment_clase = client.projects.environment_clases.list(
@@ -90,7 +90,7 @@ class TestEnvironmentClases:
             SyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_list(self, client: Gitpod) -> None:
         response = client.projects.environment_clases.with_raw_response.list()
@@ -102,7 +102,7 @@ class TestEnvironmentClases:
             SyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_list(self, client: Gitpod) -> None:
         with client.projects.environment_clases.with_streaming_response.list() as response:
@@ -122,13 +122,13 @@ class TestAsyncEnvironmentClases:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update(self, async_client: AsyncGitpod) -> None:
         environment_clase = await async_client.projects.environment_clases.update()
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_clase = await async_client.projects.environment_clases.update(
@@ -148,7 +148,7 @@ class TestAsyncEnvironmentClases:
         )
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.environment_clases.with_raw_response.update()
@@ -158,7 +158,7 @@ class TestAsyncEnvironmentClases:
         environment_clase = await response.parse()
         assert_matches_type(object, environment_clase, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.environment_clases.with_streaming_response.update() as response:
@@ -170,7 +170,7 @@ class TestAsyncEnvironmentClases:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list(self, async_client: AsyncGitpod) -> None:
         environment_clase = await async_client.projects.environment_clases.list()
@@ -178,7 +178,7 @@ class TestAsyncEnvironmentClases:
             AsyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncGitpod) -> None:
         environment_clase = await async_client.projects.environment_clases.list(
@@ -194,7 +194,7 @@ class TestAsyncEnvironmentClases:
             AsyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncGitpod) -> None:
         response = await async_client.projects.environment_clases.with_raw_response.list()
@@ -206,7 +206,7 @@ class TestAsyncEnvironmentClases:
             AsyncProjectEnvironmentClassesPage[ProjectEnvironmentClass], environment_clase, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncGitpod) -> None:
         async with async_client.projects.environment_clases.with_streaming_response.list() as response:

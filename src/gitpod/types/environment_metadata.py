@@ -42,6 +42,13 @@ class EnvironmentMetadata(BaseModel):
     CreateEnvironment or StartEnvironment were called).
     """
 
+    lockdown_at: Optional[datetime] = FieldInfo(alias="lockdownAt", default=None)
+    """
+    lockdown_at is the time at which the environment becomes locked down due to the
+    organization's maximum environment lifetime policy. Nil when no lifetime policy
+    applies.
+    """
+
     name: Optional[str] = None
     """name is the name of the environment as specified by the user"""
 

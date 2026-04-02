@@ -8,6 +8,7 @@ from typing_extensions import Required, Annotated, TypedDict
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from .veto_exec_policy_param import VetoExecPolicyParam
+from .conversation_sharing_policy import ConversationSharingPolicy
 
 __all__ = [
     "PolicyUpdateParams",
@@ -64,9 +65,6 @@ class PolicyUpdateParams(TypedDict, total=False):
     editor ID to version policy with allowed major versions.
     """
 
-    executable_deny_list: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="executableDenyList")]
-    """executable_deny_list contains the veto exec policy for environments."""
-
     maximum_environment_lifetime: Annotated[Optional[str], PropertyInfo(alias="maximumEnvironmentLifetime")]
     """
     maximum_environment_lifetime controls for how long environments are allowed to
@@ -84,7 +82,12 @@ class PolicyUpdateParams(TypedDict, total=False):
     """
     maximum_environment_timeout controls the maximum timeout allowed for
     environments in seconds. 0 means no limit (never). Minimum duration is 30
-    minutes (1800 seconds).
+    minutes (1800 seconds). value must be 0s (no limit) or at least 1800s (30
+    minutes):
+
+    ```
+    this == duration('0s') || this >= duration('1800s')
+    ```
     """
 
     maximum_running_environments_per_user: Annotated[
@@ -127,6 +130,9 @@ class PolicyUpdateParams(TypedDict, total=False):
     security_agent_policy: Annotated[Optional[SecurityAgentPolicy], PropertyInfo(alias="securityAgentPolicy")]
     """security_agent_policy contains security agent configuration updates"""
 
+    veto_exec_policy: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="vetoExecPolicy")]
+    """veto_exec_policy contains the veto exec policy for environments."""
+
 
 class AgentPolicy(TypedDict, total=False):
     """agent_policy contains agent-specific policy settings"""
@@ -135,6 +141,18 @@ class AgentPolicy(TypedDict, total=False):
     """
     command_deny_list contains a list of commands that agents are not allowed to
     execute
+    """
+
+    conversation_sharing_policy: Annotated[
+        Optional[ConversationSharingPolicy], PropertyInfo(alias="conversationSharingPolicy")
+    ]
+    """conversation_sharing_policy controls whether agent conversations can be shared"""
+
+    max_subagents_per_environment: Annotated[Optional[int], PropertyInfo(alias="maxSubagentsPerEnvironment")]
+    """
+    max_subagents_per_environment limits the number of non-terminal sub-agents a
+    parent can have running simultaneously in the same environment. Valid range:
+    0-10. Zero means use the default (5).
     """
 
     mcp_disabled: Annotated[Optional[bool], PropertyInfo(alias="mcpDisabled")]

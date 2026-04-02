@@ -69,6 +69,12 @@ class Filter(TypedDict, total=False):
     Kinds
     """
 
+    session_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="sessionIds")]
+    """
+    session_ids filters the response to only environments belonging to the specified
+    sessions
+    """
+
     status_phases: Annotated[List[EnvironmentPhase], PropertyInfo(alias="statusPhases")]
     """
     actual_phases is a list of phases the environment must be in for it to be

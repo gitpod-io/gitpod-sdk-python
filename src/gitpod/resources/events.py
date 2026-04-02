@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+
 import httpx
 
 from ..types import event_list_params, event_watch_params
@@ -18,6 +20,7 @@ from .._response import (
 from ..pagination import SyncEntriesPage, AsyncEntriesPage
 from .._base_client import AsyncPaginator, make_request_options
 from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
+from ..types.shared_params.sort import Sort
 from ..types.event_list_response import EventListResponse
 from ..types.event_watch_response import EventWatchResponse
 
@@ -51,6 +54,7 @@ class EventsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         filter: event_list_params.Filter | Omit = omit,
         pagination: event_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -86,8 +90,21 @@ class EventsResource(SyncAPIResource):
             pageSize: 20
           ```
 
+        - Filter by time range:
+
+          ```yaml
+          filter:
+            from: "2024-01-01T00:00:00Z"
+            to: "2024-02-01T00:00:00Z"
+          pagination:
+            pageSize: 20
+          ```
+
         Args:
-          pagination: pagination contains the pagination options for listing environments
+          pagination: pagination contains the pagination options for listing audit logs
+
+          sort: sort specifies the order of results. When unspecified, results are sorted by
+              creation time descending (newest first). Supported sort fields: createdAt.
 
           extra_headers: Send extra headers
 
@@ -104,6 +121,7 @@ class EventsResource(SyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 event_list_params.EventListParams,
             ),
@@ -129,6 +147,7 @@ class EventsResource(SyncAPIResource):
         *,
         environment_id: str | Omit = omit,
         organization: bool | Omit = omit,
+        resource_type_filters: Iterable[event_watch_params.ResourceTypeFilter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -163,6 +182,11 @@ class EventsResource(SyncAPIResource):
               the caller can see within their organization. No task, task execution or service
               events are produed.
 
+          resource_type_filters: Filters to limit which events are delivered on organization-scoped streams. When
+              empty, all events for the scope are delivered. When populated, only events
+              matching at least one filter entry are forwarded. Not supported for
+              environment-scoped streams; setting this field returns an error.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -178,6 +202,7 @@ class EventsResource(SyncAPIResource):
                 {
                     "environment_id": environment_id,
                     "organization": organization,
+                    "resource_type_filters": resource_type_filters,
                 },
                 event_watch_params.EventWatchParams,
             ),
@@ -216,6 +241,7 @@ class AsyncEventsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         filter: event_list_params.Filter | Omit = omit,
         pagination: event_list_params.Pagination | Omit = omit,
+        sort: Sort | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -251,8 +277,21 @@ class AsyncEventsResource(AsyncAPIResource):
             pageSize: 20
           ```
 
+        - Filter by time range:
+
+          ```yaml
+          filter:
+            from: "2024-01-01T00:00:00Z"
+            to: "2024-02-01T00:00:00Z"
+          pagination:
+            pageSize: 20
+          ```
+
         Args:
-          pagination: pagination contains the pagination options for listing environments
+          pagination: pagination contains the pagination options for listing audit logs
+
+          sort: sort specifies the order of results. When unspecified, results are sorted by
+              creation time descending (newest first). Supported sort fields: createdAt.
 
           extra_headers: Send extra headers
 
@@ -269,6 +308,7 @@ class AsyncEventsResource(AsyncAPIResource):
                 {
                     "filter": filter,
                     "pagination": pagination,
+                    "sort": sort,
                 },
                 event_list_params.EventListParams,
             ),
@@ -294,6 +334,7 @@ class AsyncEventsResource(AsyncAPIResource):
         *,
         environment_id: str | Omit = omit,
         organization: bool | Omit = omit,
+        resource_type_filters: Iterable[event_watch_params.ResourceTypeFilter] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -328,6 +369,11 @@ class AsyncEventsResource(AsyncAPIResource):
               the caller can see within their organization. No task, task execution or service
               events are produed.
 
+          resource_type_filters: Filters to limit which events are delivered on organization-scoped streams. When
+              empty, all events for the scope are delivered. When populated, only events
+              matching at least one filter entry are forwarded. Not supported for
+              environment-scoped streams; setting this field returns an error.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -343,6 +389,7 @@ class AsyncEventsResource(AsyncAPIResource):
                 {
                     "environment_id": environment_id,
                     "organization": organization,
+                    "resource_type_filters": resource_type_filters,
                 },
                 event_watch_params.EventWatchParams,
             ),

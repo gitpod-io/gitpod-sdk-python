@@ -6,6 +6,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .log_level import LogLevel
+from .update_window_param import UpdateWindowParam
 from .runner_release_channel import RunnerReleaseChannel
 from .metrics_configuration_param import MetricsConfigurationParam
 
@@ -38,3 +39,9 @@ class RunnerConfigurationParam(TypedDict, total=False):
 
     release_channel: Annotated[RunnerReleaseChannel, PropertyInfo(alias="releaseChannel")]
     """The release channel the runner is on"""
+
+    update_window: Annotated[UpdateWindowParam, PropertyInfo(alias="updateWindow")]
+    """
+    update_window defines the daily time window (UTC) during which auto-updates are
+    allowed. If not set, updates are allowed at any time.
+    """
