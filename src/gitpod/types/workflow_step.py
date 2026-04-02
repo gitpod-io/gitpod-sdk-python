@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["WorkflowStep", "Agent", "PullRequest", "Report", "ReportOutput", "Task"]
+__all__ = ["WorkflowStep", "Agent", "PullRequest", "Task"]
 
 
 class Agent(BaseModel):
@@ -51,20 +51,6 @@ class PullRequest(BaseModel):
     """
 
 
-class ReportOutput:
-    pass
-
-
-class Report(BaseModel):
-    outputs: Optional[List[ReportOutput]] = None
-    """Report must have at least one output:
-
-    ```
-    size(this) >= 1
-    ```
-    """
-
-
 class Task(BaseModel):
     """WorkflowTaskStep represents a task step that executes a command."""
 
@@ -85,8 +71,6 @@ class WorkflowStep(BaseModel):
 
     pull_request: Optional[PullRequest] = FieldInfo(alias="pullRequest", default=None)
     """WorkflowPullRequestStep represents a pull request creation step."""
-
-    report: Optional[Report] = None
 
     task: Optional[Task] = None
     """WorkflowTaskStep represents a task step that executes a command."""

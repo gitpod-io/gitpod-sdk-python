@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Iterable
 from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["WorkflowStepParam", "Agent", "PullRequest", "Report", "ReportOutput", "Task"]
+__all__ = ["WorkflowStepParam", "Agent", "PullRequest", "Task"]
 
 
 class Agent(TypedDict, total=False):
@@ -52,20 +51,6 @@ class PullRequest(TypedDict, total=False):
     """
 
 
-class ReportOutput(total=False):
-    pass
-
-
-class Report(TypedDict, total=False):
-    outputs: Iterable[ReportOutput]
-    """Report must have at least one output:
-
-    ```
-    size(this) >= 1
-    ```
-    """
-
-
 class Task(TypedDict, total=False):
     """WorkflowTaskStep represents a task step that executes a command."""
 
@@ -86,8 +71,6 @@ class WorkflowStepParam(TypedDict, total=False):
 
     pull_request: Annotated[PullRequest, PropertyInfo(alias="pullRequest")]
     """WorkflowPullRequestStep represents a pull request creation step."""
-
-    report: Report
 
     task: Task
     """WorkflowTaskStep represents a task step that executes a command."""
