@@ -20,9 +20,3 @@ class RunsOn(TypedDict, total=False):
 
     machine: object
     """Machine runs the service/task directly on the VM/machine level."""
-
-    terminal: object
-    """
-    Terminal runs the service inside a managed PTY terminal in the devcontainer.
-    Users can attach to the terminal interactively via the terminal API.
-    """
