@@ -75,7 +75,6 @@ class TestServices:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -188,7 +187,6 @@ class TestServices:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
             status={
@@ -437,7 +435,6 @@ class TestAsyncServices:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -550,7 +547,6 @@ class TestAsyncServices:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
             status={

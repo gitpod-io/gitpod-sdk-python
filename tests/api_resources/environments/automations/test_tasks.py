@@ -71,7 +71,6 @@ class TestTasks:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -178,7 +177,6 @@ class TestTasks:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -377,7 +375,6 @@ class TestAsyncTasks:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -484,7 +481,6 @@ class TestAsyncTasks:
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
