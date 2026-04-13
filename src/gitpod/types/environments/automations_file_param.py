@@ -54,7 +54,8 @@ class Services(TypedDict, total=False):
     runs_on: Annotated[RunsOn, PropertyInfo(alias="runsOn")]
 
     triggered_by: Annotated[
-        List[Literal["manual", "postEnvironmentStart", "postDevcontainerStart"]], PropertyInfo(alias="triggeredBy")
+        List[Literal["manual", "postEnvironmentStart", "postDevcontainerStart", "prebuild"]],
+        PropertyInfo(alias="triggeredBy"),
     ]
 
 
