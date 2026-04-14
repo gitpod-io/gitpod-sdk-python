@@ -29,6 +29,13 @@ class PullRequest(TypedDict, total=False):
         ]
     ]
 
+    integration_id: Annotated[Optional[str], PropertyInfo(alias="integrationId")]
+    """
+    integration_id is the optional ID of an integration that acts as the source of
+    webhook events. When set, the trigger will be activated when the webhook
+    receives events.
+    """
+
     webhook_id: Annotated[Optional[str], PropertyInfo(alias="webhookId")]
     """
     webhook_id is the optional ID of a webhook that this trigger is bound to. When

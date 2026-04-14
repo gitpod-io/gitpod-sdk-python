@@ -31,6 +31,13 @@ class PullRequest(BaseModel):
         ]
     ] = None
 
+    integration_id: Optional[str] = FieldInfo(alias="integrationId", default=None)
+    """
+    integration_id is the optional ID of an integration that acts as the source of
+    webhook events. When set, the trigger will be activated when the webhook
+    receives events.
+    """
+
     webhook_id: Optional[str] = FieldInfo(alias="webhookId", default=None)
     """
     webhook_id is the optional ID of a webhook that this trigger is bound to. When
