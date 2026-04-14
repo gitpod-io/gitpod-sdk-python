@@ -113,6 +113,7 @@ class TestAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -256,6 +257,7 @@ class TestAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -793,6 +795,7 @@ class TestAsyncAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -936,6 +939,7 @@ class TestAsyncAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
