@@ -27,6 +27,7 @@ class PullRequest(BaseModel):
                 "PULL_REQUEST_EVENT_MERGED",
                 "PULL_REQUEST_EVENT_CLOSED",
                 "PULL_REQUEST_EVENT_READY_FOR_REVIEW",
+                "PULL_REQUEST_EVENT_REVIEW_REQUESTED",
             ]
         ]
     ] = None
