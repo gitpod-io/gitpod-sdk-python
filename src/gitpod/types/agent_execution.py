@@ -461,6 +461,7 @@ class Status(BaseModel):
             "SUPPORTED_MODEL_OPENAI_4O_MINI",
             "SUPPORTED_MODEL_OPENAI_O1",
             "SUPPORTED_MODEL_OPENAI_O1_MINI",
+            "SUPPORTED_MODEL_OPENAI_AUTO",
         ]
     ] = FieldInfo(alias="supportedModel", default=None)
     """supported_model is the LLM model being used by the agent execution."""
