@@ -12,8 +12,13 @@ __all__ = ["RunnerListScmOrganizationsResponse", "Organization"]
 class Organization(BaseModel):
     is_admin: Optional[bool] = FieldInfo(alias="isAdmin", default=None)
     """
-    Whether the user has admin permissions in this organization. Admin permissions
-    typically allow creating organization-level webhooks.
+    Deprecated: this field is unused by all known consumers and is scheduled for
+    removal in a future release. Do not read it.
+
+    Originally intended to gate organization-level webhook creation in the
+    dashboard, but that gating was never implemented. Populating this field on the
+    GitLab path requires a second fully-paginated ListGroups call, which is the main
+    reason we are deprecating it.
     """
 
     name: Optional[str] = None
