@@ -41,7 +41,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...pagination import SyncRunnersPage, AsyncRunnersPage
+from ...pagination import SyncRunnersPage, AsyncRunnersPage, SyncOrganizationsPage, AsyncOrganizationsPage
 from ..._base_client import AsyncPaginator, make_request_options
 from ...types.runner import Runner
 from ...types.runner_kind import RunnerKind
@@ -681,6 +681,8 @@ class RunnersResource(SyncAPIResource):
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        pagination: runner_list_scm_organizations_params.Pagination | Omit = omit,
+        query: str | Omit = omit,
         runner_id: str | Omit = omit,
         scm_host: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -689,7 +691,7 @@ class RunnersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunnerListScmOrganizationsResponse:
+    ) -> SyncOrganizationsPage[RunnerListScmOrganizationsResponse]:
         """
         Lists SCM organizations the user belongs to.
 
@@ -709,7 +711,29 @@ class RunnersResource(SyncAPIResource):
           scmHost: "github.com"
           ```
 
+        - Search GitLab groups:
+
+          Returns the first page of GitLab groups matching the substring.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmHost: "gitlab.com"
+          query: "platform"
+          pagination:
+            pageSize: 25
+          ```
+
         Args:
+          pagination: Pagination parameters. When unset, defaults to the standard PaginationRequest
+              defaults (page_size 25, max 100). Tokens are opaque and provider-specific.
+
+          query: Optional substring filter applied to the organization name.
+
+              - GitLab: forwarded to the upstream `search` parameter (server-side,
+                case-insensitive substring on name/path).
+              - GitHub and Bitbucket: not implemented as they don't support searching Empty
+                value means no filter.
+
           scm_host: The SCM host to list organizations from (e.g., "github.com", "gitlab.com")
 
           extra_headers: Send extra headers
@@ -720,10 +744,13 @@ class RunnersResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._post(
+        return self._get_api_list(
             "/gitpod.v1.RunnerService/ListSCMOrganizations",
+            page=SyncOrganizationsPage[RunnerListScmOrganizationsResponse],
             body=maybe_transform(
                 {
+                    "pagination": pagination,
+                    "query": query,
                     "runner_id": runner_id,
                     "scm_host": scm_host,
                 },
@@ -742,7 +769,8 @@ class RunnersResource(SyncAPIResource):
                     runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
                 ),
             ),
-            cast_to=RunnerListScmOrganizationsResponse,
+            model=RunnerListScmOrganizationsResponse,
+            method="post",
         )
 
     def parse_context_url(
@@ -1505,11 +1533,13 @@ class AsyncRunnersResource(AsyncAPIResource):
             cast_to=RunnerCreateRunnerTokenResponse,
         )
 
-    async def list_scm_organizations(
+    def list_scm_organizations(
         self,
         *,
         token: str | Omit = omit,
         page_size: int | Omit = omit,
+        pagination: runner_list_scm_organizations_params.Pagination | Omit = omit,
+        query: str | Omit = omit,
         runner_id: str | Omit = omit,
         scm_host: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1518,7 +1548,7 @@ class AsyncRunnersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> RunnerListScmOrganizationsResponse:
+    ) -> AsyncPaginator[RunnerListScmOrganizationsResponse, AsyncOrganizationsPage[RunnerListScmOrganizationsResponse]]:
         """
         Lists SCM organizations the user belongs to.
 
@@ -1538,7 +1568,29 @@ class AsyncRunnersResource(AsyncAPIResource):
           scmHost: "github.com"
           ```
 
+        - Search GitLab groups:
+
+          Returns the first page of GitLab groups matching the substring.
+
+          ```yaml
+          runnerId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          scmHost: "gitlab.com"
+          query: "platform"
+          pagination:
+            pageSize: 25
+          ```
+
         Args:
+          pagination: Pagination parameters. When unset, defaults to the standard PaginationRequest
+              defaults (page_size 25, max 100). Tokens are opaque and provider-specific.
+
+          query: Optional substring filter applied to the organization name.
+
+              - GitLab: forwarded to the upstream `search` parameter (server-side,
+                case-insensitive substring on name/path).
+              - GitHub and Bitbucket: not implemented as they don't support searching Empty
+                value means no filter.
+
           scm_host: The SCM host to list organizations from (e.g., "github.com", "gitlab.com")
 
           extra_headers: Send extra headers
@@ -1549,10 +1601,13 @@ class AsyncRunnersResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._post(
+        return self._get_api_list(
             "/gitpod.v1.RunnerService/ListSCMOrganizations",
-            body=await async_maybe_transform(
+            page=AsyncOrganizationsPage[RunnerListScmOrganizationsResponse],
+            body=maybe_transform(
                 {
+                    "pagination": pagination,
+                    "query": query,
                     "runner_id": runner_id,
                     "scm_host": scm_host,
                 },
@@ -1563,7 +1618,7 @@ class AsyncRunnersResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform(
+                query=maybe_transform(
                     {
                         "token": token,
                         "page_size": page_size,
@@ -1571,7 +1626,8 @@ class AsyncRunnersResource(AsyncAPIResource):
                     runner_list_scm_organizations_params.RunnerListScmOrganizationsParams,
                 ),
             ),
-            cast_to=RunnerListScmOrganizationsResponse,
+            model=RunnerListScmOrganizationsResponse,
+            method="post",
         )
 
     async def parse_context_url(

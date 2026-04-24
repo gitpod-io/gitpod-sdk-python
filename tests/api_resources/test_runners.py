@@ -21,7 +21,7 @@ from gitpod.types import (
     RunnerCheckRepositoryAccessResponse,
     RunnerCheckAuthenticationForHostResponse,
 )
-from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage
+from gitpod.pagination import SyncRunnersPage, AsyncRunnersPage, SyncOrganizationsPage, AsyncOrganizationsPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -416,7 +416,7 @@ class TestRunners:
     @parametrize
     def test_method_list_scm_organizations(self, client: Gitpod) -> None:
         runner = client.runners.list_scm_organizations()
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -424,10 +424,15 @@ class TestRunners:
         runner = client.runners.list_scm_organizations(
             token="token",
             page_size=0,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
+            query="query",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_host="github.com",
         )
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -437,7 +442,7 @@ class TestRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = response.parse()
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(SyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -447,7 +452,7 @@ class TestRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = response.parse()
-            assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+            assert_matches_type(SyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -925,7 +930,7 @@ class TestAsyncRunners:
     @parametrize
     async def test_method_list_scm_organizations(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.list_scm_organizations()
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -933,10 +938,15 @@ class TestAsyncRunners:
         runner = await async_client.runners.list_scm_organizations(
             token="token",
             page_size=0,
+            pagination={
+                "token": "token",
+                "page_size": 100,
+            },
+            query="query",
             runner_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
             scm_host="github.com",
         )
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -946,7 +956,7 @@ class TestAsyncRunners:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         runner = await response.parse()
-        assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+        assert_matches_type(AsyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -956,7 +966,7 @@ class TestAsyncRunners:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             runner = await response.parse()
-            assert_matches_type(RunnerListScmOrganizationsResponse, runner, path=["response"])
+            assert_matches_type(AsyncOrganizationsPage[RunnerListScmOrganizationsResponse], runner, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -1,15 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["RunnerListScmOrganizationsResponse", "Organization"]
+__all__ = ["RunnerListScmOrganizationsResponse"]
 
 
-class Organization(BaseModel):
+class RunnerListScmOrganizationsResponse(BaseModel):
     is_admin: Optional[bool] = FieldInfo(alias="isAdmin", default=None)
     """
     Deprecated: this field is unused by all known consumers and is scheduled for
@@ -26,8 +26,3 @@ class Organization(BaseModel):
 
     url: Optional[str] = None
     """Organization URL (e.g., "https://github.com/gitpod-io")"""
-
-
-class RunnerListScmOrganizationsResponse(BaseModel):
-    organizations: Optional[List[Organization]] = None
-    """List of organizations the user belongs to"""
