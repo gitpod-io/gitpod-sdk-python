@@ -37,6 +37,7 @@ class TestAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "readiness_timeout": "+9125115.360s",
                         "role": "",
                         "runs_on": {
                             "docker": {
@@ -117,6 +118,7 @@ class TestAsyncAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "readiness_timeout": "+9125115.360s",
                         "role": "",
                         "runs_on": {
                             "docker": {
