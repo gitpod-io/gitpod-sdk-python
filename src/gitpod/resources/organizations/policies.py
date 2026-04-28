@@ -6,6 +6,7 @@ from typing import Dict, Optional
 
 import httpx
 
+from ...types import AdmissionLevel
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -18,6 +19,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.organizations import policy_update_params, policy_retrieve_params
+from ...types.admission_level import AdmissionLevel
 from ...types.organizations.veto_exec_policy_param import VetoExecPolicyParam
 from ...types.organizations.policy_retrieve_response import PolicyRetrieveResponse
 
@@ -109,6 +111,7 @@ class PoliciesResource(SyncAPIResource):
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
         maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        max_port_admission_level: Optional[AdmissionLevel] | Omit = omit,
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
@@ -201,6 +204,11 @@ class PoliciesResource(SyncAPIResource):
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
 
+          max_port_admission_level: max_port_admission_level caps the maximum admission level a user-opened port may
+              use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+              ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+              field, when true, takes precedence and blocks all user-initiated port sharing.
+
           members_create_projects: members_create_projects controls whether members can create projects
 
           members_require_projects: members_require_projects controls whether environments can only be created from
@@ -245,6 +253,7 @@ class PoliciesResource(SyncAPIResource):
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
+                    "max_port_admission_level": max_port_admission_level,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
@@ -349,6 +358,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
         maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        max_port_admission_level: Optional[AdmissionLevel] | Omit = omit,
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
@@ -441,6 +451,11 @@ class AsyncPoliciesResource(AsyncAPIResource):
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
 
+          max_port_admission_level: max_port_admission_level caps the maximum admission level a user-opened port may
+              use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+              ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+              field, when true, takes precedence and blocks all user-initiated port sharing.
+
           members_create_projects: members_create_projects controls whether members can create projects
 
           members_require_projects: members_require_projects controls whether environments can only be created from
@@ -485,6 +500,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
+                    "max_port_admission_level": max_port_admission_level,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,

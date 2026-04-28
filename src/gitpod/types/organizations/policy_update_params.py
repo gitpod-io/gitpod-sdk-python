@@ -7,6 +7,7 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
+from ..admission_level import AdmissionLevel
 from .veto_exec_policy_param import VetoExecPolicyParam
 from .conversation_sharing_policy import ConversationSharingPolicy
 
@@ -96,6 +97,14 @@ class PolicyUpdateParams(TypedDict, total=False):
     """
     maximum_running_environments_per_user limits simultaneously running environments
     per user
+    """
+
+    max_port_admission_level: Annotated[Optional[AdmissionLevel], PropertyInfo(alias="maxPortAdmissionLevel")]
+    """
+    max_port_admission_level caps the maximum admission level a user-opened port may
+    use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+    ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+    field, when true, takes precedence and blocks all user-initiated port sharing.
     """
 
     members_create_projects: Annotated[Optional[bool], PropertyInfo(alias="membersCreateProjects")]
