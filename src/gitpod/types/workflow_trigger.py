@@ -92,6 +92,8 @@ class WorkflowTrigger(BaseModel):
     - Manual: Can use any context type
     - Time: Typically uses Projects or Repositories context
     - PullRequest: Can use any context, FromTrigger uses PR repository context
+    - Incident: Typically uses Projects or Repositories context (no inherent repo
+      context)
     """
 
     manual: Optional[object] = None
