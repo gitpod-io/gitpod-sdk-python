@@ -34,6 +34,10 @@ class TestSecrets:
         secret = client.secrets.create(
             api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
+            credential_proxy={
+                "header": "header",
+                "target_hosts": ["string"],
+            },
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
@@ -247,6 +251,10 @@ class TestAsyncSecrets:
         secret = await async_client.secrets.create(
             api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
+            credential_proxy={
+                "header": "header",
+                "target_hosts": ["string"],
+            },
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",

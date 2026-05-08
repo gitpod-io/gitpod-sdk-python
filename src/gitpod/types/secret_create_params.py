@@ -4,10 +4,11 @@ from __future__ import annotations
 
 from typing_extensions import Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .secret_scope_param import SecretScopeParam
 
-__all__ = ["SecretCreateParams"]
+__all__ = ["SecretCreateParams", "CredentialProxy"]
 
 
 class SecretCreateParams(TypedDict, total=False):
@@ -22,6 +23,16 @@ class SecretCreateParams(TypedDict, total=False):
     """
     secret will be mounted as a docker config in the environment VM, mount will have
     the docker registry host
+    """
+
+    credential_proxy: Annotated[CredentialProxy, PropertyInfo(alias="credentialProxy")]
+    """
+    credential_proxy configures transparent credential injection when environments
+    materialize this secret. When set, the credential proxy intercepts HTTPS traffic
+    to the target hosts and replaces the dummy mounted value with the real value in
+    the specified HTTP header. The real secret value is never exposed in the
+    environment. This field is orthogonal to mount — a secret can be both mounted
+    and proxied at the same time.
     """
 
     environment_variable: Annotated[bool, PropertyInfo(alias="environmentVariable")]
@@ -52,3 +63,24 @@ class SecretCreateParams(TypedDict, total=False):
 
     value: str
     """value is the plaintext value of the secret"""
+
+
+class CredentialProxy(TypedDict, total=False):
+    """
+    credential_proxy configures transparent credential injection when
+     environments materialize this secret. When set, the credential proxy
+     intercepts HTTPS traffic to the target hosts and replaces the dummy
+     mounted value with the real value in the specified HTTP header. The real
+     secret value is never exposed in the environment.
+     This field is orthogonal to mount — a secret can be both mounted and
+     proxied at the same time.
+    """
+
+    header: str
+    """header is the HTTP header name to inject (e.g. "Authorization")."""
+
+    target_hosts: Annotated[SequenceNotStr[str], PropertyInfo(alias="targetHosts")]
+    """
+    target_hosts lists the hostnames to intercept (for example "github.com" or
+    "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
+    """
