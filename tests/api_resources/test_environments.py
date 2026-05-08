@@ -108,7 +108,6 @@ class TestEnvironments:
                         "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "credential_proxy": {
-                            "format": "FORMAT_UNSPECIFIED",
                             "header": "header",
                             "target_hosts": ["string"],
                         },
@@ -487,7 +486,6 @@ class TestEnvironments:
                         "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "credential_proxy": {
-                            "format": "FORMAT_UNSPECIFIED",
                             "header": "header",
                             "target_hosts": ["string"],
                         },
@@ -808,7 +806,6 @@ class TestAsyncEnvironments:
                         "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "credential_proxy": {
-                            "format": "FORMAT_UNSPECIFIED",
                             "header": "header",
                             "target_hosts": ["string"],
                         },
@@ -1187,7 +1184,6 @@ class TestAsyncEnvironments:
                         "api_only": True,
                         "container_registry_basic_auth_host": "containerRegistryBasicAuthHost",
                         "credential_proxy": {
-                            "format": "FORMAT_UNSPECIFIED",
                             "header": "header",
                             "target_hosts": ["string"],
                         },

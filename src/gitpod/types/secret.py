@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
@@ -9,7 +9,28 @@ from .._models import BaseModel
 from .secret_scope import SecretScope
 from .shared.subject import Subject
 
-__all__ = ["Secret"]
+__all__ = ["Secret", "CredentialProxy"]
+
+
+class CredentialProxy(BaseModel):
+    """
+    credential_proxy configures transparent credential injection via the
+     credential proxy. When set, the credential proxy intercepts HTTPS
+     traffic to the target hosts and replaces the dummy mounted value with
+     the real value in the specified HTTP header. The real secret value is
+     never exposed in the environment.
+     This field is orthogonal to mount — a secret can be both mounted and
+     proxied at the same time.
+    """
+
+    header: Optional[str] = None
+    """header is the HTTP header name to inject (e.g. "Authorization")."""
+
+    target_hosts: Optional[List[str]] = FieldInfo(alias="targetHosts", default=None)
+    """
+    target_hosts lists the hostnames to intercept (for example "github.com" or
+    "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
+    """
 
 
 class Secret(BaseModel):
@@ -115,6 +136,16 @@ class Secret(BaseModel):
 
     creator: Optional[Subject] = None
     """creator is the identity of the creator of the secret"""
+
+    credential_proxy: Optional[CredentialProxy] = FieldInfo(alias="credentialProxy", default=None)
+    """
+    credential_proxy configures transparent credential injection via the credential
+    proxy. When set, the credential proxy intercepts HTTPS traffic to the target
+    hosts and replaces the dummy mounted value with the real value in the specified
+    HTTP header. The real secret value is never exposed in the environment. This
+    field is orthogonal to mount — a secret can be both mounted and proxied at the
+    same time.
+    """
 
     environment_variable: Optional[bool] = FieldInfo(alias="environmentVariable", default=None)
     """
