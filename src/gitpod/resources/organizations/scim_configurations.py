@@ -60,6 +60,7 @@ class ScimConfigurationsResource(SyncAPIResource):
         *,
         organization_id: str,
         sso_configuration_id: str,
+        allow_unverified_email_account_linking: Optional[bool] | Omit = omit,
         name: Optional[str] | Omit = omit,
         token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -107,6 +108,10 @@ class ScimConfigurationsResource(SyncAPIResource):
           sso_configuration_id: sso_configuration_id is the SSO configuration to link (required for user
               provisioning)
 
+          allow_unverified_email_account_linking: allow_unverified_email_account_linking allows SCIM to link provisioned users to
+              existing accounts when the identity provider does not mark the email address as
+              verified
+
           name: name is a human-readable name for the SCIM configuration
 
           token_expires_in: token_expires_in is the duration until the token expires. Defaults to 1 year.
@@ -126,6 +131,7 @@ class ScimConfigurationsResource(SyncAPIResource):
                 {
                     "organization_id": organization_id,
                     "sso_configuration_id": sso_configuration_id,
+                    "allow_unverified_email_account_linking": allow_unverified_email_account_linking,
                     "name": name,
                     "token_expires_in": token_expires_in,
                 },
@@ -194,6 +200,7 @@ class ScimConfigurationsResource(SyncAPIResource):
         self,
         *,
         scim_configuration_id: str,
+        allow_unverified_email_account_linking: Optional[bool] | Omit = omit,
         enabled: Optional[bool] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sso_configuration_id: Optional[str] | Omit = omit,
@@ -236,6 +243,10 @@ class ScimConfigurationsResource(SyncAPIResource):
         Args:
           scim_configuration_id: scim_configuration_id is the ID of the SCIM configuration to update
 
+          allow_unverified_email_account_linking: allow_unverified_email_account_linking allows SCIM to link provisioned users to
+              existing accounts when the identity provider does not mark the email address as
+              verified
+
           enabled: enabled controls whether SCIM provisioning is active
 
           name: name is a human-readable name for the SCIM configuration
@@ -255,6 +266,7 @@ class ScimConfigurationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "scim_configuration_id": scim_configuration_id,
+                    "allow_unverified_email_account_linking": allow_unverified_email_account_linking,
                     "enabled": enabled,
                     "name": name,
                     "sso_configuration_id": sso_configuration_id,
@@ -482,6 +494,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         *,
         organization_id: str,
         sso_configuration_id: str,
+        allow_unverified_email_account_linking: Optional[bool] | Omit = omit,
         name: Optional[str] | Omit = omit,
         token_expires_in: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -529,6 +542,10 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
           sso_configuration_id: sso_configuration_id is the SSO configuration to link (required for user
               provisioning)
 
+          allow_unverified_email_account_linking: allow_unverified_email_account_linking allows SCIM to link provisioned users to
+              existing accounts when the identity provider does not mark the email address as
+              verified
+
           name: name is a human-readable name for the SCIM configuration
 
           token_expires_in: token_expires_in is the duration until the token expires. Defaults to 1 year.
@@ -548,6 +565,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
                 {
                     "organization_id": organization_id,
                     "sso_configuration_id": sso_configuration_id,
+                    "allow_unverified_email_account_linking": allow_unverified_email_account_linking,
                     "name": name,
                     "token_expires_in": token_expires_in,
                 },
@@ -616,6 +634,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         self,
         *,
         scim_configuration_id: str,
+        allow_unverified_email_account_linking: Optional[bool] | Omit = omit,
         enabled: Optional[bool] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sso_configuration_id: Optional[str] | Omit = omit,
@@ -658,6 +677,10 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
         Args:
           scim_configuration_id: scim_configuration_id is the ID of the SCIM configuration to update
 
+          allow_unverified_email_account_linking: allow_unverified_email_account_linking allows SCIM to link provisioned users to
+              existing accounts when the identity provider does not mark the email address as
+              verified
+
           enabled: enabled controls whether SCIM provisioning is active
 
           name: name is a human-readable name for the SCIM configuration
@@ -677,6 +700,7 @@ class AsyncScimConfigurationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "scim_configuration_id": scim_configuration_id,
+                    "allow_unverified_email_account_linking": allow_unverified_email_account_linking,
                     "enabled": enabled,
                     "name": name,
                     "sso_configuration_id": sso_configuration_id,

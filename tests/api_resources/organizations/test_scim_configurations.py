@@ -39,6 +39,7 @@ class TestScimConfigurations:
         scim_configuration = client.organizations.scim_configurations.create(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            allow_unverified_email_account_linking=True,
             name="name",
             token_expires_in="+9125115.360s",
         )
@@ -119,6 +120,7 @@ class TestScimConfigurations:
     def test_method_update_with_all_params(self, client: Gitpod) -> None:
         scim_configuration = client.organizations.scim_configurations.update(
             scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            allow_unverified_email_account_linking=True,
             enabled=False,
             name="name",
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -290,6 +292,7 @@ class TestAsyncScimConfigurations:
         scim_configuration = await async_client.organizations.scim_configurations.create(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             sso_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            allow_unverified_email_account_linking=True,
             name="name",
             token_expires_in="+9125115.360s",
         )
@@ -370,6 +373,7 @@ class TestAsyncScimConfigurations:
     async def test_method_update_with_all_params(self, async_client: AsyncGitpod) -> None:
         scim_configuration = await async_client.organizations.scim_configurations.update(
             scim_configuration_id="d2c94c27-3b76-4a42-b88c-95a85e392c68",
+            allow_unverified_email_account_linking=True,
             enabled=False,
             name="name",
             sso_configuration_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",

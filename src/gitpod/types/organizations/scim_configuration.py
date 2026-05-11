@@ -30,6 +30,15 @@ class ScimConfiguration(BaseModel):
     updated_at: datetime = FieldInfo(alias="updatedAt")
     """updated_at is when the SCIM configuration was last updated"""
 
+    allow_unverified_email_account_linking: Optional[bool] = FieldInfo(
+        alias="allowUnverifiedEmailAccountLinking", default=None
+    )
+    """
+    allow_unverified_email_account_linking allows SCIM to link provisioned users to
+    existing accounts when the identity provider does not mark the email address as
+    verified
+    """
+
     enabled: Optional[bool] = None
     """enabled indicates if SCIM provisioning is active"""
 
