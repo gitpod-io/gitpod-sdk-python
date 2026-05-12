@@ -88,6 +88,7 @@ class TestPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
+            project_creation_defaults={"insights_enabled": True},
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
@@ -208,6 +209,7 @@ class TestAsyncPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
+            project_creation_defaults={"insights_enabled": True},
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
