@@ -115,6 +115,7 @@ class PoliciesResource(SyncAPIResource):
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
+        project_creation_defaults: Optional[policy_update_params.ProjectCreationDefaults] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
@@ -218,6 +219,9 @@ class PoliciesResource(SyncAPIResource):
               in the organization. System ports (VS Code Browser, agents) are always exempt
               from this policy.
 
+          project_creation_defaults: project_creation_defaults contains updates to default settings applied to newly
+              created projects.
+
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.
 
@@ -257,6 +261,7 @@ class PoliciesResource(SyncAPIResource):
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
+                    "project_creation_defaults": project_creation_defaults,
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
@@ -362,6 +367,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
+        project_creation_defaults: Optional[policy_update_params.ProjectCreationDefaults] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
@@ -465,6 +471,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
               in the organization. System ports (VS Code Browser, agents) are always exempt
               from this policy.
 
+          project_creation_defaults: project_creation_defaults contains updates to default settings applied to newly
+              created projects.
+
           require_custom_domain_access: require_custom_domain_access controls whether users must access via custom
               domain when one is configured. When true, access via app.gitpod.io is blocked.
 
@@ -504,6 +513,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
+                    "project_creation_defaults": project_creation_defaults,
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,

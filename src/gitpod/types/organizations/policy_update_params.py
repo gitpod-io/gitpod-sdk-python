@@ -15,6 +15,7 @@ __all__ = [
     "PolicyUpdateParams",
     "AgentPolicy",
     "EditorVersionRestrictions",
+    "ProjectCreationDefaults",
     "SecurityAgentPolicy",
     "SecurityAgentPolicyCrowdstrike",
 ]
@@ -123,6 +124,14 @@ class PolicyUpdateParams(TypedDict, total=False):
     from this policy.
     """
 
+    project_creation_defaults: Annotated[
+        Optional[ProjectCreationDefaults], PropertyInfo(alias="projectCreationDefaults")
+    ]
+    """
+    project_creation_defaults contains updates to default settings applied to newly
+    created projects.
+    """
+
     require_custom_domain_access: Annotated[Optional[bool], PropertyInfo(alias="requireCustomDomainAccess")]
     """
     require_custom_domain_access controls whether users must access via custom
@@ -192,6 +201,18 @@ class EditorVersionRestrictions(TypedDict, total=False):
     latest version of the editor
 
     Examples for JetBrains: `["2025.2", "2025.1", "2024.3"]`
+    """
+
+
+class ProjectCreationDefaults(TypedDict, total=False):
+    """
+    project_creation_defaults contains updates to default settings applied to newly created projects.
+    """
+
+    insights_enabled: Annotated[Optional[bool], PropertyInfo(alias="insightsEnabled")]
+    """
+    insights_enabled controls whether Insights (co-author attribution) is
+    automatically enabled on newly created projects.
     """
 
 

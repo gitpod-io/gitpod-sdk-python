@@ -507,6 +507,7 @@ from gitpod.types.organizations import (
     CustomSecurityAgent,
     KernelControlsAction,
     OrganizationPolicies,
+    ProjectCreationDefaults,
     SecurityAgentPolicy,
     VetoExecPolicy,
     PolicyRetrieveResponse,
