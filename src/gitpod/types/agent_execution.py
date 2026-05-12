@@ -21,6 +21,7 @@ __all__ = [
     "StatusCurrentOperation",
     "StatusCurrentOperationLlm",
     "StatusCurrentOperationToolUse",
+    "StatusGoal",
     "StatusMcpIntegrationStatus",
     "StatusOutputs",
     "StatusUsedEnvironment",
@@ -308,6 +309,30 @@ class StatusCurrentOperation(BaseModel):
     tool_use: Optional[StatusCurrentOperationToolUse] = FieldInfo(alias="toolUse", default=None)
 
 
+class StatusGoal(BaseModel):
+    """goal projects the current native Codex thread goal, if any."""
+
+    objective: Optional[str] = None
+    """
+    objective is the current goal text tracked by the native Codex thread-goal
+    subsystem.
+    """
+
+    status: Optional[
+        Literal[
+            "GOAL_STATUS_UNSPECIFIED",
+            "GOAL_STATUS_ACTIVE",
+            "GOAL_STATUS_PAUSED",
+            "GOAL_STATUS_COMPLETED",
+            "GOAL_STATUS_BUDGET_EXHAUSTED",
+        ]
+    ] = None
+    """status is the lifecycle state of the current goal."""
+
+    updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
+    """updated_at is the most recent native goal update timestamp, when available."""
+
+
 class StatusMcpIntegrationStatus(BaseModel):
     """
     MCPIntegrationStatus represents the status of a single MCP integration
@@ -392,6 +417,9 @@ class Status(BaseModel):
         ]
     ] = FieldInfo(alias="failureReason", default=None)
     """failure_reason contains a structured reason code for the failure."""
+
+    goal: Optional[StatusGoal] = None
+    """goal projects the current native Codex thread goal, if any."""
 
     input_tokens_used: Optional[str] = FieldInfo(alias="inputTokensUsed", default=None)
 
