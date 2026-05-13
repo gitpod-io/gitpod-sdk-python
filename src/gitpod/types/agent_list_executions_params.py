@@ -22,6 +22,12 @@ class AgentListExecutionsParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
+    agent_execution_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="agentExecutionIds")]
+    """
+    agent_execution_ids filters the response to only the specified executions.
+    Useful for checking existence of a known set of execution IDs.
+    """
+
     agent_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="agentIds")]
 
     annotations: Dict[str, str]

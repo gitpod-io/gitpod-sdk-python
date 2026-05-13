@@ -191,6 +191,7 @@ class TestAgents:
             token="token",
             page_size=0,
             filter={
+                "agent_execution_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
                 "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
@@ -749,6 +750,7 @@ class TestAsyncAgents:
             token="token",
             page_size=0,
             filter={
+                "agent_execution_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
                 "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
