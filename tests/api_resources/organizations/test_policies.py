@@ -105,6 +105,7 @@ class TestPolicies:
                 "enabled": True,
                 "executables": ["string"],
             },
+            web_browser_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 
@@ -226,6 +227,7 @@ class TestAsyncPolicies:
                 "enabled": True,
                 "executables": ["string"],
             },
+            web_browser_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 

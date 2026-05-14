@@ -97,6 +97,12 @@ class OrganizationPolicies(BaseModel):
     the organization, only users provisioned via SCIM can create accounts.
     """
 
+    web_browser_disabled: bool = FieldInfo(alias="webBrowserDisabled")
+    """
+    web_browser_disabled controls whether users can open the built-in web browser
+    from environment pages. This does not affect VS Code Browser.
+    """
+
     delete_archived_environments_after: Optional[str] = FieldInfo(alias="deleteArchivedEnvironmentsAfter", default=None)
     """
     delete_archived_environments_after controls how long archived environments are

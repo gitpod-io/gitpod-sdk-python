@@ -151,6 +151,12 @@ class PolicyUpdateParams(TypedDict, total=False):
     veto_exec_policy: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="vetoExecPolicy")]
     """veto_exec_policy contains the veto exec policy for environments."""
 
+    web_browser_disabled: Annotated[Optional[bool], PropertyInfo(alias="webBrowserDisabled")]
+    """
+    web_browser_disabled controls whether users can open the built-in web browser
+    from environment pages. This does not affect VS Code Browser.
+    """
+
 
 class AgentPolicy(TypedDict, total=False):
     """agent_policy contains agent-specific policy settings"""

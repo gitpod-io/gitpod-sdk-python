@@ -120,6 +120,7 @@ class PoliciesResource(SyncAPIResource):
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
+        web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -233,6 +234,9 @@ class PoliciesResource(SyncAPIResource):
 
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
 
+          web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
+              from environment pages. This does not affect VS Code Browser.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -266,6 +270,7 @@ class PoliciesResource(SyncAPIResource):
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
                     "veto_exec_policy": veto_exec_policy,
+                    "web_browser_disabled": web_browser_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),
@@ -372,6 +377,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
+        web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -485,6 +491,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
 
+          web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
+              from environment pages. This does not affect VS Code Browser.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -518,6 +527,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
                     "veto_exec_policy": veto_exec_policy,
+                    "web_browser_disabled": web_browser_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),
