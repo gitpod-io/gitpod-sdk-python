@@ -53,6 +53,12 @@ class OrganizationPolicies(BaseModel):
     repo
     """
 
+    disable_from_scratch: bool = FieldInfo(alias="disableFromScratch")
+    """
+    disable_from_scratch controls whether non-admin users can create blank
+    environments without a Git or URL initializer.
+    """
+
     maximum_environments_per_user: str = FieldInfo(alias="maximumEnvironmentsPerUser")
     """
     maximum_environments_per_user limits total environments (running or stopped) per

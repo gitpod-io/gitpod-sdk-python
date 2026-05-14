@@ -106,6 +106,7 @@ class PoliciesResource(SyncAPIResource):
         default_editor_id: Optional[str] | Omit = omit,
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
+        disable_from_scratch: Optional[bool] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
@@ -184,6 +185,9 @@ class PoliciesResource(SyncAPIResource):
               kept before automatic deletion. 0 means no automatic deletion. Maximum duration
               is 4 weeks (2419200 seconds).
 
+          disable_from_scratch: disable_from_scratch controls whether non-admin users can create blank
+              environments without a Git or URL initializer.
+
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
@@ -256,6 +260,7 @@ class PoliciesResource(SyncAPIResource):
                     "default_editor_id": default_editor_id,
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
+                    "disable_from_scratch": disable_from_scratch,
                     "editor_version_restrictions": editor_version_restrictions,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
@@ -363,6 +368,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         default_editor_id: Optional[str] | Omit = omit,
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
+        disable_from_scratch: Optional[bool] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
@@ -441,6 +447,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
               kept before automatic deletion. 0 means no automatic deletion. Maximum duration
               is 4 weeks (2419200 seconds).
 
+          disable_from_scratch: disable_from_scratch controls whether non-admin users can create blank
+              environments without a Git or URL initializer.
+
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
@@ -513,6 +522,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "default_editor_id": default_editor_id,
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
+                    "disable_from_scratch": disable_from_scratch,
                     "editor_version_restrictions": editor_version_restrictions,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,

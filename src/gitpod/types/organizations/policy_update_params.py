@@ -59,6 +59,12 @@ class PolicyUpdateParams(TypedDict, total=False):
     is 4 weeks (2419200 seconds).
     """
 
+    disable_from_scratch: Annotated[Optional[bool], PropertyInfo(alias="disableFromScratch")]
+    """
+    disable_from_scratch controls whether non-admin users can create blank
+    environments without a Git or URL initializer.
+    """
+
     editor_version_restrictions: Annotated[
         Dict[str, EditorVersionRestrictions], PropertyInfo(alias="editorVersionRestrictions")
     ]
