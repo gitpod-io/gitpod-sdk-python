@@ -9,7 +9,25 @@ from typing_extensions import Annotated, TypedDict
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
-__all__ = ["WakeEventParam", "Environment", "LoopRetrigger", "LoopRetriggerUnmetCondition", "Timer"]
+__all__ = [
+    "WakeEventParam",
+    "DevcontainerRebuild",
+    "Environment",
+    "LoopRetrigger",
+    "LoopRetriggerUnmetCondition",
+    "Timer",
+]
+
+
+class DevcontainerRebuild(TypedDict, total=False):
+    environment_id: Annotated[str, PropertyInfo(alias="environmentId")]
+
+    failure_message: Annotated[SequenceNotStr[str], PropertyInfo(alias="failureMessage")]
+
+    phase: str
+    """The devcontainer phase reached by the target session."""
+
+    session_id: Annotated[str, PropertyInfo(alias="sessionId")]
 
 
 class Environment(TypedDict, total=False):
@@ -51,6 +69,8 @@ class WakeEventParam(TypedDict, total=False):
     WakeEvent is sent by the backend to wake an agent when a registered interest fires.
      Delivered via SendToAgentExecution as a new oneof variant.
     """
+
+    devcontainer_rebuild: Annotated[DevcontainerRebuild, PropertyInfo(alias="devcontainerRebuild")]
 
     environment: Environment
 

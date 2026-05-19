@@ -386,6 +386,12 @@ class TestAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "devcontainer_rebuild": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                    "session_id": "sessionId",
+                },
                 "environment": {
                     "environment_id": "environmentId",
                     "failure_message": ["string"],
@@ -945,6 +951,12 @@ class TestAsyncAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "devcontainer_rebuild": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                    "session_id": "sessionId",
+                },
                 "environment": {
                     "environment_id": "environmentId",
                     "failure_message": ["string"],
