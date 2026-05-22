@@ -109,13 +109,16 @@ class TestPolicies:
                 ],
                 "insights_enabled": True,
                 "prebuilds": {
-                    "enable_jetbrains_warmup": True,
-                    "prebuild_executor": {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "principal": "PRINCIPAL_UNSPECIFIED",
+                    "disabled": {},
+                    "enabled": {
+                        "enable_jetbrains_warmup": True,
+                        "prebuild_executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
                     },
-                    "timeout": "+9125115.360s",
-                    "trigger": {"daily_schedule": {"hour_utc": 23}},
                 },
             },
             require_custom_domain_access=True,
@@ -261,13 +264,16 @@ class TestAsyncPolicies:
                 ],
                 "insights_enabled": True,
                 "prebuilds": {
-                    "enable_jetbrains_warmup": True,
-                    "prebuild_executor": {
-                        "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "principal": "PRINCIPAL_UNSPECIFIED",
+                    "disabled": {},
+                    "enabled": {
+                        "enable_jetbrains_warmup": True,
+                        "prebuild_executor": {
+                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                            "principal": "PRINCIPAL_UNSPECIFIED",
+                        },
+                        "timeout": "+9125115.360s",
+                        "trigger": {"daily_schedule": {"hour_utc": 23}},
                     },
-                    "timeout": "+9125115.360s",
-                    "trigger": {"daily_schedule": {"hour_utc": 23}},
                 },
             },
             require_custom_domain_access=True,
