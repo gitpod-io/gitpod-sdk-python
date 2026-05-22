@@ -18,6 +18,7 @@ __all__ = [
     "AgentPolicy",
     "EditorVersionRestrictions",
     "ProjectCreationDefaults",
+    "ProjectCreationDefaultsPrebuilds",
     "SecurityAgentPolicy",
     "SecurityAgentPolicyCrowdstrike",
 ]
@@ -218,6 +219,19 @@ class EditorVersionRestrictions(TypedDict, total=False):
     """
 
 
+class ProjectCreationDefaultsPrebuilds(TypedDict, total=False):
+    """
+    prebuilds updates default prebuild settings for newly created projects.
+     When absent, prebuild defaults are left unchanged.
+    """
+
+    disabled: object
+    """disabled clears persisted prebuild defaults."""
+
+    enabled: ProjectCreationDefaultsPrebuildsParam
+    """enabled sets or updates persisted prebuild defaults."""
+
+
 class ProjectCreationDefaults(TypedDict, total=False):
     """
     project_creation_defaults contains updates to default settings applied to newly created projects.
@@ -237,11 +251,10 @@ class ProjectCreationDefaults(TypedDict, total=False):
     automatically enabled on newly created projects.
     """
 
-    prebuilds: Optional[ProjectCreationDefaultsPrebuildsParam]
+    prebuilds: Optional[ProjectCreationDefaultsPrebuilds]
     """
-    prebuilds configures default prebuild settings for newly created projects. Set
-    to enable/update prebuild defaults. Prebuilds are disabled by default when this
-    field is absent.
+    prebuilds updates default prebuild settings for newly created projects. When
+    absent, prebuild defaults are left unchanged.
     """
 
 
