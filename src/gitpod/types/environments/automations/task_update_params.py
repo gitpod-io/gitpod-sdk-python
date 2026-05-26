@@ -42,4 +42,6 @@ class Spec(TypedDict, total=False):
 
     env: Iterable[EnvironmentVariableItem]
 
+    prebuild_requires_success: Annotated[Optional[bool], PropertyInfo(alias="prebuildRequiresSuccess")]
+
     runs_on: Annotated[Optional[RunsOn], PropertyInfo(alias="runsOn")]

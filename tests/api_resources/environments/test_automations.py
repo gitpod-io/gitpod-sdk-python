@@ -55,6 +55,7 @@ class TestAutomations:
                         "depends_on": ["string"],
                         "description": "Builds the project artifacts",
                         "name": "Build Project",
+                        "prebuild_requires_success": True,
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
@@ -136,6 +137,7 @@ class TestAsyncAutomations:
                         "depends_on": ["string"],
                         "description": "Builds the project artifacts",
                         "name": "Build Project",
+                        "prebuild_requires_success": True,
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
