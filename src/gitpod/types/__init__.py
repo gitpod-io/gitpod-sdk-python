@@ -117,6 +117,7 @@ from .user_credit_usage import UserCreditUsage as UserCreditUsage
 from .account_membership import AccountMembership as AccountMembership
 from .agent_code_context import AgentCodeContext as AgentCodeContext
 from .daily_credit_usage import DailyCreditUsage as DailyCreditUsage
+from .codex_openai_model import CodexOpenAIModel as CodexOpenAIModel
 from .editor_list_params import EditorListParams as EditorListParams
 from .environment_status import EnvironmentStatus as EnvironmentStatus
 from .event_watch_params import EventWatchParams as EventWatchParams
@@ -140,6 +141,7 @@ from .project_list_params import ProjectListParams as ProjectListParams
 from .recommended_editors import RecommendedEditors as RecommendedEditors
 from .update_window_param import UpdateWindowParam as UpdateWindowParam
 from .workflow_step_param import WorkflowStepParam as WorkflowStepParam
+from .codex_settings_param import CodexSettingsParam as CodexSettingsParam
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
 from .event_watch_response import EventWatchResponse as EventWatchResponse
 from .invite_domains_param import InviteDomainsParam as InviteDomainsParam
@@ -164,6 +166,7 @@ from .project_delete_params import ProjectDeleteParams as ProjectDeleteParams
 from .project_update_params import ProjectUpdateParams as ProjectUpdateParams
 from .workflow_action_param import WorkflowActionParam as WorkflowActionParam
 from .automation_list_params import AutomationListParams as AutomationListParams
+from .codex_reasoning_effort import CodexReasoningEffort as CodexReasoningEffort
 from .editor_retrieve_params import EditorRetrieveParams as EditorRetrieveParams
 from .environment_spec_param import EnvironmentSpecParam as EnvironmentSpecParam
 from .kernel_controls_config import KernelControlsConfig as KernelControlsConfig
