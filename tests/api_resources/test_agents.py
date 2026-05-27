@@ -367,6 +367,10 @@ class TestAgents:
                 "payload": "payload",
                 "type": "TYPE_UNSPECIFIED",
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -473,6 +477,10 @@ class TestAgents:
                     "to_branch": "toBranch",
                     "url": "url",
                 },
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
@@ -932,6 +940,10 @@ class TestAsyncAgents:
                 "payload": "payload",
                 "type": "TYPE_UNSPECIFIED",
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -1038,6 +1050,10 @@ class TestAsyncAgents:
                     "to_branch": "toBranch",
                     "url": "url",
                 },
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
