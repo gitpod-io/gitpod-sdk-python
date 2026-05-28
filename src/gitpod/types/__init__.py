@@ -99,6 +99,7 @@ from .stack_frame_param import StackFrameParam as StackFrameParam
 from .account_membership import AccountMembership as AccountMembership
 from .agent_code_context import AgentCodeContext as AgentCodeContext
 from .codex_openai_model import CodexOpenAIModel as CodexOpenAIModel
+from .codex_service_tier import CodexServiceTier as CodexServiceTier
 from .editor_list_params import EditorListParams as EditorListParams
 from .environment_status import EnvironmentStatus as EnvironmentStatus
 from .event_watch_params import EventWatchParams as EventWatchParams

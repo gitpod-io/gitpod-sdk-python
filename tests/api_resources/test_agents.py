@@ -370,6 +370,7 @@ class TestAgents:
             codex_settings={
                 "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
                 "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             user_input={
                 "id": "id",
@@ -481,6 +482,7 @@ class TestAgents:
             codex_settings={
                 "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
                 "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
@@ -943,6 +945,7 @@ class TestAsyncAgents:
             codex_settings={
                 "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
                 "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             user_input={
                 "id": "id",
@@ -1054,6 +1057,7 @@ class TestAsyncAgents:
             codex_settings={
                 "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
                 "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",

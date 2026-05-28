@@ -71,6 +71,7 @@ from gitpod.types import (
     AgentMode,
     CodexOpenAIModel,
     CodexReasoningEffort,
+    CodexServiceTier,
     CodexSettings,
     Prompt,
     PromptMetadata,
