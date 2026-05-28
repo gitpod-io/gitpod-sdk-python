@@ -78,6 +78,7 @@ from gitpod.types import (
     GoalStatus,
     CodexOpenAIModel,
     CodexReasoningEffort,
+    CodexServiceTier,
     CodexSettings,
     Prompt,
     PromptMetadata,

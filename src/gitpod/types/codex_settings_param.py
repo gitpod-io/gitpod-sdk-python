@@ -6,6 +6,7 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .codex_openai_model import CodexOpenAIModel
+from .codex_service_tier import CodexServiceTier
 from .codex_reasoning_effort import CodexReasoningEffort
 
 __all__ = ["CodexSettingsParam"]
@@ -24,4 +25,10 @@ class CodexSettingsParam(TypedDict, total=False):
     """
     CodexReasoningEffort is the static allowlist of reasoning efforts supported by
     the Codex app runtime.
+    """
+
+    service_tier: Annotated[CodexServiceTier, PropertyInfo(alias="serviceTier")]
+    """
+    CodexServiceTier is the static allowlist of service tiers supported by the Codex
+    app runtime.
     """
