@@ -588,6 +588,10 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
+          agent_id: agent_id identifies the agent to start. If omitted, the backend uses the
+              configured default agent ID, or the Ona in-environment agent when no default is
+              configured.
+
           annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
               (e.g., "agent-client-session/id").
@@ -1278,6 +1282,10 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
+          agent_id: agent_id identifies the agent to start. If omitted, the backend uses the
+              configured default agent ID, or the Ona in-environment agent when no default is
+              configured.
+
           annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
               (e.g., "agent-client-session/id").

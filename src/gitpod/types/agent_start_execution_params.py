@@ -15,6 +15,11 @@ __all__ = ["AgentStartExecutionParams"]
 
 class AgentStartExecutionParams(TypedDict, total=False):
     agent_id: Annotated[str, PropertyInfo(alias="agentId")]
+    """agent_id identifies the agent to start.
+
+    If omitted, the backend uses the configured default agent ID, or the Ona
+    in-environment agent when no default is configured.
+    """
 
     annotations: Dict[str, str]
     """
