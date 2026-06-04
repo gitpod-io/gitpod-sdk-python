@@ -310,13 +310,10 @@ class StatusCurrentOperation(BaseModel):
 
 
 class StatusGoal(BaseModel):
-    """goal projects the current native Codex thread goal, if any."""
+    """goal projects the current agent goal, if any."""
 
     objective: Optional[str] = None
-    """
-    objective is the current goal text tracked by the native Codex thread-goal
-    subsystem.
-    """
+    """objective is the current goal text tracked by the agent."""
 
     status: Optional[
         Literal[
@@ -330,7 +327,7 @@ class StatusGoal(BaseModel):
     """status is the lifecycle state of the current goal."""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
-    """updated_at is the most recent native goal update timestamp, when available."""
+    """updated_at is the most recent goal update timestamp, when available."""
 
 
 class StatusMcpIntegrationStatus(BaseModel):
@@ -419,7 +416,7 @@ class Status(BaseModel):
     """failure_reason contains a structured reason code for the failure."""
 
     goal: Optional[StatusGoal] = None
-    """goal projects the current native Codex thread goal, if any."""
+    """goal projects the current agent goal, if any."""
 
     input_tokens_used: Optional[str] = FieldInfo(alias="inputTokensUsed", default=None)
 
