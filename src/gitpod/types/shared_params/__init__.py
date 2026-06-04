@@ -13,10 +13,14 @@ from .user_status import UserStatus as UserStatus
 from .resource_role import ResourceRole as ResourceRole
 from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
+from .codex_settings import CodexSettings as CodexSettings
 from .environment_class import EnvironmentClass as EnvironmentClass
 from .organization_role import OrganizationRole as OrganizationRole
 from .automation_trigger import AutomationTrigger as AutomationTrigger
+from .codex_openai_model import CodexOpenAIModel as CodexOpenAIModel
+from .codex_service_tier import CodexServiceTier as CodexServiceTier
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
+from .codex_reasoning_effort import CodexReasoningEffort as CodexReasoningEffort
 from .environment_variable_item import EnvironmentVariableItem as EnvironmentVariableItem
 from .project_environment_class import ProjectEnvironmentClass as ProjectEnvironmentClass
 from .environment_variable_source import EnvironmentVariableSource as EnvironmentVariableSource

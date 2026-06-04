@@ -3,6 +3,10 @@
 ```python
 from gitpod.types import (
     AutomationTrigger,
+    CodexOpenAIModel,
+    CodexReasoningEffort,
+    CodexServiceTier,
+    CodexSettings,
     CountResponseRelation,
     EnvironmentClass,
     EnvironmentVariableItem,
@@ -69,10 +73,6 @@ from gitpod.types import (
     AgentExecution,
     AgentMessage,
     AgentMode,
-    CodexOpenAIModel,
-    CodexReasoningEffort,
-    CodexServiceTier,
-    CodexSettings,
     Prompt,
     PromptMetadata,
     PromptSpec,

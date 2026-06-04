@@ -70,6 +70,11 @@ class TestAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -212,6 +217,11 @@ class TestAutomations:
                         "task": {"command": "command"},
                     }
                 ],
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             description="description",
             disabled=True,
@@ -752,6 +762,11 @@ class TestAsyncAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -894,6 +909,11 @@ class TestAsyncAutomations:
                         "task": {"command": "command"},
                     }
                 ],
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             description="description",
             disabled=True,

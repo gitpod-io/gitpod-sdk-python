@@ -4,15 +4,15 @@ from __future__ import annotations
 
 from typing_extensions import Annotated, TypedDict
 
-from .._utils import PropertyInfo
-from .codex_openai_model import CodexOpenAIModel
-from .codex_service_tier import CodexServiceTier
-from .codex_reasoning_effort import CodexReasoningEffort
+from ..._utils import PropertyInfo
+from ..shared.codex_openai_model import CodexOpenAIModel
+from ..shared.codex_service_tier import CodexServiceTier
+from ..shared.codex_reasoning_effort import CodexReasoningEffort
 
-__all__ = ["CodexSettingsParam"]
+__all__ = ["CodexSettings"]
 
 
-class CodexSettingsParam(TypedDict, total=False):
+class CodexSettings(TypedDict, total=False):
     """CodexSettings contains settings consumed only by the Codex app agent."""
 
     model: CodexOpenAIModel

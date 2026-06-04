@@ -7,8 +7,8 @@ from typing_extensions import Annotated, TypedDict
 from .._utils import PropertyInfo
 from .wake_event_param import WakeEventParam
 from .agent_message_param import AgentMessageParam
-from .codex_settings_param import CodexSettingsParam
 from .user_input_block_param import UserInputBlockParam
+from .shared_params.codex_settings import CodexSettings
 
 __all__ = ["AgentSendToExecutionParams"]
 
@@ -22,7 +22,7 @@ class AgentSendToExecutionParams(TypedDict, total=False):
     from a parent agent to a child agent execution, or vice versa).
     """
 
-    codex_settings: Annotated[CodexSettingsParam, PropertyInfo(alias="codexSettings")]
+    codex_settings: Annotated[CodexSettings, PropertyInfo(alias="codexSettings")]
     """
     codex_settings contains per-turn desired settings for Codex app user_input
     sends.

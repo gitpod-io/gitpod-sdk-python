@@ -7,8 +7,8 @@ from typing_extensions import Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .agent_mode import AgentMode
-from .codex_settings_param import CodexSettingsParam
 from .agent_code_context_param import AgentCodeContextParam
+from .shared_params.codex_settings import CodexSettings
 
 __all__ = ["AgentStartExecutionParams"]
 
@@ -30,7 +30,7 @@ class AgentStartExecutionParams(TypedDict, total=False):
 
     code_context: Annotated[AgentCodeContextParam, PropertyInfo(alias="codeContext")]
 
-    codex_settings: Annotated[CodexSettingsParam, PropertyInfo(alias="codexSettings")]
+    codex_settings: Annotated[CodexSettings, PropertyInfo(alias="codexSettings")]
     """codex_settings contains desired manual settings for the Codex app agent."""
 
     mode: AgentMode
