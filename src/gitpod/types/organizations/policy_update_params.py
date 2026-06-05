@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, Optional
+from typing import Dict, List, Iterable, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..admission_level import AdmissionLevel
 from .veto_exec_policy_param import VetoExecPolicyParam
+from ..shared.codex_openai_model import CodexOpenAIModel
+from ..shared.codex_service_tier import CodexServiceTier
 from .conversation_sharing_policy import ConversationSharingPolicy
+from ..shared.codex_reasoning_effort import CodexReasoningEffort
 from .project_creation_defaults_prebuilds_param import ProjectCreationDefaultsPrebuildsParam
 from .project_creation_default_environment_class_param import ProjectCreationDefaultEnvironmentClassParam
 
@@ -169,6 +172,34 @@ class PolicyUpdateParams(TypedDict, total=False):
 
 class AgentPolicy(TypedDict, total=False):
     """agent_policy contains agent-specific policy settings"""
+
+    allowed_agent_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedAgentIds")]
+    """
+    allowed_agent_ids contains the agent IDs users may select when the codex_rollout
+    feature flag is enabled. Empty means all agents are allowed.
+    """
+
+    allowed_codex_models: Annotated[List[CodexOpenAIModel], PropertyInfo(alias="allowedCodexModels")]
+    """
+    allowed_codex_models contains the Codex models users may select when the
+    codex_rollout feature flag is enabled. Empty means all Codex models are allowed.
+    """
+
+    allowed_codex_reasoning_efforts: Annotated[
+        List[CodexReasoningEffort], PropertyInfo(alias="allowedCodexReasoningEfforts")
+    ]
+    """
+    allowed_codex_reasoning_efforts contains the Codex reasoning efforts users may
+    select when the codex_rollout feature flag is enabled. Empty means all Codex
+    reasoning efforts are allowed.
+    """
+
+    allowed_codex_service_tiers: Annotated[List[CodexServiceTier], PropertyInfo(alias="allowedCodexServiceTiers")]
+    """
+    allowed_codex_service_tiers contains the Codex service tiers users may select
+    when the codex_rollout feature flag is enabled. Empty means all Codex service
+    tiers are allowed.
+    """
 
     command_deny_list: Annotated[SequenceNotStr[str], PropertyInfo(alias="commandDenyList")]
     """

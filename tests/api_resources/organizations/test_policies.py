@@ -67,6 +67,10 @@ class TestPolicies:
         policy = client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
+                "allowed_agent_ids": ["string"],
+                "allowed_codex_models": ["CODEX_OPEN_AI_MODEL_UNSPECIFIED"],
+                "allowed_codex_reasoning_efforts": ["CODEX_REASONING_EFFORT_UNSPECIFIED"],
+                "allowed_codex_service_tiers": ["CODEX_SERVICE_TIER_UNSPECIFIED"],
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "max_subagents_per_environment": 10,
@@ -216,6 +220,10 @@ class TestAsyncPolicies:
         policy = await async_client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
+                "allowed_agent_ids": ["string"],
+                "allowed_codex_models": ["CODEX_OPEN_AI_MODEL_UNSPECIFIED"],
+                "allowed_codex_reasoning_efforts": ["CODEX_REASONING_EFFORT_UNSPECIFIED"],
+                "allowed_codex_service_tiers": ["CODEX_SERVICE_TIER_UNSPECIFIED"],
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "max_subagents_per_environment": 10,
