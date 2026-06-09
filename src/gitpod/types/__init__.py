@@ -56,6 +56,7 @@ from .agent_mode import AgentMode as AgentMode
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel
+from .goal_status import GoalStatus as GoalStatus
 from .prompt_spec import PromptSpec as PromptSpec
 from .runner_kind import RunnerKind as RunnerKind
 from .runner_spec import RunnerSpec as RunnerSpec

@@ -73,6 +73,7 @@ from gitpod.types import (
     AgentExecution,
     AgentMessage,
     AgentMode,
+    GoalStatus,
     Prompt,
     PromptMetadata,
     PromptSpec,
