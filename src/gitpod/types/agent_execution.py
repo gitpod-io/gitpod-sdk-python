@@ -17,7 +17,6 @@ __all__ = [
     "Metadata",
     "Spec",
     "SpecLimits",
-    "SpecLoopCondition",
     "Status",
     "StatusCurrentOperation",
     "StatusCurrentOperationLlm",
@@ -249,14 +248,6 @@ class SpecLimits(BaseModel):
     max_output_tokens: Optional[str] = FieldInfo(alias="maxOutputTokens", default=None)
 
 
-class SpecLoopCondition(BaseModel):
-    id: Optional[str] = None
-
-    description: Optional[str] = None
-
-    expression: Optional[str] = None
-
-
 class Spec(BaseModel):
     """
     Spec is the configuration of the agent that's required for the
@@ -273,8 +264,6 @@ class Spec(BaseModel):
     """desired_phase is the desired phase of the agent run"""
 
     limits: Optional[SpecLimits] = None
-
-    loop_conditions: Optional[List[SpecLoopCondition]] = FieldInfo(alias="loopConditions", default=None)
 
     session: Optional[str] = None
 
