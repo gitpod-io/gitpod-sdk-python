@@ -27,7 +27,6 @@ from .invite_retrieve_response import InviteRetrieveResponse as InviteRetrieveRe
 from .policy_retrieve_response import PolicyRetrieveResponse as PolicyRetrieveResponse
 from .domain_verification_state import DomainVerificationState as DomainVerificationState
 from .invite_get_summary_params import InviteGetSummaryParams as InviteGetSummaryParams
-from .project_creation_defaults import ProjectCreationDefaults as ProjectCreationDefaults
 from .conversation_sharing_policy import ConversationSharingPolicy as ConversationSharingPolicy
 from .custom_domain_create_params import CustomDomainCreateParams as CustomDomainCreateParams
 from .custom_domain_delete_params import CustomDomainDeleteParams as CustomDomainDeleteParams
@@ -62,30 +61,14 @@ from .announcement_banner_update_response import AnnouncementBannerUpdateRespons
 from .domain_verification_create_response import DomainVerificationCreateResponse as DomainVerificationCreateResponse
 from .domain_verification_retrieve_params import DomainVerificationRetrieveParams as DomainVerificationRetrieveParams
 from .domain_verification_verify_response import DomainVerificationVerifyResponse as DomainVerificationVerifyResponse
-from .project_creation_defaults_prebuilds import ProjectCreationDefaultsPrebuilds as ProjectCreationDefaultsPrebuilds
 from .sso_configuration_retrieve_response import SSOConfigurationRetrieveResponse as SSOConfigurationRetrieveResponse
 from .scim_configuration_retrieve_response import ScimConfigurationRetrieveResponse as ScimConfigurationRetrieveResponse
 from .domain_verification_retrieve_response import (
     DomainVerificationRetrieveResponse as DomainVerificationRetrieveResponse,
-)
-from .project_creation_defaults_prebuilds_param import (
-    ProjectCreationDefaultsPrebuildsParam as ProjectCreationDefaultsPrebuildsParam,
-)
-from .project_creation_default_environment_class import (
-    ProjectCreationDefaultEnvironmentClass as ProjectCreationDefaultEnvironmentClass,
 )
 from .scim_configuration_regenerate_token_params import (
     ScimConfigurationRegenerateTokenParams as ScimConfigurationRegenerateTokenParams,
 )
 from .scim_configuration_regenerate_token_response import (
     ScimConfigurationRegenerateTokenResponse as ScimConfigurationRegenerateTokenResponse,
-)
-from .project_creation_default_environment_class_param import (
-    ProjectCreationDefaultEnvironmentClassParam as ProjectCreationDefaultEnvironmentClassParam,
-)
-from .project_creation_default_environment_class_warm_pool import (
-    ProjectCreationDefaultEnvironmentClassWarmPool as ProjectCreationDefaultEnvironmentClassWarmPool,
-)
-from .project_creation_default_environment_class_warm_pool_param import (
-    ProjectCreationDefaultEnvironmentClassWarmPoolParam as ProjectCreationDefaultEnvironmentClassWarmPoolParam,
 )

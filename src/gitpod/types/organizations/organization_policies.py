@@ -8,7 +8,6 @@ from ..._models import BaseModel
 from .agent_policy import AgentPolicy
 from .veto_exec_policy import VetoExecPolicy
 from .security_agent_policy import SecurityAgentPolicy
-from .project_creation_defaults import ProjectCreationDefaults
 
 __all__ = ["OrganizationPolicies", "EditorVersionRestrictions"]
 
@@ -143,14 +142,6 @@ class OrganizationPolicies(BaseModel):
     ```
     this == duration('0s') || this >= duration('1800s')
     ```
-    """
-
-    project_creation_defaults: Optional[ProjectCreationDefaults] = FieldInfo(
-        alias="projectCreationDefaults", default=None
-    )
-    """
-    project_creation_defaults contains default settings applied to newly created
-    projects.
     """
 
     security_agent_policy: Optional[SecurityAgentPolicy] = FieldInfo(alias="securityAgentPolicy", default=None)

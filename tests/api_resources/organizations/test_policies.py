@@ -93,33 +93,6 @@ class TestPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
-            project_creation_defaults={
-                "environment_classes": [
-                    {
-                        "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "order": 0,
-                        "prebuild": True,
-                        "warm_pool": {
-                            "enabled": True,
-                            "max_size": 20,
-                            "min_size": 20,
-                        },
-                    }
-                ],
-                "insights_enabled": True,
-                "prebuilds": {
-                    "disabled": {},
-                    "enabled": {
-                        "enable_jetbrains_warmup": True,
-                        "prebuild_executor": {
-                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            "principal": "PRINCIPAL_UNSPECIFIED",
-                        },
-                        "timeout": "+9125115.360s",
-                        "trigger": {"daily_schedule": {"hour_utc": 23}},
-                    },
-                },
-            },
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
@@ -246,33 +219,6 @@ class TestAsyncPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
-            project_creation_defaults={
-                "environment_classes": [
-                    {
-                        "environment_class_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                        "order": 0,
-                        "prebuild": True,
-                        "warm_pool": {
-                            "enabled": True,
-                            "max_size": 20,
-                            "min_size": 20,
-                        },
-                    }
-                ],
-                "insights_enabled": True,
-                "prebuilds": {
-                    "disabled": {},
-                    "enabled": {
-                        "enable_jetbrains_warmup": True,
-                        "prebuild_executor": {
-                            "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                            "principal": "PRINCIPAL_UNSPECIFIED",
-                        },
-                        "timeout": "+9125115.360s",
-                        "trigger": {"daily_schedule": {"hour_utc": 23}},
-                    },
-                },
-            },
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
