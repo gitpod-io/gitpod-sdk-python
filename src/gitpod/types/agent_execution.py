@@ -471,6 +471,7 @@ class Status(BaseModel):
             "SUPPORTED_MODEL_SONNET_4_5_EXTENDED",
             "SUPPORTED_MODEL_SONNET_4_6",
             "SUPPORTED_MODEL_SONNET_4_6_EXTENDED",
+            "SUPPORTED_MODEL_SONNET_5",
             "SUPPORTED_MODEL_OPUS_4",
             "SUPPORTED_MODEL_OPUS_4_EXTENDED",
             "SUPPORTED_MODEL_OPUS_4_5",
