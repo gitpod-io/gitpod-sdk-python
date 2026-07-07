@@ -849,11 +849,40 @@ Methods:
 Types:
 
 ```python
-from gitpod.types import EnvironmentUsageRecord
+from gitpod.types import (
+    AgentTraceModelBreakdown,
+    AgentTraceSummary,
+    AgentTraceTimeBucket,
+    CoAuthorSummary,
+    CoAuthorTimeBucket,
+    CoAuthorTool,
+    DateRange,
+    EnvironmentUsageRecord,
+    PrSummary,
+    PrTimeBucket,
+    Resolution,
+    SupportedModel,
+    TimeSeriesPoint,
+    ToolBreakdown,
+    UsageGetAdoptionUsageSummaryResponse,
+    UsageGetAgentTraceSummaryResponse,
+    UsageGetAgentTraceTimeSeriesResponse,
+    UsageGetCoAuthorSummaryResponse,
+    UsageGetCoAuthorTimeSeriesResponse,
+    UsageGetPrSummaryResponse,
+    UsageGetPrTimeSeriesResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /gitpod.v1.UsageService/GetAdoptionUsageSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_adoption_usage_summary</a>(\*\*<a href="src/gitpod/types/usage_get_adoption_usage_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_adoption_usage_summary_response.py">UsageGetAdoptionUsageSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetAgentTraceSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_agent_trace_summary</a>(\*\*<a href="src/gitpod/types/usage_get_agent_trace_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_agent_trace_summary_response.py">UsageGetAgentTraceSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetAgentTraceTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_agent_trace_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_agent_trace_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_agent_trace_time_series_response.py">UsageGetAgentTraceTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetCoAuthorSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_co_author_summary</a>(\*\*<a href="src/gitpod/types/usage_get_co_author_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_co_author_summary_response.py">UsageGetCoAuthorSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetCoAuthorTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_co_author_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_co_author_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_co_author_time_series_response.py">UsageGetCoAuthorTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetPrSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_pr_summary</a>(\*\*<a href="src/gitpod/types/usage_get_pr_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_pr_summary_response.py">UsageGetPrSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetPrTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_pr_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_pr_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_pr_time_series_response.py">UsageGetPrTimeSeriesResponse</a></code>
 - <code title="post /gitpod.v1.UsageService/ListEnvironmentUsageRecords">client.usage.<a href="./src/gitpod/resources/usage.py">list_environment_runtime_records</a>(\*\*<a href="src/gitpod/types/usage_list_environment_runtime_records_params.py">params</a>) -> <a href="./src/gitpod/types/environment_usage_record.py">SyncRecordsPage[EnvironmentUsageRecord]</a></code>
 
 # Users

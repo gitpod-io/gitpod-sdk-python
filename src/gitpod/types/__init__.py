@@ -53,6 +53,8 @@ from .workflow import Workflow as Workflow
 from .log_level import LogLevel as LogLevel
 from .warm_pool import WarmPool as WarmPool
 from .agent_mode import AgentMode as AgentMode
+from .pr_summary import PrSummary as PrSummary
+from .resolution import Resolution as Resolution
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel
@@ -70,11 +72,14 @@ from .project_phase import ProjectPhase as ProjectPhase
 from .runner_status import RunnerStatus as RunnerStatus
 from .update_window import UpdateWindow as UpdateWindow
 from .workflow_step import WorkflowStep as WorkflowStep
+from .co_author_tool import CoAuthorTool as CoAuthorTool
 from .editor_version import EditorVersion as EditorVersion
 from .invite_domains import InviteDomains as InviteDomains
 from .login_provider import LoginProvider as LoginProvider
+from .pr_time_bucket import PrTimeBucket as PrTimeBucket
 from .prebuild_phase import PrebuildPhase as PrebuildPhase
 from .runner_variant import RunnerVariant as RunnerVariant
+from .tool_breakdown import ToolBreakdown as ToolBreakdown
 from .warm_pool_spec import WarmPoolSpec as WarmPoolSpec
 from .admission_level import AdmissionLevel as AdmissionLevel
 from .agent_execution import AgentExecution as AgentExecution
@@ -82,9 +87,11 @@ from .bpf_debug_level import BpfDebugLevel as BpfDebugLevel
 from .prebuild_status import PrebuildStatus as PrebuildStatus
 from .prompt_metadata import PromptMetadata as PromptMetadata
 from .runner_provider import RunnerProvider as RunnerProvider
+from .supported_model import SupportedModel as SupportedModel
 from .warm_pool_phase import WarmPoolPhase as WarmPoolPhase
 from .workflow_action import WorkflowAction as WorkflowAction
 from .breadcrumb_param import BreadcrumbParam as BreadcrumbParam
+from .date_range_param import DateRangeParam as DateRangeParam
 from .environment_role import EnvironmentRole as EnvironmentRole
 from .environment_spec import EnvironmentSpec as EnvironmentSpec
 from .id_token_version import IDTokenVersion as IDTokenVersion
@@ -93,6 +100,7 @@ from .project_metadata import ProjectMetadata as ProjectMetadata
 from .wake_event_param import WakeEventParam as WakeEventParam
 from .warm_pool_status import WarmPoolStatus as WarmPoolStatus
 from .workflow_trigger import WorkflowTrigger as WorkflowTrigger
+from .co_author_summary import CoAuthorSummary as CoAuthorSummary
 from .environment_phase import EnvironmentPhase as EnvironmentPhase
 from .error_event_param import ErrorEventParam as ErrorEventParam
 from .event_list_params import EventListParams as EventListParams
@@ -101,6 +109,7 @@ from .prebuild_metadata import PrebuildMetadata as PrebuildMetadata
 from .runner_capability import RunnerCapability as RunnerCapability
 from .runner_spec_param import RunnerSpecParam as RunnerSpecParam
 from .stack_frame_param import StackFrameParam as StackFrameParam
+from .time_series_point import TimeSeriesPoint as TimeSeriesPoint
 from .account_membership import AccountMembership as AccountMembership
 from .agent_code_context import AgentCodeContext as AgentCodeContext
 from .editor_list_params import EditorListParams as EditorListParams
@@ -114,6 +123,7 @@ from .secret_scope_param import SecretScopeParam as SecretScopeParam
 from .warm_pool_metadata import WarmPoolMetadata as WarmPoolMetadata
 from .workflow_execution import WorkflowExecution as WorkflowExecution
 from .agent_message_param import AgentMessageParam as AgentMessageParam
+from .agent_trace_summary import AgentTraceSummary as AgentTraceSummary
 from .event_list_response import EventListResponse as EventListResponse
 from .gateway_list_params import GatewayListParams as GatewayListParams
 from .group_create_params import GroupCreateParams as GroupCreateParams
@@ -138,6 +148,7 @@ from .secret_create_params import SecretCreateParams as SecretCreateParams
 from .secret_delete_params import SecretDeleteParams as SecretDeleteParams
 from .user_get_user_params import UserGetUserParams as UserGetUserParams
 from .account_delete_params import AccountDeleteParams as AccountDeleteParams
+from .co_author_time_bucket import CoAuthorTimeBucket as CoAuthorTimeBucket
 from .group_create_response import GroupCreateResponse as GroupCreateResponse
 from .group_retrieve_params import GroupRetrieveParams as GroupRetrieveParams
 from .group_update_response import GroupUpdateResponse as GroupUpdateResponse
@@ -162,6 +173,7 @@ from .user_get_user_response import UserGetUserResponse as UserGetUserResponse
 from .user_input_block_param import UserInputBlockParam as UserInputBlockParam
 from .workflow_trigger_param import WorkflowTriggerParam as WorkflowTriggerParam
 from .account_retrieve_params import AccountRetrieveParams as AccountRetrieveParams
+from .agent_trace_time_bucket import AgentTraceTimeBucket as AgentTraceTimeBucket
 from .environment_initializer import EnvironmentInitializer as EnvironmentInitializer
 from .environment_list_params import EnvironmentListParams as EnvironmentListParams
 from .environment_stop_params import EnvironmentStopParams as EnvironmentStopParams
@@ -215,11 +227,13 @@ from .project_bulk_update_params import ProjectBulkUpdateParams as ProjectBulkUp
 from .runner_configuration_param import RunnerConfigurationParam as RunnerConfigurationParam
 from .secret_update_value_params import SecretUpdateValueParams as SecretUpdateValueParams
 from .agent_stop_execution_params import AgentStopExecutionParams as AgentStopExecutionParams
+from .agent_trace_model_breakdown import AgentTraceModelBreakdown as AgentTraceModelBreakdown
 from .editor_resolve_url_response import EditorResolveURLResponse as EditorResolveURLResponse
 from .environment_activity_signal import EnvironmentActivitySignal as EnvironmentActivitySignal
 from .environment_create_response import EnvironmentCreateResponse as EnvironmentCreateResponse
 from .environment_retrieve_params import EnvironmentRetrieveParams as EnvironmentRetrieveParams
 from .metrics_configuration_param import MetricsConfigurationParam as MetricsConfigurationParam
+from .usage_get_pr_summary_params import UsageGetPrSummaryParams as UsageGetPrSummaryParams
 from .agent_create_prompt_response import AgentCreatePromptResponse as AgentCreatePromptResponse
 from .agent_list_executions_params import AgentListExecutionsParams as AgentListExecutionsParams
 from .agent_retrieve_prompt_params import AgentRetrievePromptParams as AgentRetrievePromptParams
@@ -239,6 +253,7 @@ from .project_bulk_update_response import ProjectBulkUpdateResponse as ProjectBu
 from .agent_delete_execution_params import AgentDeleteExecutionParams as AgentDeleteExecutionParams
 from .environment_initializer_param import EnvironmentInitializerParam as EnvironmentInitializerParam
 from .environment_retrieve_response import EnvironmentRetrieveResponse as EnvironmentRetrieveResponse
+from .usage_get_pr_summary_response import UsageGetPrSummaryResponse as UsageGetPrSummaryResponse
 from .account_list_sso_logins_params import AccountListSSOLoginsParams as AccountListSSOLoginsParams
 from .agent_retrieve_prompt_response import AgentRetrievePromptResponse as AgentRetrievePromptResponse
 from .agent_send_to_execution_params import AgentSendToExecutionParams as AgentSendToExecutionParams
@@ -253,6 +268,7 @@ from .agent_retrieve_execution_params import AgentRetrieveExecutionParams as Age
 from .prebuild_list_warm_pools_params import PrebuildListWarmPoolsParams as PrebuildListWarmPoolsParams
 from .runner_create_logs_token_params import RunnerCreateLogsTokenParams as RunnerCreateLogsTokenParams
 from .runner_parse_context_url_params import RunnerParseContextURLParams as RunnerParseContextURLParams
+from .usage_get_pr_time_series_params import UsageGetPrTimeSeriesParams as UsageGetPrTimeSeriesParams
 from .account_get_sso_login_url_params import AccountGetSSOLoginURLParams as AccountGetSSOLoginURLParams
 from .account_list_sso_logins_response import AccountListSSOLoginsResponse as AccountListSSOLoginsResponse
 from .identity_exchange_token_response import IdentityExchangeTokenResponse as IdentityExchangeTokenResponse
@@ -269,11 +285,13 @@ from .runner_create_logs_token_response import RunnerCreateLogsTokenResponse as 
 from .runner_create_runner_token_params import RunnerCreateRunnerTokenParams as RunnerCreateRunnerTokenParams
 from .runner_parse_context_url_response import RunnerParseContextURLResponse as RunnerParseContextURLResponse
 from .runner_search_repositories_params import RunnerSearchRepositoriesParams as RunnerSearchRepositoriesParams
+from .usage_get_pr_time_series_response import UsageGetPrTimeSeriesResponse as UsageGetPrTimeSeriesResponse
 from .account_get_sso_login_url_response import AccountGetSSOLoginURLResponse as AccountGetSSOLoginURLResponse
 from .automation_cancel_execution_params import AutomationCancelExecutionParams as AutomationCancelExecutionParams
 from .prebuild_create_warm_pool_response import PrebuildCreateWarmPoolResponse as PrebuildCreateWarmPoolResponse
 from .prebuild_retrieve_warm_pool_params import PrebuildRetrieveWarmPoolParams as PrebuildRetrieveWarmPoolParams
 from .prebuild_update_warm_pool_response import PrebuildUpdateWarmPoolResponse as PrebuildUpdateWarmPoolResponse
+from .usage_get_co_author_summary_params import UsageGetCoAuthorSummaryParams as UsageGetCoAuthorSummaryParams
 from .user_get_authenticated_user_params import UserGetAuthenticatedUserParams as UserGetAuthenticatedUserParams
 from .account_list_login_providers_params import AccountListLoginProvidersParams as AccountListLoginProvidersParams
 from .automation_start_execution_response import AutomationStartExecutionResponse as AutomationStartExecutionResponse
@@ -285,6 +303,8 @@ from .environment_create_logs_token_params import EnvironmentCreateLogsTokenPara
 from .prebuild_retrieve_warm_pool_response import PrebuildRetrieveWarmPoolResponse as PrebuildRetrieveWarmPoolResponse
 from .project_prebuild_configuration_param import ProjectPrebuildConfigurationParam as ProjectPrebuildConfigurationParam
 from .runner_list_scm_organizations_params import RunnerListScmOrganizationsParams as RunnerListScmOrganizationsParams
+from .usage_get_agent_trace_summary_params import UsageGetAgentTraceSummaryParams as UsageGetAgentTraceSummaryParams
+from .usage_get_co_author_summary_response import UsageGetCoAuthorSummaryResponse as UsageGetCoAuthorSummaryResponse
 from .user_get_authenticated_user_response import UserGetAuthenticatedUserResponse as UserGetAuthenticatedUserResponse
 from .runner_check_repository_access_params import (
     RunnerCheckRepositoryAccessParams as RunnerCheckRepositoryAccessParams,
@@ -304,8 +324,15 @@ from .project_create_from_environment_params import (
 from .runner_list_scm_organizations_response import (
     RunnerListScmOrganizationsResponse as RunnerListScmOrganizationsResponse,
 )
+from .usage_get_agent_trace_summary_response import (
+    UsageGetAgentTraceSummaryResponse as UsageGetAgentTraceSummaryResponse,
+)
+from .usage_get_co_author_time_series_params import UsageGetCoAuthorTimeSeriesParams as UsageGetCoAuthorTimeSeriesParams
 from .runner_check_repository_access_response import (
     RunnerCheckRepositoryAccessResponse as RunnerCheckRepositoryAccessResponse,
+)
+from .usage_get_adoption_usage_summary_params import (
+    UsageGetAdoptionUsageSummaryParams as UsageGetAdoptionUsageSummaryParams,
 )
 from .automation_list_execution_actions_params import (
     AutomationListExecutionActionsParams as AutomationListExecutionActionsParams,
@@ -319,8 +346,17 @@ from .environment_create_from_project_response import (
 from .project_create_from_environment_response import (
     ProjectCreateFromEnvironmentResponse as ProjectCreateFromEnvironmentResponse,
 )
+from .usage_get_agent_trace_time_series_params import (
+    UsageGetAgentTraceTimeSeriesParams as UsageGetAgentTraceTimeSeriesParams,
+)
+from .usage_get_co_author_time_series_response import (
+    UsageGetCoAuthorTimeSeriesResponse as UsageGetCoAuthorTimeSeriesResponse,
+)
 from .automation_cancel_execution_action_params import (
     AutomationCancelExecutionActionParams as AutomationCancelExecutionActionParams,
+)
+from .usage_get_adoption_usage_summary_response import (
+    UsageGetAdoptionUsageSummaryResponse as UsageGetAdoptionUsageSummaryResponse,
 )
 from .account_list_joinable_organizations_params import (
     AccountListJoinableOrganizationsParams as AccountListJoinableOrganizationsParams,
@@ -330,6 +366,9 @@ from .automation_list_execution_outputs_response import (
 )
 from .identity_get_authenticated_identity_params import (
     IdentityGetAuthenticatedIdentityParams as IdentityGetAuthenticatedIdentityParams,
+)
+from .usage_get_agent_trace_time_series_response import (
+    UsageGetAgentTraceTimeSeriesResponse as UsageGetAgentTraceTimeSeriesResponse,
 )
 from .automation_retrieve_execution_action_params import (
     AutomationRetrieveExecutionActionParams as AutomationRetrieveExecutionActionParams,

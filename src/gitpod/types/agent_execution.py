@@ -10,6 +10,7 @@ from .._models import BaseModel
 from .agent_mode import AgentMode
 from .goal_status import GoalStatus
 from .shared.subject import Subject
+from .supported_model import SupportedModel
 from .agent_code_context import AgentCodeContext
 
 __all__ = [
@@ -459,35 +460,7 @@ class Status(BaseModel):
     b.status_version then a was the status before b.
     """
 
-    supported_model: Optional[
-        Literal[
-            "SUPPORTED_MODEL_UNSPECIFIED",
-            "SUPPORTED_MODEL_SONNET_3_5",
-            "SUPPORTED_MODEL_SONNET_3_7",
-            "SUPPORTED_MODEL_SONNET_3_7_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4",
-            "SUPPORTED_MODEL_SONNET_4_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4_5",
-            "SUPPORTED_MODEL_SONNET_4_5_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4_6",
-            "SUPPORTED_MODEL_SONNET_4_6_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_5",
-            "SUPPORTED_MODEL_OPUS_4",
-            "SUPPORTED_MODEL_OPUS_4_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4_5",
-            "SUPPORTED_MODEL_OPUS_4_5_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4_6",
-            "SUPPORTED_MODEL_OPUS_4_6_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4_7",
-            "SUPPORTED_MODEL_OPUS_4_8",
-            "SUPPORTED_MODEL_HAIKU_4_5",
-            "SUPPORTED_MODEL_OPENAI_4O",
-            "SUPPORTED_MODEL_OPENAI_4O_MINI",
-            "SUPPORTED_MODEL_OPENAI_O1",
-            "SUPPORTED_MODEL_OPENAI_O1_MINI",
-            "SUPPORTED_MODEL_OPENAI_AUTO",
-        ]
-    ] = FieldInfo(alias="supportedModel", default=None)
+    supported_model: Optional[SupportedModel] = FieldInfo(alias="supportedModel", default=None)
     """supported_model is the LLM model being used by the agent execution."""
 
     transcript_url: Optional[str] = FieldInfo(alias="transcriptUrl", default=None)
