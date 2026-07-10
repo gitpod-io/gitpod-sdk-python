@@ -922,7 +922,6 @@ from gitpod.types import (
     CoAuthorSummary,
     CoAuthorTimeBucket,
     CoAuthorTool,
-    DateRange,
     EnvironmentUsageRecord,
     PrSummary,
     PrTimeBucket,
