@@ -19,6 +19,7 @@ from .shared import (
     Gateway as Gateway,
     Subject as Subject,
     TaskSpec as TaskSpec,
+    DateRange as DateRange,
     ErrorCode as ErrorCode,
     Principal as Principal,
     SecretRef as SecretRef,
@@ -55,6 +56,7 @@ from .warm_pool import WarmPool as WarmPool
 from .agent_mode import AgentMode as AgentMode
 from .pr_summary import PrSummary as PrSummary
 from .resolution import Resolution as Resolution
+from .usage_type import UsageType as UsageType
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
 from .error_level import ErrorLevel as ErrorLevel
@@ -84,14 +86,15 @@ from .warm_pool_spec import WarmPoolSpec as WarmPoolSpec
 from .admission_level import AdmissionLevel as AdmissionLevel
 from .agent_execution import AgentExecution as AgentExecution
 from .bpf_debug_level import BpfDebugLevel as BpfDebugLevel
+from .credits_by_type import CreditsByType as CreditsByType
 from .prebuild_status import PrebuildStatus as PrebuildStatus
 from .prompt_metadata import PromptMetadata as PromptMetadata
 from .runner_provider import RunnerProvider as RunnerProvider
 from .supported_model import SupportedModel as SupportedModel
 from .warm_pool_phase import WarmPoolPhase as WarmPoolPhase
 from .workflow_action import WorkflowAction as WorkflowAction
+from .billing_currency import BillingCurrency as BillingCurrency
 from .breadcrumb_param import BreadcrumbParam as BreadcrumbParam
-from .date_range_param import DateRangeParam as DateRangeParam
 from .environment_role import EnvironmentRole as EnvironmentRole
 from .environment_spec import EnvironmentSpec as EnvironmentSpec
 from .id_token_version import IDTokenVersion as IDTokenVersion
@@ -109,9 +112,12 @@ from .prebuild_metadata import PrebuildMetadata as PrebuildMetadata
 from .runner_capability import RunnerCapability as RunnerCapability
 from .runner_spec_param import RunnerSpecParam as RunnerSpecParam
 from .stack_frame_param import StackFrameParam as StackFrameParam
+from .team_credit_usage import TeamCreditUsage as TeamCreditUsage
 from .time_series_point import TimeSeriesPoint as TimeSeriesPoint
+from .user_credit_usage import UserCreditUsage as UserCreditUsage
 from .account_membership import AccountMembership as AccountMembership
 from .agent_code_context import AgentCodeContext as AgentCodeContext
+from .daily_credit_usage import DailyCreditUsage as DailyCreditUsage
 from .editor_list_params import EditorListParams as EditorListParams
 from .environment_status import EnvironmentStatus as EnvironmentStatus
 from .event_watch_params import EventWatchParams as EventWatchParams
@@ -124,6 +130,7 @@ from .warm_pool_metadata import WarmPoolMetadata as WarmPoolMetadata
 from .workflow_execution import WorkflowExecution as WorkflowExecution
 from .agent_message_param import AgentMessageParam as AgentMessageParam
 from .agent_trace_summary import AgentTraceSummary as AgentTraceSummary
+from .enterprise_ai_usage import EnterpriseAIUsage as EnterpriseAIUsage
 from .event_list_response import EventListResponse as EventListResponse
 from .gateway_list_params import GatewayListParams as GatewayListParams
 from .group_create_params import GroupCreateParams as GroupCreateParams
@@ -169,11 +176,13 @@ from .runner_create_response import RunnerCreateResponse as RunnerCreateResponse
 from .runner_release_channel import RunnerReleaseChannel as RunnerReleaseChannel
 from .runner_retrieve_params import RunnerRetrieveParams as RunnerRetrieveParams
 from .secret_create_response import SecretCreateResponse as SecretCreateResponse
+from .user_cost_budget_usage import UserCostBudgetUsage as UserCostBudgetUsage
 from .user_get_user_response import UserGetUserResponse as UserGetUserResponse
 from .user_input_block_param import UserInputBlockParam as UserInputBlockParam
 from .workflow_trigger_param import WorkflowTriggerParam as WorkflowTriggerParam
 from .account_retrieve_params import AccountRetrieveParams as AccountRetrieveParams
 from .agent_trace_time_bucket import AgentTraceTimeBucket as AgentTraceTimeBucket
+from .cumulative_credit_usage import CumulativeCreditUsage as CumulativeCreditUsage
 from .environment_initializer import EnvironmentInitializer as EnvironmentInitializer
 from .environment_list_params import EnvironmentListParams as EnvironmentListParams
 from .environment_stop_params import EnvironmentStopParams as EnvironmentStopParams
@@ -188,6 +197,7 @@ from .automation_create_params import AutomationCreateParams as AutomationCreate
 from .automation_delete_params import AutomationDeleteParams as AutomationDeleteParams
 from .automation_update_params import AutomationUpdateParams as AutomationUpdateParams
 from .editor_retrieve_response import EditorRetrieveResponse as EditorRetrieveResponse
+from .environment_credit_usage import EnvironmentCreditUsage as EnvironmentCreditUsage
 from .environment_start_params import EnvironmentStartParams as EnvironmentStartParams
 from .environment_usage_record import EnvironmentUsageRecord as EnvironmentUsageRecord
 from .organization_join_params import OrganizationJoinParams as OrganizationJoinParams
@@ -195,10 +205,16 @@ from .prebuild_cancel_response import PrebuildCancelResponse as PrebuildCancelRe
 from .prebuild_create_response import PrebuildCreateResponse as PrebuildCreateResponse
 from .prebuild_retrieve_params import PrebuildRetrieveParams as PrebuildRetrieveParams
 from .runner_retrieve_response import RunnerRetrieveResponse as RunnerRetrieveResponse
+from .team_enterprise_ai_usage import TeamEnterpriseAIUsage as TeamEnterpriseAIUsage
+from .user_credit_budget_usage import UserCreditBudgetUsage as UserCreditBudgetUsage
+from .user_enterprise_ai_usage import UserEnterpriseAIUsage as UserEnterpriseAIUsage
 from .workflow_trigger_context import WorkflowTriggerContext as WorkflowTriggerContext
 from .account_retrieve_response import AccountRetrieveResponse as AccountRetrieveResponse
 from .agent_list_prompts_params import AgentListPromptsParams as AgentListPromptsParams
+from .byok_rate_card_token_type import ByokRateCardTokenType as ByokRateCardTokenType
+from .daily_enterprise_ai_usage import DailyEnterpriseAIUsage as DailyEnterpriseAIUsage
 from .editor_resolve_url_params import EditorResolveURLParams as EditorResolveURLParams
+from .enterprise_ai_token_usage import EnterpriseAITokenUsage as EnterpriseAITokenUsage
 from .environment_create_params import EnvironmentCreateParams as EnvironmentCreateParams
 from .environment_delete_params import EnvironmentDeleteParams as EnvironmentDeleteParams
 from .environment_update_params import EnvironmentUpdateParams as EnvironmentUpdateParams
@@ -215,6 +231,7 @@ from .agent_update_prompt_params import AgentUpdatePromptParams as AgentUpdatePr
 from .automation_create_response import AutomationCreateResponse as AutomationCreateResponse
 from .automation_retrieve_params import AutomationRetrieveParams as AutomationRetrieveParams
 from .automation_update_response import AutomationUpdateResponse as AutomationUpdateResponse
+from .enterprise_ai_usage_budget import EnterpriseAIUsageBudget as EnterpriseAIUsageBudget
 from .error_report_errors_params import ErrorReportErrorsParams as ErrorReportErrorsParams
 from .organization_create_params import OrganizationCreateParams as OrganizationCreateParams
 from .organization_delete_params import OrganizationDeleteParams as OrganizationDeleteParams
@@ -235,11 +252,14 @@ from .environment_retrieve_params import EnvironmentRetrieveParams as Environmen
 from .metrics_configuration_param import MetricsConfigurationParam as MetricsConfigurationParam
 from .usage_get_pr_summary_params import UsageGetPrSummaryParams as UsageGetPrSummaryParams
 from .agent_create_prompt_response import AgentCreatePromptResponse as AgentCreatePromptResponse
+from .agent_execution_credit_usage import AgentExecutionCreditUsage as AgentExecutionCreditUsage
 from .agent_list_executions_params import AgentListExecutionsParams as AgentListExecutionsParams
 from .agent_retrieve_prompt_params import AgentRetrievePromptParams as AgentRetrievePromptParams
 from .agent_start_execution_params import AgentStartExecutionParams as AgentStartExecutionParams
 from .agent_update_prompt_response import AgentUpdatePromptResponse as AgentUpdatePromptResponse
 from .automation_retrieve_response import AutomationRetrieveResponse as AutomationRetrieveResponse
+from .credit_usage_export_group_by import CreditUsageExportGroupBy as CreditUsageExportGroupBy
+from .enterprise_ai_usage_by_model import EnterpriseAIUsageByModel as EnterpriseAIUsageByModel
 from .environment_unarchive_params import EnvironmentUnarchiveParams as EnvironmentUnarchiveParams
 from .identity_get_id_token_params import IdentityGetIDTokenParams as IdentityGetIDTokenParams
 from .kernel_controls_config_param import KernelControlsConfigParam as KernelControlsConfigParam
@@ -250,6 +270,7 @@ from .organization_update_response import OrganizationUpdateResponse as Organiza
 from .project_bulk_create_response import ProjectBulkCreateResponse as ProjectBulkCreateResponse
 from .project_bulk_delete_response import ProjectBulkDeleteResponse as ProjectBulkDeleteResponse
 from .project_bulk_update_response import ProjectBulkUpdateResponse as ProjectBulkUpdateResponse
+from .team_cumulative_credit_usage import TeamCumulativeCreditUsage as TeamCumulativeCreditUsage
 from .agent_delete_execution_params import AgentDeleteExecutionParams as AgentDeleteExecutionParams
 from .environment_initializer_param import EnvironmentInitializerParam as EnvironmentInitializerParam
 from .environment_retrieve_response import EnvironmentRetrieveResponse as EnvironmentRetrieveResponse
@@ -271,6 +292,7 @@ from .runner_parse_context_url_params import RunnerParseContextURLParams as Runn
 from .usage_get_pr_time_series_params import UsageGetPrTimeSeriesParams as UsageGetPrTimeSeriesParams
 from .account_get_sso_login_url_params import AccountGetSSOLoginURLParams as AccountGetSSOLoginURLParams
 from .account_list_sso_logins_response import AccountListSSOLoginsResponse as AccountListSSOLoginsResponse
+from .credit_usage_report_filter_param import CreditUsageReportFilterParam as CreditUsageReportFilterParam
 from .identity_exchange_token_response import IdentityExchangeTokenResponse as IdentityExchangeTokenResponse
 from .organization_list_members_params import OrganizationListMembersParams as OrganizationListMembersParams
 from .prebuild_create_warm_pool_params import PrebuildCreateWarmPoolParams as PrebuildCreateWarmPoolParams
@@ -279,6 +301,8 @@ from .prebuild_update_warm_pool_params import PrebuildUpdateWarmPoolParams as Pr
 from .agent_retrieve_execution_response import AgentRetrieveExecutionResponse as AgentRetrieveExecutionResponse
 from .automation_list_executions_params import AutomationListExecutionsParams as AutomationListExecutionsParams
 from .automation_start_execution_params import AutomationStartExecutionParams as AutomationStartExecutionParams
+from .enterprise_ai_usage_budget_source import EnterpriseAIUsageBudgetSource as EnterpriseAIUsageBudgetSource
+from .enterprise_ai_usage_by_token_type import EnterpriseAIUsageByTokenType as EnterpriseAIUsageByTokenType
 from .environment_activity_signal_param import EnvironmentActivitySignalParam as EnvironmentActivitySignalParam
 from .prebuild_create_logs_token_params import PrebuildCreateLogsTokenParams as PrebuildCreateLogsTokenParams
 from .runner_create_logs_token_response import RunnerCreateLogsTokenResponse as RunnerCreateLogsTokenResponse
@@ -312,6 +336,12 @@ from .runner_check_repository_access_params import (
 from .automation_retrieve_execution_response import (
     AutomationRetrieveExecutionResponse as AutomationRetrieveExecutionResponse,
 )
+from .billing_get_credit_usage_export_params import (
+    BillingGetCreditUsageExportParams as BillingGetCreditUsageExportParams,
+)
+from .billing_get_credit_usage_report_params import (
+    BillingGetCreditUsageReportParams as BillingGetCreditUsageReportParams,
+)
 from .environment_create_from_project_params import (
     EnvironmentCreateFromProjectParams as EnvironmentCreateFromProjectParams,
 )
@@ -328,6 +358,9 @@ from .usage_get_agent_trace_summary_response import (
     UsageGetAgentTraceSummaryResponse as UsageGetAgentTraceSummaryResponse,
 )
 from .usage_get_co_author_time_series_params import UsageGetCoAuthorTimeSeriesParams as UsageGetCoAuthorTimeSeriesParams
+from .enterprise_ai_user_budget_policy_source import (
+    EnterpriseAIUserBudgetPolicySource as EnterpriseAIUserBudgetPolicySource,
+)
 from .runner_check_repository_access_response import (
     RunnerCheckRepositoryAccessResponse as RunnerCheckRepositoryAccessResponse,
 )
@@ -339,6 +372,12 @@ from .automation_list_execution_actions_params import (
 )
 from .automation_list_execution_outputs_params import (
     AutomationListExecutionOutputsParams as AutomationListExecutionOutputsParams,
+)
+from .billing_get_credit_usage_export_response import (
+    BillingGetCreditUsageExportResponse as BillingGetCreditUsageExportResponse,
+)
+from .billing_get_credit_usage_report_response import (
+    BillingGetCreditUsageReportResponse as BillingGetCreditUsageReportResponse,
 )
 from .environment_create_from_project_response import (
     EnvironmentCreateFromProjectResponse as EnvironmentCreateFromProjectResponse,
@@ -364,6 +403,9 @@ from .account_list_joinable_organizations_params import (
 from .automation_list_execution_outputs_response import (
     AutomationListExecutionOutputsResponse as AutomationListExecutionOutputsResponse,
 )
+from .billing_get_cumulative_credit_usage_params import (
+    BillingGetCumulativeCreditUsageParams as BillingGetCumulativeCreditUsageParams,
+)
 from .identity_get_authenticated_identity_params import (
     IdentityGetAuthenticatedIdentityParams as IdentityGetAuthenticatedIdentityParams,
 )
@@ -378,6 +420,18 @@ from .environment_create_environment_token_params import (
 )
 from .runner_check_authentication_for_host_params import (
     RunnerCheckAuthenticationForHostParams as RunnerCheckAuthenticationForHostParams,
+)
+from .billing_get_cumulative_credit_usage_response import (
+    BillingGetCumulativeCreditUsageResponse as BillingGetCumulativeCreditUsageResponse,
+)
+from .billing_list_enterprise_ai_team_usage_params import (
+    BillingListEnterpriseAITeamUsageParams as BillingListEnterpriseAITeamUsageParams,
+)
+from .billing_list_enterprise_ai_user_usage_params import (
+    BillingListEnterpriseAIUserUsageParams as BillingListEnterpriseAIUserUsageParams,
+)
+from .enterprise_ai_usage_time_series_filter_param import (
+    EnterpriseAIUsageTimeSeriesFilterParam as EnterpriseAIUsageTimeSeriesFilterParam,
 )
 from .identity_get_authenticated_identity_response import (
     IdentityGetAuthenticatedIdentityResponse as IdentityGetAuthenticatedIdentityResponse,
@@ -394,9 +448,24 @@ from .runner_check_authentication_for_host_response import (
 from .usage_list_environment_runtime_records_params import (
     UsageListEnvironmentRuntimeRecordsParams as UsageListEnvironmentRuntimeRecordsParams,
 )
+from .billing_get_enterprise_ai_usage_summary_params import (
+    BillingGetEnterpriseAIUsageSummaryParams as BillingGetEnterpriseAIUsageSummaryParams,
+)
 from .agent_create_execution_conversation_token_params import (
     AgentCreateExecutionConversationTokenParams as AgentCreateExecutionConversationTokenParams,
 )
+from .billing_get_enterprise_ai_usage_summary_response import (
+    BillingGetEnterpriseAIUsageSummaryResponse as BillingGetEnterpriseAIUsageSummaryResponse,
+)
+from .billing_list_enterprise_user_credit_usage_params import (
+    BillingListEnterpriseUserCreditUsageParams as BillingListEnterpriseUserCreditUsageParams,
+)
 from .agent_create_execution_conversation_token_response import (
     AgentCreateExecutionConversationTokenResponse as AgentCreateExecutionConversationTokenResponse,
+)
+from .billing_get_enterprise_ai_usage_time_series_params import (
+    BillingGetEnterpriseAIUsageTimeSeriesParams as BillingGetEnterpriseAIUsageTimeSeriesParams,
+)
+from .billing_get_enterprise_ai_usage_time_series_response import (
+    BillingGetEnterpriseAIUsageTimeSeriesResponse as BillingGetEnterpriseAIUsageTimeSeriesResponse,
 )

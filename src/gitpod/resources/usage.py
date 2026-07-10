@@ -28,8 +28,8 @@ from .._response import (
 from ..pagination import SyncRecordsPage, AsyncRecordsPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.resolution import Resolution
-from ..types.date_range_param import DateRangeParam
 from ..types.environment_usage_record import EnvironmentUsageRecord
+from ..types.shared_params.date_range import DateRange
 from ..types.usage_get_pr_summary_response import UsageGetPrSummaryResponse
 from ..types.usage_get_pr_time_series_response import UsageGetPrTimeSeriesResponse
 from ..types.usage_get_co_author_summary_response import UsageGetCoAuthorSummaryResponse
@@ -68,7 +68,7 @@ class UsageResource(SyncAPIResource):
     def get_adoption_usage_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -138,7 +138,7 @@ class UsageResource(SyncAPIResource):
     def get_agent_trace_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -206,7 +206,7 @@ class UsageResource(SyncAPIResource):
     def get_agent_trace_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,
@@ -279,7 +279,7 @@ class UsageResource(SyncAPIResource):
     def get_co_author_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -347,7 +347,7 @@ class UsageResource(SyncAPIResource):
     def get_co_author_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,
@@ -420,7 +420,7 @@ class UsageResource(SyncAPIResource):
     def get_pr_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -488,7 +488,7 @@ class UsageResource(SyncAPIResource):
     def get_pr_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,
@@ -665,7 +665,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_adoption_usage_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -735,7 +735,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_agent_trace_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -803,7 +803,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_agent_trace_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,
@@ -876,7 +876,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_co_author_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -944,7 +944,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_co_author_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,
@@ -1017,7 +1017,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_pr_summary(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         team_id: str | Omit = omit,
         user_id: str | Omit = omit,
@@ -1085,7 +1085,7 @@ class AsyncUsageResource(AsyncAPIResource):
     async def get_pr_time_series(
         self,
         *,
-        date_range: DateRangeParam,
+        date_range: DateRange,
         project_id: str | Omit = omit,
         resolution: Resolution | Omit = omit,
         team_id: str | Omit = omit,

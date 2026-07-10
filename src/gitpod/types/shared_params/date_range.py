@@ -6,12 +6,12 @@ from typing import Union
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
-from .._utils import PropertyInfo
+from ..._utils import PropertyInfo
 
-__all__ = ["DateRangeParam"]
+__all__ = ["DateRange"]
 
 
-class DateRangeParam(TypedDict, total=False):
+class DateRange(TypedDict, total=False):
     """DateRange specifies a time period for queries."""
 
     end_time: Required[Annotated[Union[str, datetime], PropertyInfo(alias="endTime", format="iso8601")]]

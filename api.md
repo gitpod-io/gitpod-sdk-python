@@ -8,6 +8,7 @@ from gitpod.types import (
     CodexServiceTier,
     CodexSettings,
     CountResponseRelation,
+    DateRange,
     EnvironmentClass,
     EnvironmentVariableItem,
     EnvironmentVariableSource,
@@ -144,6 +145,57 @@ Methods:
 - <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_response.py">AutomationRetrieveExecutionResponse</a></code>
 - <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution_action</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_action_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_action_response.py">AutomationRetrieveExecutionActionResponse</a></code>
 - <code title="post /gitpod.v1.WorkflowService/StartWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">start_execution</a>(\*\*<a href="src/gitpod/types/automation_start_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_start_execution_response.py">AutomationStartExecutionResponse</a></code>
+
+# Billing
+
+Types:
+
+```python
+from gitpod.types import (
+    AgentExecutionCreditUsage,
+    BillingCurrency,
+    ByokRateCardTokenType,
+    CreditUsageExportGroupBy,
+    CreditUsageReportFilter,
+    CreditsByType,
+    CumulativeCreditUsage,
+    DailyCreditUsage,
+    DailyEnterpriseAIUsage,
+    EnterpriseAITokenUsage,
+    EnterpriseAIUsage,
+    EnterpriseAIUsageBudget,
+    EnterpriseAIUsageBudgetSource,
+    EnterpriseAIUsageByModel,
+    EnterpriseAIUsageByTokenType,
+    EnterpriseAIUsageTimeSeriesFilter,
+    EnterpriseAIUserBudgetPolicySource,
+    EnvironmentCreditUsage,
+    TeamCreditUsage,
+    TeamCumulativeCreditUsage,
+    TeamEnterpriseAIUsage,
+    UsageType,
+    UserCostBudgetUsage,
+    UserCreditBudgetUsage,
+    UserCreditUsage,
+    UserEnterpriseAIUsage,
+    BillingGetCreditUsageExportResponse,
+    BillingGetCreditUsageReportResponse,
+    BillingGetCumulativeCreditUsageResponse,
+    BillingGetEnterpriseAIUsageSummaryResponse,
+    BillingGetEnterpriseAIUsageTimeSeriesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.BillingService/GetCreditUsageExport">client.billing.<a href="./src/gitpod/resources/billing.py">get_credit_usage_export</a>(\*\*<a href="src/gitpod/types/billing_get_credit_usage_export_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_credit_usage_export_response.py">BillingGetCreditUsageExportResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetCreditUsageReport">client.billing.<a href="./src/gitpod/resources/billing.py">get_credit_usage_report</a>(\*\*<a href="src/gitpod/types/billing_get_credit_usage_report_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_credit_usage_report_response.py">BillingGetCreditUsageReportResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetCumulativeCreditUsage">client.billing.<a href="./src/gitpod/resources/billing.py">get_cumulative_credit_usage</a>(\*\*<a href="src/gitpod/types/billing_get_cumulative_credit_usage_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_cumulative_credit_usage_response.py">BillingGetCumulativeCreditUsageResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetEnterpriseAIUsageSummary">client.billing.<a href="./src/gitpod/resources/billing.py">get_enterprise_ai_usage_summary</a>(\*\*<a href="src/gitpod/types/billing_get_enterprise_ai_usage_summary_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_enterprise_ai_usage_summary_response.py">BillingGetEnterpriseAIUsageSummaryResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetEnterpriseAIUsageTimeSeries">client.billing.<a href="./src/gitpod/resources/billing.py">get_enterprise_ai_usage_time_series</a>(\*\*<a href="src/gitpod/types/billing_get_enterprise_ai_usage_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_enterprise_ai_usage_time_series_response.py">BillingGetEnterpriseAIUsageTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseAITeamUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_ai_team_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_ai_team_usage_params.py">params</a>) -> <a href="./src/gitpod/types/team_enterprise_ai_usage.py">SyncTeamUsagePage[TeamEnterpriseAIUsage]</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseAIUserUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_ai_user_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_ai_user_usage_params.py">params</a>) -> <a href="./src/gitpod/types/user_cost_budget_usage.py">SyncUserUsagePage[UserCostBudgetUsage]</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseUserCreditUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_user_credit_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_user_credit_usage_params.py">params</a>) -> <a href="./src/gitpod/types/user_credit_budget_usage.py">SyncUserUsagePage[UserCreditBudgetUsage]</a></code>
 
 # Editors
 
@@ -856,7 +908,6 @@ from gitpod.types import (
     CoAuthorSummary,
     CoAuthorTimeBucket,
     CoAuthorTool,
-    DateRange,
     EnvironmentUsageRecord,
     PrSummary,
     PrTimeBucket,

@@ -6,13 +6,13 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 from .resolution import Resolution
-from .date_range_param import DateRangeParam
+from .shared_params.date_range import DateRange
 
 __all__ = ["UsageGetAgentTraceTimeSeriesParams"]
 
 
 class UsageGetAgentTraceTimeSeriesParams(TypedDict, total=False):
-    date_range: Required[Annotated[DateRangeParam, PropertyInfo(alias="dateRange")]]
+    date_range: Required[Annotated[DateRange, PropertyInfo(alias="dateRange")]]
     """Date range to query within."""
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]

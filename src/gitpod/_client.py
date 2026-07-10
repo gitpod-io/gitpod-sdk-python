@@ -42,6 +42,7 @@ if TYPE_CHECKING:
         errors,
         events,
         groups,
+        billing,
         editors,
         runners,
         secrets,
@@ -58,6 +59,7 @@ if TYPE_CHECKING:
     from .resources.agents import AgentsResource, AsyncAgentsResource
     from .resources.errors import ErrorsResource, AsyncErrorsResource
     from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.editors import EditorsResource, AsyncEditorsResource
     from .resources.secrets import SecretsResource, AsyncSecretsResource
     from .resources.accounts import AccountsResource, AsyncAccountsResource
@@ -156,6 +158,13 @@ class Gitpod(SyncAPIClient):
         from .resources.automations import AutomationsResource
 
         return AutomationsResource(self)
+
+    @cached_property
+    def billing(self) -> BillingResource:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResource
+
+        return BillingResource(self)
 
     @cached_property
     def editors(self) -> EditorsResource:
@@ -448,6 +457,13 @@ class AsyncGitpod(AsyncAPIClient):
         return AsyncAutomationsResource(self)
 
     @cached_property
+    def billing(self) -> AsyncBillingResource:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResource
+
+        return AsyncBillingResource(self)
+
+    @cached_property
     def editors(self) -> AsyncEditorsResource:
         from .resources.editors import AsyncEditorsResource
 
@@ -680,6 +696,13 @@ class GitpodWithRawResponse:
         return AutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.BillingResourceWithRawResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResourceWithRawResponse
+
+        return BillingResourceWithRawResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithRawResponse:
         from .resources.editors import EditorsResourceWithRawResponse
 
@@ -798,6 +821,13 @@ class AsyncGitpodWithRawResponse:
         from .resources.automations import AsyncAutomationsResourceWithRawResponse
 
         return AsyncAutomationsResourceWithRawResponse(self._client.automations)
+
+    @cached_property
+    def billing(self) -> billing.AsyncBillingResourceWithRawResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResourceWithRawResponse
+
+        return AsyncBillingResourceWithRawResponse(self._client.billing)
 
     @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithRawResponse:
@@ -920,6 +950,13 @@ class GitpodWithStreamedResponse:
         return AutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.BillingResourceWithStreamingResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResourceWithStreamingResponse
+
+        return BillingResourceWithStreamingResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithStreamingResponse:
         from .resources.editors import EditorsResourceWithStreamingResponse
 
@@ -1038,6 +1075,13 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.automations import AsyncAutomationsResourceWithStreamingResponse
 
         return AsyncAutomationsResourceWithStreamingResponse(self._client.automations)
+
+    @cached_property
+    def billing(self) -> billing.AsyncBillingResourceWithStreamingResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResourceWithStreamingResponse
+
+        return AsyncBillingResourceWithStreamingResponse(self._client.billing)
 
     @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithStreamingResponse:

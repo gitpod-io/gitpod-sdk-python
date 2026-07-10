@@ -48,6 +48,14 @@ from .groups import (
     GroupsResourceWithStreamingResponse,
     AsyncGroupsResourceWithStreamingResponse,
 )
+from .billing import (
+    BillingResource,
+    AsyncBillingResource,
+    BillingResourceWithRawResponse,
+    AsyncBillingResourceWithRawResponse,
+    BillingResourceWithStreamingResponse,
+    AsyncBillingResourceWithStreamingResponse,
+)
 from .editors import (
     EditorsResource,
     AsyncEditorsResource,
@@ -156,6 +164,12 @@ __all__ = [
     "AsyncAutomationsResourceWithRawResponse",
     "AutomationsResourceWithStreamingResponse",
     "AsyncAutomationsResourceWithStreamingResponse",
+    "BillingResource",
+    "AsyncBillingResource",
+    "BillingResourceWithRawResponse",
+    "AsyncBillingResourceWithRawResponse",
+    "BillingResourceWithStreamingResponse",
+    "AsyncBillingResourceWithStreamingResponse",
     "EditorsResource",
     "AsyncEditorsResource",
     "EditorsResourceWithRawResponse",

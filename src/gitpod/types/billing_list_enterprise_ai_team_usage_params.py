@@ -4,37 +4,40 @@ from __future__ import annotations
 
 from typing_extensions import Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .shared_params.date_range import DateRange
 
-__all__ = ["UsageListEnvironmentRuntimeRecordsParams", "Filter", "Pagination"]
+__all__ = ["BillingListEnterpriseAITeamUsageParams", "Filter", "Pagination"]
 
 
-class UsageListEnvironmentRuntimeRecordsParams(TypedDict, total=False):
+class BillingListEnterpriseAITeamUsageParams(TypedDict, total=False):
+    date_range: Required[Annotated[DateRange, PropertyInfo(alias="dateRange")]]
+    """Date range for the team usage list.
+
+    Both start and end dates are inclusive. Time-of-day is ignored; dates are
+    truncated to midnight in the specified timezone.
+    """
+
+    organization_id: Required[Annotated[str, PropertyInfo(alias="organizationId")]]
+
     token: str
 
     page_size: Annotated[int, PropertyInfo(alias="pageSize")]
 
     filter: Filter
-    """Filter options."""
 
     pagination: Pagination
-    """Pagination options."""
+
+    timezone: str
+    """IANA timezone name used to bucket usage. When empty, defaults to "UTC"."""
 
 
 class Filter(TypedDict, total=False):
-    """Filter options."""
-
-    date_range: Required[Annotated[DateRange, PropertyInfo(alias="dateRange")]]
-    """Date range to query runtime records within."""
-
-    project_id: Annotated[str, PropertyInfo(alias="projectId")]
-    """Optional project ID to filter runtime records by."""
+    team_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="teamIds")]
 
 
 class Pagination(TypedDict, total=False):
-    """Pagination options."""
-
     token: str
     """
     Token for the next set of results that was returned as next_token of a

@@ -6,6 +6,7 @@ from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject
 from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
+from .date_range import DateRange as DateRange
 from .secret_ref import SecretRef as SecretRef
 from .sort_order import SortOrder as SortOrder
 from .field_value import FieldValue as FieldValue
