@@ -9,7 +9,7 @@ from .._models import BaseModel
 from .secret_scope import SecretScope
 from .shared.subject import Subject
 
-__all__ = ["Secret", "CredentialProxy"]
+__all__ = ["Secret", "CredentialProxy", "Source", "SourceOidcJfrog"]
 
 
 class CredentialProxy(BaseModel):
@@ -31,6 +31,26 @@ class CredentialProxy(BaseModel):
     target_hosts lists the hostnames to intercept (for example "github.com" or
     "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
     """
+
+
+class SourceOidcJfrog(BaseModel):
+    host: Optional[str] = None
+    """host must be a hostname or IP address with optional port:
+
+    ```
+    this.matches("^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?[.])*[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(:([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$")
+    ```
+    """
+
+    provider_name: Optional[str] = FieldInfo(alias="providerName", default=None)
+
+
+class Source(BaseModel):
+    """Source of the secret"""
+
+    oidc_jfrog: Optional[SourceOidcJfrog] = FieldInfo(alias="oidcJfrog", default=None)
+
+    verbatim: Optional[bool] = None
 
 
 class Secret(BaseModel):
@@ -163,6 +183,9 @@ class Secret(BaseModel):
     """The Project ID this Secret belongs to Deprecated: use scope instead"""
 
     scope: Optional[SecretScope] = None
+
+    source: Optional[Source] = None
+    """Source of the secret"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
     """
