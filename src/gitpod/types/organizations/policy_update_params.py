@@ -9,6 +9,7 @@ from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
 from ..admission_level import AdmissionLevel
 from .veto_exec_policy_param import VetoExecPolicyParam
+from .codex_model_policy_param import CodexModelPolicyParam
 from ..shared.codex_openai_model import CodexOpenAIModel
 from ..shared.codex_service_tier import CodexServiceTier
 from .conversation_sharing_policy import ConversationSharingPolicy
@@ -168,9 +169,10 @@ class AgentPolicy(TypedDict, total=False):
     """
 
     allowed_codex_models: Annotated[List[CodexOpenAIModel], PropertyInfo(alias="allowedCodexModels")]
-    """
-    allowed_codex_models contains the Codex models users may select when the
-    codex_rollout feature flag is enabled. Empty means all Codex models are allowed.
+    """Deprecated: use codex_model_policy.
+
+    This legacy allowlist cannot distinguish omitted from intentionally empty on
+    update requests. Empty means all Codex models are allowed.
     """
 
     allowed_codex_reasoning_efforts: Annotated[
@@ -187,6 +189,13 @@ class AgentPolicy(TypedDict, total=False):
     allowed_codex_service_tiers contains the Codex service tiers users may select
     when the codex_rollout feature flag is enabled. Empty means all Codex service
     tiers are allowed.
+    """
+
+    codex_model_policy: Annotated[CodexModelPolicyParam, PropertyInfo(alias="codexModelPolicy")]
+    """
+    codex_model_policy contains explicit per-model Codex availability states. Omit
+    to leave the current model policy unchanged. Send an empty policy to clear
+    explicit model states.
     """
 
     command_deny_list: Annotated[SequenceNotStr[str], PropertyInfo(alias="commandDenyList")]

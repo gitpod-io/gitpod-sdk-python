@@ -558,6 +558,7 @@ Types:
 ```python
 from gitpod.types.organizations import (
     AgentPolicy,
+    CodexModelPolicy,
     ConversationSharingPolicy,
     CrowdStrikeConfig,
     CustomAgentEnvMapping,

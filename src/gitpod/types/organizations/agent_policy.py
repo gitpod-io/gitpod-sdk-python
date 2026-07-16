@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
+from .codex_model_policy import CodexModelPolicy
 from ..shared.codex_openai_model import CodexOpenAIModel
 from ..shared.codex_service_tier import CodexServiceTier
 from .conversation_sharing_policy import ConversationSharingPolicy
@@ -41,9 +42,10 @@ class AgentPolicy(BaseModel):
     """
 
     allowed_codex_models: Optional[List[CodexOpenAIModel]] = FieldInfo(alias="allowedCodexModels", default=None)
-    """
-    allowed_codex_models contains the Codex models users may select when the
-    codex_rollout feature flag is enabled. Empty means all Codex models are allowed.
+    """Deprecated: use codex_model_policy.
+
+    This legacy allowlist cannot distinguish omitted from intentionally empty on
+    update requests. Empty means all Codex models are allowed.
     """
 
     allowed_codex_reasoning_efforts: Optional[List[CodexReasoningEffort]] = FieldInfo(
@@ -62,6 +64,12 @@ class AgentPolicy(BaseModel):
     allowed_codex_service_tiers contains the Codex service tiers users may select
     when the codex_rollout feature flag is enabled. Empty means all Codex service
     tiers are allowed.
+    """
+
+    codex_model_policy: Optional[CodexModelPolicy] = FieldInfo(alias="codexModelPolicy", default=None)
+    """
+    codex_model_policy contains explicit per-model Codex availability states.
+    Missing policy or missing model entries mean allowed.
     """
 
     conversation_sharing_policy: Optional[ConversationSharingPolicy] = FieldInfo(
