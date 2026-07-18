@@ -119,6 +119,7 @@ class PoliciesResource(SyncAPIResource):
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        security_policy_id: Optional[str] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
         web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -232,6 +233,12 @@ class PoliciesResource(SyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          security_policy_id: security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+              environments. The public GA contract accepts policies that use only
+              SecurityPolicy.Spec.executables. Assignment validates materializability and
+              rejects unsupported executable selectors or effects. Set this field to an empty
+              string to clear the default assignment.
+
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
 
           web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
@@ -269,6 +276,7 @@ class PoliciesResource(SyncAPIResource):
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "security_policy_id": security_policy_id,
                     "veto_exec_policy": veto_exec_policy,
                     "web_browser_disabled": web_browser_disabled,
                 },
@@ -376,6 +384,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        security_policy_id: Optional[str] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
         web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -489,6 +498,12 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          security_policy_id: security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+              environments. The public GA contract accepts policies that use only
+              SecurityPolicy.Spec.executables. Assignment validates materializability and
+              rejects unsupported executable selectors or effects. Set this field to an empty
+              string to clear the default assignment.
+
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
 
           web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
@@ -526,6 +541,7 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "security_policy_id": security_policy_id,
                     "veto_exec_policy": veto_exec_policy,
                     "web_browser_disabled": web_browser_disabled,
                 },

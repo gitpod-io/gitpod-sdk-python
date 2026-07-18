@@ -149,6 +149,15 @@ class PolicyUpdateParams(TypedDict, total=False):
     security_agent_policy: Annotated[Optional[SecurityAgentPolicy], PropertyInfo(alias="securityAgentPolicy")]
     """security_agent_policy contains security agent configuration updates"""
 
+    security_policy_id: Annotated[Optional[str], PropertyInfo(alias="securityPolicyId")]
+    """
+    security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+    environments. The public GA contract accepts policies that use only
+    SecurityPolicy.Spec.executables. Assignment validates materializability and
+    rejects unsupported executable selectors or effects. Set this field to an empty
+    string to clear the default assignment.
+    """
+
     veto_exec_policy: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="vetoExecPolicy")]
     """veto_exec_policy contains the veto exec policy for environments."""
 

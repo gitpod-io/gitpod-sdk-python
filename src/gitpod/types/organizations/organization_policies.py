@@ -151,5 +151,14 @@ class OrganizationPolicies(BaseModel):
     environments.
     """
 
+    security_policy_id: Optional[str] = FieldInfo(alias="securityPolicyId", default=None)
+    """
+    security_policy_id references the Veto Exec SecurityPolicy assigned to newly
+    created environments. The public GA contract accepts policies that use only
+    SecurityPolicy.Spec.executables. Assignment validates materializability and
+    rejects unsupported executable selectors or effects. If empty, new environments
+    have no SecurityPolicy by default.
+    """
+
     veto_exec_policy: Optional[VetoExecPolicy] = FieldInfo(alias="vetoExecPolicy", default=None)
     """veto_exec_policy contains the veto exec policy for environments."""

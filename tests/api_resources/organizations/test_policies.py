@@ -105,6 +105,7 @@ class TestPolicies:
                     "tags": "tags",
                 }
             },
+            security_policy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             veto_exec_policy={
                 "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
@@ -232,6 +233,7 @@ class TestAsyncPolicies:
                     "tags": "tags",
                 }
             },
+            security_policy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             veto_exec_policy={
                 "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
