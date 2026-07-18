@@ -54,6 +54,7 @@ if TYPE_CHECKING:
         automations,
         environments,
         organizations,
+        security_policies,
     )
     from .resources.usage import UsageResource, AsyncUsageResource
     from .resources.agents import AgentsResource, AsyncAgentsResource
@@ -71,6 +72,7 @@ if TYPE_CHECKING:
     from .resources.groups.groups import GroupsResource, AsyncGroupsResource
     from .resources.runners.runners import RunnersResource, AsyncRunnersResource
     from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.security_policies import SecurityPoliciesResource, AsyncSecurityPoliciesResource
     from .resources.environments.environments import EnvironmentsResource, AsyncEnvironmentsResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
@@ -245,6 +247,12 @@ class Gitpod(SyncAPIClient):
         from .resources.secrets import SecretsResource
 
         return SecretsResource(self)
+
+    @cached_property
+    def security_policies(self) -> SecurityPoliciesResource:
+        from .resources.security_policies import SecurityPoliciesResource
+
+        return SecurityPoliciesResource(self)
 
     @cached_property
     def usage(self) -> UsageResource:
@@ -544,6 +552,12 @@ class AsyncGitpod(AsyncAPIClient):
         return AsyncSecretsResource(self)
 
     @cached_property
+    def security_policies(self) -> AsyncSecurityPoliciesResource:
+        from .resources.security_policies import AsyncSecurityPoliciesResource
+
+        return AsyncSecurityPoliciesResource(self)
+
+    @cached_property
     def usage(self) -> AsyncUsageResource:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -783,6 +797,12 @@ class GitpodWithRawResponse:
         return SecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
+    def security_policies(self) -> security_policies.SecurityPoliciesResourceWithRawResponse:
+        from .resources.security_policies import SecurityPoliciesResourceWithRawResponse
+
+        return SecurityPoliciesResourceWithRawResponse(self._client.security_policies)
+
+    @cached_property
     def usage(self) -> usage.UsageResourceWithRawResponse:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -908,6 +928,12 @@ class AsyncGitpodWithRawResponse:
         from .resources.secrets import AsyncSecretsResourceWithRawResponse
 
         return AsyncSecretsResourceWithRawResponse(self._client.secrets)
+
+    @cached_property
+    def security_policies(self) -> security_policies.AsyncSecurityPoliciesResourceWithRawResponse:
+        from .resources.security_policies import AsyncSecurityPoliciesResourceWithRawResponse
+
+        return AsyncSecurityPoliciesResourceWithRawResponse(self._client.security_policies)
 
     @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithRawResponse:
@@ -1037,6 +1063,12 @@ class GitpodWithStreamedResponse:
         return SecretsResourceWithStreamingResponse(self._client.secrets)
 
     @cached_property
+    def security_policies(self) -> security_policies.SecurityPoliciesResourceWithStreamingResponse:
+        from .resources.security_policies import SecurityPoliciesResourceWithStreamingResponse
+
+        return SecurityPoliciesResourceWithStreamingResponse(self._client.security_policies)
+
+    @cached_property
     def usage(self) -> usage.UsageResourceWithStreamingResponse:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -1162,6 +1194,12 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.secrets import AsyncSecretsResourceWithStreamingResponse
 
         return AsyncSecretsResourceWithStreamingResponse(self._client.secrets)
+
+    @cached_property
+    def security_policies(self) -> security_policies.AsyncSecurityPoliciesResourceWithStreamingResponse:
+        from .resources.security_policies import AsyncSecurityPoliciesResourceWithStreamingResponse
+
+        return AsyncSecurityPoliciesResourceWithStreamingResponse(self._client.security_policies)
 
     @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithStreamingResponse:

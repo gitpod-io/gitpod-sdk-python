@@ -144,6 +144,14 @@ from .organizations import (
     OrganizationsResourceWithStreamingResponse,
     AsyncOrganizationsResourceWithStreamingResponse,
 )
+from .security_policies import (
+    SecurityPoliciesResource,
+    AsyncSecurityPoliciesResource,
+    SecurityPoliciesResourceWithRawResponse,
+    AsyncSecurityPoliciesResourceWithRawResponse,
+    SecurityPoliciesResourceWithStreamingResponse,
+    AsyncSecurityPoliciesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "AccountsResource",
@@ -242,6 +250,12 @@ __all__ = [
     "AsyncSecretsResourceWithRawResponse",
     "SecretsResourceWithStreamingResponse",
     "AsyncSecretsResourceWithStreamingResponse",
+    "SecurityPoliciesResource",
+    "AsyncSecurityPoliciesResource",
+    "SecurityPoliciesResourceWithRawResponse",
+    "AsyncSecurityPoliciesResourceWithRawResponse",
+    "SecurityPoliciesResourceWithStreamingResponse",
+    "AsyncSecurityPoliciesResourceWithStreamingResponse",
     "UsageResource",
     "AsyncUsageResource",
     "UsageResourceWithRawResponse",

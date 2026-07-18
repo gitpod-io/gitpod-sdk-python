@@ -897,6 +897,27 @@ Methods:
 - <code title="post /gitpod.v1.SecretService/GetSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">get_value</a>(\*\*<a href="src/gitpod/types/secret_get_value_params.py">params</a>) -> <a href="./src/gitpod/types/secret_get_value_response.py">SecretGetValueResponse</a></code>
 - <code title="post /gitpod.v1.SecretService/UpdateSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">update_value</a>(\*\*<a href="src/gitpod/types/secret_update_value_params.py">params</a>) -> object</code>
 
+# SecurityPolicies
+
+Types:
+
+```python
+from gitpod.types import (
+    SecurityPolicy,
+    SecurityPolicyCreateResponse,
+    SecurityPolicyRetrieveResponse,
+    SecurityPolicyUpdateResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.SecurityService/CreateSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">create</a>(\*\*<a href="src/gitpod/types/security_policy_create_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_create_response.py">SecurityPolicyCreateResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/GetSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">retrieve</a>(\*\*<a href="src/gitpod/types/security_policy_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_retrieve_response.py">SecurityPolicyRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/UpdateSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">update</a>(\*\*<a href="src/gitpod/types/security_policy_update_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_update_response.py">SecurityPolicyUpdateResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/ListSecurityPolicies">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">list</a>(\*\*<a href="src/gitpod/types/security_policy_list_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy.py">SyncSecurityPoliciesPage[SecurityPolicy]</a></code>
+- <code title="post /gitpod.v1.SecurityService/DeleteSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">delete</a>(\*\*<a href="src/gitpod/types/security_policy_delete_params.py">params</a>) -> object</code>
+
 # Usage
 
 Types:
