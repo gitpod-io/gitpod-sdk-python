@@ -9,11 +9,14 @@ from pydantic import Field as FieldInfo
 from .._models import BaseModel
 from .shared.principal import Principal
 from .shared.resource_type import ResourceType
+from .audit_log_entry_details import AuditLogEntryDetails
 
-__all__ = ["EventListResponse"]
+__all__ = ["EventRetrieveResponse", "Entry"]
 
 
-class EventListResponse(BaseModel):
+class Entry(BaseModel):
+    """entry contains the common audit-log fields also returned by ListAuditLogs."""
+
     id: Optional[str] = None
 
     action: Optional[str] = None
@@ -129,3 +132,14 @@ class EventListResponse(BaseModel):
     subject_id: Optional[str] = FieldInfo(alias="subjectId", default=None)
 
     subject_type: Optional[ResourceType] = FieldInfo(alias="subjectType", default=None)
+
+
+class EventRetrieveResponse(BaseModel):
+    entry: Entry
+    """entry contains the common audit-log fields also returned by ListAuditLogs."""
+
+    details: Optional[AuditLogEntryDetails] = None
+    """
+    details contains typed evidence captured with the audit entry. It is absent when
+    the entry has no supported, valid details.
+    """

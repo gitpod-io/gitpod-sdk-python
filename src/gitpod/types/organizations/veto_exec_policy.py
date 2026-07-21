@@ -3,7 +3,7 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .kernel_controls_action import KernelControlsAction
+from ..shared.kernel_controls_action import KernelControlsAction
 
 __all__ = ["VetoExecPolicy"]
 

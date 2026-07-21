@@ -22,6 +22,7 @@ from .codex_openai_model import CodexOpenAIModel as CodexOpenAIModel
 from .codex_service_tier import CodexServiceTier as CodexServiceTier
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
 from .codex_reasoning_effort import CodexReasoningEffort as CodexReasoningEffort
+from .kernel_controls_action import KernelControlsAction as KernelControlsAction
 from .environment_variable_item import EnvironmentVariableItem as EnvironmentVariableItem
 from .project_environment_class import ProjectEnvironmentClass as ProjectEnvironmentClass
 from .environment_variable_source import EnvironmentVariableSource as EnvironmentVariableSource

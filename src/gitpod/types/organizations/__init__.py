@@ -20,7 +20,6 @@ from .security_agent_policy import SecurityAgentPolicy as SecurityAgentPolicy
 from .custom_domain_provider import CustomDomainProvider as CustomDomainProvider
 from .invite_create_response import InviteCreateResponse as InviteCreateResponse
 from .invite_retrieve_params import InviteRetrieveParams as InviteRetrieveParams
-from .kernel_controls_action import KernelControlsAction as KernelControlsAction
 from .policy_retrieve_params import PolicyRetrieveParams as PolicyRetrieveParams
 from .veto_exec_policy_param import VetoExecPolicyParam as VetoExecPolicyParam
 from .sso_configuration_state import SSOConfigurationState as SSOConfigurationState

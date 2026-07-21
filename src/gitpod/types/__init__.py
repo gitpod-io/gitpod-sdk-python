@@ -41,6 +41,7 @@ from .shared import (
     TaskExecutionPhase as TaskExecutionPhase,
     TaskExecutionStatus as TaskExecutionStatus,
     CodexReasoningEffort as CodexReasoningEffort,
+    KernelControlsAction as KernelControlsAction,
     CountResponseRelation as CountResponseRelation,
     TaskExecutionMetadata as TaskExecutionMetadata,
     EnvironmentVariableItem as EnvironmentVariableItem,
@@ -48,6 +49,7 @@ from .shared import (
     EnvironmentVariableSource as EnvironmentVariableSource,
 )
 from .account import Account as Account
+from .process import Process as Process
 from .project import Project as Project
 from .prebuild import Prebuild as Prebuild
 from .workflow import Workflow as Workflow
@@ -157,6 +159,7 @@ from .secret_delete_params import SecretDeleteParams as SecretDeleteParams
 from .user_get_user_params import UserGetUserParams as UserGetUserParams
 from .account_delete_params import AccountDeleteParams as AccountDeleteParams
 from .co_author_time_bucket import CoAuthorTimeBucket as CoAuthorTimeBucket
+from .event_retrieve_params import EventRetrieveParams as EventRetrieveParams
 from .group_create_response import GroupCreateResponse as GroupCreateResponse
 from .group_retrieve_params import GroupRetrieveParams as GroupRetrieveParams
 from .group_update_response import GroupUpdateResponse as GroupUpdateResponse
@@ -183,10 +186,12 @@ from .user_input_block_param import UserInputBlockParam as UserInputBlockParam
 from .workflow_trigger_param import WorkflowTriggerParam as WorkflowTriggerParam
 from .account_retrieve_params import AccountRetrieveParams as AccountRetrieveParams
 from .agent_trace_time_bucket import AgentTraceTimeBucket as AgentTraceTimeBucket
+from .audit_log_entry_details import AuditLogEntryDetails as AuditLogEntryDetails
 from .cumulative_credit_usage import CumulativeCreditUsage as CumulativeCreditUsage
 from .environment_initializer import EnvironmentInitializer as EnvironmentInitializer
 from .environment_list_params import EnvironmentListParams as EnvironmentListParams
 from .environment_stop_params import EnvironmentStopParams as EnvironmentStopParams
+from .event_retrieve_response import EventRetrieveResponse as EventRetrieveResponse
 from .group_retrieve_response import GroupRetrieveResponse as GroupRetrieveResponse
 from .project_create_response import ProjectCreateResponse as ProjectCreateResponse
 from .project_retrieve_params import ProjectRetrieveParams as ProjectRetrieveParams

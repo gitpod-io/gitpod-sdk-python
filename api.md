@@ -15,6 +15,7 @@ from gitpod.types import (
     ErrorCode,
     FieldValue,
     Gateway,
+    KernelControlsAction,
     OrganizationRole,
     OrganizationTier,
     Principal,
@@ -356,11 +357,19 @@ Methods:
 Types:
 
 ```python
-from gitpod.types import ResourceOperation, EventListResponse, EventWatchResponse
+from gitpod.types import (
+    AuditLogEntryDetails,
+    Process,
+    ResourceOperation,
+    EventRetrieveResponse,
+    EventListResponse,
+    EventWatchResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /gitpod.v1.EventService/GetAuditLog">client.events.<a href="./src/gitpod/resources/events.py">retrieve</a>(\*\*<a href="src/gitpod/types/event_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/event_retrieve_response.py">EventRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.EventService/ListAuditLogs">client.events.<a href="./src/gitpod/resources/events.py">list</a>(\*\*<a href="src/gitpod/types/event_list_params.py">params</a>) -> <a href="./src/gitpod/types/event_list_response.py">SyncEntriesPage[EventListResponse]</a></code>
 - <code title="post /gitpod.v1.EventService/WatchEvents">client.events.<a href="./src/gitpod/resources/events.py">watch</a>(\*\*<a href="src/gitpod/types/event_watch_params.py">params</a>) -> <a href="./src/gitpod/types/event_watch_response.py">JSONLDecoder[EventWatchResponse]</a></code>
 
@@ -563,7 +572,6 @@ from gitpod.types.organizations import (
     CrowdStrikeConfig,
     CustomAgentEnvMapping,
     CustomSecurityAgent,
-    KernelControlsAction,
     OrganizationPolicies,
     SecurityAgentPolicy,
     VetoExecPolicy,
