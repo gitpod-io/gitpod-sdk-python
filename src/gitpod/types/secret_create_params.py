@@ -8,7 +8,7 @@ from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 from .secret_scope_param import SecretScopeParam
 
-__all__ = ["SecretCreateParams", "CredentialProxy"]
+__all__ = ["SecretCreateParams", "CredentialProxy", "Source", "SourceOidcJfrog"]
 
 
 class SecretCreateParams(TypedDict, total=False):
@@ -61,8 +61,14 @@ class SecretCreateParams(TypedDict, total=False):
     scope: SecretScopeParam
     """scope is the scope of the secret"""
 
+    source: Source
+    """source is the source of the secret, possibly verbatim value"""
+
     value: str
-    """value is the plaintext value of the secret"""
+    """value is the plaintext value of the secret.
+
+    When set, source must be unset or verbatim.
+    """
 
 
 class CredentialProxy(TypedDict, total=False):
@@ -84,3 +90,23 @@ class CredentialProxy(TypedDict, total=False):
     target_hosts lists the hostnames to intercept (for example "github.com" or
     "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
     """
+
+
+class SourceOidcJfrog(TypedDict, total=False):
+    host: str
+    """host must be a hostname or IP address with optional port:
+
+    ```
+    this.matches("^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?[.])*[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(:([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$")
+    ```
+    """
+
+    provider_name: Annotated[str, PropertyInfo(alias="providerName")]
+
+
+class Source(TypedDict, total=False):
+    """source is the source of the secret, possibly verbatim value"""
+
+    oidc_jfrog: Annotated[SourceOidcJfrog, PropertyInfo(alias="oidcJfrog")]
+
+    verbatim: bool

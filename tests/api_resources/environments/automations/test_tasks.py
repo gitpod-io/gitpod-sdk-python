@@ -65,6 +65,7 @@ class TestTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -171,6 +172,7 @@ class TestTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -369,6 +371,7 @@ class TestAsyncTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
@@ -475,6 +478,7 @@ class TestAsyncTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],

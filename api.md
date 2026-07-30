@@ -3,13 +3,19 @@
 ```python
 from gitpod.types import (
     AutomationTrigger,
+    CodexOpenAIModel,
+    CodexReasoningEffort,
+    CodexServiceTier,
+    CodexSettings,
     CountResponseRelation,
+    DateRange,
     EnvironmentClass,
     EnvironmentVariableItem,
     EnvironmentVariableSource,
     ErrorCode,
     FieldValue,
     Gateway,
+    KernelControlsAction,
     OrganizationRole,
     OrganizationTier,
     Principal,
@@ -69,6 +75,7 @@ from gitpod.types import (
     AgentExecution,
     AgentMessage,
     AgentMode,
+    GoalStatus,
     Prompt,
     PromptMetadata,
     PromptSpec,
@@ -139,6 +146,57 @@ Methods:
 - <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecution">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_response.py">AutomationRetrieveExecutionResponse</a></code>
 - <code title="post /gitpod.v1.WorkflowService/GetWorkflowExecutionAction">client.automations.<a href="./src/gitpod/resources/automations.py">retrieve_execution_action</a>(\*\*<a href="src/gitpod/types/automation_retrieve_execution_action_params.py">params</a>) -> <a href="./src/gitpod/types/automation_retrieve_execution_action_response.py">AutomationRetrieveExecutionActionResponse</a></code>
 - <code title="post /gitpod.v1.WorkflowService/StartWorkflow">client.automations.<a href="./src/gitpod/resources/automations.py">start_execution</a>(\*\*<a href="src/gitpod/types/automation_start_execution_params.py">params</a>) -> <a href="./src/gitpod/types/automation_start_execution_response.py">AutomationStartExecutionResponse</a></code>
+
+# Billing
+
+Types:
+
+```python
+from gitpod.types import (
+    AgentExecutionCreditUsage,
+    BillingCurrency,
+    ByokRateCardTokenType,
+    CreditUsageExportGroupBy,
+    CreditUsageReportFilter,
+    CreditsByType,
+    CumulativeCreditUsage,
+    DailyCreditUsage,
+    DailyEnterpriseAIUsage,
+    EnterpriseAITokenUsage,
+    EnterpriseAIUsage,
+    EnterpriseAIUsageBudget,
+    EnterpriseAIUsageBudgetSource,
+    EnterpriseAIUsageByModel,
+    EnterpriseAIUsageByTokenType,
+    EnterpriseAIUsageTimeSeriesFilter,
+    EnterpriseAIUserBudgetPolicySource,
+    EnvironmentCreditUsage,
+    TeamCreditUsage,
+    TeamCumulativeCreditUsage,
+    TeamEnterpriseAIUsage,
+    UsageType,
+    UserCostBudgetUsage,
+    UserCreditBudgetUsage,
+    UserCreditUsage,
+    UserEnterpriseAIUsage,
+    BillingGetCreditUsageExportResponse,
+    BillingGetCreditUsageReportResponse,
+    BillingGetCumulativeCreditUsageResponse,
+    BillingGetEnterpriseAIUsageSummaryResponse,
+    BillingGetEnterpriseAIUsageTimeSeriesResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.BillingService/GetCreditUsageExport">client.billing.<a href="./src/gitpod/resources/billing.py">get_credit_usage_export</a>(\*\*<a href="src/gitpod/types/billing_get_credit_usage_export_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_credit_usage_export_response.py">BillingGetCreditUsageExportResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetCreditUsageReport">client.billing.<a href="./src/gitpod/resources/billing.py">get_credit_usage_report</a>(\*\*<a href="src/gitpod/types/billing_get_credit_usage_report_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_credit_usage_report_response.py">BillingGetCreditUsageReportResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetCumulativeCreditUsage">client.billing.<a href="./src/gitpod/resources/billing.py">get_cumulative_credit_usage</a>(\*\*<a href="src/gitpod/types/billing_get_cumulative_credit_usage_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_cumulative_credit_usage_response.py">BillingGetCumulativeCreditUsageResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetEnterpriseAIUsageSummary">client.billing.<a href="./src/gitpod/resources/billing.py">get_enterprise_ai_usage_summary</a>(\*\*<a href="src/gitpod/types/billing_get_enterprise_ai_usage_summary_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_enterprise_ai_usage_summary_response.py">BillingGetEnterpriseAIUsageSummaryResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/GetEnterpriseAIUsageTimeSeries">client.billing.<a href="./src/gitpod/resources/billing.py">get_enterprise_ai_usage_time_series</a>(\*\*<a href="src/gitpod/types/billing_get_enterprise_ai_usage_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/billing_get_enterprise_ai_usage_time_series_response.py">BillingGetEnterpriseAIUsageTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseAITeamUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_ai_team_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_ai_team_usage_params.py">params</a>) -> <a href="./src/gitpod/types/team_enterprise_ai_usage.py">SyncTeamUsagePage[TeamEnterpriseAIUsage]</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseAIUserUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_ai_user_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_ai_user_usage_params.py">params</a>) -> <a href="./src/gitpod/types/user_cost_budget_usage.py">SyncUserUsagePage[UserCostBudgetUsage]</a></code>
+- <code title="post /gitpod.v1.BillingService/ListEnterpriseUserCreditUsage">client.billing.<a href="./src/gitpod/resources/billing.py">list_enterprise_user_credit_usage</a>(\*\*<a href="src/gitpod/types/billing_list_enterprise_user_credit_usage_params.py">params</a>) -> <a href="./src/gitpod/types/user_credit_budget_usage.py">SyncUserUsagePage[UserCreditBudgetUsage]</a></code>
 
 # Editors
 
@@ -274,36 +332,24 @@ Methods:
 
 - <code title="post /gitpod.v1.EnvironmentService/ListEnvironmentClasses">client.environments.classes.<a href="./src/gitpod/resources/environments/classes.py">list</a>(\*\*<a href="src/gitpod/types/environments/class_list_params.py">params</a>) -> <a href="./src/gitpod/types/shared/environment_class.py">SyncEnvironmentClassesPage[EnvironmentClass]</a></code>
 
-# Errors
-
-Types:
-
-```python
-from gitpod.types import (
-    Breadcrumb,
-    ErrorEvent,
-    ErrorLevel,
-    ExceptionInfo,
-    ExceptionMechanism,
-    RequestInfo,
-    StackFrame,
-)
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.ErrorsService/ReportErrors">client.errors.<a href="./src/gitpod/resources/errors.py">report_errors</a>(\*\*<a href="src/gitpod/types/error_report_errors_params.py">params</a>) -> object</code>
-
 # Events
 
 Types:
 
 ```python
-from gitpod.types import ResourceOperation, EventListResponse, EventWatchResponse
+from gitpod.types import (
+    AuditLogEntryDetails,
+    Process,
+    ResourceOperation,
+    EventRetrieveResponse,
+    EventListResponse,
+    EventWatchResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /gitpod.v1.EventService/GetAuditLog">client.events.<a href="./src/gitpod/resources/events.py">retrieve</a>(\*\*<a href="src/gitpod/types/event_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/event_retrieve_response.py">EventRetrieveResponse</a></code>
 - <code title="post /gitpod.v1.EventService/ListAuditLogs">client.events.<a href="./src/gitpod/resources/events.py">list</a>(\*\*<a href="src/gitpod/types/event_list_params.py">params</a>) -> <a href="./src/gitpod/types/event_list_response.py">SyncEntriesPage[EventListResponse]</a></code>
 - <code title="post /gitpod.v1.EventService/WatchEvents">client.events.<a href="./src/gitpod/resources/events.py">watch</a>(\*\*<a href="src/gitpod/types/event_watch_params.py">params</a>) -> <a href="./src/gitpod/types/event_watch_response.py">JSONLDecoder[EventWatchResponse]</a></code>
 
@@ -501,13 +547,12 @@ Types:
 ```python
 from gitpod.types.organizations import (
     AgentPolicy,
+    CodexModelPolicy,
     ConversationSharingPolicy,
     CrowdStrikeConfig,
     CustomAgentEnvMapping,
     CustomSecurityAgent,
-    KernelControlsAction,
     OrganizationPolicies,
-    ProjectCreationDefaults,
     SecurityAgentPolicy,
     VetoExecPolicy,
     PolicyRetrieveResponse,
@@ -840,16 +885,65 @@ Methods:
 - <code title="post /gitpod.v1.SecretService/GetSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">get_value</a>(\*\*<a href="src/gitpod/types/secret_get_value_params.py">params</a>) -> <a href="./src/gitpod/types/secret_get_value_response.py">SecretGetValueResponse</a></code>
 - <code title="post /gitpod.v1.SecretService/UpdateSecretValue">client.secrets.<a href="./src/gitpod/resources/secrets.py">update_value</a>(\*\*<a href="src/gitpod/types/secret_update_value_params.py">params</a>) -> object</code>
 
+# SecurityPolicies
+
+Types:
+
+```python
+from gitpod.types import (
+    SecurityPolicy,
+    SecurityPolicyCreateResponse,
+    SecurityPolicyRetrieveResponse,
+    SecurityPolicyUpdateResponse,
+)
+```
+
+Methods:
+
+- <code title="post /gitpod.v1.SecurityService/CreateSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">create</a>(\*\*<a href="src/gitpod/types/security_policy_create_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_create_response.py">SecurityPolicyCreateResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/GetSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">retrieve</a>(\*\*<a href="src/gitpod/types/security_policy_retrieve_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_retrieve_response.py">SecurityPolicyRetrieveResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/UpdateSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">update</a>(\*\*<a href="src/gitpod/types/security_policy_update_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy_update_response.py">SecurityPolicyUpdateResponse</a></code>
+- <code title="post /gitpod.v1.SecurityService/ListSecurityPolicies">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">list</a>(\*\*<a href="src/gitpod/types/security_policy_list_params.py">params</a>) -> <a href="./src/gitpod/types/security_policy.py">SyncSecurityPoliciesPage[SecurityPolicy]</a></code>
+- <code title="post /gitpod.v1.SecurityService/DeleteSecurityPolicy">client.security_policies.<a href="./src/gitpod/resources/security_policies.py">delete</a>(\*\*<a href="src/gitpod/types/security_policy_delete_params.py">params</a>) -> object</code>
+
 # Usage
 
 Types:
 
 ```python
-from gitpod.types import EnvironmentUsageRecord
+from gitpod.types import (
+    AgentTraceModelBreakdown,
+    AgentTraceSummary,
+    AgentTraceTimeBucket,
+    CoAuthorSummary,
+    CoAuthorTimeBucket,
+    CoAuthorTool,
+    EnvironmentUsageRecord,
+    PrSummary,
+    PrTimeBucket,
+    Resolution,
+    SupportedModel,
+    TimeSeriesPoint,
+    ToolBreakdown,
+    UsageGetAdoptionUsageSummaryResponse,
+    UsageGetAgentTraceSummaryResponse,
+    UsageGetAgentTraceTimeSeriesResponse,
+    UsageGetCoAuthorSummaryResponse,
+    UsageGetCoAuthorTimeSeriesResponse,
+    UsageGetPrSummaryResponse,
+    UsageGetPrTimeSeriesResponse,
+)
 ```
 
 Methods:
 
+- <code title="post /gitpod.v1.UsageService/GetAdoptionUsageSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_adoption_usage_summary</a>(\*\*<a href="src/gitpod/types/usage_get_adoption_usage_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_adoption_usage_summary_response.py">UsageGetAdoptionUsageSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetAgentTraceSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_agent_trace_summary</a>(\*\*<a href="src/gitpod/types/usage_get_agent_trace_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_agent_trace_summary_response.py">UsageGetAgentTraceSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetAgentTraceTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_agent_trace_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_agent_trace_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_agent_trace_time_series_response.py">UsageGetAgentTraceTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetCoAuthorSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_co_author_summary</a>(\*\*<a href="src/gitpod/types/usage_get_co_author_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_co_author_summary_response.py">UsageGetCoAuthorSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetCoAuthorTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_co_author_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_co_author_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_co_author_time_series_response.py">UsageGetCoAuthorTimeSeriesResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetPrSummary">client.usage.<a href="./src/gitpod/resources/usage.py">get_pr_summary</a>(\*\*<a href="src/gitpod/types/usage_get_pr_summary_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_pr_summary_response.py">UsageGetPrSummaryResponse</a></code>
+- <code title="post /gitpod.v1.UsageService/GetPrTimeSeries">client.usage.<a href="./src/gitpod/resources/usage.py">get_pr_time_series</a>(\*\*<a href="src/gitpod/types/usage_get_pr_time_series_params.py">params</a>) -> <a href="./src/gitpod/types/usage_get_pr_time_series_response.py">UsageGetPrTimeSeriesResponse</a></code>
 - <code title="post /gitpod.v1.UsageService/ListEnvironmentUsageRecords">client.usage.<a href="./src/gitpod/resources/usage.py">list_environment_runtime_records</a>(\*\*<a href="src/gitpod/types/usage_list_environment_runtime_records_params.py">params</a>) -> <a href="./src/gitpod/types/environment_usage_record.py">SyncRecordsPage[EnvironmentUsageRecord]</a></code>
 
 # Users

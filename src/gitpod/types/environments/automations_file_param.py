@@ -129,6 +129,14 @@ class Tasks(TypedDict, total=False):
 
     name: str
 
+    prebuild_requires_success: Annotated[bool, PropertyInfo(alias="prebuildRequiresSuccess")]
+    """
+    prebuild_requires_success controls whether a non-successful outcome of this task
+    should fail the prebuild. When true and the task is triggered by a prebuild
+    trigger, any terminal phase other than SUCCEEDED will cause the prebuild to
+    fail. Defaults to false.
+    """
+
     runs_on: Annotated[RunsOn, PropertyInfo(alias="runsOn")]
 
     triggered_by: Annotated[

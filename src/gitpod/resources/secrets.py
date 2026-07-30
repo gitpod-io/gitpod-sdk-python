@@ -62,6 +62,7 @@ class SecretsResource(SyncAPIResource):
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         scope: SecretScopeParam | Omit = omit,
+        source: secret_create_params.Source | Omit = omit,
         value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -144,7 +145,10 @@ class SecretsResource(SyncAPIResource):
 
           scope: scope is the scope of the secret
 
-          value: value is the plaintext value of the secret
+          source: source is the source of the secret, possibly verbatim value
+
+          value: value is the plaintext value of the secret. When set, source must be unset or
+              verbatim.
 
           extra_headers: Send extra headers
 
@@ -166,6 +170,7 @@ class SecretsResource(SyncAPIResource):
                     "name": name,
                     "project_id": project_id,
                     "scope": scope,
+                    "source": source,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,
@@ -447,6 +452,7 @@ class AsyncSecretsResource(AsyncAPIResource):
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         scope: SecretScopeParam | Omit = omit,
+        source: secret_create_params.Source | Omit = omit,
         value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -529,7 +535,10 @@ class AsyncSecretsResource(AsyncAPIResource):
 
           scope: scope is the scope of the secret
 
-          value: value is the plaintext value of the secret
+          source: source is the source of the secret, possibly verbatim value
+
+          value: value is the plaintext value of the secret. When set, source must be unset or
+              verbatim.
 
           extra_headers: Send extra headers
 
@@ -551,6 +560,7 @@ class AsyncSecretsResource(AsyncAPIResource):
                     "name": name,
                     "project_id": project_id,
                     "scope": scope,
+                    "source": source,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,

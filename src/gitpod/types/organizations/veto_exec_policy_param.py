@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 
 from ..._types import SequenceNotStr
-from .kernel_controls_action import KernelControlsAction
+from ..shared.kernel_controls_action import KernelControlsAction
 
 __all__ = ["VetoExecPolicyParam"]
 

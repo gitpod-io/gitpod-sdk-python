@@ -67,6 +67,11 @@ class TestPolicies:
         policy = client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
+                "allowed_agent_ids": ["string"],
+                "allowed_codex_models": ["CODEX_OPEN_AI_MODEL_UNSPECIFIED"],
+                "allowed_codex_reasoning_efforts": ["CODEX_REASONING_EFFORT_UNSPECIFIED"],
+                "allowed_codex_service_tiers": ["CODEX_SERVICE_TIER_UNSPECIFIED"],
+                "codex_model_policy": {"model_states": {"foo": "CODEX_MODEL_POLICY_STATE_UNSPECIFIED"}},
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "max_subagents_per_environment": 10,
@@ -79,6 +84,7 @@ class TestPolicies:
             default_editor_id="defaultEditorId",
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
+            disable_from_scratch=True,
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
@@ -88,7 +94,6 @@ class TestPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
-            project_creation_defaults={"insights_enabled": True},
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
@@ -100,11 +105,13 @@ class TestPolicies:
                     "tags": "tags",
                 }
             },
+            security_policy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             veto_exec_policy={
                 "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
                 "executables": ["string"],
             },
+            web_browser_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 
@@ -188,6 +195,11 @@ class TestAsyncPolicies:
         policy = await async_client.organizations.policies.update(
             organization_id="b0e12f6c-4c67-429d-a4a6-d9838b5da047",
             agent_policy={
+                "allowed_agent_ids": ["string"],
+                "allowed_codex_models": ["CODEX_OPEN_AI_MODEL_UNSPECIFIED"],
+                "allowed_codex_reasoning_efforts": ["CODEX_REASONING_EFFORT_UNSPECIFIED"],
+                "allowed_codex_service_tiers": ["CODEX_SERVICE_TIER_UNSPECIFIED"],
+                "codex_model_policy": {"model_states": {"foo": "CODEX_MODEL_POLICY_STATE_UNSPECIFIED"}},
                 "command_deny_list": ["string"],
                 "conversation_sharing_policy": "CONVERSATION_SHARING_POLICY_UNSPECIFIED",
                 "max_subagents_per_environment": 10,
@@ -200,6 +212,7 @@ class TestAsyncPolicies:
             default_editor_id="defaultEditorId",
             default_environment_image="defaultEnvironmentImage",
             delete_archived_environments_after="+9125115.360s",
+            disable_from_scratch=True,
             editor_version_restrictions={"foo": {"allowed_versions": ["string"]}},
             maximum_environment_lifetime="+9125115.360s",
             maximum_environments_per_user="20",
@@ -209,7 +222,6 @@ class TestAsyncPolicies:
             members_create_projects=True,
             members_require_projects=True,
             port_sharing_disabled=True,
-            project_creation_defaults={"insights_enabled": True},
             require_custom_domain_access=True,
             restrict_account_creation_to_scim=True,
             security_agent_policy={
@@ -221,11 +233,13 @@ class TestAsyncPolicies:
                     "tags": "tags",
                 }
             },
+            security_policy_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             veto_exec_policy={
                 "action": "KERNEL_CONTROLS_ACTION_UNSPECIFIED",
                 "enabled": True,
                 "executables": ["string"],
             },
+            web_browser_disabled=True,
         )
         assert_matches_type(object, policy, path=["response"])
 

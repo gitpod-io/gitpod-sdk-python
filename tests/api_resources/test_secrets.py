@@ -48,6 +48,13 @@ class TestSecrets:
                 "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             },
+            source={
+                "oidc_jfrog": {
+                    "host": "x",
+                    "provider_name": "x",
+                },
+                "verbatim": True,
+            },
             value="postgresql://user:pass@localhost:5432/db",
         )
         assert_matches_type(SecretCreateResponse, secret, path=["response"])
@@ -264,6 +271,13 @@ class TestAsyncSecrets:
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
+            source={
+                "oidc_jfrog": {
+                    "host": "x",
+                    "provider_name": "x",
+                },
+                "verbatim": True,
             },
             value="postgresql://user:pass@localhost:5432/db",
         )

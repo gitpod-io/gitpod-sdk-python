@@ -40,8 +40,8 @@ class TestRunners:
     def test_method_create_with_all_params(self, client: Gitpod) -> None:
         runner = client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
-            name="Production Runner",
-            provider="RUNNER_PROVIDER_AWS_EC2",
+            name="GCP Runner",
+            provider="RUNNER_PROVIDER_GCP",
             runner_manager_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "configuration": {
@@ -55,7 +55,7 @@ class TestRunners:
                         "url": "url",
                         "username": "username",
                     },
-                    "region": "us-west",
+                    "region": "us-central1",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                     "update_window": {
                         "end_hour": 0,
@@ -554,8 +554,8 @@ class TestAsyncRunners:
     async def test_method_create_with_all_params(self, async_client: AsyncGitpod) -> None:
         runner = await async_client.runners.create(
             kind="RUNNER_KIND_UNSPECIFIED",
-            name="Production Runner",
-            provider="RUNNER_PROVIDER_AWS_EC2",
+            name="GCP Runner",
+            provider="RUNNER_PROVIDER_GCP",
             runner_manager_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             spec={
                 "configuration": {
@@ -569,7 +569,7 @@ class TestAsyncRunners:
                         "url": "url",
                         "username": "username",
                     },
-                    "region": "us-west",
+                    "region": "us-central1",
                     "release_channel": "RUNNER_RELEASE_CHANNEL_STABLE",
                     "update_window": {
                         "end_hour": 0,
