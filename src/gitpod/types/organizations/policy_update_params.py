@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Dict, Iterable, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
@@ -14,6 +14,8 @@ from ..shared.codex_openai_model import CodexOpenAIModel
 from ..shared.codex_service_tier import CodexServiceTier
 from .conversation_sharing_policy import ConversationSharingPolicy
 from ..shared.codex_reasoning_effort import CodexReasoningEffort
+from .project_creation_defaults_prebuilds_param import ProjectCreationDefaultsPrebuildsParam
+from .project_creation_default_environment_class_param import ProjectCreationDefaultEnvironmentClassParam
 
 __all__ = [
     "PolicyUpdateParams",
@@ -253,6 +255,33 @@ class EditorVersionRestrictions(TypedDict, total=False):
     latest version of the editor
 
     Examples for JetBrains: `["2025.2", "2025.1", "2024.3"]`
+    """
+
+
+class ProjectCreationDefaults(TypedDict, total=False):
+    """
+    project_creation_defaults contains updates to default settings applied to newly created projects.
+    """
+
+    environment_classes: Annotated[
+        Iterable[ProjectCreationDefaultEnvironmentClassParam], PropertyInfo(alias="environmentClasses")
+    ]
+    """
+    environment_classes replaces the full list of default environment classes and
+    their per-class settings. Send an empty list to clear defaults.
+    """
+
+    insights_enabled: Annotated[Optional[bool], PropertyInfo(alias="insightsEnabled")]
+    """
+    insights_enabled controls whether Insights (co-author attribution) is
+    automatically enabled on newly created projects.
+    """
+
+    prebuilds: Optional[ProjectCreationDefaultsPrebuildsParam]
+    """
+    prebuilds configures default prebuild settings for newly created projects. Set
+    to enable/update prebuild defaults. Prebuilds are disabled by default when this
+    field is absent.
     """
 
 
