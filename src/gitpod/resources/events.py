@@ -6,7 +6,7 @@ from typing import Iterable
 
 import httpx
 
-from ..types import event_list_params, event_watch_params
+from ..types import event_list_params, event_watch_params, event_retrieve_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -23,6 +23,7 @@ from .._decoders.jsonl import JSONLDecoder, AsyncJSONLDecoder
 from ..types.shared_params.sort import Sort
 from ..types.event_list_response import EventListResponse
 from ..types.event_watch_response import EventWatchResponse
+from ..types.event_retrieve_response import EventRetrieveResponse
 
 __all__ = ["EventsResource", "AsyncEventsResource"]
 
@@ -46,6 +47,53 @@ class EventsResource(SyncAPIResource):
         For more information, see https://www.github.com/gitpod-io/gitpod-sdk-python#with_streaming_response
         """
         return EventsResourceWithStreamingResponse(self)
+
+    def retrieve(
+        self,
+        *,
+        audit_log_entry_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EventRetrieveResponse:
+        """
+        Gets one audit-log entry, including any typed details stored for it.
+
+        Use this method to:
+
+        - Inspect the details of a specific audit-log entry
+        - Retrieve the evidence associated with a Veto Exec audit event
+
+        ### Examples
+
+        - Get an audit-log entry:
+
+          ```yaml
+          auditLogEntryId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        Args:
+          audit_log_entry_id: audit_log_entry_id is the ID of the audit-log entry to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/gitpod.v1.EventService/GetAuditLog",
+            body=maybe_transform({"audit_log_entry_id": audit_log_entry_id}, event_retrieve_params.EventRetrieveParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EventRetrieveResponse,
+        )
 
     def list(
         self,
@@ -234,6 +282,55 @@ class AsyncEventsResource(AsyncAPIResource):
         """
         return AsyncEventsResourceWithStreamingResponse(self)
 
+    async def retrieve(
+        self,
+        *,
+        audit_log_entry_id: str,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EventRetrieveResponse:
+        """
+        Gets one audit-log entry, including any typed details stored for it.
+
+        Use this method to:
+
+        - Inspect the details of a specific audit-log entry
+        - Retrieve the evidence associated with a Veto Exec audit event
+
+        ### Examples
+
+        - Get an audit-log entry:
+
+          ```yaml
+          auditLogEntryId: "d2c94c27-3b76-4a42-b88c-95a85e392c68"
+          ```
+
+        Args:
+          audit_log_entry_id: audit_log_entry_id is the ID of the audit-log entry to retrieve.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/gitpod.v1.EventService/GetAuditLog",
+            body=await async_maybe_transform(
+                {"audit_log_entry_id": audit_log_entry_id}, event_retrieve_params.EventRetrieveParams
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EventRetrieveResponse,
+        )
+
     def list(
         self,
         *,
@@ -405,6 +502,9 @@ class EventsResourceWithRawResponse:
     def __init__(self, events: EventsResource) -> None:
         self._events = events
 
+        self.retrieve = to_raw_response_wrapper(
+            events.retrieve,
+        )
         self.list = to_raw_response_wrapper(
             events.list,
         )
@@ -417,6 +517,9 @@ class AsyncEventsResourceWithRawResponse:
     def __init__(self, events: AsyncEventsResource) -> None:
         self._events = events
 
+        self.retrieve = async_to_raw_response_wrapper(
+            events.retrieve,
+        )
         self.list = async_to_raw_response_wrapper(
             events.list,
         )
@@ -429,6 +532,9 @@ class EventsResourceWithStreamingResponse:
     def __init__(self, events: EventsResource) -> None:
         self._events = events
 
+        self.retrieve = to_streamed_response_wrapper(
+            events.retrieve,
+        )
         self.list = to_streamed_response_wrapper(
             events.list,
         )
@@ -441,6 +547,9 @@ class AsyncEventsResourceWithStreamingResponse:
     def __init__(self, events: AsyncEventsResource) -> None:
         self._events = events
 
+        self.retrieve = async_to_streamed_response_wrapper(
+            events.retrieve,
+        )
         self.list = async_to_streamed_response_wrapper(
             events.list,
         )

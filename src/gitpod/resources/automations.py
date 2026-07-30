@@ -52,6 +52,7 @@ from ..types.workflow_execution_action import WorkflowExecutionAction
 from ..types.automation_create_response import AutomationCreateResponse
 from ..types.automation_update_response import AutomationUpdateResponse
 from ..types.automation_retrieve_response import AutomationRetrieveResponse
+from ..types.shared_params.codex_settings import CodexSettings
 from ..types.workflow_trigger_context_param import WorkflowTriggerContextParam
 from ..types.automation_start_execution_response import AutomationStartExecutionResponse
 from ..types.automation_retrieve_execution_response import AutomationRetrieveExecutionResponse
@@ -85,6 +86,7 @@ class AutomationsResource(SyncAPIResource):
         self,
         *,
         action: WorkflowActionParam,
+        codex_settings: CodexSettings | Omit = omit,
         description: str | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
         name: str | Omit = omit,
@@ -109,6 +111,9 @@ class AutomationsResource(SyncAPIResource):
 
         Args:
           action: WorkflowAction defines the actions to be executed in a workflow.
+
+          codex_settings: Codex app agent settings. Only meaningful when agent_id refers to the Codex app
+              agent.
 
           description:
               Description must be at most 500 characters:
@@ -149,6 +154,7 @@ class AutomationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "action": action,
+                    "codex_settings": codex_settings,
                     "description": description,
                     "executor": executor,
                     "name": name,
@@ -215,6 +221,7 @@ class AutomationsResource(SyncAPIResource):
         self,
         *,
         action: Optional[WorkflowActionParam] | Omit = omit,
+        codex_settings: Optional[CodexSettings] | Omit = omit,
         description: Optional[str] | Omit = omit,
         disabled: Optional[bool] | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
@@ -288,6 +295,9 @@ class AutomationsResource(SyncAPIResource):
         Args:
           action: WorkflowAction defines the actions to be executed in a workflow.
 
+          codex_settings: Codex app agent settings. Only meaningful when agent_id refers to the Codex app
+              agent.
+
           description:
               Description must be at most 500 characters:
 
@@ -327,6 +337,7 @@ class AutomationsResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "action": action,
+                    "codex_settings": codex_settings,
                     "description": description,
                     "disabled": disabled,
                     "executor": executor,
@@ -987,6 +998,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
         self,
         *,
         action: WorkflowActionParam,
+        codex_settings: CodexSettings | Omit = omit,
         description: str | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
         name: str | Omit = omit,
@@ -1011,6 +1023,9 @@ class AsyncAutomationsResource(AsyncAPIResource):
 
         Args:
           action: WorkflowAction defines the actions to be executed in a workflow.
+
+          codex_settings: Codex app agent settings. Only meaningful when agent_id refers to the Codex app
+              agent.
 
           description:
               Description must be at most 500 characters:
@@ -1051,6 +1066,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "action": action,
+                    "codex_settings": codex_settings,
                     "description": description,
                     "executor": executor,
                     "name": name,
@@ -1119,6 +1135,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
         self,
         *,
         action: Optional[WorkflowActionParam] | Omit = omit,
+        codex_settings: Optional[CodexSettings] | Omit = omit,
         description: Optional[str] | Omit = omit,
         disabled: Optional[bool] | Omit = omit,
         executor: Optional[Subject] | Omit = omit,
@@ -1192,6 +1209,9 @@ class AsyncAutomationsResource(AsyncAPIResource):
         Args:
           action: WorkflowAction defines the actions to be executed in a workflow.
 
+          codex_settings: Codex app agent settings. Only meaningful when agent_id refers to the Codex app
+              agent.
+
           description:
               Description must be at most 500 characters:
 
@@ -1231,6 +1251,7 @@ class AsyncAutomationsResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "action": action,
+                    "codex_settings": codex_settings,
                     "description": description,
                     "disabled": disabled,
                     "executor": executor,

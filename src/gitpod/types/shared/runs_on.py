@@ -18,9 +18,3 @@ class RunsOn(BaseModel):
 
     machine: Optional[object] = None
     """Machine runs the service/task directly on the VM/machine level."""
-
-    terminal: Optional[object] = None
-    """
-    Terminal runs the service inside a managed PTY terminal in the devcontainer.
-    Users can attach to the terminal interactively via the terminal API.
-    """

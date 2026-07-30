@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 from typing import Iterable, Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
+from .._utils import PropertyInfo
 from .shared_params.subject import Subject
 from .workflow_action_param import WorkflowActionParam
 from .workflow_trigger_param import WorkflowTriggerParam
+from .shared_params.codex_settings import CodexSettings
 
 __all__ = ["AutomationCreateParams"]
 
@@ -15,6 +17,12 @@ __all__ = ["AutomationCreateParams"]
 class AutomationCreateParams(TypedDict, total=False):
     action: Required[WorkflowActionParam]
     """WorkflowAction defines the actions to be executed in a workflow."""
+
+    codex_settings: Annotated[CodexSettings, PropertyInfo(alias="codexSettings")]
+    """Codex app agent settings.
+
+    Only meaningful when agent_id refers to the Codex app agent.
+    """
 
     description: str
     """Description must be at most 500 characters:

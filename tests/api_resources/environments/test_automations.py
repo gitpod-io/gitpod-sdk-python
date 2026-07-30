@@ -37,6 +37,7 @@ class TestAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "readiness_timeout": "+9125115.360s",
                         "role": "",
                         "runs_on": {
                             "docker": {
@@ -44,7 +45,6 @@ class TestAutomations:
                                 "image": "x",
                             },
                             "machine": {},
-                            "terminal": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -55,13 +55,13 @@ class TestAutomations:
                         "depends_on": ["string"],
                         "description": "Builds the project artifacts",
                         "name": "Build Project",
+                        "prebuild_requires_success": True,
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
                             },
                             "machine": {},
-                            "terminal": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }
@@ -119,6 +119,7 @@ class TestAsyncAutomations:
                         },
                         "description": "Development web server",
                         "name": "Web Server",
+                        "readiness_timeout": "+9125115.360s",
                         "role": "",
                         "runs_on": {
                             "docker": {
@@ -126,7 +127,6 @@ class TestAsyncAutomations:
                                 "image": "x",
                             },
                             "machine": {},
-                            "terminal": {},
                         },
                         "triggered_by": ["postDevcontainerStart"],
                     }
@@ -137,13 +137,13 @@ class TestAsyncAutomations:
                         "depends_on": ["string"],
                         "description": "Builds the project artifacts",
                         "name": "Build Project",
+                        "prebuild_requires_success": True,
                         "runs_on": {
                             "docker": {
                                 "environment": ["string"],
                                 "image": "x",
                             },
                             "machine": {},
-                            "terminal": {},
                         },
                         "triggered_by": ["postEnvironmentStart"],
                     }

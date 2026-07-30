@@ -2,13 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Union
-from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
+from .shared_params.date_range import DateRange
 
-__all__ = ["UsageListEnvironmentRuntimeRecordsParams", "Filter", "FilterDateRange", "Pagination"]
+__all__ = ["UsageListEnvironmentRuntimeRecordsParams", "Filter", "Pagination"]
 
 
 class UsageListEnvironmentRuntimeRecordsParams(TypedDict, total=False):
@@ -23,20 +22,10 @@ class UsageListEnvironmentRuntimeRecordsParams(TypedDict, total=False):
     """Pagination options."""
 
 
-class FilterDateRange(TypedDict, total=False):
-    """Date range to query runtime records within."""
-
-    end_time: Required[Annotated[Union[str, datetime], PropertyInfo(alias="endTime", format="iso8601")]]
-    """End time of the date range (exclusive)."""
-
-    start_time: Required[Annotated[Union[str, datetime], PropertyInfo(alias="startTime", format="iso8601")]]
-    """Start time of the date range (inclusive)."""
-
-
 class Filter(TypedDict, total=False):
     """Filter options."""
 
-    date_range: Required[Annotated[FilterDateRange, PropertyInfo(alias="dateRange")]]
+    date_range: Required[Annotated[DateRange, PropertyInfo(alias="dateRange")]]
     """Date range to query runtime records within."""
 
     project_id: Annotated[str, PropertyInfo(alias="projectId")]

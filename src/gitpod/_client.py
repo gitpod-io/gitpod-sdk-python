@@ -19,7 +19,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -35,9 +39,9 @@ if TYPE_CHECKING:
         usage,
         users,
         agents,
-        errors,
         events,
         groups,
+        billing,
         editors,
         runners,
         secrets,
@@ -49,11 +53,12 @@ if TYPE_CHECKING:
         automations,
         environments,
         organizations,
+        security_policies,
     )
     from .resources.usage import UsageResource, AsyncUsageResource
     from .resources.agents import AgentsResource, AsyncAgentsResource
-    from .resources.errors import ErrorsResource, AsyncErrorsResource
     from .resources.events import EventsResource, AsyncEventsResource
+    from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.editors import EditorsResource, AsyncEditorsResource
     from .resources.secrets import SecretsResource, AsyncSecretsResource
     from .resources.accounts import AccountsResource, AsyncAccountsResource
@@ -65,6 +70,7 @@ if TYPE_CHECKING:
     from .resources.groups.groups import GroupsResource, AsyncGroupsResource
     from .resources.runners.runners import RunnersResource, AsyncRunnersResource
     from .resources.projects.projects import ProjectsResource, AsyncProjectsResource
+    from .resources.security_policies import SecurityPoliciesResource, AsyncSecurityPoliciesResource
     from .resources.environments.environments import EnvironmentsResource, AsyncEnvironmentsResource
     from .resources.organizations.organizations import OrganizationsResource, AsyncOrganizationsResource
 
@@ -115,6 +121,15 @@ class Gitpod(SyncAPIClient):
         if base_url is None:
             base_url = f"https://app.gitpod.io/api"
 
+        custom_headers_env = os.environ.get("GITPOD_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -145,6 +160,13 @@ class Gitpod(SyncAPIClient):
         return AutomationsResource(self)
 
     @cached_property
+    def billing(self) -> BillingResource:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResource
+
+        return BillingResource(self)
+
+    @cached_property
     def editors(self) -> EditorsResource:
         from .resources.editors import EditorsResource
 
@@ -155,16 +177,6 @@ class Gitpod(SyncAPIClient):
         from .resources.environments import EnvironmentsResource
 
         return EnvironmentsResource(self)
-
-    @cached_property
-    def errors(self) -> ErrorsResource:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResource
-
-        return ErrorsResource(self)
 
     @cached_property
     def events(self) -> EventsResource:
@@ -223,6 +235,12 @@ class Gitpod(SyncAPIClient):
         from .resources.secrets import SecretsResource
 
         return SecretsResource(self)
+
+    @cached_property
+    def security_policies(self) -> SecurityPoliciesResource:
+        from .resources.security_policies import SecurityPoliciesResource
+
+        return SecurityPoliciesResource(self)
 
     @cached_property
     def usage(self) -> UsageResource:
@@ -396,6 +414,15 @@ class AsyncGitpod(AsyncAPIClient):
         if base_url is None:
             base_url = f"https://app.gitpod.io/api"
 
+        custom_headers_env = os.environ.get("GITPOD_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -426,6 +453,13 @@ class AsyncGitpod(AsyncAPIClient):
         return AsyncAutomationsResource(self)
 
     @cached_property
+    def billing(self) -> AsyncBillingResource:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResource
+
+        return AsyncBillingResource(self)
+
+    @cached_property
     def editors(self) -> AsyncEditorsResource:
         from .resources.editors import AsyncEditorsResource
 
@@ -436,16 +470,6 @@ class AsyncGitpod(AsyncAPIClient):
         from .resources.environments import AsyncEnvironmentsResource
 
         return AsyncEnvironmentsResource(self)
-
-    @cached_property
-    def errors(self) -> AsyncErrorsResource:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResource
-
-        return AsyncErrorsResource(self)
 
     @cached_property
     def events(self) -> AsyncEventsResource:
@@ -504,6 +528,12 @@ class AsyncGitpod(AsyncAPIClient):
         from .resources.secrets import AsyncSecretsResource
 
         return AsyncSecretsResource(self)
+
+    @cached_property
+    def security_policies(self) -> AsyncSecurityPoliciesResource:
+        from .resources.security_policies import AsyncSecurityPoliciesResource
+
+        return AsyncSecurityPoliciesResource(self)
 
     @cached_property
     def usage(self) -> AsyncUsageResource:
@@ -658,6 +688,13 @@ class GitpodWithRawResponse:
         return AutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.BillingResourceWithRawResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResourceWithRawResponse
+
+        return BillingResourceWithRawResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithRawResponse:
         from .resources.editors import EditorsResourceWithRawResponse
 
@@ -668,16 +705,6 @@ class GitpodWithRawResponse:
         from .resources.environments import EnvironmentsResourceWithRawResponse
 
         return EnvironmentsResourceWithRawResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.ErrorsResourceWithRawResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResourceWithRawResponse
-
-        return ErrorsResourceWithRawResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.EventsResourceWithRawResponse:
@@ -738,6 +765,12 @@ class GitpodWithRawResponse:
         return SecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
+    def security_policies(self) -> security_policies.SecurityPoliciesResourceWithRawResponse:
+        from .resources.security_policies import SecurityPoliciesResourceWithRawResponse
+
+        return SecurityPoliciesResourceWithRawResponse(self._client.security_policies)
+
+    @cached_property
     def usage(self) -> usage.UsageResourceWithRawResponse:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -778,6 +811,13 @@ class AsyncGitpodWithRawResponse:
         return AsyncAutomationsResourceWithRawResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.AsyncBillingResourceWithRawResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResourceWithRawResponse
+
+        return AsyncBillingResourceWithRawResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithRawResponse:
         from .resources.editors import AsyncEditorsResourceWithRawResponse
 
@@ -788,16 +828,6 @@ class AsyncGitpodWithRawResponse:
         from .resources.environments import AsyncEnvironmentsResourceWithRawResponse
 
         return AsyncEnvironmentsResourceWithRawResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.AsyncErrorsResourceWithRawResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResourceWithRawResponse
-
-        return AsyncErrorsResourceWithRawResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.AsyncEventsResourceWithRawResponse:
@@ -858,6 +888,12 @@ class AsyncGitpodWithRawResponse:
         return AsyncSecretsResourceWithRawResponse(self._client.secrets)
 
     @cached_property
+    def security_policies(self) -> security_policies.AsyncSecurityPoliciesResourceWithRawResponse:
+        from .resources.security_policies import AsyncSecurityPoliciesResourceWithRawResponse
+
+        return AsyncSecurityPoliciesResourceWithRawResponse(self._client.security_policies)
+
+    @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithRawResponse:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -898,6 +934,13 @@ class GitpodWithStreamedResponse:
         return AutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.BillingResourceWithStreamingResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import BillingResourceWithStreamingResponse
+
+        return BillingResourceWithStreamingResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.EditorsResourceWithStreamingResponse:
         from .resources.editors import EditorsResourceWithStreamingResponse
 
@@ -908,16 +951,6 @@ class GitpodWithStreamedResponse:
         from .resources.environments import EnvironmentsResourceWithStreamingResponse
 
         return EnvironmentsResourceWithStreamingResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.ErrorsResourceWithStreamingResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResourceWithStreamingResponse
-
-        return ErrorsResourceWithStreamingResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.EventsResourceWithStreamingResponse:
@@ -978,6 +1011,12 @@ class GitpodWithStreamedResponse:
         return SecretsResourceWithStreamingResponse(self._client.secrets)
 
     @cached_property
+    def security_policies(self) -> security_policies.SecurityPoliciesResourceWithStreamingResponse:
+        from .resources.security_policies import SecurityPoliciesResourceWithStreamingResponse
+
+        return SecurityPoliciesResourceWithStreamingResponse(self._client.security_policies)
+
+    @cached_property
     def usage(self) -> usage.UsageResourceWithStreamingResponse:
         """
         UsageService provides usage information about environments, users, and projects.
@@ -1018,6 +1057,13 @@ class AsyncGitpodWithStreamedResponse:
         return AsyncAutomationsResourceWithStreamingResponse(self._client.automations)
 
     @cached_property
+    def billing(self) -> billing.AsyncBillingResourceWithStreamingResponse:
+        """BillingService provides billing and subscription management functionality."""
+        from .resources.billing import AsyncBillingResourceWithStreamingResponse
+
+        return AsyncBillingResourceWithStreamingResponse(self._client.billing)
+
+    @cached_property
     def editors(self) -> editors.AsyncEditorsResourceWithStreamingResponse:
         from .resources.editors import AsyncEditorsResourceWithStreamingResponse
 
@@ -1028,16 +1074,6 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.environments import AsyncEnvironmentsResourceWithStreamingResponse
 
         return AsyncEnvironmentsResourceWithStreamingResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.AsyncErrorsResourceWithStreamingResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResourceWithStreamingResponse
-
-        return AsyncErrorsResourceWithStreamingResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.AsyncEventsResourceWithStreamingResponse:
@@ -1096,6 +1132,12 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.secrets import AsyncSecretsResourceWithStreamingResponse
 
         return AsyncSecretsResourceWithStreamingResponse(self._client.secrets)
+
+    @cached_property
+    def security_policies(self) -> security_policies.AsyncSecurityPoliciesResourceWithStreamingResponse:
+        from .resources.security_policies import AsyncSecurityPoliciesResourceWithStreamingResponse
+
+        return AsyncSecurityPoliciesResourceWithStreamingResponse(self._client.security_policies)
 
     @cached_property
     def usage(self) -> usage.AsyncUsageResourceWithStreamingResponse:

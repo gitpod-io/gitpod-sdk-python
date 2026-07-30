@@ -2,13 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Required, Annotated, TypedDict
 
 from ..._types import SequenceNotStr
 from ..._utils import PropertyInfo
+from ..admission_level import AdmissionLevel
 from .veto_exec_policy_param import VetoExecPolicyParam
+from .codex_model_policy_param import CodexModelPolicyParam
+from ..shared.codex_openai_model import CodexOpenAIModel
+from ..shared.codex_service_tier import CodexServiceTier
 from .conversation_sharing_policy import ConversationSharingPolicy
+from ..shared.codex_reasoning_effort import CodexReasoningEffort
 
 __all__ = [
     "PolicyUpdateParams",
@@ -57,6 +62,12 @@ class PolicyUpdateParams(TypedDict, total=False):
     is 4 weeks (2419200 seconds).
     """
 
+    disable_from_scratch: Annotated[Optional[bool], PropertyInfo(alias="disableFromScratch")]
+    """
+    disable_from_scratch controls whether non-admin users can create blank
+    environments without a Git or URL initializer.
+    """
+
     editor_version_restrictions: Annotated[
         Dict[str, EditorVersionRestrictions], PropertyInfo(alias="editorVersionRestrictions")
     ]
@@ -98,6 +109,14 @@ class PolicyUpdateParams(TypedDict, total=False):
     per user
     """
 
+    max_port_admission_level: Annotated[Optional[AdmissionLevel], PropertyInfo(alias="maxPortAdmissionLevel")]
+    """
+    max_port_admission_level caps the maximum admission level a user-opened port may
+    use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+    ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+    field, when true, takes precedence and blocks all user-initiated port sharing.
+    """
+
     members_create_projects: Annotated[Optional[bool], PropertyInfo(alias="membersCreateProjects")]
     """members_create_projects controls whether members can create projects"""
 
@@ -130,12 +149,63 @@ class PolicyUpdateParams(TypedDict, total=False):
     security_agent_policy: Annotated[Optional[SecurityAgentPolicy], PropertyInfo(alias="securityAgentPolicy")]
     """security_agent_policy contains security agent configuration updates"""
 
+    security_policy_id: Annotated[Optional[str], PropertyInfo(alias="securityPolicyId")]
+    """
+    security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+    environments. The public GA contract accepts policies that use only
+    SecurityPolicy.Spec.executables. Assignment validates materializability and
+    rejects unsupported executable selectors or effects. Set this field to an empty
+    string to clear the default assignment.
+    """
+
     veto_exec_policy: Annotated[Optional[VetoExecPolicyParam], PropertyInfo(alias="vetoExecPolicy")]
     """veto_exec_policy contains the veto exec policy for environments."""
+
+    web_browser_disabled: Annotated[Optional[bool], PropertyInfo(alias="webBrowserDisabled")]
+    """
+    web_browser_disabled controls whether users can open the built-in web browser
+    from environment pages. This does not affect VS Code Browser.
+    """
 
 
 class AgentPolicy(TypedDict, total=False):
     """agent_policy contains agent-specific policy settings"""
+
+    allowed_agent_ids: Annotated[SequenceNotStr[str], PropertyInfo(alias="allowedAgentIds")]
+    """
+    allowed_agent_ids contains the agent IDs users may select when the codex_rollout
+    feature flag is enabled. Empty means all agents are allowed.
+    """
+
+    allowed_codex_models: Annotated[List[CodexOpenAIModel], PropertyInfo(alias="allowedCodexModels")]
+    """Deprecated: use codex_model_policy.
+
+    This legacy allowlist cannot distinguish omitted from intentionally empty on
+    update requests. Empty means all Codex models are allowed.
+    """
+
+    allowed_codex_reasoning_efforts: Annotated[
+        List[CodexReasoningEffort], PropertyInfo(alias="allowedCodexReasoningEfforts")
+    ]
+    """
+    allowed_codex_reasoning_efforts contains the Codex reasoning efforts users may
+    select when the codex_rollout feature flag is enabled. Empty means all Codex
+    reasoning efforts are allowed.
+    """
+
+    allowed_codex_service_tiers: Annotated[List[CodexServiceTier], PropertyInfo(alias="allowedCodexServiceTiers")]
+    """
+    allowed_codex_service_tiers contains the Codex service tiers users may select
+    when the codex_rollout feature flag is enabled. Empty means all Codex service
+    tiers are allowed.
+    """
+
+    codex_model_policy: Annotated[CodexModelPolicyParam, PropertyInfo(alias="codexModelPolicy")]
+    """
+    codex_model_policy contains explicit per-model Codex availability states. Omit
+    to leave the current model policy unchanged. Send an empty policy to clear
+    explicit model states.
+    """
 
     command_deny_list: Annotated[SequenceNotStr[str], PropertyInfo(alias="commandDenyList")]
     """

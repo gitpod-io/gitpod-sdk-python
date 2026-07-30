@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from pydantic import Field as FieldInfo
@@ -9,7 +9,48 @@ from .._models import BaseModel
 from .secret_scope import SecretScope
 from .shared.subject import Subject
 
-__all__ = ["Secret"]
+__all__ = ["Secret", "CredentialProxy", "Source", "SourceOidcJfrog"]
+
+
+class CredentialProxy(BaseModel):
+    """
+    credential_proxy configures transparent credential injection via the
+     credential proxy. When set, the credential proxy intercepts HTTPS
+     traffic to the target hosts and replaces the dummy mounted value with
+     the real value in the specified HTTP header. The real secret value is
+     never exposed in the environment.
+     This field is orthogonal to mount — a secret can be both mounted and
+     proxied at the same time.
+    """
+
+    header: Optional[str] = None
+    """header is the HTTP header name to inject (e.g. "Authorization")."""
+
+    target_hosts: Optional[List[str]] = FieldInfo(alias="targetHosts", default=None)
+    """
+    target_hosts lists the hostnames to intercept (for example "github.com" or
+    "\\**.github.com"). Wildcards are subdomain-only and do not match the apex domain.
+    """
+
+
+class SourceOidcJfrog(BaseModel):
+    host: Optional[str] = None
+    """host must be a hostname or IP address with optional port:
+
+    ```
+    this.matches("^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?[.])*[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(:([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?$")
+    ```
+    """
+
+    provider_name: Optional[str] = FieldInfo(alias="providerName", default=None)
+
+
+class Source(BaseModel):
+    """Source of the secret"""
+
+    oidc_jfrog: Optional[SourceOidcJfrog] = FieldInfo(alias="oidcJfrog", default=None)
+
+    verbatim: Optional[bool] = None
 
 
 class Secret(BaseModel):
@@ -116,6 +157,16 @@ class Secret(BaseModel):
     creator: Optional[Subject] = None
     """creator is the identity of the creator of the secret"""
 
+    credential_proxy: Optional[CredentialProxy] = FieldInfo(alias="credentialProxy", default=None)
+    """
+    credential_proxy configures transparent credential injection via the credential
+    proxy. When set, the credential proxy intercepts HTTPS traffic to the target
+    hosts and replaces the dummy mounted value with the real value in the specified
+    HTTP header. The real secret value is never exposed in the environment. This
+    field is orthogonal to mount — a secret can be both mounted and proxied at the
+    same time.
+    """
+
     environment_variable: Optional[bool] = FieldInfo(alias="environmentVariable", default=None)
     """
     secret will be created as an Environment Variable with the same name as the
@@ -132,6 +183,9 @@ class Secret(BaseModel):
     """The Project ID this Secret belongs to Deprecated: use scope instead"""
 
     scope: Optional[SecretScope] = None
+
+    source: Optional[Source] = None
+    """Source of the secret"""
 
     updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
     """

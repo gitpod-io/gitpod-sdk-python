@@ -144,12 +144,6 @@ class SecretCredentialProxy(BaseModel):
      as a git credential) and proxied at the same time.
     """
 
-    format: Optional[Literal["FORMAT_UNSPECIFIED", "FORMAT_PLAIN", "FORMAT_BASE64"]] = None
-    """format describes how the secret value is encoded.
-
-    The proxy uses this to decode the value before injecting it into the header.
-    """
-
     header: Optional[str] = None
     """header is the HTTP header name to inject (e.g. "Authorization")."""
 

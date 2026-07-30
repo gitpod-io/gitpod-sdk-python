@@ -51,6 +51,9 @@ __all__ = [
     "MembersPagePagination",
     "SyncMembersPage",
     "AsyncMembersPage",
+    "OrganizationsPagePagination",
+    "SyncOrganizationsPage",
+    "AsyncOrganizationsPage",
     "OutputsPagePagination",
     "SyncOutputsPage",
     "AsyncOutputsPage",
@@ -87,6 +90,9 @@ __all__ = [
     "SecretsPagePagination",
     "SyncSecretsPage",
     "AsyncSecretsPage",
+    "SecurityPoliciesPagePagination",
+    "SyncSecurityPoliciesPage",
+    "AsyncSecurityPoliciesPage",
     "ServicesPagePagination",
     "SyncServicesPage",
     "AsyncServicesPage",
@@ -99,9 +105,15 @@ __all__ = [
     "TasksPagePagination",
     "SyncTasksPage",
     "AsyncTasksPage",
+    "TeamUsagePagePagination",
+    "SyncTeamUsagePage",
+    "AsyncTeamUsagePage",
     "TokensPagePagination",
     "SyncTokensPage",
     "AsyncTokensPage",
+    "UserUsagePagePagination",
+    "SyncUserUsagePage",
+    "AsyncUserUsagePage",
     "WarmPoolsPagePagination",
     "SyncWarmPoolsPage",
     "AsyncWarmPoolsPage",
@@ -819,6 +831,56 @@ class AsyncMembersPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
+class OrganizationsPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncOrganizationsPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    organizations: List[_T]
+    pagination: Optional[OrganizationsPagePagination] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        organizations = self.organizations
+        if not organizations:
+            return []
+        return organizations
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncOrganizationsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    organizations: List[_T]
+    pagination: Optional[OrganizationsPagePagination] = None
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        organizations = self.organizations
+        if not organizations:
+            return []
+        return organizations
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
 class OutputsPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
@@ -1419,6 +1481,56 @@ class AsyncSecretsPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
+class SecurityPoliciesPagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncSecurityPoliciesPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[SecurityPoliciesPagePagination] = None
+    security_policies: List[_T] = FieldInfo(alias="securityPolicies")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        security_policies = self.security_policies
+        if not security_policies:
+            return []
+        return security_policies
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncSecurityPoliciesPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[SecurityPoliciesPagePagination] = None
+    security_policies: List[_T] = FieldInfo(alias="securityPolicies")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        security_policies = self.security_policies
+        if not security_policies:
+            return []
+        return security_policies
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
 class ServicesPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
@@ -1619,6 +1731,56 @@ class AsyncTasksPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"token": next_token})
 
 
+class TeamUsagePagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncTeamUsagePage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[TeamUsagePagePagination] = None
+    team_usage: List[_T] = FieldInfo(alias="teamUsage")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        team_usage = self.team_usage
+        if not team_usage:
+            return []
+        return team_usage
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncTeamUsagePage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[TeamUsagePagePagination] = None
+    team_usage: List[_T] = FieldInfo(alias="teamUsage")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        team_usage = self.team_usage
+        if not team_usage:
+            return []
+        return team_usage
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
 class TokensPagePagination(BaseModel):
     next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
 
@@ -1656,6 +1818,56 @@ class AsyncTokensPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         if not tokens:
             return []
         return tokens
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class UserUsagePagePagination(BaseModel):
+    next_token: Optional[str] = FieldInfo(alias="nextToken", default=None)
+
+
+class SyncUserUsagePage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[UserUsagePagePagination] = None
+    user_usage: List[_T] = FieldInfo(alias="userUsage")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        user_usage = self.user_usage
+        if not user_usage:
+            return []
+        return user_usage
+
+    @override
+    def next_page_info(self) -> Optional[PageInfo]:
+        next_token = None
+        if self.pagination is not None:
+            if self.pagination.next_token is not None:
+                next_token = self.pagination.next_token
+        if not next_token:
+            return None
+
+        return PageInfo(params={"token": next_token})
+
+
+class AsyncUserUsagePage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    pagination: Optional[UserUsagePagePagination] = None
+    user_usage: List[_T] = FieldInfo(alias="userUsage")
+
+    @override
+    def _get_page_items(self) -> List[_T]:
+        user_usage = self.user_usage
+        if not user_usage:
+            return []
+        return user_usage
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:

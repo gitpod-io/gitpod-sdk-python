@@ -70,6 +70,11 @@ class TestAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -113,6 +118,7 @@ class TestAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -212,6 +218,11 @@ class TestAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             disabled=True,
             executor={
@@ -256,6 +267,7 @@ class TestAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -750,6 +762,11 @@ class TestAsyncAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             executor={
                 "id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -793,6 +810,7 @@ class TestAsyncAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},
@@ -892,6 +910,11 @@ class TestAsyncAutomations:
                     }
                 ],
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             description="description",
             disabled=True,
             executor={
@@ -936,6 +959,7 @@ class TestAsyncAutomations:
                     "manual": {},
                     "pull_request": {
                         "events": ["PULL_REQUEST_EVENT_UNSPECIFIED"],
+                        "integration_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                         "webhook_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     },
                     "time": {"cron_expression": "cronExpression"},

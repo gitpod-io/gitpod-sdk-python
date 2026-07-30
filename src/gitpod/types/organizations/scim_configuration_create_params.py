@@ -23,6 +23,15 @@ class ScimConfigurationCreateParams(TypedDict, total=False):
     provisioning)
     """
 
+    allow_unverified_email_account_linking: Annotated[
+        Optional[bool], PropertyInfo(alias="allowUnverifiedEmailAccountLinking")
+    ]
+    """
+    allow_unverified_email_account_linking allows SCIM to link provisioned users to
+    existing accounts when the identity provider does not mark the email address as
+    verified
+    """
+
     name: Optional[str]
     """name is a human-readable name for the SCIM configuration"""
 

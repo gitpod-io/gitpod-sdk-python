@@ -1,5 +1,107 @@
 # Changelog
 
+## 0.12.0 (2026-07-30)
+
+Full Changelog: [v0.11.0...v0.12.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.11.0...v0.12.0)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** narrow public SDK surface
+* **agent:** remove loop condition mechanism
+
+### Features
+
+* add base snapshot resource types ([86bc2ef](https://github.com/gitpod-io/gitpod-sdk-python/commit/86bc2ef04924b9c3b778263cf7c8c2f91d48def0))
+* **agent:** add devcontainer rebuild wait schema ([0cf6575](https://github.com/gitpod-io/gitpod-sdk-python/commit/0cf6575388a08e93a3e77bfd29c21b0cde3fc1b8))
+* **agents:** add native goal set control ([09bcc43](https://github.com/gitpod-io/gitpod-sdk-python/commit/09bcc435a18e00c8690c7106dbe453c3d8fa7a08))
+* **api:** add access_token field to runner create response models ([957eb60](https://github.com/gitpod-io/gitpod-sdk-python/commit/957eb60ea90eb7ed188da2cbfb0cd43838b0affd))
+* **api:** add agent turn controls ([0c7f633](https://github.com/gitpod-io/gitpod-sdk-python/commit/0c7f633f5ac848e21a39639c8952a8f53d5037fa))
+* **api:** add AGENT_EXECUTION_CNF capability to RunnerCapability ([3a521b2](https://github.com/gitpod-io/gitpod-sdk-python/commit/3a521b2a8292e6351117379a4c0c5d6e82e592cc))
+* **api:** add agent_execution_ids filter to agents list_executions ([630d438](https://github.com/gitpod-io/gitpod-sdk-python/commit/630d438761b409a15283932124a24e16b4221828))
+* **api:** add allow_unverified_email_scim_fallback_match to scim_configurations ([e1bba76](https://github.com/gitpod-io/gitpod-sdk-python/commit/e1bba7667f79b870c55096a00f18032bda03a65d))
+* **api:** add base snapshot build environment role ([0ce4953](https://github.com/gitpod-io/gitpod-sdk-python/commit/0ce4953f9e02f0a031fb963d80817aa795efcae6))
+* **api:** add base snapshot runner capability ([2c9855c](https://github.com/gitpod-io/gitpod-sdk-python/commit/2c9855c295b2a6deab6707a2b24387225a4ecf10))
+* **api:** add Claude Sonnet 5 model enum ([73ea069](https://github.com/gitpod-io/gitpod-sdk-python/commit/73ea0696fe48ad35bf58b082ecb774c2bfb14a36))
+* **api:** add Codex agent settings shape ([8d830ce](https://github.com/gitpod-io/gitpod-sdk-python/commit/8d830ce28b966c506ad9b63b0f28891226a4150a))
+* **api:** add Codex fast mode setting ([5c7ef6c](https://github.com/gitpod-io/gitpod-sdk-python/commit/5c7ef6ce126d085d5a743b7a24beed4ba99395ab))
+* **api:** add codex model policy states ([f930e3c](https://github.com/gitpod-io/gitpod-sdk-python/commit/f930e3c6346d8109a3e598a1720e1bfb08de130e))
+* **api:** add Codex policy allowlists ([4594b02](https://github.com/gitpod-io/gitpod-sdk-python/commit/4594b0296008ed2866917bba226a9fb2e08ede63))
+* **api:** add credential_proxy to secrets, remove format from environment spec ([349a1ba](https://github.com/gitpod-io/gitpod-sdk-python/commit/349a1bab3893da2900dad96fe92213c0d79c3c92))
+* **api:** add default environment class IDs to project creation defaults ([212b6b2](https://github.com/gitpod-io/gitpod-sdk-python/commit/212b6b2c408910da0b1e414428d310a32552b47a))
+* **api:** add disable_from_scratch to organizations policies ([916c70f](https://github.com/gitpod-io/gitpod-sdk-python/commit/916c70f870b5492fe5b6c117459d88cb7cb9c46f))
+* **api:** add dynamic LLM header contracts ([6520bd4](https://github.com/gitpod-io/gitpod-sdk-python/commit/6520bd48832e6063cda12b6a0354586b79619ec7))
+* **api:** add incident trigger support to workflow_trigger and workflow_execution ([5e90f8a](https://github.com/gitpod-io/gitpod-sdk-python/commit/5e90f8ae3d12d2acf8f1eaab330b5a9d8a39fea0))
+* **api:** add integration_id field, make webhook_id required in pull_request trigger ([077b662](https://github.com/gitpod-io/gitpod-sdk-python/commit/077b6622dc4e21a2033c8275c46716286a6515b8))
+* **api:** add max_port_admission_level to organizations policies ([4942a70](https://github.com/gitpod-io/gitpod-sdk-python/commit/4942a703b999261d0b0935f4db63e76c8db5d103))
+* **api:** add old_path field to ContentGitChangedFile ([d79d4d4](https://github.com/gitpod-io/gitpod-sdk-python/commit/d79d4d49ef41a889a81a0d484616fca442849356))
+* **api:** add Opus 4.8 supported model ([386256e](https://github.com/gitpod-io/gitpod-sdk-python/commit/386256e0cd6237eddebe61b4abca2c1e838ad67e))
+* **api:** add pagination and query parameter to runners.list_scm_organizations ([333311a](https://github.com/gitpod-io/gitpod-sdk-python/commit/333311aebaefb657861e2a9f6e8adb0f2abdd4dc))
+* **api:** add port_authentication capability to runner_capability ([c29b095](https://github.com/gitpod-io/gitpod-sdk-python/commit/c29b09596d2d87caaea047e61613a333c2fe4e31))
+* **api:** add prebuild trigger value to environments automations ([af2c44e](https://github.com/gitpod-io/gitpod-sdk-python/commit/af2c44e64fac19bf848c4325e0b39b183c998e74))
+* **api:** add prebuild_requires_success field to TaskSpec ([eccb99f](https://github.com/gitpod-io/gitpod-sdk-python/commit/eccb99f382cbc77c6bfcdc497ba19f23dbb78286))
+* **api:** add project_creation_defaults to organizations policies ([5d8545f](https://github.com/gitpod-io/gitpod-sdk-python/commit/5d8545fa2691bb59b0acf8ca0121300d48349a1e))
+* **api:** add PULL_REQUEST_EVENT_REVIEW_REQUESTED to workflow_trigger events ([242a3ab](https://github.com/gitpod-io/gitpod-sdk-python/commit/242a3ab60ed3580fd9488858727294ed86568ccf))
+* **api:** add readiness_timeout field to service spec types ([8786477](https://github.com/gitpod-io/gitpod-sdk-python/commit/8786477b21152c9040f3281d5b2cb17f3eada5f2))
+* **api:** add RESOURCE_ROLE_ORG_ENVIRONMENTS_READER to resource_role ([e99dc40](https://github.com/gitpod-io/gitpod-sdk-python/commit/e99dc409933596ef561dbd6784e7041d4d64a084))
+* **api:** add RUNNER_CAPABILITY_REDIS_STREAM to RunnerCapability enum ([b1ad5f5](https://github.com/gitpod-io/gitpod-sdk-python/commit/b1ad5f5fa5110c766928bd1be2589b227513d413))
+* **api:** add security policy CRUD ([85d3d46](https://github.com/gitpod-io/gitpod-sdk-python/commit/85d3d46fa1c7a73a1911eaa00e5423c62781662f))
+* **api:** add StatusGoal model and goal field to agent_execution ([3d37569](https://github.com/gitpod-io/gitpod-sdk-python/commit/3d37569f37337919926bbf799e1069aa585eef49))
+* **api:** add SUPPORTED_MODEL_OPENAI_AUTO to agent_execution status ([54503f5](https://github.com/gitpod-io/gitpod-sdk-python/commit/54503f5295a703ee855eac4c11694d2bbe465d13))
+* **api:** add SUPPORTED_MODEL_OPUS_4_7 to agent_execution Status ([74af533](https://github.com/gitpod-io/gitpod-sdk-python/commit/74af5338d7f6447df5a6464a2b2ef893c3bf4f6e))
+* **api:** add UserInputMetadata type ([ea300f4](https://github.com/gitpod-io/gitpod-sdk-python/commit/ea300f4314c14529c02ffec1e38f474d8a426844))
+* **api:** add web_browser_disabled parameter to organizations policies update ([a4a49d6](https://github.com/gitpod-io/gitpod-sdk-python/commit/a4a49d6d122a1e8911331ebfbe1b7bd1ffa9b854))
+* **api:** expose audit log entry kind ([d90ec8f](https://github.com/gitpod-io/gitpod-sdk-python/commit/d90ec8f9bdfd15d61cb8226a5c3716f6dbccf346))
+* **api:** expose default security policy assignment ([aeb8cba](https://github.com/gitpod-io/gitpod-sdk-python/commit/aeb8cba53564aa4062127a0534fedbdb81ab15d2))
+* **api:** expose usage insights API ([c7e6921](https://github.com/gitpod-io/gitpod-sdk-python/commit/c7e6921ffa2dfa33f115ad9d2ecc723aaccc5d10))
+* **api:** expose Veto Exec security policies ([07e4ed5](https://github.com/gitpod-io/gitpod-sdk-python/commit/07e4ed5e9cd7eeeab9269339a877f3cac37e407f))
+* **api:** remove deprecated access_token from runner responses ([003cd7d](https://github.com/gitpod-io/gitpod-sdk-python/commit/003cd7dcac020428985564e76c2bb6e45acd434c))
+* **api:** remove terminal field from RunsOn type ([faca2b2](https://github.com/gitpod-io/gitpod-sdk-python/commit/faca2b27b88f17a759bd91c305e5ea2a856a1e2c))
+* **audit:** curate audit events at their producers ([f54fb4a](https://github.com/gitpod-io/gitpod-sdk-python/commit/f54fb4af5721608ece6eeda2357da0c87da923be))
+* **audit:** store and retrieve Veto Exec details ([c6adc6a](https://github.com/gitpod-io/gitpod-sdk-python/commit/c6adc6a24a2806587598ad260e059e1631c89602))
+* **automations:** pin agent and Codex model per automation ([ce020c9](https://github.com/gitpod-io/gitpod-sdk-python/commit/ce020c9d3c968bff092d0ef3a37a340c306d2268))
+* **codex:** add GPT-5.6 model selection ([315f4ff](https://github.com/gitpod-io/gitpod-sdk-python/commit/315f4ffea3e7d68c45dec05bb176deeb444cc3a3))
+* **internal/types:** support eagerly validating pydantic iterators ([cbf4bac](https://github.com/gitpod-io/gitpod-sdk-python/commit/cbf4bac0498fbc32a85fb3d620ba2d7d551b53d0))
+* **rbac:** add billing viewer role ([64f6c50](https://github.com/gitpod-io/gitpod-sdk-python/commit/64f6c50c4c171f569d40e45adab9c101adcb5916))
+* **rbac:** add insights viewer role ([03c8230](https://github.com/gitpod-io/gitpod-sdk-python/commit/03c82308b65adb3944a401ebd890a1b0cd880954))
+* **secrets:** support JFrog OIDC secret sources ([419e2c0](https://github.com/gitpod-io/gitpod-sdk-python/commit/419e2c05b62cea8946933ff061d197a754f3507c))
+* support setting headers via env ([4e4f3fe](https://github.com/gitpod-io/gitpod-sdk-python/commit/4e4f3fe4d03901b3b63bccd13012197be6cc50ec))
+
+
+### Bug Fixes
+
+* **api:** narrow public SDK surface ([97913bf](https://github.com/gitpod-io/gitpod-sdk-python/commit/97913bf54c101cce3026b8fec0d1afde1f9d0c0d))
+* **api:** wrap prebuild default updates ([69a9ca3](https://github.com/gitpod-io/gitpod-sdk-python/commit/69a9ca3ab1f351c3d3e48a85d43d0d33434d0da3))
+* **client:** add missing f-string prefix in file type error message ([9371ec1](https://github.com/gitpod-io/gitpod-sdk-python/commit/9371ec1502be44e4684f8b1e0c7c6d55e8ead8dd))
+* **client:** preserve hardcoded query params when merging with user params ([b7f0b1d](https://github.com/gitpod-io/gitpod-sdk-python/commit/b7f0b1d27ef51872bf81541dd7f81a8101f856af))
+* ensure file data are only sent as 1 parameter ([5c02854](https://github.com/gitpod-io/gitpod-sdk-python/commit/5c02854efdc2874535d3d7867823048d5e8d4693))
+* use correct field name format for multipart file arrays ([c731392](https://github.com/gitpod-io/gitpod-sdk-python/commit/c731392aa36e5a3bba895d4e52a7d50addab326a))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([cb792b6](https://github.com/gitpod-io/gitpod-sdk-python/commit/cb792b633104ff26eb799d8c32703920213ec23e))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([5f05caa](https://github.com/gitpod-io/gitpod-sdk-python/commit/5f05caacfd1a55617d435845771e28503eff687c))
+* **internal:** reformat pyproject.toml ([b061deb](https://github.com/gitpod-io/gitpod-sdk-python/commit/b061deb38573beb2771beb0dfe92a5c3ba09b9d3))
+* **internal:** regenerate SDK with no functional changes ([2dc3c8d](https://github.com/gitpod-io/gitpod-sdk-python/commit/2dc3c8dbe693a77dc985066501d9bc9afacac347))
+
+
+### Documentation
+
+* **api:** add customer-facing descriptions to runner enums and fix CreateRunner examples ([5319ad7](https://github.com/gitpod-io/gitpod-sdk-python/commit/5319ad756a2e97b9d4d26444e3517b735bbd9eaa))
+* **api:** update trigger usage note in AutomationTrigger ([5a292cb](https://github.com/gitpod-io/gitpod-sdk-python/commit/5a292cb1ef87a0dd73d93445707412d25c0e95e0))
+* **types:** mark is_admin deprecated in Organization model ([5e7b9f3](https://github.com/gitpod-io/gitpod-sdk-python/commit/5e7b9f3d7dd7af385ca75b17f01c1cab87da8cb6))
+
+
+### Refactors
+
+* **agent:** remove loop condition mechanism ([9951849](https://github.com/gitpod-io/gitpod-sdk-python/commit/99518499ea51cdc5e6a37908af83afe8fe8a79ca))
+* **api:** default StartAgent agent ID ([beee4ef](https://github.com/gitpod-io/gitpod-sdk-python/commit/beee4ef89179b0541bd09335b2f6dce9a9506a3b))
+* **api:** remove project defaults API surface ([f96e98e](https://github.com/gitpod-io/gitpod-sdk-python/commit/f96e98e385ffffeb280bda2a549c4a4af0a05d3d))
+
 ## 0.11.0 (2026-04-02)
 
 Full Changelog: [v0.10.0...v0.11.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.10.0...v0.11.0)

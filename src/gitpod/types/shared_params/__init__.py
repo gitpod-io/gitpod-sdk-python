@@ -6,6 +6,7 @@ from .runs_on import RunsOn as RunsOn
 from .subject import Subject as Subject
 from .principal import Principal as Principal
 from .task_spec import TaskSpec as TaskSpec
+from .date_range import DateRange as DateRange
 from .secret_ref import SecretRef as SecretRef
 from .sort_order import SortOrder as SortOrder
 from .field_value import FieldValue as FieldValue
@@ -13,10 +14,15 @@ from .user_status import UserStatus as UserStatus
 from .resource_role import ResourceRole as ResourceRole
 from .resource_type import ResourceType as ResourceType
 from .task_metadata import TaskMetadata as TaskMetadata
+from .codex_settings import CodexSettings as CodexSettings
 from .environment_class import EnvironmentClass as EnvironmentClass
 from .organization_role import OrganizationRole as OrganizationRole
 from .automation_trigger import AutomationTrigger as AutomationTrigger
+from .codex_openai_model import CodexOpenAIModel as CodexOpenAIModel
+from .codex_service_tier import CodexServiceTier as CodexServiceTier
 from .task_execution_phase import TaskExecutionPhase as TaskExecutionPhase
+from .codex_reasoning_effort import CodexReasoningEffort as CodexReasoningEffort
+from .kernel_controls_action import KernelControlsAction as KernelControlsAction
 from .environment_variable_item import EnvironmentVariableItem as EnvironmentVariableItem
 from .project_environment_class import ProjectEnvironmentClass as ProjectEnvironmentClass
 from .environment_variable_source import EnvironmentVariableSource as EnvironmentVariableSource

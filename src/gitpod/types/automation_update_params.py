@@ -9,6 +9,7 @@ from .._utils import PropertyInfo
 from .shared_params.subject import Subject
 from .workflow_action_param import WorkflowActionParam
 from .workflow_trigger_param import WorkflowTriggerParam
+from .shared_params.codex_settings import CodexSettings
 
 __all__ = ["AutomationUpdateParams"]
 
@@ -16,6 +17,12 @@ __all__ = ["AutomationUpdateParams"]
 class AutomationUpdateParams(TypedDict, total=False):
     action: Optional[WorkflowActionParam]
     """WorkflowAction defines the actions to be executed in a workflow."""
+
+    codex_settings: Annotated[Optional[CodexSettings], PropertyInfo(alias="codexSettings")]
+    """Codex app agent settings.
+
+    Only meaningful when agent_id refers to the Codex app agent.
+    """
 
     description: Optional[str]
     """Description must be at most 500 characters:

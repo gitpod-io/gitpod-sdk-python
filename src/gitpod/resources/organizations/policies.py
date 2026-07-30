@@ -6,6 +6,7 @@ from typing import Dict, Optional
 
 import httpx
 
+from ...types import AdmissionLevel
 from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
@@ -18,6 +19,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.organizations import policy_update_params, policy_retrieve_params
+from ...types.admission_level import AdmissionLevel
 from ...types.organizations.veto_exec_policy_param import VetoExecPolicyParam
 from ...types.organizations.policy_retrieve_response import PolicyRetrieveResponse
 
@@ -104,18 +106,22 @@ class PoliciesResource(SyncAPIResource):
         default_editor_id: Optional[str] | Omit = omit,
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
+        disable_from_scratch: Optional[bool] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
         maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        max_port_admission_level: Optional[AdmissionLevel] | Omit = omit,
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        security_policy_id: Optional[str] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
+        web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -179,6 +185,9 @@ class PoliciesResource(SyncAPIResource):
               kept before automatic deletion. 0 means no automatic deletion. Maximum duration
               is 4 weeks (2419200 seconds).
 
+          disable_from_scratch: disable_from_scratch controls whether non-admin users can create blank
+              environments without a Git or URL initializer.
+
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
@@ -201,6 +210,11 @@ class PoliciesResource(SyncAPIResource):
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
 
+          max_port_admission_level: max_port_admission_level caps the maximum admission level a user-opened port may
+              use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+              ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+              field, when true, takes precedence and blocks all user-initiated port sharing.
+
           members_create_projects: members_create_projects controls whether members can create projects
 
           members_require_projects: members_require_projects controls whether environments can only be created from
@@ -219,7 +233,16 @@ class PoliciesResource(SyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          security_policy_id: security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+              environments. The public GA contract accepts policies that use only
+              SecurityPolicy.Spec.executables. Assignment validates materializability and
+              rejects unsupported executable selectors or effects. Set this field to an empty
+              string to clear the default assignment.
+
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
+
+          web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
+              from environment pages. This does not affect VS Code Browser.
 
           extra_headers: Send extra headers
 
@@ -240,18 +263,22 @@ class PoliciesResource(SyncAPIResource):
                     "default_editor_id": default_editor_id,
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
+                    "disable_from_scratch": disable_from_scratch,
                     "editor_version_restrictions": editor_version_restrictions,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
+                    "max_port_admission_level": max_port_admission_level,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "security_policy_id": security_policy_id,
                     "veto_exec_policy": veto_exec_policy,
+                    "web_browser_disabled": web_browser_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),
@@ -344,18 +371,22 @@ class AsyncPoliciesResource(AsyncAPIResource):
         default_editor_id: Optional[str] | Omit = omit,
         default_environment_image: Optional[str] | Omit = omit,
         delete_archived_environments_after: Optional[str] | Omit = omit,
+        disable_from_scratch: Optional[bool] | Omit = omit,
         editor_version_restrictions: Dict[str, policy_update_params.EditorVersionRestrictions] | Omit = omit,
         maximum_environment_lifetime: Optional[str] | Omit = omit,
         maximum_environments_per_user: Optional[str] | Omit = omit,
         maximum_environment_timeout: Optional[str] | Omit = omit,
         maximum_running_environments_per_user: Optional[str] | Omit = omit,
+        max_port_admission_level: Optional[AdmissionLevel] | Omit = omit,
         members_create_projects: Optional[bool] | Omit = omit,
         members_require_projects: Optional[bool] | Omit = omit,
         port_sharing_disabled: Optional[bool] | Omit = omit,
         require_custom_domain_access: Optional[bool] | Omit = omit,
         restrict_account_creation_to_scim: Optional[bool] | Omit = omit,
         security_agent_policy: Optional[policy_update_params.SecurityAgentPolicy] | Omit = omit,
+        security_policy_id: Optional[str] | Omit = omit,
         veto_exec_policy: Optional[VetoExecPolicyParam] | Omit = omit,
+        web_browser_disabled: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -419,6 +450,9 @@ class AsyncPoliciesResource(AsyncAPIResource):
               kept before automatic deletion. 0 means no automatic deletion. Maximum duration
               is 4 weeks (2419200 seconds).
 
+          disable_from_scratch: disable_from_scratch controls whether non-admin users can create blank
+              environments without a Git or URL initializer.
+
           editor_version_restrictions: editor_version_restrictions restricts which editor versions can be used. Maps
               editor ID to version policy with allowed major versions.
 
@@ -441,6 +475,11 @@ class AsyncPoliciesResource(AsyncAPIResource):
           maximum_running_environments_per_user: maximum_running_environments_per_user limits simultaneously running environments
               per user
 
+          max_port_admission_level: max_port_admission_level caps the maximum admission level a user-opened port may
+              use. UNSPECIFIED means no cap (any AdmissionLevel value is allowed). System
+              ports (VS Code Browser, agents) are exempt. The legacy port_sharing_disabled
+              field, when true, takes precedence and blocks all user-initiated port sharing.
+
           members_create_projects: members_create_projects controls whether members can create projects
 
           members_require_projects: members_require_projects controls whether environments can only be created from
@@ -459,7 +498,16 @@ class AsyncPoliciesResource(AsyncAPIResource):
 
           security_agent_policy: security_agent_policy contains security agent configuration updates
 
+          security_policy_id: security_policy_id assigns a Veto Exec SecurityPolicy to newly created
+              environments. The public GA contract accepts policies that use only
+              SecurityPolicy.Spec.executables. Assignment validates materializability and
+              rejects unsupported executable selectors or effects. Set this field to an empty
+              string to clear the default assignment.
+
           veto_exec_policy: veto_exec_policy contains the veto exec policy for environments.
+
+          web_browser_disabled: web_browser_disabled controls whether users can open the built-in web browser
+              from environment pages. This does not affect VS Code Browser.
 
           extra_headers: Send extra headers
 
@@ -480,18 +528,22 @@ class AsyncPoliciesResource(AsyncAPIResource):
                     "default_editor_id": default_editor_id,
                     "default_environment_image": default_environment_image,
                     "delete_archived_environments_after": delete_archived_environments_after,
+                    "disable_from_scratch": disable_from_scratch,
                     "editor_version_restrictions": editor_version_restrictions,
                     "maximum_environment_lifetime": maximum_environment_lifetime,
                     "maximum_environments_per_user": maximum_environments_per_user,
                     "maximum_environment_timeout": maximum_environment_timeout,
                     "maximum_running_environments_per_user": maximum_running_environments_per_user,
+                    "max_port_admission_level": max_port_admission_level,
                     "members_create_projects": members_create_projects,
                     "members_require_projects": members_require_projects,
                     "port_sharing_disabled": port_sharing_disabled,
                     "require_custom_domain_access": require_custom_domain_access,
                     "restrict_account_creation_to_scim": restrict_account_creation_to_scim,
                     "security_agent_policy": security_agent_policy,
+                    "security_policy_id": security_policy_id,
                     "veto_exec_policy": veto_exec_policy,
+                    "web_browser_disabled": web_browser_disabled,
                 },
                 policy_update_params.PolicyUpdateParams,
             ),

@@ -63,6 +63,12 @@ class ServiceSpecParam(TypedDict, total=False):
     env: Iterable[EnvironmentVariableItem]
     """env specifies environment variables for the service."""
 
+    readiness_timeout: Annotated[str, PropertyInfo(alias="readinessTimeout")]
+    """
+    readiness_timeout is the maximum duration a service may remain in the Starting
+    phase while readiness checks run. 0s disables the timeout.
+    """
+
     runs_on: Annotated[RunsOn, PropertyInfo(alias="runsOn")]
     """runs_on specifies the environment the service should run on."""
 

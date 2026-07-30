@@ -18,5 +18,14 @@ class TaskSpec(BaseModel):
     env: Optional[List[EnvironmentVariableItem]] = None
     """env specifies environment variables for the task."""
 
+    prebuild_requires_success: Optional[bool] = FieldInfo(alias="prebuildRequiresSuccess", default=None)
+    """
+    prebuild_requires_success controls whether a non-successful outcome of this task
+    should fail the prebuild. When true and the task is triggered by a prebuild or
+    before_snapshot trigger, any terminal phase other than SUCCEEDED (i.e. FAILED or
+    STOPPED) will cause the prebuild to fail instead of just recording a warning.
+    Defaults to false (existing behavior: task failures produce warnings only).
+    """
+
     runs_on: Optional[RunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the task should run on."""

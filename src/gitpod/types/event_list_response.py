@@ -2,6 +2,7 @@
 
 from typing import Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -111,6 +112,21 @@ class EventListResponse(BaseModel):
     Joda Time's
     [`ISODateTimeFormat.dateTime()`](<http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()>)
     to obtain a formatter capable of generating timestamps in this format.
+    """
+
+    kind: Optional[
+        Literal[
+            "AUDIT_LOG_ENTRY_KIND_UNSPECIFIED",
+            "AUDIT_LOG_ENTRY_KIND_AGENT_SECURITY_EXEC_BLOCKED",
+            "AUDIT_LOG_ENTRY_KIND_AGENT_SECURITY_EXEC_AUDITED",
+            "AUDIT_LOG_ENTRY_KIND_RESOURCE_CHANGE",
+            "AUDIT_LOG_ENTRY_KIND_CREDENTIAL_ACCESS",
+            "AUDIT_LOG_ENTRY_KIND_ENVIRONMENT_VETO",
+        ]
+    ] = None
+    """
+    AuditLogEntryKind identifies the coarse query and rendering family of an
+    audit-log entry.
     """
 
     subject_id: Optional[str] = FieldInfo(alias="subjectId", default=None)

@@ -65,13 +65,13 @@ class TestTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -172,13 +172,13 @@ class TestTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -371,13 +371,13 @@ class TestAsyncTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )
@@ -478,13 +478,13 @@ class TestAsyncTasks:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "prebuild_requires_success": True,
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
         )

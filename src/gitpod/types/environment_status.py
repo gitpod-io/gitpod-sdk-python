@@ -91,6 +91,12 @@ class ContentGitChangedFile(BaseModel):
     ] = FieldInfo(alias="changeType", default=None)
     """ChangeType is the type of change that happened to the file"""
 
+    old_path: Optional[str] = FieldInfo(alias="oldPath", default=None)
+    """
+    old_path is the previous path of the file before a rename or copy. Only set when
+    change_type is RENAMED or COPIED.
+    """
+
     path: Optional[str] = None
     """path is the path of the file"""
 

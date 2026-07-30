@@ -34,6 +34,10 @@ class TestSecrets:
         secret = client.secrets.create(
             api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
+            credential_proxy={
+                "header": "header",
+                "target_hosts": ["string"],
+            },
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
@@ -43,6 +47,13 @@ class TestSecrets:
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
+            source={
+                "oidc_jfrog": {
+                    "host": "x",
+                    "provider_name": "x",
+                },
+                "verbatim": True,
             },
             value="postgresql://user:pass@localhost:5432/db",
         )
@@ -247,6 +258,10 @@ class TestAsyncSecrets:
         secret = await async_client.secrets.create(
             api_only=True,
             container_registry_basic_auth_host="containerRegistryBasicAuthHost",
+            credential_proxy={
+                "header": "header",
+                "target_hosts": ["string"],
+            },
             environment_variable=True,
             file_path="filePath",
             name="DATABASE_URL",
@@ -256,6 +271,13 @@ class TestAsyncSecrets:
                 "project_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "service_account_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 "user_id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            },
+            source={
+                "oidc_jfrog": {
+                    "host": "x",
+                    "provider_name": "x",
+                },
+                "verbatim": True,
             },
             value="postgresql://user:pass@localhost:5432/db",
         )

@@ -56,11 +56,13 @@ class SecretsResource(SyncAPIResource):
         *,
         api_only: bool | Omit = omit,
         container_registry_basic_auth_host: str | Omit = omit,
+        credential_proxy: secret_create_params.CredentialProxy | Omit = omit,
         environment_variable: bool | Omit = omit,
         file_path: str | Omit = omit,
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         scope: SecretScopeParam | Omit = omit,
+        source: secret_create_params.Source | Omit = omit,
         value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -122,6 +124,13 @@ class SecretsResource(SyncAPIResource):
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
               the docker registry host
 
+          credential_proxy: credential_proxy configures transparent credential injection when environments
+              materialize this secret. When set, the credential proxy intercepts HTTPS traffic
+              to the target hosts and replaces the dummy mounted value with the real value in
+              the specified HTTP header. The real secret value is never exposed in the
+              environment. This field is orthogonal to mount — a secret can be both mounted
+              and proxied at the same time.
+
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
@@ -136,7 +145,10 @@ class SecretsResource(SyncAPIResource):
 
           scope: scope is the scope of the secret
 
-          value: value is the plaintext value of the secret
+          source: source is the source of the secret, possibly verbatim value
+
+          value: value is the plaintext value of the secret. When set, source must be unset or
+              verbatim.
 
           extra_headers: Send extra headers
 
@@ -152,11 +164,13 @@ class SecretsResource(SyncAPIResource):
                 {
                     "api_only": api_only,
                     "container_registry_basic_auth_host": container_registry_basic_auth_host,
+                    "credential_proxy": credential_proxy,
                     "environment_variable": environment_variable,
                     "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "scope": scope,
+                    "source": source,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,
@@ -432,11 +446,13 @@ class AsyncSecretsResource(AsyncAPIResource):
         *,
         api_only: bool | Omit = omit,
         container_registry_basic_auth_host: str | Omit = omit,
+        credential_proxy: secret_create_params.CredentialProxy | Omit = omit,
         environment_variable: bool | Omit = omit,
         file_path: str | Omit = omit,
         name: str | Omit = omit,
         project_id: str | Omit = omit,
         scope: SecretScopeParam | Omit = omit,
+        source: secret_create_params.Source | Omit = omit,
         value: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -498,6 +514,13 @@ class AsyncSecretsResource(AsyncAPIResource):
           container_registry_basic_auth_host: secret will be mounted as a docker config in the environment VM, mount will have
               the docker registry host
 
+          credential_proxy: credential_proxy configures transparent credential injection when environments
+              materialize this secret. When set, the credential proxy intercepts HTTPS traffic
+              to the target hosts and replaces the dummy mounted value with the real value in
+              the specified HTTP header. The real secret value is never exposed in the
+              environment. This field is orthogonal to mount — a secret can be both mounted
+              and proxied at the same time.
+
           environment_variable: secret will be created as an Environment Variable with the same name as the
               secret
 
@@ -512,7 +535,10 @@ class AsyncSecretsResource(AsyncAPIResource):
 
           scope: scope is the scope of the secret
 
-          value: value is the plaintext value of the secret
+          source: source is the source of the secret, possibly verbatim value
+
+          value: value is the plaintext value of the secret. When set, source must be unset or
+              verbatim.
 
           extra_headers: Send extra headers
 
@@ -528,11 +554,13 @@ class AsyncSecretsResource(AsyncAPIResource):
                 {
                     "api_only": api_only,
                     "container_registry_basic_auth_host": container_registry_basic_auth_host,
+                    "credential_proxy": credential_proxy,
                     "environment_variable": environment_variable,
                     "file_path": file_path,
                     "name": name,
                     "project_id": project_id,
                     "scope": scope,
+                    "source": source,
                     "value": value,
                 },
                 secret_create_params.SecretCreateParams,

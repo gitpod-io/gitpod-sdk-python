@@ -8,7 +8,9 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 from .agent_mode import AgentMode
+from .goal_status import GoalStatus
 from .shared.subject import Subject
+from .supported_model import SupportedModel
 from .agent_code_context import AgentCodeContext
 
 __all__ = [
@@ -16,11 +18,11 @@ __all__ = [
     "Metadata",
     "Spec",
     "SpecLimits",
-    "SpecLoopCondition",
     "Status",
     "StatusCurrentOperation",
     "StatusCurrentOperationLlm",
     "StatusCurrentOperationToolUse",
+    "StatusGoal",
     "StatusMcpIntegrationStatus",
     "StatusOutputs",
     "StatusUsedEnvironment",
@@ -247,14 +249,6 @@ class SpecLimits(BaseModel):
     max_output_tokens: Optional[str] = FieldInfo(alias="maxOutputTokens", default=None)
 
 
-class SpecLoopCondition(BaseModel):
-    id: Optional[str] = None
-
-    description: Optional[str] = None
-
-    expression: Optional[str] = None
-
-
 class Spec(BaseModel):
     """
     Spec is the configuration of the agent that's required for the
@@ -271,8 +265,6 @@ class Spec(BaseModel):
     """desired_phase is the desired phase of the agent run"""
 
     limits: Optional[SpecLimits] = None
-
-    loop_conditions: Optional[List[SpecLoopCondition]] = FieldInfo(alias="loopConditions", default=None)
 
     session: Optional[str] = None
 
@@ -306,6 +298,34 @@ class StatusCurrentOperation(BaseModel):
     session: Optional[str] = None
 
     tool_use: Optional[StatusCurrentOperationToolUse] = FieldInfo(alias="toolUse", default=None)
+
+
+class StatusGoal(BaseModel):
+    """goal projects the current agent goal, if any."""
+
+    created_at: Optional[datetime] = FieldInfo(alias="createdAt", default=None)
+    """created_at is when the current goal was created, when available."""
+
+    objective: Optional[str] = None
+    """objective is the current goal text tracked by the agent."""
+
+    status: Optional[GoalStatus] = None
+    """status is the lifecycle state of the current goal."""
+
+    time_used: Optional[str] = FieldInfo(alias="timeUsed", default=None)
+    """time_used is the elapsed wall-clock time reported by the agent for this goal."""
+
+    token_budget: Optional[str] = FieldInfo(alias="tokenBudget", default=None)
+    """
+    token_budget is the token budget reported by the agent for this goal, when one
+    exists.
+    """
+
+    tokens_used: Optional[str] = FieldInfo(alias="tokensUsed", default=None)
+    """tokens_used is the token usage reported by the agent for this goal."""
+
+    updated_at: Optional[datetime] = FieldInfo(alias="updatedAt", default=None)
+    """updated_at is the most recent goal update timestamp, when available."""
 
 
 class StatusMcpIntegrationStatus(BaseModel):
@@ -393,6 +413,9 @@ class Status(BaseModel):
     ] = FieldInfo(alias="failureReason", default=None)
     """failure_reason contains a structured reason code for the failure."""
 
+    goal: Optional[StatusGoal] = None
+    """goal projects the current agent goal, if any."""
+
     input_tokens_used: Optional[str] = FieldInfo(alias="inputTokensUsed", default=None)
 
     iterations: Optional[str] = None
@@ -437,31 +460,7 @@ class Status(BaseModel):
     b.status_version then a was the status before b.
     """
 
-    supported_model: Optional[
-        Literal[
-            "SUPPORTED_MODEL_UNSPECIFIED",
-            "SUPPORTED_MODEL_SONNET_3_5",
-            "SUPPORTED_MODEL_SONNET_3_7",
-            "SUPPORTED_MODEL_SONNET_3_7_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4",
-            "SUPPORTED_MODEL_SONNET_4_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4_5",
-            "SUPPORTED_MODEL_SONNET_4_5_EXTENDED",
-            "SUPPORTED_MODEL_SONNET_4_6",
-            "SUPPORTED_MODEL_SONNET_4_6_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4",
-            "SUPPORTED_MODEL_OPUS_4_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4_5",
-            "SUPPORTED_MODEL_OPUS_4_5_EXTENDED",
-            "SUPPORTED_MODEL_OPUS_4_6",
-            "SUPPORTED_MODEL_OPUS_4_6_EXTENDED",
-            "SUPPORTED_MODEL_HAIKU_4_5",
-            "SUPPORTED_MODEL_OPENAI_4O",
-            "SUPPORTED_MODEL_OPENAI_4O_MINI",
-            "SUPPORTED_MODEL_OPENAI_O1",
-            "SUPPORTED_MODEL_OPENAI_O1_MINI",
-        ]
-    ] = FieldInfo(alias="supportedModel", default=None)
+    supported_model: Optional[SupportedModel] = FieldInfo(alias="supportedModel", default=None)
     """supported_model is the LLM model being used by the agent execution."""
 
     transcript_url: Optional[str] = FieldInfo(alias="transcriptUrl", default=None)

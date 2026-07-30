@@ -7,6 +7,7 @@ from .custom_domain import CustomDomain as CustomDomain
 from .provider_type import ProviderType as ProviderType
 from .veto_exec_policy import VetoExecPolicy as VetoExecPolicy
 from .sso_configuration import SSOConfiguration as SSOConfiguration
+from .codex_model_policy import CodexModelPolicy as CodexModelPolicy
 from .scim_configuration import ScimConfiguration as ScimConfiguration
 from .announcement_banner import AnnouncementBanner as AnnouncementBanner
 from .crowd_strike_config import CrowdStrikeConfig as CrowdStrikeConfig
@@ -19,10 +20,10 @@ from .security_agent_policy import SecurityAgentPolicy as SecurityAgentPolicy
 from .custom_domain_provider import CustomDomainProvider as CustomDomainProvider
 from .invite_create_response import InviteCreateResponse as InviteCreateResponse
 from .invite_retrieve_params import InviteRetrieveParams as InviteRetrieveParams
-from .kernel_controls_action import KernelControlsAction as KernelControlsAction
 from .policy_retrieve_params import PolicyRetrieveParams as PolicyRetrieveParams
 from .veto_exec_policy_param import VetoExecPolicyParam as VetoExecPolicyParam
 from .sso_configuration_state import SSOConfigurationState as SSOConfigurationState
+from .codex_model_policy_param import CodexModelPolicyParam as CodexModelPolicyParam
 from .invite_retrieve_response import InviteRetrieveResponse as InviteRetrieveResponse
 from .policy_retrieve_response import PolicyRetrieveResponse as PolicyRetrieveResponse
 from .domain_verification_state import DomainVerificationState as DomainVerificationState

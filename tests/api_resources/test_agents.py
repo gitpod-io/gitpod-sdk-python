@@ -191,6 +191,7 @@ class TestAgents:
             token="token",
             page_size=0,
             filter={
+                "agent_execution_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
                 "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
@@ -366,6 +367,11 @@ class TestAgents:
                 "payload": "payload",
                 "type": "TYPE_UNSPECIFIED",
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -385,6 +391,12 @@ class TestAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "devcontainer_rebuild": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                    "session_id": "sessionId",
+                },
                 "environment": {
                     "environment_id": "environmentId",
                     "failure_message": ["string"],
@@ -466,6 +478,11 @@ class TestAgents:
                     "to_branch": "toBranch",
                     "url": "url",
                 },
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",
@@ -749,6 +766,7 @@ class TestAsyncAgents:
             token="token",
             page_size=0,
             filter={
+                "agent_execution_ids": ["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
                 "agent_ids": ["b8a64cfa-43e2-4b9d-9fb3-07edc63f5971"],
                 "annotations": {"foo": "string"},
                 "creator_ids": ["string"],
@@ -924,6 +942,11 @@ class TestAsyncAgents:
                 "payload": "payload",
                 "type": "TYPE_UNSPECIFIED",
             },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
+            },
             user_input={
                 "id": "id",
                 "created_at": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -943,6 +966,12 @@ class TestAsyncAgents:
                 "text": {"content": "Generate a report based on the latest logs."},
             },
             wake_event={
+                "devcontainer_rebuild": {
+                    "environment_id": "environmentId",
+                    "failure_message": ["string"],
+                    "phase": "phase",
+                    "session_id": "sessionId",
+                },
                 "environment": {
                     "environment_id": "environmentId",
                     "failure_message": ["string"],
@@ -1024,6 +1053,11 @@ class TestAsyncAgents:
                     "to_branch": "toBranch",
                     "url": "url",
                 },
+            },
+            codex_settings={
+                "model": "CODEX_OPEN_AI_MODEL_UNSPECIFIED",
+                "reasoning_effort": "CODEX_REASONING_EFFORT_UNSPECIFIED",
+                "service_tier": "CODEX_SERVICE_TIER_UNSPECIFIED",
             },
             mode="AGENT_MODE_UNSPECIFIED",
             name="name",

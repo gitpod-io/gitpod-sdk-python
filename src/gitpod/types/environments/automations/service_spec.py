@@ -62,6 +62,12 @@ class ServiceSpec(BaseModel):
     env: Optional[List[EnvironmentVariableItem]] = None
     """env specifies environment variables for the service."""
 
+    readiness_timeout: Optional[str] = FieldInfo(alias="readinessTimeout", default=None)
+    """
+    readiness_timeout is the maximum duration a service may remain in the Starting
+    phase while readiness checks run. 0s disables the timeout.
+    """
+
     runs_on: Optional[RunsOn] = FieldInfo(alias="runsOn", default=None)
     """runs_on specifies the environment the service should run on."""
 

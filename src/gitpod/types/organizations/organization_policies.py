@@ -52,6 +52,12 @@ class OrganizationPolicies(BaseModel):
     repo
     """
 
+    disable_from_scratch: bool = FieldInfo(alias="disableFromScratch")
+    """
+    disable_from_scratch controls whether non-admin users can create blank
+    environments without a Git or URL initializer.
+    """
+
     maximum_environments_per_user: str = FieldInfo(alias="maximumEnvironmentsPerUser")
     """
     maximum_environments_per_user limits total environments (running or stopped) per
@@ -96,6 +102,12 @@ class OrganizationPolicies(BaseModel):
     the organization, only users provisioned via SCIM can create accounts.
     """
 
+    web_browser_disabled: bool = FieldInfo(alias="webBrowserDisabled")
+    """
+    web_browser_disabled controls whether users can open the built-in web browser
+    from environment pages. This does not affect VS Code Browser.
+    """
+
     delete_archived_environments_after: Optional[str] = FieldInfo(alias="deleteArchivedEnvironmentsAfter", default=None)
     """
     delete_archived_environments_after controls how long archived environments are
@@ -137,6 +149,15 @@ class OrganizationPolicies(BaseModel):
     security_agent_policy contains security agent configuration for the
     organization. When configured, security agents are automatically deployed to all
     environments.
+    """
+
+    security_policy_id: Optional[str] = FieldInfo(alias="securityPolicyId", default=None)
+    """
+    security_policy_id references the Veto Exec SecurityPolicy assigned to newly
+    created environments. The public GA contract accepts policies that use only
+    SecurityPolicy.Spec.executables. Assignment validates materializability and
+    rejects unsupported executable selectors or effects. If empty, new environments
+    have no SecurityPolicy by default.
     """
 
     veto_exec_policy: Optional[VetoExecPolicy] = FieldInfo(alias="vetoExecPolicy", default=None)

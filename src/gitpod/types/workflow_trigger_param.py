@@ -26,8 +26,16 @@ class PullRequest(TypedDict, total=False):
             "PULL_REQUEST_EVENT_MERGED",
             "PULL_REQUEST_EVENT_CLOSED",
             "PULL_REQUEST_EVENT_READY_FOR_REVIEW",
+            "PULL_REQUEST_EVENT_REVIEW_REQUESTED",
         ]
     ]
+
+    integration_id: Annotated[Optional[str], PropertyInfo(alias="integrationId")]
+    """
+    integration_id is the optional ID of an integration that acts as the source of
+    webhook events. When set, the trigger will be activated when the webhook
+    receives events.
+    """
 
     webhook_id: Annotated[Optional[str], PropertyInfo(alias="webhookId")]
     """
@@ -82,6 +90,8 @@ class WorkflowTriggerParam(TypedDict, total=False):
     - Manual: Can use any context type
     - Time: Typically uses Projects or Repositories context
     - PullRequest: Can use any context, FromTrigger uses PR repository context
+    - Incident: Typically uses Projects or Repositories context (no inherent repo
+      context)
     """
 
     manual: object

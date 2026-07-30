@@ -69,13 +69,13 @@ class TestServices:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "readiness_timeout": "+9125115.360s",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -182,13 +182,13 @@ class TestServices:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "readiness_timeout": "+9125115.360s",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
             status={
@@ -431,13 +431,13 @@ class TestAsyncServices:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "readiness_timeout": "+9125115.360s",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
                 "session": "session",
                 "spec_version": "specVersion",
@@ -544,13 +544,13 @@ class TestAsyncServices:
                         "value_from": {"secret_ref": {"id": "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"}},
                     }
                 ],
+                "readiness_timeout": "+9125115.360s",
                 "runs_on": {
                     "docker": {
                         "environment": ["string"],
                         "image": "x",
                     },
                     "machine": {},
-                    "terminal": {},
                 },
             },
             status={

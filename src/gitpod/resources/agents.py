@@ -42,6 +42,7 @@ from ..types.user_input_block_param import UserInputBlockParam
 from ..types.agent_code_context_param import AgentCodeContextParam
 from ..types.agent_create_prompt_response import AgentCreatePromptResponse
 from ..types.agent_update_prompt_response import AgentUpdatePromptResponse
+from ..types.shared_params.codex_settings import CodexSettings
 from ..types.agent_retrieve_prompt_response import AgentRetrievePromptResponse
 from ..types.agent_start_execution_response import AgentStartExecutionResponse
 from ..types.agent_retrieve_execution_response import AgentRetrieveExecutionResponse
@@ -486,6 +487,7 @@ class AgentsResource(SyncAPIResource):
         *,
         agent_execution_id: str | Omit = omit,
         agent_message: AgentMessageParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -517,6 +519,9 @@ class AgentsResource(SyncAPIResource):
           agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
               child agent execution, or vice versa).
 
+          codex_settings: codex_settings contains per-turn desired settings for Codex app user_input
+              sends.
+
           wake_event: WakeEvent is sent by the backend to wake an agent when a registered interest
               fires. Delivered via SendToAgentExecution as a new oneof variant.
 
@@ -534,6 +539,7 @@ class AgentsResource(SyncAPIResource):
                 {
                     "agent_execution_id": agent_execution_id,
                     "agent_message": agent_message,
+                    "codex_settings": codex_settings,
                     "user_input": user_input,
                     "wake_event": wake_event,
                 },
@@ -551,6 +557,7 @@ class AgentsResource(SyncAPIResource):
         agent_id: str | Omit = omit,
         annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
@@ -581,9 +588,15 @@ class AgentsResource(SyncAPIResource):
           ```
 
         Args:
+          agent_id: agent_id identifies the agent to start. If omitted, the backend uses the
+              configured default agent ID, or the Ona in-environment agent when no default is
+              configured.
+
           annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
               (e.g., "agent-client-session/id").
+
+          codex_settings: codex_settings contains desired manual settings for the Codex app agent.
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
@@ -613,6 +626,7 @@ class AgentsResource(SyncAPIResource):
                     "agent_id": agent_id,
                     "annotations": annotations,
                     "code_context": code_context,
+                    "codex_settings": codex_settings,
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
@@ -1167,6 +1181,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         *,
         agent_execution_id: str | Omit = omit,
         agent_message: AgentMessageParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1198,6 +1213,9 @@ class AsyncAgentsResource(AsyncAPIResource):
           agent_message: AgentMessage is a message sent between agents (e.g. from a parent agent to a
               child agent execution, or vice versa).
 
+          codex_settings: codex_settings contains per-turn desired settings for Codex app user_input
+              sends.
+
           wake_event: WakeEvent is sent by the backend to wake an agent when a registered interest
               fires. Delivered via SendToAgentExecution as a new oneof variant.
 
@@ -1215,6 +1233,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                 {
                     "agent_execution_id": agent_execution_id,
                     "agent_message": agent_message,
+                    "codex_settings": codex_settings,
                     "user_input": user_input,
                     "wake_event": wake_event,
                 },
@@ -1232,6 +1251,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         agent_id: str | Omit = omit,
         annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
@@ -1262,9 +1282,15 @@ class AsyncAgentsResource(AsyncAPIResource):
           ```
 
         Args:
+          agent_id: agent_id identifies the agent to start. If omitted, the backend uses the
+              configured default agent ID, or the Ona in-environment agent when no default is
+              configured.
+
           annotations: annotations are key-value pairs for tracking external context (e.g., integration
               session IDs, GitHub issue references). Keys should follow domain/name convention
               (e.g., "agent-client-session/id").
+
+          codex_settings: codex_settings contains desired manual settings for the Codex app agent.
 
           mode: mode specifies the operational mode for this agent execution If not specified,
               defaults to AGENT_MODE_EXECUTION
@@ -1294,6 +1320,7 @@ class AsyncAgentsResource(AsyncAPIResource):
                     "agent_id": agent_id,
                     "annotations": annotations,
                     "code_context": code_context,
+                    "codex_settings": codex_settings,
                     "mode": mode,
                     "name": name,
                     "runner_id": runner_id,
