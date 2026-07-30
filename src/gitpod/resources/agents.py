@@ -38,7 +38,6 @@ from ..types.agent_mode import AgentMode
 from ..types.agent_execution import AgentExecution
 from ..types.wake_event_param import WakeEventParam
 from ..types.agent_message_param import AgentMessageParam
-from ..types.codex_settings_param import CodexSettingsParam
 from ..types.user_input_block_param import UserInputBlockParam
 from ..types.agent_code_context_param import AgentCodeContextParam
 from ..types.agent_create_prompt_response import AgentCreatePromptResponse
@@ -488,7 +487,7 @@ class AgentsResource(SyncAPIResource):
         *,
         agent_execution_id: str | Omit = omit,
         agent_message: AgentMessageParam | Omit = omit,
-        codex_settings: CodexSettingsParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -558,7 +557,7 @@ class AgentsResource(SyncAPIResource):
         agent_id: str | Omit = omit,
         annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
-        codex_settings: CodexSettingsParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
@@ -1182,7 +1181,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         *,
         agent_execution_id: str | Omit = omit,
         agent_message: AgentMessageParam | Omit = omit,
-        codex_settings: CodexSettingsParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         user_input: UserInputBlockParam | Omit = omit,
         wake_event: WakeEventParam | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1252,7 +1251,7 @@ class AsyncAgentsResource(AsyncAPIResource):
         agent_id: str | Omit = omit,
         annotations: Dict[str, str] | Omit = omit,
         code_context: AgentCodeContextParam | Omit = omit,
-        codex_settings: CodexSettingsParam | Omit = omit,
+        codex_settings: CodexSettings | Omit = omit,
         mode: AgentMode | Omit = omit,
         name: str | Omit = omit,
         runner_id: str | Omit = omit,
