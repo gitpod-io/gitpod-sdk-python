@@ -24,14 +24,6 @@ from .agents import (
     AgentsResourceWithStreamingResponse,
     AsyncAgentsResourceWithStreamingResponse,
 )
-from .errors import (
-    ErrorsResource,
-    AsyncErrorsResource,
-    ErrorsResourceWithRawResponse,
-    AsyncErrorsResourceWithRawResponse,
-    ErrorsResourceWithStreamingResponse,
-    AsyncErrorsResourceWithStreamingResponse,
-)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -190,12 +182,6 @@ __all__ = [
     "AsyncEnvironmentsResourceWithRawResponse",
     "EnvironmentsResourceWithStreamingResponse",
     "AsyncEnvironmentsResourceWithStreamingResponse",
-    "ErrorsResource",
-    "AsyncErrorsResource",
-    "ErrorsResourceWithRawResponse",
-    "AsyncErrorsResourceWithRawResponse",
-    "ErrorsResourceWithStreamingResponse",
-    "AsyncErrorsResourceWithStreamingResponse",
     "EventsResource",
     "AsyncEventsResource",
     "EventsResourceWithRawResponse",

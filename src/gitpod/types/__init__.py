@@ -61,7 +61,6 @@ from .resolution import Resolution as Resolution
 from .usage_type import UsageType as UsageType
 from .veto_param import VetoParam as VetoParam
 from .environment import Environment as Environment
-from .error_level import ErrorLevel as ErrorLevel
 from .goal_status import GoalStatus as GoalStatus
 from .prompt_spec import PromptSpec as PromptSpec
 from .runner_kind import RunnerKind as RunnerKind
@@ -97,7 +96,6 @@ from .supported_model import SupportedModel as SupportedModel
 from .warm_pool_phase import WarmPoolPhase as WarmPoolPhase
 from .workflow_action import WorkflowAction as WorkflowAction
 from .billing_currency import BillingCurrency as BillingCurrency
-from .breadcrumb_param import BreadcrumbParam as BreadcrumbParam
 from .environment_role import EnvironmentRole as EnvironmentRole
 from .environment_spec import EnvironmentSpec as EnvironmentSpec
 from .id_token_version import IDTokenVersion as IDTokenVersion
@@ -108,13 +106,11 @@ from .warm_pool_status import WarmPoolStatus as WarmPoolStatus
 from .workflow_trigger import WorkflowTrigger as WorkflowTrigger
 from .co_author_summary import CoAuthorSummary as CoAuthorSummary
 from .environment_phase import EnvironmentPhase as EnvironmentPhase
-from .error_event_param import ErrorEventParam as ErrorEventParam
 from .event_list_params import EventListParams as EventListParams
 from .group_list_params import GroupListParams as GroupListParams
 from .prebuild_metadata import PrebuildMetadata as PrebuildMetadata
 from .runner_capability import RunnerCapability as RunnerCapability
 from .runner_spec_param import RunnerSpecParam as RunnerSpecParam
-from .stack_frame_param import StackFrameParam as StackFrameParam
 from .team_credit_usage import TeamCreditUsage as TeamCreditUsage
 from .time_series_point import TimeSeriesPoint as TimeSeriesPoint
 from .user_credit_usage import UserCreditUsage as UserCreditUsage
@@ -124,7 +120,6 @@ from .daily_credit_usage import DailyCreditUsage as DailyCreditUsage
 from .editor_list_params import EditorListParams as EditorListParams
 from .environment_status import EnvironmentStatus as EnvironmentStatus
 from .event_watch_params import EventWatchParams as EventWatchParams
-from .request_info_param import RequestInfoParam as RequestInfoParam
 from .resource_operation import ResourceOperation as ResourceOperation
 from .runner_list_params import RunnerListParams as RunnerListParams
 from .secret_list_params import SecretListParams as SecretListParams
@@ -147,7 +142,6 @@ from .update_window_param import UpdateWindowParam as UpdateWindowParam
 from .workflow_step_param import WorkflowStepParam as WorkflowStepParam
 from .environment_metadata import EnvironmentMetadata as EnvironmentMetadata
 from .event_watch_response import EventWatchResponse as EventWatchResponse
-from .exception_info_param import ExceptionInfoParam as ExceptionInfoParam
 from .invite_domains_param import InviteDomainsParam as InviteDomainsParam
 from .prebuild_list_params import PrebuildListParams as PrebuildListParams
 from .runner_configuration import RunnerConfiguration as RunnerConfiguration
@@ -224,7 +218,6 @@ from .enterprise_ai_token_usage import EnterpriseAITokenUsage as EnterpriseAITok
 from .environment_create_params import EnvironmentCreateParams as EnvironmentCreateParams
 from .environment_delete_params import EnvironmentDeleteParams as EnvironmentDeleteParams
 from .environment_update_params import EnvironmentUpdateParams as EnvironmentUpdateParams
-from .exception_mechanism_param import ExceptionMechanismParam as ExceptionMechanismParam
 from .organization_leave_params import OrganizationLeaveParams as OrganizationLeaveParams
 from .project_retrieve_response import ProjectRetrieveResponse as ProjectRetrieveResponse
 from .recommended_editors_param import RecommendedEditorsParam as RecommendedEditorsParam
@@ -238,7 +231,6 @@ from .automation_create_response import AutomationCreateResponse as AutomationCr
 from .automation_retrieve_params import AutomationRetrieveParams as AutomationRetrieveParams
 from .automation_update_response import AutomationUpdateResponse as AutomationUpdateResponse
 from .enterprise_ai_usage_budget import EnterpriseAIUsageBudget as EnterpriseAIUsageBudget
-from .error_report_errors_params import ErrorReportErrorsParams as ErrorReportErrorsParams
 from .organization_create_params import OrganizationCreateParams as OrganizationCreateParams
 from .organization_delete_params import OrganizationDeleteParams as OrganizationDeleteParams
 from .organization_join_response import OrganizationJoinResponse as OrganizationJoinResponse

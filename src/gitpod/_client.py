@@ -39,7 +39,6 @@ if TYPE_CHECKING:
         usage,
         users,
         agents,
-        errors,
         events,
         groups,
         billing,
@@ -58,7 +57,6 @@ if TYPE_CHECKING:
     )
     from .resources.usage import UsageResource, AsyncUsageResource
     from .resources.agents import AgentsResource, AsyncAgentsResource
-    from .resources.errors import ErrorsResource, AsyncErrorsResource
     from .resources.events import EventsResource, AsyncEventsResource
     from .resources.billing import BillingResource, AsyncBillingResource
     from .resources.editors import EditorsResource, AsyncEditorsResource
@@ -179,16 +177,6 @@ class Gitpod(SyncAPIClient):
         from .resources.environments import EnvironmentsResource
 
         return EnvironmentsResource(self)
-
-    @cached_property
-    def errors(self) -> ErrorsResource:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResource
-
-        return ErrorsResource(self)
 
     @cached_property
     def events(self) -> EventsResource:
@@ -484,16 +472,6 @@ class AsyncGitpod(AsyncAPIClient):
         return AsyncEnvironmentsResource(self)
 
     @cached_property
-    def errors(self) -> AsyncErrorsResource:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResource
-
-        return AsyncErrorsResource(self)
-
-    @cached_property
     def events(self) -> AsyncEventsResource:
         from .resources.events import AsyncEventsResource
 
@@ -729,16 +707,6 @@ class GitpodWithRawResponse:
         return EnvironmentsResourceWithRawResponse(self._client.environments)
 
     @cached_property
-    def errors(self) -> errors.ErrorsResourceWithRawResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResourceWithRawResponse
-
-        return ErrorsResourceWithRawResponse(self._client.errors)
-
-    @cached_property
     def events(self) -> events.EventsResourceWithRawResponse:
         from .resources.events import EventsResourceWithRawResponse
 
@@ -860,16 +828,6 @@ class AsyncGitpodWithRawResponse:
         from .resources.environments import AsyncEnvironmentsResourceWithRawResponse
 
         return AsyncEnvironmentsResourceWithRawResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.AsyncErrorsResourceWithRawResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResourceWithRawResponse
-
-        return AsyncErrorsResourceWithRawResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.AsyncEventsResourceWithRawResponse:
@@ -995,16 +953,6 @@ class GitpodWithStreamedResponse:
         return EnvironmentsResourceWithStreamingResponse(self._client.environments)
 
     @cached_property
-    def errors(self) -> errors.ErrorsResourceWithStreamingResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import ErrorsResourceWithStreamingResponse
-
-        return ErrorsResourceWithStreamingResponse(self._client.errors)
-
-    @cached_property
     def events(self) -> events.EventsResourceWithStreamingResponse:
         from .resources.events import EventsResourceWithStreamingResponse
 
@@ -1126,16 +1074,6 @@ class AsyncGitpodWithStreamedResponse:
         from .resources.environments import AsyncEnvironmentsResourceWithStreamingResponse
 
         return AsyncEnvironmentsResourceWithStreamingResponse(self._client.environments)
-
-    @cached_property
-    def errors(self) -> errors.AsyncErrorsResourceWithStreamingResponse:
-        """
-        ErrorsService provides endpoints for clients to report errors
-         that will be sent to error reporting systems.
-        """
-        from .resources.errors import AsyncErrorsResourceWithStreamingResponse
-
-        return AsyncErrorsResourceWithStreamingResponse(self._client.errors)
 
     @cached_property
     def events(self) -> events.AsyncEventsResourceWithStreamingResponse:

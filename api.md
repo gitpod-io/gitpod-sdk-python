@@ -332,26 +332,6 @@ Methods:
 
 - <code title="post /gitpod.v1.EnvironmentService/ListEnvironmentClasses">client.environments.classes.<a href="./src/gitpod/resources/environments/classes.py">list</a>(\*\*<a href="src/gitpod/types/environments/class_list_params.py">params</a>) -> <a href="./src/gitpod/types/shared/environment_class.py">SyncEnvironmentClassesPage[EnvironmentClass]</a></code>
 
-# Errors
-
-Types:
-
-```python
-from gitpod.types import (
-    Breadcrumb,
-    ErrorEvent,
-    ErrorLevel,
-    ExceptionInfo,
-    ExceptionMechanism,
-    RequestInfo,
-    StackFrame,
-)
-```
-
-Methods:
-
-- <code title="post /gitpod.v1.ErrorsService/ReportErrors">client.errors.<a href="./src/gitpod/resources/errors.py">report_errors</a>(\*\*<a href="src/gitpod/types/error_report_errors_params.py">params</a>) -> object</code>
-
 # Events
 
 Types:
