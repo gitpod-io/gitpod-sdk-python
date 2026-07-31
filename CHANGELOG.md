@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.0 (2026-07-31)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **automations:** add organization policy defaults ([e3fcbf4](https://github.com/gitpod-io/gitpod-sdk-python/commit/e3fcbf4c518530988d16291df991e039d9447879))
+
 ## 0.12.0 (2026-07-30)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/gitpod-io/gitpod-sdk-python/compare/v0.11.0...v0.12.0)
